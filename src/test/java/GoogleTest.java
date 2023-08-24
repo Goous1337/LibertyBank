@@ -1,7 +1,9 @@
 import java.time.Duration;
 
+import io.qameta.allure.Step;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -10,7 +12,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TestTest {
+public class GoogleTest {
 
     private WebDriver driver;
 
@@ -22,7 +24,8 @@ public class TestTest {
     }
 
     @Test
-    public void testGoogleSearch() {
+    @DisplayName("Custom test name containing spaces")
+    public void testGoogleSearch1() {
         driver.get("https://www.google.com");
         assertEquals("Googlяe", driver.getTitle());
     }
