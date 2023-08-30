@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <File name="file" fileName="src/main/resources/logs/api_tests.log">
+            <PatternLayout charset="UTF-8">
+                <Pattern>[%d{HH:mm:ss}] %-5p (%F) - %m%n</Pattern>
+            </PatternLayout>
+        </File>
+    </Appenders>
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="file"/>
+        </Root>
+    </Loggers>
+</Configuration>
