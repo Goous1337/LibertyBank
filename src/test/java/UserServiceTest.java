@@ -11,13 +11,12 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static api.core.ApiClient.sendRequest;
 import static api.core.ApiClient.sendSimpleRequest;
 import static api.core.RequestParamType.PARAMETER;
-import static constant.ApiEndpoints.REGISTRATION;
 import static constant.ParamList.MOBILE_PHONE;
 import static constant.ParamList.PHONE_NUMBER;
 import static constant.ApiEndpoints.USER_STATUS;
 import static io.restassured.http.Method.GET;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import static service.Registration.checkRegistrationByPhone;
 
 public class UserServiceTest extends BaseTest {
 
@@ -46,13 +45,7 @@ public class UserServiceTest extends BaseTest {
 
     public void regUserWithInvalidNumberPhone(String invalidNumber){
         params.add(new RequestParam(PARAMETER, MOBILE_PHONE, invalidNumber));
-        Response response = sendSimpleRequest(GET, REGISTRATION, params);
-
-        JsonResponse jsonResponse = sendRequest(GET, REGISTRATION, params);
-
-        assertEquals(400, response.getStatusCode(), "Код ответа не соответствует ожидаемому");
-        assertEquals(400, jsonResponse.getStatusCode(), "Код ответа не соответствует ожидаемому");
+        int statusCode = checkRegistrationByPhone(params).statusCode();
+        assertEquals(400, statusCode, "Код ответа не соответствует ожидаемому");
     }
 }
-
-
