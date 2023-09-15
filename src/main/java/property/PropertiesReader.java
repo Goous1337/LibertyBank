@@ -1,5 +1,8 @@
 package property;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.IOException;
 import java.util.Objects;
 import java.util.Properties;
@@ -8,6 +11,8 @@ import java.util.Properties;
  * Считыватель параметров из файла config.properties
  */
 public final class PropertiesReader {
+    private static final Logger LOG = LogManager.getLogger(PropertiesReader.class);
+
 
     private final static String CONFIG_PROPERTIES = "config.properties";
     private static Properties properties;

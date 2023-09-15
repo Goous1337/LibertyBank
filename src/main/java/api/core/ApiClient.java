@@ -12,8 +12,12 @@ import io.restassured.specification.RequestSpecification;
 import model.response.ClassResponse;
 import model.response.JsonResponse;
 
-import static io.restassured.RestAssured.given;
+
+import static io.restassured.config.HttpClientConfig.httpClientConfig;
 import static property.BaseProperties.BASE_URL;
+
+import io.restassured.builder.RequestSpecBuilder;
+
 
 public class ApiClient {
 
@@ -22,19 +26,19 @@ public class ApiClient {
     }
 
     public static Response sendSimpleRequest(Method method, String address,
-            List<RequestParam> paramsTable) {
+                                             List<RequestParam> paramsTable) {
         RequestSender request = createRequest(paramsTable);
         return request.request(method, address);
     }
 
     public static <T> ClassResponse<T> sendRequest(Method method, String address,
-            List<RequestParam> paramsTable, Class<T> clazz) {
+                                                   List<RequestParam> paramsTable, Class<T> clazz) {
         RequestSender request = createRequest(paramsTable);
         return getResponseAnswer(request.request(method, address), clazz);
     }
 
     public static JsonResponse sendRequest(Method method, String address,
-            List<RequestParam> paramsTable) {
+                                           List<RequestParam> paramsTable) {
         RequestSender request = createRequest(paramsTable);
         return getResponseAnswer(request.request(method, address));
     }
@@ -46,10 +50,18 @@ public class ApiClient {
      * @return сформированный запрос
      */
     public static RequestSender createRequest(List<RequestParam> paramsTable) {
-        RequestSpecification request = given().relaxedHTTPSValidation();
+        RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder();
+        requestSpecBuilder.setRelaxedHTTPSValidation();
+        requestSpecBuilder.setConfig(RestAssured.config().httpClient(httpClientConfig()
+                .setParam("http.connection.timeout", 5000)
+                .setParam("http.socket.timeout", 5000)));
+
         for (RequestParam requestParam : paramsTable) {
             String name = requestParam.getName();
             String value = requestParam.getValue();
+
+            RequestSpecification request = requestSpecBuilder.build();
+
             switch (requestParam.getType()) {
                 case COOKIE:
                     request.cookie(name, value);
@@ -66,10 +78,13 @@ public class ApiClient {
                 default:
                     throw new IllegalArgumentException(String.format("Некорректно задан тип %s для параметра запроса %s ", requestParam.getType(), name));
             }
+
+            request.log().everything();
+            return request;
         }
-        request.log().everything();
-        return request;
+        return null;
     }
+
 
     private static <T> model.response.ClassResponse<T> getResponseAnswer(Response r, Class<T> clazz) {
         T returnObject;
