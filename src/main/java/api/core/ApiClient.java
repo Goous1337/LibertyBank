@@ -1,5 +1,6 @@
 package api.core;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -29,6 +30,10 @@ public class ApiClient {
                                              List<RequestParam> paramsTable) {
         RequestSender request = createRequest(paramsTable);
         return request.request(method, address);
+    }
+
+    public static Response sendRequestWithoutParams(Method method, String address) {
+        return sendSimpleRequest(method, address, Collections.emptyList());
     }
 
     public static <T> ClassResponse<T> sendRequest(Method method, String address,
