@@ -14,7 +14,10 @@ import io.restassured.specification.RequestSpecification;
 import model.response.ClassResponse;
 import model.response.JsonResponse;
 
+import static io.restassured.RestAssured.given;
 import static io.restassured.config.HttpClientConfig.httpClientConfig;
+import static org.apache.http.params.CoreConnectionPNames.CONNECTION_TIMEOUT;
+import static org.apache.http.params.CoreConnectionPNames.SO_TIMEOUT;
 import static property.BaseProperties.BASE_URL;
 
 
@@ -102,13 +105,10 @@ public class ApiClient {
     }
 
     private static RequestSpecification getRequestSpecification() {
-        return RestAssured.given(
-                new RequestSpecBuilder()
-                        .setConfig(RestAssured.config().httpClient(httpClientConfig()
-                                .setParam("http.connection.timeout", 5000)
-                                .setParam("http.socket.timeout", 5000)))
-                        .setRelaxedHTTPSValidation()
-                        .build());
+        return given().relaxedHTTPSValidation()
+                .config(RestAssured.config().httpClient(httpClientConfig()
+                        .setParam(CONNECTION_TIMEOUT, 5000)
+                        .setParam(SO_TIMEOUT, 5000)));
     }
 
 
