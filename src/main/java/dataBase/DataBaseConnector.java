@@ -1,13 +1,16 @@
 package dataBase;
 
 import javax.sql.DataSource;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+
 import lombok.Data;
+
 import static property.PropertiesReader.getPropertyValue;
 
 @Data
-public class    DataBaseConnector {
+public class DataBaseConnector {
 
     private static String getConnectionUrl() {
         return "jdbc:postgresql://"
