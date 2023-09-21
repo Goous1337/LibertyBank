@@ -26,7 +26,7 @@ public class ApiClient {
         RestAssured.baseURI = BASE_URL;
     }
 
-    public static Response sendSimpleRequest(Method method, String address,
+    public static Response  sendSimpleRequest(Method method, String address,
                                              List<RequestParam> paramsTable) {
         RequestSender request = createRequest(paramsTable);
         return request.request(method, address);
