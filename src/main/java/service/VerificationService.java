@@ -12,12 +12,13 @@ import static api.core.ApiClient.sendSimpleRequest;
 import static api.core.RequestParamType.PARAMETER;
 import static constant.ApiEndpoints.VERIFICATION_CODE;
 import static constant.UserServiceConstants.PARAMETER_MOBILE_PHONE;
+import static constant.UserServiceConstants.PARAMETER_RECEIVER;
 import static io.restassured.http.Method.PATCH;
 
 public class VerificationService {
 
     public Response verificationService(String phoneNumber) {
-        List<RequestParam> params = Collections.singletonList(new RequestParam(PARAMETER, PARAMETER_MOBILE_PHONE, phoneNumber));
+        List<RequestParam> params = Collections.singletonList(new RequestParam(PARAMETER, PARAMETER_RECEIVER, phoneNumber));
         return sendSimpleRequest(PATCH, VERIFICATION_CODE, params);
     }
 
@@ -32,7 +33,7 @@ public class VerificationService {
     }
 
     public Response checkVerificationCodeInvalidHttpMethod(String invalidHttpMethod, String phoneNumber) {
-        List<RequestParam> params = Collections.singletonList(new RequestParam(PARAMETER, PARAMETER_MOBILE_PHONE, phoneNumber));
+        List<RequestParam> params = Collections.singletonList(new RequestParam(PARAMETER, PARAMETER_RECEIVER, phoneNumber));
         return sendSimpleRequest(Method.valueOf(invalidHttpMethod), VERIFICATION_CODE, params);
 
     }
