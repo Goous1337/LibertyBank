@@ -6,6 +6,7 @@ import java.util.List;
 import org.json.JSONObject;
 
 import io.restassured.RestAssured;
+import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSender;
@@ -13,11 +14,11 @@ import io.restassured.specification.RequestSpecification;
 import model.response.ClassResponse;
 import model.response.JsonResponse;
 
-
+import static io.restassured.RestAssured.given;
 import static io.restassured.config.HttpClientConfig.httpClientConfig;
+import static org.apache.http.params.CoreConnectionPNames.CONNECTION_TIMEOUT;
+import static org.apache.http.params.CoreConnectionPNames.SO_TIMEOUT;
 import static property.BaseProperties.BASE_URL;
-
-import io.restassured.builder.RequestSpecBuilder;
 
 
 public class ApiClient {
@@ -27,8 +28,24 @@ public class ApiClient {
     }
 
     public static Response sendSimpleRequest(Method method, String address,
-                                             List<RequestParam> paramsTable) {
+            List<RequestParam> paramsTable) {
         RequestSender request = createRequest(paramsTable);
+        return request.request(method, address);
+    }
+
+    public static Response sendSimpleRequest(Method method, String address,
+            RequestParam param) {
+        return sendSimpleRequest(method, address, List.of(param));
+    }
+
+    public static Response sendSimpleRequest(Method method, String address,
+            List<RequestParam> paramsTable, Object pojo) {
+        RequestSender request = createRequestWithPojoAndParams(paramsTable, pojo);
+        return request.request(method, address);
+    }
+
+    public static Response sendSimpleRequest(Method method, String address, Object pojo) {
+        RequestSender request = createRequestWithPojo(pojo);
         return request.request(method, address);
     }
 
@@ -37,13 +54,13 @@ public class ApiClient {
     }
 
     public static <T> ClassResponse<T> sendRequest(Method method, String address,
-                                                   List<RequestParam> paramsTable, Class<T> clazz) {
+            List<RequestParam> paramsTable, Class<T> clazz) {
         RequestSender request = createRequest(paramsTable);
         return getResponseAnswer(request.request(method, address), clazz);
     }
 
     public static JsonResponse sendRequest(Method method, String address,
-                                           List<RequestParam> paramsTable) {
+            List<RequestParam> paramsTable) {
         RequestSender request = createRequest(paramsTable);
         return getResponseAnswer(request.request(method, address));
     }
@@ -55,17 +72,21 @@ public class ApiClient {
      * @return сформированный запрос
      */
     public static RequestSender createRequest(List<RequestParam> paramsTable) {
-        RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder();
-        requestSpecBuilder.setRelaxedHTTPSValidation();
-        requestSpecBuilder.setConfig(RestAssured.config().httpClient(httpClientConfig()
-                .setParam("http.connection.timeout", 5000)
-                .setParam("http.socket.timeout", 5000)));
+        return requestParamsSetter(getRequestSpecification(), paramsTable);
+    }
 
+    public static RequestSender createRequestWithPojoAndParams(List<RequestParam> paramsTable, Object pojo) {
+        return requestParamsSetter(getRequestSpecification(), paramsTable).body(pojo);
+    }
+
+    public static RequestSender createRequestWithPojo(Object pojo) {
+        return getRequestSpecification().body(pojo);
+    }
+
+    private static RequestSpecification requestParamsSetter(RequestSpecification request, List<RequestParam> paramsTable) {
         for (RequestParam requestParam : paramsTable) {
             String name = requestParam.getName();
             String value = requestParam.getValue();
-
-            RequestSpecification request = requestSpecBuilder.build();
 
             switch (requestParam.getType()) {
                 case COOKIE:
@@ -83,11 +104,16 @@ public class ApiClient {
                 default:
                     throw new IllegalArgumentException(String.format("Некорректно задан тип %s для параметра запроса %s ", requestParam.getType(), name));
             }
-
             request.log().everything();
-            return request;
         }
-        return null;
+        return request;
+    }
+
+    private static RequestSpecification getRequestSpecification() {
+        return given().relaxedHTTPSValidation()
+                .config(RestAssured.config().httpClient(httpClientConfig()
+                        .setParam(CONNECTION_TIMEOUT, 5000)
+                        .setParam(SO_TIMEOUT, 5000)));
     }
 
 
