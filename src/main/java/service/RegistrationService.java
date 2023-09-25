@@ -17,8 +17,7 @@ import static io.restassured.http.Method.GET;
 public class RegistrationService {
 
     public Response checkRegistrationByPhone(String phoneNumber) {
-        List<RequestParam> params = Collections.singletonList(new RequestParam(PARAMETER, PARAMETER_MOBILE_PHONE, phoneNumber));
-        return sendSimpleRequest(GET, REGISTRATION, params);
+        return sendSimpleRequest(GET, REGISTRATION, new RequestParam(PARAMETER, PARAMETER_MOBILE_PHONE, phoneNumber));
     }
 
     public Response checkRegistrationByPhoneWithoutParam() {
@@ -26,13 +25,11 @@ public class RegistrationService {
     }
 
     public Response checkRegistrationByPhoneInvalidURL(String invalidURL, String phoneNumber) {
-        List<RequestParam> params = Collections.singletonList(new RequestParam(PARAMETER, PARAMETER_MOBILE_PHONE, phoneNumber));
-        return sendSimpleRequest(GET, invalidURL, params);
+        return sendSimpleRequest(GET, invalidURL, new RequestParam(PARAMETER, PARAMETER_MOBILE_PHONE, phoneNumber));
     }
 
     public Response checkRegistrationByPhoneInvalidHttpMethod(String invalidHttpMethod, String phoneNumber) {
-        List<RequestParam> params = Collections.singletonList(new RequestParam(PARAMETER, PARAMETER_MOBILE_PHONE, phoneNumber));
-        return sendSimpleRequest(Method.valueOf(invalidHttpMethod), REGISTRATION, params);
+        return sendSimpleRequest(Method.valueOf(invalidHttpMethod), REGISTRATION, new RequestParam(PARAMETER, PARAMETER_MOBILE_PHONE, phoneNumber));
     }
 
 }
