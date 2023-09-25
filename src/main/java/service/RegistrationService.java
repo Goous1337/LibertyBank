@@ -13,12 +13,17 @@ import static api.core.RequestParamType.PARAMETER;
 import static constant.ApiEndpoints.REGISTRATION;
 import static constant.UserServiceConstants.PARAMETER_MOBILE_PHONE;
 import static io.restassured.http.Method.GET;
+import static io.restassured.http.Method.PATCH;
 
 public class RegistrationService {
 
     public Response checkRegistrationByPhone(String phoneNumber) {
         List<RequestParam> params = Collections.singletonList(new RequestParam(PARAMETER, PARAMETER_MOBILE_PHONE, phoneNumber));
         return sendSimpleRequest(GET, REGISTRATION, params);
+    }
+    public Response checkVerificationCode(String phoneNumber) {
+        List<RequestParam> params = Collections.singletonList(new RequestParam(PARAMETER, PARAMETER_MOBILE_PHONE, phoneNumber));
+        return sendSimpleRequest(PATCH, REGISTRATION, params);
     }
 
     public Response checkRegistrationByPhoneWithoutParam() {
