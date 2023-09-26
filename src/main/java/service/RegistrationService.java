@@ -39,13 +39,11 @@ public class RegistrationService {
     }
 
     public Response checkRegistrationByPassport(String passport) {
-        List<RequestParam> params = Collections.singletonList(new RequestParam(PARAMETER, PARAMETER_PASSPORT, passport));
-        return sendSimpleRequest(GET, REGISTRATION, params);
+        return sendSimpleRequest(GET, REGISTRATION, new RequestParam(PARAMETER, PARAMETER_PASSPORT, passport));
     }
 
     public Response checkRegistrationByPassportInvalidHttpMethod(String invalidHttpMethod, String passport) {
-        List<RequestParam> params = Collections.singletonList(new RequestParam(PARAMETER, PARAMETER_PASSPORT, passport));
-        return sendSimpleRequest(Method.valueOf(invalidHttpMethod), REGISTRATION, params);
+        return sendSimpleRequest(Method.valueOf(invalidHttpMethod), REGISTRATION, new RequestParam(PARAMETER, PARAMETER_PASSPORT, passport));
     }
 
 
