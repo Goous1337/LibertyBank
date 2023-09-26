@@ -20,5 +20,6 @@ public class BaseTest {
     public BaseTest() {
         params = new ArrayList<>();
         registrationService = new RegistrationService();
+        verificationService = new VerificationService();
     }
 }
