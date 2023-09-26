@@ -12,6 +12,7 @@ import static api.core.ApiClient.sendSimpleRequest;
 import static api.core.RequestParamType.PARAMETER;
 import static constant.ApiEndpoints.REGISTRATION;
 import static constant.UserServiceConstants.PARAMETER_MOBILE_PHONE;
+import static constant.UserServiceConstants.PARAMETER_PASSPORT;
 import static io.restassured.http.Method.GET;
 import static io.restassured.http.Method.PATCH;
 
@@ -36,5 +37,14 @@ public class RegistrationService {
     public Response checkRegistrationByPhoneInvalidHttpMethod(String invalidHttpMethod, String phoneNumber) {
         return sendSimpleRequest(Method.valueOf(invalidHttpMethod), REGISTRATION, new RequestParam(PARAMETER, PARAMETER_MOBILE_PHONE, phoneNumber));
     }
+
+    public Response checkRegistrationByPassport(String passport) {
+        return sendSimpleRequest(GET, REGISTRATION, new RequestParam(PARAMETER, PARAMETER_PASSPORT, passport));
+    }
+
+    public Response checkRegistrationByPassportInvalidHttpMethod(String invalidHttpMethod, String passport) {
+        return sendSimpleRequest(Method.valueOf(invalidHttpMethod), REGISTRATION, new RequestParam(PARAMETER, PARAMETER_PASSPORT, passport));
+    }
+
 
 }

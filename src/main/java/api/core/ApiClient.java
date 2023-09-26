@@ -6,7 +6,6 @@ import java.util.List;
 import org.json.JSONObject;
 
 import io.restassured.RestAssured;
-import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSender;
