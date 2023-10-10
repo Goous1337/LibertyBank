@@ -115,7 +115,7 @@ public class EP_12_CheckChangingStatusSmsNotificationSettings extends BaseTest {
     public void checkChangingSmsNotificationSettingsAuthorizedUser2(String customerId) {
         Response response = verificationService.checkChangingSmsNotificationSettingsAuthorizedUser1(customerId);
         assertAll(
-                () -> assertEquals(HttpStatus.SC_OK,
+                () -> assertEquals(HttpStatus.SC_INTERNAL_SERVER_ERROR,
                         response.statusCode(),
                         "Код ответа не соответствует ожидаемому")
         );

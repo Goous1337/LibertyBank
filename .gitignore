@@ -5,3 +5,4 @@ target/
 *.log
 allure-results/
 .allure/
+.allure/
