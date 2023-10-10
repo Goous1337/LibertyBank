@@ -19,24 +19,21 @@ public class EP_2_CheckRegistrationByPassportTest extends BaseTest {
 
     @ParameterizedTest
     @CsvSource({
-            "123456, clientId1",
-            "1234567890, clientId2",
-            "12345678901234567890, clientId3",
-            "AZ-012, clientId4"
+            "4512123456, 033140e9-ea0a-40c3-a738-060283531147, 79958984928"
     })
     @Tags({@Tag("smoke"), @Tag("API")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-247")
     @Description("Проверка регистрации по номеру паспорта, когда пользователь является клиентом банка, " +
             "но не зарегистрирован в приложении")
-    public void checkRegistrationByPassportRegisteredClient(String validPassport, String clientId) {
+    public void checkRegistrationByPassportRegisteredClient(String validPassport, String clientId, String validPhoneNumber) {
         Response response = registrationService.checkRegistrationByPassport(validPassport);
         assertAll(
                 () -> assertEquals(HttpStatus.SC_OK,
                         response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals(validPassport,
+                () -> assertEquals(validPhoneNumber,
                         response.body().jsonPath().get("mobilePhone"),
-                        "Номер паспорта в ответе не соответствует ожидаемому"),
+                        "Номер телефона в ответе не соответствует ожидаемому"),
                 () -> assertEquals(clientId,
                         response.body().jsonPath().get("id"),
                         "ID клиента в ответе не соответствует ожидаемому")
@@ -45,7 +42,7 @@ public class EP_2_CheckRegistrationByPassportTest extends BaseTest {
 
     @ParameterizedTest
     @ValueSource(
-            strings = {"AZ-012", "123456", "1234567890", "12345678901234567890"}
+            strings = {"4016467248", "4016467248"}
     )
     @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-280")
@@ -58,7 +55,7 @@ public class EP_2_CheckRegistrationByPassportTest extends BaseTest {
 
     @ParameterizedTest
     @ValueSource(
-            strings = {"AZ-012", "123456", "1234567890", "12345678901234567890"}
+            strings = {"4016467247", "4016467247"}
     )
     @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-274")
@@ -72,7 +69,7 @@ public class EP_2_CheckRegistrationByPassportTest extends BaseTest {
 
     @ParameterizedTest
     @ValueSource(
-            strings = {"12345,", "123456789012345678901", "az-0123", ""}
+            strings = {"4016467246,", "123456789012345678901", "az-0123", " "}
     )
     @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-261")
@@ -85,7 +82,7 @@ public class EP_2_CheckRegistrationByPassportTest extends BaseTest {
 
     @ParameterizedTest
     @ValueSource(
-            strings = {"AZ-012", "123456", "1234567890", "12345678901234567890"}
+            strings = {"1652349856", "1652349856"}
     )
     @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-285")
