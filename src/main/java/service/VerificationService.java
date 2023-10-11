@@ -1,26 +1,16 @@
 package service;
 
 import api.core.RequestParam;
-import api.utils.GsonHelper;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
-import pojo.clientService.SMS_Notification_Boolean;
-import pojo.clientService.SMS_Notification_Integer;
-import pojo.clientService.SMS_Notification_String;
 import pojo.userAccountService.GetVerificationCode;
 import pojo.userAccountService.PhoneVerificationRequest;
 import pojo.userAccountService.Verification;
 
-import java.util.List;
-import java.util.Map;
-
 import static api.core.ApiClient.*;
 import static api.core.RequestParamType.*;
-import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
 import static constant.ApiEndpoints.*;
-import static constant.UserServiceConstants.PARAMETER_CUSTOMER_ID;
-import static constant.UserServiceConstants.PARAMETER_RECEIVER;
-import static io.netty.handler.codec.http.HttpHeaders.Values.APPLICATION_JSON;
+import static constant.CustomerServiceConstants.PARAMETER_RECEIVER;
 import static io.restassured.http.Method.*;
 
 
@@ -66,43 +56,5 @@ public class VerificationService {
 
     public Response checkVerificationCodeInvalidHttpMethod(String invalidHttpMethod, String phoneNumber) {
         return sendSimpleRequest(Method.valueOf(invalidHttpMethod), VERIFICATION_CODE, new RequestParam(PARAMETER, PARAMETER_RECEIVER, phoneNumber));
-    }
-
-    public Response checkChangingSmsNotificationSettingsAuthorizedUser(String customerId, Boolean notificationStatus) {
-        List<RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId),
-                new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
-        return sendSimpleRequest(PATCH, SMS_NOTIFICATION, params, new SMS_Notification_Boolean(notificationStatus));
-    }
-
-    public Response checkChangingSmsNotificationSettingsAuthorizedUserInvalidUrl(String customerId, Boolean notificationStatus) {
-        List<RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId),
-                new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
-        return sendSimpleRequest(PATCH, "/user/settings/notif/sms", params, new SMS_Notification_Boolean(notificationStatus));
-    }
-
-    public Response checkChangingSmsNotificationSettingsAuthorizedUserInvalidMethod(String invalidHttpMethod,
-                                                                                    String customerId,
-                                                                                    Boolean notificationStatus) {
-        List<RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId),
-                new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
-        return sendSimpleRequest(Method.valueOf(invalidHttpMethod), SMS_NOTIFICATION, params, new SMS_Notification_Boolean(notificationStatus));
-    }
-
-    public Response checkChangingSmsNotificationSettingsInvalidData(String customerId, String notificationStatus) {
-        List<RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId),
-                new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
-        return sendSimpleRequest(PATCH, SMS_NOTIFICATION, params, new SMS_Notification_String(notificationStatus));
-    }
-
-    public Response checkChangingSmsNotificationSettingsInvalidData1(String customerId, Integer notificationStatus) {
-        List<RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId),
-                new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
-        return sendSimpleRequest(PATCH, SMS_NOTIFICATION, params, new SMS_Notification_Integer(notificationStatus));
-    }
-
-    public Response checkChangingSmsNotificationSettingsAuthorizedUser1(String customerId) {
-        List<RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId),
-                new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON), new RequestParam(BODY, " " , "true"));
-        return sendSimpleRequest(PATCH, SMS_NOTIFICATION, params);
     }
 }

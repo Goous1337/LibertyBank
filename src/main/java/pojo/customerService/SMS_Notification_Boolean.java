@@ -1,4 +1,4 @@
-package pojo.clientService;
+package pojo.customerService;
 
 import com.fasterxml.jackson.annotation.JsonSetter;
 import lombok.AllArgsConstructor;

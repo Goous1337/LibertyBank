@@ -9,4 +9,5 @@ public final class ApiEndpoints {
     public static final String VERIFICATION_CODE = "api/v1/security/session";
     public static final String VERIFICATION = "api/v1/security/session/verification";
     public static final String SMS_NOTIFICATION = "user/settings/notifications/sms";
+    public static final String INVALID_SMS_NOTIFICATION = "/user/settings/notif/sms";
 }

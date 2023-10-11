@@ -1,6 +1,6 @@
 package constant;
 
-public class UserServiceConstants {
+public class CustomerServiceConstants {
     public static final String PARAMETER_MOBILE_PHONE = "mobilePhone";
     public static final String PARAMETER_RECEIVER = "receiver";
     public static final String PARAMETER_CUSTOMER_ID = "customerId";

@@ -1,4 +1,4 @@
-package api.clientService;
+package api.customerService;
 
 import api.BaseTest;
 import io.qameta.allure.Description;
@@ -7,7 +7,6 @@ import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -26,7 +25,7 @@ public class EP_2_CheckRegistrationByPassportTest extends BaseTest {
     @Description("Проверка регистрации по номеру паспорта, когда пользователь является клиентом банка, " +
             "но не зарегистрирован в приложении")
     public void checkRegistrationByPassportRegisteredClient(String validPassport, String clientId, String validPhoneNumber) {
-        Response response = registrationService.checkRegistrationByPassport(validPassport);
+        Response response = customerService.checkRegistrationByPassport(validPassport);
         assertAll(
                 () -> assertEquals(HttpStatus.SC_OK,
                         response.statusCode(),
@@ -49,7 +48,7 @@ public class EP_2_CheckRegistrationByPassportTest extends BaseTest {
     @Description("Проверка регистрации по паспорту если пользователь уже зарегистрирован в СДБО")
     public void checkRegistrationByPassportAlreadyRegisteredUser(String invalidPassport) {
         assertEquals(HttpStatus.SC_CONFLICT,
-                registrationService.checkRegistrationByPassport(invalidPassport).statusCode(),
+                customerService.checkRegistrationByPassport(invalidPassport).statusCode(),
                 "Код ответа не соответствует ожидаемому");
     }
 
@@ -63,7 +62,7 @@ public class EP_2_CheckRegistrationByPassportTest extends BaseTest {
             "когда пользователь не зарегистрирован в приложении и не является клиентом банка")
     public void checkRegistrationByPassportNotAClient(String invalidPassport) {
         assertEquals(HttpStatus.SC_BAD_REQUEST,
-                registrationService.checkRegistrationByPassport(invalidPassport).statusCode(),
+                customerService.checkRegistrationByPassport(invalidPassport).statusCode(),
                 "Код ответа не соответствует ожидаемому");
     }
 
@@ -76,7 +75,7 @@ public class EP_2_CheckRegistrationByPassportTest extends BaseTest {
     @Description("Проверка работы валидации паспорта")
     public void checkRegistrationByPassportInvalidPassport(String invalidPassport) {
         assertEquals(HttpStatus.SC_BAD_REQUEST,
-                registrationService.checkRegistrationByPassport(invalidPassport).statusCode(),
+                customerService.checkRegistrationByPassport(invalidPassport).statusCode(),
                 "Код ответа не соответствует ожидаемому");
     }
 
@@ -89,7 +88,7 @@ public class EP_2_CheckRegistrationByPassportTest extends BaseTest {
     @Description("Проверка попытки регистрации заблокированного пользователя")
     public void checkRegistrationByPhoneBlockedUser(String invalidPassport) {
         assertEquals(HttpStatus.SC_FORBIDDEN,
-                registrationService.checkRegistrationByPassport(invalidPassport).statusCode(),
+                customerService.checkRegistrationByPassport(invalidPassport).statusCode(),
                 "Код ответа не соответствует ожидаемому");
     }
 
@@ -105,7 +104,7 @@ public class EP_2_CheckRegistrationByPassportTest extends BaseTest {
     @Description("Проверка регистрации пользователя по номеру телефона используя невалидный метод запроса")
     public void checkRegistrationByPhoneInvalidMethod(String invalidHttpMethod, String validPassport) {
         assertEquals(HttpStatus.SC_METHOD_NOT_ALLOWED,
-                registrationService.checkRegistrationByPassportInvalidHttpMethod(invalidHttpMethod, validPassport).statusCode(),
+                customerService.checkRegistrationByPassportInvalidHttpMethod(invalidHttpMethod, validPassport).statusCode(),
                 "Код ответа не соответствует ожидаемому");
     }
 

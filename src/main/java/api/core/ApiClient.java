@@ -103,7 +103,6 @@ public class ApiClient {
                 default:
                     throw new IllegalArgumentException(String.format("Некорректно задан тип %s для параметра запроса %s ", requestParam.getType(), name));
             }
-            request.log().everything();
         }
         return request;
     }
@@ -112,7 +111,8 @@ public class ApiClient {
         return given().relaxedHTTPSValidation()
                 .config(RestAssured.config().httpClient(httpClientConfig()
                         .setParam(CONNECTION_TIMEOUT, 5000)
-                        .setParam(SO_TIMEOUT, 5000)));
+                        .setParam(SO_TIMEOUT, 5000)))
+                .log().everything();
     }
 
 

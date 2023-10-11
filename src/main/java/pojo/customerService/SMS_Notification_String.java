@@ -1,4 +1,4 @@
-package pojo.clientService;
+package pojo.customerService;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
