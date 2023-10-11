@@ -1,7 +1,8 @@
 package service;
 
+import java.util.List;
+
 import api.core.RequestParam;
-import api.utils.GsonHelper;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
 import pojo.clientService.SMS_Notification_Boolean;
@@ -11,17 +12,21 @@ import pojo.userAccountService.GetVerificationCode;
 import pojo.userAccountService.PhoneVerificationRequest;
 import pojo.userAccountService.Verification;
 
-import java.util.List;
-import java.util.Map;
-
-import static api.core.ApiClient.*;
-import static api.core.RequestParamType.*;
+import static api.core.ApiClient.sendRequestWithoutParams;
+import static api.core.ApiClient.sendSimpleRequest;
+import static api.core.RequestParamType.BODY;
+import static api.core.RequestParamType.HEADER;
+import static api.core.RequestParamType.PARAMETER;
 import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
-import static constant.ApiEndpoints.*;
+import static constant.ApiEndpoints.SMS_NOTIFICATION;
+import static constant.ApiEndpoints.VERIFICATION;
+import static constant.ApiEndpoints.VERIFICATION_CODE;
 import static constant.UserServiceConstants.PARAMETER_CUSTOMER_ID;
 import static constant.UserServiceConstants.PARAMETER_RECEIVER;
 import static io.netty.handler.codec.http.HttpHeaders.Values.APPLICATION_JSON;
-import static io.restassured.http.Method.*;
+import static io.restassured.http.Method.GET;
+import static io.restassured.http.Method.PATCH;
+import static io.restassured.http.Method.POST;
 
 
 public class VerificationService {
@@ -81,9 +86,9 @@ public class VerificationService {
     }
 
     public Response checkChangingSmsNotificationSettingsAuthorizedUserInvalidMethod(String invalidHttpMethod,
-                                                                                    String customerId,
-                                                                                    Boolean notificationStatus) {
-        List<RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId),
+            String customerId, Boolean notificationStatus) {
+        List<RequestParam> params = List.of(
+                new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId),
                 new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
         return sendSimpleRequest(Method.valueOf(invalidHttpMethod), SMS_NOTIFICATION, params, new SMS_Notification_Boolean(notificationStatus));
     }
@@ -102,7 +107,7 @@ public class VerificationService {
 
     public Response checkChangingSmsNotificationSettingsAuthorizedUser1(String customerId) {
         List<RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId),
-                new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON), new RequestParam(BODY, " " , "true"));
+                new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON), new RequestParam(BODY, " ", "true"));
         return sendSimpleRequest(PATCH, SMS_NOTIFICATION, params);
     }
 }
