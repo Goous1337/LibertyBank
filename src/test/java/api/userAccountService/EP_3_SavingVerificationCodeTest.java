@@ -96,6 +96,7 @@ public class EP_3_SavingVerificationCodeTest extends BaseTest {
                 "Код ответа не соответствует ожидаемому");
     }
 
+
     @ParameterizedTest
     @ValueSource(
             strings = {"0000000000", "111111111111", "+1234567890", "-1234567890", " ()12345678901"}
