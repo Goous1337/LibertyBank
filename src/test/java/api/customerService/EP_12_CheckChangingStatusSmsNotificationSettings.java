@@ -2,7 +2,6 @@ package api.customerService;
 
 import api.BaseTest;
 import io.qameta.allure.Description;
-import io.qameta.allure.Issue;
 import io.qameta.allure.TmsLink;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
@@ -122,7 +121,6 @@ public class EP_12_CheckChangingStatusSmsNotificationSettings extends BaseTest {
     @DisplayName("Проверка необходимости параметров в теле запроса")
     @Description("Проверка необходимости параметра notificationStatus в теле запроса")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-965")
-    @Issue("Заведен баг")
     @ParameterizedTest(name = "customerId: {0}")
     @CsvSource({
             "033140e9-ea0a-40c3-a738-060283531147"
