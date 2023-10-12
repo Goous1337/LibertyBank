@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RequestParam {
-
     private RequestParamType type;
     private String name;
     private String value;

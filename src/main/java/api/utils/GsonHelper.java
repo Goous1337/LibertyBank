@@ -1,7 +1,5 @@
 package api.utils;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.google.gson.Gson;
@@ -14,13 +12,5 @@ public class GsonHelper {
                 .setPrettyPrinting()
                 .create();
         return gson.toJson(params);
-    }
-
-    public static void main(String[] args) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("", true);
-
-        String body = GsonHelper.createBody(params);
-        System.out.println(body);
     }
 }

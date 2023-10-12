@@ -7,9 +7,11 @@ import pojo.userAccountService.GetVerificationCode;
 import pojo.userAccountService.PhoneVerificationRequest;
 import pojo.userAccountService.Verification;
 
-import static api.core.ApiClient.*;
-import static api.core.RequestParamType.*;
-import static constant.ApiEndpoints.*;
+import static api.core.ApiClient.sendRequestWithoutParams;
+import static api.core.ApiClient.sendSimpleRequest;
+import static api.core.RequestParamType.PARAMETER;
+import static constant.ApiEndpoints.VERIFICATION;
+import static constant.ApiEndpoints.VERIFICATION_CODE;
 import static constant.CustomerServiceConstants.PARAMETER_RECEIVER;
 import static io.restassured.http.Method.*;
 
