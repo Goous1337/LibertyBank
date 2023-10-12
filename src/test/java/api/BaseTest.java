@@ -6,7 +6,7 @@ import java.util.List;
 import api.core.RequestParam;
 import lombok.Data;
 import service.CustomerService;
-import service.VerificationService;
+import service.UserAccountService;
 
 /**
  * Базовый тестовый класс
@@ -15,11 +15,11 @@ import service.VerificationService;
 public class BaseTest {
     protected List<RequestParam> params;
     protected CustomerService customerService;
-    protected VerificationService verificationService;
+    protected UserAccountService userAccountService;
 
     public BaseTest() {
         params = new ArrayList<>();
         customerService = new CustomerService();
-        verificationService = new VerificationService();
+        userAccountService = new UserAccountService();
     }
 }

@@ -4,9 +4,11 @@ import dataBase.DataBaseConnector;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import static constant.DataBaseConstants.USER_ACCOUNT_SERVICE_DB;
+
 public class DataUtils {
 
-    static JdbcTemplate jdbcTemplate = DataBaseConnector.getJdbcTemplate();
+    static JdbcTemplate jdbcTemplate = DataBaseConnector.getJdbcTemplate(USER_ACCOUNT_SERVICE_DB);
 
     public static String getNonExistentClientPhoneNumber() {
         String newPhoneNumber;
