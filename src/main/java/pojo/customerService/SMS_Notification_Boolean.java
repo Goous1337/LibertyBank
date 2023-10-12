@@ -10,6 +10,5 @@ import lombok.Data;
 
 public class SMS_Notification_Boolean {
 
-    @JsonSetter("")
     private Boolean notificationStatus;
 }
