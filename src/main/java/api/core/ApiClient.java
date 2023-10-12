@@ -22,8 +22,6 @@ import static org.apache.http.params.CoreConnectionPNames.SO_TIMEOUT;
 
 public class ApiClient {
 
-
-
     public static Response sendSimpleRequest(Method method, String address,
             List<RequestParam> paramsTable) {
         RequestSender request = createRequest(paramsTable);

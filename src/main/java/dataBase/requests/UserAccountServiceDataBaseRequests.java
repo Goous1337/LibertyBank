@@ -13,26 +13,22 @@ import static constant.DataBaseConstants.USER_SERVICE_DB;
 
 public class UserAccountServiceDataBaseRequests {
 
-    public static String get111(String phoneNumber) {
+    public static String receivingIdCustomerByPhoneNumber(String phoneNumber) {
 
         JdbcTemplate jdbcTemplate = DataBaseConnector.getJdbcTemplate(USER_SERVICE_DB);
-        //здесь поделючение к user_service_db
         String sql = "SELECT customer_id FROM public.client WHERE mobile_phone=?";
         String idCustomer = jdbcTemplate.queryForObject(sql, String.class, phoneNumber);
         System.out.println(idCustomer);
         return idCustomer;
     }
 
-    public static String get222(String phoneNumber, String idCustomer) {
+    public static String receivingVerificationCodeByIdCustomer(String phoneNumber, String idCustomer) {
         JdbcTemplate jdbcTemplate1 = DataBaseConnector.getJdbcTemplate(USER_ACCOUNT_SERVICE_DB);
-
         String sql2 = "SELECT last_verification_code " +
                 "FROM user_profile WHERE customer_id=?::uuid";
         String verificationCode = jdbcTemplate1.queryForObject(sql2, String.class, idCustomer);
         System.out.println(verificationCode);
         return verificationCode;
 
-
     }
 }
-

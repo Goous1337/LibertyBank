@@ -13,7 +13,6 @@ import java.util.Properties;
 public final class PropertiesReader {
     private static final Logger LOG = LogManager.getLogger(PropertiesReader.class);
 
-
     private final static String CONFIG_PROPERTIES = "config.properties";
     private static Properties properties;
     private static PropertiesReader instance;
