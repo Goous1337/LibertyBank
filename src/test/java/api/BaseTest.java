@@ -5,7 +5,7 @@ import java.util.List;
 
 import api.core.RequestParam;
 import lombok.Data;
-import service.RegistrationService;
+import service.CustomerService;
 import service.VerificationService;
 
 /**
@@ -14,12 +14,12 @@ import service.VerificationService;
 @Data
 public class BaseTest {
     protected List<RequestParam> params;
-    protected RegistrationService registrationService;
+    protected CustomerService customerService;
     protected VerificationService verificationService;
 
     public BaseTest() {
         params = new ArrayList<>();
-        registrationService = new RegistrationService();
+        customerService = new CustomerService();
         verificationService = new VerificationService();
     }
 }

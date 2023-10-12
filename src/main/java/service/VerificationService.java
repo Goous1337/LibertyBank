@@ -10,9 +10,9 @@ import pojo.userAccountService.Verification;
 import static api.core.ApiClient.sendRequestWithoutParams;
 import static api.core.ApiClient.sendSimpleRequest;
 import static api.core.RequestParamType.PARAMETER;
-import static constant.ApiEndpoints.VERIFICATION_CODE;
 import static constant.ApiEndpoints.VERIFICATION;
-import static constant.UserServiceConstants.PARAMETER_RECEIVER;
+import static constant.ApiEndpoints.VERIFICATION_CODE;
+import static constant.CustomerServiceConstants.PARAMETER_RECEIVER;
 import static io.restassured.http.Method.*;
 
 
@@ -58,6 +58,5 @@ public class VerificationService {
 
     public Response checkVerificationCodeInvalidHttpMethod(String invalidHttpMethod, String phoneNumber) {
         return sendSimpleRequest(Method.valueOf(invalidHttpMethod), VERIFICATION_CODE, new RequestParam(PARAMETER, PARAMETER_RECEIVER, phoneNumber));
-
     }
 }
