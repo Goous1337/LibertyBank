@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import service.VerificationService;
+import service.UserAccountService;
 
 import static constant.CustomerServiceConstants.NOT_REGISTERED_PHONE_NUMBER;
 import static constant.CustomerServiceConstants.REGISTERED_PHONE_NUMBER;
@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class EP_4_UserVerificationByPhoneNumber extends BaseTest {
 
-    VerificationService verificationService = new VerificationService();
+    UserAccountService verificationService = new UserAccountService();
 
     @Tags({@Tag("smoke"), @Tag("API")})
     @Test

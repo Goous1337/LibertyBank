@@ -1,14 +1,16 @@
-import api.BaseTest;
-import dataBase.DataBaseConnector;
 import org.junit.jupiter.api.Test;
-import org.springframework.jdbc.core.JdbcTemplate;
+
+import api.BaseTest;
+
+import static constant.LibertyServiceName.USER_ACCOUNT_SERVICE;
+import static dataBase.DataBaseConnector.getDBConnection;
 
 public class UserServiceTest extends BaseTest {
 
     @Test
     public void fetchData() {
-        JdbcTemplate jdbcTemplate = DataBaseConnector.getJdbcTemplate();
         String sql = "SELECT name FROM manufacturers WHERE city = ?";
-        System.out.println(jdbcTemplate.queryForObject(sql, String.class, "Moscow"));
+        String name = getDBConnection(USER_ACCOUNT_SERVICE).queryForObject(sql, String.class, "Moscow");
+        System.out.println(name);
     }
 }

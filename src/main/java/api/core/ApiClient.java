@@ -17,14 +17,10 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.config.HttpClientConfig.httpClientConfig;
 import static org.apache.http.params.CoreConnectionPNames.CONNECTION_TIMEOUT;
 import static org.apache.http.params.CoreConnectionPNames.SO_TIMEOUT;
-import static property.BaseProperties.BASE_URL;
+
 
 
 public class ApiClient {
-
-    static {
-        RestAssured.baseURI = BASE_URL;
-    }
 
     public static Response sendSimpleRequest(Method method, String address,
             List<RequestParam> paramsTable) {
@@ -46,6 +42,11 @@ public class ApiClient {
     public static Response sendSimpleRequest(Method method, String address, Object pojo) {
         RequestSender request = createRequestWithPojo(pojo);
         return request.request(method, address);
+    }
+
+    public static Response sendSimpleRequest(Method method, String URI, String address, Object pojo) {
+        RequestSender request = createRequestWithPojo(pojo);
+        return request.request(method, URI, address);
     }
 
     public static Response sendRequestWithoutParams(Method method, String address) {
