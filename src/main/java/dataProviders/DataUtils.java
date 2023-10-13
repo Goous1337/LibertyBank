@@ -1,14 +1,11 @@
 package dataProviders;
 
-import dataBase.DataBaseConnector;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.springframework.jdbc.core.JdbcTemplate;
 
-import static constant.DataBaseConstants.USER_ACCOUNT_SERVICE_DB;
+import static constant.LibertyServiceName.USER_ACCOUNT_SERVICE;
+import static dataBase.DataBaseConnector.getDBConnection;
 
 public class DataUtils {
-
-    static JdbcTemplate jdbcTemplate = DataBaseConnector.getJdbcTemplate(USER_ACCOUNT_SERVICE_DB);
 
     public static String getNonExistentClientPhoneNumber() {
         String newPhoneNumber;
@@ -20,7 +17,8 @@ public class DataUtils {
 
     private static boolean isPhoneNumberExistingInClientDB(String phoneNumber) {
         String selectPhoneNumbersCountSQL = "SELECT COUNT(*) FROM public.client WHERE mobile_phone = ?";
-        Integer phoneNumberCount = jdbcTemplate.queryForObject(selectPhoneNumbersCountSQL, Integer.class, phoneNumber);
+        Integer phoneNumberCount = getDBConnection(USER_ACCOUNT_SERVICE)
+                .queryForObject(selectPhoneNumbersCountSQL, Integer.class, phoneNumber);
         return phoneNumberCount != null && phoneNumberCount > 0;
     }
 

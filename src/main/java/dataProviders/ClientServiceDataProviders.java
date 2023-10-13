@@ -1,27 +1,23 @@
 package dataProviders;
 
-import org.apache.commons.lang3.RandomStringUtils;
-
 import java.util.stream.Stream;
+
+import static org.apache.commons.lang3.RandomStringUtils.randomAlphanumeric;
+import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
 
 public class ClientServiceDataProviders {
 
     public static Stream<String> generateRandomInvalidPhoneNumbers() {
         return Stream.of(
-                RandomStringUtils.randomAlphanumeric(11),
-                RandomStringUtils.randomNumeric(10),
-                RandomStringUtils.randomNumeric(12),
+                randomAlphanumeric(11),
+                randomNumeric(10),
+                randomNumeric(12),
                 ""
         );
     }
 
-    public static Object[] provideNonExistentClientPhoneNumbers() {
-        int numberOfPhoneNumbers = 3;
-        Object[] phoneNumbers = new Object[numberOfPhoneNumbers];
-        for (int i = 0; i < numberOfPhoneNumbers; i++) {
-            phoneNumbers[i] = DataUtils.getNonExistentClientPhoneNumber();
-        }
-        return phoneNumbers;
+    public static Stream<String> provideNonExistentClientPhoneNumbers() {
+        return Stream.generate(DataUtils::getNonExistentClientPhoneNumber).limit(3);
     }
 
 }

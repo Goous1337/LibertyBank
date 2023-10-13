@@ -2,10 +2,8 @@ package constant;
 
 public class DataBaseConstants {
 
-    public static final String USER_SERVICE_DB = "user_service_db";
-    public static final String USER_ACCOUNT_SERVICE_DB = "user_account_service_db";
-    public static final String INFO_SERVICE_DB = "info_service_db";
-    public static final String URL_DB = "db_url";
-    public static final String DB_HOST = "db_host";
-    public static final String DB_PORT = "db_port";
+    public static final String POSTGRESQL_DB_DRIVER = "org.postgresql.Driver";
+    public static final String DB_URL = "db_url";
+    public static final String DB_USER = "db_user";
+    public static final String DB_PASSWORD = "db_pass";
 }

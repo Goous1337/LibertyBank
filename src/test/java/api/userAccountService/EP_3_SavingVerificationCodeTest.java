@@ -1,11 +1,5 @@
 package api.userAccountService;
 
-import api.BaseTest;
-import dataBase.requests.UserAccountServiceDataBaseRequests;
-import io.qameta.allure.Description;
-import io.qameta.allure.TmsLink;
-import io.restassured.RestAssured;
-import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -15,9 +9,17 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import api.BaseTest;
+import dataBase.requests.UserAccountServiceDataBaseRequests;
+import io.qameta.allure.Description;
+import io.qameta.allure.TmsLink;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
 
 import static constant.CustomerServiceConstants.REGISTERED_PHONE_NUMBER;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static property.BaseProperties.URL_USER_ACCOUNT_SERVICE;
 
 public class EP_3_SavingVerificationCodeTest extends BaseTest {
@@ -42,12 +44,12 @@ public class EP_3_SavingVerificationCodeTest extends BaseTest {
                         "Код ответа не соответствует ожидаемому"),
                 () -> assertNotNull(
                         response.body().jsonPath().get("blockSeconds")));
-        assertNotNull(UserAccountServiceDataBaseRequests.receivingVerificationCodeByIdCustomer(phoneNumber, idCustomer),
+        assertNotNull(UserAccountServiceDataBaseRequests.receivingVerificationCodeByIdCustomer(idCustomer),
                 "Верификационный код необнаружен");
     }
 
 
-// тут пока нечего смотреть ((
+    // тут пока нечего смотреть ((
     @Test
     @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-245")

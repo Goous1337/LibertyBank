@@ -1,55 +1,45 @@
 package dataBase;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+
+import constant.LibertyServiceName;
 import lombok.Data;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import static constant.DataBaseConstants.DB_PASSWORD;
+import static constant.DataBaseConstants.DB_USER;
+import static constant.DataBaseConstants.POSTGRESQL_DB_DRIVER;
 import static property.PropertiesReader.getPropertyValue;
 
 @Data
 public class DataBaseConnector {
     private static Map<String, JdbcTemplate> jdbcTemplateMap = new HashMap<>();
 
-    private String dbName;
-    private String host;
-    private String port;
-    private String user;
-    private String password;
-
-    private DataBaseConnector(String dbName, String host, String port, String user, String password) {
-        this.dbName = dbName;
-        this.host = host;
-        this.port = port;
-        this.user = user;
-        this.password = password;
-    }
-
-    public static JdbcTemplate getJdbcTemplate(String dbName) {
-        if (!jdbcTemplateMap.containsKey(dbName)) {
-            DataBaseConnector dataBaseConnector = new DataBaseConnector(dbName, getPropertyValue("db_host"),
-                    getPropertyValue("db_port"), getPropertyValue("db_user"), getPropertyValue("db_pass"));
-            JdbcTemplate jdbcTemplate = new JdbcTemplate(dataBaseConnector.dataSource());
-            jdbcTemplateMap.put(dbName, jdbcTemplate);
+    public static JdbcTemplate getDBConnection(LibertyServiceName service) {
+        String serviceName = service.getServiceName();
+        if (!jdbcTemplateMap.containsKey(serviceName)) {
+            JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource(getConnectionUrl(serviceName)));
+            jdbcTemplateMap.put(serviceName, jdbcTemplate);
         }
-        return jdbcTemplateMap.get(dbName);
+        return jdbcTemplateMap.get(serviceName);
     }
 
-    private DataSource dataSource() {
+    private static DataSource dataSource(String url) {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl(getConnectionUrl());
-        dataSource.setUsername(user);
-        dataSource.setPassword(password);
+        dataSource.setDriverClassName(POSTGRESQL_DB_DRIVER);
+        dataSource.setUrl(url);
+        dataSource.setUsername(getPropertyValue(DB_USER));
+        dataSource.setPassword(getPropertyValue(DB_PASSWORD));
         return dataSource;
     }
 
-    private String getConnectionUrl() {
-        return getPropertyValue("db_url") + host + ":" + port + "/" + dbName;
+    private static String getConnectionUrl(String serviceName) {
+        return getPropertyValue("db_url") + serviceName + "?characterEncoding=utf8";
     }
 
 }
