@@ -18,9 +18,7 @@ import static api.core.RequestParamType.*;
 import static api.utils.GsonHelper.createBody;
 import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
 import static constant.ApiEndpoints.*;
-import static constant.ApiEndpoints.CHANGE_EMAIL;
 import static constant.CustomerServiceConstants.*;
-import static constant.CustomerServiceConstants.PARAMETER_CUSTOMER_ID;
 import static io.netty.handler.codec.http.HttpHeaders.Values.APPLICATION_JSON;
 import static io.restassured.http.Method.GET;
 import static io.restassured.http.Method.PATCH;
@@ -31,6 +29,7 @@ public class CustomerService {
     public Response checkRegistrationByPhone(String phoneNumber) {
         return sendSimpleRequest(GET, REGISTRATION, new RequestParam(PARAMETER, PARAMETER_MOBILE_PHONE, phoneNumber));
     }
+
     public Response checkVerificationCode(String phoneNumber) {
         List<RequestParam> params = Collections.singletonList(new RequestParam(PARAMETER, PARAMETER_MOBILE_PHONE, phoneNumber));
         return sendSimpleRequest(PATCH, REGISTRATION, params);

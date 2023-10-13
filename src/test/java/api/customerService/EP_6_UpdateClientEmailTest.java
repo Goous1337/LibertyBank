@@ -1,7 +1,6 @@
 package api.customerService;
 
 import api.BaseTest;
-import dataBase.DataBaseConnector;
 import dataBase.requests.CustomerServiceDataBaseRequest;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
@@ -14,12 +13,10 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CUSTOMER_SERVICE;
-import static property.BaseProperties.URL_USER_ACCOUNT_SERVICE;
 
 @DisplayName("EP-6 Обновление email Клиента")
 public class EP_6_UpdateClientEmailTest extends BaseTest {
