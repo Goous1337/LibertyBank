@@ -24,7 +24,7 @@ import static property.BaseProperties.URL_USER_ACCOUNT_SERVICE;
 
 public class EP_3_SavingVerificationCodeTest extends BaseTest {
 
-    static {
+    {
         RestAssured.baseURI = URL_USER_ACCOUNT_SERVICE;
     }
 

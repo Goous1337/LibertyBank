@@ -21,7 +21,7 @@ import static property.BaseProperties.CUSTOMER_SERVICE;
 @DisplayName("EP-6 Обновление email Клиента")
 public class EP_6_UpdateClientEmailTest extends BaseTest {
 
-    static {
+    {
         RestAssured.baseURI = CUSTOMER_SERVICE;
     }
 

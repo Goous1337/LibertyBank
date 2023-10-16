@@ -22,7 +22,7 @@ import static property.BaseProperties.CUSTOMER_SERVICE;
 @DisplayName("Проверка регистрации по номеру телефона")
 public class EP_1_CheckRegistrationByPhoneTest extends BaseTest {
 
-    static {
+    {
         RestAssured.baseURI = CUSTOMER_SERVICE;
     }
 

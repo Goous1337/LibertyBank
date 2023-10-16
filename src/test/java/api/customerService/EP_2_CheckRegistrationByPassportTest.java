@@ -18,7 +18,7 @@ import static property.BaseProperties.CUSTOMER_SERVICE;
 
 public class EP_2_CheckRegistrationByPassportTest extends BaseTest {
 
-    static {
+    {
         RestAssured.baseURI = CUSTOMER_SERVICE;
     }
 

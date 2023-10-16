@@ -19,7 +19,7 @@ import static property.BaseProperties.CUSTOMER_SERVICE;
 @DisplayName("Изменение статуса настройки получения SMS-уведомлений")
 public class EP_12_CheckChangingStatusSmsNotificationSettings extends BaseTest {
 
-    static {
+    {
         RestAssured.baseURI = CUSTOMER_SERVICE;
     }
 
