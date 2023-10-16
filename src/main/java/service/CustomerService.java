@@ -6,6 +6,7 @@ import io.restassured.response.Response;
 import pojo.customerService.SMS_Notification_Boolean;
 import pojo.customerService.SMS_Notification_Integer;
 import pojo.customerService.SMS_Notification_String;
+import pojo.customerService.User;
 
 import java.util.Collections;
 import java.util.List;
@@ -17,9 +18,7 @@ import static api.core.RequestParamType.*;
 import static api.utils.GsonHelper.createBody;
 import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
 import static constant.ApiEndpoints.*;
-import static constant.ApiEndpoints.SMS_NOTIFICATION;
 import static constant.CustomerServiceConstants.*;
-import static constant.CustomerServiceConstants.PARAMETER_CUSTOMER_ID;
 import static io.netty.handler.codec.http.HttpHeaders.Values.APPLICATION_JSON;
 import static io.restassured.http.Method.GET;
 import static io.restassured.http.Method.PATCH;
@@ -30,6 +29,7 @@ public class CustomerService {
     public Response checkRegistrationByPhone(String phoneNumber) {
         return sendSimpleRequest(GET, REGISTRATION, new RequestParam(PARAMETER, PARAMETER_MOBILE_PHONE, phoneNumber));
     }
+
     public Response checkVerificationCode(String phoneNumber) {
         List<RequestParam> params = Collections.singletonList(new RequestParam(PARAMETER, PARAMETER_MOBILE_PHONE, phoneNumber));
         return sendSimpleRequest(PATCH, REGISTRATION, params);
@@ -91,5 +91,23 @@ public class CustomerService {
         List<RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId),
                 new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON), new RequestParam(BODY, EMPTY, body));
         return sendSimpleRequest(PATCH, SMS_NOTIFICATION, params);
+    }
+
+    public Response checkUpdateClientEmail(String customerId, String email) {
+        List<RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId),
+                new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
+        return sendSimpleRequest(PATCH, CHANGE_EMAIL, params, new User(customerId, email));
+    }
+
+    public Response checkUnsuccessfulUpdateEmailInvalidHttpMethod(String invalidHttpMethod, String customerId, String email) {
+        List<RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId),
+                new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
+        return sendSimpleRequest(Method.valueOf(invalidHttpMethod), CHANGE_EMAIL, params, new User(customerId, email));
+    }
+
+    public Response checkUpdateClientEmailInvalidURL(String invalidURL, String customerId, String email) {
+        List<RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId),
+                new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
+        return sendSimpleRequest(PATCH, invalidURL, params, new User(customerId, email));
     }
 }

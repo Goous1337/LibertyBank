@@ -3,6 +3,7 @@ package api.customerService;
 import api.BaseTest;
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
+import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
@@ -16,9 +17,14 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static property.BaseProperties.CUSTOMER_SERVICE;
 
 @DisplayName("Проверка регистрации по номеру телефона")
 public class EP_1_CheckRegistrationByPhoneTest extends BaseTest {
+
+    {
+        RestAssured.baseURI = CUSTOMER_SERVICE;
+    }
 
     @DisplayName("Проверка регистрации по номеру телефона, когда пользователь является клиентом банка, но не зарегистрирован в приложении")
     @Description("Данный тест кейс проверяет, что при отправке номера телефона пользователя, который есть в базе клиентов банка, " +

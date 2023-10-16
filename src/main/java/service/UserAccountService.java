@@ -1,22 +1,18 @@
 package service;
 
 import api.core.RequestParam;
-import io.restassured.http.Method;
 import io.restassured.response.Response;
-import pojo.customerService.SMS_Notification_String;
 import pojo.userAccountService.GetVerificationCode;
 import pojo.userAccountService.PhoneVerificationRequest;
 import pojo.userAccountService.Verification;
 
 import java.util.List;
 
-import static api.core.ApiClient.sendRequestWithoutParams;
 import static api.core.ApiClient.sendSimpleRequest;
-import static api.core.RequestParamType.*;
+import static api.core.RequestParamType.HEADER;
 import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
-import static constant.ApiEndpoints.*;
-import static constant.CustomerServiceConstants.PARAMETER_CUSTOMER_ID;
-import static constant.CustomerServiceConstants.PARAMETER_RECEIVER;
+import static constant.ApiEndpoints.VERIFICATION;
+import static constant.ApiEndpoints.VERIFICATION_CODE;
 import static io.netty.handler.codec.http.HttpHeaders.Values.APPLICATION_JSON;
 import static io.restassured.http.Method.*;
 
@@ -65,4 +61,5 @@ public class UserAccountService {
 /*        public Response checkVerificationCodeInvalidHttpMethod (String invalidHttpMethod, String phoneNumber){
             return sendSimpleRequest(Method.valueOf(invalidHttpMethod), VERIFICATION_CODE, new RequestParam(PARAMETER, PARAMETER_RECEIVER, phoneNumber));
         }*/
-    }}
+    }
+}
