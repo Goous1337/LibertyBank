@@ -1,6 +1,7 @@
 package service;
 
 import api.core.RequestParam;
+import io.restassured.http.Method;
 import io.restassured.response.Response;
 import pojo.userAccountService.GetVerificationCode;
 import pojo.userAccountService.PhoneVerificationRequest;
@@ -49,17 +50,14 @@ public class UserAccountService {
                 new PhoneVerificationRequest(invalidMobilePhone, invalidVerificationCode));
     }
 
-    public Response verificationService(String phoneNumber) {
-        return sendSimpleRequest(PATCH, VERIFICATION_CODE, new Verification(phoneNumber));
-    }
-
-    public Response checkingVerificationCodeSuccessfullySaved(String phoneNumber) {
+    public Response checkVerificationCodeSuccessfulSaved(String phoneNumber) {
         List<RequestParam> params = List.of(new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
         return sendSimpleRequest(PATCH, VERIFICATION_CODE, params, new Verification(phoneNumber));
-
-
-/*        public Response checkVerificationCodeInvalidHttpMethod (String invalidHttpMethod, String phoneNumber){
-            return sendSimpleRequest(Method.valueOf(invalidHttpMethod), VERIFICATION_CODE, new RequestParam(PARAMETER, PARAMETER_RECEIVER, phoneNumber));
-        }*/
     }
+
+    public Response checkVerificationCodeInvalidHttpMethod(String httpMethod, String phoneNumber) {
+        List<RequestParam> params = List.of(new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
+        return sendSimpleRequest(Method.valueOf(httpMethod), VERIFICATION_CODE, params, new Verification(phoneNumber));
+    }
+
 }

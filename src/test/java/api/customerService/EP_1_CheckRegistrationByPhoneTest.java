@@ -19,11 +19,51 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CUSTOMER_SERVICE;
 
-@DisplayName("Проверка регистрации по номеру телефона")
+@DisplayName("EP-1 Проверка регистрации по номеру телефона")
 public class EP_1_CheckRegistrationByPhoneTest extends BaseTest {
 
     {
         RestAssured.baseURI = CUSTOMER_SERVICE;
+    }
+
+    @DisplayName("Проверка попытки регистрации заблокированного пользователя")
+    @Description("Проверка попытки регистрации заблокированного пользователя")
+    @Tag("API")
+    @TmsLink("https://jira.astondevs.ru/browse/LIB-260")
+    @ParameterizedTest
+    @ValueSource(
+            strings = {"79137193837", "79978020792"}
+    )
+
+    public void checkRegistrationByPhoneBlockedUser(String invalidPhoneNumber) {
+        Response response = customerService.checkRegistrationByPhone(invalidPhoneNumber);
+        assertAll(
+                () -> assertEquals(HttpStatus.SC_FORBIDDEN,
+                        response.statusCode(),
+                        "Код ответа не соответствует ожидаемому"),
+                () -> assertEquals("Пользователь заблокирован",
+                        response.body().jsonPath().get("message"),
+                        "Сообщение об ошибке не соответствует ожидаемому")
+        );
+    }
+
+    @DisplayName("Проверка работы валидации номера телефона")
+    @Description("Проверка работы валидации номера телефона")
+    @Tag("API")
+    @TmsLink("https://jira.astondevs.ru/browse/LIB-275")
+    @ParameterizedTest
+    @MethodSource("dataProviders.ClientServiceDataProviders#generateRandomInvalidPhoneNumbers")
+
+    public void checkRegistrationByPhoneInvalidPhoneNumber(String invalidPhoneNumber) {
+        Response response = customerService.checkRegistrationByPhone(invalidPhoneNumber);
+        assertAll(
+                () -> assertEquals(HttpStatus.SC_BAD_REQUEST,
+                        response.statusCode(),
+                        "Код ответа не соответствует ожидаемому"),
+                () -> assertEquals("Некорректный запрос. Убедитесь, что адрес указан верно и попробуйте еще раз.",
+                        response.body().jsonPath().get("message"),
+                        "Сообщение об ошибке не соответствует ожидаемому")
+        );
     }
 
     @DisplayName("Проверка регистрации по номеру телефона, когда пользователь является клиентом банка, но не зарегистрирован в приложении")
@@ -53,27 +93,6 @@ public class EP_1_CheckRegistrationByPhoneTest extends BaseTest {
         );
     }
 
-    @DisplayName("Проверка регистрации если пользователь уже зарегистрирован в СДБО")
-    @Description("Проверка регистрации уже зарегистрированного пользователя")
-    @Tag("API")
-    @TmsLink("https://jira.astondevs.ru/browse/LIB-320")
-    @ParameterizedTest
-    @ValueSource(
-            strings = {"79974699104", "79060996597", "79948964168"}
-    )
-
-    public void checkRegistrationByPhoneAlreadyRegisteredUser(String invalidPhoneNumber) {
-        Response response = customerService.checkRegistrationByPhone(invalidPhoneNumber);
-        assertAll(
-                () -> assertEquals(HttpStatus.SC_CONFLICT,
-                        response.statusCode(),
-                        "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals("Пользователь уже зарегистрирован в СДБО, и повторно зарегистрироваться нельзя",
-                        response.body().jsonPath().get("message"),
-                        "Сообщение об ошибке не соответствует ожидаемому")
-        );
-    }
-
     @DisplayName("Проверка регистрации по номеру телефона, когда пользователь не зарегистрирован в приложении и не является клиентом банка")
     @Description("Данный тест кейс проверяет, что при отправке номера телефона пользователя, которого нет в базе клиентов банка, " +
             "получим ответ от сервера 400 Bad Request")
@@ -94,46 +113,6 @@ public class EP_1_CheckRegistrationByPhoneTest extends BaseTest {
         );
     }
 
-    @DisplayName("Проверка работы валидации номера телефона")
-    @Description("Проверка работы валидации номера телефона")
-    @Tag("API")
-    @TmsLink("https://jira.astondevs.ru/browse/LIB-275")
-    @ParameterizedTest
-    @MethodSource("dataProviders.ClientServiceDataProviders#generateRandomInvalidPhoneNumbers")
-
-    public void checkRegistrationByPhoneInvalidPhoneNumber(String invalidPhoneNumber) {
-        Response response = customerService.checkRegistrationByPhone(invalidPhoneNumber);
-        assertAll(
-                () -> assertEquals(HttpStatus.SC_BAD_REQUEST,
-                        response.statusCode(),
-                        "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals("Некорректный запрос. Убедитесь, что адрес указан верно и попробуйте еще раз.",
-                        response.body().jsonPath().get("message"),
-                        "Сообщение об ошибке не соответствует ожидаемому")
-        );
-    }
-
-    @DisplayName("Проверка попытки регистрации заблокированного пользователя")
-    @Description("Проверка попытки регистрации заблокированного пользователя")
-    @Tag("API")
-    @TmsLink("https://jira.astondevs.ru/browse/LIB-260")
-    @ParameterizedTest
-    @ValueSource(
-            strings = {"79137193837", "79978020792"}
-    )
-
-    public void checkRegistrationByPhoneBlockedUser(String invalidPhoneNumber) {
-        Response response = customerService.checkRegistrationByPhone(invalidPhoneNumber);
-        assertAll(
-                () -> assertEquals(HttpStatus.SC_FORBIDDEN,
-                        response.statusCode(),
-                        "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals("Пользователь заблокирован",
-                        response.body().jsonPath().get("message"),
-                        "Сообщение об ошибке не соответствует ожидаемому")
-        );
-    }
-
     @Test
     @DisplayName("Проверка регистрации по номеру телефона, когда номер телефона пользователя не передан в качестве параметра запроса")
     @Description("Тест кейс проверяет результат отправки данного GET запроса без обязательного параметра 'mobilePhone'")
@@ -143,23 +122,6 @@ public class EP_1_CheckRegistrationByPhoneTest extends BaseTest {
     public void checkRegistrationByPhoneWithoutParam() {
         assertEquals(HttpStatus.SC_INTERNAL_SERVER_ERROR,
                 customerService.checkRegistrationByPhoneWithoutParam().statusCode(),
-                "Код ответа не соответствует ожидаемому");
-    }
-
-    @DisplayName("Проверка регистрации пользователя по номеру телефона используя невалидный URL запроса")
-    @Description("Данный тест кейс проверяет обработку невалидного URL запроса для проверки регистрации пользователя по номеру телефона.")
-    @Tag("API")
-    @TmsLink("https://jira.astondevs.ru/browse/LIB-295")
-    @ParameterizedTest(name = "invalidURL: {0}, validPhoneNumber: {1}")
-    @CsvSource({
-            "registratio, 79031553942",
-            "register, 79958984928",
-            "reg, 79849475391"
-    })
-
-    public void checkRegistrationByPhoneInvalidURL(String invalidURL, String validPhoneNumber) {
-        assertEquals(HttpStatus.SC_NOT_FOUND,
-                customerService.checkRegistrationByPhoneInvalidURL(invalidURL, validPhoneNumber).statusCode(),
                 "Код ответа не соответствует ожидаемому");
     }
 
@@ -187,4 +149,43 @@ public class EP_1_CheckRegistrationByPhoneTest extends BaseTest {
                         "Сообщение об ошибке не соответствует ожидаемому")
         );
     }
+
+    @DisplayName("Проверка регистрации пользователя по номеру телефона используя невалидный URL запроса")
+    @Description("Данный тест кейс проверяет обработку невалидного URL запроса для проверки регистрации пользователя по номеру телефона.")
+    @Tag("API")
+    @TmsLink("https://jira.astondevs.ru/browse/LIB-295")
+    @ParameterizedTest(name = "invalidURL: {0}, validPhoneNumber: {1}")
+    @CsvSource({
+            "registratio, 79031553942",
+            "register, 79958984928",
+            "reg, 79849475391"
+    })
+
+    public void checkRegistrationByPhoneInvalidURL(String invalidURL, String validPhoneNumber) {
+        assertEquals(HttpStatus.SC_NOT_FOUND,
+                customerService.checkRegistrationByPhoneInvalidURL(invalidURL, validPhoneNumber).statusCode(),
+                "Код ответа не соответствует ожидаемому");
+    }
+
+    @DisplayName("Проверка регистрации если пользователь уже зарегистрирован в СДБО")
+    @Description("Проверка регистрации уже зарегистрированного пользователя")
+    @Tag("API")
+    @TmsLink("https://jira.astondevs.ru/browse/LIB-320")
+    @ParameterizedTest
+    @ValueSource(
+            strings = {"79974699104", "79060996597", "79948964168"}
+    )
+
+    public void checkRegistrationByPhoneAlreadyRegisteredUser(String invalidPhoneNumber) {
+        Response response = customerService.checkRegistrationByPhone(invalidPhoneNumber);
+        assertAll(
+                () -> assertEquals(HttpStatus.SC_CONFLICT,
+                        response.statusCode(),
+                        "Код ответа не соответствует ожидаемому"),
+                () -> assertEquals("Пользователь уже зарегистрирован в СДБО, и повторно зарегистрироваться нельзя",
+                        response.body().jsonPath().get("message"),
+                        "Сообщение об ошибке не соответствует ожидаемому")
+        );
+    }
+
 }
