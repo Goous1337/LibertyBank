@@ -99,15 +99,14 @@ public class CustomerService {
         return sendSimpleRequest(PATCH, CHANGE_EMAIL, params, new User(customerId, email));
     }
 
-    public Response checkUnsuccessfulUpdateEmailInvalidHttpMethod(String invalidHttpMethod, String customerId, String email) {
-        List<RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId),
-                new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
-        return sendSimpleRequest(Method.valueOf(invalidHttpMethod), CHANGE_EMAIL, params, new User(customerId, email));
+    public Response checkUnsuccessfulUpdateEmailInvalidHttpMethod(String httpMethod, String customerId, String email) {
+        return sendSimpleRequest(Method.valueOf(httpMethod), CHANGE_EMAIL,
+                new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId), new User(customerId, email));
     }
 
-    public Response checkUpdateClientEmailInvalidURL(String invalidURL, String customerId, String email) {
+    public Response checkUpdateClientEmailInvalidURL(String url, String customerId, String email) {
         List<RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId),
                 new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
-        return sendSimpleRequest(PATCH, invalidURL, params, new User(customerId, email));
+        return sendSimpleRequest(PATCH, url, params, new User(customerId, email));
     }
 }
