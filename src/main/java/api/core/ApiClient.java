@@ -49,6 +49,11 @@ public class ApiClient {
         return request.request(method, URI, address);
     }
 
+    public static Response sendSimpleRequest(Method method, String address, RequestParam param, Object pojo) {
+        RequestSender request = createRequestWithPojoAndParams(List.of(param), pojo);
+        return request.request(method, address);
+    }
+
     public static Response sendRequestWithoutParams(Method method, String address) {
         return sendSimpleRequest(method, address, Collections.emptyList());
     }
