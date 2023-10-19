@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CUSTOMER_SERVICE;
@@ -38,9 +39,7 @@ public class EP_12_CheckChangingStatusSmsNotificationSettings extends BaseTest {
     public void checkChangingSmsNotificationSettingsAuthorizedUser(String customerId, Boolean notificationStatus) {
         Response response = customerService.checkChangingSmsNotificationSettingsAuthorizedUser(customerId, notificationStatus);
         assertAll(
-                () -> assertEquals(HttpStatus.SC_OK,
-                        response.statusCode(),
-                        "Код ответа не соответствует ожидаемому")
+                () -> assertEquals(SC_OK, response.statusCode(), "Код ответа не соответствует ожидаемому")
         );
     }
 
@@ -56,9 +55,7 @@ public class EP_12_CheckChangingStatusSmsNotificationSettings extends BaseTest {
     public void checkChangingSmsNotificationSettingsInvalidUrl(String customerId, Boolean notificationStatus) {
         Response response = customerService.checkChangingSmsNotificationSettingsAuthorizedUserInvalidUrl(customerId, notificationStatus);
         assertAll(
-                () -> assertEquals(HttpStatus.SC_NOT_FOUND,
-                        response.statusCode(),
-                        "Код ответа не соответствует ожидаемому")
+                () -> assertEquals(SC_NOT_FOUND, response.statusCode(), "Код ответа не соответствует ожидаемому")
         );
     }
 
@@ -73,11 +70,11 @@ public class EP_12_CheckChangingStatusSmsNotificationSettings extends BaseTest {
             "HEAD,  033140e9-ea0a-40c3-a738-060283531147, true"
     })
 
-    public void checkChangingSmsNotificationSettingsInvalidMethod(String invalidHttpMethod, String customerId, Boolean notificationStatus) {
+    public void checkChangingSmsNotificationSettingsInvalidMethod(String invalidHttpMethod, String customerId,
+                                                                  Boolean notificationStatus) {
         Response response = customerService.checkChangingSmsNotificationSettingsAuthorizedUserInvalidMethod(invalidHttpMethod, customerId, notificationStatus);
         assertAll(
-                () -> assertEquals(HttpStatus.SC_METHOD_NOT_ALLOWED,
-                        response.statusCode(),
+                () -> assertEquals(SC_METHOD_NOT_ALLOWED, response.statusCode(),
                         "Код ответа не соответствует ожидаемому")
         );
     }
@@ -97,8 +94,7 @@ public class EP_12_CheckChangingStatusSmsNotificationSettings extends BaseTest {
     public void checkChangingSmsNotificationSettingsInvalidData(String customerId, String notificationStatus) {
         Response response = customerService.checkChangingSmsNotificationSettingsInvalidData(customerId, notificationStatus);
         assertAll(
-                () -> assertEquals(HttpStatus.SC_UNSUPPORTED_MEDIA_TYPE,
-                        response.statusCode(),
+                () -> assertEquals(SC_UNSUPPORTED_MEDIA_TYPE, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
                 () -> assertEquals("Формат запрашиваемых данных не поддерживается сервером, поэтому запрос отклонён.",
                         response.body().jsonPath().get("message"),
@@ -120,9 +116,7 @@ public class EP_12_CheckChangingStatusSmsNotificationSettings extends BaseTest {
     public void checkChangingSmsNotificationSettingsInvalidData1(String customerId, Integer notificationStatus) {
         Response response = customerService.checkChangingSmsNotificationSettingsInvalidData1(customerId, notificationStatus);
         assertAll(
-                () -> assertEquals(HttpStatus.SC_OK,
-                        response.statusCode(),
-                        "Код ответа не соответствует ожидаемому")
+                () -> assertEquals(SC_OK, response.statusCode(), "Код ответа не соответствует ожидаемому")
         );
     }
 
@@ -139,8 +133,7 @@ public class EP_12_CheckChangingStatusSmsNotificationSettings extends BaseTest {
     public void checkChangingSmsNotificationSettingsAuthorizedUser2(String customerId) {
         Response response = customerService.checkChangingSmsNotificationSettingsAuthorizedUser1(customerId);
         assertAll(
-                () -> assertEquals(HttpStatus.SC_INTERNAL_SERVER_ERROR,
-                        response.statusCode(),
+                () -> assertEquals(SC_INTERNAL_SERVER_ERROR, response.statusCode(),
                         "Код ответа не соответствует ожидаемому")
         );
     }

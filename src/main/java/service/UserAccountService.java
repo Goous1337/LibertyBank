@@ -51,13 +51,13 @@ public class UserAccountService {
     }
 
     public Response checkVerificationCodeSuccessfulSaved(String phoneNumber) {
-        List<RequestParam> params = List.of(new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
-        return sendSimpleRequest(PATCH, VERIFICATION_CODE, params, new Verification(phoneNumber));
+        return sendSimpleRequest(PATCH, VERIFICATION_CODE, new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON),
+                new Verification(phoneNumber));
     }
 
     public Response checkVerificationCodeInvalidHttpMethod(String httpMethod, String phoneNumber) {
-        List<RequestParam> params = List.of(new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
-        return sendSimpleRequest(Method.valueOf(httpMethod), VERIFICATION_CODE, params, new Verification(phoneNumber));
+        return sendSimpleRequest(Method.valueOf(httpMethod), VERIFICATION_CODE,
+                new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON), new Verification(phoneNumber));
     }
 
 }

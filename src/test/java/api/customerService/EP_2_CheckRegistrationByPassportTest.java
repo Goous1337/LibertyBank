@@ -15,6 +15,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CUSTOMER_SERVICE;
@@ -39,7 +40,7 @@ public class EP_2_CheckRegistrationByPassportTest extends BaseTest {
     public void checkRegistrationByPassportRegisteredClient(String passportNumber, String clientId, String phoneNumber) {
         Response response = customerService.checkRegistrationByPassport(passportNumber);
         assertAll(
-                () -> assertEquals(HttpStatus.SC_OK,
+                () -> assertEquals(SC_OK,
                         response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
                 () -> assertEquals(phoneNumber,
@@ -64,7 +65,7 @@ public class EP_2_CheckRegistrationByPassportTest extends BaseTest {
     public void checkRegistrationByPassportInvalidPassport(String passportNumber) {
         Response response = customerService.checkRegistrationByPassport(passportNumber);
         assertAll(
-                () -> assertEquals(HttpStatus.SC_BAD_REQUEST, response.statusCode(),
+                () -> assertEquals(SC_BAD_REQUEST, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
                 () -> assertEquals("Пользователь не зарегистрирован в Приложении и не является Клиентом Банка",
                         response.body().jsonPath().get("message"), "Сообщение об ошибке не соответствует ожидаемому")
@@ -84,7 +85,7 @@ public class EP_2_CheckRegistrationByPassportTest extends BaseTest {
     public void checkRegistrationByPassportNotAClient(String passportNumber) {
         Response response = customerService.checkRegistrationByPassport(passportNumber);
         assertAll(
-                () -> assertEquals(HttpStatus.SC_BAD_REQUEST, response.statusCode(),
+                () -> assertEquals(SC_BAD_REQUEST, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
                 () -> assertEquals("Пользователь не зарегистрирован в Приложении и не является Клиентом Банка",
                         response.body().jsonPath().get("message"), "Сообщение об ошибке не соответствует ожидаемому")
@@ -102,7 +103,7 @@ public class EP_2_CheckRegistrationByPassportTest extends BaseTest {
     public void checkRegistrationByPassportLowercaseLatinLetters() {
         String passportNumber = "bm8765432";
 
-        assertEquals(HttpStatus.SC_OK,
+        assertEquals(SC_OK,
                 customerService.checkRegistrationByPassport(passportNumber).statusCode(),
                 "Код ответа не соответствует ожидаемому");
     }
@@ -119,7 +120,7 @@ public class EP_2_CheckRegistrationByPassportTest extends BaseTest {
     public void checkRegistrationByPassportAlreadyRegisteredUser(String passportNumber) {
         Response response = customerService.checkRegistrationByPassport(passportNumber);
         assertAll(
-                () -> assertEquals(HttpStatus.SC_CONFLICT, response.statusCode(),
+                () -> assertEquals(SC_CONFLICT, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
                 () -> assertEquals("Пользователь уже зарегистрирован в СДБО, и повторно зарегистрироваться нельзя",
                         response.body().jsonPath().get("message"), "Сообщение об ошибке не соответствует ожидаемому")
@@ -139,7 +140,7 @@ public class EP_2_CheckRegistrationByPassportTest extends BaseTest {
     public void checkRegistrationByPhoneBlockedUser(String passportNumber) {
         Response response = customerService.checkRegistrationByPassport(passportNumber);
         assertAll(
-                () -> assertEquals(HttpStatus.SC_FORBIDDEN, response.statusCode(),
+                () -> assertEquals(SC_FORBIDDEN, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
                 () -> assertEquals("Пользователь заблокирован", response.body().jsonPath().get("message"),
                         "Сообщение об ошибке не соответствует ожидаемому")
@@ -162,7 +163,7 @@ public class EP_2_CheckRegistrationByPassportTest extends BaseTest {
     public void checkRegistrationByPhoneInvalidMethod(String invalidHttpMethod, String passportNumber) {
         Response response = customerService.checkRegistrationByPassportInvalidHttpMethod(invalidHttpMethod, passportNumber);
         assertAll(
-                () -> assertEquals(HttpStatus.SC_METHOD_NOT_ALLOWED, response.statusCode(),
+                () -> assertEquals(SC_METHOD_NOT_ALLOWED, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
                 () -> assertEquals("Метод не разрешен. Сервер знает о запрашиваемом методе, но он был " +
                                 "деактивирован и не может быть использован.", response.body().jsonPath().get("message"),

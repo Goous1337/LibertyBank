@@ -17,6 +17,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.URL_USER_ACCOUNT_SERVICE;
 
@@ -39,7 +40,7 @@ public class EP_3_SavingVerificationCodeTest extends BaseTest {
 
         Response response = userAccountService.checkVerificationCodeSuccessfulSaved(phoneNumber);
         assertAll(
-                () -> assertEquals(HttpStatus.SC_OK, response.statusCode(),
+                () -> assertEquals(SC_OK, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
                 () -> assertNotNull(
                         response.body().jsonPath().get("blockSeconds")),
@@ -60,7 +61,7 @@ public class EP_3_SavingVerificationCodeTest extends BaseTest {
         Response response = userAccountService.checkVerificationCodeSuccessfulSaved(phoneNumber);
         String idCustomer = UserAccountServiceDataBaseRequests.getIdCustomerByPhoneNumber(phoneNumber);
         assertAll(
-                () -> assertEquals(HttpStatus.SC_INTERNAL_SERVER_ERROR,
+                () -> assertEquals(SC_INTERNAL_SERVER_ERROR,
                         response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
                 () -> assertNull(idCustomer, "Создана запись id несуществующего пользователя")
@@ -77,10 +78,10 @@ public class EP_3_SavingVerificationCodeTest extends BaseTest {
     public void unsuccessfulReRequestVerificationCodeTimeNotExpired() {
         String phoneNumber = "79808901750";
 
-        assertEquals(HttpStatus.SC_OK, userAccountService.checkVerificationCodeSuccessfulSaved
-                (phoneNumber).statusCode(), "Код ответа не соответствует ожидаемому");
-        assertEquals(HttpStatus.SC_NOT_ACCEPTABLE, userAccountService.checkVerificationCodeSuccessfulSaved
-                (phoneNumber).statusCode(), "Код ответа не соответствует ожидаемому");
+        assertEquals(SC_OK, userAccountService.checkVerificationCodeSuccessfulSaved(phoneNumber).statusCode(),
+                "Код ответа не соответствует ожидаемому");
+        assertEquals(SC_NOT_ACCEPTABLE, userAccountService.checkVerificationCodeSuccessfulSaved(phoneNumber).statusCode(),
+                "Код ответа не соответствует ожидаемому");
     }
 
     @DisplayName("Отправка номера телефона, где пустое тело запроса")
@@ -91,7 +92,7 @@ public class EP_3_SavingVerificationCodeTest extends BaseTest {
     @NullAndEmptySource
 
     public void unsuccessfulSavingVerificationCodePhoneNumberIsEmpty(String phoneNumber) {
-        assertEquals(HttpStatus.SC_INTERNAL_SERVER_ERROR,
+        assertEquals(SC_INTERNAL_SERVER_ERROR,
                 userAccountService.checkVerificationCodeSuccessfulSaved(phoneNumber).statusCode(),
                 "Код ответа не соответствует ожидаемому");
     }
@@ -106,7 +107,7 @@ public class EP_3_SavingVerificationCodeTest extends BaseTest {
     )
 
     public void unsuccessfulSavingVerificationCodePhoneNumberInvalidLength(String phoneNumber) {
-        assertEquals(HttpStatus.SC_INTERNAL_SERVER_ERROR,
+        assertEquals(SC_INTERNAL_SERVER_ERROR,
                 userAccountService.checkVerificationCodeSuccessfulSaved(phoneNumber).statusCode(),
                 "Код ответа не соответствует ожидаемому");
     }
@@ -121,7 +122,7 @@ public class EP_3_SavingVerificationCodeTest extends BaseTest {
     )
 
     public void unsuccessfulSavingVerificationCodePhoneNumberFormattedForm(String phoneNumber) {
-        assertEquals(HttpStatus.SC_INTERNAL_SERVER_ERROR,
+        assertEquals(SC_INTERNAL_SERVER_ERROR,
                 userAccountService.checkVerificationCodeSuccessfulSaved(phoneNumber).statusCode(),
                 "Код ответа не соответствует ожидаемому");
     }
@@ -140,7 +141,7 @@ public class EP_3_SavingVerificationCodeTest extends BaseTest {
         Response response = userAccountService.checkVerificationCodeSuccessfulSaved(phoneNumber);
         String newVerificationCode = UserAccountServiceDataBaseRequests.getVerificationCodeByIdCustomer(idCustomer);
         assertAll(
-                () -> assertEquals(HttpStatus.SC_OK, response.statusCode(),
+                () -> assertEquals(SC_OK, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
                 () -> assertNotNull(
                         response.body().jsonPath().get("blockSeconds")),
@@ -162,7 +163,7 @@ public class EP_3_SavingVerificationCodeTest extends BaseTest {
     })
 
     public void unsuccessfulSavingVerificationCodeInvalidMethod(String httpMethod, String phoneNumber) {
-        assertEquals(HttpStatus.SC_METHOD_NOT_ALLOWED,
+        assertEquals(SC_METHOD_NOT_ALLOWED,
                 userAccountService.checkVerificationCodeInvalidHttpMethod(httpMethod, phoneNumber).statusCode(),
                 "Код ответа не соответствует ожидаемому");
     }
@@ -181,7 +182,7 @@ public class EP_3_SavingVerificationCodeTest extends BaseTest {
         UserAccountServiceDataBaseRequests.deleteVerificationCodeByIdCustomer(idCustomer);
         Response response = userAccountService.checkVerificationCodeSuccessfulSaved(phoneNumber);
         assertAll(
-                () -> assertEquals(HttpStatus.SC_OK, response.statusCode(),
+                () -> assertEquals(SC_OK, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
                 () -> assertNotNull(
                         response.body().jsonPath().get("blockSeconds")),
@@ -199,7 +200,7 @@ public class EP_3_SavingVerificationCodeTest extends BaseTest {
     )
 
     public void unsuccessfulSavingVerificationCodeInvalidPhoneNumber(String phoneNumber) {
-        assertEquals(HttpStatus.SC_INTERNAL_SERVER_ERROR,
+        assertEquals(SC_INTERNAL_SERVER_ERROR,
                 userAccountService.checkVerificationCodeSuccessfulSaved(phoneNumber).statusCode(),
                 "Код ответа не соответствует ожидаемому");
     }

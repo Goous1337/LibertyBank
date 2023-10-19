@@ -15,6 +15,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CUSTOMER_SERVICE;
@@ -38,7 +39,7 @@ public class EP_1_CheckRegistrationByPhoneTest extends BaseTest {
     public void checkRegistrationByPhoneBlockedUser(String invalidPhoneNumber) {
         Response response = customerService.checkRegistrationByPhone(invalidPhoneNumber);
         assertAll(
-                () -> assertEquals(HttpStatus.SC_FORBIDDEN,
+                () -> assertEquals(SC_FORBIDDEN,
                         response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
                 () -> assertEquals("Пользователь заблокирован",
@@ -57,7 +58,7 @@ public class EP_1_CheckRegistrationByPhoneTest extends BaseTest {
     public void checkRegistrationByPhoneInvalidPhoneNumber(String invalidPhoneNumber) {
         Response response = customerService.checkRegistrationByPhone(invalidPhoneNumber);
         assertAll(
-                () -> assertEquals(HttpStatus.SC_BAD_REQUEST,
+                () -> assertEquals(SC_BAD_REQUEST,
                         response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
                 () -> assertEquals("Некорректный запрос. Убедитесь, что адрес указан верно и попробуйте еще раз.",
@@ -81,7 +82,7 @@ public class EP_1_CheckRegistrationByPhoneTest extends BaseTest {
     public void checkRegistrationByPhoneNonRegisteredClient(String validPhoneNumber, String clientId) {
         Response response = customerService.checkRegistrationByPhone(validPhoneNumber);
         assertAll(
-                () -> assertEquals(HttpStatus.SC_OK,
+                () -> assertEquals(SC_OK,
                         response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
                 () -> assertEquals(validPhoneNumber,
@@ -104,7 +105,7 @@ public class EP_1_CheckRegistrationByPhoneTest extends BaseTest {
     public void checkRegistrationByPhoneNotAClient(String invalidPhoneNumber) {
         Response response = customerService.checkRegistrationByPhone(invalidPhoneNumber);
         assertAll(
-                () -> assertEquals(HttpStatus.SC_BAD_REQUEST,
+                () -> assertEquals(SC_BAD_REQUEST,
                         response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
                 () -> assertEquals("Некорректный запрос. Убедитесь, что адрес указан верно и попробуйте еще раз.",
@@ -120,7 +121,7 @@ public class EP_1_CheckRegistrationByPhoneTest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB-291")
 
     public void checkRegistrationByPhoneWithoutParam() {
-        assertEquals(HttpStatus.SC_INTERNAL_SERVER_ERROR,
+        assertEquals(SC_INTERNAL_SERVER_ERROR,
                 customerService.checkRegistrationByPhoneWithoutParam().statusCode(),
                 "Код ответа не соответствует ожидаемому");
     }
@@ -141,7 +142,7 @@ public class EP_1_CheckRegistrationByPhoneTest extends BaseTest {
     public void checkRegistrationByPhoneInvalidMethod(String invalidHttpMethod, String validPhoneNumber) {
         Response response = customerService.checkRegistrationByPhoneInvalidHttpMethod(invalidHttpMethod, validPhoneNumber);
         assertAll(
-                () -> assertEquals(HttpStatus.SC_METHOD_NOT_ALLOWED,
+                () -> assertEquals(SC_METHOD_NOT_ALLOWED,
                         response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
                 () -> assertEquals("Метод не разрешен. Сервер знает о запрашиваемом методе, но он был деактивирован и не может быть использован.",
@@ -162,7 +163,7 @@ public class EP_1_CheckRegistrationByPhoneTest extends BaseTest {
     })
 
     public void checkRegistrationByPhoneInvalidURL(String invalidURL, String validPhoneNumber) {
-        assertEquals(HttpStatus.SC_NOT_FOUND,
+        assertEquals(SC_NOT_FOUND,
                 customerService.checkRegistrationByPhoneInvalidURL(invalidURL, validPhoneNumber).statusCode(),
                 "Код ответа не соответствует ожидаемому");
     }
@@ -179,7 +180,7 @@ public class EP_1_CheckRegistrationByPhoneTest extends BaseTest {
     public void checkRegistrationByPhoneAlreadyRegisteredUser(String invalidPhoneNumber) {
         Response response = customerService.checkRegistrationByPhone(invalidPhoneNumber);
         assertAll(
-                () -> assertEquals(HttpStatus.SC_CONFLICT,
+                () -> assertEquals(SC_CONFLICT,
                         response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
                 () -> assertEquals("Пользователь уже зарегистрирован в СДБО, и повторно зарегистрироваться нельзя",

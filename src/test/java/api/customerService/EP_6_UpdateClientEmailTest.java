@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CUSTOMER_SERVICE;
@@ -71,7 +72,7 @@ public class EP_6_UpdateClientEmailTest extends BaseTest {
     public void unsuccessfulUpdateEmailInvalidMethod(String httpMethod, String customerId, String email) {
         Response response = customerService.checkUnsuccessfulUpdateEmailInvalidHttpMethod(httpMethod,
                 customerId, email);
-        assertEquals(HttpStatus.SC_METHOD_NOT_ALLOWED, response.statusCode()
+        assertEquals(SC_METHOD_NOT_ALLOWED, response.statusCode()
         );
     }
 
@@ -101,7 +102,7 @@ public class EP_6_UpdateClientEmailTest extends BaseTest {
 
     public void unsuccessfulUpdateEmailInvalidData(String customerId, String email) {
         Response response = customerService.checkUpdateClientEmail(customerId, email);
-        assertEquals(HttpStatus.SC_BAD_REQUEST,
+        assertEquals(SC_BAD_REQUEST,
                 response.statusCode(),
                 "Код ответа не соответствует ожидаемому");
     }
@@ -116,7 +117,7 @@ public class EP_6_UpdateClientEmailTest extends BaseTest {
     })
 
     public void unsuccessfulUpdateClientEmailInvalidURL(String url, String customerId, String email) {
-        assertEquals(HttpStatus.SC_NOT_FOUND,
+        assertEquals(SC_NOT_FOUND,
                 customerService.checkUpdateClientEmailInvalidURL(url, customerId, email).statusCode(),
                 "Код ответа не соответствует ожидаемому");
     }
@@ -134,7 +135,7 @@ public class EP_6_UpdateClientEmailTest extends BaseTest {
 
     public void unsuccessfulUpdateEmailEmptyData(String customerId, String email) {
         Response response = customerService.checkUpdateClientEmail(customerId, email);
-        assertEquals(HttpStatus.SC_INTERNAL_SERVER_ERROR,
+        assertEquals(SC_INTERNAL_SERVER_ERROR,
                 response.statusCode(),
                 "Код ответа не соответствует ожидаемому");
     }
@@ -152,7 +153,7 @@ public class EP_6_UpdateClientEmailTest extends BaseTest {
 
     public void unsuccessfulUpdateNotAuthorizedClientEmail(String customerId, String email) {
         Response response = customerService.checkUpdateClientEmail(customerId, email);
-        assertEquals(HttpStatus.SC_UNAUTHORIZED,
+        assertEquals(SC_UNAUTHORIZED,
                 response.statusCode(),
                 "Код ответа не соответствует ожидаемому");
     }

@@ -100,9 +100,8 @@ public class CustomerService {
     }
 
     public Response checkUnsuccessfulUpdateEmailInvalidHttpMethod(String httpMethod, String customerId, String email) {
-        List<RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId),
-                new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
-        return sendSimpleRequest(Method.valueOf(httpMethod), CHANGE_EMAIL, params, new User(customerId, email));
+        return sendSimpleRequest(Method.valueOf(httpMethod), CHANGE_EMAIL,
+                new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId), new User(customerId, email));
     }
 
     public Response checkUpdateClientEmailInvalidURL(String url, String customerId, String email) {
