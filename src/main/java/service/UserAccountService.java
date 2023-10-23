@@ -5,6 +5,7 @@ import io.restassured.http.Method;
 import io.restassured.response.Response;
 import pojo.userAccountService.GetVerificationCode;
 import pojo.userAccountService.PhoneVerificationRequest;
+import pojo.userAccountService.PhoneVerificationRequestInteger;
 import pojo.userAccountService.Verification;
 
 import java.util.List;
@@ -26,8 +27,15 @@ public class UserAccountService {
     }
 
     public Response verificationMobilePhoneVerificationCode(String mobilePhone, String verificationCode) {
-        return sendSimpleRequest(POST, VERIFICATION,
+        List<RequestParam> params = List.of(new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
+        return sendSimpleRequest(POST, VERIFICATION, params,
                 new PhoneVerificationRequest(mobilePhone, verificationCode));
+    }
+
+    public Response verificationMobilePhoneVerificationCodeInteger(String mobilePhone, Integer verificationCode) {
+        List<RequestParam> params = List.of(new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
+        return sendSimpleRequest(POST, VERIFICATION, params,
+                new PhoneVerificationRequestInteger(mobilePhone, verificationCode));
     }
 
     public Response verificationMobilePhone(String mobilePhone) {
@@ -41,7 +49,8 @@ public class UserAccountService {
     }
 
     public Response verificationWithInvalidMethod(String mobilePhone, String verificationCode) {
-        return sendSimpleRequest(GET, VERIFICATION,
+        List<RequestParam> params = List.of(new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
+        return sendSimpleRequest(GET, VERIFICATION, params,
                 new PhoneVerificationRequest(mobilePhone, verificationCode));
     }
 

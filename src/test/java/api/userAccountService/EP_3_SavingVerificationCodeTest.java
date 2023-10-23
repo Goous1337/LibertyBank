@@ -7,7 +7,6 @@ import io.qameta.allure.Issue;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
@@ -52,7 +51,7 @@ public class EP_3_SavingVerificationCodeTest extends BaseTest {
     @Description("Проверка возникновения ошибки при сохранении кода верификации в БД")
     @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-244")
-    @ParameterizedTest
+    @ParameterizedTest(name = "phoneNumber: {0}")
     @ValueSource(
             strings = {"7999123", "599932555145620", "799912fdf3456", "kdkdk"}
     )
@@ -101,7 +100,7 @@ public class EP_3_SavingVerificationCodeTest extends BaseTest {
     @Description("Тест на определение валидации телефонного номера по его длине")
     @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-253")
-    @ParameterizedTest
+    @ParameterizedTest(name = "phoneNumber: {0}")
     @ValueSource(
             strings = {"7999123456", "799912345678"}
     )
@@ -116,7 +115,7 @@ public class EP_3_SavingVerificationCodeTest extends BaseTest {
     @Description("Проверка ввода номера телефона в форматированном виде")
     @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-256")
-    @ParameterizedTest
+    @ParameterizedTest(name = "phoneNumber: {0}")
     @ValueSource(
             strings = {"7(999)1234567", "7 999 123 45 67", "7999-123-45-67", "+79991234567"}
     )
@@ -154,7 +153,7 @@ public class EP_3_SavingVerificationCodeTest extends BaseTest {
     @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-312")
     @Issue("https://jira.astondevs.ru/browse/LIB-1195")
-    @ParameterizedTest
+    @ParameterizedTest(name = "httpMethod: {0}, phoneNumber: {1}")
     @CsvSource({
             "POST, 77777777777",
             "PUT, 77777777777",
@@ -194,7 +193,7 @@ public class EP_3_SavingVerificationCodeTest extends BaseTest {
     @Description("Пользователь пробует отправить невалидный номер телефона (валидный номер телефона, 11 цифр без «+»)")
     @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-314")
-    @ParameterizedTest
+    @ParameterizedTest(name = "phoneNumber: {0}")
     @ValueSource(
             strings = {"0000000000", "111111111111", "+1234567890", "-1234567890", " ()12345678901"}
     )

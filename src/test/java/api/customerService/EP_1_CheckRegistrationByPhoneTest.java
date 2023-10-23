@@ -5,7 +5,6 @@ import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
@@ -31,7 +30,7 @@ public class EP_1_CheckRegistrationByPhoneTest extends BaseTest {
     @Description("Проверка попытки регистрации заблокированного пользователя")
     @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-260")
-    @ParameterizedTest
+    @ParameterizedTest(name = "invalidPhoneNumber: {0}")
     @ValueSource(
             strings = {"79137193837", "79978020792"}
     )
@@ -172,9 +171,9 @@ public class EP_1_CheckRegistrationByPhoneTest extends BaseTest {
     @Description("Проверка регистрации уже зарегистрированного пользователя")
     @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-320")
-    @ParameterizedTest
+    @ParameterizedTest(name = "invalidPhoneNumber: {0}")
     @ValueSource(
-            strings = {"79974699104", "79060996597", "79948964168"}
+            strings = {"79974699104", "79727824061", "79948964168"}
     )
 
     public void checkRegistrationByPhoneAlreadyRegisteredUser(String invalidPhoneNumber) {

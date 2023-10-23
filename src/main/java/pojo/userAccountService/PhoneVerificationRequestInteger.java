@@ -9,5 +9,5 @@ import lombok.Data;
 public class PhoneVerificationRequestInteger {
 
     private String mobilePhone;
-    private String verificationCode;
+    private Integer verificationCode;
 }
