@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.URL_USER_ACCOUNT_SERVICE;
 
 @DisplayName("EP-3 Сохранение кода верификации")
-public class EP_3_SavingVerificationCodeTest extends BaseTest {
+public class UAS_3_SavingVerificationCodeTest extends BaseTest {
 
     {
         RestAssured.baseURI = URL_USER_ACCOUNT_SERVICE;

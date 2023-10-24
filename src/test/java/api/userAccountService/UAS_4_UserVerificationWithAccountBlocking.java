@@ -3,6 +3,7 @@ package api.userAccountService;
 import api.BaseTest;
 import dataBase.requests.UserAccountServiceDataBaseRequests;
 import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -22,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.URL_USER_ACCOUNT_SERVICE;
 
 @DisplayName("UAS-4 Верификация пользователя с учетом блокировки учетной записи")
-public class UAS_4_UserVerificationByPhoneNumber extends BaseTest {
+public class UAS_4_UserVerificationWithAccountBlocking extends BaseTest {
 
     {
         RestAssured.baseURI = URL_USER_ACCOUNT_SERVICE;
@@ -88,11 +89,12 @@ public class UAS_4_UserVerificationByPhoneNumber extends BaseTest {
                 "Код ответа не соответствует ожидаемому");
     }
 
-//    баг
     @DisplayName("Верификация пользователя, когда параметр 'mobilePhone' не заполнен")
-    @Description("Проверка поведения системы, если обязательный параметр 'mobilePhone' оставить незаполненным.")
+    @Description("Проверка поведения системы, если обязательный параметр 'mobilePhone' оставить незаполненным, " +
+            "либо значение пустые кавычки.")
     @Tags({@Tag("smoke"), @Tag("API")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-296")
+    @Issue("https://jira.astondevs.ru/browse/LIB-1325")
     @ParameterizedTest
     @EmptySource
     @NullSource
@@ -134,11 +136,11 @@ public class UAS_4_UserVerificationByPhoneNumber extends BaseTest {
         assertEquals(SC_NOT_ACCEPTABLE, response.getStatusCode(), "Код ответа не соответствует ожидаемому");
     }
 
-    //  баг
     @DisplayName("Верификация пользователя, когда в параметре 'mobilePhone' указано не валидное значение")
     @Description("Проверка, что при введении не валидных данных в поле 'mobilePhone', верификация не проходит и система выдает 400 ошибку")
     @Tags({@Tag("smoke"), @Tag("API")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-304,https://jira.astondevs.ru/browse/LIB-310")
+    @Issue("https://jira.astondevs.ru/browse/LIB-1326")
     @ParameterizedTest(name = "mobilePhone: {0}")
     @ValueSource(
             strings = {"79998887723",
@@ -163,11 +165,11 @@ public class UAS_4_UserVerificationByPhoneNumber extends BaseTest {
         assertEquals(SC_BAD_REQUEST, response.getStatusCode(), "Код ответа не соответствует ожидаемому");
     }
 
-    //    баг 500 ошибка
     @DisplayName("Верификация пользователя, когда метод не POST")
     @Description("Проверка, что при указании метода PATCH вместо POST, система выдает сообщение с 405 ошибкой")
     @Tags({@Tag("smoke"), @Tag("API")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-305")
+    @Issue("https://jira.astondevs.ru/browse/LIB-1327")
     @Test
 
     public void userVerificationWithInvalidMethod() {

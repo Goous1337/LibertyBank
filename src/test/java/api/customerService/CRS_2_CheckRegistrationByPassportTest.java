@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CUSTOMER_SERVICE;
 
 @DisplayName("EP-2 Проверка регистрации по документу, удостоверяющему личность")
-public class EP_2_CheckRegistrationByPassportTest extends BaseTest {
+public class CRS_2_CheckRegistrationByPassportTest extends BaseTest {
 
     {
         RestAssured.baseURI = CUSTOMER_SERVICE;
