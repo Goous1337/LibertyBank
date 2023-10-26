@@ -3,10 +3,7 @@ package service;
 import api.core.RequestParam;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
-import pojo.customerService.SMS_Notification_Boolean;
-import pojo.customerService.SMS_Notification_Integer;
-import pojo.customerService.SMS_Notification_String;
-import pojo.customerService.User;
+import pojo.customerService.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -20,8 +17,7 @@ import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
 import static constant.ApiEndpoints.*;
 import static constant.CustomerServiceConstants.*;
 import static io.netty.handler.codec.http.HttpHeaders.Values.APPLICATION_JSON;
-import static io.restassured.http.Method.GET;
-import static io.restassured.http.Method.PATCH;
+import static io.restassured.http.Method.*;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 public class CustomerService {
@@ -108,5 +104,25 @@ public class CustomerService {
         List<RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId),
                 new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
         return sendSimpleRequest(PATCH, url, params, new User(customerId, email));
+    }
+    public Response checkSuccessfulUpdateQuestionAnswer(String customerId, String securityQuestion, String securityAnswer) {
+        List<RequestParam> params = List.of( new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON),
+                new RequestParam(PATH, PARAMETER_CUSTOMER_ID, customerId));
+        return sendSimpleRequest(PATCH, QUESTION_ANSWER, params, new UserQuestion(securityQuestion, securityAnswer));
+    }
+
+    public Response checkUpdateQuestionAnswerInvalidHttpMethod(String invalidHttpMethod,
+                                                               String customerId,
+                                                               String securityQuestion, String securityAnswer) {
+        List<RequestParam> params = List.of( new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON),
+                new RequestParam(PATH, PARAMETER_CUSTOMER_ID, customerId));
+        return sendSimpleRequest(Method.valueOf(invalidHttpMethod), QUESTION_ANSWER,
+                params, new UserQuestion(securityQuestion, securityAnswer));
+    }
+
+    public Response checkUpdateQuestionAnswerInvalidUrl(String customerId, String securityQuestion, String securityAnswer) {
+        List<RequestParam> params = List.of( new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON),
+                new RequestParam(PATH, PARAMETER_CUSTOMER_ID, customerId));
+        return sendSimpleRequest(PATCH, INVALID_QUESTION_ANSWER, params, new UserQuestion(securityQuestion, securityAnswer));
     }
 }

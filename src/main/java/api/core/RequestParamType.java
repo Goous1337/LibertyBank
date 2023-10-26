@@ -5,5 +5,5 @@ package api.core;
  */
 
 public enum RequestParamType {
-    COOKIE, PARAMETER, HEADER, BODY
+    COOKIE, PARAMETER, HEADER, BODY, PATH
 }
