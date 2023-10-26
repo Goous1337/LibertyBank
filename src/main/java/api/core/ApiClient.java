@@ -6,6 +6,9 @@ import java.util.List;
 import org.json.JSONObject;
 
 import io.restassured.RestAssured;
+import io.restassured.filter.log.LogDetail;
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSender;
@@ -19,24 +22,28 @@ import static org.apache.http.params.CoreConnectionPNames.CONNECTION_TIMEOUT;
 import static org.apache.http.params.CoreConnectionPNames.SO_TIMEOUT;
 
 
-
 public class ApiClient {
 
-    public static Response sendSimpleRequest(Method method, String address,
-            List<RequestParam> paramsTable) {
+    static  {
+        RestAssured.filters(List.of(
+                new RequestLoggingFilter(LogDetail.ALL),
+                new ResponseLoggingFilter(LogDetail.BODY),
+                new ResponseLoggingFilter(LogDetail.STATUS)
+        ));
+    }
+
+    public static Response sendSimpleRequest(Method method, String address, List<RequestParam> paramsTable) {
         RequestSender request = createRequest(paramsTable);
         return request.request(method, address);
     }
 
-    public static Response sendSimpleRequest(Method method, String address,
-            RequestParam param) {
+    public static Response sendSimpleRequest(Method method, String address, RequestParam param) {
         return sendSimpleRequest(method, address, List.of(param));
     }
 
-    public static Response sendSimpleRequest(Method method, String address,
-            List<RequestParam> paramsTable, Object pojo) {
+    public static Response sendSimpleRequest(Method method, String address, List<RequestParam> paramsTable, Object pojo) {
         RequestSender request = createRequestWithPojoAndParams(paramsTable, pojo);
-        return request.request(method, address).prettyPeek();
+        return request.request(method, address);
     }
 
     public static Response sendSimpleRequest(Method method, String address, Object pojo) {
@@ -51,21 +58,19 @@ public class ApiClient {
 
     public static Response sendSimpleRequest(Method method, String address, RequestParam param, Object pojo) {
         RequestSender request = createRequestWithPojoAndParams(List.of(param), pojo);
-        return request.request(method, address).prettyPeek();
+        return request.request(method, address);
     }
 
     public static Response sendRequestWithoutParams(Method method, String address) {
         return sendSimpleRequest(method, address, Collections.emptyList());
     }
 
-    public static <T> ClassResponse<T> sendRequest(Method method, String address,
-            List<RequestParam> paramsTable, Class<T> clazz) {
+    public static <T> ClassResponse<T> sendRequest(Method method, String address, List<RequestParam> paramsTable, Class<T> clazz) {
         RequestSender request = createRequest(paramsTable);
         return getResponseAnswer(request.request(method, address), clazz);
     }
 
-    public static JsonResponse sendRequest(Method method, String address,
-            List<RequestParam> paramsTable) {
+    public static JsonResponse sendRequest(Method method, String address, List<RequestParam> paramsTable) {
         RequestSender request = createRequest(paramsTable);
         return getResponseAnswer(request.request(method, address));
     }
@@ -120,8 +125,7 @@ public class ApiClient {
         return given().relaxedHTTPSValidation()
                 .config(RestAssured.config().httpClient(httpClientConfig()
                         .setParam(CONNECTION_TIMEOUT, 5000)
-                        .setParam(SO_TIMEOUT, 5000)))
-                .log().everything();
+                        .setParam(SO_TIMEOUT, 5000)));
     }
 
 
