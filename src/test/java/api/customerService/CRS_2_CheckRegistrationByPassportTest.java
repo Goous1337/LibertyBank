@@ -6,7 +6,6 @@ import io.qameta.allure.Issue;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
@@ -21,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CUSTOMER_SERVICE;
 
 @DisplayName("EP-2 Проверка регистрации по документу, удостоверяющему личность")
-public class EP_2_CheckRegistrationByPassportTest extends BaseTest {
+public class CRS_2_CheckRegistrationByPassportTest extends BaseTest {
 
     {
         RestAssured.baseURI = CUSTOMER_SERVICE;
