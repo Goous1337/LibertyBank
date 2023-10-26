@@ -36,7 +36,7 @@ public class ApiClient {
     public static Response sendSimpleRequest(Method method, String address,
             List<RequestParam> paramsTable, Object pojo) {
         RequestSender request = createRequestWithPojoAndParams(paramsTable, pojo);
-        return request.request(method, address);
+        return request.request(method, address).prettyPeek();
     }
 
     public static Response sendSimpleRequest(Method method, String address, Object pojo) {

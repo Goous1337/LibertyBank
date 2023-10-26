@@ -26,11 +26,6 @@ public class CustomerService {
         return sendSimpleRequest(GET, REGISTRATION, new RequestParam(PARAMETER, PARAMETER_MOBILE_PHONE, phoneNumber));
     }
 
-    public Response checkVerificationCode(String phoneNumber) {
-        List<RequestParam> params = Collections.singletonList(new RequestParam(PARAMETER, PARAMETER_MOBILE_PHONE, phoneNumber));
-        return sendSimpleRequest(PATCH, REGISTRATION, params);
-    }
-
     public Response checkRegistrationByPhoneWithoutParam() {
         return sendRequestWithoutParams(GET, REGISTRATION);
     }
@@ -124,5 +119,43 @@ public class CustomerService {
         List<RequestParam> params = List.of( new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON),
                 new RequestParam(PATH, PARAMETER_CUSTOMER_ID, customerId));
         return sendSimpleRequest(PATCH, INVALID_QUESTION_ANSWER, params, new UserQuestion(securityQuestion, securityAnswer));
+    }
+
+    public Response checkChangingEmailNotificationSettingsAuthorizedUser(String customerId, Boolean notificationStatus) {
+        List<RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId),
+                new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
+        return sendSimpleRequest(PATCH, EMAIL_NOTIFICATION, params, new SMS_Notification_Boolean(notificationStatus));
+    }
+
+    public Response checkChangingEmailNotificationSettingsInvalidMethod(String invalidHttpMethod,
+                                                                                    String customerId, Boolean notificationStatus) {
+        List<RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId),
+                new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
+        return sendSimpleRequest(Method.valueOf(invalidHttpMethod), EMAIL_NOTIFICATION, params, new SMS_Notification_Boolean(notificationStatus));
+    }
+
+    public Response checkChangingEmailNotificationSettingsInvalidUrl(String customerId, Boolean notificationStatus) {
+        List<RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId),
+                new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
+        return sendSimpleRequest(PATCH, INVALID_EMAIL_NOTIFICATION, params, new SMS_Notification_Boolean(notificationStatus));
+    }
+
+    public Response checkChangingEmailNotificationSettingsInvalidData(String customerId, String notificationStatus) {
+        List<RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId),
+                new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
+        return sendSimpleRequest(PATCH, EMAIL_NOTIFICATION, params, new SMS_Notification_String(notificationStatus));
+    }
+
+    public Response checkChangingEmailNotificationSettingsInvalidData(String customerId, Integer notificationStatus) {
+        List<RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId),
+                new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
+        return sendSimpleRequest(PATCH, EMAIL_NOTIFICATION, params, new SMS_Notification_Integer(notificationStatus));
+    }
+
+    public Response checkChangingEmailNotificationSettings(String customerId) {
+        String body = createBody(Map.of(EMPTY, true));
+        List<RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId),
+                new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON), new RequestParam(BODY, EMPTY, body));
+        return sendSimpleRequest(PATCH, EMAIL_NOTIFICATION, params);
     }
 }
