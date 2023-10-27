@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 
-public class SMS_Notification_String {
+public class Notification_String {
 
     private String notificationStatus;
 }

@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 
-public class SMS_Notification_Integer {
+public class Notification_Integer {
 
     private Integer notificationStatus;
 }
