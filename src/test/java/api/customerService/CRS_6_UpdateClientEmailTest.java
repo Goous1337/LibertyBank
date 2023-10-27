@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CUSTOMER_SERVICE;
 
-@DisplayName("EP-6 Обновление email Клиента")
+@DisplayName("CRS-6 Обновление email Клиента")
 public class CRS_6_UpdateClientEmailTest extends BaseTest {
 
     {
