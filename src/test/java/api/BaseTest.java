@@ -6,6 +6,7 @@ import java.util.List;
 import api.core.RequestParam;
 import lombok.Data;
 import service.CustomerService;
+import service.InfoService;
 import service.UserAccountService;
 
 /**
@@ -17,9 +18,12 @@ public class BaseTest {
     protected CustomerService customerService;
     protected UserAccountService userAccountService;
 
+    protected InfoService infoService;
+
     public BaseTest() {
         params = new ArrayList<>();
         customerService = new CustomerService();
         userAccountService = new UserAccountService();
+        infoService = new InfoService();
     }
 }
