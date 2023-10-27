@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CUSTOMER_SERVICE;
 
 @DisplayName("EP-6 Обновление email Клиента")
-public class EP_6_UpdateClientEmailTest extends BaseTest {
+public class CRS_6_UpdateClientEmailTest extends BaseTest {
 
     {
         RestAssured.baseURI = CUSTOMER_SERVICE;

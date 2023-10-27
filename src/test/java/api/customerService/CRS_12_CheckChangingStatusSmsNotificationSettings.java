@@ -7,7 +7,6 @@ import io.qameta.allure.Issues;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
@@ -20,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CUSTOMER_SERVICE;
 
 @DisplayName("EP-12 Изменение статуса настройки получения SMS-уведомлений")
-public class EP_12_CheckChangingStatusSmsNotificationSettings extends BaseTest {
+public class CRS_12_CheckChangingStatusSmsNotificationSettings extends BaseTest {
 
     {
         RestAssured.baseURI = CUSTOMER_SERVICE;
