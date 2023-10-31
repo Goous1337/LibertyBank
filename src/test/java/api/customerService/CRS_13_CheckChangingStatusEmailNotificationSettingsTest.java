@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CUSTOMER_SERVICE;
 
 @DisplayName("CRS_13 Изменение статуса настройки получения email-рассылки")
-public class CRS_13_CheckChangingStatusEmailNotificationSettings extends BaseTest {
+public class CRS_13_CheckChangingStatusEmailNotificationSettingsTest extends BaseTest {
 
     {
         RestAssured.baseURI = CUSTOMER_SERVICE;

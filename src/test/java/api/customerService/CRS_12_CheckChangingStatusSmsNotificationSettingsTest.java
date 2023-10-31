@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CUSTOMER_SERVICE;
 
 @DisplayName("CRS-12 Изменение статуса настройки получения SMS-уведомлений")
-public class CRS_12_CheckChangingStatusSmsNotificationSettings extends BaseTest {
+public class CRS_12_CheckChangingStatusSmsNotificationSettingsTest extends BaseTest {
 
     {
         RestAssured.baseURI = CUSTOMER_SERVICE;
