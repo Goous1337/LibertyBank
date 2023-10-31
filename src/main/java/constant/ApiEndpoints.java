@@ -18,4 +18,5 @@ public final class ApiEndpoints {
 
     public static final String CITY_LIST = "city_dict/cities_list";
     public static final String INVALID_CITY_LIST = "city_dict/citiees_list";
+    public static final String BANK_DIVISIONS_LIST = "bank_branch";
 };

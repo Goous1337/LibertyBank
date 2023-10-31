@@ -3,7 +3,6 @@ package api.infoService;
 import api.BaseTest;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
-import io.qameta.allure.Issues;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -23,34 +22,38 @@ import static org.apache.hc.core5.http.HttpStatus.SC_NOT_FOUND;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.INFO_SERVICE;
 
+@DisplayName("IS-5 Получение списка городов, где находятся отделения")
 public class IS_5_CheckDefaultCityListTest extends BaseTest {
+
     {
         RestAssured.baseURI = INFO_SERVICE;
     }
+
     @DisplayName("Основной сценарий. Получение информации о списке дефолтных городов.")
     @Description("В данном тест-кейсе проводится проверка возможности получения информации о списке городов из БД")
     @Tags({@Tag("smoke"), @Tag("API")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-1135")
     @Test
-    public void successfulGettingCityList(){
+
+    public void successfulGettingCityList() {
         Response response = infoService.successfulGettingCityList();
         assertAll(
                 () -> assertEquals(HttpStatus.SC_OK,
                         response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
                 () -> assertTrue(response.jsonPath().get("totalCount")
-                        instanceof Number,
+                                instanceof Number,
                         "Поле 'totalCount' не соответствует ожидаемому"),
                 () -> assertTrue(response.jsonPath().get("items")
-                        instanceof List,
+                                instanceof List,
                         "Поле 'items' не соответствует ожидаемому"),
                 () -> {
                     List<Map<String, Object>> items = response.jsonPath().getList("items");
-                    for (int i =0; i<items.size();i++) {
+                    for (int i = 0; i < items.size(); i++) {
                         Map<String, Object> item = items.get(i);
-                        assertTrue(item.get("cityId") instanceof Number, "Поле items["+i+"].'cityId' не соответствует ожидаемому");
-                        assertTrue(item.get("cityName") instanceof String, "Поле items["+i+"].'cityName' не соответствует ожидаемому");
-                        assertTrue(item.get("isDefault") instanceof Boolean, "Поле items["+i+"].'default' не соответствует ожидаемому");
+                        assertTrue(item.get("cityId") instanceof Number, "Поле items[" + i + "].'cityId' не соответствует ожидаемому");
+                        assertTrue(item.get("cityName") instanceof String, "Поле items[" + i + "].'cityName' не соответствует ожидаемому");
+                        assertTrue(item.get("isDefault") instanceof Boolean, "Поле items[" + i + "].'default' не соответствует ожидаемому");
                     }
                 },
                 () -> {
@@ -63,10 +66,11 @@ public class IS_5_CheckDefaultCityListTest extends BaseTest {
 
     @DisplayName("Проверка работы сервиса получения списка городов, где находятся отделения при невалидном URL.")
     @Description("В данном тест-кейсе проводится проверка возможности получения информации о списке городов из БД, если использован невалидный URL")
-    @Tags({@Tag("API")})
+    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-1139")
     @Test
-    public void unsuccessfulGettingCityLisInvalidUrl(){
+
+    public void unsuccessfulGettingCityLisInvalidUrl() {
         Response response = infoService.unsuccessfulGettingCityListInvalidUrl();
         assertAll(
                 () -> assertEquals(SC_NOT_FOUND, response.statusCode(),
@@ -76,9 +80,9 @@ public class IS_5_CheckDefaultCityListTest extends BaseTest {
 
     @DisplayName("Проверка получения информации о списке городов если запрос не GET/ HEAD / OPTIONS.")
     @Description("В данном тест-кейсе проводится проверка возможности получения информации о списке городов из БД, если использован невалидный метод запроса")
-    @Tags({@Tag("API")})
+    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-1138")
-    @Issues({@Issue("https://jira.astondevs.ru/browse/LIB-1206")})
+    @Issue("https://jira.astondevs.ru/browse/LIB-1206")
     @ParameterizedTest(name = "Http метод: {0}")
     @CsvSource({
             "PATCH",
@@ -86,6 +90,7 @@ public class IS_5_CheckDefaultCityListTest extends BaseTest {
             "PUT",
             "DELETE"
     })
+
     public void unsuccessfulGettingCityListInvalidHttpMethod(String invalidHttpMethod) {
         Response response = infoService.unsuccessfulGettingCityListInvalidHttpMethod(invalidHttpMethod);
         assertAll(

@@ -101,6 +101,7 @@ public class CustomerService {
                 new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
         return sendSimpleRequest(PATCH, url, params, new User(customerId, email));
     }
+
     public Response checkSuccessfulUpdateQuestionAnswer(String customerId, String securityQuestion, String securityAnswer) {
         List<RequestParam> params = List.of( new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON),
                 new RequestParam(PATH, PARAMETER_CUSTOMER_ID, customerId));
