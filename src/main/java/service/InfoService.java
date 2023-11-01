@@ -4,8 +4,6 @@ package service;
 import api.core.RequestParam;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
-import pojo.customerService.SMS_Notification_Boolean;
-import pojo.customerService.User;
 
 import java.util.List;
 
