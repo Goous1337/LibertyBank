@@ -20,7 +20,7 @@ import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.URL_USER_ACCOUNT_SERVICE;
 
-@DisplayName("EP-3 Сохранение кода верификации")
+@DisplayName("UAS-3 Сохранение кода верификации")
 public class UAS_3_SavingVerificationCodeTest extends BaseTest {
 
     {

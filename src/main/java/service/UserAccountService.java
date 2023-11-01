@@ -3,7 +3,6 @@ package service;
 import api.core.RequestParam;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
-import pojo.userAccountService.GetVerificationCode;
 import pojo.userAccountService.PhoneVerificationRequest;
 import pojo.userAccountService.PhoneVerificationRequestInteger;
 import pojo.userAccountService.Verification;

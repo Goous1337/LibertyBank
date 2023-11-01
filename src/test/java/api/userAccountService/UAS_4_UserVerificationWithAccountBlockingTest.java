@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.URL_USER_ACCOUNT_SERVICE;
 
 @DisplayName("UAS-4 Верификация пользователя с учетом блокировки учетной записи")
-public class UAS_4_UserVerificationWithAccountBlocking extends BaseTest {
+public class UAS_4_UserVerificationWithAccountBlockingTest extends BaseTest {
 
     {
         RestAssured.baseURI = URL_USER_ACCOUNT_SERVICE;
