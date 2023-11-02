@@ -1,20 +1,20 @@
-final String TEST_CONTAINER_IMAGE = 'maven:3.8.7-openjdk-18-slim'
-final String GIT_REPO_URL = 'https://git.astondevs.ru/aston/liberty-bank/liberty-bank-aqa-web-and-api.git'
-final String GIT_CREDS_ID = 'gitlab-aston'
-
 pipeline {
-	agent any
-	environment {
-		INNER_CONTAINER_WORK_DIR = "/usr/src/myapp"
-	}
-	stages {
-		stage('Clone SCM') {
-			steps {
-				echo "env.GIT_BRANCH: ${env.GIT_BRANCH}"
-				git branch: env.GIT_BRANCH.replaceFirst('origin/', ''),  credentialsId: GIT_CREDS_ID, url: GIT_REPO_URL
-			}
-		}
-		stage('Run tests') {
+    agent {
+        label 'master'
+    }
+    environment{
+        TEST_CONTAINER_IMAGE = 'maven:3.8.7-openjdk-18-slim'
+        GIT_REPO_URL = 'https://git.astondevs.ru/aston/liberty-bank/liberty-bank-aqa-web-and-api.git'
+        GIT_CREDS_ID = 'gitlab-aston'
+        INNER_CONTAINER_WORK_DIR = "/usr/src/myapp"
+    }
+    stages{
+        stage('Copy GIT') {
+            steps{
+                git branch: 'develop', credentialsId: GIT_CREDS_ID, url: GIT_REPO_URL
+            }
+        }
+        stage('Run tests') {
 			agent {
         		docker { 
 					image TEST_CONTAINER_IMAGE
@@ -37,9 +37,4 @@ pipeline {
 			}
 		}
     }
-	post {
-		cleanup { 
-			cleanWs()
-		}	
-	}	
 }
