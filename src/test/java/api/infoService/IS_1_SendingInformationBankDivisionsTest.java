@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.INFO_SERVICE;
 
 @DisplayName("IS-1 Отправка информации о подразделениях Банка")
-public class IS_1_SendingInformationBankDivisions extends BaseTest {
+public class IS_1_SendingInformationBankDivisionsTest extends BaseTest {
 
     {
         RestAssured.baseURI = INFO_SERVICE;
