@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CUSTOMER_SERVICE;
 
 @DisplayName("CRS-15 Изменение контрольного вопроса / ответа")
-public class CRS_15_ChangingSecurityQuestionAnswer extends BaseTest {
+public class CRS_15_ChangingSecurityQuestionAnswerTest extends BaseTest {
 
     {
         RestAssured.baseURI = CUSTOMER_SERVICE;

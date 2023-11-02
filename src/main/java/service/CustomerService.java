@@ -37,11 +37,13 @@ public class CustomerService {
         return sendSimpleRequest(Method.valueOf(invalidHttpMethod), REGISTRATION, new RequestParam(PARAMETER, PARAMETER_MOBILE_PHONE, phoneNumber));
     }
 
-    public Response checkRegistrationByPassport(String passport) {
-        return sendSimpleRequest(GET, REGISTRATION, new RequestParam(PARAMETER, PARAMETER_PASSPORT, passport));
+    public Response checkRegistrationByPassport(String passportSeries,String passportNumber) {
+        List <RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_PASSPORT_SERIES, passportSeries),
+                new RequestParam(PARAMETER, PARAMETER_PASSPORT_NUMBER, passportNumber));
+        return sendSimpleRequest(GET, REGISTRATION, params);
     }
 
-    public Response checkRegistrationByPassportInvalidHttpMethod(String invalidHttpMethod, String passport) {
+    public Response checkRegistrationByPassportInvalidHttpMethod(String invalidHttpMethod,String passportSeries, String passport) {
         return sendSimpleRequest(Method.valueOf(invalidHttpMethod), REGISTRATION, new RequestParam(PARAMETER, PARAMETER_PASSPORT, passport));
     }
 
@@ -99,6 +101,7 @@ public class CustomerService {
                 new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
         return sendSimpleRequest(PATCH, url, params, new User(customerId, email));
     }
+
     public Response checkSuccessfulUpdateQuestionAnswer(String customerId, String securityQuestion, String securityAnswer) {
         List<RequestParam> params = List.of( new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON),
                 new RequestParam(PATH, PARAMETER_CUSTOMER_ID, customerId));
