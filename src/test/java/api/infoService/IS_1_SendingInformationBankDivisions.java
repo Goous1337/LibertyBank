@@ -57,10 +57,11 @@ public class IS_1_SendingInformationBankDivisions extends BaseTest {
                 () -> assertEquals(SC_OK, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
                 () -> {
-                    List<String> items = response.jsonPath().getList("cityName");
-                    items.forEach(actualCityName -> assertEquals(expectedCityName, actualCityName,
-                            "Запрошенный город не соответствует представленному"));
-
+                    List<Map<String, Object>> items = response.jsonPath().getList("cityName");
+                    for (int i = 0; i < items.size(); i++) {
+                        assertEquals(expectedCityName, items.get(i),
+                                "Запрошенный город не соответствует представленному");
+                    }
                 },
                 () -> {
                     List<Map<String, Object>> items = response.jsonPath().getList("$");
