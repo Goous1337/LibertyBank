@@ -11,7 +11,7 @@ pipeline {
     stages{
         stage('Copy GIT') {
             steps{
-                git branch: 'Frolov', credentialsId: GIT_CREDS_ID, url: GIT_REPO_URL
+                git branch: 'main', credentialsId: GIT_CREDS_ID, url: GIT_REPO_URL
             }
         }
         stage('Run tests') {
