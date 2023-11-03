@@ -15,20 +15,12 @@ import static constant.InfoServiceConstants.*;
 import static io.restassured.http.Method.GET;
 
 public class InfoService {
-    public Response successfulGettingCityList() {
-        return sendRequestWithoutParams(GET, CITY_LIST);
-    }
-
     public Response unsuccessfulGettingCityListInvalidUrl() {
         return sendRequestWithoutParams(GET, INVALID_CITY_LIST);
     }
 
-    public Response unsuccessfulGettingCityListInvalidHttpMethod(String invalidHttpMethod) {
-        return sendRequestWithoutParams(Method.valueOf(invalidHttpMethod), CITY_LIST);
-    }
-
-    public Response checkGettingAllBankDivisions() {
-        return sendRequestWithoutParams(GET, BANK_DIVISIONS_LIST);
+    public Response unsuccessfulGettingCityList(String HttpMethod) {
+        return sendRequestWithoutParams(Method.valueOf(HttpMethod), CITY_LIST);
     }
 
     public Response checkGettingBankDivisionsByCity(String cityId) {
@@ -45,12 +37,8 @@ public class InfoService {
         return sendRequestWithoutParams(GET, url);
     }
 
-    public Response checkGettingAllBankDivisionsInvalidMethod(String httpMethod) {
+    public Response checkGettingAllBankDivisions(String httpMethod) {
         return sendRequestWithoutParams(Method.valueOf(httpMethod), BANK_DIVISIONS_LIST);
-    }
-
-    public Response checkGettingInformationCurrencyExchangeRates() {
-        return sendRequestWithoutParams(GET, BANK_EXCHANGE_RATES);
     }
 
     public Response checkGettingInformationCurrencyExchangeRatesCityId(String cityId) {
@@ -67,7 +55,7 @@ public class InfoService {
         return sendRequestWithoutParams(GET, INVALID_BANK_EXCHANGE_RATES);
     }
 
-    public Response checkGettingInformationCurrencyExchangeRatesInvalidMethod(String httpMethod) {
+    public Response checkGettingInformationCurrencyExchangeRates(String httpMethod) {
         return sendRequestWithoutParams(Method.valueOf(httpMethod), BANK_EXCHANGE_RATES);
     }
 }

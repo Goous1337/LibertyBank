@@ -19,6 +19,7 @@ import java.util.Map;
 
 import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.apache.http.HttpStatus.SC_NOT_FOUND;
+import static org.asynchttpclient.util.HttpConstants.Methods.GET;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.INFO_SERVICE;
 
@@ -36,8 +37,8 @@ public class IS_2_GettingInformationCurrencyExchangeRatesTest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB-1155")
     @Test
 
-    public void GettingInformationCurrencyExchangeRates() {
-        Response response = infoService.checkGettingInformationCurrencyExchangeRates();
+    public void gettingInformationCurrencyExchangeRates() {
+        Response response = infoService.checkGettingInformationCurrencyExchangeRates(GET);
         assertAll(
                 () -> assertEquals(SC_OK,
                         response.statusCode(),
@@ -77,7 +78,7 @@ public class IS_2_GettingInformationCurrencyExchangeRatesTest extends BaseTest {
             strings = {"1", "5", "10"}
     )
 
-    public void GettingInformationCurrencyExchangeRateCityId(String cityId) {
+    public void gettingInformationCurrencyExchangeRateCityId(String cityId) {
         Response response = infoService.checkGettingInformationCurrencyExchangeRatesCityId(cityId);
         assertAll(
                 () -> assertEquals(SC_OK,
@@ -120,7 +121,7 @@ public class IS_2_GettingInformationCurrencyExchangeRatesTest extends BaseTest {
             "6, 0, 10"
     })
 
-    public void GettingInformationCurrencyExchangeRateCityIdPageSize(String cityId, String pageNumb, String size) {
+    public void gettingInformationCurrencyExchangeRateCityIdPageSize(String cityId, String pageNumb, String size) {
         Response response = infoService.checkGettingInformationCurrencyExchangeRateCityIdPageSize(cityId, pageNumb, size);
         assertAll(
                 () -> assertEquals(SC_OK,
@@ -158,7 +159,7 @@ public class IS_2_GettingInformationCurrencyExchangeRatesTest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB-1239")
     @Test
 
-    public void GettingInformationCurrencyExchangeRatesInvalidUrl() {
+    public void gettingInformationCurrencyExchangeRatesInvalidUrl() {
         Response response = infoService.checkGettingInformationCurrencyExchangeRatesInvalidUrl();
         assertAll(
                 () -> assertEquals(SC_NOT_FOUND,
@@ -177,8 +178,8 @@ public class IS_2_GettingInformationCurrencyExchangeRatesTest extends BaseTest {
             strings = {"POST", "PATCH", "DELETE", "PUT"}
     )
 
-    public void GettingInformationCurrencyExchangeRatesInvalidMethod(String httpMethod) {
-        Response response = infoService.checkGettingInformationCurrencyExchangeRatesInvalidMethod(httpMethod);
+    public void gettingInformationCurrencyExchangeRatesInvalidMethod(String httpMethod) {
+        Response response = infoService.checkGettingInformationCurrencyExchangeRates(httpMethod);
         assertAll(
                 () -> assertEquals(SC_METHOD_NOT_ALLOWED,
                         response.statusCode(),
@@ -220,7 +221,7 @@ public class IS_2_GettingInformationCurrencyExchangeRatesTest extends BaseTest {
             "-1, &, -1"
     })
 
-    public void GettingInformationCurrencyExchangeRateCityIdPageSizeInvalid(String cityId, String pageNumb, String size) {
+    public void gettingInformationCurrencyExchangeRateCityIdPageSizeInvalid(String cityId, String pageNumb, String size) {
         Response response = infoService.checkGettingInformationCurrencyExchangeRateCityIdPageSize(cityId, pageNumb, size);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST,
