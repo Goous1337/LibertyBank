@@ -64,8 +64,7 @@ public class IS_1_SendingInformationBankDivisionsTest extends BaseTest {
                 },
                 () -> {
                     List<Map<String, Object>> items = response.jsonPath().getList("$");
-                    for (int i = 0; i < items.size(); i++) {
-                        Map<String, Object> item = items.get(i);
+                    for (Map<String, Object> item : items) {
                         assertTrue(item.get("branchAddress") instanceof String,
                                 "Поле 'branchAddress' не соответствует ожидаемому формату");
                         assertTrue(item.get("hasCashWithdraw") instanceof Boolean,

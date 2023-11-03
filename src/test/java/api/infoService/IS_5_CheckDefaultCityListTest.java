@@ -36,7 +36,7 @@ public class IS_5_CheckDefaultCityListTest extends BaseTest {
     @Test
 
     public void successfulGettingCityList() {
-        Response response = infoService.successfulGettingCityList();
+        Response response = infoService.getCityList("GET");
         assertAll(
                 () -> assertEquals(HttpStatus.SC_OK,
                         response.statusCode(),
@@ -92,7 +92,7 @@ public class IS_5_CheckDefaultCityListTest extends BaseTest {
     })
 
     public void unsuccessfulGettingCityListInvalidHttpMethod(String invalidHttpMethod) {
-        Response response = infoService.unsuccessfulGettingCityListInvalidHttpMethod(invalidHttpMethod);
+        Response response = infoService.getCityList(invalidHttpMethod);
         assertAll(
                 () -> assertEquals(SC_METHOD_NOT_ALLOWED, response.statusCode(),
                         "Код ответа не соответствует ожидаемому")

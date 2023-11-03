@@ -9,27 +9,18 @@ import java.util.List;
 
 import static api.core.ApiClient.sendRequestWithoutParams;
 import static api.core.ApiClient.sendSimpleRequest;
-import static api.core.RequestParamType.HEADER;
 import static api.core.RequestParamType.PARAMETER;
-import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
 import static constant.ApiEndpoints.*;
-import static constant.CustomerServiceConstants.PARAMETER_CUSTOMER_ID;
 import static constant.InfoServiceConstants.*;
-import static io.netty.handler.codec.http.HttpHeaders.Values.APPLICATION_JSON;
 import static io.restassured.http.Method.GET;
-import static io.restassured.http.Method.PATCH;
 
 public class InfoService {
-    public Response successfulGettingCityList() {
-        return sendRequestWithoutParams(GET, CITY_LIST);
-    }
-
     public Response unsuccessfulGettingCityListInvalidUrl() {
         return sendRequestWithoutParams(GET, INVALID_CITY_LIST);
     }
 
-    public Response unsuccessfulGettingCityListInvalidHttpMethod(String invalidHttpMethod) {
-        return sendRequestWithoutParams(Method.valueOf(invalidHttpMethod), CITY_LIST);
+    public Response getCityList(String httpMethod) {
+        return sendRequestWithoutParams(Method.valueOf(httpMethod), CITY_LIST);
     }
 
     public Response checkGettingAllBankDivisions() {
