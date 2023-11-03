@@ -19,7 +19,7 @@ public class InfoService {
         return sendRequestWithoutParams(GET, INVALID_CITY_LIST);
     }
 
-    public Response unsuccessfulGettingCityList(String HttpMethod) {
+    public Response gettingCityList(String HttpMethod) {
         return sendRequestWithoutParams(Method.valueOf(HttpMethod), CITY_LIST);
     }
 
