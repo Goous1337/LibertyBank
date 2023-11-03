@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.apache.hc.core5.http.HttpStatus.*;
+import static org.asynchttpclient.util.HttpConstants.Methods.GET;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.INFO_SERVICE;
 
@@ -36,7 +37,7 @@ public class IS_1_SendingInformationBankDivisionsTest extends BaseTest {
     @Test
 
     public void successfulGettingBankDivisionsList() {
-        assertEquals(SC_OK, infoService.checkGettingAllBankDivisions().statusCode(),
+        assertEquals(SC_OK, infoService.checkGettingAllBankDivisions(GET).statusCode(),
                 "Код ответа не соответствует ожидаемому");
     }
 
@@ -148,7 +149,7 @@ public class IS_1_SendingInformationBankDivisionsTest extends BaseTest {
     )
 
     public void unsuccessfulGettingBankDivisionsInvalidMethod(String httpMethod) {
-        assertEquals(SC_METHOD_NOT_ALLOWED, infoService.checkGettingAllBankDivisionsInvalidMethod(httpMethod).statusCode(),
+        assertEquals(SC_METHOD_NOT_ALLOWED, infoService.checkGettingAllBankDivisions(httpMethod).statusCode(),
                 "Код ответа не соответствует ожидаемому");
     }
 
