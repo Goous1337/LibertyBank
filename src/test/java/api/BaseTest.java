@@ -20,6 +20,7 @@ public class BaseTest {
 
     protected InfoService infoService;
 
+
     public BaseTest() {
         params = new ArrayList<>();
         customerService = new CustomerService();

@@ -9,9 +9,13 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.HashMap;
+
+import static dataProviders.DataUtils.getPassportWithCustomerStatus;
 import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -95,34 +99,20 @@ public class CRS_2_CheckRegistrationByPassportTest extends BaseTest {
                         response.body().jsonPath().get("type"), "Сообщение об ошибке не соответствует ожидаемому")
         );
     }
-    /* [НА УДАЛЕНИЕ]
-
-    @DisplayName("Проверка регистрации при вводе номера документа, содержащий строчные латинские буквы")
-    @Description("В данном кейсе проверяем получение номера телефона, при вводе  номера документа ,удостоверяющего" +
-            " личность пользователя,  когда пользователь - клиент  банка.")
-    @Tag("API")
-    @TmsLink("https://jira.astondevs.ru/browse/LIB-276")
-    @Issue("https://jira.astondevs.ru/browse/LIB-1198")
-    @Test
-
-    public void checkRegistrationByPassportLowercaseLatinLetters() {
-        String passportNumber = "bm8765432";
-
-        assertEquals(SC_OK,
-                customerService.checkRegistrationByPassport(passportNumber).statusCode(),
-                "Код ответа не соответствует ожидаемому");
-    }
-*/
     @DisplayName("Проверка регистрации, если пользователь уже зарегистрирован в СДБО")
     @Description("Тест на проверку регистрации, если пользователь уже зарегистрирован в СДБО")
     @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-280")
-    @ParameterizedTest(name = "Серия:{0}, Номер паспорта: {1}")
+    //@ParameterizedTest(name = "Серия:{0}, Номер паспорта: {1}")
+    @Test
     @CsvSource({
             "4954, 262577"
     })
 
-    public void checkRegistrationByPassportAlreadyRegisteredUser(String passportSeries, String passportNumber) {
+    public void checkRegistrationByPassportAlreadyRegisteredUser(/*String passportSeries, String passportNumber*/) {
+        HashMap<String,String> passport = getPassportWithCustomerStatus(2);
+        String passportSeries = passport.get("series");
+        String passportNumber = passport.get("number");
         Response response = customerService.checkRegistrationByPassport(passportSeries,passportNumber);
         assertAll(
                 () -> assertEquals(SC_CONFLICT, response.statusCode(),
@@ -130,6 +120,7 @@ public class CRS_2_CheckRegistrationByPassportTest extends BaseTest {
                 () -> assertEquals("Пользователь уже зарегистрирован в СДБО, и повторно зарегистрироваться нельзя",
                         response.body().jsonPath().get("message"), "Сообщение об ошибке не соответствует ожидаемому")
         );
+
     }
 
     @DisplayName("Проверка регистрации, если пользователь пользователь заблокирован")
