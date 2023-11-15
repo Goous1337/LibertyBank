@@ -21,4 +21,5 @@ public final class ApiEndpoints {
     public static final String BANK_DIVISIONS_LIST = "bank_branch";
     public static final String BANK_EXCHANGE_RATES = "exchange_rates";
     public static final String INVALID_BANK_EXCHANGE_RATES = "exchange_ratesss";
+    public static final String NOTIFICATION_SETTINGS = "/auth/user/settings/notifications";
 };
