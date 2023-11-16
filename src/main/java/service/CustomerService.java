@@ -160,4 +160,18 @@ public class CustomerService {
                 new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON), new RequestParam(BODY, EMPTY, body));
         return sendSimpleRequest(PATCH, EMAIL_NOTIFICATION, params);
     }
+
+    public Response checkPushNotification(String customerId, String notificationStatus) {
+        String body = createBody(Map.of(PARAMETER_NOTIFICATION_STATUS,notificationStatus));
+        List<RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId)
+                , new RequestParam(BODY, EMPTY, body),
+                new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
+        return sendSimpleRequest(PATCH, PUSH_NOTIFICATION, params);
+    }
+
+    public Response checkPushNotificationWIthHttpMethod(String customerId, String httpMethod) {
+        List<RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId));
+        return sendSimpleRequest(Method.valueOf(httpMethod), PUSH_NOTIFICATION, params);
+    }
+
 }

@@ -10,6 +10,8 @@ public final class ApiEndpoints {
     public static final String VERIFICATION = "security/session/verification";
     public static final String SMS_NOTIFICATION = "user/settings/notifications/sms";
     public static final String EMAIL_NOTIFICATION = "user/settings/notifications/email";
+
+    public static final String PUSH_NOTIFICATION = "user/settings/notifications/push";
     public static final String INVALID_SMS_NOTIFICATION = "/user/settings/notif/sms";
     public static final String INVALID_EMAIL_NOTIFICATION = "/user/settings/notif/email";
     public static final String CHANGE_EMAIL = "auth/user/settings/email";

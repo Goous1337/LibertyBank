@@ -26,8 +26,7 @@ public class DataUtils {
 
     public static HashMap<String,String> getPassportWithCustomerStatus(Integer customerStatus) {
         HashMap<String,String> passport = new HashMap<>();
-        String selectPassportIdWithCustomerStatus = "SELECT passport_id FROM public.customer WHERE customer_status = '"+customerStatus+"'" +
-                " AND patronymic NOT LIKE 'Реакт%' AND patronymic NOT LIKE 'Айос%' AND patronymic NOT LIKE 'Андроид%'";
+        String selectPassportIdWithCustomerStatus = "SELECT passport_id FROM public.customer WHERE customer_status = '"+customerStatus+"'";
         Integer passportId = getDBConnection(CUSTOMER_SERVICE)
                 .queryForList(selectPassportIdWithCustomerStatus, Integer.class).get(0);
         String selectPassportSeries = "SELECT series FROM public.passport WHERE id = '"+passportId+"'";
@@ -36,8 +35,12 @@ public class DataUtils {
                 .queryForList(selectPassportSeries, String.class).get(0));
         passport.put("number",getDBConnection(CUSTOMER_SERVICE)
                 .queryForList(selectPassportNumber, String.class).get(0));
-        passport.put("третье значение", "3" );
         return passport;
+    }
+    public static String getCustomerIdWithCustomerStatus(boolean push_notification) {
+        String sql = "SELECT customer_id FROM public.customer WHERE push_notification = ?";
+        return getDBConnection(CUSTOMER_SERVICE)
+                .queryForList(sql, String.class,push_notification).get(0);
     }
 
 }

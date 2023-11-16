@@ -120,7 +120,6 @@ public class CRS_2_CheckRegistrationByPassportTest extends BaseTest {
                 () -> assertEquals("Пользователь уже зарегистрирован в СДБО, и повторно зарегистрироваться нельзя",
                         response.body().jsonPath().get("message"), "Сообщение об ошибке не соответствует ожидаемому")
         );
-
     }
 
     @DisplayName("Проверка регистрации, если пользователь пользователь заблокирован")
