@@ -15,6 +15,8 @@ import static api.utils.GsonHelper.createBody;
 import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
 import static constant.ApiEndpoints.*;
 import static constant.CustomerServiceConstants.*;
+import static constant.InfoServiceConstants.PARAMETER_CITYID;
+import static constant.InfoServiceConstants.PARAMETER_CUSTOMERID;
 import static io.netty.handler.codec.http.HttpHeaders.Values.APPLICATION_JSON;
 import static io.restassured.http.Method.*;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
@@ -160,7 +162,6 @@ public class CustomerService {
                 new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON), new RequestParam(BODY, EMPTY, body));
         return sendSimpleRequest(PATCH, EMAIL_NOTIFICATION, params);
     }
-
     public Response checkPushNotification(String customerId, String notificationStatus) {
         String body = createBody(Map.of(PARAMETER_NOTIFICATION_STATUS,notificationStatus));
         List<RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId)
@@ -173,5 +174,13 @@ public class CustomerService {
         List<RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId));
         return sendSimpleRequest(Method.valueOf(httpMethod), PUSH_NOTIFICATION, params);
     }
+    public Response checkSendingNotificationSettings(String customerId) {
+        return sendSimpleRequest(GET, NOTIFICATION_SETTINGS, new RequestParam(PARAMETER, PARAMETER_CUSTOMERID, customerId));
+    }
 
+    public Response checkSendingNotificationSettingsInvalidMethod(String invalidHttpMethod, String customerId) {
+        return sendSimpleRequest(Method.valueOf(invalidHttpMethod), NOTIFICATION_SETTINGS, new RequestParam(PARAMETER,
+                PARAMETER_CUSTOMER_ID, customerId));
+
+    }
 }

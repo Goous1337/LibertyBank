@@ -49,7 +49,7 @@ public class CRS_6_UpdateClientEmailTest extends BaseTest {
         Response response = customerService.checkUpdateClientEmail(customerId, email);
         String actualEmail = CustomerServiceDataBaseRequest.receivingEmailCustomerByCustomerId(customerId);
         assertAll(
-                () -> assertEquals(HttpStatus.SC_OK,
+                () -> assertEquals(SC_OK,
                         response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
                 () -> assertEquals(email, actualEmail,
