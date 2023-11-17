@@ -15,7 +15,6 @@ import static api.utils.GsonHelper.createBody;
 import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
 import static constant.ApiEndpoints.*;
 import static constant.CustomerServiceConstants.*;
-import static constant.InfoServiceConstants.PARAMETER_CITYID;
 import static constant.InfoServiceConstants.PARAMETER_CUSTOMERID;
 import static io.netty.handler.codec.http.HttpHeaders.Values.APPLICATION_JSON;
 import static io.restassured.http.Method.*;
@@ -181,6 +180,11 @@ public class CustomerService {
     public Response checkSendingNotificationSettingsInvalidMethod(String invalidHttpMethod, String customerId) {
         return sendSimpleRequest(Method.valueOf(invalidHttpMethod), NOTIFICATION_SETTINGS, new RequestParam(PARAMETER,
                 PARAMETER_CUSTOMER_ID, customerId));
-
     }
+
+    public Response checkPushNotificationInvalidUrl(String customerId) {
+        return sendSimpleRequest(PATCH, INVALID_NOTIFICATION,
+                new RequestParam(PARAMETER,PARAMETER_CUSTOMERID,customerId));
+    }
+
 }

@@ -12,6 +12,8 @@ public final class ApiEndpoints {
     public static final String EMAIL_NOTIFICATION = "user/settings/notifications/email";
 
     public static final String PUSH_NOTIFICATION = "user/settings/notifications/push";
+
+    public static final String INVALID_NOTIFICATION = "/user/settings/notif/push";
     public static final String INVALID_SMS_NOTIFICATION = "/user/settings/notif/sms";
     public static final String INVALID_EMAIL_NOTIFICATION = "/user/settings/notif/email";
     public static final String CHANGE_EMAIL = "auth/user/settings/email";
@@ -24,4 +26,6 @@ public final class ApiEndpoints {
     public static final String BANK_EXCHANGE_RATES = "exchange_rates";
     public static final String INVALID_BANK_EXCHANGE_RATES = "exchange_ratesss";
     public static final String NOTIFICATION_SETTINGS = "/auth/user/settings/notifications";
-};
+
+
+}

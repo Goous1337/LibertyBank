@@ -2,9 +2,7 @@ package api.customerService;
 
 import api.BaseTest;
 import constant.LibertyServiceName;
-import dataBase.requests.CustomerServiceDataBaseRequest;
 import io.qameta.allure.Description;
-import io.qameta.allure.Issue;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -38,7 +36,7 @@ public class CRS_11_PushNotificationsTest extends BaseTest {
                 () -> {
                     String sql = "SELECT push_notification FROM public.customer WHERE customer_id = ?";
                     assertFalse(getDBConnection(LibertyServiceName.CUSTOMER_SERVICE)
-                            .queryForList(sql, Boolean.class,customerId).get(0));;
+                            .queryForList(sql, Boolean.class,customerId).get(0));
                 }
         );
     }
@@ -84,5 +82,25 @@ public class CRS_11_PushNotificationsTest extends BaseTest {
                         "Код ответа не соответствует ожидаемому")
         );
     }
+
+    @DisplayName("Использование невалидного URL при изменении PUSH-уведомлений.")
+    @Description("В данном тест-кейсе проводится проверка работы системы если используется невалидный URL")
+    @Tag("API")
+    @TmsLink("https://jira.astondevs.ru/browse/LIB-1194")
+    @Test
+    public void unsuccessfulPushNotificationInvalidUrl() {
+        String customerId = "e4934e7d-d27f-4af5-8d76-e3a7c90ebb89";
+        Response response = customerService.checkPushNotificationInvalidUrl(customerId);
+        assertAll(
+                () -> assertEquals(HttpStatus.SC_NOT_FOUND,
+                        response.statusCode(),
+                        "Код ответа не соответствует ожидаемому"),
+                () -> assertEquals("Not Found",
+                        response.jsonPath().get("error"),
+                        "Сообщение об ошибке не соответствует ожидаемому")
+        );
+    }
+
+
 
 }
