@@ -39,13 +39,13 @@ public class CustomerService {
         return sendSimpleRequest(Method.valueOf(invalidHttpMethod), REGISTRATION, new RequestParam(PARAMETER, PARAMETER_MOBILE_PHONE, phoneNumber));
     }
 
-    public Response checkRegistrationByPassport(String passportSeries,String passportNumber) {
-        List <RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_PASSPORT_SERIES, passportSeries),
+    public Response checkRegistrationByPassport(String passportSeries, String passportNumber) {
+        List<RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_PASSPORT_SERIES, passportSeries),
                 new RequestParam(PARAMETER, PARAMETER_PASSPORT_NUMBER, passportNumber));
         return sendSimpleRequest(GET, REGISTRATION, params);
     }
 
-    public Response checkRegistrationByPassportInvalidHttpMethod(String invalidHttpMethod,String passportSeries, String passport) {
+    public Response checkRegistrationByPassportInvalidHttpMethod(String invalidHttpMethod, String passportSeries, String passport) {
         return sendSimpleRequest(Method.valueOf(invalidHttpMethod), REGISTRATION, new RequestParam(PARAMETER, PARAMETER_PASSPORT, passport));
     }
 
@@ -105,7 +105,7 @@ public class CustomerService {
     }
 
     public Response checkSuccessfulUpdateQuestionAnswer(String customerId, String securityQuestion, String securityAnswer) {
-        List<RequestParam> params = List.of( new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON),
+        List<RequestParam> params = List.of(new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON),
                 new RequestParam(PATH, PARAMETER_CUSTOMER_ID, customerId));
         return sendSimpleRequest(PATCH, QUESTION_ANSWER, params, new UserQuestion(securityQuestion, securityAnswer));
     }
@@ -113,14 +113,14 @@ public class CustomerService {
     public Response checkUpdateQuestionAnswerInvalidHttpMethod(String invalidHttpMethod,
                                                                String customerId,
                                                                String securityQuestion, String securityAnswer) {
-        List<RequestParam> params = List.of( new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON),
+        List<RequestParam> params = List.of(new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON),
                 new RequestParam(PATH, PARAMETER_CUSTOMER_ID, customerId));
         return sendSimpleRequest(Method.valueOf(invalidHttpMethod), QUESTION_ANSWER,
                 params, new UserQuestion(securityQuestion, securityAnswer));
     }
 
     public Response checkUpdateQuestionAnswerInvalidUrl(String customerId, String securityQuestion, String securityAnswer) {
-        List<RequestParam> params = List.of( new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON),
+        List<RequestParam> params = List.of(new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON),
                 new RequestParam(PATH, PARAMETER_CUSTOMER_ID, customerId));
         return sendSimpleRequest(PATCH, INVALID_QUESTION_ANSWER, params, new UserQuestion(securityQuestion, securityAnswer));
     }
@@ -132,7 +132,7 @@ public class CustomerService {
     }
 
     public Response checkChangingEmailNotificationSettingsInvalidMethod(String invalidHttpMethod,
-                                                                                    String customerId, Boolean notificationStatus) {
+                                                                        String customerId, Boolean notificationStatus) {
         List<RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId),
                 new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
         return sendSimpleRequest(Method.valueOf(invalidHttpMethod), EMAIL_NOTIFICATION, params, new Notification_Boolean(notificationStatus));
@@ -170,6 +170,14 @@ public class CustomerService {
     public Response checkSendingNotificationSettingsInvalidMethod(String invalidHttpMethod, String customerId) {
         return sendSimpleRequest(Method.valueOf(invalidHttpMethod), NOTIFICATION_SETTINGS, new RequestParam(PARAMETER,
                 PARAMETER_CUSTOMER_ID, customerId));
+    }
 
+    public Response checkGettingUserInformation(String customerId) {
+        return sendSimpleRequest(GET, RETRIEVING_USER_DATA, new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId));
+    }
+
+    public Response checkGettingUserInformationInvalidMethod(String invalidHttpMethod, String customerId) {
+        return sendSimpleRequest(Method.valueOf(invalidHttpMethod), RETRIEVING_USER_DATA, new RequestParam(PARAMETER,
+                PARAMETER_CUSTOMER_ID, customerId));
     }
 }
