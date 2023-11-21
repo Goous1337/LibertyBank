@@ -33,10 +33,9 @@ public class CRS_9_GettingUserInformation extends BaseTest {
             "73481ef5-4703-44cb-b8e9-a36c58058959, Никита, Бондарев, Андроидович, 2000-06-11, 79228134511, n.bondarev@android.ru, 2",
             "e670aafa-adfd-49e6-bdbf-b65d9e0c7d53, Сергей, Лебедев, Павлович, 1985-08-14, 79031553942, sergey.lebedev123@yahoo.com, 1",
     })
-    @Test
 
     public void successfulGettingUserInformation(String customerId, String firstName, String lastName, String patronymic,
-                                            String birthDate, String mobilePhone, String email, String customerStatus) {
+                                                 String birthDate, String mobilePhone, String email, String customerStatus) {
         Response response = customerService.checkGettingUserInformation(customerId);
 
         assertAll(
@@ -90,6 +89,7 @@ public class CRS_9_GettingUserInformation extends BaseTest {
     @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-1340")
     @Test
+
     public void checkGettingUserInformationUsingInvalidData() {
         String customerId = "813f5509";
         Response response = customerService.checkGettingUserInformation(customerId);
@@ -110,6 +110,7 @@ public class CRS_9_GettingUserInformation extends BaseTest {
             "POST, 6733729f-d627-4122-baab-8100d7242f30",
             "PATCH, 6733729f-d627-4122-baab-8100d7242f30"
     })
+
     public void checkGettingUserInformationInvalidMethod(String invalidHttpMethod, String customerId) {
         Response response = customerService.checkGettingUserInformationInvalidMethod(invalidHttpMethod, customerId);
 
