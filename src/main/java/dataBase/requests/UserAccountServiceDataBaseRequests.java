@@ -33,7 +33,18 @@ public class UserAccountServiceDataBaseRequests {
         String sql = "DELETE FROM user_profile WHERE customer_id=?::uuid";
         getDBConnection(USER_ACCOUNT_SERVICE).update(sql, idCustomer);
         LOG.info(String.format("Удален код верификации пользователя id: %s", idCustomer));
-
     }
 
+    public static void updatePasswordInUserProfileTableIsNull(String idCustomer) {
+        String sql = "UPDATE user_profile SET password = NULL WHERE customer_id =?::uuid";
+        getDBConnection(USER_ACCOUNT_SERVICE).update(sql, idCustomer);
+        LOG.info(String.format("Удален пароль пользователя  id: %s", idCustomer));
+    }
+
+    public static String getHashPasswordInUserProfileTable(String idCustomer) {
+        String sql = "SELECT password FROM user_profile WHERE customer_id=?::uuid";
+        String hashPassword = getDBConnection(USER_ACCOUNT_SERVICE).queryForObject(sql, String.class, idCustomer);
+        LOG.info(String.format("Получен пароль пользователя  id: %s", idCustomer));
+        return hashPassword;
+    }
 }

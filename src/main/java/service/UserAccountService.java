@@ -3,17 +3,15 @@ package service;
 import api.core.RequestParam;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
-import pojo.userAccountService.PhoneVerificationRequest;
-import pojo.userAccountService.PhoneVerificationRequestInteger;
-import pojo.userAccountService.Verification;
+import pojo.userAccountService.*;
 
 import java.util.List;
 
+import static api.core.ApiClient.sendRequestWithoutParams;
 import static api.core.ApiClient.sendSimpleRequest;
 import static api.core.RequestParamType.HEADER;
 import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
-import static constant.ApiEndpoints.VERIFICATION;
-import static constant.ApiEndpoints.VERIFICATION_CODE;
+import static constant.ApiEndpoints.*;
 import static io.netty.handler.codec.http.HttpHeaders.Values.APPLICATION_JSON;
 import static io.restassured.http.Method.*;
 
@@ -48,4 +46,32 @@ public class UserAccountService {
                 new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON), new Verification(phoneNumber));
     }
 
+    public Response changePasswordForUserUpdatedDatabase(String sessionToken, String newPassword) {
+        return sendSimpleRequest(PATCH, CHANGE_PASSWORD, new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON),
+                new PasswordChangeRequest(sessionToken, newPassword));
+    }
+
+    public Response changePasswordForUserUpdatedDatabaseInvalidURL(String sessionToken, String newPassword) {
+        return sendSimpleRequest(PATCH, INVALID_CHANGE_PASSWORD, new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON),
+                new PasswordChangeRequest(sessionToken, newPassword));
+    }
+
+    public Response checkPasswordChangesInvalidMethod(String invalidHttpMethod, String sessionToken, String customerId) {
+        return sendSimpleRequest(Method.valueOf(invalidHttpMethod), CHANGE_PASSWORD, new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON),
+                new PasswordChangeRequest(sessionToken, customerId));
+    }
+
+    public Response changePasswordForUserUpdatedDatabaseWithoutToken(String newPassword) {
+        return sendSimpleRequest(PATCH, CHANGE_PASSWORD, new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON),
+                new OnlyPasswordChangeRequest(newPassword));
+    }
+
+    public Response changePasswordForUserUpdatedDatabaseWithoutNewPassword(String sessionToken) {
+        return sendSimpleRequest(PATCH, CHANGE_PASSWORD, new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON),
+                new OnlySessionTokenChangeRequest(sessionToken));
+    }
+
+    public Response changePasswordForUserUpdatedDatabaseWithoutBody() {
+        return sendRequestWithoutParams(PATCH, CHANGE_PASSWORD);
+    }
 }
