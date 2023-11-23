@@ -8,6 +8,8 @@ public final class ApiEndpoints {
     public static final String REGISTRATION = "registration";
     public static final String VERIFICATION_CODE = "security/session";
     public static final String VERIFICATION = "security/session/verification";
+    public static final String CHANGE_PASSWORD = "/security/password";
+    public static final String INVALID_CHANGE_PASSWORD = "/security/pass";
     public static final String SMS_NOTIFICATION = "user/settings/notifications/sms";
     public static final String EMAIL_NOTIFICATION = "user/settings/notifications/email";
     public static final String INVALID_SMS_NOTIFICATION = "/user/settings/notif/sms";
@@ -23,4 +25,4 @@ public final class ApiEndpoints {
     public static final String BANK_EXCHANGE_RATES = "exchange_rates";
     public static final String INVALID_BANK_EXCHANGE_RATES = "exchange_ratesss";
     public static final String NOTIFICATION_SETTINGS = "/auth/user/settings/notifications";
-};
+}
