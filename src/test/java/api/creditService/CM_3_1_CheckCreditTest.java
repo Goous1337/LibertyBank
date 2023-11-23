@@ -9,6 +9,4 @@ public class CM_3_1_CheckCreditTest {
     {
         RestAssured.baseURI = CREDIT_SERVICE;
     }
-
-
 }
