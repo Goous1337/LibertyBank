@@ -170,9 +170,13 @@ public class CustomerService {
         return sendSimpleRequest(PATCH, PUSH_NOTIFICATION, params);
     }
 
-    public Response checkPushNotificationWIthHttpMethod(String customerId, String httpMethod) {
+    public Response checkPushNotificationWithHttpMethod(String customerId, String httpMethod) {
         List<RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId));
         return sendSimpleRequest(Method.valueOf(httpMethod), PUSH_NOTIFICATION, params);
+    }
+    public Response checkPushNotificationInvalidUrl (String customerId) {
+        List<RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId));
+        return sendSimpleRequest(PATCH, INVALID_NOTIFICATION, params);
     }
     public Response checkSendingNotificationSettings(String customerId) {
         return sendSimpleRequest(GET, NOTIFICATION_SETTINGS, new RequestParam(PARAMETER, PARAMETER_CUSTOMERID, customerId));
@@ -181,7 +185,7 @@ public class CustomerService {
     public Response checkSendingNotificationSettingsInvalidMethod(String invalidHttpMethod, String customerId) {
         return sendSimpleRequest(Method.valueOf(invalidHttpMethod), NOTIFICATION_SETTINGS, new RequestParam(PARAMETER,
                 PARAMETER_CUSTOMER_ID, customerId));
-
+    }
     public Response checkGettingUserInformation(String customerId) {
         return sendSimpleRequest(GET, RETRIEVING_USER_DATA, new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId));
     }

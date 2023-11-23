@@ -103,13 +103,9 @@ public class CRS_2_CheckRegistrationByPassportTest extends BaseTest {
     @Description("Тест на проверку регистрации, если пользователь уже зарегистрирован в СДБО")
     @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-280")
-    //@ParameterizedTest(name = "Серия:{0}, Номер паспорта: {1}")
     @Test
-    @CsvSource({
-            "4954, 262577"
-    })
 
-    public void checkRegistrationByPassportAlreadyRegisteredUser(/*String passportSeries, String passportNumber*/) {
+    public void checkRegistrationByPassportAlreadyRegisteredUser() {
         HashMap<String,String> passport = getPassportWithCustomerStatus(2);
         String passportSeries = passport.get("series");
         String passportNumber = passport.get("number");
@@ -171,7 +167,7 @@ public class CRS_2_CheckRegistrationByPassportTest extends BaseTest {
     @DisplayName("Валидация номера паспорта")
     @Description("В данном кейсе производится проверка валидации номера паспорта.")
     @Tag("API")
-    @TmsLink("https://jira.astondevs.ru/browse/LIB-306")
+    @TmsLink("https://jira.astondevs.ru/browse/LIB-1355")
     @ParameterizedTest(name = "Серия: {0}, номер паспорта: {1}")
     @CsvSource({
             "1515, 45745",
