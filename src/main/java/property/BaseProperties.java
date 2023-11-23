@@ -9,4 +9,7 @@ public final class BaseProperties {
     public static String CUSTOMER_SERVICE = getPropertyValue("customer_service");
     public static String INFO_SERVICE = getPropertyValue("info_service");
 
+    public static String CREDIT_SERVICE = getPropertyValue("credit_service");
+    public static String DEPOSIT_SERVICE = getPropertyValue("deposit_service");
+
 }
