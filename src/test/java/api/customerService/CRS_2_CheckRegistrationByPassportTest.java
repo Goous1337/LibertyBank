@@ -126,7 +126,7 @@ public class CRS_2_CheckRegistrationByPassportTest extends BaseTest {
     @Description("В данном кейсе производится проверка регистрации, при вводе валидного номера документа клиента " +
             "банка, пользователь заблокирован в СДБО")
     @Tag("API")
-    @TmsLink("https://jira.astondevs.ru/browse/LIB-1355")
+    @TmsLink("https://jira.astondevs.ru/browse/LIB-286")
     @ParameterizedTest(name = "Серия: {0}, Номер паспорта: {1}")
     @CsvSource({
             "1244, 125155",
