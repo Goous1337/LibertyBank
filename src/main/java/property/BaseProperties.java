@@ -11,4 +11,6 @@ public final class BaseProperties {
     public static String CREDIT_SERVICE = getPropertyValue("credit_service");
     public static String DEPOSIT_SERVICE = getPropertyValue("deposit_service");
 
+    public static String ACCESS_TOKEN_CUSTOMER_SERVICE = getPropertyValue("access_token_credit_service");
+
 }
