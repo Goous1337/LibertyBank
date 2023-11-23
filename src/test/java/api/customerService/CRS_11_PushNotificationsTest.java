@@ -75,7 +75,7 @@ public class CRS_11_PushNotificationsTest extends BaseTest {
     })
     public void unsuccessfulPushNotificationWrongHttpMethod(String httpMethod) {
         String customerId = getCustomerIdWithCustomerStatus(true);
-        Response response = customerService.checkPushNotificationWithHttpMethod(customerId,httpMethod);
+        Response response = customerService.checkPushNotificationWIthHttpMethod(customerId,httpMethod);
         assertAll(
                 () -> assertEquals(HttpStatus.SC_METHOD_NOT_ALLOWED,
                         response.statusCode(),
@@ -100,7 +100,4 @@ public class CRS_11_PushNotificationsTest extends BaseTest {
                         "Сообщение об ошибке не соответствует ожидаемому")
         );
     }
-
-
-
 }
