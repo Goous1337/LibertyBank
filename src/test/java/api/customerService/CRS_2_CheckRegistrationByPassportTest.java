@@ -172,7 +172,7 @@ public class CRS_2_CheckRegistrationByPassportTest extends BaseTest {
     @Description("В данном кейсе производится проверка валидации номера паспорта.")
     @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-306")
-    @ParameterizedTest(name = "Метод: {0}, номер паспорта: {1}")
+    @ParameterizedTest(name = "Серия: {0}, номер паспорта: {1}")
     @CsvSource({
             "1515, 45745",
             "1515, 4574578",
