@@ -162,18 +162,7 @@ public class CustomerService {
                 new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON), new RequestParam(BODY, EMPTY, body));
         return sendSimpleRequest(PATCH, EMAIL_NOTIFICATION, params);
     }
-    public Response checkPushNotification(String customerId, String notificationStatus) {
-        String body = createBody(Map.of(PARAMETER_NOTIFICATION_STATUS,notificationStatus));
-        List<RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId)
-                , new RequestParam(BODY, EMPTY, body),
-                new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
-        return sendSimpleRequest(PATCH, PUSH_NOTIFICATION, params);
-    }
 
-    public Response checkPushNotificationWIthHttpMethod(String customerId, String httpMethod) {
-        List<RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId));
-        return sendSimpleRequest(Method.valueOf(httpMethod), PUSH_NOTIFICATION, params);
-    }
     public Response checkSendingNotificationSettings(String customerId) {
         return sendSimpleRequest(GET, NOTIFICATION_SETTINGS, new RequestParam(PARAMETER, PARAMETER_CUSTOMERID, customerId));
     }
@@ -182,12 +171,5 @@ public class CustomerService {
         return sendSimpleRequest(Method.valueOf(invalidHttpMethod), NOTIFICATION_SETTINGS, new RequestParam(PARAMETER,
                 PARAMETER_CUSTOMER_ID, customerId));
 
-    public Response checkGettingUserInformation(String customerId) {
-        return sendSimpleRequest(GET, RETRIEVING_USER_DATA, new RequestParam(PARAMETER, PARAMETER_CUSTOMER_ID, customerId));
-    }
-
-    public Response checkGettingUserInformationInvalidMethod(String invalidHttpMethod, String customerId) {
-        return sendSimpleRequest(Method.valueOf(invalidHttpMethod), RETRIEVING_USER_DATA, new RequestParam(PARAMETER,
-                PARAMETER_CUSTOMER_ID, customerId));
     }
 }
