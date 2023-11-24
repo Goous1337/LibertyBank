@@ -9,9 +9,13 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.HashMap;
+
+import static dataProviders.DataUtils.getPassportWithCustomerStatus;
 import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -65,13 +69,13 @@ public class CRS_2_CheckRegistrationByPassportTest extends BaseTest {
             "'151 ', 457457"
     })
 
-    public void checkRegistrationByPassportInvalidPassport(String passportSeries,String passportNumber) {
+    public void checkRegistrationByPassportInvalidSeries(String passportSeries,String passportNumber) {
         Response response = customerService.checkRegistrationByPassport(passportSeries, passportNumber);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals("Пользователь не зарегистрирован в Приложении и не является Клиентом Банка",
-                        response.body().jsonPath().get("message"), "Сообщение об ошибке не соответствует ожидаемому")
+                () -> assertEquals("400 BAD_REQUEST",
+                        response.body().jsonPath().get("type"), "Сообщение об ошибке не соответствует ожидаемому")
         );
     }
 
@@ -95,34 +99,16 @@ public class CRS_2_CheckRegistrationByPassportTest extends BaseTest {
                         response.body().jsonPath().get("type"), "Сообщение об ошибке не соответствует ожидаемому")
         );
     }
-    /* [НА УДАЛЕНИЕ]
-
-    @DisplayName("Проверка регистрации при вводе номера документа, содержащий строчные латинские буквы")
-    @Description("В данном кейсе проверяем получение номера телефона, при вводе  номера документа ,удостоверяющего" +
-            " личность пользователя,  когда пользователь - клиент  банка.")
-    @Tag("API")
-    @TmsLink("https://jira.astondevs.ru/browse/LIB-276")
-    @Issue("https://jira.astondevs.ru/browse/LIB-1198")
-    @Test
-
-    public void checkRegistrationByPassportLowercaseLatinLetters() {
-        String passportNumber = "bm8765432";
-
-        assertEquals(SC_OK,
-                customerService.checkRegistrationByPassport(passportNumber).statusCode(),
-                "Код ответа не соответствует ожидаемому");
-    }
-*/
     @DisplayName("Проверка регистрации, если пользователь уже зарегистрирован в СДБО")
     @Description("Тест на проверку регистрации, если пользователь уже зарегистрирован в СДБО")
     @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-280")
-    @ParameterizedTest(name = "Серия:{0}, Номер паспорта: {1}")
-    @CsvSource({
-            "4954, 262577"
-    })
+    @Test
 
-    public void checkRegistrationByPassportAlreadyRegisteredUser(String passportSeries, String passportNumber) {
+    public void checkRegistrationByPassportAlreadyRegisteredUser() {
+        HashMap<String,String> passport = getPassportWithCustomerStatus(2);
+        String passportSeries = passport.get("series");
+        String passportNumber = passport.get("number");
         Response response = customerService.checkRegistrationByPassport(passportSeries,passportNumber);
         assertAll(
                 () -> assertEquals(SC_CONFLICT, response.statusCode(),
@@ -176,5 +162,32 @@ public class CRS_2_CheckRegistrationByPassportTest extends BaseTest {
                         "Сообщение об ошибке не соответствует ожидаемому")
         );
     }
+
+
+    @DisplayName("Валидация номера паспорта")
+    @Description("В данном кейсе производится проверка валидации номера паспорта.")
+    @Tag("API")
+    @TmsLink("https://jira.astondevs.ru/browse/LIB-1355")
+    @ParameterizedTest(name = "Серия: {0}, номер паспорта: {1}")
+    @CsvSource({
+            "1515, 45745",
+            "1515, 4574578",
+            "1515, 457457ъ",
+            "1515, 457457q",
+            "1515, @457457",
+            "1515, ' 457457'",
+            "1515, '457457 '"
+    })
+
+    public void checkRegistrationByPassportInvalidNumber(String passportSeries,String passportNumber) {
+        Response response = customerService.checkRegistrationByPassport(passportSeries, passportNumber);
+        assertAll(
+                () -> assertEquals(SC_BAD_REQUEST, response.statusCode(),
+                        "Код ответа не соответствует ожидаемому"),
+                () -> assertEquals("400 BAD_REQUEST",
+                        response.body().jsonPath().get("type"), "Сообщение об ошибке не соответствует ожидаемому")
+        );
+    }
+
 
 }
