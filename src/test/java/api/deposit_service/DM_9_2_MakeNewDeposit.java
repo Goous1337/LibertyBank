@@ -150,4 +150,26 @@ public class DM_9_2_MakeNewDeposit extends BaseTest {
                 () -> assertEquals(ERROR_TITLE, depositInvalidData.getTitle()),
                 () -> assertEquals(ERROR_STATUS, depositInvalidData.getStatus()));
     }
+
+    @DisplayName("Проверка валидации обязательного поля 'срок депозита'")
+    @Description("Данный тест-кейс направлен на проверку DM 9.2 по US 9.2 на оформление нового депозита" +
+            " авторизованным пользователем при введении валидных и невалидных значений в обязательное поле" +
+            " 'срок депозита'. Заявка с невалидными значениями не должна заноситься в БД.")
+    @Tag("API")
+    @TmsLink("https://jira.astondevs.ru/browse/LIB3-815")
+    @Test
+    public void checkValidationDepositPeriod() {
+        Specifications.installSpecification
+                (Specifications.requestSpec(DEPOSIT_SERVICE), Specifications.responseSpec(STATUS_400));
+        DepositData depositData = new DepositData
+                (1, 19000.0000, "двадцать 20", false);
+        DepositDataInvalidRequest depositDataInvalidRequest
+                = given().log().all()
+                .header("Authorization", ACCESS_TOKEN_CUSTOMER_SERVICE)
+                .body(depositData).when().post(DEPOSIT_SETTINGS)
+                .then().log().all()
+                .extract().as(DepositDataInvalidRequest.class);
+
+        Assertions.assertNotNull(depositDataInvalidRequest.getErrorMessage());
+    }
 }
