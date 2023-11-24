@@ -25,4 +25,7 @@ public final class ApiEndpoints {
     public static final String BANK_EXCHANGE_RATES = "exchange_rates";
     public static final String INVALID_BANK_EXCHANGE_RATES = "exchange_ratesss";
     public static final String NOTIFICATION_SETTINGS = "/auth/user/settings/notifications";
+
+    public static final String DEPOSIT_PRODUCTS = "/deposits/api/v1/deposit-product";
+    public static final String INVALID_DEPOSIT_PRODUCTS = "/deposits/api/v0/deposit-product";
 }
