@@ -18,6 +18,7 @@ public class BaseTest {
     protected CustomerService customerService;
     protected UserAccountService userAccountService;
 
+
     protected InfoService infoService;
 
     public BaseTest() {
@@ -25,5 +26,6 @@ public class BaseTest {
         customerService = new CustomerService();
         userAccountService = new UserAccountService();
         infoService = new InfoService();
+
     }
 }
