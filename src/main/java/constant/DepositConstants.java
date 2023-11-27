@@ -3,6 +3,8 @@ package constant;
 public class DepositConstants {
     public static final Integer STATUS_200 = 200;
     public static final Integer STATUS_400 = 400;
+    public static final Integer STATUS_404 = 404;
+    public static final Integer STATUS_500 = 500;
     public static final Integer STATUS_401 = 401;
     public static final String ERROR_REQUEST = "Wrong validation: must not be null";
     public static final String ERROR_TITLE = "Bad Request";
