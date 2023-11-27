@@ -16,7 +16,7 @@ import static property.BaseProperties.ACCESS_TOKEN_CUSTOMER_SERVICE;
 import static property.BaseProperties.DEPOSIT_SERVICE;
 
 @DisplayName("DM-9.2 Оформление нового депозита")
-public class DM_9_2_MakeNewDeposit extends BaseTest {
+public class DM_9_2_MakeNewDepositTest extends BaseTest {
     @DisplayName("Оформление нового депозита")
     @Description("Данный тест-кейс направлен на проверку DM 9.2 по US 9.2 на оформление нового депозита" +
             " авторизованным пользователем.")
@@ -95,7 +95,7 @@ public class DM_9_2_MakeNewDeposit extends BaseTest {
 
     @DisplayName("Проверка валидации обязательного поля 'сумма депозита' ")
     @Description("Данный тест-кейс направлен на проверку DM 9.2 по US 9.2 на оформление нового депозита" +
-            "авторизованным пользователем при введении валидных и невалидных значений в обязательное поле" + "" +
+            "авторизованным пользователем при введении валидных и невалидных значений в обязательное поле" +
             "'сумма депозита'. Заявка с невалидными значениями не должна заноситься в БД.")
     @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-814")
