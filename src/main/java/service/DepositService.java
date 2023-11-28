@@ -29,4 +29,14 @@ public class DepositService {
         return sendSimpleRequest(GET, DEPOSIT_PRODUCTS,
                 new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
     }
+
+    public Response checkListCurrentDepositProductsUsers() {
+        return sendSimpleRequest(GET, DEPOSIT_PRODUCTS_USER,
+                new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
+    }
+
+    public Response checkListCurrentDepositProductUserEmptyToken() {
+        return sendSimpleRequest(GET, DEPOSIT_PRODUCTS_USER,
+                new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
+    }
 }

@@ -29,5 +29,6 @@ public final class ApiEndpoints {
     public static final String NOTIFICATION_SETTINGS = "/auth/user/settings/notifications";
 
     public static final String DEPOSIT_PRODUCTS = "/deposits/api/v1/deposit-product";
+    public static final String DEPOSIT_PRODUCTS_USER = "/deposits/api/v1/deposit";
     public static final String INVALID_DEPOSIT_PRODUCTS = "/deposits/api/v0/deposit-product";
 }

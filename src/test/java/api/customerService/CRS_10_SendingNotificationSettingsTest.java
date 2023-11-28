@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.CUSTOMER_SERVICE;
 
 @DisplayName("CRS-10 Отправка настроек уведомлений")
-public class CRS_10_SendingNotificationSettings extends BaseTest {
+public class CRS_10_SendingNotificationSettingsTest extends BaseTest {
 
     {
         RestAssured.baseURI = CUSTOMER_SERVICE;
