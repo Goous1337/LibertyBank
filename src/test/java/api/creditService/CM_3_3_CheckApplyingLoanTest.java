@@ -96,13 +96,14 @@ public class CM_3_3_CheckApplyingLoanTest extends BaseTest {
                 .extract().as(InvalidDataResponse.class);
         Assertions.assertNotNull(invalidDataResponse.getErrorMessage());
     }
+
     @DisplayName("Оформление заявки на кредит в случае, если в результирующей таблице нет записей по указанным критериям")
-    @Description("Данный тест-кейс направлен на проверку CM 3.3 по US 3.3 на оформление заявки на кредит"+"" +
+    @Description("Данный тест-кейс направлен на проверку CM 3.3 по US 3.3 на оформление заявки на кредит" +
             " авторизованным пользователем в случае, если в результирующей таблице нет записей по указанным критериям.")
     @Tags({@Tag("API"), @Tag("Negative")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-614")
     @Test
-    public void checkNoRecordsMatchingCriteria(){
+    public void checkNoRecordsMatchingCriteria() {
         CreateApplyingLoanRequest applyingRequest = new CreateApplyingLoanRequest
                 (0, 2500000, 20, "RUB", "2023-09-04",
                         60000, 30000, "869834521222");
@@ -119,13 +120,14 @@ public class CM_3_3_CheckApplyingLoanTest extends BaseTest {
                 .extract().as(InvalidDataResponse.class);
         Assertions.assertNotNull(invalidDataResponse.getErrorMessage());
     }
+
     @DisplayName("Оформление заявки на кредит в случае некорректной конфигурации запроса")
-    @Description("Данный тест-кейс направлен на проверку CM 3.3 по US 3.3 на оформление заявки"+
+    @Description("Данный тест-кейс направлен на проверку CM 3.3 по US 3.3 на оформление заявки" +
             " на кредит авторизованным пользователем в случае некорректной конфигурации запроса.")
     @Tags({@Tag("API"), @Tag("Negative")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-612")
     @Test
-    public void checkApplyingLoanIncorrectRequestConfig(){
+    public void checkApplyingLoanIncorrectRequestConfig() {
         CreateApplyingLoanRequest applyingRequest = new CreateApplyingLoanRequest
                 (null, 2500000, 20, "RUB", "2023-09-04",
                         60000, 30000, "869834521222");
