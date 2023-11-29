@@ -8,7 +8,6 @@ import lombok.Data;
 public class DepositDataResponse {
     private Integer depositProductId;
     private Double initialAmount;
-    private String currencyCode;
     private String periodMonths;
     private Boolean autoRenewal;
 

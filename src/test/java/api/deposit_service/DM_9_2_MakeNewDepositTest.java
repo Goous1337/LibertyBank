@@ -3,6 +3,7 @@ package api.deposit_service;
 import api.BaseTest;
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
+import io.restassured.RestAssured;
 import model.response.Specifications;
 import org.junit.jupiter.api.*;
 import pojo.depositService.*;

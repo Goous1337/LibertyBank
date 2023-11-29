@@ -3,21 +3,32 @@ package api.creditService;
 import api.BaseTest;
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
 import model.response.Specifications;
 import org.junit.jupiter.api.*;
 import pojo.creditService.CreateApplyingLoanRequest;
 import pojo.creditService.CreateApplyingLoanResponse;
 import pojo.creditService.InvalidDataResponse;
 
+import java.util.List;
+import java.util.Map;
+
 import static constant.ApiEndpoints.CREDIT_BODY;
+import static constant.CreditServiceConstants.*;
 import static constant.DepositConstants.*;
 import static io.restassured.RestAssured.given;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.apache.hc.core5.http.HttpStatus.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.ACCESS_TOKEN_CUSTOMER_SERVICE;
 import static property.BaseProperties.CREDIT_SERVICE;
 
 @DisplayName("СМ 3.3 Оформление заявки на кредит")
 public class CM_3_3_CheckApplyingLoanTest extends BaseTest {
+    {
+        RestAssured.baseURI = CREDIT_SERVICE;
+    }
+
     @DisplayName("Оформление заявки на кредит")
     @Description("Данный тест-кейс направлен на проверку CM 3.3 по US 3.3 на оформление" +
             " заявки на кредит авторизованным пользователем.")
@@ -25,28 +36,19 @@ public class CM_3_3_CheckApplyingLoanTest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-606")
     @Test
     public void checkApplyingLoan() {
-        int productId = 3;
-        int amount = 2500000;
-        int periodMonths = 20;
-        CreateApplyingLoanRequest applyingRequest = new CreateApplyingLoanRequest
-                (3, 2500000, 20, "RUB", "2023-09-04",
-                        60000, 30000, "8698345212");
-        Specifications.installSpecification
-                (Specifications.requestSpec(CREDIT_SERVICE), Specifications.responseSpec(STATUS_200));
-        CreateApplyingLoanResponse applyingResponse = given()
-                .log().all()
-                .header("Authorization", ACCESS_TOKEN_CUSTOMER_SERVICE)
-                .body(applyingRequest)
-                .when()
-                .post(CREDIT_BODY)
-                .then()
-                .log().all()
-                .extract()
-                .as(CreateApplyingLoanResponse.class);
-        Assertions.assertAll(
-                () -> assertEquals(productId, applyingResponse.getProductId()),
-                () -> assertEquals(amount, applyingResponse.getAmount()),
-                () -> assertEquals(periodMonths, applyingResponse.getPeriodMonths()));
+        Response response = creditService.checkListApplyingLoan
+                (3, 2500000, 20, "RUB", "2023-11-28"
+                        , 60000, 30000, "8698345212");
+
+        assertAll(
+                () -> assertEquals(SC_OK,
+                        response.getStatusCode(),
+                        "Код ответа не соответствует ожидаемому"),
+
+                () -> assertEquals(PRODUCT_ID, (Integer) response.jsonPath().get("productId")),
+                () -> assertEquals(AMOUNT, (Integer) response.jsonPath().get("amount")),
+                () -> assertEquals(PERIOD_MONTH, (Integer) response.jsonPath().get("periodMonths"))
+        );
     }
 
     @DisplayName("Оформление заявки на кредит с невалидным токеном")
@@ -56,45 +58,13 @@ public class CM_3_3_CheckApplyingLoanTest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-611")
     @Test
     public void checkApplyingLoanInvalidToken() {
-        CreateApplyingLoanRequest applyingRequest = new CreateApplyingLoanRequest
-                (3, 2500000, 20, "RUB", "2023-09-04",
+        Response response = creditService.checkListApplyingLoanInvalidToken
+                (3, 2500000, 20, "RUB", "2023-11-28",
                         60000, 30000, "8698345212");
-        Specifications.installSpecification
-                (Specifications.requestSpec(CREDIT_SERVICE), Specifications.responseSpec(STATUS_401));
-        InvalidDataResponse invalidDataResponse = given()
-                .log().all()
-                .header("Authorization", INVALID_ACCESS_TOKEN)
-                .body(applyingRequest)
-                .when()
-                .post(CREDIT_BODY)
-                .then().
-                log().all()
-                .extract().as(InvalidDataResponse.class);
-        Assertions.assertNotNull(invalidDataResponse.getErrorMessage());
-    }
-
-    @DisplayName("Оформление заявки на кредит в случае ошибки сервера")
-    @Description("Данный тест-кейс направлен на проверку CM 3.3 по US 3.3 в случае ошибки сервера" +
-            " при попытке оформления заявки на кредит авторизованным пользователем.")
-    @Tags({@Tag("API"), @Tag("Negative")})
-    @TmsLink("https://jira.astondevs.ru/browse/LIB3-610")
-    @Test
-    public void checkServerError() {
-        CreateApplyingLoanRequest applyingRequest = new CreateApplyingLoanRequest
-                (3, 2500000, 20, "RUB", "2023-09-04",
-                        60000, 30000, "869834521222");
-        Specifications.installSpecification
-                (Specifications.requestSpec(CREDIT_SERVICE), Specifications.responseSpec(STATUS_500));
-        InvalidDataResponse invalidDataResponse = given()
-                .log().all()
-                .header("Authorization", ACCESS_TOKEN_CUSTOMER_SERVICE)
-                .body(applyingRequest)
-                .when()
-                .post(CREDIT_BODY)
-                .then().
-                log().all()
-                .extract().as(InvalidDataResponse.class);
-        Assertions.assertNotNull(invalidDataResponse.getErrorMessage());
+        Assertions.assertAll(
+                () -> assertEquals(SC_UNAUTHORIZED, response.getStatusCode()),
+                () -> assertNotNull(response.jsonPath().get("errorMessage"))
+        );
     }
 
     @DisplayName("Оформление заявки на кредит в случае, если в результирующей таблице нет записей по указанным критериям")
@@ -103,22 +73,14 @@ public class CM_3_3_CheckApplyingLoanTest extends BaseTest {
     @Tags({@Tag("API"), @Tag("Negative")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-614")
     @Test
-    public void checkNoRecordsMatchingCriteria() {
-        CreateApplyingLoanRequest applyingRequest = new CreateApplyingLoanRequest
-                (0, 2500000, 20, "RUB", "2023-09-04",
-                        60000, 30000, "869834521222");
-        Specifications.installSpecification
-                (Specifications.requestSpec(CREDIT_SERVICE), Specifications.responseSpec(STATUS_404));
-        InvalidDataResponse invalidDataResponse = given()
-                .log().all()
-                .header("Authorization", ACCESS_TOKEN_CUSTOMER_SERVICE)
-                .body(applyingRequest)
-                .when()
-                .post(CREDIT_BODY)
-                .then().
-                log().all()
-                .extract().as(InvalidDataResponse.class);
-        Assertions.assertNotNull(invalidDataResponse.getErrorMessage());
+    public void checkApplyingLoanServerNoRecordsMatchingCriteria() {
+        Response response = creditService.checkListApplyingLoan
+                (0, 2500000, 20, "RUB", "2023-11-28",
+                        60000, 30000, "8698345212");
+        Assertions.assertAll(
+                () -> assertEquals(SC_NOT_FOUND, response.getStatusCode()),
+                () -> assertNotNull(response.jsonPath().get("errorMessage"))
+        );
     }
 
     @DisplayName("Оформление заявки на кредит в случае некорректной конфигурации запроса")
@@ -127,21 +89,14 @@ public class CM_3_3_CheckApplyingLoanTest extends BaseTest {
     @Tags({@Tag("API"), @Tag("Negative")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-612")
     @Test
-    public void checkApplyingLoanIncorrectRequestConfig() {
-        CreateApplyingLoanRequest applyingRequest = new CreateApplyingLoanRequest
-                (null, 2500000, 20, "RUB", "2023-09-04",
-                        60000, 30000, "869834521222");
-        Specifications.installSpecification
-                (Specifications.requestSpec(CREDIT_SERVICE), Specifications.responseSpec(STATUS_400));
-        InvalidDataResponse invalidDataResponse = given()
-                .log().all()
-                .header("Authorization", ACCESS_TOKEN_CUSTOMER_SERVICE)
-                .body(applyingRequest)
-                .when()
-                .post(CREDIT_BODY)
-                .then().
-                log().all()
-                .extract().as(InvalidDataResponse.class);
-        Assertions.assertNotNull(invalidDataResponse.getErrorMessage());
+    public void checkApplyingLoanInvalidConfig() {
+        Response response = creditService.checkListApplyingLoan
+                (null, 2500000, 20, "RUB", "2023-11-28",
+                        60000, 30000, "8698345212");
+        Assertions.assertAll(
+                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode()),
+                () -> assertNotNull(response.jsonPath().get("errorMessage"))
+        );
     }
 }
+
