@@ -15,7 +15,7 @@ import static dataBase.DataBaseConnector.getDBConnection;
 import static dataProviders.DataUtils.getCustomerIdWithCustomerStatus;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.CUSTOMER_SERVICE;
-
+@DisplayName("CRS-11 Изменение PUSH-уведомлений")
 public class CRS_11_PushNotificationsTest extends BaseTest {
     {
         RestAssured.baseURI = CUSTOMER_SERVICE;
