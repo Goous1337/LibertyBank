@@ -19,6 +19,7 @@ public class BaseTest {
     protected InfoService infoService;
 
     protected DepositService depositService;
+    protected CreditService creditService;
 
     protected CreditService creditService;
 
