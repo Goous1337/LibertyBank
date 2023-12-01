@@ -8,6 +8,8 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
 import service.CreditService;
 
+import static constant.CreditService.*;
+import static javax.swing.Action.NAME;
 import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.CREDIT_SERVICE;
@@ -27,7 +29,14 @@ public class CM_3_3_1_DisplayingElectronicBackgroundForApplyingCredit extends Ba
         Response response = CreditService.checkGetRequestDisplayingElectronicBackground("3");
         assertAll(
                 () -> assertEquals(SC_OK, response.statusCode(),
-                        "Код ответа не соответствует ожидаемому")
+                        "Код ответа не соответствует ожидаемому"),
+                () -> assertEquals(ID,(String) response.jsonPath().get("id")),
+                () -> assertEquals(NAME_CREDIT,(String) response.jsonPath().get("name")),
+                () -> assertEquals(MIN_SUM,(Integer) response.jsonPath().get("minSum")),
+                () -> assertEquals(MAX_SUM,(Integer) response.jsonPath().get("maxSum")),
+                () -> assertEquals(CURRENCY_CODE,(String) response.jsonPath().get("currencyCode")),
+                () -> assertEquals(MIN_PERIOD_MONTHS,(Integer) response.jsonPath().get("minPeriodMonths")),
+                () -> assertEquals(MAX_PERIOD_MONTHS,(Integer) response.jsonPath().get("maxPeriodMonths"))
         );
     }
 
@@ -41,7 +50,8 @@ public class CM_3_3_1_DisplayingElectronicBackgroundForApplyingCredit extends Ba
         Response response = CreditService.checkGetRequestDisplayingElectronicBackgroundInvalidToken();
         assertAll(
                 () -> assertEquals(SC_UNAUTHORIZED, response.statusCode(),
-                        "Код ответа не соответствует ожидаемому")
+                        "Код ответа не соответствует ожидаемому"),
+                () -> assertEquals(ERROR_MESSAGE_UNAUTHORIZED_401,(String) response.jsonPath().get("errorMessage"))
         );
     }
 
@@ -54,7 +64,8 @@ public class CM_3_3_1_DisplayingElectronicBackgroundForApplyingCredit extends Ba
         Response response = CreditService.checkGetRequestDisplayingElectronicBackground("4");
         assertAll(
                 () -> assertEquals(SC_NOT_FOUND, response.statusCode(),
-                        "Код ответа не соответствует ожидаемому")
+                        "Код ответа не соответствует ожидаемому"),
+                () -> assertEquals(ERROR_MESSAGE_UNAUTHORIZED_404,(String) response.jsonPath().get("errorMessage"))
         );
     }
 }
