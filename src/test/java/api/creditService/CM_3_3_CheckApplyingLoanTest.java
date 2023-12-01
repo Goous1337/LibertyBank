@@ -8,7 +8,6 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
 
 import static constant.CreditServiceConstants.*;
-import static io.restassured.RestAssured.given;
 import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.CREDIT_SERVICE;

@@ -1,7 +1,6 @@
 package api.creditService;
 
 import api.BaseTest;
-import api.core.RequestParam;
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;

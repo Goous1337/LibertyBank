@@ -1,11 +1,9 @@
 package service;
 
 import api.core.RequestParam;
-import io.restassured.http.Method;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSender;
 import pojo.creditService.CreateApplyingLoanRequest;
-import pojo.creditService.InvalidDataResponse;
+
 
 import java.util.List;
 
@@ -48,6 +46,7 @@ public class CreditService {
         return sendSimpleRequest(GET, CREDIT_ORDER_STATUS,
                 new RequestParam(HEADER, AUTHORIZATION, INVALID_ACCESS_TOKEN));
     }
+
     public Response checkListNumberOfLoanApplicationsSubmittedNoRecordsInTheTable() {
         return sendSimpleRequest(GET, INVALID_CREDIT_ORDER_TABLE,
                 new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
