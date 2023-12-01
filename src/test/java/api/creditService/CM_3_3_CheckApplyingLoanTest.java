@@ -5,22 +5,11 @@ import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import model.response.Specifications;
 import org.junit.jupiter.api.*;
-import pojo.creditService.CreateApplyingLoanRequest;
-import pojo.creditService.CreateApplyingLoanResponse;
-import pojo.creditService.InvalidDataResponse;
 
-import java.util.List;
-import java.util.Map;
-
-import static constant.ApiEndpoints.CREDIT_BODY;
 import static constant.CreditServiceConstants.*;
-import static constant.DepositConstants.*;
-import static io.restassured.RestAssured.given;
 import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
-import static property.BaseProperties.ACCESS_TOKEN_CUSTOMER_SERVICE;
 import static property.BaseProperties.CREDIT_SERVICE;
 
 @DisplayName("СМ 3.3 Оформление заявки на кредит")

@@ -5,17 +5,11 @@ import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import model.response.Specifications;
 import org.junit.jupiter.api.*;
-import pojo.depositService.*;
 
-import static constant.ApiEndpoints.DEPOSIT_SETTINGS;
-import static constant.CreditServiceConstants.*;
 import static constant.DepositConstants.*;
-import static io.restassured.RestAssured.given;
 import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
-import static property.BaseProperties.ACCESS_TOKEN_CUSTOMER_SERVICE;
 import static property.BaseProperties.DEPOSIT_SERVICE;
 
 @DisplayName("DM-9.2 Оформление нового депозита")
