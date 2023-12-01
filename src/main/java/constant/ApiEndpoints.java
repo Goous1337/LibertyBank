@@ -31,6 +31,9 @@ public final class ApiEndpoints {
     public static final String DEPOSIT_PRODUCTS = "/deposits/api/v1/deposit-product";
     public static final String DEPOSIT_PRODUCTS_USER = "/deposits/api/v1/deposit";
     public static final String INVALID_DEPOSIT_PRODUCTS = "/deposits/api/v0/deposit-product";
+
+    public static final String CREDIT_PRODUCTS = "/credits/api/v1/credit-product";
+    public static final String INVALID_CREDIT_PRODUCTS = "/credits/api/v1/credit-product/.";
     public static final String DEPOSIT_SETTINGS = "deposits/api/v1/deposit/new";
     public static final String CREDIT_BODY = "credits/api/v1/credit-order/new";
     public static final String CREDIT_ORDER_STATUS = "credits/api/v1/credit-order/status";

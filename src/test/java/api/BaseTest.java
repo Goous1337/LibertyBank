@@ -21,6 +21,8 @@ public class BaseTest {
     protected DepositService depositService;
     protected CreditService creditService;
 
+    protected CreditService creditService;
+
     public BaseTest() {
         params = new ArrayList<>();
         customerService = new CustomerService();
