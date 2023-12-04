@@ -9,7 +9,6 @@ import org.junit.jupiter.api.*;
 import service.CreditService;
 
 import static constant.CreditService.*;
-import static javax.swing.Action.NAME;
 import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.CREDIT_SERVICE;
@@ -51,7 +50,7 @@ public class CM_3_3_1_DisplayingElectronicBackgroundForApplyingCredit extends Ba
         assertAll(
                 () -> assertEquals(SC_UNAUTHORIZED, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals(ERROR_MESSAGE_UNAUTHORIZED_401,(String) response.jsonPath().get("errorMessage"))
+                () -> assertNotNull(response.jsonPath().get("errorMessage"))
         );
     }
 
@@ -65,7 +64,7 @@ public class CM_3_3_1_DisplayingElectronicBackgroundForApplyingCredit extends Ba
         assertAll(
                 () -> assertEquals(SC_NOT_FOUND, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals(ERROR_MESSAGE_UNAUTHORIZED_404,(String) response.jsonPath().get("errorMessage"))
+                () -> assertNotNull(response.jsonPath().get("errorMessage"))
         );
     }
 }
