@@ -3,6 +3,7 @@ package api.core;
 import java.util.Collections;
 import java.util.List;
 
+import io.restassured.http.ContentType;
 import org.json.JSONObject;
 
 import io.restassured.RestAssured;
@@ -122,7 +123,9 @@ public class ApiClient {
     }
 
     private static RequestSpecification getRequestSpecification() {
-        return given().relaxedHTTPSValidation()
+        return given()
+                .contentType(ContentType.JSON)
+                .relaxedHTTPSValidation()
                 .config(RestAssured.config().httpClient(httpClientConfig()
                         .setParam(CONNECTION_TIMEOUT, 5000)
                         .setParam(SO_TIMEOUT, 5000)));
