@@ -17,6 +17,9 @@ public final class ApiEndpoints {
     public static final String INVALID_SMS_NOTIFICATION = "user/settings/notif/sms";
     public static final String INVALID_EMAIL_NOTIFICATION = "user/settings/notif/email";
     public static final String CHANGE_EMAIL = "auth/user/settings/email";
+    public static final String QUESTION_ANSWER = "/registration/user-profile/{customerId}/question";
+    public static final String INVALID_QUESTION_ANSWER = "/registration/user/{customerId}/question";
+    public static final String RETRIEVING_USER_DATA = "/auth/information";
     public static final String QUESTION_ANSWER = "registration/user-profile/{customerId}/question";
     public static final String INVALID_QUESTION_ANSWER = "registration/user/{customerId}/question";
 
@@ -31,6 +34,13 @@ public final class ApiEndpoints {
     public static final String DEPOSIT_PRODUCTS = "deposits/api/v1/deposit-product";
     public static final String DEPOSIT_PRODUCTS_USER = "deposits/api/v1/deposit";
     public static final String INVALID_DEPOSIT_PRODUCTS = "deposits/api/v0/deposit-product";
+    public static final String DEPOSIT_PRODUCTS = "/deposits/api/v1/deposit-product";
+    public static final String DEPOSIT_PRODUCTS_USER = "/deposits/api/v1/deposit";
+    public static final String INVALID_DEPOSIT_PRODUCTS = "/deposits/api/v0/deposit-product";
+    public static final String CREDIT_BACKGROUND = "credits/api/v1/credit-product/form";
+
+    public static final String CREDIT_PRODUCTS = "/credits/api/v1/credit-product";
+    public static final String INVALID_CREDIT_PRODUCTS = "/credits/api/v1/credit-product/.";
     public static final String DEPOSIT_SETTINGS = "deposits/api/v1/deposit/new";
     public static final String CREDIT_BODY = "credits/api/v1/credit-order/new";
     public static final String CREDIT_ORDER_STATUS = "credits/api/v1/credit-order/status";
