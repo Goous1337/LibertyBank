@@ -5,10 +5,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Tags;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static constant.CreditServiceConstants.STATUS_WITHDRAWN;
 import static org.apache.hc.core5.http.HttpStatus.*;
@@ -74,6 +71,20 @@ public class CM_3_7_CheckWithdrawalOfLoanApplication extends BaseTest {
     @Test
     public void checkWithdrawalOfLoanApplicationOnAnAlreadyWithdrawnApplication() {
         Response response = creditService.checkListWithdrawalOfLoanApplication(1);
+        assertAll(
+                () -> assertEquals(SC_CONFLICT, response.getStatusCode()),
+                () -> assertNotNull(response.jsonPath().get("errorMessage"))
+        );
+    }
+
+    @Disabled("Bug https://jira.astondevs.ru/browse/LIB-1882")
+    @DisplayName("Отзыв кредитной заявки по одобренной заявке")
+    @Description("Данный тест-кейс направлен на отзыв кредитной заявки по одобренной заявке")
+    @Tags({@Tag("Negative"), @Tag("API")})
+    @TmsLink("https://jira.astondevs.ru/browse/LIB3-772")
+    @Test
+    public void checkWithdrawalOfLoanApplicationOnAnAlreadyApprovedApplication() {
+        Response response = creditService.checkListWithdrawalOfLoanApplication(9);
         assertAll(
                 () -> assertEquals(SC_CONFLICT, response.getStatusCode()),
                 () -> assertNotNull(response.jsonPath().get("errorMessage"))
