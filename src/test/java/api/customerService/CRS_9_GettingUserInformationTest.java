@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CUSTOMER_SERVICE;
 
 @DisplayName("CRS-9 Получение информации о пользователе")
-public class CRS_9_GettingUserInformation extends BaseTest {
+public class CRS_9_GettingUserInformationTest extends BaseTest {
 
     {
         RestAssured.baseURI = CUSTOMER_SERVICE;

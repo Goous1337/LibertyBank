@@ -16,5 +16,4 @@ public class CustomerServiceDataBaseRequest {
         LOG.info(String.format("По id пользователя %s получен email %s", customerId, email));
         return email;
     }
-
 }

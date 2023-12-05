@@ -5,10 +5,7 @@ import java.util.List;
 
 import api.core.RequestParam;
 import lombok.Data;
-import service.CreditService;
-import service.CustomerService;
-import service.InfoService;
-import service.UserAccountService;
+import service.*;
 
 /**
  * Базовый тестовый класс
@@ -20,6 +17,8 @@ public class BaseTest {
     protected UserAccountService userAccountService;
 
     protected InfoService infoService;
+
+    protected DepositService depositService;
     protected CreditService creditService;
 
     public BaseTest() {
@@ -27,5 +26,7 @@ public class BaseTest {
         customerService = new CustomerService();
         userAccountService = new UserAccountService();
         infoService = new InfoService();
+        depositService = new DepositService();
+        creditService = new CreditService();
     }
 }
