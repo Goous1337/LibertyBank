@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string"
+      },
+      "name": {
+        "type": "string"
+      },
+      "currencyCode": {
+        "type": "string"
+      },
+      "terminationDate": {
+        "type": "string"
+      },
+      "principalDebt": {
+        "type": "number"
+      }
+    },
+    "required": [
+      "id",
+      "name",
+      "currencyCode",
+      "terminationDate",
+      "principalDebt"
+    ]
+  }
+}

@@ -7,16 +7,12 @@ import io.restassured.http.Method;
 import io.restassured.response.Response;
 import pojo.creditService.CreateApplyingLoanRequest;
 
+import static api.core.ApiClient.sendRequestWithoutParams;
 import static api.core.ApiClient.sendSimpleRequest;
 import static api.core.RequestParamType.HEADER;
 import static api.core.RequestParamType.PARAMETER;
 import static com.google.common.net.HttpHeaders.AUTHORIZATION;
-import static constant.ApiEndpoints.CREDIT_BACKGROUND;
-import static constant.ApiEndpoints.CREDIT_BODY;
-import static constant.ApiEndpoints.CREDIT_ORDER_STATUS;
-import static constant.ApiEndpoints.CREDIT_PRODUCTS;
-import static constant.ApiEndpoints.INVALID_CREDIT_ORDER_TABLE;
-import static constant.ApiEndpoints.INVALID_CREDIT_PRODUCTS;
+import static constant.ApiEndpoints.*;
 import static constant.CustomerServiceConstants.PARAMETER_PRODUCT_ID;
 import static constant.ApiEndpoints.*;
 import static constant.CreditServiceConstants.EMPTY_TOKEN;
@@ -101,5 +97,13 @@ public class CreditService {
     public static Response checkGetRequestDisplayingElectronicBackgroundInvalidToken() {
         return sendSimpleRequest(Method.GET, CREDIT_BACKGROUND,
                 new RequestParam(HEADER, AUTHORIZATION, INVALID_TOKEN_CREDIT_SERVICE));
+    }
+
+    public  Response checkCreditInfo() {
+        return sendSimpleRequest(GET, CREDIT_INFO,
+                new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
+    }
+    public  Response checkCreditInfoNoToken() {
+        return sendRequestWithoutParams(GET, CREDIT_INFO);
     }
 }
