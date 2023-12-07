@@ -37,4 +37,6 @@ public final class ApiEndpoints {
     public static final String CREDIT_BODY = "credits/api/v1/credit-order/new";
     public static final String CREDIT_ORDER_STATUS = "credits/api/v1/credit-order/status";
     public static final String INVALID_CREDIT_ORDER_TABLE = "credits/api/v1/credit-order/bank";
+
+    public static final String CREDIT_INFO ="credits/api/v1/credit";
 }

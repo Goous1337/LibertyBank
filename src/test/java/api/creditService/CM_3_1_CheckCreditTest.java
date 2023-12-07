@@ -1,22 +1,20 @@
 package api.creditService;
 
+
 import api.BaseTest;
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
-import static org.apache.hc.core5.http.HttpStatus.SC_OK;
+import static org.apache.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CREDIT_SERVICE;
-
 
 public class CM_3_1_CheckCreditTest extends BaseTest {
     {
@@ -27,13 +25,30 @@ public class CM_3_1_CheckCreditTest extends BaseTest {
     @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-84")
     @Test
-
     public void successfulGetUserCreditInfo() {
-        Response response = creditService.checkCreditInfo();
+       Response response = creditService.checkCreditInfo();
+       String jsonSchemaPath ="schemas/creditService/CM_3_1/successfulGetUserCreditInfo.json";
         assertAll(
                 () -> assertEquals(SC_OK,
                         response.statusCode(),
-                        "Код ответа не соответствует ожидаемому")
+                        "Код ответа не соответствует ожидаемому"),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+        );
+    }
+
+    @DisplayName("Получение информации по действующему кредиту при неуспешной валидации токена")
+    @Description("Данный тест-кейс направлен на получение STATUS CODE 401 при неуспешной валидации токена для получения краткой информации о кредитах авторизованного пользователя по CM 3.1 и US 3.1")
+    @Tag("API")
+    @TmsLink("https://jira.astondevs.ru/browse/LIB3-86")
+    @Test
+    public void unsuccessfulGetUserCreditInfoNoToken() {
+        Response response = creditService.checkCreditInfoNoToken();
+        String jsonSchemaPath ="schemas/creditService/CM_3_1/unsuccessfulGetUserCreditInfoError.json";
+        assertAll(
+                () -> assertEquals(SC_UNAUTHORIZED,
+                        response.statusCode(),
+                        "Код ответа не соответствует ожидаемому"),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 }
