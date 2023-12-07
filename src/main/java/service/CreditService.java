@@ -86,8 +86,6 @@ public class CreditService {
         return sendSimpleRequest(DELETE, NOT_EXIST_CREDIT_WITHDRAWAL,
                 new RequestParam(HEADER, AUTHORIZATION, EMPTY_TOKEN));
     }
-}
-
     public static Response checkGetRequestDisplayingElectronicBackground(String productId) {
         List<RequestParam> param = List.of(new RequestParam(PARAMETER, PARAMETER_PRODUCT_ID, productId),
                 new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
