@@ -13,9 +13,9 @@ public final class ApiEndpoints {
     public static final String SMS_NOTIFICATION = "user/settings/notifications/sms";
     public static final String EMAIL_NOTIFICATION = "user/settings/notifications/email";
     public static final String PUSH_NOTIFICATION = "user/settings/notifications/push";
-    public static final String INVALID_NOTIFICATION = "/user/settings/notif/push";
-    public static final String INVALID_SMS_NOTIFICATION = "/user/settings/notif/sms";
-    public static final String INVALID_EMAIL_NOTIFICATION = "/user/settings/notif/email";
+    public static final String INVALID_NOTIFICATION = "user/settings/notif/push";
+    public static final String INVALID_SMS_NOTIFICATION = "user/settings/notif/sms";
+    public static final String INVALID_EMAIL_NOTIFICATION = "user/settings/notif/email";
     public static final String CHANGE_EMAIL = "auth/user/settings/email";
     public static final String QUESTION_ANSWER = "/registration/user-profile/{customerId}/question";
     public static final String INVALID_QUESTION_ANSWER = "/registration/user/{customerId}/question";
@@ -37,4 +37,6 @@ public final class ApiEndpoints {
     public static final String CREDIT_BODY = "credits/api/v1/credit-order/new";
     public static final String CREDIT_ORDER_STATUS = "credits/api/v1/credit-order/status";
     public static final String INVALID_CREDIT_ORDER_TABLE = "credits/api/v1/credit-order/bank";
+
+    public static final String CREDIT_INFO ="credits/api/v1/credit";
 }
