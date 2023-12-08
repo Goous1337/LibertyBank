@@ -101,4 +101,16 @@ public class CreditService {
         return sendSimpleRequest(Method.GET, CREDIT_BACKGROUND,
                 new RequestParam(HEADER, AUTHORIZATION, INVALID_TOKEN_CREDIT_SERVICE));
     }
+    public Response checkListObtainingInformationOnBanksLoanProduct() {
+        return sendSimpleRequest(GET, CREDIT_PRODUCTS_INFO,
+                new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
+    }
+    public Response checkListObtainingInformationOnBanksLoanProductInvalidToken() {
+        return sendSimpleRequest(GET, CREDIT_PRODUCTS_INFO,
+                new RequestParam(HEADER, AUTHORIZATION, INVALID_TOKEN_CREDIT_SERVICE));
+    }
+    public Response checkListObtainingInformationOnBanksLoanProductNoRecordsInResultingTable() {
+        return sendSimpleRequest(GET, INVALID_CREDIT_PRODUCT,
+                new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
+    }
 }
