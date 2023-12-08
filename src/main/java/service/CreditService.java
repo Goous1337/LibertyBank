@@ -38,7 +38,7 @@ public class CreditService {
 
     public Response checkListApplyingLoan
             (Integer productId, Integer amount, Integer periodMonths, String currencyCode, String creationDate,
-                    Integer monthlyIncome, Integer monthlyExpenditure, String employerIdentificationNumber) {
+             Integer monthlyIncome, Integer monthlyExpenditure, String employerIdentificationNumber) {
         List<RequestParam> params = List.of
                 (new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
         return sendSimpleRequest
@@ -48,7 +48,7 @@ public class CreditService {
 
     public Response checkListApplyingLoanInvalidToken
             (Integer productId, Integer amount, Integer periodMonths, String currencyCode, String creationDate,
-                    Integer monthlyIncome, Integer monthlyExpenditure, String employerIdentificationNumber) {
+             Integer monthlyIncome, Integer monthlyExpenditure, String employerIdentificationNumber) {
         List<RequestParam> params = List.of
                 (new RequestParam(HEADER, AUTHORIZATION, INVALID_ACCESS_TOKEN));
         return sendSimpleRequest
@@ -90,7 +90,6 @@ public class CreditService {
         return sendSimpleRequest(DELETE, NOT_EXIST_CREDIT_WITHDRAWAL,
                 new RequestParam(HEADER, AUTHORIZATION, EMPTY_TOKEN));
     }
-}
 
     public static Response checkGetRequestDisplayingElectronicBackground(String productId) {
         List<RequestParam> param = List.of(new RequestParam(PARAMETER, PARAMETER_PRODUCT_ID, productId),
