@@ -43,4 +43,5 @@ public final class ApiEndpoints {
     public static final String NOT_EXIST_CREDIT_WITHDRAWAL = "credits/api/v1/credit-order/10000";
     public static final String CREDIT_INFO ="credits/api/v1/credit";
 
+    public static final String CREDIT_INFORMATION = "credits/api/v1/credit/current";
 }

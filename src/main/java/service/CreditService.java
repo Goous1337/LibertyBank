@@ -13,6 +13,7 @@ import static api.core.RequestParamType.HEADER;
 import static api.core.RequestParamType.PARAMETER;
 import static com.google.common.net.HttpHeaders.AUTHORIZATION;
 import static constant.ApiEndpoints.*;
+import static constant.CustomerServiceConstants.PARAMETER_ID;
 import static constant.CustomerServiceConstants.PARAMETER_PRODUCT_ID;
 import static constant.ApiEndpoints.*;
 import static constant.CreditServiceConstants.EMPTY_TOKEN;
@@ -93,6 +94,12 @@ public class CreditService {
         return sendSimpleRequest(Method.GET, CREDIT_BACKGROUND, param);
     }
 
+    public static Response checkViewInfoCurrentCreditsUsers(String id) {
+        List<RequestParam> param = List.of(new RequestParam(PARAMETER, PARAMETER_ID, id),
+                new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
+        return sendSimpleRequest(GET, CREDIT_INFORMATION, param);
+    }
+
     public static Response checkGetRequestDisplayingElectronicBackgroundInvalidToken() {
         return sendSimpleRequest(Method.GET, CREDIT_BACKGROUND,
                 new RequestParam(HEADER, AUTHORIZATION, INVALID_TOKEN_CREDIT_SERVICE));
@@ -116,5 +123,10 @@ public class CreditService {
     }
     public  Response checkCreditInfoNoToken() {
         return sendRequestWithoutParams(GET, CREDIT_INFO);
+    }
+    public static Response checkViewInfoCurrentCreditsUsersInvalidToken(String id) {
+        List<RequestParam> param = List.of(new RequestParam(PARAMETER, PARAMETER_ID, id),
+                new RequestParam(HEADER, AUTHORIZATION, INVALID_TOKEN_CREDIT_SERVICE));
+        return sendSimpleRequest(GET, CREDIT_INFORMATION, param);
     }
 }
