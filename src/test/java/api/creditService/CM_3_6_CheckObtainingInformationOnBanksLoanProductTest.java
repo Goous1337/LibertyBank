@@ -5,10 +5,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Tags;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static constant.CreditServiceConstants.*;
 import static org.apache.hc.core5.http.HttpStatus.*;
@@ -50,7 +47,7 @@ public class CM_3_6_CheckObtainingInformationOnBanksLoanProductTest extends Base
         );
     }
 
-    @Deprecated(since = "Bug https://jira.astondevs.ru/browse/LIB3-1222")
+    @Disabled("Bug https://jira.astondevs.ru/browse/LIB3-1222")
     @DisplayName("Получение подробной информации по кредитному продукту банка при неуспешной валидации токена")
     @Description("Данный тест-кейс направлен на получение STATUS CODE  401 При неуспешной валидации токена при" +
             " получении подробной информации по кредитному продукту банка по CM-3.6 и US 3.6")
