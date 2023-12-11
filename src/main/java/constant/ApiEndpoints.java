@@ -41,4 +41,6 @@ public final class ApiEndpoints {
     public static final String INVALID_CREDIT_ORDER_TABLE = "credits/api/v1/credit-order/bank";
     public static final String CREDIT_WITHDRAWAL = "credits/api/v1/credit-order/";
     public static final String NOT_EXIST_CREDIT_WITHDRAWAL = "credits/api/v1/credit-order/10000";
+    public static final String CREDIT_INFO ="credits/api/v1/credit";
+
 }
