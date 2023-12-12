@@ -8,11 +8,11 @@ import lombok.Data;
 
 public class DepositData {
     private Integer depositProductId;
-    private Double initialAmount;
+    private Float initialAmount;
     private String periodMonths;
     private Boolean autoRenewal;
 
-    public DepositData(Integer depositProductId, Double initialAmount, Boolean autoRenewal) {
+    public DepositData(Integer depositProductId, Float initialAmount, Boolean autoRenewal) {
         this.depositProductId = depositProductId;
         this.initialAmount = initialAmount;
         this.autoRenewal = autoRenewal;

@@ -39,7 +39,7 @@ public class DepositService {
     }
 
     public Response checkListMakeNewDeposit
-            (Integer depositProductId, Double initialAmount, String periodMonths, Boolean autoRenewal) {
+            (Integer depositProductId, Float initialAmount, String periodMonths, Boolean autoRenewal) {
         List<RequestParam> param = List.of
                 (new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
         return sendSimpleRequest
@@ -47,7 +47,7 @@ public class DepositService {
     }
 
     public Response checkMakeNewDepositInvalidRequest
-            (Integer depositProductId, Double initialAmount, Boolean autoRenewal) {
+            (Integer depositProductId, Float initialAmount, Boolean autoRenewal) {
         List<RequestParam> param = List.of
                 (new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
         return sendSimpleRequest
@@ -55,7 +55,7 @@ public class DepositService {
     }
 
     public Response checkListMakeNewDepositInvalidToken
-            (Integer depositProductId, Double initialAmount, String periodMonths, Boolean autoRenewal) {
+            (Integer depositProductId, Float initialAmount, String periodMonths, Boolean autoRenewal) {
         List<RequestParam> param = List.of
                 (new RequestParam(HEADER, AUTHORIZATION, INVALID_ACCESS_TOKEN));
         return sendSimpleRequest
