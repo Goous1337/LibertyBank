@@ -118,4 +118,9 @@ public class DepositService {
         return sendSimpleRequest
                 (POST, DEPOSIT_CALCULATOR, param, new DepositDataCalculator(depositProductId, initialSum, isCapitalisation));
     }
+
+    public Response checkDetailedInformationAboutDeposit(Integer productId) {
+        return sendSimpleRequest(GET, DEPOSIT_PRODUCTS_OFFER + productId,
+                new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
+    }
 }
