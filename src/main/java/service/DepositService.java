@@ -81,4 +81,9 @@ public class DepositService {
         return sendSimpleRequest(GET, DEPOSIT_PRODUCTS_USER,
                 new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
     }
+
+    public Response checkDetailedInformationAboutDeposit(Integer productId) {
+        return sendSimpleRequest(GET, DEPOSIT_PRODUCTS_OFFER + productId,
+                new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
+    }
 }
