@@ -9,6 +9,7 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import pojo.absInfoService.AbsInfoServiceData;
 
 import static org.apache.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -29,8 +30,9 @@ public class IS_2_addingAtmTest extends BaseTest {
     public void successfulAddingNewATM() {
         String atmNumber = "333489";
         AbsInfoServiceDataBaseRequest.deleteNewAtm(atmNumber);
-        Response response = absInfoService.checkAddNewAtm("Россия", "МО", "Москва", "Новая", "String", "String", "0", true,
+        AbsInfoServiceData absInfoServiceData = new AbsInfoServiceData("Россия", "МО", "Москва", "Новая", "String", "String", "0", true,
                 true, atmNumber, true, true, true, true, true, true, true, 0, 0, true);
+        Response response = absInfoService.checkAddNewAtm(absInfoServiceData);
 
         assertAll(
                 () -> assertEquals(SC_OK,
@@ -49,12 +51,17 @@ public class IS_2_addingAtmTest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB4-946")
     @Test
     public void unsuccessfulAddingNewATM() {
-        Response response = absInfoService.checkAddNewAtm("Россия", "МО", "Москва", "Новая", "String", "String", "0", true,
-                true, "458998", true, true, true, true, true, true, true, 0, 0, true);
-        Response responseReturn = absInfoService.checkAddNewAtm("Россия", "МО", "Москва", "Новая", "String", "String", "0", true,
-                true, "458998", true, true, true, true, true, true, true, 0, 0, true);
+        String atmNumber = "458998";
+        AbsInfoServiceDataBaseRequest.deleteNewAtm(atmNumber);
+        AbsInfoServiceData absInfoServiceData = new AbsInfoServiceData("Россия", "МО", "Москва", "Новая", "String", "String", "0", true,
+                true, atmNumber, true, true, true, true, true, true, true, 0, 0, true);
+        Response response = absInfoService.checkAddNewAtm(absInfoServiceData);
+        Response responseReturn = absInfoService.checkAddNewAtm(absInfoServiceData);
 
         assertAll(
+                () -> assertEquals(SC_OK,
+                        response.statusCode(),
+                        "Код ответа не соответствует ожидаемому"),
                 () -> assertEquals(SC_BAD_REQUEST,
                         responseReturn.statusCode(),
                         "Код ответа не соответствует ожидаемому")

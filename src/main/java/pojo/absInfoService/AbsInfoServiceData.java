@@ -1,10 +1,11 @@
 package pojo.absInfoService;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
+@Builder
+@Getter
 public class AbsInfoServiceData {
     private String country;
     private String region;
