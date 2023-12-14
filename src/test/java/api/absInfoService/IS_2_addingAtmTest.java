@@ -55,17 +55,8 @@ public class IS_2_addingAtmTest extends BaseTest {
         AbsInfoServiceDataBaseRequest.deleteNewAtm(atmNumber);
         AbsInfoServiceData absInfoServiceData = new AbsInfoServiceData("Россия", "МО", "Москва", "Новая", "String", "String", "0", true,
                 true, atmNumber, true, true, true, true, true, true, true, 0, 0, true);
-        Response response = absInfoService.checkAddNewAtm(absInfoServiceData);
-        Response responseReturn = absInfoService.checkAddNewAtm(absInfoServiceData);
-
-        assertAll(
-                () -> assertEquals(SC_OK,
-                        response.statusCode(),
-                        "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals(SC_BAD_REQUEST,
-                        responseReturn.statusCode(),
-                        "Код ответа не соответствует ожидаемому")
-        );
+        assertEquals(SC_OK, absInfoService.checkAddNewAtm(absInfoServiceData).statusCode(), "Код ответа не соответствует ожидаемому");
+        assertEquals(SC_BAD_REQUEST, absInfoService.checkAddNewAtm(absInfoServiceData).statusCode(), "Код ответа не соответствует ожидаемому");
     }
 
     @DisplayName("[IS-2] [STATUS CODE 404] (POST) Не удалось найти запрашиваемый ресурс")
@@ -77,10 +68,6 @@ public class IS_2_addingAtmTest extends BaseTest {
         Response response = absInfoService.checkInvalidURLAddNewAtm("Россия", "МО", "Москва", "Новая", "String", "String", "0", true,
                 true, "458998", true, true, true, true, true, true, true, 0, 0, true);
 
-        assertAll(
-                () -> assertEquals(SC_NOT_FOUND,
-                        response.statusCode(),
-                        "Код ответа не соответствует ожидаемому")
-        );
+        assertEquals(SC_NOT_FOUND, response.statusCode(), "Код ответа не соответствует ожидаемому");
     }
 }
