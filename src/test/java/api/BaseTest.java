@@ -10,10 +10,13 @@ import api.core.RequestParam;
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import lombok.Data;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.log4j.Log4j2;
-import lombok.extern.slf4j.Slf4j;
-import service.*;
+import service.AbsInfoService;
+import service.CreditService;
+import service.CustomerService;
+import service.DepositService;
+import service.InfoService;
+import service.UserAccountService;
 
 /**
  * Базовый тестовый класс
