@@ -3,14 +3,23 @@ package api;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.TestInfo;
+
 import api.core.RequestParam;
+import io.qameta.allure.Description;
+import io.qameta.allure.TmsLink;
 import lombok.Data;
+import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import service.*;
 
 /**
  * Базовый тестовый класс
  */
 @Data
+@Log4j2
 public class BaseTest {
     protected List<RequestParam> params;
     protected CustomerService customerService;
@@ -29,4 +38,17 @@ public class BaseTest {
         depositService = new DepositService();
         creditService = new CreditService();
     }
+
+    @BeforeEach
+    public void beforeTestLogging(TestInfo info) {
+        String testLink = info.getTestMethod()
+                .get()
+                .getAnnotation(TmsLink.class).value();
+        String testDescription = info.getTestMethod()
+                .get()
+                .getAnnotation(Description.class).value();
+        log.info("\n_____________________________________________________\n");
+        log.info(String.format("Test-case link: %s\nTest description: %s\n", testLink, testDescription));
+    }
+
 }

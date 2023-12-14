@@ -9,11 +9,11 @@ pipeline {
         INNER_CONTAINER_WORK_DIR = "/usr/src/myapp"
     }
     stages{
-        stage('Copy GIT') {
-            steps{
-                git branch: 'main', credentialsId: GIT_CREDS_ID, url: GIT_REPO_URL
-            }
-        }
+//         stage('Copy GIT') {
+//             steps{
+//                 git branch: GIT_BRANCH, credentialsId: GIT_CREDS_ID, url: GIT_REPO_URL
+//             }
+//         }
         stage('Run tests') {
 			agent {
         		docker { 
@@ -23,7 +23,7 @@ pipeline {
 				}
 			}
 				steps {
-					sh 'mvn clean test'
+					sh 'mvn clean test -Dgroups=${TEST_TAGS}'
 					sh 'ls -al'
 				}
     	}
