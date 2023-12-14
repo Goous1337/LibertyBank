@@ -11,8 +11,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static org.apache.http.HttpStatus.*;
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.ABS_INFO_SERVICE;
 
 @DisplayName("IS_2 Добавление нового банкомата")
@@ -35,9 +34,11 @@ public class IS_2_addingAtmTest extends BaseTest {
         assertAll(
                 () -> assertEquals(SC_OK,
                         response.statusCode(),
-                        "Код ответа не соответствует ожидаемому")
-//                () -> assertEquals(response.jsonPath().get("message"), "Банкомат успешно добавлен",
-//                        "Код ответа не соответствует ожидаемому")
+                        "Код ответа не соответствует ожидаемому"),
+
+                () -> assertTrue(response.jsonPath().get("message").toString().startsWith("Банкомат c UUID ")&&
+                                response.jsonPath().get("message").toString().endsWith(" добавлен"),
+                        "Сообщение ответа не соответствует ожидаемому")
         );
         AbsInfoServiceDataBaseRequest.deleteNewAtm(atmNumber);
     }
