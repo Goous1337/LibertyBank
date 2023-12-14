@@ -28,6 +28,7 @@ public class IS_2_addingAtmTest extends BaseTest {
     @Test
     public void successfulAddingNewATM() {
         String atmNumber = "333489";
+        AbsInfoServiceDataBaseRequest.deleteNewAtm(atmNumber);
         Response response = absInfoService.checkAddNewAtm("Россия", "МО", "Москва", "Новая", "String", "String", "0", true,
                 true, atmNumber, true, true, true, true, true, true, true, 0, 0, true);
 
@@ -40,7 +41,6 @@ public class IS_2_addingAtmTest extends BaseTest {
                                 response.jsonPath().get("message").toString().endsWith(" добавлен"),
                         "Сообщение ответа не соответствует ожидаемому")
         );
-        AbsInfoServiceDataBaseRequest.deleteNewAtm(atmNumber);
     }
 
     @DisplayName("[IS-2] [STATUS CODE 400] (POST) Добавление уже существующего филиала")
