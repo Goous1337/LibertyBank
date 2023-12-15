@@ -2,10 +2,10 @@ package service;
 
 import io.restassured.response.Response;
 import pojo.absInfoService.AbsInfoServiceData;
+import pojo.absInfoService.AbsInfoServiceDataBankBranch;
 
 import static api.core.ApiClient.sendSimpleRequest;
-import static constant.ApiEndpoints.ABS_INFO_SERVICE;
-import static constant.ApiEndpoints.INVALID_ABS_INFO_SERVICE;
+import static constant.ApiEndpoints.*;
 import static io.restassured.http.Method.POST;
 
 
@@ -27,4 +27,15 @@ public class AbsInfoService {
                         cash_deposit, cash_deposit_currencies, money_transfer, nfc, banknotes_per_pack, max_amount,
                         encashment_service));
     }
+
+    public Response checkAddNewBankBranch(AbsInfoServiceDataBankBranch absInfoServiceDataBankBranch) {
+        return sendSimpleRequest
+                (POST, ABS_INFO_SERVICE_NEW_BANK, absInfoServiceDataBankBranch);
+    }
+
+    public Response checkInvalidURLAddNewBankBranch(AbsInfoServiceDataBankBranch absInfoServiceDataBankBranch) {
+        return sendSimpleRequest
+                (POST, INVALID_ABS_INFO_SERVICE_NEW_BANK, absInfoServiceDataBankBranch);
+    }
+
 }
