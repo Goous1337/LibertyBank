@@ -33,7 +33,7 @@ public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseT
     @ParameterizedTest(name = "initialSum: {1}")
     @ValueSource(ints = {99999, 100000, 1000, 1001})
     public void checkPositiveBoundaryValueScenarios(Integer initialSum) {
-        Response response = depositService.checkListPositiveBoundaryValueScenarios
+        Response response = depositService.checkListBoundaryValueScenarios
                 (2, initialSum, 13, true);
         assertAll(
                 () -> assertEquals(SC_OK, response.getStatusCode()),
@@ -51,7 +51,7 @@ public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseT
     @ParameterizedTest(name = "initialSum: {1}")
     @ValueSource(ints = {-1, -2})
     public void checkNegativeBoundaryValueScenarios(Integer initialSum) {
-        Response response = depositService.checkListPositiveBoundaryValueScenarios
+        Response response = depositService.checkListBoundaryValueScenarios
                 (2, initialSum, 13, true);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode()),
@@ -66,7 +66,7 @@ public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseT
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-735")
     @Test
     public void checkCalculationIncomeFromDepositForCertainPeriodCapitalizationFalse() {
-        Response response = depositService.checkListPositiveBoundaryValueScenarios
+        Response response = depositService.checkListBoundaryValueScenarios
                 (2, 1000, 13, false);
         assertAll(
                 () -> assertEquals(SC_OK, response.getStatusCode()),
