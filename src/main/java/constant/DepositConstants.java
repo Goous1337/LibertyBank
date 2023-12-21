@@ -2,8 +2,11 @@ package constant;
 
 public class DepositConstants {
     public static final Integer DEPOSIT_PRODUCT_ID = 1;
+    public static final Integer DEPOSIT_ID_PRODUCT = 2;
+    public static final Integer TERM_TIME = 13;
     public static final Integer DEPOSIT_400= 400;
     public static final Float DEPOSIT_AMOUNT = 19000.0000f;
+    public static final Float INITIAL_SUM = 1000f;
     public static final String DEPOSIT_PERIOD = "24";
     public static final String DEPOSIT_DETAIL = "Failed to read request";
     public static final String DEPOSIT_TITLE = "Bad Request";

@@ -9,7 +9,8 @@ public enum LibertyServiceName {
     USER_SERVICE("user_service_db"),
     USER_ACCOUNT_SERVICE("user_account_service_db"),
     CUSTOMER_SERVICE("customer_service_db"),
-    INFO_SERVICE("info_service_db");
+    INFO_SERVICE("info_service_db"),
+    DEPOSIT_SERVICE_DB("deposit_service_db");
 
     private final String serviceName;
 }
