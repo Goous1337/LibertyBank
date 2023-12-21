@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.ABS_INFO_SERVICE;
 
 @DisplayName("IS_2 Добавление нового банкомата")
-public class IS_2_addingAtmTest extends BaseTest {
+public class IS_2_AddingAtmTest extends BaseTest {
 
     {
         RestAssured.baseURI = ABS_INFO_SERVICE;
@@ -45,7 +45,7 @@ public class IS_2_addingAtmTest extends BaseTest {
         );
     }
 
-    @DisplayName("[IS-2] [STATUS CODE 400] (POST) Добавление уже существующего филиала")
+    @DisplayName("[IS-2] [STATUS CODE 400] (POST) Добавление уже существующего банкомата")
     @Description("Данный тест-кейс направлен на проверку [IS-2] [STATUS CODE 400] (POST) Добавление уже существующего филиала")
     @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB4-946")

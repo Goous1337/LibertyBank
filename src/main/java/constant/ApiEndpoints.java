@@ -37,6 +37,7 @@ public final class ApiEndpoints {
     public static final String INVALID_CREDIT_PRODUCTS = "credits/api/v1/credit-product/.";
     public static final String INVALID_CREDIT_PRODUCT = "credits/api/v1/credit-product/6";
     public static final String DEPOSIT_SETTINGS = "deposits/api/v1/deposit/new";
+    public static final String DEPOSIT_CALCULATOR = "deposits/api/v1/deposit-product/profit_calculating";
     public static final String CREDIT_BODY = "credits/api/v1/credit-order/new";
     public static final String CREDIT_ORDER_STATUS = "credits/api/v1/credit-order/status";
     public static final String INVALID_CREDIT_ORDER_TABLE = "credits/api/v1/credit-order/bank";
@@ -48,6 +49,8 @@ public final class ApiEndpoints {
 
     public static final String ABS_INFO_SERVICE ="api/v1/info-service/atm";
     public static final String INVALID_ABS_INFO_SERVICE ="api/v1/info-service/atm/";
+    public static final String ABS_INFO_SERVICE_NEW_BANK ="api/v1/info-service/offices";
+    public static final String INVALID_ABS_INFO_SERVICE_NEW_BANK ="api/v1/info-service/offices/";
     public static final String ABS_NEWS ="api/v1/abs/news";
     public static final String INVALID_ABS_NEWS ="api/v1/abs/new";
 }

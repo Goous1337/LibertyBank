@@ -1,8 +1,8 @@
 package service;
 
-import api.core.RequestParam;
 import io.restassured.response.Response;
 import pojo.absInfoService.AbsInfoServiceData;
+import pojo.absInfoService.AbsInfoServiceDataBankBranch;
 
 import static api.core.ApiClient.sendSimpleRequest;
 import static api.core.RequestParamType.HEADER;
@@ -38,4 +38,15 @@ public class AbsInfoService {
     public Response checkReceiveNewWithInvalidEndpoint() {
         return sendSimpleRequest (GET, INVALID_ABS_NEWS, new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
     }
+
+    public Response checkAddNewBankBranch(AbsInfoServiceDataBankBranch absInfoServiceDataBankBranch) {
+        return sendSimpleRequest
+                (POST, ABS_INFO_SERVICE_NEW_BANK, absInfoServiceDataBankBranch);
+    }
+
+    public Response checkInvalidURLAddNewBankBranch(AbsInfoServiceDataBankBranch absInfoServiceDataBankBranch) {
+        return sendSimpleRequest
+                (POST, INVALID_ABS_INFO_SERVICE_NEW_BANK, absInfoServiceDataBankBranch);
+    }
+
 }
