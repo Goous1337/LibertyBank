@@ -15,10 +15,10 @@ import static api.utils.GsonHelper.createBody;
 import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
 import static constant.ApiEndpoints.*;
 import static constant.CustomerServiceConstants.*;
-import static constant.InfoServiceConstants.PARAMETER_CITYID;
 import static constant.InfoServiceConstants.PARAMETER_CUSTOMERID;
 import static io.netty.handler.codec.http.HttpHeaders.Values.APPLICATION_JSON;
-import static io.restassured.http.Method.*;
+import static io.restassured.http.Method.GET;
+import static io.restassured.http.Method.PATCH;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 public class CustomerService {

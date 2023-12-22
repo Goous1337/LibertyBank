@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.CREDIT_SERVICE;
 
 @DisplayName("СM 3.7 Отзыв кредитной заявки")
-public class CM_3_7_CheckWithdrawalOfLoanApplication extends BaseTest {
+public class CM_3_7_CheckWithdrawalOfLoanApplicationTest extends BaseTest {
     {
         RestAssured.baseURI = CREDIT_SERVICE;
     }
@@ -38,7 +38,7 @@ public class CM_3_7_CheckWithdrawalOfLoanApplication extends BaseTest {
     }
 
     @DisplayName("Отзыв кредитной заявки c несуществующим значением параметра creditOrderId")
-    @Description("Данный тест-кейс направлен на отзыв кредитной заявки c несуществующим значением+" +
+    @Description("Данный тест-кейс направлен на отзыв кредитной заявки c несуществующим значением+" +
             " параметра creditOrderId")
     @Tags({@Tag("Negative"), @Tag("API")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-767")
