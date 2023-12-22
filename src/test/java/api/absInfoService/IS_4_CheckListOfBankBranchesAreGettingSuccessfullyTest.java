@@ -1,4 +1,4 @@
-package api.absInfoServic;
+package api.absInfoService;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.ABS_INFO_SERVICE;
 
-public class ABS_IS_4_CheckListOfBankBranchesAreGettingSuccessfullyTest {
+public class IS_4_CheckListOfBankBranchesAreGettingSuccessfullyTest {
 
     {
         RestAssured.baseURI = ABS_INFO_SERVICE;
@@ -34,6 +34,22 @@ public class ABS_IS_4_CheckListOfBankBranchesAreGettingSuccessfullyTest {
         Response response = InfoService.gettingListOfBankBranches(GET);
         assertAll(
                 () -> assertEquals(HttpStatus.SC_OK,
+                        response.statusCode(),
+                        "Код ответа не соответствует ожидаемому"),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+        );
+    }
+    @DisplayName("[IS-4] [STATUS CODE 404] (GET) Ошибка в URL'e")
+    @Description("Проверить, что при ошибке в URL появляется 404 ошибка")
+    @Tags({@Tag("API")})
+    @TmsLink("https://jira.astondevs.ru/browse/LIB4-935")
+    @Test
+
+    public void unsuccessfulGettingListOfBankBranches() {
+        String jsonSchemaPath = "schemas/StatusCode404InfoService.json";
+        Response response = InfoService.unGettingListOfBankBranches(GET);
+        assertAll(
+                () -> assertEquals(HttpStatus.SC_NOT_FOUND,
                         response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))

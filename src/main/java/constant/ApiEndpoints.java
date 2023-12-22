@@ -47,6 +47,7 @@ public final class ApiEndpoints {
     public static final String CREDIT_INFORMATION = "credits/api/v1/credit/current";
     public static final String CREDIT_SUM_CALCULATE = "credits/api/v1/credit-product/credit-calculate/sum-calculate";
     public static final String BANK_LIST = "api/v1/info-service/offices";
+    public static final String BANK_LIST_MISTAKE = "api/v156/info-service/offices";
 
     public static final String ABS_INFO_SERVICE ="api/v1/info-service/atm";
     public static final String INVALID_ABS_INFO_SERVICE ="api/v1/info-service/atm/";
