@@ -79,21 +79,21 @@ public class DepositService {
     }
 
     public Response checkListBoundaryValueScenarios
-            (Integer depositProductId, Integer initialSum, Integer termTime, Boolean isCapitalisation) {
+            (Integer depositProductId, Float initialSum, Integer termTime, Boolean isCapitalisation) {
         return sendSimpleRequest(POST, DEPOSIT_CALCULATOR,
                 getRP(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE),
                 new DepositDataCalculator(depositProductId, initialSum, termTime, isCapitalisation));
     }
 
     public Response checkListCalculatingOfPotentialIncomeOnDepositWithoutId
-            (Integer initialSum, Integer termTime, Boolean isCapitalisation) {
+            (Float initialSum, Integer termTime, Boolean isCapitalisation) {
         return sendSimpleRequest(POST, DEPOSIT_CALCULATOR,
                 getRP(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE),
                 new DepositDataCalculator(initialSum, termTime, isCapitalisation));
     }
 
     public Response checkListCalculatingOfPotentialIncomeOnDepositWithoutCapitalisation
-            (Integer depositProductId, Integer initialSum, Integer termTime) {
+            (Integer depositProductId, Float initialSum, Integer termTime) {
         return sendSimpleRequest(POST, DEPOSIT_CALCULATOR,
                 getRP(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE),
                 new DepositDataCalculator(depositProductId, initialSum, termTime));
@@ -107,7 +107,7 @@ public class DepositService {
     }
 
     public Response checkListCalculatingOfPotentialIncomeOnDepositWithoutTermTime
-            (Integer depositProductId, Integer initialSum, Boolean isCapitalisation) {
+            (Integer depositProductId, Float initialSum, Boolean isCapitalisation) {
         return sendSimpleRequest(POST, DEPOSIT_CALCULATOR,
                 getRP(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE),
                 new DepositDataCalculator(depositProductId, initialSum, isCapitalisation));
@@ -116,5 +116,16 @@ public class DepositService {
     public Response checkDetailedInformationAboutDeposit(Integer productId) {
         return sendSimpleRequest(GET, DEPOSIT_PRODUCTS_OFFER + productId,
                 getRP(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
+    }
+
+    public float calculationFinalDepositAmountIsTrue(float initSum, float insertRate, int termTime) {
+        float formula = (1 + (insertRate / 100) / 12);
+        float finalValue = (float) (Math.pow(formula, termTime) * initSum);
+        return (float) Math.round(finalValue * 100) / 100;
+    }
+
+    public float calculationFinalDepositAmountIsFalse(float initSum, float insertRate, int termTime) {
+        float formula = (initSum * insertRate * ((float) (termTime * 30) / 365)) / 100;
+        return (float) Math.round(formula * 100) / 100;
     }
 }
