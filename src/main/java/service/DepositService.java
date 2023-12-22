@@ -121,13 +121,11 @@ public class DepositService {
     public float calculationFinalDepositAmountIsTrue(float initSum, float insertRate, int termTime) {
         float formula = (1 + (insertRate / 100) / 12);
         float finalValue = (float) (Math.pow(formula, termTime) * initSum);
-        String convertFinalValue = String.format("%.2f", finalValue);
-        return Float.parseFloat(convertFinalValue.replace(",", "."));
+        return (float) Math.round(finalValue * 100) / 100;
     }
 
     public float calculationFinalDepositAmountIsFalse(float initSum, float insertRate, int termTime) {
         float formula = (initSum * insertRate * ((float) (termTime * 30) / 365)) / 100;
-        String convertFinalValue = String.format("%.2f", formula);
-        return Float.parseFloat(convertFinalValue.replace(",", "."));
+        return (float) Math.round(formula * 100) / 100;
     }
 }

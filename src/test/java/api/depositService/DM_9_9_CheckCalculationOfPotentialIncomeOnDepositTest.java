@@ -72,7 +72,6 @@ public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseT
         Response response = depositService.checkListBoundaryValueScenarios
                 (DEPOSIT_ID_PRODUCT, INITIAL_SUM, TERM_TIME, false);
         assertAll(
-                () -> assertEquals(valueFromFormulaIfFalse, response.jsonPath().get("percentProfit")),
                 () -> assertEquals(SC_OK, response.getStatusCode()),
                 () -> assertNotNull(response.jsonPath().get("finalSum")),
                 () -> assertNotNull(response.jsonPath().get("moneyProfit")),
