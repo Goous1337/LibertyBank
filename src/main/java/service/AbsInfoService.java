@@ -7,6 +7,7 @@ import pojo.absInfoService.AbsInfoServiceDataBankBranch;
 import static api.core.ApiClient.sendSimpleRequest;
 import static constant.ApiEndpoints.*;
 import static io.restassured.http.Method.POST;
+import static io.restassured.http.Method.PUT;
 
 
 public class AbsInfoService {
@@ -37,5 +38,12 @@ public class AbsInfoService {
         return sendSimpleRequest
                 (POST, INVALID_ABS_INFO_SERVICE_NEW_BANK, absInfoServiceDataBankBranch);
     }
-
+    public Response checkListEditingInformationAboutBranches
+            (AbsInfoServiceDataBankBranch absInfoServiceDataBankBranch,String uuid){
+return sendSimpleRequest(PUT,ABS_INFO_SERVICE_UPDATE+uuid, absInfoServiceDataBankBranch);
+    }
+    public Response checkListEditingInformationAboutBranchesInvalidEndpoint
+            (AbsInfoServiceDataBankBranch absInfoServiceDataBankBranch,String uuid){
+        return sendSimpleRequest(PUT,ABS_INFO_SERVICE_INVALID+uuid, absInfoServiceDataBankBranch);
+    }
 }

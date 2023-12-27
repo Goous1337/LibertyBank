@@ -1,14 +1,12 @@
 package pojo.absInfoService;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
 @Builder
 @Getter
+@NoArgsConstructor
 public class AbsInfoServiceDataBankBranch {
 
     private String office_number;
