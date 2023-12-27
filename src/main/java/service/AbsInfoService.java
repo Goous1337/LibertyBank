@@ -1,12 +1,20 @@
 package service;
 
+import api.core.RequestParam;
 import io.restassured.response.Response;
 import pojo.absInfoService.AbsInfoServiceData;
 import pojo.absInfoService.AbsInfoServiceDataBankBranch;
 
 import static api.core.ApiClient.sendSimpleRequest;
+import static api.core.RequestParam.getRP;
+import static api.core.RequestParamType.HEADER;
+import static com.google.common.net.HttpHeaders.AUTHORIZATION;
+import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
 import static constant.ApiEndpoints.*;
+import static io.netty.handler.codec.http.HttpHeaders.Values.APPLICATION_JSON;
+import static io.restassured.http.Method.GET;
 import static io.restassured.http.Method.POST;
+import static property.BaseProperties.ACCESS_TOKEN_CUSTOMER_SERVICE;
 import static io.restassured.http.Method.PUT;
 
 
@@ -27,6 +35,14 @@ public class AbsInfoService {
                         room_number, payments, biometrics, atm_number, is_closed, cash_withdrawal, withdrawal_currencies,
                         cash_deposit, cash_deposit_currencies, money_transfer, nfc, banknotes_per_pack, max_amount,
                         encashment_service));
+    }
+
+    public Response checkReceiveNews() {
+        return sendSimpleRequest (GET, ABS_NEWS,
+                getRP(HEADER, CONTENT_TYPE, APPLICATION_JSON));
+    }
+    public Response checkReceiveNewWithInvalidEndpoint() {
+        return sendSimpleRequest (GET, INVALID_ABS_NEWS, getRP(HEADER, CONTENT_TYPE, APPLICATION_JSON));
     }
 
     public Response checkAddNewBankBranch(AbsInfoServiceDataBankBranch absInfoServiceDataBankBranch) {
