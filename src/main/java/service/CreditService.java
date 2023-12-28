@@ -92,9 +92,10 @@ public class CreditService {
         return sendSimpleRequest(Method.GET, CREDIT_BACKGROUND, param);
     }
 
-    public static Response checkGetRequestDisplayingElectronicBackgroundInvalidToken() {
-        return sendSimpleRequest(Method.GET, CREDIT_BACKGROUND,
+    public static Response checkGetRequestDisplayingElectronicBackgroundInvalidToken(String productId) {
+        List<RequestParam> param = List.of(new RequestParam(PARAMETER, PARAMETER_PRODUCT_ID, productId),
                 new RequestParam(HEADER, AUTHORIZATION, INVALID_TOKEN_CREDIT_SERVICE));
+        return sendSimpleRequest(Method.GET, CREDIT_BACKGROUND,param);
     }
 
     public  Response checkCreditInfo() {

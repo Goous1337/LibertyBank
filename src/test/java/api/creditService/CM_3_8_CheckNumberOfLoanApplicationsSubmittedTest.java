@@ -4,6 +4,7 @@ import api.BaseTest;
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -29,10 +30,11 @@ public class CM_3_8_CheckNumberOfLoanApplicationsSubmittedTest extends BaseTest 
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-533")
     @Test
     public void checkNumberOfLoanApplicationsSubmitted() {
+        String jsonSchemaPath = "schemas/creditService/CM_3_8/checkNumberOfLoanApplicationsSubmitted.json";
         Response response = creditService.checkListNumberOfLoanApplicationsSubmitted();
         assertAll(
                 () -> assertEquals(SC_OK, response.getStatusCode()),
-                () -> assertNotNull(response.jsonPath().get("count"))
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 
@@ -43,10 +45,11 @@ public class CM_3_8_CheckNumberOfLoanApplicationsSubmittedTest extends BaseTest 
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-536")
     @Test
     public void checkNumberOfLoanApplicationsSubmittedInvalidToken() {
+        String jsonSchemaPath = "schemas/creditService/CM_3_8/errorMessage.json";
         Response response = creditService.checkListNumberOfLoanApplicationsSubmittedInvalidToken();
         assertAll(
                 () -> assertEquals(SC_UNAUTHORIZED, response.getStatusCode()),
-                () -> assertNotNull(response.jsonPath().get("errorMessage"))
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 
@@ -59,11 +62,11 @@ public class CM_3_8_CheckNumberOfLoanApplicationsSubmittedTest extends BaseTest 
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-537")
     @Test
     public void checkNumberOfLoanApplicationsSubmittedNoRecordsInTheTable() {
+        String jsonSchemaPath = "schemas/creditService/CM_3_8/errorMessage.json";
         Response response = creditService.checkListNumberOfLoanApplicationsSubmittedNoRecordsInTheTable();
         assertAll(
                 () -> assertEquals(SC_NOT_FOUND, response.getStatusCode()),
-                () -> assertEquals(STATUS_404, (Integer) response.jsonPath().get("status")),
-                () -> assertEquals(ERROR, (String) response.jsonPath().get("error"))
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 }

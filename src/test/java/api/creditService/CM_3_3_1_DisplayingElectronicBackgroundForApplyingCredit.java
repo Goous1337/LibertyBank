@@ -4,11 +4,11 @@ import api.BaseTest;
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
 import service.CreditService;
 
-import static constant.CreditService.*;
 import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.CREDIT_SERVICE;
@@ -22,20 +22,15 @@ public class CM_3_3_1_DisplayingElectronicBackgroundForApplyingCredit extends Ba
     @DisplayName("Отображение электронной формы для оформления заявки на кредит")
     @Description("Данный тест-кейс направлен на проверку отображения электронной формы для оформления заявки на кредит")
     @Tags({@Tag("API")})
-    @TmsLink("https://jira.astondevs.ru/secure/StructureBoard.jspa?s=13#")
+    @TmsLink("https://jira.astondevs.ru/browse/LIB3-850")
     @Test
     public void checkDisplayingElectronicBackgroundForApplyingCreditValidToken() {
-        Response response = CreditService.checkGetRequestDisplayingElectronicBackground("3");
+        String jsonSchemaPath ="schemas/creditService/CM_3_3_1/checkDisplayingElectronicBackgroundForApplyingCreditValidToken.json";
+        Response response = CreditService.checkGetRequestDisplayingElectronicBackground("3");//TODO сделать для всех существующих productId
         assertAll(
                 () -> assertEquals(SC_OK, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals(ID,(String) response.jsonPath().get("id")),
-                () -> assertEquals(NAME_CREDIT,(String) response.jsonPath().get("name")),
-                () -> assertEquals(MIN_SUM,(Integer) response.jsonPath().get("minSum")),
-                () -> assertEquals(MAX_SUM,(Integer) response.jsonPath().get("maxSum")),
-                () -> assertEquals(CURRENCY_CODE,(String) response.jsonPath().get("currencyCode")),
-                () -> assertEquals(MIN_PERIOD_MONTHS,(Integer) response.jsonPath().get("minPeriodMonths")),
-                () -> assertEquals(MAX_PERIOD_MONTHS,(Integer) response.jsonPath().get("maxPeriodMonths"))
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 
@@ -46,11 +41,12 @@ public class CM_3_3_1_DisplayingElectronicBackgroundForApplyingCredit extends Ba
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-851")
     @Test
     public void checkDisplayingElectronicBackgroundForApplyingCreditInvalidToken() {
-        Response response = CreditService.checkGetRequestDisplayingElectronicBackgroundInvalidToken();
+        String jsonSchemaPath ="schemas/creditService/CM_3_3_1/errorMessage.json";
+        Response response = CreditService.checkGetRequestDisplayingElectronicBackgroundInvalidToken("3");//TODO сделать для всех существующих productId
         assertAll(
                 () -> assertEquals(SC_UNAUTHORIZED, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
-                () -> assertNotNull(response.jsonPath().get("errorMessage"))
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 
@@ -60,11 +56,12 @@ public class CM_3_3_1_DisplayingElectronicBackgroundForApplyingCredit extends Ba
     @TmsLink("https://jira.astondevs.ru/secure/StructureBoard.jspa?s=13#")
     @Test
     public void checkDisplayingElectronicBackgroundForApplyingCreditValidTokenWithoutParameters() {
-        Response response = CreditService.checkGetRequestDisplayingElectronicBackground("4");
+        String jsonSchemaPath ="schemas/creditService/CM_3_3_1/errorMessage.json";
+        Response response = CreditService.checkGetRequestDisplayingElectronicBackground("165");//TODO сделать для несуществующего productId
         assertAll(
                 () -> assertEquals(SC_NOT_FOUND, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
-                () -> assertNotNull(response.jsonPath().get("errorMessage"))
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 }

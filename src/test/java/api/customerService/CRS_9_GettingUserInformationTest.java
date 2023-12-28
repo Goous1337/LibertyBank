@@ -5,6 +5,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -36,33 +37,13 @@ public class CRS_9_GettingUserInformationTest extends BaseTest {
 
     public void successfulGettingUserInformation(String customerId, String firstName, String lastName, String patronymic,
                                                  String birthDate, String mobilePhone, String email, String customerStatus) {
+        String jsonSchemaPath = "schemas/customerService/CRS_9/successfulGettingUserInformation.json";
         Response response = customerService.checkGettingUserInformation(customerId);
-
         assertAll(
                 () -> assertEquals(SC_OK,
                         response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals(firstName,
-                        response.body().jsonPath().get("firstName"),
-                        "Имя в ответе не соответствует ожидаемому"),
-                () -> assertEquals(lastName,
-                        response.body().jsonPath().get("lastName"),
-                        "Фамилия в ответе не соответствует ожидаемому"),
-                () -> assertEquals(patronymic,
-                        response.body().jsonPath().get("patronymic"),
-                        "Отчество в ответе не соответствует ожидаемому"),
-                () -> assertEquals(birthDate,
-                        response.body().jsonPath().get("birthDate"),
-                        "Дата рождения в ответе не соответствует ожидаемому"),
-                () -> assertEquals(mobilePhone,
-                        response.body().jsonPath().get("mobilePhone"),
-                        "Номер телефона в ответе не соответствует ожидаемому"),
-                () -> assertEquals(email,
-                        response.body().jsonPath().get("email"),
-                        "Email в ответе не соответствует ожидаемому"),
-                () -> assertEquals(customerStatus,
-                        response.body().jsonPath().get("customerStatus"),
-                        "Статус клиента в ответе не соответствует ожидаемому")
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 
@@ -91,11 +72,13 @@ public class CRS_9_GettingUserInformationTest extends BaseTest {
     @Test
 
     public void checkGettingUserInformationUsingInvalidData() {
+        String jsonSchemaPath = "schemas/customerService/CRS_9/errorMessage.json";
         String customerId = "813f5509";
         Response response = customerService.checkGettingUserInformation(customerId);
 
         assertAll(
-                () -> assertEquals(SC_BAD_REQUEST, response.statusCode(), "Код ответа не соответствует ожидаемому")
+                () -> assertEquals(SC_BAD_REQUEST, response.statusCode(), "Код ответа не соответствует ожидаемому"),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 
@@ -112,13 +95,12 @@ public class CRS_9_GettingUserInformationTest extends BaseTest {
     })
 
     public void checkGettingUserInformationInvalidMethod(String invalidHttpMethod, String customerId) {
+        String jsonSchemaPath = "schemas/customerService/CRS_9/errorMessage.json";
         Response response = customerService.checkGettingUserInformationInvalidMethod(invalidHttpMethod, customerId);
 
         assertAll(
                 () -> assertEquals(SC_METHOD_NOT_ALLOWED, response.statusCode(), "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals("Метод не разрешен. Сервер знает о запрашиваемом методе, но он был " +
-                                "деактивирован и не может быть использован.", response.body().jsonPath().get("message"),
-                        "Сообщение об ошибке не соответствует ожидаемому")
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 }

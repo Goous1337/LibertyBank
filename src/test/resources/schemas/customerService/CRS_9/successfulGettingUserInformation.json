@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "middleName": {
+      "type": "string"
+    },
+    "birthDate": {
+      "type": "string"
+    },
+    "mobilePhone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "clientStatus": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "firstName",
+    "lastName",
+    "middleName",
+    "birthDate",
+    "mobilePhone",
+    "email",
+    "clientStatus"
+  ]
+}
