@@ -11,4 +11,6 @@ public class CustomerServiceConstants {
     public static final String REGISTERED_PHONE_NUMBER = "79958984928";
     public static final String NOT_REGISTERED_PHONE_NUMBER = "79998887723";
     public static final String PARAMETER_PRODUCT_ID = "productId";
+    public static final String PARAMETER_ID = "id";
+
 }

@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string"
+    },
+    "schemaName": {
+      "type": "string"
+    },
+    "interestRateEarly": {
+      "type": "number"
+    },
+    "isCapitalization": {
+      "type": "boolean"
+    },
+    "amountMin": {
+      "type": "number"
+    },
+    "amountMax": {
+      "type": "number"
+    },
+    "minDurationMonths": {
+      "type": "integer"
+    },
+    "maxDurationMonths": {
+      "type": "integer"
+    },
+    "currencyCode": {
+      "type": "string"
+    },
+    "isActive": {
+      "type": "boolean"
+    },
+    "isRevocable": {
+      "type": "boolean"
+    },
+    "productDetails": {
+      "type": "string"
+    },
+    "autoRenewal": {
+      "type": "boolean"
+    },
+    "maxInterestRate": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "schemaName",
+    "interestRateEarly",
+    "isCapitalization",
+    "amountMin",
+    "amountMax",
+    "minDurationMonths",
+    "maxDurationMonths",
+    "currencyCode",
+    "isActive",
+    "isRevocable",
+    "productDetails",
+    "autoRenewal",
+    "maxInterestRate"
+  ]
+}

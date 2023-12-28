@@ -26,13 +26,13 @@ public class DM_9_2_MakeNewDepositTest extends BaseTest {
     @Test
     public void checkMakeNewDeposit() {
         Response response = depositService.checkListMakeNewDeposit
-                (1, 19000.0000, "24", false);
+                (1, 19000.0000f, "24", false);
         assertAll(
                 () -> assertEquals(SC_OK,
                         response.getStatusCode()),
 
                 () -> assertEquals(DEPOSIT_PRODUCT_ID, (Integer) response.jsonPath().get("depositProductId")),
-                () -> assertEquals(DEPOSIT_AMOUNT, (Double) response.jsonPath().get("initialAmount")),
+                () -> assertEquals(DEPOSIT_AMOUNT, (Float) response.jsonPath().get("initialAmount")),
                 () -> assertEquals(DEPOSIT_PERIOD, (String) response.jsonPath().get("periodMonths")),
                 () -> assertEquals(DEPOSIT_RENEWAL, (Boolean) response.jsonPath().get("autoRenewal"))
         );
@@ -46,7 +46,7 @@ public class DM_9_2_MakeNewDepositTest extends BaseTest {
     @Test
     public void checkMakeNewDepositInvalidRequest() {
         Response response = depositService.checkMakeNewDepositInvalidRequest
-                (1, 19000.0000, false);
+                (1, 19000.0000f, false);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode()),
                 () -> assertNotNull(response.jsonPath().get("errorMessage"))
@@ -61,7 +61,7 @@ public class DM_9_2_MakeNewDepositTest extends BaseTest {
     @Test
     public void checkMakeNewDepositInvalidToken() {
         Response response = depositService.checkListMakeNewDepositInvalidToken
-                (1, 19000.0000, "24", false);
+                (1, 19000.0000f, "24", false);
         assertAll(
                 () -> assertEquals(SC_UNAUTHORIZED, response.getStatusCode()),
                 () -> assertNotNull(response.jsonPath().get("errorMessage"))
@@ -81,13 +81,13 @@ public class DM_9_2_MakeNewDepositTest extends BaseTest {
      */
     public void checkValidationDepositAmount() {
         Response response = depositService.checkListMakeNewDeposit
-                (1, 19000.0000, "24", false);
+                (1, 19000.0000f, "24", false);
         assertAll(
                 () -> assertEquals(SC_OK,
                         response.getStatusCode()),
 
                 () -> assertEquals(DEPOSIT_PRODUCT_ID, (Integer) response.jsonPath().get("depositProductId")),
-                () -> assertEquals(DEPOSIT_AMOUNT, (Double) response.jsonPath().get("initialAmount")),
+                () -> assertEquals(DEPOSIT_AMOUNT, (Float) response.jsonPath().get("initialAmount")),
                 () -> assertEquals(DEPOSIT_PERIOD, (String) response.jsonPath().get("periodMonths")),
                 () -> assertEquals(DEPOSIT_RENEWAL, (Boolean) response.jsonPath().get("autoRenewal"))
         );
@@ -103,7 +103,9 @@ public class DM_9_2_MakeNewDepositTest extends BaseTest {
                 (1, "десять 10", "24", false);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode()),
-                () -> assertNotNull(response.jsonPath().get("errorMessage"))
+                () -> assertEquals(DEPOSIT_TITLE, response.jsonPath().get("title")),
+                () -> assertEquals(DEPOSIT_400, response.jsonPath().get("status")),
+                () -> assertEquals(DEPOSIT_DETAIL, response.jsonPath().get("detail"))
         );
     }
 
@@ -116,7 +118,7 @@ public class DM_9_2_MakeNewDepositTest extends BaseTest {
     @Test
     public void checkValidationDepositPeriod1() {
         Response response = depositService.checkListMakeNewDeposit
-                (1, 19000.0000, "двадцать 20", false);
+                (1, 19000.0000f, "двадцать 20", false);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode()),
                 () -> assertNotNull(response.jsonPath().get("errorMessage"))
