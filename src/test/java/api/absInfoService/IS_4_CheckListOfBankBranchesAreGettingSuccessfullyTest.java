@@ -1,5 +1,6 @@
 package api.absInfoService;
 
+import dataBase.requests.AbsInfoServiceDataBaseRequest;
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
@@ -10,7 +11,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
-import service.InfoService;
+import service.AbsInfoService;
+
+import java.util.List;
 
 import static org.asynchttpclient.util.HttpConstants.Methods.GET;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -31,14 +34,20 @@ public class IS_4_CheckListOfBankBranchesAreGettingSuccessfullyTest {
 
     public void successfulGettingListOfBankBranches() {
         String jsonSchemaPath = "schemas/IS_4_CheckListOfBanks/successfulGettingListOfBankBranches.json";
-        Response response = InfoService.gettingListOfBankBranches(GET);
+        List<String> uuidOfBanksBD = AbsInfoServiceDataBaseRequest.getBankUuid();
+        Response response = AbsInfoService.gettingListOfBankBranches(GET);
         assertAll(
                 () -> assertEquals(HttpStatus.SC_OK,
                         response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
-                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath)),
+                () -> {
+                    List<String> uuidOfBanks = response.jsonPath().getList("office_uuid");
+                    assertEquals(uuidOfBanksBD, uuidOfBanks);
+                }
         );
     }
+
     @DisplayName("[IS-4] [STATUS CODE 404] (GET) Ошибка в URL'e")
     @Description("Проверить, что при ошибке в URL появляется 404 ошибка")
     @Tags({@Tag("API")})
@@ -47,7 +56,7 @@ public class IS_4_CheckListOfBankBranchesAreGettingSuccessfullyTest {
 
     public void unsuccessfulGettingListOfBankBranches() {
         String jsonSchemaPath = "schemas/StatusCode404InfoService.json";
-        Response response = InfoService.unGettingListOfBankBranches(GET);
+        Response response = AbsInfoService.unGettingListOfBankBranches(GET);
         assertAll(
                 () -> assertEquals(HttpStatus.SC_NOT_FOUND,
                         response.statusCode(),

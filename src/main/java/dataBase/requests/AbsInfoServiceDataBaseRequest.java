@@ -2,6 +2,10 @@ package dataBase.requests;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import pojo.absInfoService.AbsInfoServiceDataBankBranch;
+
+import java.util.List;
 
 import static constant.LibertyServiceName.*;
 import static dataBase.DataBaseConnector.getDBConnection;
@@ -33,5 +37,11 @@ public class AbsInfoServiceDataBaseRequest {
         String actualUuid = (getDBConnection(ABS_INFO_SERVICE).queryForObject(sql, String.class, uuid));
         LOG.info(String.format("Получен uuid банка: %s", uuid));
         return actualUuid;
+    }
+
+    public static List<String> getBankUuid(){
+        String sql = "SELECT uuid FROM bank_office";
+        List<String> uuid = getDBConnection(ABS_INFO_SERVICE).queryForList(sql, String.class);
+        return uuid;
     }
 }
