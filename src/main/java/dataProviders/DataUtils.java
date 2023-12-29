@@ -42,5 +42,4 @@ public class DataUtils {
         return getDBConnection(CUSTOMER_SERVICE)
                 .queryForList(sql, String.class,push_notification).get(0);
     }
-
 }
