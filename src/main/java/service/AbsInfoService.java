@@ -17,6 +17,7 @@ import static io.netty.handler.codec.http.HttpHeaders.Values.APPLICATION_JSON;
 import static io.restassured.http.Method.GET;
 import static io.restassured.http.Method.POST;
 import static property.BaseProperties.ACCESS_TOKEN_CUSTOMER_SERVICE;
+import static io.restassured.http.Method.PUT;
 
 
 public class AbsInfoService {
@@ -55,6 +56,14 @@ public class AbsInfoService {
     public Response checkInvalidURLAddNewBankBranch(AbsInfoServiceDataBankBranch absInfoServiceDataBankBranch) {
         return sendSimpleRequest
                 (POST, INVALID_ABS_INFO_SERVICE_NEW_BANK, absInfoServiceDataBankBranch);
+    }
+    public Response checkListEditingInformationAboutBranches
+            (AbsInfoServiceDataBankBranch absInfoServiceDataBankBranch,String uuid){
+return sendSimpleRequest(PUT,ABS_INFO_SERVICE_UPDATE+uuid, absInfoServiceDataBankBranch);
+    }
+    public Response checkListEditingInformationAboutBranchesInvalidEndpoint
+            (AbsInfoServiceDataBankBranch absInfoServiceDataBankBranch,String uuid){
+        return sendSimpleRequest(PUT,ABS_INFO_SERVICE_INVALID+uuid, absInfoServiceDataBankBranch);
     }
 
     public static Response gettingListOfBankBranches(String HttpMethod) {

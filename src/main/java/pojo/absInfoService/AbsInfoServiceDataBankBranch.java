@@ -6,6 +6,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Getter
+@NoArgsConstructor
 public class AbsInfoServiceDataBankBranch {
 
     private String office_number;
