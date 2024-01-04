@@ -32,7 +32,7 @@ public class IS_7_SeparateNewsPageTest extends BaseTest {
     @Tags({@Tag("API"), @Tag("Smoke")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB4-971")
     @ParameterizedTest()
-    @ValueSource(ints = {1,2,3,4,5,6,7})
+    @ValueSource(ints = {1, 2, 3, 4, 5, 6, 7})
     public void checkingWhetherInformationIsReceivedFromNewsPage(int id) {
         String jsonSchemaPath = "schemas/absInfoService/successfulGetNewsByUuid.json";
         String uuid = AbsInfoServiceDataBaseRequest.getBankNewsUuid(id);
@@ -61,10 +61,11 @@ public class IS_7_SeparateNewsPageTest extends BaseTest {
     @Description("Данный тест-кейс направлен на проверку получения информации о новостях при невалидном url")
     @Tags({@Tag("API"), @Tag("Negative")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB4-973")
-    @Test
-    public void checkingWhetherInformationIsReceivedFromNewsPageInvalidUrl() {
+    @ParameterizedTest()
+    @ValueSource(ints = {1, 2, 3, 4, 5, 6, 7})
+    public void checkingWhetherInformationIsReceivedFromNewsPageInvalidUrl(int id) {
         String jsonSchemaPath = "schemas/StatusCode404InfoService.json";
-        String uuid = AbsInfoServiceDataBaseRequest.getBankNewsUuid(5);
+        String uuid = AbsInfoServiceDataBaseRequest.getBankNewsUuid(id);
         Response response = absInfoService.checkListWhetherInformationIsReceivedFromNewsPageInvalidUrl(uuid);
         assertAll(
                 () -> assertEquals(SC_NOT_FOUND, response.getStatusCode()),
