@@ -11,6 +11,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static constant.AbsInfoServiceConstants.UN_EXIST_UUID_ABS;
 import static org.apache.http.HttpStatus.SC_NOT_FOUND;
@@ -29,10 +31,11 @@ public class IS_7_SeparateNewsPageTest extends BaseTest {
     @Description("Данный тест-кейс направлен на проверку получения информации о новостях")
     @Tags({@Tag("API"), @Tag("Smoke")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB4-971")
-    @Test
-    public void checkingWhetherInformationIsReceivedFromNewsPage() {
+    @ParameterizedTest()
+    @ValueSource(ints = {1,2,3,4,5,6,7})
+    public void checkingWhetherInformationIsReceivedFromNewsPage(int id) {
         String jsonSchemaPath = "schemas/absInfoService/successfulGetNewsByUuid.json";
-        String uuid = AbsInfoServiceDataBaseRequest.getBankNewsUuid(5);
+        String uuid = AbsInfoServiceDataBaseRequest.getBankNewsUuid(id);
         Response response = absInfoService.checkListWhetherInformationIsReceivedFromNewsPage(uuid);
         assertAll(
                 () -> assertEquals(SC_OK, response.getStatusCode()),
