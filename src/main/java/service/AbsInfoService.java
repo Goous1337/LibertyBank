@@ -9,8 +9,9 @@ import static api.core.ApiClient.sendRequestWithoutParams;
 import static api.core.ApiClient.sendSimpleRequest;
 import static api.core.RequestParam.getRP;
 import static api.core.RequestParamType.HEADER;
-import static api.core.RequestParamType.PARAMETER;
+import static api.core.RequestParamType.PATH_PARAMETER;
 import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
+import static constant.AbsInfoServiceConstants.NEWS_UUID;
 import static constant.ApiEndpoints.*;
 import static io.netty.handler.codec.http.HttpHeaders.Values.APPLICATION_JSON;
 import static io.restassured.http.Method.*;
@@ -53,13 +54,15 @@ public class AbsInfoService {
         return sendSimpleRequest
                 (POST, INVALID_ABS_INFO_SERVICE_NEW_BANK, absInfoServiceDataBankBranch);
     }
+
     public Response checkListEditingInformationAboutBranches
-            (AbsInfoServiceDataBankBranch absInfoServiceDataBankBranch,String uuid){
-return sendSimpleRequest(PUT,ABS_INFO_SERVICE_UPDATE+uuid, absInfoServiceDataBankBranch);
+            (AbsInfoServiceDataBankBranch absInfoServiceDataBankBranch, String uuid) {
+        return sendSimpleRequest(PUT, ABS_INFO_SERVICE_UPDATE , uuid, absInfoServiceDataBankBranch);
     }
+
     public Response checkListEditingInformationAboutBranchesInvalidEndpoint
-            (AbsInfoServiceDataBankBranch absInfoServiceDataBankBranch,String uuid){
-        return sendSimpleRequest(PUT,ABS_INFO_SERVICE_INVALID+uuid, absInfoServiceDataBankBranch);
+            (AbsInfoServiceDataBankBranch absInfoServiceDataBankBranch, String uuid) {
+        return sendSimpleRequest(PUT, ABS_INFO_SERVICE_INVALID, uuid, absInfoServiceDataBankBranch);
     }
 
     public static Response gettingListOfBankBranches(String HttpMethod) {
@@ -69,10 +72,12 @@ return sendSimpleRequest(PUT,ABS_INFO_SERVICE_UPDATE+uuid, absInfoServiceDataBan
     public static Response unGettingListOfBankBranches(String HttpMethod) {
         return sendRequestWithoutParams(Method.valueOf(HttpMethod), BANK_LIST_MISTAKE);
     }
-    public Response checkListWhetherInformationIsReceivedFromNewsPage(String uuid) {
-        return sendSimpleRequest(GET, ABS_NEWS_BY_UUID+uuid, getRP(HEADER, CONTENT_TYPE, APPLICATION_JSON));
-    }
+
     public Response checkListWhetherInformationIsReceivedFromNewsPageInvalidUrl(String uuid) {
-        return sendSimpleRequest(GET, INVALID_ABS_NEWS+uuid, getRP(HEADER, CONTENT_TYPE, APPLICATION_JSON));
+        return sendSimpleRequest(GET, INVALID_ABS_NEWS, getRP(PATH_PARAMETER, NEWS_UUID, uuid));
+    }
+
+    public Response checkListWhetherInformationIsReceivedFromNewsPage(String uuid) {
+        return sendSimpleRequest(GET, ABS_NEWS_BY_UUID, getRP(PATH_PARAMETER, NEWS_UUID, uuid));
     }
 }

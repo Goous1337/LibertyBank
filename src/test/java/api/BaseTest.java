@@ -11,12 +11,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import lombok.Data;
 import lombok.extern.log4j.Log4j2;
-import service.AbsInfoService;
-import service.CreditService;
-import service.CustomerService;
-import service.DepositService;
-import service.InfoService;
-import service.UserAccountService;
+import service.*;
 
 /**
  * Базовый тестовый класс
@@ -33,6 +28,7 @@ public class BaseTest {
     protected DepositService depositService;
     protected CreditService creditService;
     protected AbsInfoService absInfoService;
+    protected AbsClientService absClientService;
 
     public BaseTest() {
         params = new ArrayList<>();
@@ -42,6 +38,7 @@ public class BaseTest {
         depositService = new DepositService();
         creditService = new CreditService();
         absInfoService = new AbsInfoService();
+        absClientService = new AbsClientService();
     }
 
     @BeforeEach

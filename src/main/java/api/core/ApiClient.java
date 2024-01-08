@@ -25,7 +25,7 @@ import static org.apache.http.params.CoreConnectionPNames.SO_TIMEOUT;
 
 public class ApiClient {
 
-    static  {
+    static {
         RestAssured.filters(List.of(
                 new RequestLoggingFilter(LogDetail.ALL),
                 new ResponseLoggingFilter(LogDetail.BODY),
@@ -113,6 +113,8 @@ public class ApiClient {
                     request.body(value);
                     break;
                 case PATH:
+                    request.pathParam(name, value);
+                case PATH_PARAMETER:
                     request.pathParam(name, value);
                     break;
                 default:
