@@ -1,6 +1,5 @@
 package service;
 
-import api.core.RequestParam;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
 import pojo.absInfoService.AbsInfoServiceData;
@@ -10,13 +9,11 @@ import static api.core.ApiClient.sendRequestWithoutParams;
 import static api.core.ApiClient.sendSimpleRequest;
 import static api.core.RequestParam.getRP;
 import static api.core.RequestParamType.HEADER;
-import static com.google.common.net.HttpHeaders.AUTHORIZATION;
 import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
 import static constant.ApiEndpoints.*;
 import static io.netty.handler.codec.http.HttpHeaders.Values.APPLICATION_JSON;
 import static io.restassured.http.Method.GET;
 import static io.restassured.http.Method.POST;
-import static property.BaseProperties.ACCESS_TOKEN_CUSTOMER_SERVICE;
 import static io.restassured.http.Method.PUT;
 
 
@@ -57,13 +54,15 @@ public class AbsInfoService {
         return sendSimpleRequest
                 (POST, INVALID_ABS_INFO_SERVICE_NEW_BANK, absInfoServiceDataBankBranch);
     }
+
     public Response checkListEditingInformationAboutBranches
-            (AbsInfoServiceDataBankBranch absInfoServiceDataBankBranch,String uuid){
-return sendSimpleRequest(PUT,ABS_INFO_SERVICE_UPDATE+uuid, absInfoServiceDataBankBranch);
+            (AbsInfoServiceDataBankBranch absInfoServiceDataBankBranch, String uuid) {
+        return sendSimpleRequest(PUT, ABS_INFO_SERVICE_UPDATE + uuid, absInfoServiceDataBankBranch);
     }
+
     public Response checkListEditingInformationAboutBranchesInvalidEndpoint
-            (AbsInfoServiceDataBankBranch absInfoServiceDataBankBranch,String uuid){
-        return sendSimpleRequest(PUT,ABS_INFO_SERVICE_INVALID+uuid, absInfoServiceDataBankBranch);
+            (AbsInfoServiceDataBankBranch absInfoServiceDataBankBranch, String uuid) {
+        return sendSimpleRequest(PUT, ABS_INFO_SERVICE_INVALID + uuid, absInfoServiceDataBankBranch);
     }
 
     public static Response gettingListOfBankBranches(String HttpMethod) {
@@ -72,5 +71,9 @@ return sendSimpleRequest(PUT,ABS_INFO_SERVICE_UPDATE+uuid, absInfoServiceDataBan
 
     public static Response unGettingListOfBankBranches(String HttpMethod) {
         return sendRequestWithoutParams(Method.valueOf(HttpMethod), BANK_LIST_MISTAKE);
+    }
+
+    public Response checkListEditingInformationBranches(String uuid) {
+        return sendSimpleRequest(GET, String.format("%s%s", ABS_INFO_SERVICE_UPDATE, uuid), getRP(HEADER, CONTENT_TYPE, APPLICATION_JSON));
     }
 }

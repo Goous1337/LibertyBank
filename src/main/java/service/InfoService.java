@@ -60,13 +60,5 @@ public class InfoService {
     public Response checkGettingInformationCurrencyExchangeRates(String httpMethod) {
         return sendRequestWithoutParams(Method.valueOf(httpMethod), BANK_EXCHANGE_RATES);
     }
-    public static Response unGettingListOfBankBranches(String HttpMethod) {
-        return sendRequestWithoutParams(Method.valueOf(HttpMethod), BANK_LIST_MISTAKE);
-    }
-    public static Response gettingListOfBankBranches(String HttpMethod) {
-        return sendRequestWithoutParams(Method.valueOf(HttpMethod), BANK_LIST);
-    }
-
-
 
 }

@@ -4,9 +4,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import pojo.absInfoService.AbsInfoServiceDataBankBranch;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import pojo.absInfoService.AbsInfoServiceDataBankBranch;
 
+import java.util.Collections;
 import java.util.List;
 
 import static constant.LibertyServiceName.ABS_INFO_SERVICE;
@@ -79,9 +78,15 @@ public class AbsInfoServiceDataBaseRequest {
         return absInfoServiceDataBankBranch;
     }
 
-    public static List<String> getBankUuid(){
+    public static List<String> getBankUuid() {
         String sql = "SELECT uuid FROM bank_office";
         List<String> uuid = getDBConnection(ABS_INFO_SERVICE).queryForList(sql, String.class);
         return uuid;
     }
+    public static String getUuid() {
+        String sql = "SELECT uuid FROM bank_office WHERE id = 5";
+        String uuid = getDBConnection(ABS_INFO_SERVICE).queryForObject(sql, String.class);
+        return uuid;
+    }
 }
+
