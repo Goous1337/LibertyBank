@@ -9,7 +9,9 @@ import static api.core.ApiClient.sendRequestWithoutParams;
 import static api.core.ApiClient.sendSimpleRequest;
 import static api.core.RequestParam.getRP;
 import static api.core.RequestParamType.HEADER;
+import static api.core.RequestParamType.PATH;
 import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
+import static constant.AbsInfoServiceConstants.ABS_SERVICE_OFFICE_UUID;
 import static constant.ApiEndpoints.*;
 import static io.netty.handler.codec.http.HttpHeaders.Values.APPLICATION_JSON;
 import static io.restassured.http.Method.GET;
@@ -73,7 +75,8 @@ public class AbsInfoService {
         return sendRequestWithoutParams(Method.valueOf(HttpMethod), BANK_LIST_MISTAKE);
     }
 
-    public Response checkListEditingInformationBranches(String uuid) {
-        return sendSimpleRequest(GET, String.format("%s%s", ABS_INFO_SERVICE_UPDATE, uuid), getRP(HEADER, CONTENT_TYPE, APPLICATION_JSON));
+    public static Response checkListEditingInformationBranches(String uuid) {
+        return sendSimpleRequest(GET, ABS_INFO_SERVICE_UPDATE, getRP(PATH,ABS_SERVICE_OFFICE_UUID, uuid));
     }
+
 }

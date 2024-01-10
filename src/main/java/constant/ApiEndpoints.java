@@ -51,7 +51,7 @@ public final class ApiEndpoints {
     public static final String ABS_INFO_SERVICE ="api/v1/info-service/atm";
     public static final String INVALID_ABS_INFO_SERVICE ="api/v1/info-service/atm/";
     public static final String ABS_INFO_SERVICE_NEW_BANK ="api/v1/info-service/offices";
-    public static final String ABS_INFO_SERVICE_UPDATE ="api/v1/info-service/offices/";
+    public static final String ABS_INFO_SERVICE_UPDATE ="api/v1/info-service/offices/{office_uuid}";
     public static final String ABS_INFO_SERVICE_INVALID ="api/v1/info-service/officess/";
     public static final String INVALID_ABS_INFO_SERVICE_NEW_BANK ="api/v1/info-service/offices/";
     public static final String ABS_NEWS ="api/v1/abs/news";

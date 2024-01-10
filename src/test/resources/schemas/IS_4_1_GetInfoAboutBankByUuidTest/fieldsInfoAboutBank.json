@@ -1,9 +1,105 @@
 {
-  "definitions": {},
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://example.com/object1704290639.json",
-  "title": "Root",
+  "title": "Generated schema for Root",
   "type": "object",
+  "properties": {
+    "country": {
+      "type": "string"
+    },
+    "region": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "street": {
+      "type": "string"
+    },
+    "building_number": {
+      "type": "string"
+    },
+    "office_coordinates": {
+      "type": "string"
+    },
+    "post_code": {
+      "type": "string"
+    },
+    "ramp": {
+      "type": "boolean"
+    },
+    "consultation": {
+      "type": "boolean"
+    },
+    "insurance": {
+      "type": "boolean"
+    },
+    "office_uuid": {
+      "type": "string"
+    },
+    "office_number": {
+      "type": "string"
+    },
+    "phone_number": {
+      "type": "string"
+    },
+    "is_closed": {
+      "type": "boolean"
+    },
+    "opening_time": {
+      "type": "string"
+    },
+    "closing_time": {
+      "type": "string"
+    },
+    "currency_exchange": {
+      "type": "boolean"
+    },
+    "exotic_currency": {
+      "type": "boolean"
+    },
+    "money_transfer": {
+      "type": "boolean"
+    },
+    "cash_withdrawal": {
+      "type": "boolean"
+    },
+    "accept_payment": {
+      "type": "boolean"
+    },
+    "replenish_card": {
+      "type": "boolean"
+    },
+    "replenish_account": {
+      "type": "boolean"
+    },
+    "bik": {
+      "type": "string"
+    },
+    "kpp": {
+      "type": "string"
+    },
+    "inn": {
+      "type": "string"
+    },
+    "okpo": {
+      "type": "string"
+    },
+    "ogrn": {
+      "type": "string"
+    },
+    "swift": {
+      "type": "string"
+    },
+    "payment_account": {
+      "type": "string"
+    },
+    "correspondent_account": {
+      "type": "string"
+    },
+    "bank_name_full": {
+      "type": "string"
+    }
+  },
   "required": [
     "country",
     "region",
@@ -15,6 +111,7 @@
     "ramp",
     "consultation",
     "insurance",
+    "office_uuid",
     "office_number",
     "phone_number",
     "is_closed",
@@ -36,306 +133,5 @@
     "payment_account",
     "correspondent_account",
     "bank_name_full"
-  ],
-  "properties": {
-    "country": {
-      "$id": "#root/country",
-      "title": "Country",
-      "type": "string",
-      "default": "",
-      "examples": [
-        "Россия"
-      ],
-      "pattern": "^.*$"
-    },
-    "region": {
-      "$id": "#root/region",
-      "title": "Region",
-      "type": "string",
-      "default": "",
-      "examples": [
-        "Московская область"
-      ],
-      "pattern": "^.*$"
-    },
-    "city": {
-      "$id": "#root/city",
-      "title": "City",
-      "type": "string",
-      "default": "",
-      "examples": [
-        "Балашиха"
-      ],
-      "pattern": "^.*$"
-    },
-    "street": {
-      "$id": "#root/street",
-      "title": "Street",
-      "type": "string",
-      "default": "",
-      "examples": [
-        "Вернадского"
-      ],
-      "pattern": "^.*$"
-    },
-    "building_number": {
-      "$id": "#root/building_number",
-      "title": "Building_number",
-      "type": "string",
-      "default": "",
-      "examples": [
-        "5"
-      ],
-      "pattern": "^.*$"
-    },
-    "office_coordinates": {
-      "$id": "#root/office_coordinates",
-      "title": "Office_coordinates",
-      "type": "string",
-      "default": "",
-      "examples": [
-        "55.696225, 37.544539"
-      ],
-      "pattern": "^.*$"
-    },
-    "post_code": {
-      "$id": "#root/post_code",
-      "title": "Post_code",
-      "type": "string",
-      "default": "",
-      "examples": [
-        "117997"
-      ],
-      "pattern": "^.*$"
-    },
-    "ramp": {
-      "$id": "#root/ramp",
-      "title": "Ramp",
-      "type": "boolean",
-      "examples": [
-        true
-      ],
-      "default": true
-    },
-    "consultation": {
-      "$id": "#root/consultation",
-      "title": "Consultation",
-      "type": "boolean",
-      "examples": [
-        false
-      ],
-      "default": true
-    },
-    "insurance": {
-      "$id": "#root/insurance",
-      "title": "Insurance",
-      "type": "boolean",
-      "examples": [
-        true
-      ],
-      "default": true
-    },
-    "office_number": {
-      "$id": "#root/office_number",
-      "title": "Office_number",
-      "type": "string",
-      "default": "",
-      "examples": [
-        "8500"
-      ],
-      "pattern": "^.*$"
-    },
-    "phone_number": {
-      "$id": "#root/phone_number",
-      "title": "Phone_number",
-      "type": "string",
-      "default": "",
-      "examples": [
-        "+74955555555"
-      ],
-      "pattern": "^.*$"
-    },
-    "is_closed": {
-      "$id": "#root/is_closed",
-      "title": "Is_closed",
-      "type": "boolean",
-      "examples": [
-        false
-      ],
-      "default": true
-    },
-    "opening_time": {
-      "$id": "#root/opening_time",
-      "title": "Opening_time",
-      "type": "string",
-      "default": "",
-      "examples": [
-        "00:00"
-      ],
-      "pattern": "^.*$"
-    },
-    "closing_time": {
-      "$id": "#root/closing_time",
-      "title": "Closing_time",
-      "type": "string",
-      "default": "",
-      "examples": [
-        "23:59"
-      ],
-      "pattern": "^.*$"
-    },
-    "currency_exchange": {
-      "$id": "#root/currency_exchange",
-      "title": "Currency_exchange",
-      "type": "boolean",
-      "examples": [
-        true
-      ],
-      "default": true
-    },
-    "exotic_currency": {
-      "$id": "#root/exotic_currency",
-      "title": "Exotic_currency",
-      "type": "boolean",
-      "examples": [
-        true
-      ],
-      "default": true
-    },
-    "money_transfer": {
-      "$id": "#root/money_transfer",
-      "title": "Money_transfer",
-      "type": "boolean",
-      "examples": [
-        true
-      ],
-      "default": true
-    },
-    "cash_withdrawal": {
-      "$id": "#root/cash_withdrawal",
-      "title": "Cash_withdrawal",
-      "type": "boolean",
-      "examples": [
-        true
-      ],
-      "default": true
-    },
-    "accept_payment": {
-      "$id": "#root/accept_payment",
-      "title": "Accept_payment",
-      "type": "boolean",
-      "examples": [
-        true
-      ],
-      "default": true
-    },
-    "replenish_card": {
-      "$id": "#root/replenish_card",
-      "title": "Replenish_card",
-      "type": "boolean",
-      "examples": [
-        true
-      ],
-      "default": true
-    },
-    "replenish_account": {
-      "$id": "#root/replenish_account",
-      "title": "Replenish_account",
-      "type": "boolean",
-      "examples": [
-        true
-      ],
-      "default": true
-    },
-    "bik": {
-      "$id": "#root/bik",
-      "title": "Bik",
-      "type": "string",
-      "default": "",
-      "examples": [
-        "044525225"
-      ],
-      "pattern": "^.*$"
-    },
-    "kpp": {
-      "$id": "#root/kpp",
-      "title": "Kpp",
-      "type": "string",
-      "default": "",
-      "examples": [
-        "773643002"
-      ],
-      "pattern": "^.*$"
-    },
-    "inn": {
-      "$id": "#root/inn",
-      "title": "Inn",
-      "type": "string",
-      "default": "",
-      "examples": [
-        "7707083893"
-      ],
-      "pattern": "^.*$"
-    },
-    "okpo": {
-      "$id": "#root/okpo",
-      "title": "Okpo",
-      "type": "string",
-      "default": "",
-      "examples": [
-        "1232354325"
-      ],
-      "pattern": "^.*$"
-    },
-    "ogrn": {
-      "$id": "#root/ogrn",
-      "title": "Ogrn",
-      "type": "string",
-      "default": "",
-      "examples": [
-        "25356475667"
-      ],
-      "pattern": "^.*$"
-    },
-    "swift": {
-      "$id": "#root/swift",
-      "title": "Swift",
-      "type": "string",
-      "default": "",
-      "examples": [
-        "LIBBRUMM007"
-      ],
-      "pattern": "^.*$"
-    },
-    "payment_account": {
-      "$id": "#root/payment_account",
-      "title": "Payment_account",
-      "type": "string",
-      "default": "",
-      "examples": [
-        "40702810562000000000"
-      ],
-      "pattern": "^.*$"
-    },
-    "correspondent_account": {
-      "$id": "#root/correspondent_account",
-      "title": "Correspondent_account",
-      "type": "string",
-      "default": "",
-      "examples": [
-        "30101810400000000225"
-      ],
-      "pattern": "^.*$"
-    },
-    "bank_name_full": {
-      "$id": "#root/bank_name_full",
-      "title": "Bank_name_full",
-      "type": "string",
-      "default": "",
-      "examples": [
-        "АО «Liberty Bank»"
-      ],
-      "pattern": "^.*$"
-    }
-  }
+  ]
 }
