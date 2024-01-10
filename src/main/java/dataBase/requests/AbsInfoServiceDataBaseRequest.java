@@ -43,6 +43,7 @@ public class AbsInfoServiceDataBaseRequest {
     public static String getBankBranchUuid(int id) {
         String sql = "SELECT uuid FROM bank_office WHERE id=?";
         String uuid = getDBConnection(ABS_INFO_SERVICE).queryForObject(sql, String.class, id);
+        LOG.info(String.format("Получен uuid офиса банка: %s по id: %s", uuid, id));
         return uuid;
     }
 
@@ -86,6 +87,13 @@ public class AbsInfoServiceDataBaseRequest {
     public static String getUuid() {
         String sql = "SELECT uuid FROM bank_office WHERE id = 5";
         String uuid = getDBConnection(ABS_INFO_SERVICE).queryForObject(sql, String.class);
+        return uuid;
+    }
+
+    public static String getBankNewsUuid(int id) {
+        String sql = "SELECT uuid FROM news WHERE id=?";
+        String uuid = getDBConnection(ABS_INFO_SERVICE).queryForObject(sql, String.class, id);
+        LOG.info(String.format("Получен uuid news: %s по id: %s", uuid, id));
         return uuid;
     }
 }
