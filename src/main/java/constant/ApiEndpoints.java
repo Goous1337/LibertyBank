@@ -54,7 +54,6 @@ public final class ApiEndpoints {
     public static final String ABS_INFO_SERVICE_NEW_BANK = "api/v1/info-service/offices";
     public static final String ABS_INFO_SERVICE_UPDATE = "api/v1/info-service/offices/{uuid}";
     public static final String ABS_INFO_SERVICE_INVALID = "api/v1/info-service/officess/{uuid}";
-    public static final String ABS_INFO_SERVICE_INVALID_2 = "api/v1/info-service/officess/{uuid}";
     public static final String INVALID_ABS_INFO_SERVICE_NEW_BANK = "api/v1/info-service/offices/";
     public static final String ABS_NEWS = "api/v1/abs/news";
     public static final String ABS_NEWS_BY_UUID = "api/v1/abs/news/{newsUuid}";
