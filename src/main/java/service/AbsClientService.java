@@ -15,7 +15,7 @@ import static io.restassured.http.Method.GET;
 public class AbsClientService {
     public Response checkListObtainingClientDataUsingPassport(String series, String number) {
         List<RequestParam> params = List.of
-                (new RequestParam(PARAMETER, SERIES, series), new RequestParam(PARAMETER, NUMBER, number));
+                (getRP(PARAMETER, SERIES, series), getRP(PARAMETER, NUMBER, number));
         return sendSimpleRequest(GET, ABS_CLIENT_SHORT_INFO, params);
     }
 
@@ -25,8 +25,8 @@ public class AbsClientService {
 
     public Response checkListObtainingClientDataUsingPassportAndUuid(String uuid, String series, String number) {
         List<RequestParam> params = List.of
-                (new RequestParam(PARAMETER, UUID_SHORT_INFO, uuid), new RequestParam(PARAMETER, SERIES, series),
-                        new RequestParam(PARAMETER, NUMBER, number));
+                (getRP(PARAMETER, UUID_SHORT_INFO, uuid), getRP(PARAMETER, SERIES, series),
+                        getRP(PARAMETER, NUMBER, number));
         return sendSimpleRequest(GET, ABS_CLIENT_SHORT_INFO, params);
     }
 }

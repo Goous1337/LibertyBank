@@ -9,7 +9,7 @@ import static api.core.ApiClient.sendRequestWithoutParams;
 import static api.core.ApiClient.sendSimpleRequest;
 import static api.core.RequestParam.getRP;
 import static api.core.RequestParamType.HEADER;
-import static api.core.RequestParamType.PATH_PARAMETER;
+import static api.core.RequestParamType.PATH;
 import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
 import static constant.AbsInfoServiceConstants.NEWS_UUID;
 import static constant.ApiEndpoints.*;
@@ -74,10 +74,10 @@ public class AbsInfoService {
     }
 
     public Response checkListWhetherInformationIsReceivedFromNewsPageInvalidUrl(String uuid) {
-        return sendSimpleRequest(GET, INVALID_ABS_NEWS, getRP(PATH_PARAMETER, NEWS_UUID, uuid));
+        return sendSimpleRequest(GET, INVALID_ABS_NEWS, getRP(PATH, NEWS_UUID, uuid));
     }
 
     public Response checkListWhetherInformationIsReceivedFromNewsPage(String uuid) {
-        return sendSimpleRequest(GET, ABS_NEWS_BY_UUID, getRP(PATH_PARAMETER, NEWS_UUID, uuid));
+        return sendSimpleRequest(GET, ABS_NEWS_BY_UUID, getRP(PATH, NEWS_UUID, uuid));
     }
 }
