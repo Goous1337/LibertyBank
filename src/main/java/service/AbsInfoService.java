@@ -1,5 +1,6 @@
 package service;
 
+import api.core.RequestParam;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
 import pojo.absInfoService.AbsInfoServiceData;
@@ -11,10 +12,13 @@ import static api.core.RequestParam.getRP;
 import static api.core.RequestParamType.HEADER;
 import static api.core.RequestParamType.PATH;
 import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
-import static constant.AbsInfoServiceConstants.NEWS_UUID;
+import static constant.AbsInfoServiceConstants.*;
 import static constant.ApiEndpoints.*;
 import static io.netty.handler.codec.http.HttpHeaders.Values.APPLICATION_JSON;
 import static io.restassured.http.Method.*;
+import static io.restassured.http.Method.GET;
+import static io.restassured.http.Method.POST;
+import static io.restassured.http.Method.PUT;
 
 
 public class AbsInfoService {
@@ -80,4 +84,9 @@ public class AbsInfoService {
     public Response checkListWhetherInformationIsReceivedFromNewsPage(String uuid) {
         return sendSimpleRequest(GET, ABS_NEWS_BY_UUID, getRP(PATH, NEWS_UUID, uuid));
     }
+
+    public static Response checkListEditingInformationBranches(String office_uuid) {
+        return sendSimpleRequest(GET, ABS_INFO_SERVICE_UPDATE, getRP(PATH, UUID, office_uuid));
+    }
+
 }

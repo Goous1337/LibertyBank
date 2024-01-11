@@ -29,7 +29,6 @@ public class BaseTest {
     protected CreditService creditService;
     protected AbsInfoService absInfoService;
     protected AbsClientService absClientService;
-
     public BaseTest() {
         params = new ArrayList<>();
         customerService = new CustomerService();
