@@ -52,7 +52,7 @@ public final class PropertiesReader {
         return Integer.parseInt(PropertiesReader.getPropertyValue(name, CONFIG_PROPERTIES));
     }
 
-    private static String getPropertyValue(String name, String propertiesFileName) {
+    protected static String getPropertyValue(String name, String propertiesFileName) {
         if (System.getProperty(name) != null) {
             return System.getProperty(name);
         }
