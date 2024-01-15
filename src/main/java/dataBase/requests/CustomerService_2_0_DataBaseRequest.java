@@ -1,0 +1,31 @@
+package dataBase.requests;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import static constant.LibertyServiceName.CUSTOMER_SERVICE_DB_2_0;
+import static dataBase.DataBaseConnector.getDBConnection;
+
+public class CustomerService_2_0_DataBaseRequest {
+    private static final Logger LOG = LogManager.getLogger("DBRequest");
+
+    public static String getCustomerIdByMobilePhone(String mobilePhone) {
+        String sql = "SELECT customer_id FROM customer WHERE mobile_phone =?";
+        String customerId = getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sql, String.class, mobilePhone);
+        LOG.info(String.format("Получен id пользователя: %s , по мобильному телефону: %s", customerId, mobilePhone));
+        return customerId;
+    }
+
+    public static String getCustomerLastVerificationCodeById(String id) {
+        String sql = "SELECT last_verification_code FROM user_profile WHERE customer_id =?::uuid";
+        String verificationCode = getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sql, String.class, id);
+        LOG.info(String.format("Получен код верификации: %s , по id: %s", verificationCode, id));
+        return verificationCode;
+    }
+
+    public static void resetTimerOfVerificationCodeById(String id) {
+        String sql = "UPDATE user_profile SET sms_sent_counter = 0 WHERE customer_id =?::uuid";
+        getDBConnection(CUSTOMER_SERVICE_DB_2_0).update(sql, id);
+        LOG.info(String.format("Счетчик таймера по id: %s , был сброшен на начальное значение (30 секунд.)", id));
+    }
+}

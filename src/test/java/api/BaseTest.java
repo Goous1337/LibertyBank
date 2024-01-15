@@ -1,17 +1,16 @@
 package api;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.TestInfo;
-
 import api.core.RequestParam;
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import lombok.Data;
 import lombok.extern.log4j.Log4j2;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.TestInfo;
 import service.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Базовый тестовый класс
@@ -29,6 +28,7 @@ public class BaseTest {
     protected CreditService creditService;
     protected AbsInfoService absInfoService;
     protected AbsClientService absClientService;
+    protected CustomerService_2_0 customerService_2_0;
 
     public BaseTest() {
         params = new ArrayList<>();
@@ -39,6 +39,7 @@ public class BaseTest {
         creditService = new CreditService();
         absInfoService = new AbsInfoService();
         absClientService = new AbsClientService();
+        customerService_2_0 = new CustomerService_2_0();
     }
 
     @BeforeEach
