@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.DEPOSIT_SERVICE;
 
 @DisplayName("Отправка чека на электронную почту")
-public class DM_9_11_CheckSendingEmailAfterDepositWithdrawal extends BaseTest {
+public class DM_9_11_CheckSendingEmailAfterDepositWithdrawalTest extends BaseTest {
 
     {
         RestAssured.baseURI = DEPOSIT_SERVICE;
