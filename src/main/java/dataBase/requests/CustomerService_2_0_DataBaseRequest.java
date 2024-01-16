@@ -3,6 +3,8 @@ package dataBase.requests;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.List;
+
 import static constant.LibertyServiceName.CUSTOMER_SERVICE_DB_2_0;
 import static dataBase.DataBaseConnector.getDBConnection;
 
@@ -27,5 +29,18 @@ public class CustomerService_2_0_DataBaseRequest {
         String sql = "UPDATE user_profile SET sms_sent_counter = 0 WHERE customer_id =?::uuid";
         getDBConnection(CUSTOMER_SERVICE_DB_2_0).update(sql, id);
         LOG.info(String.format("Счетчик таймера по id: %s , был сброшен на начальное значение (30 секунд.)", id));
+    }
+
+    public static void deleteDataById(String id) {
+        String sql = "DELETE FROM  user_token WHERE customer_id =?::uuid; DELETE FROM user_profile WHERE customer_id =?::uuid";
+        getDBConnection(CUSTOMER_SERVICE_DB_2_0).update(sql, id, id);
+        LOG.info(String.format("Данные пользователя по id: %s , были удалены", id));
+    }
+
+    public static List<String> getAllCustomerId() {
+        String sql = "SELECT customer_id FROM user_profile";
+        List<String> customerIdList = getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForList(sql, String.class);
+        LOG.info(String.format("Получен список id из таблицы user_profile"));
+        return customerIdList;
     }
 }
