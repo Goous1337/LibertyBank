@@ -11,8 +11,6 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
-import static constant.CreditServiceConstants.ERROR;
-import static constant.CreditServiceConstants.STATUS_404;
 import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.CREDIT_SERVICE;
@@ -45,7 +43,7 @@ public class CM_3_8_CheckNumberOfLoanApplicationsSubmittedTest extends BaseTest 
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-536")
     @Test
     public void checkNumberOfLoanApplicationsSubmittedInvalidToken() {
-        String jsonSchemaPath = "schemas/creditService/CM_3_8/errorMessage.json";
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = creditService.checkListNumberOfLoanApplicationsSubmittedInvalidToken();
         assertAll(
                 () -> assertEquals(SC_UNAUTHORIZED, response.getStatusCode()),
@@ -62,7 +60,7 @@ public class CM_3_8_CheckNumberOfLoanApplicationsSubmittedTest extends BaseTest 
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-537")
     @Test
     public void checkNumberOfLoanApplicationsSubmittedNoRecordsInTheTable() {
-        String jsonSchemaPath = "schemas/creditService/CM_3_8/errorMessage.json";
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = creditService.checkListNumberOfLoanApplicationsSubmittedNoRecordsInTheTable();
         assertAll(
                 () -> assertEquals(SC_NOT_FOUND, response.getStatusCode()),

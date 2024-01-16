@@ -1,0 +1,95 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "uuid": {
+        "type": "string"
+      },
+      "country": {
+        "type": "string"
+      },
+      "region": {
+        "type": "string"
+      },
+      "city": {
+        "type": "string"
+      },
+      "street": {
+        "type": "string"
+      },
+      "buildingNumber": {
+        "type": "string"
+      },
+      "coordinates": {
+        "type": "string"
+      },
+      "roomNumber": {
+        "type": "string"
+      },
+      "atmNumber": {
+        "type": "string"
+      },
+      "isClosed": {
+        "type": "boolean"
+      },
+      "cashWithdrawal": {
+        "type": "boolean"
+      },
+      "cashDeposit": {
+        "type": "boolean"
+      },
+      "cashDepositCurrencies": {
+        "type": "boolean"
+      },
+      "moneyTransfer": {
+        "type": "boolean"
+      },
+      "payments": {
+        "type": "boolean"
+      },
+      "nfc": {
+        "type": "boolean"
+      },
+      "banknotesPerPack": {
+        "type": "number"
+      },
+      "maxAmount": {
+        "type": "number"
+      },
+      "biometrics": {
+        "type": "boolean"
+      },
+      "encashmentService": {
+        "type": "boolean"
+      },
+      "withdrawalCurrencies": {
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "uuid",
+      "country",
+      "region",
+      "city",
+      "street",
+      "buildingNumber",
+      "coordinates",
+      "roomNumber",
+      "atmNumber",
+      "isClosed",
+      "cashWithdrawal",
+      "cashDeposit",
+      "cashDepositCurrencies",
+      "moneyTransfer",
+      "payments",
+      "nfc",
+      "banknotesPerPack",
+      "maxAmount",
+      "biometrics",
+      "encashmentService",
+      "withdrawalCurrencies"
+    ]
+  }
+}

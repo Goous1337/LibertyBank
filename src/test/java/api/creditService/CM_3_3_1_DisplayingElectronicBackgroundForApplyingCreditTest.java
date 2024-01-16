@@ -9,7 +9,6 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
 import service.CreditService;
 
-import static constant.CreditService.*;
 import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.CREDIT_SERVICE;
@@ -42,8 +41,8 @@ public class CM_3_3_1_DisplayingElectronicBackgroundForApplyingCreditTest extend
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-851")
     @Test
     public void checkDisplayingElectronicBackgroundForApplyingCreditInvalidToken() {
-        String jsonSchemaPath ="schemas/creditService/CM_3_3_1/errorMessage.json";
-        Response response = CreditService.checkGetRequestDisplayingElectronicBackgroundInvalidToken("3");//TODO сделать для всех существующих productId
+        String jsonSchemaPath = "schemas/errorMessage.json";
+        Response response = CreditService.checkGetRequestDisplayingElectronicBackgroundInvalidToken();
         assertAll(
                 () -> assertEquals(SC_UNAUTHORIZED, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
@@ -57,7 +56,7 @@ public class CM_3_3_1_DisplayingElectronicBackgroundForApplyingCreditTest extend
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-852")
     @Test
     public void checkDisplayingElectronicBackgroundForApplyingCreditValidTokenWithoutParameters() {
-        String jsonSchemaPath ="schemas/creditService/CM_3_3_1/errorMessage.json";
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = CreditService.checkGetRequestDisplayingElectronicBackground("165");//TODO сделать для несуществующего productId
         assertAll(
                 () -> assertEquals(SC_NOT_FOUND, response.statusCode(),

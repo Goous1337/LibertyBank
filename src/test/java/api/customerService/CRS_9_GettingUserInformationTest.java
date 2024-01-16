@@ -72,7 +72,7 @@ public class CRS_9_GettingUserInformationTest extends BaseTest {
     @Test
 
     public void checkGettingUserInformationUsingInvalidData() {
-        String jsonSchemaPath = "schemas/customerService/CRS_9/errorMessage.json";
+        String jsonSchemaPath = "schemas/errorMessage.json";
         String customerId = "813f5509";
         Response response = customerService.checkGettingUserInformation(customerId);
 
@@ -95,7 +95,7 @@ public class CRS_9_GettingUserInformationTest extends BaseTest {
     })
 
     public void checkGettingUserInformationInvalidMethod(String invalidHttpMethod, String customerId) {
-        String jsonSchemaPath = "schemas/customerService/CRS_9/errorMessage.json";
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkGettingUserInformationInvalidMethod(invalidHttpMethod, customerId);
 
         assertAll(

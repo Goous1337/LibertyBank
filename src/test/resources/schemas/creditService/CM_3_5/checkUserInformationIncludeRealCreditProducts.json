@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Generated schema for Root",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "creditLimit": {
+      "type": "number"
+    },
+    "currencyCode": {
+      "type": "string"
+    },
+    "periodMonths": {
+      "type": "number"
+    },
+    "interestRate": {
+      "type": "number"
+    },
+    "generalDebt": {
+      "type": "number"
+    },
+    "currMainCreditPayment": {
+      "type": "number"
+    },
+    "percentCerditPayment": {
+      "type": "number"
+    },
+    "paymentDate": {
+      "type": "string"
+    },
+    "outstandingPrincipal": {
+      "type": "number"
+    },
+    "number": {
+      "type": "string"
+    },
+    "creditAccountNumber": {
+      "type": "string"
+    },
+    "isActive": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "name",
+    "creditLimit",
+    "currencyCode",
+    "periodMonths",
+    "interestRate",
+    "generalDebt",
+    "currMainCreditPayment",
+    "percentCerditPayment",
+    "paymentDate",
+    "outstandingPrincipal",
+    "number",
+    "creditAccountNumber",
+    "isActive"
+  ]
+}

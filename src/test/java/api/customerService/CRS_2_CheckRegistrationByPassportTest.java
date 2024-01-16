@@ -67,7 +67,7 @@ public class CRS_2_CheckRegistrationByPassportTest extends BaseTest {
     })
 
     public void checkRegistrationByPassportInvalidSeries(String passportSeries,String passportNumber) {
-        String jsonSchemaPath = "schemas/customerService/CRS_2/errorMessage.json";
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkRegistrationByPassport(passportSeries, passportNumber);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.statusCode(),
@@ -88,7 +88,7 @@ public class CRS_2_CheckRegistrationByPassportTest extends BaseTest {
     })
 
     public void checkRegistrationByPassportNotAClient(String passportSeries,String passportNumber) {
-        String jsonSchemaPath = "schemas/customerService/CRS_2/errorMessage.json";
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkRegistrationByPassport(passportSeries,passportNumber);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.statusCode(),
@@ -103,7 +103,7 @@ public class CRS_2_CheckRegistrationByPassportTest extends BaseTest {
     @Test
 
     public void checkRegistrationByPassportAlreadyRegisteredUser() {
-        String jsonSchemaPath = "schemas/customerService/CRS_2/errorMessage.json";
+        String jsonSchemaPath = "schemas/errorMessage.json";
         HashMap<String,String> passport = getPassportWithCustomerStatus(2);
         String passportSeries = passport.get("series");
         String passportNumber = passport.get("number");
@@ -127,7 +127,7 @@ public class CRS_2_CheckRegistrationByPassportTest extends BaseTest {
     })
 
     public void checkRegistrationByPhoneBlockedUser(String passportSeries,String passportNumber) {
-        String jsonSchemaPath = "schemas/customerService/CRS_2/errorMessage.json";
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkRegistrationByPassport(passportSeries,passportNumber);
         assertAll(
                 () -> assertEquals(SC_FORBIDDEN, response.statusCode(),
@@ -150,7 +150,7 @@ public class CRS_2_CheckRegistrationByPassportTest extends BaseTest {
     })
 
     public void checkRegistrationByPhoneInvalidMethod(String invalidHttpMethod, String passportSeries, String passportNumber) {
-        String jsonSchemaPath = "schemas/customerService/CRS_2/errorMessage.json";
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkRegistrationByPassportInvalidHttpMethod(invalidHttpMethod, passportSeries, passportNumber);
         assertAll(
                 () -> assertEquals(SC_METHOD_NOT_ALLOWED, response.statusCode(),
@@ -176,7 +176,7 @@ public class CRS_2_CheckRegistrationByPassportTest extends BaseTest {
     })
 
     public void checkRegistrationByPassportInvalidNumber(String passportSeries,String passportNumber) {
-        String jsonSchemaPath = "schemas/customerService/CRS_2/errorMessage.json";
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkRegistrationByPassport(passportSeries, passportNumber);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.statusCode(),

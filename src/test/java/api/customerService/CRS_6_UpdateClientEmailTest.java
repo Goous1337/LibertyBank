@@ -8,7 +8,6 @@ import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
-import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
@@ -71,7 +70,7 @@ public class CRS_6_UpdateClientEmailTest extends BaseTest {
     })
 
     public void unsuccessfulUpdateEmailInvalidMethod(String httpMethod, String customerId, String email) {
-        String jsonSchemaPath = "schemas/customerService/CRS_6/errorMessage.json";
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkUnsuccessfulUpdateEmailInvalidHttpMethod(httpMethod,
                 customerId, email);
         assertAll(
@@ -106,7 +105,7 @@ public class CRS_6_UpdateClientEmailTest extends BaseTest {
     })
 
     public void unsuccessfulUpdateEmailInvalidData(String customerId, String email) {
-        String jsonSchemaPath = "schemas/customerService/CRS_6/errorMessage.json";
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkUpdateClientEmail(customerId, email);
         assertAll(
                 ()->assertEquals(SC_BAD_REQUEST, response.statusCode(),
@@ -125,7 +124,7 @@ public class CRS_6_UpdateClientEmailTest extends BaseTest {
     })
 
     public void unsuccessfulUpdateClientEmailInvalidURL(String url, String customerId, String email) {
-        String jsonSchemaPath = "schemas/customerService/CRS_6/errorMessage.json";
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkUpdateClientEmailInvalidURL(url, customerId, email);
         assertAll(
                 ()->assertEquals(SC_NOT_FOUND, response.statusCode(),
@@ -146,7 +145,7 @@ public class CRS_6_UpdateClientEmailTest extends BaseTest {
     })
 
     public void unsuccessfulUpdateEmailEmptyData(String customerId, String email) {
-        String jsonSchemaPath = "schemas/customerService/CRS_6/errorMessage.json";
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkUpdateClientEmail(customerId, email);
         assertAll(
                 ()->assertEquals(SC_INTERNAL_SERVER_ERROR, response.statusCode(),
@@ -167,7 +166,7 @@ public class CRS_6_UpdateClientEmailTest extends BaseTest {
     })
 
     public void unsuccessfulUpdateNotAuthorizedClientEmail(String customerId, String email) {
-        String jsonSchemaPath = "schemas/customerService/CRS_6/errorMessage.json";
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkUpdateClientEmail(customerId, email);
         assertAll(
                 ()->assertEquals(SC_UNAUTHORIZED, response.statusCode(),

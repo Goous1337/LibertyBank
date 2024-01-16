@@ -37,7 +37,7 @@ public class CRS_1_CheckRegistrationByPhoneTest extends BaseTest {
     )
 
     public void checkRegistrationByPhoneBlockedUser(String invalidPhoneNumber) {
-        String jsonSchemaPath = "schemas/customerService/CRS_1/errorMessage.json";
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkRegistrationByPhone(invalidPhoneNumber);
         assertAll(
                 () -> assertEquals(SC_FORBIDDEN,
@@ -55,7 +55,7 @@ public class CRS_1_CheckRegistrationByPhoneTest extends BaseTest {
     @MethodSource("dataProviders.ClientServiceDataProviders#generateRandomInvalidPhoneNumbers")
 
     public void checkRegistrationByPhoneInvalidPhoneNumber(String invalidPhoneNumber) {
-        String jsonSchemaPath = "schemas/customerService/CRS_1/errorMessage.json";
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkRegistrationByPhone(invalidPhoneNumber);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST,
@@ -97,7 +97,7 @@ public class CRS_1_CheckRegistrationByPhoneTest extends BaseTest {
     @MethodSource("dataProviders.ClientServiceDataProviders#provideNonExistentClientPhoneNumbers")
 
     public void checkRegistrationByPhoneNotAClient(String invalidPhoneNumber) {
-        String jsonSchemaPath = "schemas/customerService/CRS_1/errorMessage.json";
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkRegistrationByPhone(invalidPhoneNumber);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST,
@@ -116,7 +116,7 @@ public class CRS_1_CheckRegistrationByPhoneTest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB-291")
 
     public void checkRegistrationByPhoneWithoutParam() {
-        String jsonSchemaPath = "schemas/customerService/CRS_1/errorMessage.json";
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkRegistrationByPhoneWithoutParam();
         assertAll(
                 () -> assertEquals(SC_INTERNAL_SERVER_ERROR,
@@ -140,7 +140,7 @@ public class CRS_1_CheckRegistrationByPhoneTest extends BaseTest {
     })
 
     public void checkRegistrationByPhoneInvalidMethod(String invalidHttpMethod, String validPhoneNumber) {
-        String jsonSchemaPath = "schemas/customerService/CRS_1/errorMessage.json";
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkRegistrationByPhoneInvalidHttpMethod(invalidHttpMethod, validPhoneNumber);
         assertAll(
                 () -> assertEquals(SC_METHOD_NOT_ALLOWED,
@@ -162,7 +162,7 @@ public class CRS_1_CheckRegistrationByPhoneTest extends BaseTest {
     })
 
     public void checkRegistrationByPhoneInvalidURL(String invalidURL, String validPhoneNumber) {
-        String jsonSchemaPath = "schemas/customerService/CRS_1/errorMessage.json";
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkRegistrationByPhoneInvalidURL(invalidURL, validPhoneNumber);
         assertAll(
                 ()->assertEquals(SC_NOT_FOUND,
@@ -182,7 +182,7 @@ public class CRS_1_CheckRegistrationByPhoneTest extends BaseTest {
     )
 
     public void checkRegistrationByPhoneAlreadyRegisteredUser(String invalidPhoneNumber) {
-        String jsonSchemaPath = "schemas/customerService/CRS_1/errorMessage.json";
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkRegistrationByPhone(invalidPhoneNumber);
         assertAll(
                 () -> assertEquals(SC_CONFLICT,

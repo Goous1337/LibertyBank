@@ -8,7 +8,6 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
 
-import static constant.CreditServiceConstants.STATUS_WITHDRAWN;
 import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.CREDIT_SERVICE;
@@ -45,7 +44,7 @@ public class CM_3_7_CheckWithdrawalOfLoanApplicationTest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-767")
     @Test
     public void checkWithdrawalOfLoanApplicationNotExistParamOfId() {
-        String jsonSchemaPath = "schemas/creditService/CM_3_7/errorMessage.json";
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = creditService.checkListWithdrawalOfLoanApplicationNotExistParamOfId();
         assertAll(
                 () -> assertEquals(SC_NOT_FOUND, response.getStatusCode()),
@@ -59,7 +58,7 @@ public class CM_3_7_CheckWithdrawalOfLoanApplicationTest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-769")
     @Test
     public void checkWithdrawalOfLoanApplicationEmptyToken() {
-        String jsonSchemaPath = "schemas/creditService/CM_3_7/errorMessage.json";
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = creditService.checkListWithdrawalOfLoanApplicationEmptyToken();
         assertAll(
                 () -> assertEquals(SC_UNAUTHORIZED, response.getStatusCode()),
@@ -73,7 +72,7 @@ public class CM_3_7_CheckWithdrawalOfLoanApplicationTest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-771")
     @Test
     public void checkWithdrawalOfLoanApplicationOnAnAlreadyWithdrawnApplication() {
-        String jsonSchemaPath = "schemas/creditService/CM_3_7/errorMessage.json";
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = creditService.checkListWithdrawalOfLoanApplication(1);
         assertAll(
                 () -> assertEquals(SC_CONFLICT, response.getStatusCode()),
@@ -88,7 +87,7 @@ public class CM_3_7_CheckWithdrawalOfLoanApplicationTest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-772")
     @Test
     public void checkWithdrawalOfLoanApplicationOnAnAlreadyApprovedApplication() {
-        String jsonSchemaPath = "schemas/creditService/CM_3_7/errorMessage.json";
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = creditService.checkListWithdrawalOfLoanApplication(9);
         assertAll(
                 () -> assertEquals(SC_CONFLICT, response.getStatusCode()),

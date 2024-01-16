@@ -53,7 +53,7 @@ public class CM_3_2_CheckInformationCurrentCreditProductsTest extends BaseTest {
     public void checkInformationCurrentCreditProductsWithInvalidToken() {
         String invalidToken = "asdasaksdkasd";
         Response response = creditService.checkListCurrentCreditProductsWithInvalidToken(invalidToken);
-        String jsonSchemaPath = "schemas/creditService/CM_3_2/errorMessage.json";
+        String jsonSchemaPath = "schemas/errorMessage.json";
         assertAll(
                 () -> assertEquals(SC_UNAUTHORIZED,
                         response.statusCode(),
@@ -71,7 +71,7 @@ public class CM_3_2_CheckInformationCurrentCreditProductsTest extends BaseTest {
 
     public void unsuccessfulInformationBankCreditProductsIncorrectRequestConfiguration() {
         Response response = creditService.checkListCurrentCreditProductsIncorrectRequestConfiguration();
-        String jsonSchemaPath = "schemas/creditService/CM_3_2/errorMessage.json";
+        String jsonSchemaPath = "schemas/errorMessage.json";
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST,
                         response.statusCode(),
