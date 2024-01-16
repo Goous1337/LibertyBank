@@ -53,4 +53,7 @@ public final class ApiEndpoints {
     public static final String INVALID_ABS_INFO_SERVICE_NEW_BANK ="api/v1/info-service/offices/";
     public static final String ABS_NEWS ="api/v1/abs/news";
     public static final String INVALID_ABS_NEWS ="api/v1/abs/new";
+
+    public static final String CLIENT_ACCOUNTS_LIST ="api/v1/info-service/atm";
+    public static final String INVALID_CLIENT_ACCOUNTS_LIST ="api/v1/info-service/atm/";
 }
