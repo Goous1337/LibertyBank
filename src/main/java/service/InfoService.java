@@ -5,10 +5,12 @@ import api.core.RequestParam;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
 
+import java.util.Collections;
 import java.util.List;
 
 import static api.core.ApiClient.sendRequestWithoutParams;
 import static api.core.ApiClient.sendSimpleRequest;
+import static api.core.RequestParam.getRP;
 import static api.core.RequestParamType.PARAMETER;
 import static constant.ApiEndpoints.*;
 import static constant.InfoServiceConstants.*;
@@ -47,7 +49,7 @@ public class InfoService {
 
     public Response checkGettingInformationCurrencyExchangeRateCityIdPageSize(String cityId, String pageNumb, String size) {
         List<RequestParam> params = List.of(new RequestParam(PARAMETER, PARAMETER_CITYID, cityId),
-                new RequestParam(PARAMETER, PARAMETER_PAGENUMB, pageNumb), new RequestParam(PARAMETER, PARAMETER_PAGELIMIT, size));
+                getRP(PARAMETER, PARAMETER_PAGENUMB, pageNumb), new RequestParam(PARAMETER, PARAMETER_PAGELIMIT, size));
         return sendSimpleRequest(GET, BANK_EXCHANGE_RATES, params);
     }
 
@@ -58,4 +60,5 @@ public class InfoService {
     public Response checkGettingInformationCurrencyExchangeRates(String httpMethod) {
         return sendRequestWithoutParams(Method.valueOf(httpMethod), BANK_EXCHANGE_RATES);
     }
+
 }

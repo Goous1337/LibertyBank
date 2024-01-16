@@ -25,7 +25,7 @@ import static org.apache.http.params.CoreConnectionPNames.SO_TIMEOUT;
 
 public class ApiClient {
 
-    static  {
+    static {
         RestAssured.filters(List.of(
                 new RequestLoggingFilter(LogDetail.ALL),
                 new ResponseLoggingFilter(LogDetail.BODY),

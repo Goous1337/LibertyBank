@@ -43,17 +43,25 @@ public final class ApiEndpoints {
     public static final String INVALID_CREDIT_ORDER_TABLE = "credits/api/v1/credit-order/bank";
     public static final String CREDIT_WITHDRAWAL = "credits/api/v1/credit-order/";
     public static final String NOT_EXIST_CREDIT_WITHDRAWAL = "credits/api/v1/credit-order/10000";
-    public static final String CREDIT_INFO ="credits/api/v1/credit";
-
+    public static final String CREDIT_INFO = "credits/api/v1/credit";
     public static final String CREDIT_INFORMATION = "credits/api/v1/credit/current";
+    public static final String CREDIT_SUM_CALCULATE = "credits/api/v1/credit-product/credit-calculate/sum-calculate";
+    public static final String BANK_LIST = "api/v1/info-service/offices";
+    public static final String BANK_LIST_MISTAKE = "api/v156/info-service/offices";
 
-    public static final String ABS_INFO_SERVICE ="api/v1/info-service/atm";
-    public static final String INVALID_ABS_INFO_SERVICE ="api/v1/info-service/atm/";
-    public static final String ABS_INFO_SERVICE_NEW_BANK ="api/v1/info-service/offices";
-    public static final String INVALID_ABS_INFO_SERVICE_NEW_BANK ="api/v1/info-service/offices/";
-    public static final String ABS_NEWS ="api/v1/abs/news";
-    public static final String INVALID_ABS_NEWS ="api/v1/abs/new";
+    public static final String ABS_INFO_SERVICE = "api/v1/info-service/atm";
+    public static final String INVALID_ABS_INFO_SERVICE = "api/v1/info-service/atm/";
+    public static final String ABS_INFO_SERVICE_NEW_BANK = "api/v1/info-service/offices";
+    public static final String ABS_INFO_SERVICE_UPDATE = "api/v1/info-service/offices/{uuid}";
+    public static final String ABS_INFO_SERVICE_INVALID = "api/v1/info-service/officess/{uuid}";
+    public static final String INVALID_ABS_INFO_SERVICE_NEW_BANK = "api/v1/info-service/offices/";
+    public static final String ABS_NEWS = "api/v1/abs/news";
+    public static final String ABS_NEWS_BY_UUID = "api/v1/abs/news/{newsUuid}";
+    public static final String ABS_CLIENT_SHORT_INFO = "api/v1/client-service/clients/short-info";
+    public static final String INVALID_ABS_NEWS = "api/v1/abs/new/{newsUuid}";
+    public static final String ABS_CLIENT_SERVICE_PERSONAL_DATE ="api/v1/client-service/clients/personal-date";
 
     public static final String CLIENT_ACCOUNTS_LIST ="api/v1/info-service/atm";
     public static final String INVALID_CLIENT_ACCOUNTS_LIST ="api/v1/info-service/atm/";
+
 }

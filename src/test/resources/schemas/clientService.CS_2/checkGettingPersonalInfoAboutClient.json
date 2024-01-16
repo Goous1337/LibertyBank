@@ -1,0 +1,105 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Generated schema for Root",
+  "type": "object",
+  "properties": {
+    "personal_information": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "postcode": {
+          "type": "number"
+        },
+        "sex": {
+          "type": "string"
+        },
+        "customer_uuid": {
+          "type": "string"
+        },
+        "full_name": {
+          "type": "string"
+        },
+        "mobile_phone": {
+          "type": "string"
+        },
+        "birth_date": {
+          "type": "string"
+        },
+        "address_customer": {
+          "type": "string"
+        },
+        "accession_date": {
+          "type": "string"
+        },
+        "in_archive": {
+          "type": "boolean"
+        },
+        "marital_status": {
+          "type": "string"
+        },
+        "client_status": {
+          "type": "string"
+        },
+        "security_question": {
+          "type": "string"
+        },
+        "security_answer": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "email",
+        "postcode",
+        "sex",
+        "customer_uuid",
+        "full_name",
+        "mobile_phone",
+        "birth_date",
+        "address_customer",
+        "accession_date",
+        "in_archive",
+        "marital_status",
+        "client_status",
+        "security_question",
+        "security_answer"
+      ]
+    },
+    "passport_data": {
+      "type": "object",
+      "properties": {
+        "citizenship": {
+          "type": "string"
+        },
+        "series": {
+          "type": "string"
+        },
+        "number": {
+          "type": "string"
+        },
+        "date_issue": {
+          "type": "string"
+        },
+        "department_code": {
+          "type": "string"
+        },
+        "issued_by": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "citizenship",
+        "series",
+        "number",
+        "date_issue",
+        "department_code",
+        "issued_by"
+      ]
+    }
+  },
+  "required": [
+    "personal_information",
+    "passport_data"
+  ]
+}
