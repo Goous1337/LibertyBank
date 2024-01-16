@@ -61,4 +61,8 @@ public final class ApiEndpoints {
     public static final String ABS_CLIENT_SHORT_INFO = "api/v1/client-service/clients/short-info";
     public static final String INVALID_ABS_NEWS = "api/v1/abs/new/{newsUuid}";
     public static final String ABS_CLIENT_SERVICE_PERSONAL_DATE ="api/v1/client-service/clients/personal-date";
+
+    public static final String CLIENT_ACCOUNTS_LIST ="api/v1/info-service/atm";
+    public static final String INVALID_CLIENT_ACCOUNTS_LIST ="api/v1/info-service/atm/";
+
 }

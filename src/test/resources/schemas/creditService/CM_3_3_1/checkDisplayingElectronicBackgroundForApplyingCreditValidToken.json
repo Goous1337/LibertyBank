@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "minSum": {
+      "type": "number"
+    },
+    "maxSum": {
+      "type": "number"
+    },
+    "currencyCode": {
+      "type": "string"
+    },
+    "minPeriodMonths": {
+      "type": "number"
+    },
+    "maxPeriodMonths": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "minSum",
+    "maxSum",
+    "currencyCode",
+    "minPeriodMonths",
+    "maxPeriodMonths"
+  ]
+}

@@ -6,8 +6,8 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
-import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
@@ -46,14 +46,14 @@ public class CRS_6_UpdateClientEmailTest extends BaseTest {
     })
 
     public void successfulUpdateClientEmail(String customerId, String email) {
+        String jsonSchemaPath = "schemas/customerService/CRS_6/successfulUpdateClientEmail.json";
         Response response = customerService.checkUpdateClientEmail(customerId, email);
         String actualEmail = CustomerServiceDataBaseRequest.receivingEmailCustomerByCustomerId(customerId);
         assertAll(
                 () -> assertEquals(SC_OK,
                         response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals(email, actualEmail,
-                        "email не соответствует ожидаемому")
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 
@@ -70,9 +70,13 @@ public class CRS_6_UpdateClientEmailTest extends BaseTest {
     })
 
     public void unsuccessfulUpdateEmailInvalidMethod(String httpMethod, String customerId, String email) {
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkUnsuccessfulUpdateEmailInvalidHttpMethod(httpMethod,
                 customerId, email);
-        assertEquals(SC_METHOD_NOT_ALLOWED, response.statusCode()
+        assertAll(
+                ()->assertEquals(SC_METHOD_NOT_ALLOWED, response.statusCode(),
+                        "Код ответа не соответствует ожидаемому"),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 
@@ -101,10 +105,13 @@ public class CRS_6_UpdateClientEmailTest extends BaseTest {
     })
 
     public void unsuccessfulUpdateEmailInvalidData(String customerId, String email) {
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkUpdateClientEmail(customerId, email);
-        assertEquals(SC_BAD_REQUEST,
-                response.statusCode(),
-                "Код ответа не соответствует ожидаемому");
+        assertAll(
+                ()->assertEquals(SC_BAD_REQUEST, response.statusCode(),
+                        "Код ответа не соответствует ожидаемому"),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+        );
     }
 
     @DisplayName("Обновление email клиента при указании невалидного URL")
@@ -117,9 +124,13 @@ public class CRS_6_UpdateClientEmailTest extends BaseTest {
     })
 
     public void unsuccessfulUpdateClientEmailInvalidURL(String url, String customerId, String email) {
-        assertEquals(SC_NOT_FOUND,
-                customerService.checkUpdateClientEmailInvalidURL(url, customerId, email).statusCode(),
-                "Код ответа не соответствует ожидаемому");
+        String jsonSchemaPath = "schemas/errorMessage.json";
+        Response response = customerService.checkUpdateClientEmailInvalidURL(url, customerId, email);
+        assertAll(
+                ()->assertEquals(SC_NOT_FOUND, response.statusCode(),
+                        "Код ответа не соответствует ожидаемому"),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+        );
     }
 
     @DisplayName("Проверка обязательности параметров в запросе")
@@ -134,10 +145,13 @@ public class CRS_6_UpdateClientEmailTest extends BaseTest {
     })
 
     public void unsuccessfulUpdateEmailEmptyData(String customerId, String email) {
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkUpdateClientEmail(customerId, email);
-        assertEquals(SC_INTERNAL_SERVER_ERROR,
-                response.statusCode(),
-                "Код ответа не соответствует ожидаемому");
+        assertAll(
+                ()->assertEquals(SC_INTERNAL_SERVER_ERROR, response.statusCode(),
+                        "Код ответа не соответствует ожидаемому"),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+        );
     }
 
     @DisplayName("Изменение электронной почты неавторизованного клиента")
@@ -152,10 +166,13 @@ public class CRS_6_UpdateClientEmailTest extends BaseTest {
     })
 
     public void unsuccessfulUpdateNotAuthorizedClientEmail(String customerId, String email) {
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkUpdateClientEmail(customerId, email);
-        assertEquals(SC_UNAUTHORIZED,
-                response.statusCode(),
-                "Код ответа не соответствует ожидаемому");
+        assertAll(
+                ()->assertEquals(SC_UNAUTHORIZED, response.statusCode(),
+                        "Код ответа не соответствует ожидаемому"),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+        );
     }
 
 }

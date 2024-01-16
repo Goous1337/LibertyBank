@@ -5,6 +5,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -39,17 +40,13 @@ public class CRS_2_CheckRegistrationByPassportTest extends BaseTest {
     })
 
     public void checkRegistrationByPassportRegisteredClient(String passportSeries,String passportNumber, String clientId, String phoneNumber) {
+        String jsonSchemaPath = "schemas/customerService/CRS_2/checkRegistrationByPassportRegisteredClient.json";
         Response response = customerService.checkRegistrationByPassport(passportSeries,passportNumber);
         assertAll(
                 () -> assertEquals(SC_OK,
                         response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals(phoneNumber,
-                        response.body().jsonPath().get("mobilePhone"),
-                        "Номер телефона в ответе не соответствует ожидаемому"),
-                () -> assertEquals(clientId,
-                        response.body().jsonPath().get("id"),
-                        "ID клиента в ответе не соответствует ожидаемому")
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 
@@ -70,12 +67,12 @@ public class CRS_2_CheckRegistrationByPassportTest extends BaseTest {
     })
 
     public void checkRegistrationByPassportInvalidSeries(String passportSeries,String passportNumber) {
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkRegistrationByPassport(passportSeries, passportNumber);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals("400 BAD_REQUEST",
-                        response.body().jsonPath().get("type"), "Сообщение об ошибке не соответствует ожидаемому")
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 
@@ -91,12 +88,12 @@ public class CRS_2_CheckRegistrationByPassportTest extends BaseTest {
     })
 
     public void checkRegistrationByPassportNotAClient(String passportSeries,String passportNumber) {
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkRegistrationByPassport(passportSeries,passportNumber);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals("400 BAD_REQUEST",
-                        response.body().jsonPath().get("type"), "Сообщение об ошибке не соответствует ожидаемому")
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
     @DisplayName("Проверка регистрации, если пользователь уже зарегистрирован в СДБО")
@@ -106,6 +103,7 @@ public class CRS_2_CheckRegistrationByPassportTest extends BaseTest {
     @Test
 
     public void checkRegistrationByPassportAlreadyRegisteredUser() {
+        String jsonSchemaPath = "schemas/errorMessage.json";
         HashMap<String,String> passport = getPassportWithCustomerStatus(2);
         String passportSeries = passport.get("series");
         String passportNumber = passport.get("number");
@@ -113,8 +111,7 @@ public class CRS_2_CheckRegistrationByPassportTest extends BaseTest {
         assertAll(
                 () -> assertEquals(SC_CONFLICT, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals("Пользователь уже зарегистрирован в СДБО, и повторно зарегистрироваться нельзя",
-                        response.body().jsonPath().get("message"), "Сообщение об ошибке не соответствует ожидаемому")
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 
@@ -130,12 +127,12 @@ public class CRS_2_CheckRegistrationByPassportTest extends BaseTest {
     })
 
     public void checkRegistrationByPhoneBlockedUser(String passportSeries,String passportNumber) {
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkRegistrationByPassport(passportSeries,passportNumber);
         assertAll(
                 () -> assertEquals(SC_FORBIDDEN, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals("Пользователь заблокирован", response.body().jsonPath().get("message"),
-                        "Сообщение об ошибке не соответствует ожидаемому")
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 
@@ -153,13 +150,12 @@ public class CRS_2_CheckRegistrationByPassportTest extends BaseTest {
     })
 
     public void checkRegistrationByPhoneInvalidMethod(String invalidHttpMethod, String passportSeries, String passportNumber) {
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkRegistrationByPassportInvalidHttpMethod(invalidHttpMethod, passportSeries, passportNumber);
         assertAll(
                 () -> assertEquals(SC_METHOD_NOT_ALLOWED, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals("Метод не разрешен. Сервер знает о запрашиваемом методе, но он был " +
-                                "деактивирован и не может быть использован.", response.body().jsonPath().get("message"),
-                        "Сообщение об ошибке не соответствует ожидаемому")
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 
@@ -180,12 +176,12 @@ public class CRS_2_CheckRegistrationByPassportTest extends BaseTest {
     })
 
     public void checkRegistrationByPassportInvalidNumber(String passportSeries,String passportNumber) {
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkRegistrationByPassport(passportSeries, passportNumber);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals("400 BAD_REQUEST",
-                        response.body().jsonPath().get("type"), "Сообщение об ошибке не соответствует ожидаемому")
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 

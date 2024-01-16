@@ -5,20 +5,27 @@ import io.restassured.http.Method;
 import io.restassured.response.Response;
 import pojo.absInfoService.AbsInfoServiceData;
 import pojo.absInfoService.AbsInfoServiceDataBankBranch;
+import pojo.customerService.Notification_Integer;
+
+import static api.core.ApiClient.sendRequestWithoutParams;
+import java.util.List;
 
 import static api.core.ApiClient.sendRequestWithoutParams;
 import static api.core.ApiClient.sendSimpleRequest;
 import static api.core.RequestParam.getRP;
 import static api.core.RequestParamType.HEADER;
 import static api.core.RequestParamType.PATH;
+import static api.core.RequestParamType.*;
 import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
 import static constant.AbsInfoServiceConstants.*;
 import static constant.ApiEndpoints.*;
+import static constant.CustomerServiceConstants.PARAMETER_CUSTOMER_ID;
 import static io.netty.handler.codec.http.HttpHeaders.Values.APPLICATION_JSON;
 import static io.restassured.http.Method.*;
 import static io.restassured.http.Method.GET;
 import static io.restassured.http.Method.POST;
 import static io.restassured.http.Method.PUT;
+import static io.restassured.http.Method.*;
 
 
 public class AbsInfoService {
@@ -89,4 +96,11 @@ public class AbsInfoService {
         return sendSimpleRequest(GET, ABS_INFO_SERVICE_UPDATE, getRP(PATH, UUID, office_uuid));
     }
 
+    public Response checkClientAccountsList() {
+        return sendRequestWithoutParams(GET, CLIENT_ACCOUNTS_LIST);
+    }
+
+    public Response checkClientAccountsListInvalidUrl() {
+        return sendRequestWithoutParams(GET, INVALID_CLIENT_ACCOUNTS_LIST);
+    }
 }
