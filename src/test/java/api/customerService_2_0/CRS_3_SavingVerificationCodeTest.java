@@ -5,6 +5,7 @@ import dataBase.requests.CustomerService_2_0_DataBaseRequest;
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -12,13 +13,12 @@ import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import pojo.customerService_2_0.CustomerService_2_0_InvalidMobilePhoneValue;
 import pojo.customerService_2_0.CustomerService_2_0_Mobile;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static org.apache.http.HttpStatus.SC_OK;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.apache.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.CUSTOMER_SERVICE_2_0;
 
@@ -76,12 +76,44 @@ public class CRS_3_SavingVerificationCodeTest extends BaseTest {
         CustomerService_2_0_DataBaseRequest.deleteDataById(customerId);
         Response response = customerService_2_0.checkListSavingVerificationCode(customerService_2_0_mobile);
         List<String> customerIdList = CustomerService_2_0_DataBaseRequest.getAllCustomerId();
-        String updatedId = customerIdList.stream().filter(x -> x.equals(customerId)).collect(Collectors.joining());
         assertAll(
                 () -> assertEquals(SC_OK, response.getStatusCode()),
                 () -> assertNotNull(response.jsonPath().get("blockSeconds")),
-                () -> assertEquals(customerId, updatedId)
+                () -> assertTrue(customerIdList.contains(customerId))
         );
         CustomerService_2_0_DataBaseRequest.resetTimerOfVerificationCodeById(customerId);
+    }
+
+    @DisplayName("Проверка валидации номера телефона при регистрации")
+    @Description("В данном эндпоинте проверяется попытка регистрации отправка номера мобильного телефона с невалидными значениями.")
+    @Tags({@Tag("API"), @Tag("Negative")})
+    @TmsLink("https://jira.astondevs.ru/browse/LIB-2104")
+    @ParameterizedTest
+    @ValueSource(strings = {"7999123456", "799912345678", "+7(999)1234567", "privet"})
+    public void checkingPhoneNumberValidationDuringRegistration(String mobilePhone) {
+        String jsonSchemaPath = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";
+        CustomerService_2_0_Mobile customerService_2_0_mobile = new CustomerService_2_0_Mobile(mobilePhone);
+        Response response = customerService_2_0.checkListSavingVerificationCode(customerService_2_0_mobile);
+        assertAll(
+                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode()),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+        );
+    }
+
+    @DisplayName("Проверка валидации номера телефона при регистрации")
+    @Description("В данном эндпоинте проверяется попытка регистрации отправка номера мобильного телефона с невалидными значениями.")
+    @Tags({@Tag("API"), @Tag("Negative")})
+    @TmsLink("https://jira.astondevs.ru/browse/LIB-2104")
+    @Test
+    public void checkingPhoneNumberValidationDuringRegistrationWithInvalidTypeOfMobilePhone() {
+        String jsonSchemaPath = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";
+        CustomerService_2_0_InvalidMobilePhoneValue customerService20InvalidMobilePhoneValue
+                = new CustomerService_2_0_InvalidMobilePhoneValue(1);
+        Response response = customerService_2_0.checkListSavingVerificationCodeWithInvalidMobilePhoneType
+                (customerService20InvalidMobilePhoneValue);
+        assertAll(
+                () -> assertEquals(SC_UNSUPPORTED_MEDIA_TYPE, response.getStatusCode()),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+        );
     }
 }
