@@ -2,7 +2,7 @@ package property;
 
 public class WebPropertiesReader {
 
-    private static final String PATH_PROPERTIES = "src/main/resources/web.properties";
+    private static final String PATH_PROPERTIES = "web.properties";
 
     public static String getWebDriver() {
         return PropertiesReader.getPropertyValue("driver", PATH_PROPERTIES);

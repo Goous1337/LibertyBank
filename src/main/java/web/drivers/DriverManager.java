@@ -9,7 +9,10 @@ import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
 import property.WebPropertiesReader;
 
+import java.time.Duration;
+
 import static web.constans.DriverConfig.*;
+import static web.helpers.Waiters.TIME_TO_WAIT;
 
 public class DriverManager {
 
@@ -34,6 +37,8 @@ public class DriverManager {
 
     private static WebDriver createChromeDriver() {
         ChromeOptions options = new ChromeOptions();
+        options.setImplicitWaitTimeout(Duration.ofSeconds(TIME_TO_WAIT));
+        options.addArguments("start-maximized");
         return new ChromeDriver(options);
     }
 
