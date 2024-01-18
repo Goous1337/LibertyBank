@@ -21,6 +21,7 @@ import service.*;
 public class BaseTest {
     protected List<RequestParam> params;
     protected CustomerService customerService;
+    protected CustomerService2_0 customerService2_0;
     protected UserAccountService userAccountService;
 
     protected InfoService infoService;
@@ -38,6 +39,7 @@ public class BaseTest {
         creditService = new CreditService();
         absInfoService = new AbsInfoService();
         absClientService = new AbsClientService();
+        customerService2_0 = new CustomerService2_0();
     }
 
     @BeforeEach

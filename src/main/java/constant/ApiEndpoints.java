@@ -65,4 +65,6 @@ public final class ApiEndpoints {
     public static final String CLIENT_ACCOUNTS_LIST ="api/v1/info-service/atm";
     public static final String INVALID_CLIENT_ACCOUNTS_LIST ="api/v1/info-service/atm/";
 
+    public static final String RETRIEVING_USER_INFO = "customer/api/v1/auth/information";
+
 }
