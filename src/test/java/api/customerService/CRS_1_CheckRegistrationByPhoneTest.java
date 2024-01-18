@@ -4,6 +4,7 @@ import api.BaseTest;
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -36,14 +37,13 @@ public class CRS_1_CheckRegistrationByPhoneTest extends BaseTest {
     )
 
     public void checkRegistrationByPhoneBlockedUser(String invalidPhoneNumber) {
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkRegistrationByPhone(invalidPhoneNumber);
         assertAll(
                 () -> assertEquals(SC_FORBIDDEN,
                         response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals("Пользователь заблокирован",
-                        response.body().jsonPath().get("message"),
-                        "Сообщение об ошибке не соответствует ожидаемому")
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 
@@ -55,14 +55,13 @@ public class CRS_1_CheckRegistrationByPhoneTest extends BaseTest {
     @MethodSource("dataProviders.ClientServiceDataProviders#generateRandomInvalidPhoneNumbers")
 
     public void checkRegistrationByPhoneInvalidPhoneNumber(String invalidPhoneNumber) {
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkRegistrationByPhone(invalidPhoneNumber);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST,
                         response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals("Некорректный запрос. Убедитесь, что адрес указан верно и попробуйте еще раз.",
-                        response.body().jsonPath().get("message"),
-                        "Сообщение об ошибке не соответствует ожидаемому")
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 
@@ -79,17 +78,13 @@ public class CRS_1_CheckRegistrationByPhoneTest extends BaseTest {
     })
 
     public void checkRegistrationByPhoneNonRegisteredClient(String validPhoneNumber, String clientId) {
+        String jsonSchemaPath = "schemas/customerService/CRS_1/checkRegistrationByPhoneBlockedUser.json";
         Response response = customerService.checkRegistrationByPhone(validPhoneNumber);
         assertAll(
                 () -> assertEquals(SC_OK,
                         response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals(validPhoneNumber,
-                        response.body().jsonPath().get("mobilePhone"),
-                        "Номер телефона в ответе не соответствует ожидаемому"),
-                () -> assertEquals(clientId,
-                        response.body().jsonPath().get("id"),
-                        "ID клиента в ответе не соответствует ожидаемому")
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 
@@ -102,6 +97,7 @@ public class CRS_1_CheckRegistrationByPhoneTest extends BaseTest {
     @MethodSource("dataProviders.ClientServiceDataProviders#provideNonExistentClientPhoneNumbers")
 
     public void checkRegistrationByPhoneNotAClient(String invalidPhoneNumber) {
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkRegistrationByPhone(invalidPhoneNumber);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST,
@@ -120,9 +116,14 @@ public class CRS_1_CheckRegistrationByPhoneTest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB-291")
 
     public void checkRegistrationByPhoneWithoutParam() {
-        assertEquals(SC_INTERNAL_SERVER_ERROR,
-                customerService.checkRegistrationByPhoneWithoutParam().statusCode(),
-                "Код ответа не соответствует ожидаемому");
+        String jsonSchemaPath = "schemas/errorMessage.json";
+        Response response = customerService.checkRegistrationByPhoneWithoutParam();
+        assertAll(
+                () -> assertEquals(SC_INTERNAL_SERVER_ERROR,
+                       response.statusCode(),
+                        "Код ответа не соответствует ожидаемому"),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+        );
     }
 
     @DisplayName("Проверка попытки регистрации заблокированного пользователя")
@@ -139,14 +140,13 @@ public class CRS_1_CheckRegistrationByPhoneTest extends BaseTest {
     })
 
     public void checkRegistrationByPhoneInvalidMethod(String invalidHttpMethod, String validPhoneNumber) {
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkRegistrationByPhoneInvalidHttpMethod(invalidHttpMethod, validPhoneNumber);
         assertAll(
                 () -> assertEquals(SC_METHOD_NOT_ALLOWED,
                         response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals("Метод не разрешен. Сервер знает о запрашиваемом методе, но он был деактивирован и не может быть использован.",
-                        response.body().jsonPath().get("message"),
-                        "Сообщение об ошибке не соответствует ожидаемому")
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 
@@ -162,9 +162,14 @@ public class CRS_1_CheckRegistrationByPhoneTest extends BaseTest {
     })
 
     public void checkRegistrationByPhoneInvalidURL(String invalidURL, String validPhoneNumber) {
-        assertEquals(SC_NOT_FOUND,
-                customerService.checkRegistrationByPhoneInvalidURL(invalidURL, validPhoneNumber).statusCode(),
-                "Код ответа не соответствует ожидаемому");
+        String jsonSchemaPath = "schemas/errorMessage.json";
+        Response response = customerService.checkRegistrationByPhoneInvalidURL(invalidURL, validPhoneNumber);
+        assertAll(
+                ()->assertEquals(SC_NOT_FOUND,
+                response.statusCode(),
+                "Код ответа не соответствует ожидаемому"),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+                );
     }
 
     @DisplayName("Проверка регистрации если пользователь уже зарегистрирован в СДБО")
@@ -177,14 +182,13 @@ public class CRS_1_CheckRegistrationByPhoneTest extends BaseTest {
     )
 
     public void checkRegistrationByPhoneAlreadyRegisteredUser(String invalidPhoneNumber) {
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkRegistrationByPhone(invalidPhoneNumber);
         assertAll(
                 () -> assertEquals(SC_CONFLICT,
                         response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals("Пользователь уже зарегистрирован в СДБО, и повторно зарегистрироваться нельзя",
-                        response.body().jsonPath().get("message"),
-                        "Сообщение об ошибке не соответствует ожидаемому")
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 

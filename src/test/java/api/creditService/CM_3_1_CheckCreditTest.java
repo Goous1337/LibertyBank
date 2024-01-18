@@ -43,7 +43,7 @@ public class CM_3_1_CheckCreditTest extends BaseTest {
     @Test
     public void unsuccessfulGetUserCreditInfoNoToken() {
         Response response = creditService.checkCreditInfoNoToken();
-        String jsonSchemaPath ="schemas/creditService/CM_3_1/unsuccessfulGetUserCreditInfoError.json";
+        String jsonSchemaPath = "schemas/errorMessage.json";
         assertAll(
                 () -> assertEquals(SC_UNAUTHORIZED,
                         response.statusCode(),

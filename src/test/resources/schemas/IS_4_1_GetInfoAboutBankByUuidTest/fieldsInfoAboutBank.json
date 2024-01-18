@@ -1,0 +1,137 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Generated schema for Root",
+  "type": "object",
+  "properties": {
+    "country": {
+      "type": "string"
+    },
+    "region": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "street": {
+      "type": "string"
+    },
+    "building_number": {
+      "type": "string"
+    },
+    "office_coordinates": {
+      "type": "string"
+    },
+    "post_code": {
+      "type": "string"
+    },
+    "ramp": {
+      "type": "boolean"
+    },
+    "consultation": {
+      "type": "boolean"
+    },
+    "insurance": {
+      "type": "boolean"
+    },
+    "office_uuid": {
+      "type": "string"
+    },
+    "office_number": {
+      "type": "string"
+    },
+    "phone_number": {
+      "type": "string"
+    },
+    "is_closed": {
+      "type": "boolean"
+    },
+    "opening_time": {
+      "type": "string"
+    },
+    "closing_time": {
+      "type": "string"
+    },
+    "currency_exchange": {
+      "type": "boolean"
+    },
+    "exotic_currency": {
+      "type": "boolean"
+    },
+    "money_transfer": {
+      "type": "boolean"
+    },
+    "cash_withdrawal": {
+      "type": "boolean"
+    },
+    "accept_payment": {
+      "type": "boolean"
+    },
+    "replenish_card": {
+      "type": "boolean"
+    },
+    "replenish_account": {
+      "type": "boolean"
+    },
+    "bik": {
+      "type": "string"
+    },
+    "kpp": {
+      "type": "string"
+    },
+    "inn": {
+      "type": "string"
+    },
+    "okpo": {
+      "type": "string"
+    },
+    "ogrn": {
+      "type": "string"
+    },
+    "swift": {
+      "type": "string"
+    },
+    "payment_account": {
+      "type": "string"
+    },
+    "correspondent_account": {
+      "type": "string"
+    },
+    "bank_name_full": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "country",
+    "region",
+    "city",
+    "street",
+    "building_number",
+    "office_coordinates",
+    "post_code",
+    "ramp",
+    "consultation",
+    "insurance",
+    "office_uuid",
+    "office_number",
+    "phone_number",
+    "is_closed",
+    "opening_time",
+    "closing_time",
+    "currency_exchange",
+    "exotic_currency",
+    "money_transfer",
+    "cash_withdrawal",
+    "accept_payment",
+    "replenish_card",
+    "replenish_account",
+    "bik",
+    "kpp",
+    "inn",
+    "okpo",
+    "ogrn",
+    "swift",
+    "payment_account",
+    "correspondent_account",
+    "bank_name_full"
+  ]
+}

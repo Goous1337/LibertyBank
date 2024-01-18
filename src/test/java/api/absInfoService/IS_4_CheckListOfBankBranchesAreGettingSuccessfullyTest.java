@@ -1,5 +1,6 @@
 package api.absInfoService;
 
+import api.BaseTest;
 import dataBase.requests.AbsInfoServiceDataBaseRequest;
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
@@ -20,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.ABS_INFO_SERVICE;
 
-public class IS_4_CheckListOfBankBranchesAreGettingSuccessfullyTest {
+public class IS_4_CheckListOfBankBranchesAreGettingSuccessfullyTest extends BaseTest {
 
     {
         RestAssured.baseURI = ABS_INFO_SERVICE;

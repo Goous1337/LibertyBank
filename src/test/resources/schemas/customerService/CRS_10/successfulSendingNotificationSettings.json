@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string"
+    },
+    "sms_notification": {
+      "type": "boolean"
+    },
+    "push_notification": {
+      "type": "boolean"
+    },
+    "email_subscription": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "email",
+    "sms_notification",
+    "push_notification",
+    "email_subscription"
+  ]
+}

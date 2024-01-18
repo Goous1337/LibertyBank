@@ -45,4 +45,12 @@ public class AbsClientServiceDataBaseRequest {
         LOG.info(String.format("Получен uuid клиента: %s по id %s", clientUuid, id));
         return clientUuid;
     }
+
+    public static String getCustomerUuid() {
+        String sql = "select customer_uuid\n" +
+                "from customer \n" +
+                "where id=3";
+        String customer_uuid = getDBConnection(ABS_CLIENT_SERVICE_BD).queryForObject(sql, String.class);
+        return customer_uuid;
+    }
 }
