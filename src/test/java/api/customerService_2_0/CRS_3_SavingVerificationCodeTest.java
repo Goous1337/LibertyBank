@@ -35,7 +35,7 @@ public class CRS_3_SavingVerificationCodeTest extends BaseTest {
     @Test
     public void checkSuccessSavingVerificationCode() throws InterruptedException {
         int sleepTime;
-        String mobilePhone = "79808901750";
+        String mobilePhone = "79958984928";
         String customerId = CustomerService_2_0_DataBaseRequest.getCustomerIdByMobilePhone(mobilePhone);
         CustomerService_2_0_Mobile customerService_2_0_mobile = new CustomerService_2_0_Mobile(mobilePhone);
         Response firstResponse = customerService_2_0.checkListSavingVerificationCode(customerService_2_0_mobile);
@@ -85,7 +85,10 @@ public class CRS_3_SavingVerificationCodeTest extends BaseTest {
     }
 
     @DisplayName("Проверка валидации номера телефона при регистрации")
-    @Description("В данном эндпоинте проверяется попытка регистрации отправка номера мобильного телефона с невалидными значениями.")
+    @Description("""
+            В данном эндпоинте проверяется попытка регистрации отправка номера мобильного телефона
+            с невалидными значениями.
+            """)
     @Tags({@Tag("API"), @Tag("Negative")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2104")
     @ParameterizedTest
@@ -96,24 +99,53 @@ public class CRS_3_SavingVerificationCodeTest extends BaseTest {
         Response response = customerService_2_0.checkListSavingVerificationCode(customerService_2_0_mobile);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode()),
-                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+                () -> response.then().assertThat().body(JsonSchemaValidator
+                        .matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 
     @DisplayName("Проверка валидации номера телефона при регистрации")
-    @Description("В данном эндпоинте проверяется попытка регистрации отправка номера мобильного телефона с невалидными значениями.")
+    @Description("""
+            В данном эндпоинте проверяется попытка регистрации отправка номера мобильного телефона
+             с невалидными значениями.
+            """)
     @Tags({@Tag("API"), @Tag("Negative")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2104")
-    @Test
-    public void checkingPhoneNumberValidationDuringRegistrationWithInvalidTypeOfMobilePhone() {
+    @ParameterizedTest
+    @ValueSource(longs = {1, 7999123456L, 799912345678L, -79808901750L})
+    public void checkingPhoneNumberValidationDuringRegistrationWithInvalidTypeOfMobilePhone(long mobilePhone) {
         String jsonSchemaPath = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";
         CustomerService_2_0_InvalidMobilePhoneValue customerService20InvalidMobilePhoneValue
-                = new CustomerService_2_0_InvalidMobilePhoneValue(1);
+                = new CustomerService_2_0_InvalidMobilePhoneValue(mobilePhone);
         Response response = customerService_2_0.checkListSavingVerificationCodeWithInvalidMobilePhoneType
                 (customerService20InvalidMobilePhoneValue);
         assertAll(
                 () -> assertEquals(SC_UNSUPPORTED_MEDIA_TYPE, response.getStatusCode()),
-                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+                () -> response.then().assertThat().body(JsonSchemaValidator
+                        .matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
+    }
+
+    @DisplayName("Повторный запрос смс-кода верификации, если время блокировки не истекло")
+    @Description("""
+            Пользователь делает повторный запрос SMS-кода верификации, когда время блокировки еще не истекло
+            (не позднее 30 секунд)
+            """)
+    @Tags({@Tag("API"), @Tag("Negative")})
+    @TmsLink("https://jira.astondevs.ru/browse/LIB-2099")
+    @Test
+    public void checkSavingVerificationCodeIfBlockingTimeIsActive() {
+        String mobilePhone = "79808901750";
+        String jsonSchemaPath = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";
+        String customerId = CustomerService_2_0_DataBaseRequest.getCustomerIdByMobilePhone(mobilePhone);
+        CustomerService_2_0_Mobile customerService_2_0_mobile = new CustomerService_2_0_Mobile(mobilePhone);
+        customerService_2_0.checkListSavingVerificationCode(customerService_2_0_mobile);
+        Response secondResponse = customerService_2_0.checkListSavingVerificationCode(customerService_2_0_mobile);
+        assertAll(
+                () -> assertEquals(SC_NOT_ACCEPTABLE, secondResponse.getStatusCode()),
+                () -> secondResponse.then().assertThat().body(JsonSchemaValidator
+                        .matchesJsonSchemaInClasspath(jsonSchemaPath))
+        );
+        CustomerService_2_0_DataBaseRequest.resetTimerOfVerificationCodeById(customerId);
     }
 }

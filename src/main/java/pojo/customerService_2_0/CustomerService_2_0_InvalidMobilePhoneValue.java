@@ -8,5 +8,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CustomerService_2_0_InvalidMobilePhoneValue {
-    private Integer mobilePhone;
+    private long mobilePhone;
 }
