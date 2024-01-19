@@ -2,6 +2,7 @@ package service;
 
 import api.core.RequestParam;
 import io.restassured.response.Response;
+import pojo.depositService.DepositCheckEmail;
 import pojo.depositService.DepositData;
 import pojo.depositService.DepositDataCalculator;
 import pojo.depositService.DepositDataIncorrectValues;
@@ -11,12 +12,7 @@ import static api.core.RequestParam.getRP;
 import static api.core.RequestParamType.HEADER;
 import static com.google.common.net.HttpHeaders.AUTHORIZATION;
 import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
-import static constant.ApiEndpoints.DEPOSIT_CALCULATOR;
-import static constant.ApiEndpoints.DEPOSIT_PRODUCTS;
-import static constant.ApiEndpoints.DEPOSIT_PRODUCTS_OFFER;
-import static constant.ApiEndpoints.DEPOSIT_PRODUCTS_USER;
-import static constant.ApiEndpoints.DEPOSIT_SETTINGS;
-import static constant.ApiEndpoints.INVALID_DEPOSIT_PRODUCTS;
+import static constant.ApiEndpoints.*;
 import static constant.DepositConstants.INVALID_ACCESS_TOKEN;
 import static io.netty.handler.codec.http.HttpHeaders.Values.APPLICATION_JSON;
 import static io.restassured.http.Method.GET;
@@ -127,5 +123,11 @@ public class DepositService {
     public float calculationFinalDepositAmountIsFalse(float initSum, float insertRate, int termTime) {
         float formula = (initSum * insertRate * ((float) (termTime * 30) / 365)) / 100;
         return (float) Math.round(formula * 100) / 100;
+    }
+
+    public Response checkSendingByEmail(String eMail, Integer id) {
+        return sendSimpleRequest(POST, DEPOSIT_SEND_EMAIL,
+                getRP(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE),
+                new DepositCheckEmail(eMail,id));
     }
 }

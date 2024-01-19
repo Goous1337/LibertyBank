@@ -27,6 +27,7 @@ public class CRS_11_PushNotificationsTest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB-1190")
     @Test
     public void successfulPushNotificationTest() {
+        String jsonSchemaPath = "schemas/errorMessage.json";
         String customerId = getCustomerIdWithCustomerStatus(true);
         Response response = customerService.checkPushNotification(customerId,"true");
         assertAll(

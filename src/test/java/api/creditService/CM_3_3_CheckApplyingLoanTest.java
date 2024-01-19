@@ -4,6 +4,7 @@ import api.BaseTest;
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
 
@@ -26,8 +27,8 @@ public class CM_3_3_CheckApplyingLoanTest extends BaseTest {
     @Test
     public void checkApplyingLoan() {
         Response response = creditService.checkListApplyingLoan
-                (3, 2500000, 20, "RUB", "2023-11-28"
-                        , 60000, 30000, "8698345212");
+                (1, 250, 20, "RUB", "2023-11-28"
+                        , 60000, 30000, "8698345212");//TODO сделать генерацию валидных данных зависящих от productId
 
         assertAll(
                 () -> assertEquals(SC_OK,
@@ -47,12 +48,13 @@ public class CM_3_3_CheckApplyingLoanTest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-611")
     @Test
     public void checkApplyingLoanInvalidToken() {
+        String jsonSchemaPath = "schemas/creditService/CM_3_3/errorMessage.json";
         Response response = creditService.checkListApplyingLoanInvalidToken
                 (3, 2500000, 20, "RUB", "2023-11-28",
                         60000, 30000, "8698345212");
         Assertions.assertAll(
                 () -> assertEquals(SC_UNAUTHORIZED, response.getStatusCode()),
-                () -> assertNotNull(response.jsonPath().get("errorMessage"))
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 
@@ -63,12 +65,13 @@ public class CM_3_3_CheckApplyingLoanTest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-614")
     @Test
     public void checkApplyingLoanServerNoRecordsMatchingCriteria() {
+        String jsonSchemaPath = "schemas/creditService/CM_3_3/errorMessage.json";
         Response response = creditService.checkListApplyingLoan
                 (0, 2500000, 20, "RUB", "2023-11-28",
                         60000, 30000, "8698345212");
         Assertions.assertAll(
                 () -> assertEquals(SC_NOT_FOUND, response.getStatusCode()),
-                () -> assertNotNull(response.jsonPath().get("errorMessage"))
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 
@@ -78,13 +81,14 @@ public class CM_3_3_CheckApplyingLoanTest extends BaseTest {
     @Tags({@Tag("API"), @Tag("Negative")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-612")
     @Test
-    public void checkApplyingLoanInvalidConfig() {
+    public void checkApplyingLoanInvalidConfig() {//TODO сделать параметризацию по каждому полю по очереди
+        String jsonSchemaPath = "schemas/creditService/CM_3_3/errorMessage.json";
         Response response = creditService.checkListApplyingLoan
                 (null, 2500000, 20, "RUB", "2023-11-28",
                         60000, 30000, "8698345212");
         Assertions.assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode()),
-                () -> assertNotNull(response.jsonPath().get("errorMessage"))
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 }

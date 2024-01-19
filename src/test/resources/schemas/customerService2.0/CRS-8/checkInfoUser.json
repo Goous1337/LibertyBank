@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "patronymic": {
+      "type": "string"
+    },
+    "birthDate": {
+      "type": "string"
+    },
+    "mobilePhone": {
+      "type": "string"
+    },
+    "email": {
+      "anyOf": [
+        {"type": "null"},
+        {"type": "string"}
+      ]
+    },
+    "customerStatus": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "firstName",
+    "lastName",
+    "patronymic",
+    "birthDate",
+    "mobilePhone",
+    "email",
+    "customerStatus"
+  ]
+}

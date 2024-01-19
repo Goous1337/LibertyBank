@@ -4,10 +4,10 @@ import api.BaseTest;
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
 
-import static constant.CreditServiceConstants.STATUS_WITHDRAWN;
 import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.CREDIT_SERVICE;
@@ -24,6 +24,7 @@ public class CM_3_7_CheckWithdrawalOfLoanApplicationTest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-764")
     @Test
     public void checkWithdrawalOfLoanApplication() {
+        String jsonSchemaPath ="schemas/creditService/CM_3_7/checkWithdrawalOfLoanApplication.json";
         Response responseReg = creditService.checkListApplyingLoan
                 (3, 2500000, 20, "RUB", "2023-11-28"
                         , 60000, 30000, "8698345212");
@@ -32,8 +33,7 @@ public class CM_3_7_CheckWithdrawalOfLoanApplicationTest extends BaseTest {
         Response responseWithdrawal = creditService.checkListWithdrawalOfLoanApplication(idValue);
         assertAll(
                 () -> assertEquals(SC_OK, responseWithdrawal.getStatusCode()),
-                () -> assertEquals(idValue, responseWithdrawal.jsonPath().get("creditOrderId")),
-                () -> assertEquals(STATUS_WITHDRAWN, responseWithdrawal.jsonPath().get("status"))
+                () -> responseWithdrawal.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 
@@ -44,10 +44,11 @@ public class CM_3_7_CheckWithdrawalOfLoanApplicationTest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-767")
     @Test
     public void checkWithdrawalOfLoanApplicationNotExistParamOfId() {
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = creditService.checkListWithdrawalOfLoanApplicationNotExistParamOfId();
         assertAll(
                 () -> assertEquals(SC_NOT_FOUND, response.getStatusCode()),
-                () -> assertNotNull(response.jsonPath().get("errorMessage"))
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 
@@ -57,10 +58,11 @@ public class CM_3_7_CheckWithdrawalOfLoanApplicationTest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-769")
     @Test
     public void checkWithdrawalOfLoanApplicationEmptyToken() {
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = creditService.checkListWithdrawalOfLoanApplicationEmptyToken();
         assertAll(
                 () -> assertEquals(SC_UNAUTHORIZED, response.getStatusCode()),
-                () -> assertNotNull(response.jsonPath().get("errorMessage"))
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 
@@ -70,10 +72,11 @@ public class CM_3_7_CheckWithdrawalOfLoanApplicationTest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-771")
     @Test
     public void checkWithdrawalOfLoanApplicationOnAnAlreadyWithdrawnApplication() {
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = creditService.checkListWithdrawalOfLoanApplication(1);
         assertAll(
                 () -> assertEquals(SC_CONFLICT, response.getStatusCode()),
-                () -> assertNotNull(response.jsonPath().get("errorMessage"))
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 
@@ -84,10 +87,11 @@ public class CM_3_7_CheckWithdrawalOfLoanApplicationTest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-772")
     @Test
     public void checkWithdrawalOfLoanApplicationOnAnAlreadyApprovedApplication() {
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = creditService.checkListWithdrawalOfLoanApplication(9);
         assertAll(
                 () -> assertEquals(SC_CONFLICT, response.getStatusCode()),
-                () -> assertNotNull(response.jsonPath().get("errorMessage"))
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 }

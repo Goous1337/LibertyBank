@@ -4,6 +4,7 @@ import api.BaseTest;
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -11,8 +12,6 @@ import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
-import java.util.Map;
 
 import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -33,23 +32,14 @@ public class CRS_10_SendingNotificationSettingsTest extends BaseTest {
     @Test
 
     public void successfulSendingNotificationSettings() {
+        String jsonSchemaPath = "schemas/customerService/CRS_10/successfulSendingNotificationSettings.json";
         String customerId = "813f5509-7696-44be-a321-3a094c48a6e7";
 
         Response response = customerService.checkSendingNotificationSettings(customerId);
 
         assertAll(
                 () -> assertEquals(SC_OK, response.statusCode(), "Код ответа не соответствует ожидаемому"),
-                () -> {
-                    Map<String, Object> items = response.jsonPath().getMap("$");
-
-                    assertNotNull(items.get("email"));
-                    assertTrue(items.get("smsNotification") instanceof Boolean,
-                            "Поле 'smsNotification' не соответствует ожидаемому формату");
-                    assertTrue(items.get("pushNotification") instanceof Boolean,
-                            "Поле 'pushNotification' не соответствует ожидаемому формату");
-                    assertTrue(items.get("emailSubscription") instanceof Boolean,
-                            "Поле 'emailSubscription' не соответствует ожидаемому формату");
-                }
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 
@@ -62,14 +52,14 @@ public class CRS_10_SendingNotificationSettingsTest extends BaseTest {
     @Test
 
     public void unsuccessfulSendingNotificationSettingsUserNotAuth() {
+        String jsonSchemaPath = "schemas/errorMessage.json";
         String customerId = "813f5509-7696-44be-a321-3a094c48a6e7";
 
         Response response = customerService.checkSendingNotificationSettings(customerId);
 
         assertAll(
                 () -> assertEquals(SC_UNAUTHORIZED, response.statusCode(), "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals("Пользователь не авторизован.", response.body().jsonPath().get("message"),
-                        "Сообщение об ошибке не соответствует ожидаемому")
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 
@@ -81,14 +71,14 @@ public class CRS_10_SendingNotificationSettingsTest extends BaseTest {
     @Test
 
     public void unsuccessfulSendingNotificationSettingsUserNotInBase() {
+        String jsonSchemaPath = "schemas/errorMessage.json";
         String customerId = "813f5509-7696-44be-a321-3a094c48a7e6";
 
         Response response = customerService.checkSendingNotificationSettings(customerId);
 
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.statusCode(), "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals("Некорректный запрос. Убедитесь, что адрес указан верно и попробуйте еще раз.",
-                        response.body().jsonPath().get("message"), "Сообщение об ошибке не соответствует ожидаемому")
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 
@@ -105,13 +95,12 @@ public class CRS_10_SendingNotificationSettingsTest extends BaseTest {
     })
 
     public void unsuccessfulSendingNotificationSettingsInvalidMethod(String invalidHttpMethod, String customerId) {
+        String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkSendingNotificationSettingsInvalidMethod(invalidHttpMethod, customerId);
 
         assertAll(
                 () -> assertEquals(SC_METHOD_NOT_ALLOWED, response.statusCode(), "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals("Метод не разрешен. Сервер знает о запрашиваемом методе, но он был " +
-                                "деактивирован и не может быть использован.", response.body().jsonPath().get("message"),
-                        "Сообщение об ошибке не соответствует ожидаемому")
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 }

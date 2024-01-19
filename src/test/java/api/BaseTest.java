@@ -21,6 +21,7 @@ import service.*;
 public class BaseTest {
     protected List<RequestParam> params;
     protected CustomerService customerService;
+    protected CustomerService2_0 customerService2_0;
     protected UserAccountService userAccountService;
 
     protected InfoService infoService;
@@ -30,6 +31,7 @@ public class BaseTest {
     protected AbsInfoService absInfoService;
     protected AbsClientService absClientService;
     protected CustomerService_2_0 customerService_2_0;
+
     public BaseTest() {
         params = new ArrayList<>();
         customerService = new CustomerService();
@@ -39,6 +41,7 @@ public class BaseTest {
         creditService = new CreditService();
         absInfoService = new AbsInfoService();
         absClientService = new AbsClientService();
+        customerService2_0 = new CustomerService2_0();
         customerService_2_0 = new CustomerService_2_0();
     }
 
