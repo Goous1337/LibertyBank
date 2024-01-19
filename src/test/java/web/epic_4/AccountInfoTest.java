@@ -1,4 +1,4 @@
-package web;
+package web.epic_4;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -6,13 +6,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import property.WebPropertiesReader;
+import web.BaseTest;
 import web.drivers.DriverManager;
 
 import static web.constans.UrlConfig.ACCOUNTS_URL;
 
 public class AccountInfoTest extends BaseTest {
 
-    private static WebDriver driver = DriverManager.getDriver();
+    private static final WebDriver driver = DriverManager.getDriver();
 
     private static final String ELEMENT_VERIFICATION_MESSAGE = "%s не отображается";
 
