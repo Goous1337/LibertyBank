@@ -11,19 +11,38 @@ public class AccountSteps {
         accountPage = new AccountPage();
     }
 
+    @Step("Кликнуть на вкладку с открытыми счетами")
+    public void clickOpenAccountsTab() {
+        accountPage.clickOpenAccountsTab();
+    }
+
+    @Step("Кликнуть на вкладку с закрытыми счетами")
+    public void clickClosedAccountsTab() {
+        accountPage.clickClosedAccountsTab();
+    }
+
+    @Step("Кликнуть на вкладку с заблокированными счетами")
+    public void clickBlockedAccountsTab() {
+        accountPage.clickBlockedAccountsTab();
+    }
+
+    @Step("Кликнуть на первый счет в списке")
+    public void clickAccount() {
+        accountPage.clickAccount();
+    }
     @Step("Выбрать 'Открытые счета'")
     public void selectOpenAccounts() {
-        accountPage.clickOpenAccounts();
+        accountPage.clickOpenAccountsTab();
     }
 
     @Step("Выбрать 'Закрытые счета'")
     public void selectClosedAccounts() {
-        accountPage.clickClosedAccounts();
+        accountPage.clickClosedAccountsTab();
     }
 
     @Step("Выбрать 'Заблокированные счета'")
     public void selectBlockedAccounts() {
-        accountPage.clickBlockedAccounts();
+        accountPage.clickBlockedAccountsTab();
     }
 
     @Step("Кликнуть на основной счет")

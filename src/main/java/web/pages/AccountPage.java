@@ -18,6 +18,9 @@ public class AccountPage extends BasePage {
     @FindBy(xpath = "//*[contains(text(), 'Основной счет')]")
     private WebElement mainAccountLabel;
 
+    @FindBy(xpath = "//p[contains(text(), 'Текущий счет')]")
+    private WebElement account;
+
     @FindBy(css = "._label-width_adjustable_c42rp_10")
     private WebElement accountStatus;
 
@@ -53,18 +56,6 @@ public class AccountPage extends BasePage {
 
     @FindBy(xpath = "//*[contains(text(), 'EUR')]")
     private WebElement filterByEur;
-
-    public void clickOpenAccounts() {
-        openAccountsTab.click();
-    }
-
-    public void clickClosedAccounts() {
-        closedAccountsTab.click();
-    }
-
-    public void clickBlockedAccounts() {
-        blockedAccountsTab.click();
-    }
 
     public void clickMainAccountLabel() {
         mainAccountLabel.click();
@@ -131,5 +122,25 @@ public class AccountPage extends BasePage {
     public void clickFilterByEur() {
         Waiters.waitElement(filterByEur);
         filterByEur.click();
+    }
+
+    public void clickOpenAccountsTab() {
+        Waiters.waitElement(openAccountsTab);
+        openAccountsTab.click();
+    }
+
+    public void clickClosedAccountsTab() {
+        Waiters.waitElement(closedAccountsTab);
+        closedAccountsTab.click();
+    }
+
+    public void clickBlockedAccountsTab() {
+        Waiters.waitElement(blockedAccountsTab);
+        blockedAccountsTab.click();
+    }
+
+    public void clickAccount() {
+        Waiters.waitElement(account);
+        account.click();
     }
 }

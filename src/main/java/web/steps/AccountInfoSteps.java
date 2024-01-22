@@ -22,6 +22,10 @@ public class AccountInfoSteps {
         return accountInfoPage.isOpenDateDisplayed();
     }
 
+    public boolean isCloseDateDisplayed() {
+        return accountInfoPage.isCloseDateDisplayed();
+    }
+
     public boolean isContractNumberDisplayed() {
         return accountInfoPage.isContractNumberDisplayed();
     }
@@ -32,5 +36,17 @@ public class AccountInfoSteps {
 
     public boolean isAccountStatusDisplayed() {
         return accountInfoPage.isAccountStatusDisplayed();
+    }
+
+    public boolean isCurrencyIconDisplayed() {
+        return accountInfoPage.isCurrencyIconDisplayed();
+    }
+
+    public boolean isBalanceDisplayed() {
+        return accountInfoPage.isBalanceDisplayed();
+    }
+
+    public String getAccountStatus() {
+        return accountInfoPage.getAccountStatus();
     }
 }
