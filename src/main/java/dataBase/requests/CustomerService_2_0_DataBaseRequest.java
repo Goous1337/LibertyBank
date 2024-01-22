@@ -52,4 +52,10 @@ public class CustomerService_2_0_DataBaseRequest {
         String customerId = getDBConnection(CUSTOMER_SERVICE_2_0).queryForObject(sql, String.class, passportId);
         return customerId;
     }
+    public static String getCustomerPasswordById(String id){
+        String sql = "SELECT password FROM user_profile WHERE customer_id =?::uuid";
+        String password = getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sql, String.class,id);
+        LOG.info(String.format("Получен пароль пользователя по id %s",id));
+        return password;
+    }
 }
