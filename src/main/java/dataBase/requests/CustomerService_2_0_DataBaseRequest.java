@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
+import static constant.LibertyServiceName.CUSTOMER_SERVICE_2_0;
 import static constant.LibertyServiceName.CUSTOMER_SERVICE_DB_2_0;
 import static dataBase.DataBaseConnector.getDBConnection;
 
@@ -42,5 +43,13 @@ public class CustomerService_2_0_DataBaseRequest {
         List<String> customerIdList = getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForList(sql, String.class);
         LOG.info(String.format("Получен список id из таблицы user_profile"));
         return customerIdList;
+    }
+
+    public static String getCustomerIdByPassportId(int passportId) {
+        String sql = "select customer_id\n" +
+                "from customer \n" +
+                "where passport_id=?";
+        String customerId = getDBConnection(CUSTOMER_SERVICE_2_0).queryForObject(sql, String.class, passportId);
+        return customerId;
     }
 }

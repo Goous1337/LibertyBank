@@ -68,4 +68,6 @@ public final class ApiEndpoints {
 
     public static final String RETRIEVING_USER_INFO = "customer/api/v1/auth/information";
 
+    public static final String CUSTOMER_2_0_NOTIFICATION = "customer/api/v1/auth/user/settings/notifications";
+    public static final String INCORRECT_CUSTOMER_2_0_NOTIFICATION = "customer/ai/v1/auth/user/settings/notifications";
 }
