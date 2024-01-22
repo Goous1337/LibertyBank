@@ -45,7 +45,7 @@ public class CustomerService_2_0_DataBaseRequest {
         return customerIdList;
     }
 
-    public static String getCustomerId(int passportId) {
+    public static String getCustomerIdByPassportId(int passportId) {
         String sql = "select customer_id\n" +
                 "from customer \n" +
                 "where passport_id=?";
