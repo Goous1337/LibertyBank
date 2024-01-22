@@ -12,7 +12,7 @@ import static web.drivers.DriverManager.getDriver;
 
 public class Waiters {
 
-    public static final long TIME_TO_WAIT = 10L;
+    public static final long TIME_TO_WAIT = 15L;
 
     private final static WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(TIME_TO_WAIT));
 

@@ -18,6 +18,9 @@ public class AccountPage extends BasePage {
     @FindBy(xpath = "//*[contains(text(), 'Основной счет')]")
     private WebElement mainAccountLabel;
 
+    @FindBy(xpath = "//*[contains(text(), 'Текущий счет')]")
+    private WebElement createCurrentAccount;
+
     @FindBy(xpath = "//p[contains(text(), 'Текущий счет')]")
     private WebElement account;
 
@@ -59,6 +62,19 @@ public class AccountPage extends BasePage {
 
     public void clickMainAccountLabel() {
         mainAccountLabel.click();
+    }
+
+    public void clickCreateCurrentAccount() {
+        Waiters.waitElement(createCurrentAccount);
+        createCurrentAccount.click();
+    }
+
+    public boolean isOpenAccountDisplayed() {
+       return openAccountsTab.isDisplayed();
+    }
+
+    public boolean isMainAccountLabelDisplayed() {
+        return mainAccountLabel.isDisplayed();
     }
 
     public boolean isAccountStatusDisplayed() {
