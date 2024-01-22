@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import web.drivers.DriverManager;
 import web.steps.AccountInfoSteps;
 import web.steps.AccountSteps;
+import web.steps.CreateAccountSteps;
 
 import static web.constans.UrlConfig.BASE_URL;
 
@@ -17,9 +18,11 @@ public class BaseTest {
 
     protected AccountInfoSteps accountInfoSteps = new AccountInfoSteps();
 
+    protected CreateAccountSteps createAccountSteps = new CreateAccountSteps();
+
     @BeforeAll
     public static void setUp() {
-       driver.get(BASE_URL);
+        driver.get(BASE_URL);
     }
 
     @AfterAll

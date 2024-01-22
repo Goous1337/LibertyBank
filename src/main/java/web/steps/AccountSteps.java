@@ -50,6 +50,19 @@ public class AccountSteps {
         accountPage.clickMainAccountLabel();
     }
 
+    @Step("Кликнуть на текущий счет")
+    public void clickCreateCurrentAccount() {
+        accountPage.clickCreateCurrentAccount();
+    }
+
+    public boolean isOpenAccountDisplayed() {
+        return accountPage.isOpenAccountDisplayed();
+    }
+
+    public boolean isMainAccountLabelDisplayed() {
+        return accountPage.isMainAccountLabelDisplayed();
+    }
+
     @Step("Отображается статус счета")
     public boolean accountStatusIsDisplayed() {
         return accountPage.isAccountStatusDisplayed();
