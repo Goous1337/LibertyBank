@@ -63,6 +63,7 @@ public final class ApiEndpoints {
     public static final String CUSTOMER_SECURITY = "customer/api/v1/security/session";
     public static final String CUSTOMER_LOGIN = "customer/api/v1/login";
     public static final String CUSTOMER_CHANGE_PASSWORD = "customer/api/v1/security/password/changepassword";
+    public static final String CUSTOMER_VERIFICATION_BY_CODE = "customer/api/v1/security/session/verification";
     public static final String ABS_CLIENT_SERVICE_PERSONAL_DATE ="api/v1/client-service/clients/personal-date";
 
     public static final String CLIENT_ACCOUNTS_LIST ="api/v1/info-service/atm";

@@ -2,10 +2,7 @@ package service;
 
 import io.restassured.http.Method;
 import io.restassured.response.Response;
-import pojo.customerService_2_0.ChangeUserAccountPasswordByPhone;
-import pojo.customerService_2_0.CustomerService_2_0_InvalidMobilePhoneValue;
-import pojo.customerService_2_0.CustomerService_2_0_Mobile;
-import pojo.customerService_2_0.UserAuthorizationByPhone;
+import pojo.customerService_2_0.*;
 
 import static api.core.ApiClient.sendSimpleRequest;
 import static constant.ApiEndpoints.*;
@@ -60,5 +57,9 @@ public class CustomerService_2_0 {
     public Response checkListSavingVerificationCodeWithInvalidMethods
             (ChangeUserAccountPasswordByPhone changeUserAccountPasswordByPhone, String httpMethod) {
         return sendSimpleRequest(Method.valueOf(httpMethod), CUSTOMER_CHANGE_PASSWORD, changeUserAccountPasswordByPhone);
+    }
+
+    public Response checkListUserVerificationWithValidData(UserVerificationWithCode userVerificationWithCode) {
+        return sendSimpleRequest(POST, CUSTOMER_VERIFICATION_BY_CODE, userVerificationWithCode);
     }
 }
