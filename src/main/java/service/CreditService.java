@@ -15,7 +15,6 @@ import static com.google.common.net.HttpHeaders.AUTHORIZATION;
 import static constant.ApiEndpoints.*;
 import static constant.CustomerServiceConstants.PARAMETER_ID;
 import static constant.CustomerServiceConstants.PARAMETER_PRODUCT_ID;
-import static constant.ApiEndpoints.*;
 import static constant.CreditServiceConstants.EMPTY_TOKEN;
 import static constant.DepositConstants.INVALID_ACCESS_TOKEN;
 import static io.restassured.http.Method.*;
@@ -117,13 +116,15 @@ public class CreditService {
                 new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
     }
 
-    public  Response checkCreditInfo() {
+    public Response checkCreditInfo() {
         return sendSimpleRequest(GET, CREDIT_INFO,
                 new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
     }
-    public  Response checkCreditInfoNoToken() {
+
+    public Response checkCreditInfoNoToken() {
         return sendRequestWithoutParams(GET, CREDIT_INFO);
     }
+
     public static Response checkViewInfoCurrentCreditsUsersInvalidToken(String id) {
         List<RequestParam> param = List.of(new RequestParam(PARAMETER, PARAMETER_ID, id),
                 new RequestParam(HEADER, AUTHORIZATION, INVALID_TOKEN_CREDIT_SERVICE));

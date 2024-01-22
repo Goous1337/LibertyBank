@@ -1,30 +1,28 @@
 package web;
 
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.WebDriver;
-import property.WebPropertiesReader;
 import web.drivers.DriverManager;
 import web.steps.AccountInfoSteps;
 import web.steps.AccountSteps;
+import web.steps.CreateAccountSteps;
+
+import static web.constans.UrlConfig.BASE_URL;
 
 public class BaseTest {
 
-    private static final WebDriver driver = DriverManager.getDriver();
+    protected static final WebDriver driver = DriverManager.getDriver();
 
     protected AccountSteps accountSteps = new AccountSteps();
 
     protected AccountInfoSteps accountInfoSteps = new AccountInfoSteps();
 
+    protected CreateAccountSteps createAccountSteps = new CreateAccountSteps();
+
     @BeforeAll
     public static void setUp() {
-        driver.get(WebPropertiesReader.getWebBaseUrl());
-    }
-
-    @AfterEach
-    public void closeTab() {
-        driver.close();
+        driver.get(BASE_URL);
     }
 
     @AfterAll
