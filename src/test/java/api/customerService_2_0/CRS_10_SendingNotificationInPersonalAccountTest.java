@@ -32,7 +32,7 @@ public class CRS_10_SendingNotificationInPersonalAccountTest extends BaseTest {
 
     public void checkSendingNotificationInPersonalAccount() {
         String jsonSchemaPath = "schemas/customerService_2_0/CRS_10_checkSendingNotificationInPersonalAccountTest.json";
-        String customer_id = CustomerService_2_0_DataBaseRequest.getCustomerId();
+        String customer_id = CustomerService_2_0_DataBaseRequest.getCustomerId(4);
         Response response = customerService_2_0.checkGetNotificationInPersonalAccount(customer_id);
         assertAll(
                 () -> assertEquals(HttpStatus.SC_OK,
@@ -68,7 +68,7 @@ public class CRS_10_SendingNotificationInPersonalAccountTest extends BaseTest {
 
     public void checkSendingNotificationInPersonalAccountInvalidRequest(String method) {
         String jsonSchemaPath = "schemas/customerService_2_0/CRS_10_checkSendingNotificationInPersonalAccountInvalidRequest.json";
-        String customer_id = CustomerService_2_0_DataBaseRequest.getCustomerId();
+        String customer_id = CustomerService_2_0_DataBaseRequest.getCustomerId(4);
         Response response = customerService_2_0.checkGetPersonalInfoClientsWithIncorrectRequest(method, customer_id);
         assertAll(
                 () -> assertEquals(HttpStatus.SC_METHOD_NOT_ALLOWED,

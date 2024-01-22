@@ -44,11 +44,12 @@ public class CustomerService_2_0_DataBaseRequest {
         LOG.info(String.format("Получен список id из таблицы user_profile"));
         return customerIdList;
     }
-    public static String getCustomerId() {
+
+    public static String getCustomerId(int passportId) {
         String sql = "select customer_id\n" +
                 "from customer \n" +
-                "where passport_id=4";
-        String customerId = getDBConnection(CUSTOMER_SERVICE_2_0).queryForObject(sql, String.class);
+                "where passport_id=?";
+        String customerId = getDBConnection(CUSTOMER_SERVICE_2_0).queryForObject(sql, String.class, passportId);
         return customerId;
     }
 }
