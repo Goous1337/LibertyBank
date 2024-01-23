@@ -2,7 +2,7 @@ package api.customerService_2_0;
 
 import api.BaseTest;
 
-import dataBase.requests.CustomerService2_0DataBaseRequest;
+import dataBase.requests.CustomerService_2_0_DataBaseRequest;
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import pojo.customerService2_0.NotificationStatus;
+import pojo.customerService_2_0.NotificationStatus;
 
 
 import static org.apache.hc.core5.http.HttpStatus.*;
@@ -35,14 +35,14 @@ public class CRS_11_PushNotificationsTest extends BaseTest {
     @Test
 
     public void successfulReceivePUSHNotificationsTrue() {
-        String customerId = CustomerService2_0DataBaseRequest.receivingCustomerIdWithNotificationStatusFalse();
-        Response response = customerService2_0.checkPushNotification(customerId, true);
+        String customerId = CustomerService_2_0_DataBaseRequest.receivingCustomerIdWithNotificationStatusFalse();
+        Response response = customerService_2_0.checkPushNotification(customerId, true);
         System.out.println(customerId);
         assertAll(
                 () -> assertEquals(SC_OK,
                         response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals(true, CustomerService2_0DataBaseRequest.checkNotificationStatusByCustomerId(customerId),
+                () -> assertEquals(true, CustomerService_2_0_DataBaseRequest.checkNotificationStatusByCustomerId(customerId),
                         "Статус push_notification данного %s не поменялся" + customerId)
         );
     }
@@ -54,13 +54,13 @@ public class CRS_11_PushNotificationsTest extends BaseTest {
     @Test
 
     public void successfulReceivePUSHNotificationsFalse() {
-        String customerId = CustomerService2_0DataBaseRequest.receivingCustomerIdWithNotificationStatusTrue();
-        Response response = customerService2_0.checkPushNotification(customerId, false);
+        String customerId = CustomerService_2_0_DataBaseRequest.receivingCustomerIdWithNotificationStatusTrue();
+        Response response = customerService_2_0.checkPushNotification(customerId, false);
         assertAll(
                 () -> assertEquals(SC_OK,
                         response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
-                () -> assertFalse(CustomerService2_0DataBaseRequest.checkNotificationStatusByCustomerId(customerId),
+                () -> assertFalse(CustomerService_2_0_DataBaseRequest.checkNotificationStatusByCustomerId(customerId),
                         "Статус push_notification данного %s не поменялся" + customerId)
         );
     }
@@ -73,8 +73,8 @@ public class CRS_11_PushNotificationsTest extends BaseTest {
     @ValueSource(strings = {"true", "12321", "gfaghs", ""})
 
     public void unsuccessfulReceivePUSHNotificationsNotBoolean(String notificationStatus) {
-        String customerId = CustomerService2_0DataBaseRequest.receivingCustomerIdWithNotificationStatusFalse();
-        Response response = customerService2_0.checkPushNotificationWithNotBoolean(customerId, notificationStatus);
+        String customerId = CustomerService_2_0_DataBaseRequest.receivingCustomerIdWithNotificationStatusFalse();
+        Response response = customerService_2_0.checkPushNotificationWithNotBoolean(customerId, notificationStatus);
         assertAll(
                 () -> assertEquals(SC_UNSUPPORTED_MEDIA_TYPE,
                         response.statusCode(),
@@ -94,8 +94,8 @@ public class CRS_11_PushNotificationsTest extends BaseTest {
 
     public void unsuccessfulReceivePUSHNotificationsWithInvalidMethod(String method) {
         NotificationStatus notificationStatus = new NotificationStatus(true);
-        String customerId = CustomerService2_0DataBaseRequest.receivingCustomerIdWithNotificationStatusFalse();
-        Response response = customerService2_0.checkPushNotificationWithHttpMethod(method, customerId, notificationStatus);
+        String customerId = CustomerService_2_0_DataBaseRequest.receivingCustomerIdWithNotificationStatusFalse();
+        Response response = customerService_2_0.checkPushNotificationWithHttpMethod(method, customerId, notificationStatus);
         assertAll(
                 () -> assertEquals(SC_METHOD_NOT_ALLOWED,
                         response.statusCode(),
@@ -113,8 +113,8 @@ public class CRS_11_PushNotificationsTest extends BaseTest {
     @Test
 
     public void unsuccessfulReceivePUSHNotificationsWithInvalidURL() {
-        String customerId = CustomerService2_0DataBaseRequest.receivingCustomerIdWithNotificationStatusFalse();
-        Response response = customerService2_0.checkPushNotificationWithInvalidURL(customerId, false);
+        String customerId = CustomerService_2_0_DataBaseRequest.receivingCustomerIdWithNotificationStatusFalse();
+        Response response = customerService_2_0.checkPushNotificationWithInvalidURL(customerId, false);
         assertAll(
                 () -> assertEquals(SC_NOT_FOUND,
                         response.statusCode(),
@@ -133,8 +133,8 @@ public class CRS_11_PushNotificationsTest extends BaseTest {
 
     public void unsuccessfulReceivePUSHNotificationsWrongData() {
         NotificationStatus notificationStatus = new NotificationStatus(null);
-        String customerId = CustomerService2_0DataBaseRequest.receivingCustomerIdWithNotificationStatusFalse();
-        Response response = customerService2_0.checkPushNotificationWithNull(notificationStatus, customerId);
+        String customerId = CustomerService_2_0_DataBaseRequest.receivingCustomerIdWithNotificationStatusFalse();
+        Response response = customerService_2_0.checkPushNotificationWithNull(notificationStatus, customerId);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST,
                         response.statusCode(),
