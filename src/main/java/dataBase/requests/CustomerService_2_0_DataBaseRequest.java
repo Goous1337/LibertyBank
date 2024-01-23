@@ -3,6 +3,7 @@ package dataBase.requests;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import static constant.LibertyServiceName.CUSTOMER_SERVICE_2_0;
@@ -52,10 +53,20 @@ public class CustomerService_2_0_DataBaseRequest {
         String customerId = getDBConnection(CUSTOMER_SERVICE_2_0).queryForObject(sql, String.class, passportId);
         return customerId;
     }
-    public static String getCustomerPasswordById(String id){
+
+    public static String getCustomerPasswordById(String id) {
         String sql = "SELECT password FROM user_profile WHERE customer_id =?::uuid";
-        String password = getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sql, String.class,id);
-        LOG.info(String.format("Получен пароль пользователя по id %s",id));
+        String password = getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sql, String.class, id);
+        LOG.info(String.format("Получен пароль пользователя по id %s", id));
         return password;
+    }
+
+    public static void updateLastCodeExpiration(String id) throws SQLException {
+        String sql = "update user_profile set last_code_expiration = NOW() - interval '3 hour' where customer_id =?::uuid";
+        int update = getDBConnection(CUSTOMER_SERVICE_DB_2_0).update(sql, id);
+        if (update != 1) {
+            throw new SQLException("Не удалось обновить таблицу");
+        }
+        LOG.info(String.format("Таблица last_code_expiration была успешно обновлена по id %s", id));
     }
 }

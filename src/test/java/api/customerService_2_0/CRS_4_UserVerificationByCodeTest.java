@@ -5,6 +5,7 @@ import dataBase.requests.CustomerService_2_0_DataBaseRequest;
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -13,9 +14,10 @@ import org.junit.jupiter.api.Test;
 import pojo.customerService_2_0.CustomerService_2_0_Mobile;
 import pojo.customerService_2_0.UserVerificationWithCode;
 
+import java.sql.SQLException;
+
 import static constant.CustomerService_2_0_Constants.*;
-import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
-import static org.apache.http.HttpStatus.SC_OK;
+import static org.apache.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.CUSTOMER_SERVICE_2_0;
 
@@ -53,6 +55,7 @@ public class CRS_4_UserVerificationByCodeTest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2126")
     @Test
     public void checkUserVerificationWithUnExistMobilePhone() {
+        String jsonSchemaPath = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";
         String customerId = CustomerService_2_0_DataBaseRequest.getCustomerIdByMobilePhone(CUSTOMER_USER_MOBILE_PHONE);
         CustomerService_2_0_Mobile customerService_2_0_mobile = new CustomerService_2_0_Mobile
                 (CUSTOMER_USER_MOBILE_PHONE);
@@ -62,8 +65,57 @@ public class CRS_4_UserVerificationByCodeTest extends BaseTest {
                 (UN_EXIST_CUSTOMER_USER_PHONE, verificationCode);
         Response response = customerService_2_0.checkListUserVerificationWithValidData(userVerificationWithCode);
         assertAll(
-                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode())
+                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode()),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
         CustomerService_2_0_DataBaseRequest.resetTimerOfVerificationCodeById(customerId);
+    }
+
+    @DisplayName("Верификация пользователя, код верификации с истекшим сроком действия")
+    @Description("""
+            Данный тест-кейс проверяет верификацию пользователя с истекшим кодом верификации.
+            """)
+    @Tags({@Tag("API"), @Tag("Negative")})
+    @TmsLink("https://jira.astondevs.ru/browse/LIB-2117")
+    @Test
+    public void checkUserVerificationWithExpiredVerificationCode() throws SQLException {
+        String jsonSchemaPath = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";
+        String customerId = CustomerService_2_0_DataBaseRequest.getCustomerIdByMobilePhone(CUSTOMER_MOBILE_PHONE);
+        CustomerService_2_0_Mobile customerService_2_0_mobile = new CustomerService_2_0_Mobile(CUSTOMER_MOBILE_PHONE);
+        customerService_2_0.checkListSavingVerificationCode(customerService_2_0_mobile);
+        String verificationCode = CustomerService_2_0_DataBaseRequest.getCustomerLastVerificationCodeById(customerId);
+        CustomerService_2_0_DataBaseRequest.updateLastCodeExpiration(customerId);
+        UserVerificationWithCode userVerificationWithCode = new UserVerificationWithCode
+                (CUSTOMER_MOBILE_PHONE, verificationCode);
+        Response response = customerService_2_0.checkListUserVerificationWithValidData(userVerificationWithCode);
+        assertAll(
+                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode()),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+        );
+        CustomerService_2_0_DataBaseRequest.resetTimerOfVerificationCodeById(customerId);
+    }
+
+    @DisplayName("Верификация пользователя невалидным методом")
+    @Description("""
+            Данный тест-кейс проверяет, что при указании метода PATCH вместо POST,
+             система выдает сообщение с 405 ошибкой
+            """)
+    @Tags({@Tag("API"), @Tag("Negative")})
+    @TmsLink("https://jira.astondevs.ru/browse/LIB-2127")
+    @Test
+    public void checkUserVerificationWithInvalidMethod() {
+        String jsonSchemaPath = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";
+        String mobilePhone = "79198235298";
+        String customerId = CustomerService_2_0_DataBaseRequest.getCustomerIdByMobilePhone(mobilePhone);
+        CustomerService_2_0_Mobile customerService_2_0_mobile = new CustomerService_2_0_Mobile(mobilePhone);
+        customerService_2_0.checkListSavingVerificationCode(customerService_2_0_mobile);
+        String verificationCode = CustomerService_2_0_DataBaseRequest.getCustomerLastVerificationCodeById(customerId);
+        UserVerificationWithCode userVerificationWithCode = new UserVerificationWithCode(mobilePhone, verificationCode);
+        Response response = customerService_2_0
+                .checkListUserVerificationWithInvalidMethod(userVerificationWithCode, "PATCH");
+        assertAll(
+                () -> assertEquals(SC_METHOD_NOT_ALLOWED, response.getStatusCode()),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+        );
     }
 }

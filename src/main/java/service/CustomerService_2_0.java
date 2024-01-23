@@ -62,4 +62,9 @@ public class CustomerService_2_0 {
     public Response checkListUserVerificationWithValidData(UserVerificationWithCode userVerificationWithCode) {
         return sendSimpleRequest(POST, CUSTOMER_VERIFICATION_BY_CODE, userVerificationWithCode);
     }
+
+    public Response checkListUserVerificationWithInvalidMethod
+            (UserVerificationWithCode userVerificationWithCode, String method) {
+        return sendSimpleRequest(Method.valueOf(method), CUSTOMER_VERIFICATION_BY_CODE, userVerificationWithCode);
+    }
 }
