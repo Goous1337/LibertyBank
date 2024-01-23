@@ -36,7 +36,6 @@ public class CRS_11_PushNotificationsTest extends BaseTest {
 
     public void successfulReceivePUSHNotificationsTrue() {
         String customerId = CustomerService2_0DataBaseRequest.receivingCustomerIdWithNotificationStatusFalse();
-
         Response response = customerService2_0.checkPushNotification(customerId, true);
         System.out.println(customerId);
         assertAll(
@@ -44,10 +43,8 @@ public class CRS_11_PushNotificationsTest extends BaseTest {
                         response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
                 () -> assertEquals(true, CustomerService2_0DataBaseRequest.checkNotificationStatusByCustomerId(customerId),
-                        "Статус push_notification данного %s не поменялся"+ customerId)
+                        "Статус push_notification данного %s не поменялся" + customerId)
         );
-        System.out.println(CustomerService2_0DataBaseRequest.checkNotificationStatusByCustomerId(customerId));
-
     }
 
     @DisplayName("Основной сценарий. Проверка возможности отказа от получения PUSH-уведомлений.")
