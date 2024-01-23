@@ -9,7 +9,6 @@ import java.util.List;
 import static api.core.ApiClient.sendSimpleRequest;
 import static api.core.RequestParam.getRP;
 import static api.core.RequestParamType.PARAMETER;
-import static constant.AbsClientServiceConstant.*;
 import static constant.AbsClientServiceConstants.*;
 import static constant.ApiEndpoints.ABS_CLIENT_SERVICE_PERSONAL_DATE;
 import static constant.ApiEndpoints.ABS_CLIENT_SHORT_INFO;
@@ -33,16 +32,19 @@ public class AbsClientService {
                         getRP(PARAMETER, NUMBER, number));
         return sendSimpleRequest(GET, ABS_CLIENT_SHORT_INFO, params);
     }
-    public Response checkGetPersonalInfoClients(String customer_uuid){
-        return sendSimpleRequest(GET,ABS_CLIENT_SERVICE_PERSONAL_DATE, getRP(PARAMETER, PARAMETER_CUSTOMER_UUID, customer_uuid));
+
+    public Response checkGetPersonalInfoClients(String customer_uuid) {
+        return sendSimpleRequest(GET, ABS_CLIENT_SERVICE_PERSONAL_DATE, getRP(PARAMETER, PARAMETER_CUSTOMER_UUID, customer_uuid));
     }
-    public Response checkGetPersonalInfoClientsWithIncorrectUuid(){
+
+    public Response checkGetPersonalInfoClientsWithIncorrectUuid() {
         return sendSimpleRequest(Method.GET, ABS_CLIENT_SERVICE_PERSONAL_DATE,
-                getRP(PARAMETER, PARAMETER_CUSTOMER_UUID , PARAMETER_INCORRECT_CUSTOMER_UUID));
+                getRP(PARAMETER, PARAMETER_CUSTOMER_UUID, PARAMETER_INCORRECT_CUSTOMER_UUID));
     }
-    public Response checkGetPersonalInfoClientsWithInvalidUuid(){
+
+    public Response checkGetPersonalInfoClientsWithInvalidUuid() {
         return sendSimpleRequest(Method.GET, ABS_CLIENT_SERVICE_PERSONAL_DATE,
-                getRP(PARAMETER, PARAMETER_CUSTOMER_UUID , PARAMETER_INVALID_CUSTOMER_UUID));
+                getRP(PARAMETER, PARAMETER_CUSTOMER_UUID, PARAMETER_INVALID_CUSTOMER_UUID));
     }
 
 }

@@ -1,4 +1,4 @@
-package api.customerService2_0;
+package api.customerService_2_0;
 
 import api.BaseTest;
 
