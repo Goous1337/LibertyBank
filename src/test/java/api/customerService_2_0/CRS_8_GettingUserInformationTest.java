@@ -34,7 +34,7 @@ public class CRS_8_GettingUserInformationTest extends BaseTest {
 
     public void successfulGettingUserInformation() {
         String actualCustomerID = CustomerService2_0DataBaseRequest.receivingCustomerId();
-        String jsonSchemaPath = "schemas/customerService2.0/CRS-8/checkInfoUser.json";
+        String jsonSchemaPath = "schemas/customerService_2_0/CRS-8/checkInfoUser.json";
         Response response = customerService2_0.checkGettingUserInformation(actualCustomerID);
         assertAll(
                 () -> assertEquals(SC_OK,
