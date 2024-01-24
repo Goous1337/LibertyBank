@@ -1,28 +1,29 @@
 package web.epic_4;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.WebDriver;
-import property.WebPropertiesReader;
 import web.BaseTest;
-import web.drivers.DriverManager;
 
 import static web.constans.UrlConfig.ACCOUNTS_URL;
 
+@Tag("Web")
+@Epic("4 - Счета")
+@Feature("US-4.3 Просмотр подробной информации о счете")
+@DisplayName("US-4.3 Просмотр подробной информации о счете")
 public class AccountInfoTest extends BaseTest {
-
-    private static WebDriver driver = DriverManager.getDriver();
 
     private static final String ELEMENT_VERIFICATION_MESSAGE = "%s не отображается";
 
     @BeforeEach
     public void setUpTest() {
-        driver.get(WebPropertiesReader.getWebBaseUrl() + ACCOUNTS_URL);
+        open(ACCOUNTS_URL);
     }
 
     @Test
     @DisplayName("Проверка отображения элементов подробной информации об открытом счете")
     public void checkActiveAccountInfo() {
-        accountSteps.clickOpenAccountsTab();
+        accountSteps.selectOpenAccounts();
         accountSteps.clickAccount();
         commonInfoChecks();
         Assertions.assertEquals("Активный", accountInfoSteps.getAccountStatus(), "Счет не является активным");
@@ -31,7 +32,7 @@ public class AccountInfoTest extends BaseTest {
     @Test
     @DisplayName("Проверка отображения элементов подробной информации о закрытом счете")
     public void checkClosedAccountInfo() {
-        accountSteps.clickClosedAccountsTab();
+        accountSteps.selectClosedAccounts();
         accountSteps.clickAccount();
         commonInfoChecks();
         Assertions.assertAll(
@@ -43,7 +44,7 @@ public class AccountInfoTest extends BaseTest {
     @Test
     @DisplayName("Проверка отображения элементов подробной информации о заблокированном счете")
     public void checkBlockedAccountInfo() {
-        accountSteps.clickBlockedAccountsTab();
+        accountSteps.selectBlockedAccounts();
         accountSteps.clickAccount();
         commonInfoChecks();
         Assertions.assertEquals("Заблокирован", accountInfoSteps.getAccountStatus(), "Счет не является заблокированным");
