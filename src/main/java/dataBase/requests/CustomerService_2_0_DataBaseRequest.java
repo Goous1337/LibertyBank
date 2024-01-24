@@ -69,4 +69,18 @@ public class CustomerService_2_0_DataBaseRequest {
         }
         LOG.info(String.format("Таблица last_code_expiration была успешно обновлена по id %s", id));
     }
+
+    public static Integer getWrongAttemptsByCustomerId(String id) {
+        String sql = "SELECT wrong_attempts FROM user_profile WHERE customer_id =?::uuid";
+        Integer wrongAttempts = getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sql, Integer.class, id);
+        LOG.info(String.format("Получены данные из колонки wrong_attempts по id %s", id));
+        return wrongAttempts;
+    }
+
+    public static Integer getSmsSendCounterByCustomerId(String id) {
+        String sql = "SELECT sms_sent_counter FROM user_profile WHERE customer_id =?::uuid";
+        Integer smsSendCounter = getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sql, Integer.class, id);
+        LOG.info(String.format("Получены данные из колонки sms_sent_counter по id %s", id));
+        return smsSendCounter;
+    }
 }

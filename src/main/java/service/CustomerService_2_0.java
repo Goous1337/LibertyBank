@@ -67,4 +67,14 @@ public class CustomerService_2_0 {
             (UserVerificationWithCode userVerificationWithCode, String method) {
         return sendSimpleRequest(Method.valueOf(method), CUSTOMER_VERIFICATION_BY_CODE, userVerificationWithCode);
     }
+
+    public Response checkListUserVerificationWithInvalidTypeMobilePhone
+            (UserVerificationWithInvalidTypeMobilePhone userVerificationWithInvalidTypeMobilePhone) {
+        return sendSimpleRequest(POST, CUSTOMER_VERIFICATION_BY_CODE, userVerificationWithInvalidTypeMobilePhone);
+    }
+
+    public Response checkListUserVerificationWithInvalidTypeVerificationCode
+            (UserVerificationWithInvalidTypeVerificationCode userVerificationWithInvalidTypeVerificationCode) {
+        return sendSimpleRequest(POST, CUSTOMER_VERIFICATION_BY_CODE, userVerificationWithInvalidTypeVerificationCode);
+    }
 }
