@@ -1,5 +1,6 @@
 package web.steps;
 
+import io.qameta.allure.Step;
 import web.pages.AccountInfoPage;
 
 public class AccountInfoSteps {
@@ -48,5 +49,20 @@ public class AccountInfoSteps {
 
     public String getAccountStatus() {
         return accountInfoPage.getAccountStatus();
+    }
+
+    @Step("Кликнуть на кнопку 'Меню действий'")
+    public void clickActionsMenuButton() {
+        accountInfoPage.clickActionsMenuButton();
+    }
+
+    @Step("Нажать на кнопку 'Заблокировать'")
+    public void clickBlockButton() {
+        accountInfoPage.clickBlockButton();
+    }
+
+    @Step("Нажать на кнопку 'Разблокировать'")
+    public void clickUnblockButton() {
+        accountInfoPage.clickUnblockButton();
     }
 }
