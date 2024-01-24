@@ -10,7 +10,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import web.BaseTest;
 
-import static web.constans.AccountStatusConstant.*;
+import static web.constans.AccountServiceConstants.*;
 import static web.constans.UrlConfig.ACCOUNTS_URL;
 import static web.constans.UrlConfig.BASE_URL;
 
@@ -32,7 +32,7 @@ public class ViewingListOfActiveAccountsTest extends BaseTest {
     @TmsLink("LIB2-2431")
     @DisplayName("Просмотр открытых счетов")
     public void viewingOpenAccounts() {
-        Assertions.assertEquals(OPEN, accountSteps.getAccountStatus(), String.format(STATUS_ERROR_MESSAGE, "Активный"));
+        Assertions.assertEquals(OPEN_ACCOUNT_STATUS, accountSteps.getAccountStatus(), String.format(STATUS_ERROR_MESSAGE, "Активный"));
         Assertions.assertAll(
                 () -> Assertions.assertTrue(accountSteps.accountStatusIsDisplayed(), String.format(ERROR_MESSAGE, "Статус счета")),
                 () -> Assertions.assertTrue(accountSteps.accountNameOrNumberIsDisplayed(), String.format(ERROR_MESSAGE, "Номер или имя счета")),
@@ -47,7 +47,7 @@ public class ViewingListOfActiveAccountsTest extends BaseTest {
     @DisplayName("Просмотр закрытых счетов")
     public void viewingClosedAccounts() {
         accountSteps.selectClosedAccounts();
-        Assertions.assertEquals(CLOSED, accountSteps.getAccountStatus(), String.format(ERROR_MESSAGE, "Закрыт"));
+        Assertions.assertEquals(CLOSED_ACCOUNT_STATUS, accountSteps.getAccountStatus(), String.format(ERROR_MESSAGE, "Закрыт"));
     }
 
     @Test
@@ -55,7 +55,7 @@ public class ViewingListOfActiveAccountsTest extends BaseTest {
     @DisplayName("Просмотр заблокированных счетов")
     public void viewingBlockedAccounts() {
         accountSteps.selectBlockedAccounts();
-        Assertions.assertEquals(BLOCKED, accountSteps.getAccountStatus(), String.format(ERROR_MESSAGE, "Заблокирован"));
+        Assertions.assertEquals(BLOCKED_ACCOUNT_STATUS, accountSteps.getAccountStatus(), String.format(ERROR_MESSAGE, "Заблокирован"));
     }
 
     @Test

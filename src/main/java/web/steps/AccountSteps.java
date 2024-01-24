@@ -11,24 +11,41 @@ public class AccountSteps {
         accountPage = new AccountPage();
     }
 
+    @Step("Кликнуть на первый счет в списке")
+    public void clickAccount() {
+        accountPage.clickAccount();
+    }
     @Step("Выбрать 'Открытые счета'")
     public void selectOpenAccounts() {
-        accountPage.clickOpenAccounts();
+        accountPage.clickOpenAccountsTab();
     }
 
     @Step("Выбрать 'Закрытые счета'")
     public void selectClosedAccounts() {
-        accountPage.clickClosedAccounts();
+        accountPage.clickClosedAccountsTab();
     }
 
     @Step("Выбрать 'Заблокированные счета'")
     public void selectBlockedAccounts() {
-        accountPage.clickBlockedAccounts();
+        accountPage.clickBlockedAccountsTab();
     }
 
     @Step("Кликнуть на основной счет")
     public void clickMainAccountLabel() {
         accountPage.clickMainAccountLabel();
+    }
+
+    @Step("Кликнуть на текущий счет")
+    public void clickCreateCurrentAccount() {
+        accountPage.clickCreateCurrentAccount();
+    }
+
+    public boolean isOpenAccountDisplayed() {
+        return accountPage.isOpenAccountDisplayed();
+    }
+
+    public boolean isMainAccountLabelDisplayed() {
+        return accountPage.isMainAccountLabelDisplayed();
     }
 
     @Step("Отображается статус счета")

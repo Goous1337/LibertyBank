@@ -2,7 +2,13 @@ package web.pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import web.helpers.Waiters;
+
+import java.time.Duration;
+
+import static web.drivers.DriverManager.getDriver;
 
 public class AccountPage extends BasePage {
 
@@ -17,6 +23,12 @@ public class AccountPage extends BasePage {
 
     @FindBy(xpath = "//*[contains(text(), 'Основной счет')]")
     private WebElement mainAccountLabel;
+
+    @FindBy(xpath = "//*[contains(text(), 'Текущий счет')]")
+    private WebElement createCurrentAccount;
+
+    @FindBy(xpath = "//p[contains(text(), 'Текущий счет')]")
+    private WebElement account;
 
     @FindBy(css = "._label-width_adjustable_c42rp_10")
     private WebElement accountStatus;
@@ -54,20 +66,22 @@ public class AccountPage extends BasePage {
     @FindBy(xpath = "//*[contains(text(), 'EUR')]")
     private WebElement filterByEur;
 
-    public void clickOpenAccounts() {
-        openAccountsTab.click();
-    }
-
-    public void clickClosedAccounts() {
-        closedAccountsTab.click();
-    }
-
-    public void clickBlockedAccounts() {
-        blockedAccountsTab.click();
-    }
-
     public void clickMainAccountLabel() {
+        Waiters.waitElement(mainAccountLabel);
         mainAccountLabel.click();
+    }
+
+    public void clickCreateCurrentAccount() {
+        Waiters.waitElement(createCurrentAccount);
+        createCurrentAccount.click();
+    }
+
+    public boolean isOpenAccountDisplayed() {
+        return openAccountsTab.isDisplayed();
+    }
+
+    public boolean isMainAccountLabelDisplayed() {
+        return mainAccountLabel.isDisplayed();
     }
 
     public boolean isAccountStatusDisplayed() {
@@ -131,5 +145,25 @@ public class AccountPage extends BasePage {
     public void clickFilterByEur() {
         Waiters.waitElement(filterByEur);
         filterByEur.click();
+    }
+
+    public void clickOpenAccountsTab() {
+        Waiters.waitElement(openAccountsTab);
+        openAccountsTab.click();
+    }
+
+    public void clickClosedAccountsTab() {
+        Waiters.waitElement(closedAccountsTab);
+        closedAccountsTab.click();
+    }
+
+    public void clickBlockedAccountsTab() {
+        Waiters.waitElement(blockedAccountsTab);
+        blockedAccountsTab.click();
+    }
+
+    public void clickAccount() {
+        Waiters.waitElement(account);
+        account.click();
     }
 }

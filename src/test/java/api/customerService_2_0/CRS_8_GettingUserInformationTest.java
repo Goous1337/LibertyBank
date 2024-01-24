@@ -1,7 +1,7 @@
 package api.customerService_2_0;
 
 import api.BaseTest;
-import dataBase.requests.CustomerService2_0DataBaseRequest;
+import dataBase.requests.CustomerService_2_0_DataBaseRequest;
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CUSTOMER_SERVICE_2_0;
 
-@DisplayName("Получение информации о пользователе")
+@DisplayName("CRS-8 Получение информации о пользователе")
 public class CRS_8_GettingUserInformationTest extends BaseTest {
     {
         RestAssured.baseURI = CUSTOMER_SERVICE_2_0;
@@ -33,9 +33,9 @@ public class CRS_8_GettingUserInformationTest extends BaseTest {
     @Test
 
     public void successfulGettingUserInformation() {
-        String actualCustomerID = CustomerService2_0DataBaseRequest.receivingCustomerId();
-        String jsonSchemaPath = "schemas/customerService_2_0/CRS-8/checkInfoUser.json";
-        Response response = customerService2_0.checkGettingUserInformation(actualCustomerID);
+        String actualCustomerID = CustomerService_2_0_DataBaseRequest.receivingCustomerId();
+        String jsonSchemaPath = "schemas/customerService2.0/CRS-8/checkInfoUser.json";
+        Response response = customerService_2_0.checkGettingUserInformation(actualCustomerID);
         assertAll(
                 () -> assertEquals(SC_OK,
                         response.statusCode(),
@@ -55,7 +55,7 @@ public class CRS_8_GettingUserInformationTest extends BaseTest {
 
     public void unsuccessfulGettingUserInformationWithInvalidCustomerId(String customerId) {
 
-        Response response = customerService2_0.checkGettingUserInformation(customerId);
+        Response response = customerService_2_0.checkGettingUserInformation(customerId);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST,
                         response.statusCode(),
@@ -77,8 +77,8 @@ public class CRS_8_GettingUserInformationTest extends BaseTest {
 
     public void unsuccessfulGettingUserInformationWithInvalidMethod(String method) {
 
-        String actualCustomerID = CustomerService2_0DataBaseRequest.receivingCustomerId();
-        Response response = customerService2_0.checkGettingUserInformationWithInvalidMethod(method, actualCustomerID);
+        String actualCustomerID = CustomerService_2_0_DataBaseRequest.receivingCustomerId();
+        Response response = customerService_2_0.checkGettingUserInformationWithInvalidMethod(method, actualCustomerID);
         assertAll(
                 () -> assertEquals(SC_METHOD_NOT_ALLOWED,
                         response.statusCode(),
