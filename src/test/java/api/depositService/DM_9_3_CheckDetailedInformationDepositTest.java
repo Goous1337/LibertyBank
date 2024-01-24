@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.DEPOSIT_SERVICE;
 
-@DisplayName("Получение подробной информации о депозитном предложении")
+@DisplayName("DM-9.3 Получение подробной информации о депозитном предложении")
 public class DM_9_3_CheckDetailedInformationDepositTest extends BaseTest {
     {
         RestAssured.baseURI = DEPOSIT_SERVICE;
