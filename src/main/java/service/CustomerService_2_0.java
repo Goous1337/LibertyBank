@@ -38,19 +38,19 @@ public class CustomerService_2_0 {
     }
 
     public Response  checkUpdateQuestionAnswer(String question, String answer,String customerId){
-        List<RequestParam> params = List.of(new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON),
-                new RequestParam(PARAMETER,PARAMETER_CUSTOMER_ID, customerId));
+        List<RequestParam> params = List.of(getRP(HEADER, CONTENT_TYPE, APPLICATION_JSON),
+                getRP(PARAMETER,PARAMETER_CUSTOMER_ID, customerId));
         return sendSimpleRequest(PATCH, QUESTION_ANSWER_2_0, params, new UserQuestion(question, answer));
     }
 
     public Response updateQuestionAnswerInvalidHttpMethod(String question, String answer, String invalidHttpMethod) {
-        List<RequestParam> params = List.of(new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON));
+        List<RequestParam> params = List.of(getRP(HEADER, CONTENT_TYPE, APPLICATION_JSON));
         return sendSimpleRequest(Method.valueOf(invalidHttpMethod), QUESTION_ANSWER_2_0, params, new UserQuestion(question, answer));
     }
 
     public Response checkUpdateQuestionAnswerInvalidUrl(String question, String answer,String customerId){
         List<RequestParam> params = List.of(new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON),
-                new RequestParam(PARAMETER,PARAMETER_CUSTOMER_ID, customerId));
+                getRP(PARAMETER,PARAMETER_CUSTOMER_ID, customerId));
         return sendSimpleRequest(PATCH, QUESTION_ANSWER_INVALID_URL_2_0, params, new UserQuestion(question, answer));
     }
 
