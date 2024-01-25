@@ -6,14 +6,13 @@ import org.junit.jupiter.api.*;
 import web.BaseTest;
 
 import static web.constans.UrlConfig.ACCOUNTS_URL;
+import static web.constans.AccountServiceConstants.*;
 
 @Tag("Web")
 @Epic("4 - Счета")
 @Feature("US-4.3 Просмотр подробной информации о счете")
 @DisplayName("US-4.3 Просмотр подробной информации о счете")
 public class AccountInfoTest extends BaseTest {
-
-    private static final String ELEMENT_VERIFICATION_MESSAGE = "%s не отображается";
 
     @BeforeEach
     public void setUpTest() {
@@ -26,7 +25,7 @@ public class AccountInfoTest extends BaseTest {
         accountSteps.selectOpenAccounts();
         accountSteps.clickAccount();
         commonInfoChecks();
-        Assertions.assertEquals("Активный", accountInfoSteps.getAccountStatus(), "Счет не является активным");
+        Assertions.assertEquals(OPEN_ACCOUNT_STATUS, accountInfoSteps.getAccountStatus(), String.format(STATUS_ERROR_MESSAGE, OPEN_ACCOUNT_STATUS));
     }
 
     @Test
@@ -36,8 +35,8 @@ public class AccountInfoTest extends BaseTest {
         accountSteps.clickAccount();
         commonInfoChecks();
         Assertions.assertAll(
-                () -> Assertions.assertTrue(accountInfoSteps.isCloseDateDisplayed(), String.format(ELEMENT_VERIFICATION_MESSAGE, "Дата закрытия счета")),
-                () -> Assertions.assertEquals("Закрыт", accountInfoSteps.getAccountStatus(), "Счет не является закрытым")
+                () -> Assertions.assertTrue(accountInfoSteps.isCloseDateDisplayed(), String.format(DISPLAYED_MESSAGE, "Дата закрытия счета")),
+                () -> Assertions.assertEquals(CLOSED_ACCOUNT_STATUS, accountInfoSteps.getAccountStatus(), String.format(STATUS_ERROR_MESSAGE, CLOSED_ACCOUNT_STATUS))
         );
     }
 
@@ -47,18 +46,18 @@ public class AccountInfoTest extends BaseTest {
         accountSteps.selectBlockedAccounts();
         accountSteps.clickAccount();
         commonInfoChecks();
-        Assertions.assertEquals("Заблокирован", accountInfoSteps.getAccountStatus(), "Счет не является заблокированным");
+        Assertions.assertEquals(BLOCKED_ACCOUNT_STATUS, accountInfoSteps.getAccountStatus(), String.format(STATUS_ERROR_MESSAGE, BLOCKED_ACCOUNT_STATUS));
     }
 
     private void commonInfoChecks() {
         Assertions.assertAll(
-                () -> Assertions.assertTrue(accountInfoSteps.isAccountNameDisplayed(), String.format(ELEMENT_VERIFICATION_MESSAGE, "Название счета")),
-                () -> Assertions.assertTrue(accountInfoSteps.isAccountNumberDisplayed(), String.format(ELEMENT_VERIFICATION_MESSAGE, "Номер счета")),
-                () -> Assertions.assertTrue(accountInfoSteps.isOpenDateDisplayed(), String.format(ELEMENT_VERIFICATION_MESSAGE, "Дата открытия счета")),
-                () -> Assertions.assertTrue(accountInfoSteps.isContractNumberDisplayed(), String.format(ELEMENT_VERIFICATION_MESSAGE, "Номер договора")),
-                () -> Assertions.assertTrue(accountInfoSteps.isAccountStatusDisplayed(), String.format(ELEMENT_VERIFICATION_MESSAGE, "Статус счета")),
-                () -> Assertions.assertTrue(accountInfoSteps.isCurrencyIconDisplayed(), String.format(ELEMENT_VERIFICATION_MESSAGE, "Иконка валюты")),
-                () -> Assertions.assertTrue(accountInfoSteps.isBalanceDisplayed(), String.format(ELEMENT_VERIFICATION_MESSAGE, "Баланс"))
+                () -> Assertions.assertTrue(accountInfoSteps.isAccountNameDisplayed(), String.format(DISPLAYED_MESSAGE, "Название счета")),
+                () -> Assertions.assertTrue(accountInfoSteps.isAccountNumberDisplayed(), String.format(DISPLAYED_MESSAGE, "Номер счета")),
+                () -> Assertions.assertTrue(accountInfoSteps.isOpenDateDisplayed(), String.format(DISPLAYED_MESSAGE, "Дата открытия счета")),
+                () -> Assertions.assertTrue(accountInfoSteps.isContractNumberDisplayed(), String.format(DISPLAYED_MESSAGE, "Номер договора")),
+                () -> Assertions.assertTrue(accountInfoSteps.isAccountStatusDisplayed(), String.format(DISPLAYED_MESSAGE, "Статус счета")),
+                () -> Assertions.assertTrue(accountInfoSteps.isCurrencyIconDisplayed(), String.format(DISPLAYED_MESSAGE, "Иконка валюты")),
+                () -> Assertions.assertTrue(accountInfoSteps.isBalanceDisplayed(), String.format(DISPLAYED_MESSAGE, "Баланс"))
         );
     }
 }

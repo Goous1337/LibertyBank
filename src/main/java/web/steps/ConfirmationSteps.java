@@ -40,4 +40,18 @@ public class ConfirmationSteps {
     public void deny() {
         confirmationPage.clickDenyButton();
     }
+
+    public boolean isCloseVerificationMessageDisplayed() {
+        return confirmationPage.isCloseVerificationMessageDisplayed();
+    }
+
+    public boolean isCloseSuccessfullyMessageDisplayed() {
+        return confirmationPage.isCloseSuccessfullyMessageDisplayed();
+    }
+
+    @Step("Нажать кнопку Вернуться к счетам")
+    public void clickNavigateToAccountsPageButton() {
+        confirmationPage.clickNavigateToAccountsPageButton();
+    }
+
 }

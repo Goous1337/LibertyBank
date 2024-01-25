@@ -80,6 +80,10 @@ public class AccountPage extends BasePage {
         return openAccountsTab.isDisplayed();
     }
 
+    public boolean isCloseAccountDisplayed() {
+        return closedAccountsTab.isDisplayed();
+    }
+
     public boolean isMainAccountLabelDisplayed() {
         return mainAccountLabel.isDisplayed();
     }
@@ -97,14 +101,17 @@ public class AccountPage extends BasePage {
     }
 
     public boolean isRubleImageDisplayed() {
+        Waiters.waitElement(rubleImage);
         return rubleImage.isDisplayed();
     }
 
     public boolean isDollarImageDisplayed() {
+        Waiters.waitElement(dollarImage);
         return dollarImage.isDisplayed();
     }
 
     public boolean isEuroImageDisplayed() {
+        Waiters.waitElement(euroImage);
         return euroImage.isDisplayed();
     }
 
