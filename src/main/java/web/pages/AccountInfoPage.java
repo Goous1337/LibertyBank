@@ -1,5 +1,6 @@
 package web.pages;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import web.helpers.Waiters;
@@ -33,29 +34,32 @@ public class AccountInfoPage extends BasePage {
     @FindBy(xpath = "//div[contains(@class, 'my-bill-card__top-desc')]/p[2]")
     private WebElement accountStatus;
 
-    @FindBy(xpath = "//div[@data-testid='dots-button']")
-    private WebElement actionsMenuButton;
+    @FindBy(xpath = "//*[contains(text(), 'Назад')]")
+    private WebElement goBackButton;
+
+    @FindBy(xpath = "//*[@data-testid='dots-button']")
+    private WebElement dotsInfoButton;
+
+    @FindBy(xpath = "//button[contains(text(), 'Реквизиты')]")
+    private WebElement requisitesOpt;
+
+    @FindBy(xpath = "//button[contains(text(), 'Выписка по счету')]")
+    private WebElement accountStatementOpt;
+
+    @FindBy(xpath = "//button[contains(text(), 'Сделать счет основным')]")
+    private WebElement setMainAccountOpt;
+
+    @FindBy(xpath = "//button[contains(text(), 'Справка о доступном остатке')]")
+    private WebElement informationAboutAvailableBalanceOpt;
+
+    @FindBy(xpath = "//button[contains(text(), 'Закрыть счет')]")
+    private WebElement closeAccountOpt;
 
     @FindBy(xpath = "//button[contains(text(), 'Заблокировать счет')]")
-    private WebElement blockButton;
+    private WebElement blockAccountOpt;
 
     @FindBy(xpath = "//button[contains(text(), 'Разблокировать счет')]")
-    private WebElement unblockButton;
-
-    public void clickActionsMenuButton() {
-        Waiters.waitElement(actionsMenuButton);
-        actionsMenuButton.click();
-    }
-
-    public void clickBlockButton() {
-        Waiters.waitElement(blockButton);
-        blockButton.click();
-    }
-
-    public void clickUnblockButton() {
-        Waiters.waitElement(unblockButton);
-        unblockButton.click();
-    }
+    private WebElement unblockAccountOpt;
 
     public boolean isAccountNameDisplayed() {
         Waiters.waitElement(accountName);
@@ -79,7 +83,11 @@ public class AccountInfoPage extends BasePage {
     }
 
     public boolean isMainAccountLabelDisplayed() {
-        return mainAccountLabel.isDisplayed();
+        try {
+            return mainAccountLabel.isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
     }
 
     public boolean isAccountStatusDisplayed() {
@@ -96,5 +104,50 @@ public class AccountInfoPage extends BasePage {
 
     public String getAccountStatus() {
         return accountStatus.getText();
+    }
+
+    public void clickGoBackButton() {
+        goBackButton.click();
+    }
+
+    public void clickDotsInfoButton() {
+        dotsInfoButton.click();
+    }
+
+    public void clickRequisitesOpt() {
+        requisitesOpt.click();
+    }
+
+    public void clickAccountStatementOpt() {
+        accountStatementOpt.click();
+    }
+
+    public void clickSetMainAccountOpt() {
+        setMainAccountOpt.click();
+    }
+
+    public boolean isSetMainAccountOptDisplayed() {
+        try {
+            return setMainAccountOpt.isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
+    public void clickInformationAboutAvailableBalanceOpt() {
+        informationAboutAvailableBalanceOpt.click();
+    }
+
+    public void clickCloseAccountOpt() {
+        closeAccountOpt.click();
+    }
+
+    public void clickBlockAccountOpt() {
+        blockAccountOpt.click();
+    }
+
+    public void clickUnblockAccountOpt() {
+        Waiters.waitElement(unblockAccountOpt);
+        unblockAccountOpt.click();
     }
 }

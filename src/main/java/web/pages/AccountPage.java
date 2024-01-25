@@ -18,11 +18,17 @@ public class AccountPage extends BasePage {
     @FindBy(xpath = "//*[contains(text(), 'Основной счет')]")
     private WebElement mainAccountLabel;
 
+    @FindBy(xpath = "(//*[contains(text(), 'Основной счет')])[2]")
+    private WebElement secondMainAccountLabel;
+
     @FindBy(xpath = "//*[contains(text(), 'Текущий счет')]")
     private WebElement createCurrentAccount;
 
     @FindBy(xpath = "//p[contains(text(), 'Текущий счет')]")
     private WebElement account;
+
+    @FindBy(xpath = "(//p[contains(text(), 'Текущий счет')])[2]")
+    private WebElement secondAccount;
 
     @FindBy(css = "._label-width_adjustable_c42rp_10")
     private WebElement accountStatus;
@@ -76,6 +82,10 @@ public class AccountPage extends BasePage {
 
     public boolean isMainAccountLabelDisplayed() {
         return mainAccountLabel.isDisplayed();
+    }
+
+    public boolean isSecondMainAccountLabelDisplayed() {
+        return secondMainAccountLabel.isDisplayed();
     }
 
     public boolean isAccountStatusDisplayed() {
@@ -159,5 +169,10 @@ public class AccountPage extends BasePage {
     public void clickAccount() {
         Waiters.waitElement(account);
         account.click();
+    }
+
+    public void clickSecondAccount() {
+        Waiters.waitElement(secondAccount);
+        secondAccount.click();
     }
 }

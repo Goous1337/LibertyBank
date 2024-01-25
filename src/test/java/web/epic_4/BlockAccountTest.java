@@ -26,9 +26,9 @@ public class BlockAccountTest extends BaseTest {
     @Test
     public void blockOpenAccount() {
         openActiveAccount();
-        accountInfoSteps.clickActionsMenuButton();
-        accountInfoSteps.clickBlockButton();
-        confirmAccountBlockSteps.clickConfirmButton();
+        accountInfoSteps.clickDotsInfoButton();
+        accountInfoSteps.selectBlockAccount();
+        confirmationSteps.accept();
         Assertions.assertEquals(BLOCKED_ACCOUNT_STATUS, accountInfoSteps.getAccountStatus(), "Счет не является заблокированным");
     }
 
@@ -37,9 +37,9 @@ public class BlockAccountTest extends BaseTest {
     @Test
     public void blockMainAccount() {
         openMainAccount();
-        accountInfoSteps.clickActionsMenuButton();
-        accountInfoSteps.clickBlockButton();
-        confirmAccountBlockSteps.clickConfirmButton();
+        accountInfoSteps.clickDotsInfoButton();
+        accountInfoSteps.selectBlockAccount();
+        confirmationSteps.accept();
         Assertions.assertFalse(accountInfoSteps.isMainAccountLabelDisplayed(), "Счет является основным");
         Assertions.assertEquals(BLOCKED_ACCOUNT_STATUS, accountInfoSteps.getAccountStatus(), "Счет не является заблокированным");
     }
@@ -49,9 +49,9 @@ public class BlockAccountTest extends BaseTest {
     @Test
     public void unblockAccount() {
         openBlockedAccount();
-        accountInfoSteps.clickActionsMenuButton();
-        accountInfoSteps.clickUnblockButton();
-        confirmAccountBlockSteps.clickConfirmButton();
+        accountInfoSteps.clickDotsInfoButton();
+        accountInfoSteps.selectUnblockAccount();
+        confirmationSteps.accept();
         Assertions.assertEquals(OPEN_ACCOUNT_STATUS, accountInfoSteps.getAccountStatus(), "Счет не является активным");
     }
 
@@ -60,9 +60,9 @@ public class BlockAccountTest extends BaseTest {
     @Test
     public void deniedBlockAccount() {
         openActiveAccount();
-        accountInfoSteps.clickActionsMenuButton();
-        accountInfoSteps.clickBlockButton();
-        confirmAccountBlockSteps.clickDenyButton();
+        accountInfoSteps.clickDotsInfoButton();
+        accountInfoSteps.selectBlockAccount();
+        confirmationSteps.deny();
         Assertions.assertEquals(OPEN_ACCOUNT_STATUS, accountInfoSteps.getAccountStatus(), "Счет не является активным");
     }
 
@@ -71,9 +71,9 @@ public class BlockAccountTest extends BaseTest {
     @Test
     public void deniedUnblockAccount() {
         openBlockedAccount();
-        accountInfoSteps.clickActionsMenuButton();
-        accountInfoSteps.clickUnblockButton();
-        confirmAccountBlockSteps.clickDenyButton();
+        accountInfoSteps.clickDotsInfoButton();
+        accountInfoSteps.selectUnblockAccount();
+        confirmationSteps.deny();
         Assertions.assertEquals(BLOCKED_ACCOUNT_STATUS, accountInfoSteps.getAccountStatus(), "Счет не является активным");
     }
 

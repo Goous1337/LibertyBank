@@ -12,7 +12,6 @@ import web.BaseTest;
 
 import static web.constans.AccountServiceConstants.*;
 import static web.constans.UrlConfig.ACCOUNTS_URL;
-import static web.constans.UrlConfig.BASE_URL;
 
 @Epic("Epic-4")
 @Feature("US-4.2 Просмотр списка активных счетов")
@@ -23,10 +22,9 @@ public class ViewingListOfActiveAccountsTest extends BaseTest {
     private static final String STATUS_ERROR_MESSAGE = "Статус не совпадает с '%s'";
 
     @BeforeEach
-    public void goToAccounts() {
-        driver.get(BASE_URL + ACCOUNTS_URL);
+    public void setUpTest() {
+        open(ACCOUNTS_URL);
     }
-
 
     @Test
     @TmsLink("LIB2-2431")

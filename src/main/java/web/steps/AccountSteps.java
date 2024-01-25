@@ -15,6 +15,12 @@ public class AccountSteps {
     public void clickAccount() {
         accountPage.clickAccount();
     }
+
+    @Step("Кликнуть на второй счет в списке")
+    public void clickSecondAccount() {
+        accountPage.clickSecondAccount();
+    }
+
     @Step("Выбрать 'Открытые счета'")
     public void selectOpenAccounts() {
         accountPage.clickOpenAccountsTab();
@@ -44,8 +50,14 @@ public class AccountSteps {
         return accountPage.isOpenAccountDisplayed();
     }
 
+    @Step("Отображается статус 'Основной счет'")
     public boolean isMainAccountLabelDisplayed() {
         return accountPage.isMainAccountLabelDisplayed();
+    }
+
+    @Step("Отображается статус 'Основной счет' у второго счета")
+    public boolean isSecondMainAccountLabelDisplayed() {
+        return accountPage.isSecondMainAccountLabelDisplayed();
     }
 
     @Step("Отображается статус счета")
