@@ -6,6 +6,8 @@ public class AccountServiceConstants {
     public static final String ELEMENT_ENABLED_VERIFICATION_MESSAGE = "Кнопка [%s] не кликабельна";
     public static final String ELEMENT_NOT_SELECTED_VERIFICATION_MESSAGE = "Элемент [%s] выбран";
     public static final String ELEMENT_NOT_ENABLED_VERIFICATION_MESSAGE = "Кнопка [%s] кликабельна";
+    public static final String DISPLAYED_MESSAGE = "[%s] отображается";
+    public static final String NOT_DISPLAYED_MESSAGE = "[%s] не отображается";
     public static final String RUB = "RUB";
     public static final String EUR = "EUR";
     public static final String USD = "USD";

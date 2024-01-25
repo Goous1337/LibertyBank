@@ -7,10 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
-import property.WebPropertiesReader;
 import web.BaseTest;
-import web.drivers.DriverManager;
 
 import static web.constans.AccountServiceConstants.*;
 import static web.constans.UrlConfig.ACCOUNTS_URL;
@@ -20,11 +17,9 @@ import static web.constans.UrlConfig.ACCOUNTS_URL;
 @DisplayName("US-4.1 Открытие текущего счета")
 public class CreateCurrentAccountTest extends BaseTest {
 
-    private static WebDriver driver = DriverManager.getDriver();
-
     @BeforeEach
     public void setUpTest() {
-        driver.get(WebPropertiesReader.getWebBaseUrl() + ACCOUNTS_URL);
+        open(ACCOUNTS_URL);
         accountSteps.clickCreateCurrentAccount();
     }
 

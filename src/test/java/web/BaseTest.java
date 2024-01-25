@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import web.drivers.DriverManager;
 import web.steps.AccountInfoSteps;
 import web.steps.AccountSteps;
-import web.steps.ConfirmAccountBlockSteps;
+import web.steps.ConfirmationSteps;
 import web.steps.CreateAccountSteps;
 
 import static web.constans.UrlConfig.BASE_URL;
@@ -21,7 +21,7 @@ public class BaseTest {
 
     protected CreateAccountSteps createAccountSteps = new CreateAccountSteps();
 
-    protected ConfirmAccountBlockSteps confirmAccountBlockSteps = new ConfirmAccountBlockSteps();
+    protected ConfirmationSteps confirmationSteps = new ConfirmationSteps();
 
     @BeforeAll
     public static void setUp() {

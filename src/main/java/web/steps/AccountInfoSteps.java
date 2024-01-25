@@ -31,6 +31,7 @@ public class AccountInfoSteps {
         return accountInfoPage.isContractNumberDisplayed();
     }
 
+    @Step("Отображается статус 'Основной счет'")
     public boolean isMainAccountLabelDisplayed() {
         return accountInfoPage.isMainAccountLabelDisplayed();
     }
@@ -51,18 +52,53 @@ public class AccountInfoSteps {
         return accountInfoPage.getAccountStatus();
     }
 
-    @Step("Кликнуть на кнопку 'Меню действий'")
-    public void clickActionsMenuButton() {
-        accountInfoPage.clickActionsMenuButton();
+    @Step("Вернуться к списку счетов")
+    public void goBack() {
+     accountInfoPage.clickGoBackButton();
     }
 
-    @Step("Нажать на кнопку 'Заблокировать'")
-    public void clickBlockButton() {
-        accountInfoPage.clickBlockButton();
+    @Step("Нажать на три точки")
+    public void clickDotsInfoButton() {
+        accountInfoPage.clickDotsInfoButton();
     }
 
-    @Step("Нажать на кнопку 'Разблокировать'")
-    public void clickUnblockButton() {
-        accountInfoPage.clickUnblockButton();
+    @Step("Выбрать 'Реквизиты'")
+    public void selectRequisites() {
+        accountInfoPage.clickRequisitesOpt();
+    }
+
+    @Step("Выбрать 'Выписка по счету'")
+    public void selectAccountStatement() {
+        accountInfoPage.clickAccountStatementOpt();
+    }
+
+    @Step("Выбрать 'Сделать счет основным'")
+    public void selectSetMainAccount() {
+        accountInfoPage.clickSetMainAccountOpt();
+    }
+
+    @Step("Отображется пункт 'Сделать счет основным'")
+    public boolean isSetMainAccountOptDisplayed() {
+        return accountInfoPage.isSetMainAccountOptDisplayed();
+    }
+
+    @Step("Выбрать 'Справка о доступном остатке'")
+    public void selectInformationAboutAvailableBalance() {
+        accountInfoPage.clickInformationAboutAvailableBalanceOpt();
+    }
+
+    @Step("Выбрать 'Закрыть счет'")
+    public void selectCloseAccount() {
+        accountInfoPage.clickCloseAccountOpt();
+    }
+
+    @Step("Выбрать 'Заблокировать счет'")
+    public void selectBlockAccount() {
+        accountInfoPage.clickBlockAccountOpt();
+    }
+
+    @Step("Выбрать 'Разблокировать счет'")
+    public void selectUnblockAccount() {
+        accountInfoPage.clickUnblockAccountOpt();
     }
 }
