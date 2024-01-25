@@ -112,6 +112,7 @@ public class CRS_4_UserVerificationByCodeTest extends BaseTest {
                 () -> assertEquals(SC_METHOD_NOT_ALLOWED, response.getStatusCode()),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
+        CustomerService_2_0_DataBaseRequest.resetTimerOfVerificationCodeById(customerId);
     }
 
     @DisplayName("Проверка верификации пользователя при введении валидного кода, после блокировки")
@@ -206,5 +207,52 @@ public class CRS_4_UserVerificationByCodeTest extends BaseTest {
                         .matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
         CustomerService_2_0_DataBaseRequest.resetTimerOfVerificationCodeById(customerId);
+    }
+
+    @DisplayName("Проверка верификации пользователя при введении валидного кода, после 2 попыток ввода невалидного кода")
+    @Description("""
+            Данный тест-кейс проверяет верификацию пользователя при введении валидного кода,
+             после 2 попыток введения невалидного кода.
+            """)
+    @Tags({@Tag("API"), @Tag("Positive")})
+    @TmsLink("https://jira.astondevs.ru/browse/LIB-2120")
+    @Test
+    public void checkUserVerificationAfterAttemptsToEnterInvalidCode() throws InterruptedException {
+        String mobilePhone = "79221009133";
+        String customerId = CustomerService_2_0_DataBaseRequest.getCustomerIdByMobilePhone(mobilePhone);
+        CustomerService_2_0_Mobile customerService_2_0_mobile = new CustomerService_2_0_Mobile(mobilePhone);
+        Response getTimeBlockSeconds = customerService_2_0.checkListSavingVerificationCode(customerService_2_0_mobile);
+        int blockSecondsValue = getTimeBlockSeconds.jsonPath().get("blockSeconds");
+        String verificationCode = CustomerService_2_0_DataBaseRequest.getCustomerLastVerificationCodeById(customerId);
+        UserVerificationWithCode userVerificationWithWrongCode = new UserVerificationWithCode
+                (mobilePhone, INVALID_VERIFICATION_CODE);
+        CustomerService_2_0_DataBaseRequest.updateWrongAttemptsById(customerId);
+        customerService_2_0.checkListUserVerificationWithValidData(userVerificationWithWrongCode);
+        Integer wrongAttemptsValue = CustomerService_2_0_DataBaseRequest.getWrongAttemptsByCustomerId(customerId);
+        Response firstResponse = customerService_2_0.checkListUserVerificationWithValidData
+                (new UserVerificationWithCode(mobilePhone, verificationCode));
+        assertAll(
+                () -> assertEquals(SC_OK, firstResponse.getStatusCode()),
+                () -> assertEquals(1, wrongAttemptsValue),
+                () -> assertNotNull(firstResponse.jsonPath().get("sessionToken"))
+        );
+        CustomerService_2_0_DataBaseRequest.updateWrongAttemptsById(customerId);
+        Thread.sleep(blockSecondsValue * 1000L);
+        CustomerService_2_0_DataBaseRequest.resetTimerOfVerificationCodeById(customerId);
+        customerService_2_0.checkListSavingVerificationCode(customerService_2_0_mobile);
+        String secondVerificationCode = CustomerService_2_0_DataBaseRequest
+                .getCustomerLastVerificationCodeById(customerId);
+        customerService_2_0.checkListUserVerificationWithValidData(userVerificationWithWrongCode);
+        customerService_2_0.checkListUserVerificationWithValidData(userVerificationWithWrongCode);
+        Integer secondWrongAttemptsValue = CustomerService_2_0_DataBaseRequest.getWrongAttemptsByCustomerId(customerId);
+        Response secondResponse = customerService_2_0.checkListUserVerificationWithValidData
+                (new UserVerificationWithCode(mobilePhone, secondVerificationCode));
+        assertAll(
+                () -> assertEquals(SC_OK, secondResponse.getStatusCode()),
+                () -> assertEquals(2, secondWrongAttemptsValue),
+                () -> assertNotNull(secondResponse.jsonPath().get("sessionToken"))
+        );
+        CustomerService_2_0_DataBaseRequest.resetTimerOfVerificationCodeById(customerId);
+        CustomerService_2_0_DataBaseRequest.updateWrongAttemptsById(customerId);
     }
 }

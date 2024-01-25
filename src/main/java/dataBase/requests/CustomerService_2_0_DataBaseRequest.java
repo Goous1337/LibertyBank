@@ -83,4 +83,10 @@ public class CustomerService_2_0_DataBaseRequest {
         LOG.info(String.format("Получены данные из колонки sms_sent_counter по id %s", id));
         return smsSendCounter;
     }
+
+    public static void updateWrongAttemptsById(String id) {
+        String sql = "UPDATE user_profile SET wrong_attempts = 0 WHERE customer_id =?::uuid";
+        getDBConnection(CUSTOMER_SERVICE_DB_2_0).update(sql, id);
+        LOG.info(String.format("Значение  в колонке wrong_attempts изминилось на 0 по id %s", id));
+    }
 }
