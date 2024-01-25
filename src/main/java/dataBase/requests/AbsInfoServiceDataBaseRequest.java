@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import pojo.absInfoService.AbsInfoServiceDataBankBranch;
 
-import java.util.Collections;
 import java.util.List;
 
 import static constant.LibertyServiceName.ABS_INFO_SERVICE;

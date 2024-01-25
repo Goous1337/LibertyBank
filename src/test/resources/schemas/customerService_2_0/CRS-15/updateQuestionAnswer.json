@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "securityQuestion": {
+      "type": "string"
+    },
+    "securityAnswer": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "securityQuestion",
+    "securityAnswer"
+  ]
+}

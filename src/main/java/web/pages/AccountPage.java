@@ -2,13 +2,7 @@ package web.pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import web.helpers.Waiters;
-
-import java.time.Duration;
-
-import static web.drivers.DriverManager.getDriver;
 
 public class AccountPage extends BasePage {
 
