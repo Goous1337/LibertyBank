@@ -2,17 +2,27 @@ package web.pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import web.helpers.Waiters;
 
 public class ConfirmationPage extends BasePage {
 
     @FindBy(xpath = "//*[contains(text(), 'Вы действительно хотите сделать счет основным?')]")
     private WebElement setMainAccountDialogBox;
 
+    @FindBy(xpath = "//div[contains(@class, '_description_vnbx4_123')]")
+    private WebElement closeVerificationMessage;
+
     @FindBy(xpath = "//*[contains(text(), 'Ваш счет успешно стал основным')]")
     private WebElement successSetMainAccountDialogBox;
 
     @FindBy(xpath = "//button[contains(text(), 'Вернуться к счету')]")
     private WebElement returnToAccountButton;
+
+    @FindBy(xpath = "//*[contains(text(), 'Ваш счет успешно закрыт')]")
+    private WebElement closeSuccessfullyMessage;
+
+    @FindBy(xpath = "//button[contains(text(), 'Вернуться к счетам')]")
+    private WebElement navigateToAccountsPageButton;
 
     @FindBy(xpath = "//*[contains(text(), 'Вы действительно хотите заблокировать счет?')]")
     private WebElement blockAccountDialogBox;
@@ -45,5 +55,19 @@ public class ConfirmationPage extends BasePage {
 
     public void clickDenyButton() {
         denyButton.click();
+    }
+
+    public boolean isCloseVerificationMessageDisplayed() {
+        Waiters.waitElement(closeVerificationMessage);
+        return closeVerificationMessage.isDisplayed();
+    }
+
+    public boolean isCloseSuccessfullyMessageDisplayed() {
+        Waiters.waitElement(closeSuccessfullyMessage);
+        return closeVerificationMessage.isDisplayed();
+    }
+
+    public void clickNavigateToAccountsPageButton() {
+        navigateToAccountsPageButton.click();
     }
 }

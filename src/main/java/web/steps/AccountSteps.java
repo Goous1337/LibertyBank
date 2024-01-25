@@ -50,6 +50,10 @@ public class AccountSteps {
         return accountPage.isOpenAccountDisplayed();
     }
 
+    public boolean isCloseAccountsDisplayed() {
+        return accountPage.isCloseAccountDisplayed();
+    }
+
     @Step("Отображается статус 'Основной счет'")
     public boolean isMainAccountLabelDisplayed() {
         return accountPage.isMainAccountLabelDisplayed();

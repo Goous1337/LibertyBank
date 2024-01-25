@@ -52,12 +52,17 @@ public class AccountInfoSteps {
         return accountInfoPage.getAccountStatus();
     }
 
+    @Step("Нажать кнопку Закрыть счет")
+    public void clickCloseButton() {
+        accountInfoPage.clickCloseAccountOpt();
+    }
+
     @Step("Вернуться к списку счетов")
     public void goBack() {
      accountInfoPage.clickGoBackButton();
     }
 
-    @Step("Нажать на три точки")
+    @Step("Нажать на кебаб-меню")
     public void clickDotsInfoButton() {
         accountInfoPage.clickDotsInfoButton();
     }
