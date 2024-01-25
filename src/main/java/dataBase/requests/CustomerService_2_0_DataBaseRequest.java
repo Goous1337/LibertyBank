@@ -87,6 +87,6 @@ public class CustomerService_2_0_DataBaseRequest {
     public static void updateWrongAttemptsById(String id) {
         String sql = "UPDATE user_profile SET wrong_attempts = 0 WHERE customer_id =?::uuid";
         getDBConnection(CUSTOMER_SERVICE_DB_2_0).update(sql, id);
-        LOG.info(String.format("Значение  в колонке wrong_attempts изминилось на 0 по id %s", id));
+        LOG.info(String.format("Значение  в колонке wrong_attempts обновлено на значение 0 по id %s", id));
     }
 }
