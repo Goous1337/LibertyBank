@@ -49,7 +49,7 @@ public class CustomerService_2_0 {
     }
 
     public Response checkUpdateQuestionAnswerInvalidUrl(String question, String answer,String customerId){
-        List<RequestParam> params = List.of(new RequestParam(HEADER, CONTENT_TYPE, APPLICATION_JSON),
+        List<RequestParam> params = List.of(getRP(HEADER, CONTENT_TYPE, APPLICATION_JSON),
                 getRP(PARAMETER,PARAMETER_CUSTOMER_ID, customerId));
         return sendSimpleRequest(PATCH, QUESTION_ANSWER_INVALID_URL_2_0, params, new UserQuestion(question, answer));
     }
