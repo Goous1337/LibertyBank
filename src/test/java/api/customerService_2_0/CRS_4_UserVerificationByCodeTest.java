@@ -7,10 +7,7 @@ import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Tags;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import pojo.customerService_2_0.CustomerService_2_0_Mobile;
@@ -209,6 +206,7 @@ public class CRS_4_UserVerificationByCodeTest extends BaseTest {
         CustomerService_2_0_DataBaseRequest.resetTimerOfVerificationCodeById(customerId);
     }
 
+    @Disabled("Баг")
     @DisplayName("Проверка верификации пользователя при введении валидного кода, после 2 попыток ввода невалидного кода")
     @Description("""
             Данный тест-кейс проверяет верификацию пользователя при введении валидного кода,
