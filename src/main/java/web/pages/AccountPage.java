@@ -18,11 +18,17 @@ public class AccountPage extends BasePage {
     @FindBy(xpath = "//*[contains(text(), 'Основной счет')]")
     private WebElement mainAccountLabel;
 
+    @FindBy(xpath = "(//*[contains(text(), 'Основной счет')])[2]")
+    private WebElement secondMainAccountLabel;
+
     @FindBy(xpath = "//*[contains(text(), 'Текущий счет')]")
     private WebElement createCurrentAccount;
 
     @FindBy(xpath = "//p[contains(text(), 'Текущий счет')]")
     private WebElement account;
+
+    @FindBy(xpath = "(//p[contains(text(), 'Текущий счет')])[2]")
+    private WebElement secondAccount;
 
     @FindBy(css = "._label-width_adjustable_c42rp_10")
     private WebElement accountStatus;
@@ -61,6 +67,7 @@ public class AccountPage extends BasePage {
     private WebElement filterByEur;
 
     public void clickMainAccountLabel() {
+        Waiters.waitElement(mainAccountLabel);
         mainAccountLabel.click();
     }
 
@@ -70,11 +77,19 @@ public class AccountPage extends BasePage {
     }
 
     public boolean isOpenAccountDisplayed() {
-       return openAccountsTab.isDisplayed();
+        return openAccountsTab.isDisplayed();
+    }
+
+    public boolean isCloseAccountDisplayed() {
+        return closedAccountsTab.isDisplayed();
     }
 
     public boolean isMainAccountLabelDisplayed() {
         return mainAccountLabel.isDisplayed();
+    }
+
+    public boolean isSecondMainAccountLabelDisplayed() {
+        return secondMainAccountLabel.isDisplayed();
     }
 
     public boolean isAccountStatusDisplayed() {
@@ -86,14 +101,17 @@ public class AccountPage extends BasePage {
     }
 
     public boolean isRubleImageDisplayed() {
+        Waiters.waitElement(rubleImage);
         return rubleImage.isDisplayed();
     }
 
     public boolean isDollarImageDisplayed() {
+        Waiters.waitElement(dollarImage);
         return dollarImage.isDisplayed();
     }
 
     public boolean isEuroImageDisplayed() {
+        Waiters.waitElement(euroImage);
         return euroImage.isDisplayed();
     }
 
@@ -158,5 +176,10 @@ public class AccountPage extends BasePage {
     public void clickAccount() {
         Waiters.waitElement(account);
         account.click();
+    }
+
+    public void clickSecondAccount() {
+        Waiters.waitElement(secondAccount);
+        secondAccount.click();
     }
 }

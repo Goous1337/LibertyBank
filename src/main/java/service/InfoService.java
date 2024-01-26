@@ -5,7 +5,6 @@ import api.core.RequestParam;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
 
-import java.util.Collections;
 import java.util.List;
 
 import static api.core.ApiClient.sendRequestWithoutParams;

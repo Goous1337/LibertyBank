@@ -19,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CUSTOMER_SERVICE_2_0;
 
+@DisplayName("CRS-10 Отправка настроек уведомлений.")
 public class CRS_10_SendingNotificationInPersonalAccountTest extends BaseTest {
     {
         RestAssured.baseURI = CUSTOMER_SERVICE_2_0;
