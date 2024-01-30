@@ -4,10 +4,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.WebDriver;
 import web.drivers.DriverManager;
-import web.steps.AccountInfoSteps;
-import web.steps.AccountSteps;
-import web.steps.ConfirmationSteps;
-import web.steps.CreateAccountSteps;
+import web.steps.*;
 
 import static web.constans.UrlConfig.BASE_URL;
 
@@ -22,6 +19,8 @@ public class BaseTest {
     protected CreateAccountSteps createAccountSteps = new CreateAccountSteps();
 
     protected ConfirmationSteps confirmationSteps = new ConfirmationSteps();
+
+    protected RenameAccountSteps renameAccountSteps = new RenameAccountSteps();
 
     @BeforeAll
     public static void setUp() {

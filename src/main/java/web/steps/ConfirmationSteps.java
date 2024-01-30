@@ -21,6 +21,11 @@ public class ConfirmationSteps {
         return confirmationPage.isSuccessSetMainAccountDialogBoxDisplayed();
     }
 
+    @Step("Отображается диалоговое окно об успешности переименования")
+    public boolean isSuccessRenameAccountNameDialogBoxDisplayed() {
+        return confirmationPage.isSuccessRenameAccountNameDialogBoxDisplayed();
+    }
+
     @Step("Вернуться к счету")
     public void returnToAccount() {
         confirmationPage.clickReturnToAccountButton();
