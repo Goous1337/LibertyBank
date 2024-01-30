@@ -1,30 +1,27 @@
 package service;
 
 import api.core.RequestParam;
-import io.restassured.http.Method;
 import constant.CustomerServiceConstants;
+import io.restassured.http.Method;
 import io.restassured.response.Response;
-import pojo.customerService_2_0.*;
 import pojo.customerService.UserQuestion;
 import pojo.customerService_2_0.*;
 
 import java.util.List;
 import java.util.Map;
 
-
 import static api.core.ApiClient.sendSimpleRequest;
+import static api.core.RequestParam.getRP;
 import static api.core.RequestParamType.*;
-import static constant.CustomerServiceConstants.PARAMETER_CUSTOMER_ID;
 import static api.utils.GsonHelper.createBody;
+import static com.google.common.net.HttpHeaders.AUTHORIZATION;
 import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
 import static constant.ApiEndpoints.*;
-import static api.core.RequestParam.getRP;
+import static constant.CustomerServiceConstants.PARAMETER_CUSTOMER_ID;
 import static constant.CustomerServiceConstants.PARAMETER_NOTIFICATION_STATUS;
 import static constant.CustomerService_2_0_Constants.PARAMETER_INCORRECT_CUSTOMER_ID;
 import static io.netty.handler.codec.http.HttpHeaders.Values.APPLICATION_JSON;
-import static io.restassured.http.Method.GET;
-import static io.restassured.http.Method.PATCH;
-import static io.restassured.http.Method.POST;
+import static io.restassured.http.Method.*;
 import static org.apache.commons.lang3.StringUtils.SPACE;
 
 
@@ -38,9 +35,9 @@ public class CustomerService_2_0 {
         return sendSimpleRequest(PATCH, CUSTOMER_SECURITY, customerService_2_0_mobile0Mobile);
     }
 
-    public Response  checkUpdateQuestionAnswer(String question, String answer,String customerId){
+    public Response checkUpdateQuestionAnswer(String question, String answer, String customerId) {
         List<RequestParam> params = List.of(getRP(HEADER, CONTENT_TYPE, APPLICATION_JSON),
-                getRP(PARAMETER,PARAMETER_CUSTOMER_ID, customerId));
+                getRP(PARAMETER, PARAMETER_CUSTOMER_ID, customerId));
         return sendSimpleRequest(PATCH, QUESTION_ANSWER_2_0, params, new UserQuestion(question, answer));
     }
 
@@ -49,9 +46,9 @@ public class CustomerService_2_0 {
         return sendSimpleRequest(Method.valueOf(invalidHttpMethod), QUESTION_ANSWER_2_0, params, new UserQuestion(question, answer));
     }
 
-    public Response checkUpdateQuestionAnswerInvalidUrl(String question, String answer,String customerId){
+    public Response checkUpdateQuestionAnswerInvalidUrl(String question, String answer, String customerId) {
         List<RequestParam> params = List.of(getRP(HEADER, CONTENT_TYPE, APPLICATION_JSON),
-                getRP(PARAMETER,PARAMETER_CUSTOMER_ID, customerId));
+                getRP(PARAMETER, PARAMETER_CUSTOMER_ID, customerId));
         return sendSimpleRequest(PATCH, QUESTION_ANSWER_INVALID_URL_2_0, params, new UserQuestion(question, answer));
     }
 
@@ -79,13 +76,15 @@ public class CustomerService_2_0 {
     }
 
     public Response checkListAbilityChangePasswordInPersonalAccount(
-            ChangeUserAccountPasswordByPhone changeUserAccountPasswordByPhone) {
-        return sendSimpleRequest(PATCH, CUSTOMER_CHANGE_PASSWORD, changeUserAccountPasswordByPhone);
+            ChangeUserAccountPasswordByPhone changeUserAccountPasswordByPhone, String refreshToken) {
+        return sendSimpleRequest(PATCH, CUSTOMER_CHANGE_PASSWORD,
+                getRP(HEADER, AUTHORIZATION, String.format("Bearer %s", refreshToken)), changeUserAccountPasswordByPhone);
     }
 
     public Response checkListSavingVerificationCodeWithInvalidMethods
-            (ChangeUserAccountPasswordByPhone changeUserAccountPasswordByPhone, String httpMethod) {
-        return sendSimpleRequest(Method.valueOf(httpMethod), CUSTOMER_CHANGE_PASSWORD, changeUserAccountPasswordByPhone);
+            (ChangeUserAccountPasswordByPhone changeUserAccountPasswordByPhone, String httpMethod, String refreshToken) {
+        return sendSimpleRequest(Method.valueOf(httpMethod), CUSTOMER_CHANGE_PASSWORD,
+                getRP(HEADER, AUTHORIZATION, String.format("Bearer %s", refreshToken)), changeUserAccountPasswordByPhone);
     }
 
     public Response checkListUserVerificationWithValidData(UserVerificationWithCode userVerificationWithCode) {
@@ -116,14 +115,14 @@ public class CustomerService_2_0 {
     }
 
     public Response checkPushNotification(String customerId, Boolean notificationStatus) {
-        String body = createBody(Map.of(PARAMETER_NOTIFICATION_STATUS,notificationStatus));
+        String body = createBody(Map.of(PARAMETER_NOTIFICATION_STATUS, notificationStatus));
         List<RequestParam> params = List.of(getRP(PARAMETER, CustomerServiceConstants.PARAMETER_CUSTOMER_ID, customerId)
                 , getRP(HEADER, CONTENT_TYPE, APPLICATION_JSON), getRP(BODY, SPACE, body));
         return sendSimpleRequest(PATCH, PUSH_NOTIFICATION_2_0, params);
     }
 
     public Response checkPushNotificationWithNotBoolean(String customerId, String notificationStatus) {
-        String body = createBody(Map.of(PARAMETER_NOTIFICATION_STATUS,notificationStatus));
+        String body = createBody(Map.of(PARAMETER_NOTIFICATION_STATUS, notificationStatus));
         List<RequestParam> params = List.of(getRP(PARAMETER, CustomerServiceConstants.PARAMETER_CUSTOMER_ID, customerId)
                 , getRP(HEADER, CONTENT_TYPE, APPLICATION_JSON), getRP(BODY, SPACE, body));
         return sendSimpleRequest(PATCH, PUSH_NOTIFICATION_2_0, params);
