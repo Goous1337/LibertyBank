@@ -15,6 +15,16 @@ public class AccountInfoSteps {
         return accountInfoPage.isAccountNameDisplayed();
     }
 
+    @Step("Получить название счета")
+    public String getAccountName() {
+        return accountInfoPage.getAccountName();
+    }
+
+    @Step("Нажать на значок карандаша")
+    public void clickPencil() {
+        accountInfoPage.clickPencilImage();
+    }
+
     public boolean isAccountNumberDisplayed() {
         return accountInfoPage.isAccountNumberDisplayed();
     }

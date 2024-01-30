@@ -10,6 +10,9 @@ public class AccountInfoPage extends BasePage {
     @FindBy(xpath = "//*[contains(@class, 'my-bill-page__current')]")
     private WebElement accountName;
 
+    @FindBy(name = "pencil")
+    private WebElement pencilImage;
+
     @FindBy(xpath = "//*[contains(@class, 'my-bill-card__top-number-text')]")
     private WebElement accountNumber;
 
@@ -64,6 +67,15 @@ public class AccountInfoPage extends BasePage {
     public boolean isAccountNameDisplayed() {
         Waiters.waitElement(accountName);
         return accountName.isDisplayed();
+    }
+
+    public String getAccountName() {
+        Waiters.waitElement(accountName);
+        return accountName.getText();
+    }
+
+    public void clickPencilImage () {
+        pencilImage.click();
     }
 
     public boolean isAccountNumberDisplayed() {
