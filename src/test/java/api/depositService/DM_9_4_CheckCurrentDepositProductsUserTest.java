@@ -15,7 +15,6 @@ import java.util.Map;
 
 import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static property.BaseProperties.DEPOSIT_SERVICE;
 
 @DisplayName("DM 9.4 Просмотр действующих депозитных продуктов пользователя")

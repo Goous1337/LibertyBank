@@ -115,6 +115,9 @@ public class ApiClient {
                 case PATH:
                     request.pathParam(name, value);
                     break;
+                case QUERY_PARAMETER:
+                    request.queryParam(name, value);
+                    break;
                 default:
                     throw new IllegalArgumentException(String.format("Некорректно задан тип %s для параметра запроса %s ", requestParam.getType(), name));
             }

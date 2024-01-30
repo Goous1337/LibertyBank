@@ -1,5 +1,6 @@
 package web.steps;
 
+import io.qameta.allure.Step;
 import web.pages.AccountInfoPage;
 
 public class AccountInfoSteps {
@@ -30,6 +31,7 @@ public class AccountInfoSteps {
         return accountInfoPage.isContractNumberDisplayed();
     }
 
+    @Step("Отображается статус 'Основной счет'")
     public boolean isMainAccountLabelDisplayed() {
         return accountInfoPage.isMainAccountLabelDisplayed();
     }
@@ -48,5 +50,60 @@ public class AccountInfoSteps {
 
     public String getAccountStatus() {
         return accountInfoPage.getAccountStatus();
+    }
+
+    @Step("Нажать кнопку Закрыть счет")
+    public void clickCloseButton() {
+        accountInfoPage.clickCloseAccountOpt();
+    }
+
+    @Step("Вернуться к списку счетов")
+    public void goBack() {
+     accountInfoPage.clickGoBackButton();
+    }
+
+    @Step("Нажать на кебаб-меню")
+    public void clickDotsInfoButton() {
+        accountInfoPage.clickDotsInfoButton();
+    }
+
+    @Step("Выбрать 'Реквизиты'")
+    public void selectRequisites() {
+        accountInfoPage.clickRequisitesOpt();
+    }
+
+    @Step("Выбрать 'Выписка по счету'")
+    public void selectAccountStatement() {
+        accountInfoPage.clickAccountStatementOpt();
+    }
+
+    @Step("Выбрать 'Сделать счет основным'")
+    public void selectSetMainAccount() {
+        accountInfoPage.clickSetMainAccountOpt();
+    }
+
+    @Step("Отображется пункт 'Сделать счет основным'")
+    public boolean isSetMainAccountOptDisplayed() {
+        return accountInfoPage.isSetMainAccountOptDisplayed();
+    }
+
+    @Step("Выбрать 'Справка о доступном остатке'")
+    public void selectInformationAboutAvailableBalance() {
+        accountInfoPage.clickInformationAboutAvailableBalanceOpt();
+    }
+
+    @Step("Выбрать 'Закрыть счет'")
+    public void selectCloseAccount() {
+        accountInfoPage.clickCloseAccountOpt();
+    }
+
+    @Step("Выбрать 'Заблокировать счет'")
+    public void selectBlockAccount() {
+        accountInfoPage.clickBlockAccountOpt();
+    }
+
+    @Step("Выбрать 'Разблокировать счет'")
+    public void selectUnblockAccount() {
+        accountInfoPage.clickUnblockAccountOpt();
     }
 }

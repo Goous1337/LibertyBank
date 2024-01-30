@@ -13,7 +13,7 @@ import static org.apache.hc.core5.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.DEPOSIT_SERVICE;
 
-@DisplayName("Отправка чека на электронную почту")
+@DisplayName("DM-9.11 Отправка чека на электронную почту")
 public class DM_9_11_CheckSendingEmailAfterDepositWithdrawalTest extends BaseTest {
 
     {

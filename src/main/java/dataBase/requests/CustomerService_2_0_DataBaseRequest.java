@@ -3,6 +3,7 @@ package dataBase.requests;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import static constant.LibertyServiceName.CUSTOMER_SERVICE_2_0;
@@ -52,11 +53,69 @@ public class CustomerService_2_0_DataBaseRequest {
         String customerId = getDBConnection(CUSTOMER_SERVICE_2_0).queryForObject(sql, String.class, passportId);
         return customerId;
     }
-    public static String getCustomerPasswordById(String id){
+
+    public static String getCustomerPasswordById(String id) {
         String sql = "SELECT password FROM user_profile WHERE customer_id =?::uuid";
-        String password = getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sql, String.class,id);
-        LOG.info(String.format("Получен пароль пользователя по id %s",id));
+        String password = getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sql, String.class, id);
+        LOG.info(String.format("Получен пароль пользователя по id %s", id));
         return password;
+    }
+
+    public static void updateLastCodeExpiration(String id) throws SQLException {
+        String sql = "update user_profile set last_code_expiration = NOW() - interval '3 hour' where customer_id =?::uuid";
+        int update = getDBConnection(CUSTOMER_SERVICE_DB_2_0).update(sql, id);
+        if (update != 1) {
+            throw new SQLException("Не удалось обновить таблицу");
+        }
+        LOG.info(String.format("Таблица last_code_expiration была успешно обновлена по id %s", id));
+    }
+
+    public static Integer getWrongAttemptsByCustomerId(String id) {
+        String sql = "SELECT wrong_attempts FROM user_profile WHERE customer_id =?::uuid";
+        Integer wrongAttempts = getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sql, Integer.class, id);
+        LOG.info(String.format("Получены данные из колонки wrong_attempts по id %s", id));
+        return wrongAttempts;
+    }
+
+    public static Integer getSmsSendCounterByCustomerId(String id) {
+        String sql = "SELECT sms_sent_counter FROM user_profile WHERE customer_id =?::uuid";
+        Integer smsSendCounter = getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sql, Integer.class, id);
+        LOG.info(String.format("Получены данные из колонки sms_sent_counter по id %s", id));
+        return smsSendCounter;
+    }
+
+    public static void updateWrongAttemptsById(String id) {
+        String sql = "UPDATE user_profile SET wrong_attempts = 0 WHERE customer_id =?::uuid";
+        getDBConnection(CUSTOMER_SERVICE_DB_2_0).update(sql, id);
+        LOG.info(String.format("Значение  в колонке wrong_attempts обновлено на значение 0 по id %s", id));
+    }
+
+    public static String receivingCustomerId() {
+        String sql = "SELECT customer_id FROM public.customer LIMIT 1";
+        String customerID = getDBConnection(CUSTOMER_SERVICE_2_0).queryForObject(sql, String.class);
+        LOG.info(String.format("получен customerId %s", customerID));
+        return customerID;
+    }
+
+    public static String receivingCustomerIdWithNotificationStatusFalse() {
+        String sql = "SELECT customer_id FROM public.customer WHERE push_notification = false LIMIT 1";
+        String customerID = getDBConnection(CUSTOMER_SERVICE_2_0).queryForObject(sql, String.class);
+        LOG.info(String.format("получен customerId %s", customerID));
+        return customerID;
+    }
+
+    public static String receivingCustomerIdWithNotificationStatusTrue() {
+        String sql = "SELECT customer_id FROM public.customer WHERE push_notification = true LIMIT 1";
+        String customerID = getDBConnection(CUSTOMER_SERVICE_2_0).queryForObject(sql, String.class);
+        LOG.info(String.format("получен customerId %s", customerID));
+        return customerID;
+    }
+
+    public static Boolean checkNotificationStatusByCustomerId(String customerId) {
+        String sql = "SELECT push_notification FROM customer WHERE customer_id ='"+customerId+"';";
+        Boolean push_notification = getDBConnection(CUSTOMER_SERVICE_2_0).queryForObject(sql, Boolean.class);
+        LOG.info(String.format("получен push_notification: %s по customer_id: %s", push_notification, customerId));
+        return push_notification;
     }
 
     public static String getMobilePhoneByCustomerId(String id){

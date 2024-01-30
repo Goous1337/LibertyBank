@@ -12,33 +12,28 @@ import web.BaseTest;
 
 import static web.constans.AccountServiceConstants.*;
 import static web.constans.UrlConfig.ACCOUNTS_URL;
-import static web.constans.UrlConfig.BASE_URL;
 
 @Epic("Epic-4")
 @Feature("US-4.2 Просмотр списка активных счетов")
 @DisplayName("US-4.2 Просмотр списка активных счетов")
 public class ViewingListOfActiveAccountsTest extends BaseTest {
 
-    private static final String ERROR_MESSAGE = "'%s' не отображается";
-    private static final String STATUS_ERROR_MESSAGE = "Статус не совпадает с '%s'";
-
     @BeforeEach
-    public void goToAccounts() {
-        driver.get(BASE_URL + ACCOUNTS_URL);
+    public void setUpTest() {
+        open(ACCOUNTS_URL);
     }
-
 
     @Test
     @TmsLink("LIB2-2431")
     @DisplayName("Просмотр открытых счетов")
     public void viewingOpenAccounts() {
-        Assertions.assertEquals(OPEN_ACCOUNT_STATUS, accountSteps.getAccountStatus(), String.format(STATUS_ERROR_MESSAGE, "Активный"));
+        Assertions.assertEquals(OPEN_ACCOUNT_STATUS, accountSteps.getAccountStatus(), String.format(STATUS_ERROR_MESSAGE, OPEN_ACCOUNT_STATUS));
         Assertions.assertAll(
-                () -> Assertions.assertTrue(accountSteps.accountStatusIsDisplayed(), String.format(ERROR_MESSAGE, "Статус счета")),
-                () -> Assertions.assertTrue(accountSteps.accountNameOrNumberIsDisplayed(), String.format(ERROR_MESSAGE, "Номер или имя счета")),
-                () -> Assertions.assertTrue(accountSteps.amountIsDisplayed(), String.format(ERROR_MESSAGE, "Сумма счета")),
-                () -> Assertions.assertTrue(accountSteps.currencyIsDisplayed(), String.format(ERROR_MESSAGE, "Валюта счета")),
-                () -> Assertions.assertTrue(accountSteps.accountTypeIsDisplayed(), String.format(ERROR_MESSAGE, "Тип счета"))
+                () -> Assertions.assertTrue(accountSteps.accountStatusIsDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Статус счета")),
+                () -> Assertions.assertTrue(accountSteps.accountNameOrNumberIsDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Номер или имя счета")),
+                () -> Assertions.assertTrue(accountSteps.amountIsDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Сумма счета")),
+                () -> Assertions.assertTrue(accountSteps.currencyIsDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Валюта счета")),
+                () -> Assertions.assertTrue(accountSteps.accountTypeIsDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Тип счета"))
         );
     }
 
@@ -47,7 +42,7 @@ public class ViewingListOfActiveAccountsTest extends BaseTest {
     @DisplayName("Просмотр закрытых счетов")
     public void viewingClosedAccounts() {
         accountSteps.selectClosedAccounts();
-        Assertions.assertEquals(CLOSED_ACCOUNT_STATUS, accountSteps.getAccountStatus(), String.format(ERROR_MESSAGE, "Закрыт"));
+        Assertions.assertEquals(CLOSED_ACCOUNT_STATUS, accountSteps.getAccountStatus(), String.format(STATUS_ERROR_MESSAGE, CLOSED_ACCOUNT_STATUS));
     }
 
     @Test
@@ -55,7 +50,7 @@ public class ViewingListOfActiveAccountsTest extends BaseTest {
     @DisplayName("Просмотр заблокированных счетов")
     public void viewingBlockedAccounts() {
         accountSteps.selectBlockedAccounts();
-        Assertions.assertEquals(BLOCKED_ACCOUNT_STATUS, accountSteps.getAccountStatus(), String.format(ERROR_MESSAGE, "Заблокирован"));
+        Assertions.assertEquals(BLOCKED_ACCOUNT_STATUS, accountSteps.getAccountStatus(), String.format(STATUS_ERROR_MESSAGE, BLOCKED_ACCOUNT_STATUS));
     }
 
     @Test
@@ -63,16 +58,16 @@ public class ViewingListOfActiveAccountsTest extends BaseTest {
     @DisplayName("Фильтрация счетов по валюте")
     public void filterAccountsByCurrency() {
         accountSteps.filterByRubles();
-        Assertions.assertTrue(accountSteps.rubleImageIsDisplayed(), String.format(ERROR_MESSAGE, "Значок рубля"));
+        Assertions.assertTrue(accountSteps.rubleImageIsDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, RUB));
         accountSteps.filterByDollars();
-        Assertions.assertTrue(accountSteps.dollarImageIsDisplayed(), String.format(ERROR_MESSAGE, "Значок доллара"));
+        Assertions.assertTrue(accountSteps.dollarImageIsDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, USD));
         accountSteps.filterByEuro();
-        Assertions.assertTrue(accountSteps.euroImageIsDisplayed(), String.format(ERROR_MESSAGE, "Значок евро"));
+        Assertions.assertTrue(accountSteps.euroImageIsDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, EUR));
         accountSteps.filterByAllCurrency();
         Assertions.assertAll(
-                () -> Assertions.assertTrue(accountSteps.rubleImageIsDisplayed(), String.format(ERROR_MESSAGE, "Значок рубля")),
-                () -> Assertions.assertTrue(accountSteps.dollarImageIsDisplayed(), String.format(ERROR_MESSAGE, "Значок доллара")),
-                () -> Assertions.assertTrue(accountSteps.euroImageIsDisplayed(), String.format(ERROR_MESSAGE, "Значок евро"))
+                () -> Assertions.assertTrue(accountSteps.rubleImageIsDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, RUB)),
+                () -> Assertions.assertTrue(accountSteps.dollarImageIsDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, USD)),
+                () -> Assertions.assertTrue(accountSteps.euroImageIsDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, EUR))
         );
     }
 }

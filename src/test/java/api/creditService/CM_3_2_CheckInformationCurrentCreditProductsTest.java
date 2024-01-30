@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static property.BaseProperties.CREDIT_SERVICE;
 
 @DisplayName("Получение информации о кредитных продуктах банка")
