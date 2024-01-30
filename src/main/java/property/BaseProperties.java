@@ -19,6 +19,4 @@ public final class BaseProperties {
 
     public static String ACCOUNT_SERVICE = getPropertyValue("account_service");
 
-    public static String CUSTOMER_ID = getPropertyValue("x_customer_id");
-
 }
