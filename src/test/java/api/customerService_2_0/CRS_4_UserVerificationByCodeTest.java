@@ -3,6 +3,7 @@ package api.customerService_2_0;
 import api.BaseTest;
 import dataBase.requests.CustomerService_2_0_DataBaseRequest;
 import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
@@ -206,7 +207,7 @@ public class CRS_4_UserVerificationByCodeTest extends BaseTest {
         CustomerService_2_0_DataBaseRequest.resetTimerOfVerificationCodeById(customerId);
     }
 
-    @Disabled("Баг")
+    @Disabled("Bug https://jira.astondevs.ru/browse/LIB-2599")
     @DisplayName("Проверка верификации пользователя при введении валидного кода, после 2 попыток ввода невалидного кода")
     @Description("""
             Данный тест-кейс проверяет верификацию пользователя при введении валидного кода,
@@ -214,6 +215,7 @@ public class CRS_4_UserVerificationByCodeTest extends BaseTest {
             """)
     @Tags({@Tag("API"), @Tag("Positive")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2120")
+    @Issue("https://jira.astondevs.ru/browse/LIB-2599")
     @Test
     public void checkUserVerificationAfterAttemptsToEnterInvalidCode() throws InterruptedException {
         String mobilePhone = "79221009133";
