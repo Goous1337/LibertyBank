@@ -58,4 +58,21 @@ public class CustomerService_2_0_DataBaseRequest {
         LOG.info(String.format("Получен пароль пользователя по id %s",id));
         return password;
     }
+
+    public static String getMobilePhoneByCustomerId(String id){
+        String sql = "select mobile_phone\n" +
+                "from customer\n" +
+                "where customer_id =?::uuid";
+        String mobile_phone = getDBConnection(CUSTOMER_SERVICE_2_0).queryForObject(sql, String.class, id);
+        return mobile_phone;
+    }
+
+    public static String getPasswordByCustomerId(String customerId){
+        String sql = "select \"password\"  \n" +
+                "from user_profile up \n" +
+                "where customer_id = 'd54eb158-7499-4bda-bafb-d4bd965a1985'";
+        String password = getDBConnection(CUSTOMER_SERVICE_2_0).queryForObject(sql, String.class);
+        return password;
+    }
+
 }

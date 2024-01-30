@@ -2,21 +2,16 @@ package service;
 
 import io.restassured.http.Method;
 import io.restassured.response.Response;
-import pojo.customerService_2_0.ChangeUserAccountPasswordByPhone;
-import pojo.customerService_2_0.CustomerService_2_0_InvalidMobilePhoneValue;
-import pojo.customerService_2_0.CustomerService_2_0_Mobile;
-import pojo.customerService_2_0.UserAuthorizationByPhone;
+import pojo.customerService_2_0.*;
 
 import static api.core.ApiClient.sendSimpleRequest;
-import static constant.ApiEndpoints.*;
 import static api.core.RequestParam.getRP;
+import static api.core.RequestParamType.HEADER;
 import static api.core.RequestParamType.PARAMETER;
 import static constant.ApiEndpoints.*;
 import static constant.CustomerService_2_0_Constants.PARAMETER_CUSTOMER_ID;
 import static constant.CustomerService_2_0_Constants.PARAMETER_INCORRECT_CUSTOMER_ID;
-import static io.restassured.http.Method.GET;
-import static io.restassured.http.Method.PATCH;
-import static io.restassured.http.Method.POST;
+import static io.restassured.http.Method.*;
 
 
 public class CustomerService_2_0 {
@@ -60,5 +55,19 @@ public class CustomerService_2_0 {
     public Response checkListSavingVerificationCodeWithInvalidMethods
             (ChangeUserAccountPasswordByPhone changeUserAccountPasswordByPhone, String httpMethod) {
         return sendSimpleRequest(Method.valueOf(httpMethod), CUSTOMER_CHANGE_PASSWORD, changeUserAccountPasswordByPhone);
+    }
+
+    public Response getSessionToken(GetSessionToken getSessionToken) {
+        return sendSimpleRequest(POST, CUSTOMER_2_0_SECURITY_VERIFICATION, getSessionToken);
+    }
+
+    public Response checkRecoveryPasswordOnAuthorizationPage(
+            RecoveryPassword recoveryPassword, String sessionToken) {
+        return sendSimpleRequest(PATCH, CUSTOMER_2_0_RECOVERY, getRP(HEADER, REGISTRATION, sessionToken), recoveryPassword);
+    }
+
+    public Response checkRecoveryPasswordOnAuthorizationPageWithInvalidMethod(
+            RecoveryPassword recoveryPassword, String sessionToken, String httpMethod) {
+        return sendSimpleRequest(Method.valueOf(httpMethod), CUSTOMER_2_0_RECOVERY, getRP(HEADER, REGISTRATION, sessionToken), recoveryPassword);
     }
 }
