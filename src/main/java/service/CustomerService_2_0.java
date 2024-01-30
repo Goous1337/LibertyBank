@@ -4,6 +4,7 @@ import api.core.RequestParam;
 import io.restassured.http.Method;
 import constant.CustomerServiceConstants;
 import io.restassured.response.Response;
+import pojo.customerService_2_0.*;
 import pojo.customerService.UserQuestion;
 import pojo.customerService_2_0.*;
 
@@ -85,6 +86,25 @@ public class CustomerService_2_0 {
     public Response checkListSavingVerificationCodeWithInvalidMethods
             (ChangeUserAccountPasswordByPhone changeUserAccountPasswordByPhone, String httpMethod) {
         return sendSimpleRequest(Method.valueOf(httpMethod), CUSTOMER_CHANGE_PASSWORD, changeUserAccountPasswordByPhone);
+    }
+
+    public Response checkListUserVerificationWithValidData(UserVerificationWithCode userVerificationWithCode) {
+        return sendSimpleRequest(POST, CUSTOMER_VERIFICATION_BY_CODE, userVerificationWithCode);
+    }
+
+    public Response checkListUserVerificationWithInvalidMethod
+            (UserVerificationWithCode userVerificationWithCode, String method) {
+        return sendSimpleRequest(Method.valueOf(method), CUSTOMER_VERIFICATION_BY_CODE, userVerificationWithCode);
+    }
+
+    public Response checkListUserVerificationWithInvalidTypeMobilePhone
+            (UserVerificationWithInvalidTypeMobilePhone userVerificationWithInvalidTypeMobilePhone) {
+        return sendSimpleRequest(POST, CUSTOMER_VERIFICATION_BY_CODE, userVerificationWithInvalidTypeMobilePhone);
+    }
+
+    public Response checkListUserVerificationWithInvalidTypeVerificationCode
+            (UserVerificationWithInvalidTypeVerificationCode userVerificationWithInvalidTypeVerificationCode) {
+        return sendSimpleRequest(POST, CUSTOMER_VERIFICATION_BY_CODE, userVerificationWithInvalidTypeVerificationCode);
     }
 
     public Response checkGettingUserInformation(String customerId) {
