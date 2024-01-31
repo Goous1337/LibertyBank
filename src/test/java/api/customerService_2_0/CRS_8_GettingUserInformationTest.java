@@ -13,7 +13,9 @@ import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import pojo.customerService_2_0.UserAuthorizationByPhone;
 
+import static constant.CustomerService_2_0_Constants.*;
 import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -33,9 +35,13 @@ public class CRS_8_GettingUserInformationTest extends BaseTest {
     @Test
 
     public void successfulGettingUserInformation() {
-        String actualCustomerID = CustomerService_2_0_DataBaseRequest.receivingCustomerId();
-        String jsonSchemaPath = "schemas/customerService2.0/CRS-8/checkInfoUser.json";
-        Response response = customerService_2_0.checkGettingUserInformation(actualCustomerID);
+        String customerId = CustomerService_2_0_DataBaseRequest.getCustomerIdByMobilePhone(CUSTOMER_USER_PHONE);
+        UserAuthorizationByPhone userAuthorizationByPhone = new UserAuthorizationByPhone
+                (CUSTOMER_USER_PHONE, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE);
+        Response getToken = customerService_2_0.userAuthorizationByMobilePhone(userAuthorizationByPhone);
+        String token = getToken.body().jsonPath().get("accessToken");
+        String jsonSchemaPath = "schemas/customerService_2_0/CRS-8/checkInfoUser.json";
+        Response response = customerService_2_0.checkGettingUserInformation(customerId , token);
         assertAll(
                 () -> assertEquals(SC_OK,
                         response.statusCode(),
@@ -50,12 +56,16 @@ public class CRS_8_GettingUserInformationTest extends BaseTest {
     @Tags({@Tag("API"), @Tag("negative")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2113")
 
-    @ParameterizedTest(name = "customerId: {0}")
+    @ParameterizedTest(name = "customerIdInvalid: {0}")
     @ValueSource(strings = {"12321", "gfaghs", ""})
 
-    public void unsuccessfulGettingUserInformationWithInvalidCustomerId(String customerId) {
+    public void unsuccessfulGettingUserInformationWithInvalidCustomerId(String customerIdInvalid) {
+        UserAuthorizationByPhone userAuthorizationByPhone = new UserAuthorizationByPhone
+                (CUSTOMER_USER_PHONE, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE);
+        Response getToken = customerService_2_0.userAuthorizationByMobilePhone(userAuthorizationByPhone);
+        String token = getToken.body().jsonPath().get("accessToken");
 
-        Response response = customerService_2_0.checkGettingUserInformation(customerId);
+        Response response = customerService_2_0.checkGettingUserInformation(customerIdInvalid, token);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST,
                         response.statusCode(),
@@ -73,12 +83,16 @@ public class CRS_8_GettingUserInformationTest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2114")
 
     @ParameterizedTest(name = "Method: {0}")
-    @ValueSource(strings = {"POST", "PUT", "PATCH"})
+    @ValueSource(strings = {"POST", "PUT", "PATCH", "DELETE"})
 
     public void unsuccessfulGettingUserInformationWithInvalidMethod(String method) {
 
-        String actualCustomerID = CustomerService_2_0_DataBaseRequest.receivingCustomerId();
-        Response response = customerService_2_0.checkGettingUserInformationWithInvalidMethod(method, actualCustomerID);
+        String customerId = CustomerService_2_0_DataBaseRequest.getCustomerIdByMobilePhone(CUSTOMER_USER_PHONE);
+        UserAuthorizationByPhone userAuthorizationByPhone = new UserAuthorizationByPhone
+                (CUSTOMER_USER_PHONE, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE);
+        Response getToken = customerService_2_0.userAuthorizationByMobilePhone(userAuthorizationByPhone);
+        String token = getToken.body().jsonPath().get("accessToken");
+        Response response = customerService_2_0.checkGettingUserInformationWithInvalidMethod(method, customerId, token);
         assertAll(
                 () -> assertEquals(SC_METHOD_NOT_ALLOWED,
                         response.statusCode(),
