@@ -10,9 +10,9 @@ import pojo.customerService_2_0.*;
 import java.util.List;
 import java.util.Map;
 
-
 import static api.core.ApiClient.sendSimpleRequest;
 import static api.core.RequestParamType.*;
+import static com.google.common.net.HttpHeaders.AUTHORIZATION;
 import static constant.CustomerServiceConstants.PARAMETER_CUSTOMER_ID;
 import static api.utils.GsonHelper.createBody;
 import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
@@ -25,7 +25,6 @@ import static io.restassured.http.Method.GET;
 import static io.restassured.http.Method.PATCH;
 import static io.restassured.http.Method.POST;
 import static org.apache.commons.lang3.StringUtils.SPACE;
-
 
 public class CustomerService_2_0 {
     public Response checkListSavingVerificationCode(CustomerService_2_0_Mobile customerService_2_0_mobile0Mobile) {
@@ -87,12 +86,17 @@ public class CustomerService_2_0 {
         return sendSimpleRequest(Method.valueOf(httpMethod), CUSTOMER_CHANGE_PASSWORD, changeUserAccountPasswordByPhone);
     }
 
-    public Response checkGettingUserInformation(String customerId) {
-        return sendSimpleRequest(GET, RETRIEVING_USER_INFO, getRP(PARAMETER, CustomerServiceConstants.PARAMETER_CUSTOMER_ID, customerId));
+    public Response checkGettingUserInformation(String customerId, String token) {
+        List<RequestParam> params = List.of(getRP(PARAMETER, PARAMETER_CUSTOMER_ID, customerId)
+                , getRP(HEADER, AUTHORIZATION, String.format("Bearer %s", token)));
+        return sendSimpleRequest(GET, RETRIEVING_USER_INFO, params);
     }
 
-    public Response checkGettingUserInformationWithInvalidMethod(String invalidMethod, String customerId) {
-        return sendSimpleRequest(Method.valueOf(invalidMethod), RETRIEVING_USER_INFO, getRP(PARAMETER, CustomerServiceConstants.PARAMETER_CUSTOMER_ID, customerId));
+
+    public Response checkGettingUserInformationWithInvalidMethod(String invalidMethod, String customerId, String token) {
+        List<RequestParam> params = List.of(getRP(PARAMETER, PARAMETER_CUSTOMER_ID, customerId)
+                , getRP(HEADER, AUTHORIZATION, String.format("Bearer %s", token)));
+        return sendSimpleRequest(Method.valueOf(invalidMethod), RETRIEVING_USER_INFO, params);
     }
 
     public Response checkPushNotification(String customerId, Boolean notificationStatus) {

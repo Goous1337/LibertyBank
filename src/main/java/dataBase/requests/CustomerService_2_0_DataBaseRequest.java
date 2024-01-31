@@ -59,13 +59,6 @@ public class CustomerService_2_0_DataBaseRequest {
         return password;
     }
 
-    public static String receivingCustomerId() {
-        String sql = "SELECT customer_id FROM public.customer LIMIT 1";
-        String customerID = getDBConnection(CUSTOMER_SERVICE_2_0).queryForObject(sql, String.class);
-        LOG.info(String.format("получен customerId %s", customerID));
-        return customerID;
-    }
-
     public static String receivingCustomerIdWithNotificationStatusFalse() {
         String sql = "SELECT customer_id FROM public.customer WHERE push_notification = false LIMIT 1";
         String customerID = getDBConnection(CUSTOMER_SERVICE_2_0).queryForObject(sql, String.class);
