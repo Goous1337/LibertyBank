@@ -76,7 +76,7 @@ public class CRS_14_ChangingPasswordInPersonalAccount extends BaseTest {
         );
     }
 
-    @Disabled("Bug")
+    @Disabled("Bug https://jira.astondevs.ru/browse/LIB-2602")
     @DisplayName(" Проверка системы валидации параметров в BODY при запросе восстановления пароля.")
     @Description("""
             Данный тест-кейс проверяет возможность изменения пароля в личном кабинете пользователя при
@@ -84,7 +84,7 @@ public class CRS_14_ChangingPasswordInPersonalAccount extends BaseTest {
             """)
     @Tags({@Tag("API"), @Tag("Negative")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2089")
-    @Issue("")
+    @Issue("https://jira.astondevs.ru/browse/LIB-2602")
     @Test
     public void checkSavingVerificationCodeWithNullParameters() {
         String jsonSchemaPath = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";
