@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "accounts": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "customerId": {
+              "type": "string"
+            },
+            "openDate": {
+              "type": "string"
+            },
+            "currency": {
+              "type": "string"
+            },
+            "accountNumber": {
+              "type": "string"
+            },
+            "accountName": {
+              "type": "string"
+            },
+            "balance": {
+              "type": "number"
+            },
+            "status": {
+              "type": "string"
+            },
+            "blockedCash": {
+              "type": "number"
+            },
+            "isMain": {
+              "type": "boolean"
+            },
+            "accountType": {
+              "type": "string"
+            },
+            "closeDate": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "customerId",
+            "currency",
+            "accountNumber",
+            "accountName",
+            "balance",
+            "status",
+            "blockedCash",
+            "isMain",
+            "accountType"
+          ]
+        }
+      ]
+    },
+    "pageNumber": {
+      "type": "integer"
+    },
+    "pageSize": {
+      "type": "integer"
+    },
+    "totalElements": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "accounts",
+    "pageNumber",
+    "pageSize",
+    "totalElements"
+  ]
+}

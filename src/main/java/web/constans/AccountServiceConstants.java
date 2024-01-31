@@ -1,12 +1,13 @@
 package web.constans;
 
 public class AccountServiceConstants {
-    public static final String NOT_SELECTED_MESSAGE = "Элемент [%s] не выбран";
-    public static final String NOT_ENABLED_MESSAGE = "Кнопка [%s] не кликабельна";
+    public static final String DISPLAYED_MESSAGE = "[%s] отображается";
+    public static final String NOT_DISPLAYED_MESSAGE = "[%s] не отображается";
+    public static final String NOT_EQUALS_MESSAGE = "[%s] не соответствует";
     public static final String SELECTED_MESSAGE = "Элемент [%s] выбран";
+    public static final String NOT_SELECTED_MESSAGE = "Элемент [%s] не выбран";
     public static final String ENABLED_MESSAGE = "Кнопка [%s] кликабельна";
-    public static final String DISPLAYED_MESSAGE = "Элемент [%s] отображается";
-    public static final String NOT_DISPLAYED_MESSAGE = "Элемент [%s] не отображается";
+    public static final String NOT_ENABLED_MESSAGE = "Кнопка [%s] не кликабельна";
     public static final String STATUS_ERROR_MESSAGE = "Статус не совпадает с '%s'";
     public static final String RUB = "RUB";
     public static final String EUR = "EUR";

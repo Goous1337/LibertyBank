@@ -86,6 +86,25 @@ public class CustomerService_2_0 {
         return sendSimpleRequest(Method.valueOf(httpMethod), CUSTOMER_CHANGE_PASSWORD, changeUserAccountPasswordByPhone);
     }
 
+    public Response checkListUserVerificationWithValidData(UserVerificationWithCode userVerificationWithCode) {
+        return sendSimpleRequest(POST, CUSTOMER_VERIFICATION_BY_CODE, userVerificationWithCode);
+    }
+
+    public Response checkListUserVerificationWithInvalidMethod
+            (UserVerificationWithCode userVerificationWithCode, String method) {
+        return sendSimpleRequest(Method.valueOf(method), CUSTOMER_VERIFICATION_BY_CODE, userVerificationWithCode);
+    }
+
+    public Response checkListUserVerificationWithInvalidTypeMobilePhone
+            (UserVerificationWithInvalidTypeMobilePhone userVerificationWithInvalidTypeMobilePhone) {
+        return sendSimpleRequest(POST, CUSTOMER_VERIFICATION_BY_CODE, userVerificationWithInvalidTypeMobilePhone);
+    }
+
+    public Response checkListUserVerificationWithInvalidTypeVerificationCode
+            (UserVerificationWithInvalidTypeVerificationCode userVerificationWithInvalidTypeVerificationCode) {
+        return sendSimpleRequest(POST, CUSTOMER_VERIFICATION_BY_CODE, userVerificationWithInvalidTypeVerificationCode);
+    }
+
     public Response checkGettingUserInformation(String customerId, String token) {
         List<RequestParam> params = List.of(getRP(PARAMETER, PARAMETER_CUSTOMER_ID, customerId)
                 , getRP(HEADER, AUTHORIZATION, String.format("Bearer %s", token)));

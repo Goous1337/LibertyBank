@@ -13,8 +13,10 @@ public final class BaseProperties {
     public static String DEPOSIT_SERVICE = getPropertyValue("deposit_service");
     public static String DEPOSIT_SERVICE_NEW = getPropertyValue("deposit_service_new");
     public static String ACCESS_TOKEN_CUSTOMER_SERVICE = getPropertyValue("access_token_credit_service");
-    public static String INVALID_TOKEN_CREDIT_SERVICE="JSO1q6y8muhBjpLlviMOUOIc";
+    public static String INVALID_TOKEN_CREDIT_SERVICE = "JSO1q6y8muhBjpLlviMOUOIc";
     public static String ABS_INFO_SERVICE = getPropertyValue("abs_info_service");
     public static String ABS_CLIENT_SERVICE = getPropertyValue("abs_client_service");
+
+    public static String ACCOUNT_SERVICE = getPropertyValue("account_service");
 
 }
