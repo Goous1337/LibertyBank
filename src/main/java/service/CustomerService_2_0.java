@@ -4,7 +4,6 @@ import api.core.RequestParam;
 import io.restassured.http.Method;
 import constant.CustomerServiceConstants;
 import io.restassured.response.Response;
-import pojo.customerService_2_0.*;
 import pojo.customerService.UserQuestion;
 import pojo.customerService_2_0.*;
 
@@ -20,12 +19,16 @@ import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
 import static constant.ApiEndpoints.*;
 import static api.core.RequestParam.getRP;
 import static constant.CustomerServiceConstants.PARAMETER_NOTIFICATION_STATUS;
+import static api.core.RequestParamType.HEADER;
+import static api.core.RequestParamType.PARAMETER;
+import static constant.ApiEndpoints.*;
 import static constant.CustomerService_2_0_Constants.PARAMETER_INCORRECT_CUSTOMER_ID;
 import static io.netty.handler.codec.http.HttpHeaders.Values.APPLICATION_JSON;
 import static io.restassured.http.Method.GET;
 import static io.restassured.http.Method.PATCH;
 import static io.restassured.http.Method.POST;
 import static org.apache.commons.lang3.StringUtils.SPACE;
+import static io.restassured.http.Method.*;
 
 
 public class CustomerService_2_0 {
@@ -144,5 +147,19 @@ public class CustomerService_2_0 {
     public Response checkPushNotificationWithNull(NotificationStatus notificationStatus, String customerId) {
         List<RequestParam> params = List.of(getRP(PARAMETER, CustomerServiceConstants.PARAMETER_CUSTOMER_ID, customerId));
         return sendSimpleRequest(PATCH, PUSH_NOTIFICATION_2_0, params, notificationStatus);
+    }
+
+    public Response getSessionToken(GetSessionToken getSessionToken) {
+        return sendSimpleRequest(POST, CUSTOMER_2_0_SECURITY_VERIFICATION, getSessionToken);
+    }
+
+    public Response checkRecoveryPasswordOnAuthorizationPage(
+            RecoveryPassword recoveryPassword, String sessionToken) {
+        return sendSimpleRequest(PATCH, CUSTOMER_2_0_RECOVERY, getRP(HEADER, REGISTRATION, sessionToken), recoveryPassword);
+    }
+
+    public Response checkRecoveryPasswordOnAuthorizationPageWithInvalidMethod(
+            RecoveryPassword recoveryPassword, String sessionToken, String httpMethod) {
+        return sendSimpleRequest(Method.valueOf(httpMethod), CUSTOMER_2_0_RECOVERY, getRP(HEADER, REGISTRATION, sessionToken), recoveryPassword);
     }
 }
