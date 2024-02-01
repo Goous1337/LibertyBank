@@ -11,4 +11,7 @@ public class AccountServiceConstants {
     public static final String ACCOUNT_TYPE_CREDIT = "CREDIT";
     public static final String ACCOUNT_TYPE_DEPOSIT = "DEPOSIT";
     public static final String ACCOUNT_TYPE_PAYMENT = "PAYMENT";
+    public static final String STATUS_ACTIVE = "ACTIVE";
+    public static final String STATUS_CLOSED = "CLOSED";
+    public static final String STATUS_BLOCKED = "BLOCKED";
 }
