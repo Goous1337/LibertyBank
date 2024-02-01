@@ -15,6 +15,8 @@ public enum LibertyServiceName {
     DEPOSIT_SERVICE_DB("deposit_service_db"),
     ABS_CLIENT_SERVICE_BD("abs_client_service_db"),
     CUSTOMER_SERVICE_DB_2_0("customer2_service_db"),
-    СREDIT_SERVICE("credit_service_db");
+    CREDIT_SERVICE("credit_service_db"),
+    ACCOUNT_SERVICE_DB("account_service_db");
+
     private final String serviceName;
 }
