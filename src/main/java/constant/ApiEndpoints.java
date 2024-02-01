@@ -81,5 +81,5 @@ public final class ApiEndpoints {
     public static final String QUESTION_ANSWER_INVALID_URL_2_0 = "customer/api/v1/auth/user/settings/control";
 
     public static final String ACCOUNTS_LIST = "account-service/api/v1/accounts";
-
+    public static final String CHANGE_PASSWORD_2_0 = "customer/api/v1/security/password";
 }
