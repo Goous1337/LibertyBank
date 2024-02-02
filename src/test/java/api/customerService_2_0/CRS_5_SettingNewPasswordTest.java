@@ -17,7 +17,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import pojo.customerService_2_0.CustomerService_2_0_Mobile;
 import pojo.customerService_2_0.UserVerificationWithCode;
 
-import static org.apache.hc.core5.http.HttpStatus.SC_METHOD_NOT_ALLOWED;
+import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CUSTOMER_SERVICE_2_0;
@@ -84,5 +84,89 @@ public class CRS_5_SettingNewPasswordTest extends BaseTest {
         );
     }
 
+    @DisplayName("Проверка обязательности значения token в теле запроса при установлении нового пароля")
+    @Description("Данный тест-кейс проверяет обязательность token в теле запроса")
+    @Tags({@Tag("API"), @Tag("Negative")})
+    @TmsLink("https://jira.astondevs.ru/browse/LIB-2130")
+    @ParameterizedTest(name = "token: {0}, newPassword: {1}")
+    @CsvSource({"asd , YjMzYjM2Mzg3Y2U1YWExZGRkZmMyOGRkZGNiZDQxNGVkYjQ4NTRiNWZhZWM5ZDAzOGRmZWQzMmIyZTEyYWZjYQ==",
+            " asd , "})
 
+    public void checkSettingNewPasswordUserWithoutToken(String token, String newPassword) {
+
+        Response response = customerService_2_0.changePasswordForUserUpdatedDatabase(token, newPassword);
+        assertAll(
+                () -> assertEquals(SC_UNAUTHORIZED, response.statusCode(),
+                        "Код ответа не соответствует ожидаемому"),
+                () -> assertNotNull(response.getBody(), "Сообщение об ошибке отсутсвует")
+        );
+    }
+
+    @DisplayName("Проверка обязательности значения password в теле запроса при установлении нового пароля")
+    @Description("Данный тест-кейс проверяет обязательность password в теле запроса")
+    @Tags({@Tag("API"), @Tag("Negative")})
+    @TmsLink("https://jira.astondevs.ru/browse/LIB-2130")
+    @Test
+
+    public void checkSettingNewPasswordUserWithoutPassword() {
+        String mobileNumber = "79486170021";
+        String newPassword = "";
+        customerService_2_0.checkListSavingVerificationCode(new CustomerService_2_0_Mobile(mobileNumber));
+        String customerId = CustomerService_2_0_DataBaseRequest.getCustomerIdByMobilePhone(mobileNumber);
+        String verificationCode = CustomerService_2_0_DataBaseRequest.getCustomerLastVerificationCodeById(customerId);
+        Response getTokenResponse = customerService_2_0.checkListUserVerificationWithValidData
+                (new UserVerificationWithCode(mobileNumber, verificationCode));
+        CustomerService_2_0_DataBaseRequest.updatePasswordInUserProfileTableIsNull(customerId);
+        String token = getTokenResponse.body().jsonPath().get("sessionToken");
+        Response response = customerService_2_0.changePasswordForUserUpdatedDatabase(token, newPassword);
+
+        assertAll(
+                () -> assertEquals(SC_BAD_REQUEST, response.statusCode(),
+                        "Код ответа не соответствует ожидаемому"),
+                () -> assertNotNull(response.getBody(), "Сообщение об ошибке отсутсвует")
+        );
+    }
+
+    @DisplayName("Проверка обязательности значения password в теле запроса при установлении нового пароля")
+    @Description("Данный тест-кейс проверяет обязательность password в теле запроса")
+    @Tags({@Tag("API"), @Tag("Negative")})
+    @TmsLink("https://jira.astondevs.ru/browse/LIB-2130")
+    @Test
+
+    public void checkSettingNewPasswordUserAlreadyHasPassword() {
+        String mobileNumber = "79808901750";
+        String newPassword = "YjMzYjM2Mzg3Y2U1YWExZGRkZmMyOGRkZGNiZDQxNGVkYjQ4NTRiNWZhZWM5ZDAzOGRmZWQzMmIyZTEyYWZjYQ==";
+        customerService_2_0.checkListSavingVerificationCode(new CustomerService_2_0_Mobile(mobileNumber));
+        String customerId = CustomerService_2_0_DataBaseRequest.getCustomerIdByMobilePhone(mobileNumber);
+        String verificationCode = CustomerService_2_0_DataBaseRequest.getCustomerLastVerificationCodeById(customerId);
+        Response getTokenResponse = customerService_2_0.checkListUserVerificationWithValidData
+                (new UserVerificationWithCode(mobileNumber, verificationCode));
+        String token = getTokenResponse.body().jsonPath().get("sessionToken");
+        Response response = customerService_2_0.changePasswordForUserUpdatedDatabase(token, newPassword);
+
+        assertAll(
+                () -> assertEquals(SC_CONFLICT, response.statusCode(),
+                        "Код ответа не соответствует ожидаемому"),
+                () -> assertNotNull(response.getBody(), "Сообщение об ошибке отсутсвует")
+        );
+    }
+
+    @DisplayName("Проверка обязательности значения password в теле запроса при установлении нового пароля")
+    @Description("Данный тест-кейс проверяет обязательность password в теле запроса")
+    @Tags({@Tag("API"), @Tag("Negative")})
+    @TmsLink("https://jira.astondevs.ru/browse/LIB-2130")
+    @Test
+
+    public void checkSettingNewPasswordWithoutInvalidEndpoint() {
+        String token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI4OTgzNjBmNy1hZTkxLTQzMGQtYWQ5My1kYzI0YmNkYzZhYWUiLCJpYXQiO" +
+                "jE3MDY3Njk3MzAsImV4cCI6MTcwNjc3MDMzMH0.l6cEIykOLRH_H1LqtXvUDuSNIbxDTMlhHT9RjzorQAQ";
+        String newPassword = "YjMzYjM2Mzg3Y2U1YWExZGRkZmMyOGRkZGNiZDQxNGVkYjQ4NTRiNWZhZWM5ZDAzOGRmZWQzMmIyZTEyYWZjYQ==";
+        Response response = customerService_2_0.changePasswordForUserUpdatedDatabaseInvalidEndpoint(token, newPassword);
+
+        assertAll(
+                () -> assertEquals(SC_NOT_FOUND, response.statusCode(),
+                        "Код ответа не соответствует ожидаемому"),
+                () -> assertNotNull(response.getBody(), "Сообщение об ошибке отсутсвует")
+        );
+    }
 }
