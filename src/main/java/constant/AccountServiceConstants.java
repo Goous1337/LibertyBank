@@ -5,6 +5,7 @@ public class AccountServiceConstants {
     public static final String CUSTOMER_WITH_NO_ACCOUNTS = "8e449009-e53b-453f-97d6-8d53524e75f9";
     public static final String INVALID_CUSTOMER_ID ="00000000-0000-0000-0000-00000000000";
     public static final String HEADER_CUSTOMER_ID = "X-Customer-Id";
+    public static final String INVALID_ACCOUNT_ID = "00000000-0000-0000-0000-000000000000";
     public static final String CURRENCY_RUB = "RUB";
     public static final String CURRENCY_USD = "USD";
     public static final String CURRENCY_EUR = "EUR";
