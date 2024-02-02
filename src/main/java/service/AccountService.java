@@ -4,6 +4,8 @@ import io.restassured.response.Response;
 import pojo.accountService.AccountData;
 import pojo.accountService.ChangeAccountNameRequest;
 import pojo.accountService.ChangeAccountStatusRequest;
+
+import static api.core.ApiClient.sendRequestWithoutParams;
 import static api.core.ApiClient.sendSimpleRequest;
 import static api.core.RequestParam.getRP;
 import static api.core.RequestParamType.HEADER;
@@ -45,5 +47,9 @@ public class AccountService {
     public Response changeAccountName(String accountId, String accountName) {
         return sendSimpleRequest(PATCH, ACCOUNTS_LIST + "/" + accountId,
                 new ChangeAccountNameRequest(accountName));
+    }
+
+    public Response getAccountInfoData(String accountId) {
+        return sendRequestWithoutParams(GET, ACCOUNTS_LIST + "/" + accountId);
     }
 }
