@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static constant.LibertyServiceName.CUSTOMER_SERVICE_2_0;
@@ -112,9 +113,28 @@ public class CustomerService_2_0_DataBaseRequest {
     }
 
     public static Boolean checkNotificationStatusByCustomerId(String customerId) {
-        String sql = "SELECT push_notification FROM customer WHERE customer_id ='"+customerId+"';";
+        String sql = "SELECT push_notification FROM customer WHERE customer_id ='" + customerId + "';";
         Boolean push_notification = getDBConnection(CUSTOMER_SERVICE_2_0).queryForObject(sql, Boolean.class);
         LOG.info(String.format("получен push_notification: %s по customer_id: %s", push_notification, customerId));
         return push_notification;
+    }
+
+    public static Integer getCustomerPassportIdByMobilePhone(String mobilePhone) {
+        String sql = "SELECT passport_id FROM customer WHERE mobile_phone=?";
+        Integer passportId = getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sql, Integer.class, mobilePhone);
+        return passportId;
+    }
+
+    public static List<String> getCustomerPassportSeriesAndNumberByPassportId(Integer passportId) {
+        List<String> identityDocNumber = new ArrayList<>();
+        String sqlSeries = "SELECT passport.series FROM passport WHERE id =?";
+        String sqlNumber = "SELECT passport.number FROM passport WHERE id =?";
+        String passportSeries = getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sqlSeries, String.class, passportId);
+        identityDocNumber.add(passportSeries);
+        String passportNumber = getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sqlNumber, String.class, passportId);
+        identityDocNumber.add(passportNumber);
+
+
+        return identityDocNumber;
     }
 }

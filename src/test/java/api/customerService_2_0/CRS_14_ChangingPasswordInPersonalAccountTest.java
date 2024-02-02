@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.CUSTOMER_SERVICE_2_0;
 
 @DisplayName("CRS-14 Изменение пароля в личном кабинете.")
-public class CRS_14_ChangingPasswordInPersonalAccount extends BaseTest {
+public class CRS_14_ChangingPasswordInPersonalAccountTest extends BaseTest {
     {
         RestAssured.baseURI = CUSTOMER_SERVICE_2_0;
     }
