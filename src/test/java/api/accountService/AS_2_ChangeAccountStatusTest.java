@@ -9,6 +9,7 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
 
+import static constant.AccountServiceConstants.*;
 import static org.apache.hc.core5.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,11 +17,8 @@ import static property.BaseProperties.ACCOUNT_SERVICE;
 
 @DisplayName("AS-2 Изменить статус счета")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class AS_2_ChangeAccountStatus extends BaseTest {
+public class AS_2_ChangeAccountStatusTest extends BaseTest {
 
-    public static final String STATUS_ACTIVE = "ACTIVE";
-    public static final String STATUS_CLOSED = "CLOSED";
-    public static final String STATUS_BLOCKED = "BLOCKED";
     public static final String JSON_SCHEMA = "schemas/accountService/successfulChangeAccountStatus.json";
 
     {
