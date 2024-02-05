@@ -8,9 +8,10 @@ import pojo.accountService.ChangeAccountStatusRequest;
 import static api.core.ApiClient.sendRequestWithoutParams;
 import static api.core.ApiClient.sendSimpleRequest;
 import static api.core.RequestParam.getRP;
-import static api.core.RequestParamType.HEADER;
+import static api.core.RequestParamType.*;
 import static constant.AccountServiceConstants.*;
 import static constant.ApiEndpoints.ACCOUNTS_LIST;
+import static constant.ApiEndpoints.ACCOUNTS_LIST_BY_CUSTOMER_ID;
 import static io.restassured.http.Method.GET;
 import static io.restassured.http.Method.POST;
 import static io.restassured.http.Method.PATCH;
@@ -25,6 +26,18 @@ public class AccountService {
     public Response getAccountsListByCustomerIdWithNoAccounts() {
         return sendSimpleRequest(GET, ACCOUNTS_LIST,
                 getRP(HEADER, HEADER_CUSTOMER_ID, CUSTOMER_WITH_NO_ACCOUNTS));
+    }
+
+    public Response getAccountsListByInvalidCustomerId() {
+        return sendRequestWithoutParams(GET, ACCOUNTS_LIST_BY_CUSTOMER_ID + INVALID_CUSTOMER_ID);
+    }
+
+    public Response getAccountsListByValidCustomerIdWithNoAccounts() {
+        return sendRequestWithoutParams(GET, ACCOUNTS_LIST_BY_CUSTOMER_ID + CUSTOMER_WITH_NO_ACCOUNTS);
+    }
+
+    public Response getAccountsListByValidCustomerIdWithAccounts() {
+        return sendRequestWithoutParams(GET, ACCOUNTS_LIST_BY_CUSTOMER_ID + VALID_CUSTOMER_ID);
     }
 
     public Response checkCreateNewAccount(String currency, String accountType, Boolean isMain) {
