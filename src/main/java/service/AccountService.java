@@ -11,7 +11,7 @@ import static constant.AccountServiceConstants.VALID_CUSTOMER_ID;
 import static constant.ApiEndpoints.ACCOUNTS_LIST;
 import static io.restassured.http.Method.GET;
 import static io.restassured.http.Method.PATCH;
-import static property.BaseProperties.CUSTOMER_ID;
+//import static property.BaseProperties.CUSTOMER_ID;
 
 public class AccountService {
 
