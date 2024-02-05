@@ -74,6 +74,12 @@ public class CustomerService_2_0 {
     public Response userAuthorizationByMobilePhone(UserAuthorizationByPhone userAuthorizationByPhone) {
         return sendSimpleRequest(POST, CUSTOMER_LOGIN, userAuthorizationByPhone);
     }
+    public Response checkListUserAuthorizationWithInvalidUrl(UserAuthorizationByPhone userAuthorizationByPhone){
+        return sendSimpleRequest(POST,INVALID_CUSTOMER_LOGIN,userAuthorizationByPhone);
+    }
+    public Response checkListUserAuthorizationWithInvalidMethod(UserAuthorizationByPhone userAuthorizationByPhone,String method){
+        return sendSimpleRequest(Method.valueOf(method),CUSTOMER_LOGIN,userAuthorizationByPhone);
+    }
 
     public Response checkListAbilityChangePasswordInPersonalAccount(
             ChangeUserAccountPasswordByPhone changeUserAccountPasswordByPhone, String refreshToken) {

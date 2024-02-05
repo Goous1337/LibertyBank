@@ -38,7 +38,7 @@ public class CRS_6_UserAuthorizationNewPasswordTest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2158")
     @Test
     public void checkUserAuthorizationWithMobileAndPassport() {
-        String mobilePhone = "79486170021";
+        String mobilePhone = "79808901750";
         int passportId = CustomerService_2_0_DataBaseRequest.getCustomerPassportIdByMobilePhone(mobilePhone);
         List<String> passportSeriesAndNumber = CustomerService_2_0_DataBaseRequest
                 .getCustomerPassportSeriesAndNumberByPassportId(passportId);
@@ -68,7 +68,7 @@ public class CRS_6_UserAuthorizationNewPasswordTest extends BaseTest {
     @CsvSource({"11111,TSRiNDU0OTM4ODYwMzk5YzZmYzVlOTFlMzQxMzExZDkzM2JlYTk4MDgyYzg0YzMyMjU4NWMxZmVmMTFmZGY0Yg==",
             "@$#$%&*(!@#,12345678"})
     public void checkUserAuthorizationWithInvalidData(String invalidLogin, String invalidPassword) {
-        String mobilePhone = "79486170021";
+        String mobilePhone = "79808901750";
         String jsonSchemaPath = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";
         int passportId = CustomerService_2_0_DataBaseRequest.getCustomerPassportIdByMobilePhone(mobilePhone);
         List<String> passportSeriesAndNumber = CustomerService_2_0_DataBaseRequest
@@ -107,13 +107,68 @@ public class CRS_6_UserAuthorizationNewPasswordTest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2160")
     @Test
     public void checkUserAuthorizationWithInvalidType() {
-        String mobilePhone = "79486170021";
+        String mobilePhone = "79808901750";
         String invalidType = "PHONE";
         String jsonSchemaPath = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";
         Response response = customerService_2_0.userAuthorizationByMobilePhone
                 (new UserAuthorizationByPhone(mobilePhone, CUSTOMER_USER_PASSWORD, invalidType));
         assertAll(
                 () -> assertEquals(SC_UNSUPPORTED_MEDIA_TYPE, response.getStatusCode()),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+        );
+    }
+
+    @DisplayName("Авторизация пользователя используя невалидный (не существующий) URL")
+    @Description("""
+            Данный тест кейс проверяет процесс авторизации клиента используя невалидный (не существующий) URL.
+            """)
+    @Tags({@Tag("API"), @Tag("Negative")})
+    @TmsLink("https://jira.astondevs.ru/browse/LIB-2161")
+    @Test
+    public void checkUserAuthorizationWithInvalidUrl() {
+        String mobilePhone = "79808901750";
+        String jsonSchema = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";
+        Response response = customerService_2_0.checkListUserAuthorizationWithInvalidUrl
+                (new UserAuthorizationByPhone(mobilePhone, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE));
+        assertAll(
+                () -> assertEquals(SC_NOT_FOUND, response.getStatusCode()),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchema))
+        );
+    }
+
+    @DisplayName("Авторизация пользователя используя некорректный метод запроса")
+    @Description("""
+            Данный тест кейс проверяет процесс авторизации клиента используя некорректный метод запроса.
+            """)
+    @Tags({@Tag("API"), @Tag("Negative")})
+    @TmsLink("https://jira.astondevs.ru/browse/LIB-2162")
+    @ParameterizedTest
+    @CsvSource({"GET", "PUT", "PATCH", "DELETE"})
+    public void checkUserAuthorizationWithInvalidMethod(String method) {
+        String mobilePhone = "79808901750";
+        String jsonSchemaPath = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";
+        Response response = customerService_2_0.checkListUserAuthorizationWithInvalidMethod
+                (new UserAuthorizationByPhone(mobilePhone, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE), method);
+        assertAll(
+                () -> assertEquals(SC_METHOD_NOT_ALLOWED, response.getStatusCode()),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+        );
+    }
+
+    @DisplayName("Авторизация пользователя если клиент заблокирован работниками банка.")
+    @Description("""
+            Данный тест кейс проверяет процесс авторизации используя данные если клиент заблокирован работниками банка.
+            """)
+    @Tags({@Tag("API"), @Tag("Negative")})
+    @TmsLink("https://jira.astondevs.ru/browse/LIB-2163")
+    @Test
+    public void checkBlockedUserAuthorization() {
+        String blockedUserMobilePhone = CustomerService_2_0_DataBaseRequest.getBlockedUserMobilePhone();
+        String jsonSchemaPath = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";
+        Response response = customerService_2_0.userAuthorizationByMobilePhone(new UserAuthorizationByPhone
+                (blockedUserMobilePhone, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE));
+        assertAll(
+                () -> assertEquals(SC_FORBIDDEN, response.getStatusCode()),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }

@@ -133,8 +133,12 @@ public class CustomerService_2_0_DataBaseRequest {
         identityDocNumber.add(passportSeries);
         String passportNumber = getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sqlNumber, String.class, passportId);
         identityDocNumber.add(passportNumber);
-
-
         return identityDocNumber;
+    }
+
+    public static String getBlockedUserMobilePhone() {
+        String sql = "SELECT mobile_phone FROM customer WHERE customer_status = '0' LIMIT 1";
+        String mobilePhone = getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sql, String.class);
+        return mobilePhone;
     }
 }
