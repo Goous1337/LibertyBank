@@ -130,7 +130,7 @@ public class CRS_5_SettingNewPasswordTest extends BaseTest {
     @DisplayName("Проверка обязательности значения password в теле запроса при установлении нового пароля")
     @Description("Данный тест-кейс проверяет обязательность password в теле запроса")
     @Tags({@Tag("API"), @Tag("Negative")})
-    @TmsLink("https://jira.astondevs.ru/browse/LIB-2130")
+    @TmsLink("https://jira.astondevs.ru/browse/LIB-2131")
     @Test
 
     public void checkSettingNewPasswordUserAlreadyHasPassword() {
@@ -154,7 +154,7 @@ public class CRS_5_SettingNewPasswordTest extends BaseTest {
     @DisplayName("Проверка обязательности значения password в теле запроса при установлении нового пароля")
     @Description("Данный тест-кейс проверяет обязательность password в теле запроса")
     @Tags({@Tag("API"), @Tag("Negative")})
-    @TmsLink("https://jira.astondevs.ru/browse/LIB-2130")
+    @TmsLink("https://jira.astondevs.ru/browse/LIB-2132")
     @Test
 
     public void checkSettingNewPasswordWithoutInvalidEndpoint() {
@@ -165,6 +165,33 @@ public class CRS_5_SettingNewPasswordTest extends BaseTest {
 
         assertAll(
                 () -> assertEquals(SC_NOT_FOUND, response.statusCode(),
+                        "Код ответа не соответствует ожидаемому"),
+                () -> assertNotNull(response.getBody(), "Сообщение об ошибке отсутсвует")
+        );
+    }
+
+    @DisplayName("Валидация входных параметров при установлении нового пароля")
+    @Description("Данный тест-кейс проверяет валидацию входных параметров: newPassword.")
+    @Tags({@Tag("API"), @Tag("Negative")})
+    @TmsLink("https://jira.astondevs.ru/browse/LIB-2133")
+    @ParameterizedTest(name = "newPassword: {0}, mobilePhone: {1}")
+    @CsvSource({"cXdlcnR5MjU2, 79031553942",
+            "99202a04b653cb6667aa98d435aa52f8df7ed8b91d1cc15ee66945d13ffc1c9b, 79220038766",
+            "9a97e78fd64751eb33b8880ce568b248991cb3b481904ca647e2964157ef26cb, 79221009133"})
+
+    public void checkSettingNewPasswordUserWithUnencryptedPassword(String newPassword, String mobileNumber) {
+
+        customerService_2_0.checkListSavingVerificationCode(new CustomerService_2_0_Mobile(mobileNumber));
+        String customerId = CustomerService_2_0_DataBaseRequest.getCustomerIdByMobilePhone(mobileNumber);
+        String verificationCode = CustomerService_2_0_DataBaseRequest.getCustomerLastVerificationCodeById(customerId);
+        Response getTokenResponse = customerService_2_0.checkListUserVerificationWithValidData
+                (new UserVerificationWithCode(mobileNumber, verificationCode));
+        String token = getTokenResponse.body().jsonPath().get("sessionToken");
+        CustomerService_2_0_DataBaseRequest.updatePasswordInUserProfileTableIsNull(customerId);
+        Response response = customerService_2_0.changePasswordForUserUpdatedDatabase(token, newPassword);
+
+        assertAll(
+                () -> assertEquals(SC_BAD_REQUEST, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
                 () -> assertNotNull(response.getBody(), "Сообщение об ошибке отсутсвует")
         );
