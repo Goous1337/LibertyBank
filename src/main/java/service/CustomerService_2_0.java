@@ -13,22 +13,19 @@ import java.util.Map;
 import static api.core.ApiClient.sendSimpleRequest;
 import static api.core.RequestParamType.*;
 import static com.google.common.net.HttpHeaders.AUTHORIZATION;
-import static constant.CustomerServiceConstants.PARAMETER_CUSTOMER_ID;
 import static api.utils.GsonHelper.createBody;
 import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
 import static constant.ApiEndpoints.*;
 import static api.core.RequestParam.getRP;
-import static constant.CustomerServiceConstants.PARAMETER_NOTIFICATION_STATUS;
 import static api.core.RequestParamType.HEADER;
 import static api.core.RequestParamType.PARAMETER;
-import static constant.ApiEndpoints.*;
+import static constant.CustomerServiceConstants.*;
 import static constant.CustomerService_2_0_Constants.PARAMETER_INCORRECT_CUSTOMER_ID;
 import static io.netty.handler.codec.http.HttpHeaders.Values.APPLICATION_JSON;
 import static io.restassured.http.Method.GET;
 import static io.restassured.http.Method.PATCH;
 import static io.restassured.http.Method.POST;
 import static org.apache.commons.lang3.StringUtils.SPACE;
-import static io.restassured.http.Method.*;
 
 public class CustomerService_2_0 {
     public Response checkListSavingVerificationCode(CustomerService_2_0_Mobile customerService_2_0_mobile0Mobile) {
@@ -166,4 +163,26 @@ public class CustomerService_2_0 {
             RecoveryPassword recoveryPassword, String sessionToken, String httpMethod) {
         return sendSimpleRequest(Method.valueOf(httpMethod), CUSTOMER_2_0_RECOVERY, getRP(HEADER, REGISTRATION, sessionToken), recoveryPassword);
     }
+
+    public Response updateEmailForClient(String token, UpdatedEmail email) {
+        return sendSimpleRequest(PATCH, CUSTOMER_2_0_EMAIL,
+                getRP(HEADER, AUTHORIZATION, String.format("Bearer %s", token)), email);
+    }
+
+    public Response updateEmailForClientWithoutEmail(String token) {
+        return sendSimpleRequest(PATCH, CUSTOMER_2_0_EMAIL,
+                getRP(HEADER, AUTHORIZATION, String.format("Bearer %s", token)));
+    }
+
+    public Response updateEmailForClientWithInvalidURL(String token, UpdatedEmail email, String url) {
+        return sendSimpleRequest(PATCH, url,
+                getRP(HEADER, AUTHORIZATION, String.format("Bearer %s", token)), email);
+    }
+
+    public Response updateEmailForClientWithHttpMethod(String token, String method, UpdatedEmail email) {
+        System.out.println(Method.valueOf(method));
+        return sendSimpleRequest(Method.valueOf(method), CUSTOMER_2_0_EMAIL, getRP(HEADER, AUTHORIZATION,
+                String.format("Bearer %s", token)), email);
+    }
+
 }
