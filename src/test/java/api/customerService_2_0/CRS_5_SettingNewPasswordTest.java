@@ -52,6 +52,7 @@ public class CRS_5_SettingNewPasswordTest extends BaseTest {
                         "Код ответа не соответствует ожидаемому"),
                 () -> assertNotEquals(oldHashPassword, newPassword)
         );
+        CustomerService_2_0_DataBaseRequest.resetTimerOfVerificationCodeById(customerId);
     }
 
     @DisplayName("Валидация метода запроса установления пароля")
@@ -82,6 +83,7 @@ public class CRS_5_SettingNewPasswordTest extends BaseTest {
                         "Код ответа не соответствует ожидаемому"),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
+        CustomerService_2_0_DataBaseRequest.resetTimerOfVerificationCodeById(customerId);
     }
 
     @DisplayName("Проверка обязательности значения token в теле запроса при установлении нового пароля")
@@ -125,6 +127,7 @@ public class CRS_5_SettingNewPasswordTest extends BaseTest {
                         "Код ответа не соответствует ожидаемому"),
                 () -> assertNotNull(response.getBody(), "Сообщение об ошибке отсутсвует")
         );
+        CustomerService_2_0_DataBaseRequest.resetTimerOfVerificationCodeById(customerId);
     }
 
     @DisplayName("Проверка обязательности значения password в теле запроса при установлении нового пароля")
@@ -149,6 +152,7 @@ public class CRS_5_SettingNewPasswordTest extends BaseTest {
                         "Код ответа не соответствует ожидаемому"),
                 () -> assertNotNull(response.getBody(), "Сообщение об ошибке отсутсвует")
         );
+        CustomerService_2_0_DataBaseRequest.resetTimerOfVerificationCodeById(customerId);
     }
 
     @DisplayName("Проверка обязательности значения password в теле запроса при установлении нового пароля")
@@ -195,5 +199,6 @@ public class CRS_5_SettingNewPasswordTest extends BaseTest {
                         "Код ответа не соответствует ожидаемому"),
                 () -> assertNotNull(response.getBody(), "Сообщение об ошибке отсутсвует")
         );
+        CustomerService_2_0_DataBaseRequest.resetTimerOfVerificationCodeById(customerId);
     }
 }
