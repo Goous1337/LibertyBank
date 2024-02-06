@@ -25,7 +25,7 @@ public class CRS_5_SettingNewPasswordTest extends BaseTest {
     {
         RestAssured.baseURI = CUSTOMER_SERVICE_2_0;
     }
-    @Disabled
+
     @DisplayName("Основной сценарий. Установка нового пароля")
     @Description("Данный тест-кейс проверяет успешную установку нового пароля пользователю.")
     @Tags({@Tag("API"), @Tag("Smoke"), @Tag("Positive")})
@@ -51,7 +51,7 @@ public class CRS_5_SettingNewPasswordTest extends BaseTest {
         );
         CustomerService_2_0_DataBaseRequest.resetTimerOfVerificationCodeById(customerId);
     }
-    @Disabled
+
     @DisplayName("Валидация метода запроса установления пароля")
     @Description("Данный тест-кейс проверяет возможность отправки запроса методом отличным от PATCH.")
     @Tags({@Tag("API"), @Tag("Negative")})
@@ -82,7 +82,7 @@ public class CRS_5_SettingNewPasswordTest extends BaseTest {
         );
         CustomerService_2_0_DataBaseRequest.resetTimerOfVerificationCodeById(customerId);
     }
-    @Disabled
+
     @DisplayName("Проверка обязательности значения token в теле запроса при установлении нового пароля")
     @Description("Данный тест-кейс проверяет обязательность token в теле запроса")
     @Tags({@Tag("API"), @Tag("Negative")})
@@ -100,7 +100,7 @@ public class CRS_5_SettingNewPasswordTest extends BaseTest {
                 () -> assertNotNull(response.getBody(), "Сообщение об ошибке отсутсвует")
         );
     }
-    @Disabled
+
     @DisplayName("Проверка обязательности значения password в теле запроса при установлении нового пароля")
     @Description("Данный тест-кейс проверяет обязательность password в теле запроса")
     @Tags({@Tag("API"), @Tag("Negative")})
@@ -126,7 +126,7 @@ public class CRS_5_SettingNewPasswordTest extends BaseTest {
         );
         CustomerService_2_0_DataBaseRequest.resetTimerOfVerificationCodeById(customerId);
     }
-    @Disabled
+
     @DisplayName("Проверка обязательности значения password в теле запроса при установлении нового пароля")
     @Description("Данный тест-кейс проверяет обязательность password в теле запроса")
     @Tags({@Tag("API"), @Tag("Negative")})
@@ -151,7 +151,7 @@ public class CRS_5_SettingNewPasswordTest extends BaseTest {
         );
         CustomerService_2_0_DataBaseRequest.resetTimerOfVerificationCodeById(customerId);
     }
-    @Disabled
+
     @DisplayName("Проверка обязательности значения password в теле запроса при установлении нового пароля")
     @Description("Данный тест-кейс проверяет обязательность password в теле запроса")
     @Tags({@Tag("API"), @Tag("Negative")})
@@ -170,7 +170,7 @@ public class CRS_5_SettingNewPasswordTest extends BaseTest {
                 () -> assertNotNull(response.getBody(), "Сообщение об ошибке отсутсвует")
         );
     }
-    @Disabled
+
     @DisplayName("Валидация входных параметров при установлении нового пароля")
     @Description("Данный тест-кейс проверяет валидацию входных параметров: newPassword.")
     @Tags({@Tag("API"), @Tag("Negative")})
