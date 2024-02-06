@@ -45,14 +45,6 @@ public class CustomerService_2_0_DataBaseRequest {
         return customerIdList;
     }
 
-    public static String getCustomerIdByPassportId(int passportId) {
-        String sql = "select customer_id\n" +
-                "from customer \n" +
-                "where passport_id=?";
-        String customerId = getDBConnection(CUSTOMER_SERVICE_2_0).queryForObject(sql, String.class, passportId);
-        return customerId;
-    }
-
     public static String getCustomerPasswordById(String id) {
         String sql = "SELECT password FROM user_profile WHERE customer_id =?::uuid";
         String password = getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sql, String.class, id);
