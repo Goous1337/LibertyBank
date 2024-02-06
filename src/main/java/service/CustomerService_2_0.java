@@ -19,6 +19,10 @@ import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
 import static constant.ApiEndpoints.*;
 import static constant.CustomerServiceConstants.PARAMETER_CUSTOMER_ID;
 import static constant.CustomerServiceConstants.PARAMETER_NOTIFICATION_STATUS;
+import static api.core.RequestParamType.HEADER;
+import static api.core.RequestParamType.PARAMETER;
+
+import static constant.CustomerService_2_0_Constants.PARAMETER_INCORRECT_CUSTOMER_ID;
 import static io.netty.handler.codec.http.HttpHeaders.Values.APPLICATION_JSON;
 import static io.restassured.http.Method.*;
 import static org.apache.commons.lang3.StringUtils.SPACE;
@@ -156,5 +160,20 @@ public class CustomerService_2_0 {
     public Response checkRecoveryPasswordOnAuthorizationPageWithInvalidMethod(
             RecoveryPassword recoveryPassword, String sessionToken, String httpMethod) {
         return sendSimpleRequest(Method.valueOf(httpMethod), CUSTOMER_2_0_RECOVERY, getRP(HEADER, REGISTRATION, sessionToken), recoveryPassword);
+    }
+
+    public Response changePasswordForUserUpdatedDatabase(String sessionToken, String newPassword) {
+        return sendSimpleRequest(PATCH, CHANGE_PASSWORD_2_0, getRP(HEADER, "Registration", sessionToken),
+                new PasswordChangeRequest(newPassword));
+    }
+
+    public Response changePasswordForUserUpdatedDatabaseWithInvalidMethod(String method, String sessionToken, String newPassword) {
+        return sendSimpleRequest(Method.valueOf(method), CHANGE_PASSWORD_2_0, getRP(HEADER, "Registration", sessionToken),
+                new PasswordChangeRequest(newPassword));
+    }
+
+    public Response changePasswordForUserUpdatedDatabaseInvalidEndpoint(String sessionToken, String newPassword) {
+        return sendSimpleRequest(PATCH, INVALID_CHANGE_PASSWORD_2_0, getRP(HEADER, "Registration", sessionToken),
+                new PasswordChangeRequest(newPassword));
     }
 }
