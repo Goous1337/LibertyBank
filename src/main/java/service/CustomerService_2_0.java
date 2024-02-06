@@ -1,8 +1,8 @@
 package service;
 
 import api.core.RequestParam;
-import io.restassured.http.Method;
 import constant.CustomerServiceConstants;
+import io.restassured.http.Method;
 import io.restassured.response.Response;
 import pojo.customerService.UserQuestion;
 import pojo.customerService_2_0.*;
@@ -11,20 +11,27 @@ import java.util.List;
 import java.util.Map;
 
 import static api.core.ApiClient.sendSimpleRequest;
+import static api.core.RequestParam.getRP;
 import static api.core.RequestParamType.*;
+import static api.utils.GsonHelper.createBody;
 import static com.google.common.net.HttpHeaders.AUTHORIZATION;
 import static api.utils.GsonHelper.createBody;
 import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
 import static constant.ApiEndpoints.*;
 import static api.core.RequestParam.getRP;
+import static constant.CustomerServiceConstants.PARAMETER_CUSTOMER_ID;
+import static constant.CustomerServiceConstants.PARAMETER_NOTIFICATION_STATUS;
 import static api.core.RequestParamType.HEADER;
 import static api.core.RequestParamType.PARAMETER;
-import static constant.CustomerServiceConstants.*;
+import static constant.ApiEndpoints.*;
+
 import static constant.CustomerService_2_0_Constants.PARAMETER_INCORRECT_CUSTOMER_ID;
 import static io.netty.handler.codec.http.HttpHeaders.Values.APPLICATION_JSON;
 import static io.restassured.http.Method.GET;
 import static io.restassured.http.Method.PATCH;
 import static io.restassured.http.Method.POST;
+import static org.apache.commons.lang3.StringUtils.SPACE;
+import static io.restassured.http.Method.*;
 import static org.apache.commons.lang3.StringUtils.SPACE;
 
 public class CustomerService_2_0 {
@@ -185,4 +192,19 @@ public class CustomerService_2_0 {
                 String.format("Bearer %s", token)), email);
     }
 
+
+    public Response changePasswordForUserUpdatedDatabase(String sessionToken, String newPassword) {
+        return sendSimpleRequest(PATCH, CHANGE_PASSWORD_2_0, getRP(HEADER, "Registration", sessionToken),
+                new PasswordChangeRequest(newPassword));
+    }
+
+    public Response changePasswordForUserUpdatedDatabaseWithInvalidMethod(String method, String sessionToken, String newPassword) {
+        return sendSimpleRequest(Method.valueOf(method), CHANGE_PASSWORD_2_0, getRP(HEADER, "Registration", sessionToken),
+                new PasswordChangeRequest(newPassword));
+    }
+
+    public Response changePasswordForUserUpdatedDatabaseInvalidEndpoint(String sessionToken, String newPassword) {
+        return sendSimpleRequest(PATCH, INVALID_CHANGE_PASSWORD_2_0, getRP(HEADER, "Registration", sessionToken),
+                new PasswordChangeRequest(newPassword));
+    }
 }
