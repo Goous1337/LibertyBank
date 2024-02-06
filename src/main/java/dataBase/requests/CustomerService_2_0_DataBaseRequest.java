@@ -6,8 +6,7 @@ import org.apache.logging.log4j.Logger;
 import java.sql.SQLException;
 import java.util.List;
 
-import static constant.LibertyServiceName.CUSTOMER_SERVICE_2_0;
-import static constant.LibertyServiceName.CUSTOMER_SERVICE_DB_2_0;
+import static constant.LibertyServiceName.*;
 import static dataBase.DataBaseConnector.getDBConnection;
 
 public class CustomerService_2_0_DataBaseRequest {
@@ -90,13 +89,6 @@ public class CustomerService_2_0_DataBaseRequest {
         LOG.info(String.format("Значение  в колонке wrong_attempts обновлено на значение 0 по id %s", id));
     }
 
-    public static String receivingCustomerId() {
-        String sql = "SELECT customer_id FROM public.customer LIMIT 1";
-        String customerID = getDBConnection(CUSTOMER_SERVICE_2_0).queryForObject(sql, String.class);
-        LOG.info(String.format("получен customerId %s", customerID));
-        return customerID;
-    }
-
     public static String receivingCustomerIdWithNotificationStatusFalse() {
         String sql = "SELECT customer_id FROM public.customer WHERE push_notification = false LIMIT 1";
         String customerID = getDBConnection(CUSTOMER_SERVICE_2_0).queryForObject(sql, String.class);
@@ -131,7 +123,12 @@ public class CustomerService_2_0_DataBaseRequest {
                 "from user_profile up \n" +
                 "where customer_id = 'd54eb158-7499-4bda-bafb-d4bd965a1985'";
         String password = getDBConnection(CUSTOMER_SERVICE_2_0).queryForObject(sql, String.class);
+        LOG.info(String.format("Получен пароль пользователя  id: %s", customerId));
         return password;
     }
-
+    public static void updatePasswordInUserProfileTableIsNull(String idCustomer) {
+        String sql = "UPDATE user_profile SET password = NULL WHERE customer_id =?::uuid";
+        getDBConnection(CUSTOMER_SERVICE_2_0).update(sql, idCustomer);
+        LOG.info(String.format("Удален пароль пользователя  id: %s", idCustomer));
+    }
 }
