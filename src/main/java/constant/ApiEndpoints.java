@@ -65,17 +65,25 @@ public final class ApiEndpoints {
     public static final String INVALID_CUSTOMER_LOGIN = "customer/api/v1/loginn";
     public static final String CUSTOMER_CHANGE_PASSWORD = "customer/api/v1/security/password/changepassword";
     public static final String CUSTOMER_VERIFICATION_BY_CODE = "customer/api/v1/security/session/verification";
-    public static final String ABS_CLIENT_SERVICE_PERSONAL_DATE ="api/v1/client-service/clients/personal-date";
+    public static final String ABS_CLIENT_SERVICE_PERSONAL_DATE = "api/v1/client-service/clients/personal-date";
 
-    public static final String CLIENT_ACCOUNTS_LIST ="api/v1/info-service/atm";
-    public static final String INVALID_CLIENT_ACCOUNTS_LIST ="api/v1/info-service/atm/";
+    public static final String CLIENT_ACCOUNTS_LIST = "api/v1/info-service/atm";
+    public static final String INVALID_CLIENT_ACCOUNTS_LIST = "api/v1/info-service/atm/";
 
     public static final String RETRIEVING_USER_INFO = "customer/api/v1/auth/information";
     public static final String PUSH_NOTIFICATION_2_0 = "customer/api/v1/auth/user/settings/notifications/push";
     public static final String INVALID_PUSH_NOTIFICATION_2_0 = "customer/api/v1/^auth/user/settings/notifications/push";
     public static final String CUSTOMER_2_0_NOTIFICATION = "customer/api/v1/auth/user/settings/notifications";
     public static final String INCORRECT_CUSTOMER_2_0_NOTIFICATION = "customer/ai/v1/auth/user/settings/notifications";
+    public static final String CUSTOMER_2_0_RECOVERY = "customer/api/v1/security/password/recovery";
+    public static final String CUSTOMER_2_0_SECURITY_VERIFICATION = "customer/api/v1/security/session/verification";
+
     public static final String QUESTION_ANSWER_2_0 = "customer/api/v1/auth/user/settings/controls";
-    public static final String QUESTION_ANSWER_INVALID_URL_2_0 ="customer/api/v1/auth/user/settings/control";
+    public static final String QUESTION_ANSWER_INVALID_URL_2_0 = "customer/api/v1/auth/user/settings/control";
+
+    public static final String ACCOUNTS_LIST = "account-service/api/v1/accounts";
+    public static final String CHANGE_PASSWORD_2_0 = "customer/api/v1/security/password";
+    public static final String INVALID_CHANGE_PASSWORD_2_0 = "customer/api/v1/security/pas";
+    public static final String ACCOUNTS_LIST_BY_CUSTOMER_ID = "account-service/api/v1/accounts/customer/";
 
 }

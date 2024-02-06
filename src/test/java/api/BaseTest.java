@@ -3,6 +3,7 @@ package api;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.qameta.allure.TmsLinks;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInfo;
 
@@ -22,14 +23,13 @@ public class BaseTest {
     protected List<RequestParam> params;
     protected CustomerService customerService;
     protected UserAccountService userAccountService;
-
     protected InfoService infoService;
-
     protected DepositService depositService;
     protected CreditService creditService;
     protected AbsInfoService absInfoService;
     protected AbsClientService absClientService;
     protected CustomerService_2_0 customerService_2_0;
+    protected AccountService accountService;
 
     public BaseTest() {
         params = new ArrayList<>();
@@ -41,6 +41,7 @@ public class BaseTest {
         absInfoService = new AbsInfoService();
         absClientService = new AbsClientService();
         customerService_2_0 = new CustomerService_2_0();
+        accountService = new AccountService();
     }
 
     @BeforeEach
@@ -54,5 +55,4 @@ public class BaseTest {
         log.info("\n_____________________________________________________\n");
         log.info(String.format("Test-case link: %s\nTest description: %s\n", testLink, testDescription));
     }
-
 }

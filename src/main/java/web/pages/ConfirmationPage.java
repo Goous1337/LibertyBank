@@ -15,6 +15,9 @@ public class ConfirmationPage extends BasePage {
     @FindBy(xpath = "//*[contains(text(), 'Ваш счет успешно стал основным')]")
     private WebElement successSetMainAccountDialogBox;
 
+    @FindBy(xpath = "//*[contains(text(), 'Название счета успешно изменено')]")
+    private WebElement successRenameAccountNameDialogBox;
+
     @FindBy(xpath = "//button[contains(text(), 'Вернуться к счету')]")
     private WebElement returnToAccountButton;
 
@@ -43,6 +46,10 @@ public class ConfirmationPage extends BasePage {
 
     public boolean isSuccessSetMainAccountDialogBoxDisplayed() {
         return successSetMainAccountDialogBox.isDisplayed();
+    }
+
+    public boolean isSuccessRenameAccountNameDialogBoxDisplayed() {
+        return successRenameAccountNameDialogBox.isDisplayed();
     }
 
     public void clickReturnToAccountButton() {
