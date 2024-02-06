@@ -38,7 +38,7 @@ public class CRS_6_UserAuthorizationNewPasswordTest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2158")
     @Test
     public void checkUserAuthorizationWithMobileAndPassport() {
-        String mobilePhone = "79808901750";
+        String mobilePhone = "79198151165";
         int passportId = CustomerService_2_0_DataBaseRequest.getCustomerPassportIdByMobilePhone(mobilePhone);
         List<String> passportSeriesAndNumber = CustomerService_2_0_DataBaseRequest
                 .getCustomerPassportSeriesAndNumberByPassportId(passportId);
@@ -68,7 +68,7 @@ public class CRS_6_UserAuthorizationNewPasswordTest extends BaseTest {
     @CsvSource({"11111,TSRiNDU0OTM4ODYwMzk5YzZmYzVlOTFlMzQxMzExZDkzM2JlYTk4MDgyYzg0YzMyMjU4NWMxZmVmMTFmZGY0Yg==",
             "@$#$%&*(!@#,12345678"})
     public void checkUserAuthorizationWithInvalidData(String invalidLogin, String invalidPassword) {
-        String mobilePhone = "79808901750";
+        String mobilePhone = "79198151165";
         String jsonSchemaPath = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";
         int passportId = CustomerService_2_0_DataBaseRequest.getCustomerPassportIdByMobilePhone(mobilePhone);
         List<String> passportSeriesAndNumber = CustomerService_2_0_DataBaseRequest
@@ -107,7 +107,7 @@ public class CRS_6_UserAuthorizationNewPasswordTest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2160")
     @Test
     public void checkUserAuthorizationWithInvalidType() {
-        String mobilePhone = "79808901750";
+        String mobilePhone = "79198151165";
         String invalidType = "PHONE";
         String jsonSchemaPath = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";
         Response response = customerService_2_0.userAuthorizationByMobilePhone
@@ -126,7 +126,7 @@ public class CRS_6_UserAuthorizationNewPasswordTest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2161")
     @Test
     public void checkUserAuthorizationWithInvalidUrl() {
-        String mobilePhone = "79808901750";
+        String mobilePhone = "79198151165";
         String jsonSchema = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";
         int passportId = CustomerService_2_0_DataBaseRequest.getCustomerPassportIdByMobilePhone(mobilePhone);
         List<String> passportSeriesAndNumber = CustomerService_2_0_DataBaseRequest
@@ -153,7 +153,7 @@ public class CRS_6_UserAuthorizationNewPasswordTest extends BaseTest {
     @ParameterizedTest
     @CsvSource({"GET", "PUT", "PATCH", "DELETE"})
     public void checkUserAuthorizationWithInvalidMethod(String method) {
-        String mobilePhone = "79808901750";
+        String mobilePhone = "79198151165";
         String jsonSchemaPath = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";
         int passportId = CustomerService_2_0_DataBaseRequest.getCustomerPassportIdByMobilePhone(mobilePhone);
         List<String> passportSeriesAndNumber = CustomerService_2_0_DataBaseRequest
