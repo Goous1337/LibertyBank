@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ChangeUserAccountPasswordByPhone {
-    private String refreshToken;
     private String password;
     private String newPassword;
 }

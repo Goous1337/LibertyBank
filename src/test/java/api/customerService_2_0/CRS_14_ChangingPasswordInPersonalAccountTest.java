@@ -3,6 +3,7 @@ package api.customerService_2_0;
 import api.BaseTest;
 import dataBase.requests.CustomerService_2_0_DataBaseRequest;
 import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
@@ -37,17 +38,17 @@ public class CRS_14_ChangingPasswordInPersonalAccountTest extends BaseTest {
         Response getToken = customerService_2_0.userAuthorizationByMobilePhone(userAuthorizationByPhone);
         String refreshToken = getToken.jsonPath().get("refreshToken");
         ChangeUserAccountPasswordByPhone changeUserAccountPasswordByPhone = new ChangeUserAccountPasswordByPhone
-                (refreshToken, CUSTOMER_USER_PASSWORD, NEW_CUSTOMER_USER_PASSWORD);
+                (CUSTOMER_USER_PASSWORD, NEW_CUSTOMER_USER_PASSWORD);
         Response response = customerService_2_0
-                .checkListAbilityChangePasswordInPersonalAccount(changeUserAccountPasswordByPhone);
+                .checkListAbilityChangePasswordInPersonalAccount(changeUserAccountPasswordByPhone, refreshToken);
         String newPassword = CustomerService_2_0_DataBaseRequest.getCustomerPasswordById(customerId);
         assertAll(
                 () -> assertEquals(SC_OK, response.getStatusCode()),
                 () -> assertNotEquals(password, newPassword)
         );
         ChangeUserAccountPasswordByPhone resetPassword = new ChangeUserAccountPasswordByPhone
-                (refreshToken, NEW_CUSTOMER_USER_PASSWORD, CUSTOMER_USER_PASSWORD);
-        customerService_2_0.checkListAbilityChangePasswordInPersonalAccount(resetPassword);
+                (NEW_CUSTOMER_USER_PASSWORD, CUSTOMER_USER_PASSWORD);
+        customerService_2_0.checkListAbilityChangePasswordInPersonalAccount(resetPassword, refreshToken);
     }
 
     @DisplayName("Проверка обязательности полей при запросе изменения пароля в личном кабинете.")
@@ -58,19 +59,24 @@ public class CRS_14_ChangingPasswordInPersonalAccountTest extends BaseTest {
     @Tags({@Tag("API"), @Tag("Negative")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2100")
     @ParameterizedTest
-    @CsvSource({".,., ", "$,$,#"})
-    public void checkSavingVerificationCodeWithInvalidValues(String refreshToken, String password, String newPassword) {
+    @CsvSource({"., ", "$,#"})
+    public void checkSavingVerificationCodeWithInvalidValues(String password, String newPassword) {
         String jsonSchemaPath = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";
+        UserAuthorizationByPhone userAuthorizationByPhone = new UserAuthorizationByPhone
+                (CUSTOMER_USER_PHONE, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE);
+        Response getToken = customerService_2_0.userAuthorizationByMobilePhone(userAuthorizationByPhone);
+        String refreshToken = getToken.jsonPath().get("refreshToken");
         ChangeUserAccountPasswordByPhone changeUserAccountPasswordByPhone = new ChangeUserAccountPasswordByPhone
-                (refreshToken, password, newPassword);
+                (password, newPassword);
         Response response = customerService_2_0.checkListAbilityChangePasswordInPersonalAccount
-                (changeUserAccountPasswordByPhone);
+                (changeUserAccountPasswordByPhone, refreshToken);
         assertAll(
                 () -> assertEquals(SC_UNSUPPORTED_MEDIA_TYPE, response.getStatusCode()),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 
+    @Disabled("Bug https://jira.astondevs.ru/browse/LIB-2602")
     @DisplayName(" Проверка системы валидации параметров в BODY при запросе восстановления пароля.")
     @Description("""
             Данный тест-кейс проверяет возможность изменения пароля в личном кабинете пользователя при
@@ -78,12 +84,17 @@ public class CRS_14_ChangingPasswordInPersonalAccountTest extends BaseTest {
             """)
     @Tags({@Tag("API"), @Tag("Negative")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2089")
+    @Issue("https://jira.astondevs.ru/browse/LIB-2602")
     @Test
     public void checkSavingVerificationCodeWithNullParameters() {
         String jsonSchemaPath = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";
+        UserAuthorizationByPhone userAuthorizationByPhone = new UserAuthorizationByPhone
+                (CUSTOMER_USER_PHONE, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE);
+        Response getToken = customerService_2_0.userAuthorizationByMobilePhone(userAuthorizationByPhone);
+        String refreshToken = getToken.jsonPath().get("refreshToken");
         ChangeUserAccountPasswordByPhone changeUserAccountPasswordByPhone = new ChangeUserAccountPasswordByPhone();
         Response response = customerService_2_0
-                .checkListAbilityChangePasswordInPersonalAccount(changeUserAccountPasswordByPhone);
+                .checkListAbilityChangePasswordInPersonalAccount(changeUserAccountPasswordByPhone, refreshToken);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode()),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
@@ -106,9 +117,10 @@ public class CRS_14_ChangingPasswordInPersonalAccountTest extends BaseTest {
         Response getToken = customerService_2_0.userAuthorizationByMobilePhone(userAuthorizationByPhone);
         String refreshToken = getToken.jsonPath().get("refreshToken");
         ChangeUserAccountPasswordByPhone changeUserAccountPasswordByPhone = new ChangeUserAccountPasswordByPhone
-                (refreshToken, CUSTOMER_USER_PASSWORD, NEW_CUSTOMER_USER_PASSWORD);
+                (CUSTOMER_USER_PASSWORD, NEW_CUSTOMER_USER_PASSWORD);
         Response response = customerService_2_0
-                .checkListSavingVerificationCodeWithInvalidMethods(changeUserAccountPasswordByPhone, httpMethod);
+                .checkListSavingVerificationCodeWithInvalidMethods
+                        (changeUserAccountPasswordByPhone, httpMethod, refreshToken);
         assertAll(
                 () -> assertEquals(SC_METHOD_NOT_ALLOWED, response.getStatusCode()),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))

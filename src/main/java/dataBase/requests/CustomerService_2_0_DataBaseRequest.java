@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static constant.LibertyServiceName.*;
@@ -122,5 +123,34 @@ public class CustomerService_2_0_DataBaseRequest {
         String sql = "UPDATE user_profile SET password = NULL WHERE customer_id =?::uuid";
         getDBConnection(CUSTOMER_SERVICE_2_0).update(sql, idCustomer);
         LOG.info(String.format("Удален пароль пользователя  id: %s", idCustomer));
+    }
+
+    public static Integer getCustomerPassportIdByMobilePhone(String mobilePhone) {
+        String sql = "SELECT passport_id FROM customer WHERE mobile_phone=?";
+        Integer passportId = getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sql, Integer.class, mobilePhone);
+        return passportId;
+    }
+
+    public static List<String> getCustomerPassportSeriesAndNumberByPassportId(Integer passportId) {
+        List<String> identityDocNumber = new ArrayList<>();
+        String sqlSeries = "SELECT passport.series FROM passport WHERE id =?";
+        String sqlNumber = "SELECT passport.number FROM passport WHERE id =?";
+        String passportSeries = getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sqlSeries, String.class, passportId);
+        identityDocNumber.add(passportSeries);
+        String passportNumber = getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sqlNumber, String.class, passportId);
+        identityDocNumber.add(passportNumber);
+        return identityDocNumber;
+    }
+
+    public static String getBlockedUserMobilePhone() {
+        String sql = "SELECT mobile_phone FROM customer WHERE customer_status = '0' LIMIT 1";
+        String mobilePhone = getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sql, String.class);
+        return mobilePhone;
+    }
+
+    public static Integer getBlockedUserPassportId() {
+        String sql = "SELECT passport_id FROM customer WHERE customer_status = '0' LIMIT 1";
+        Integer passportId = getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sql, Integer.class);
+        return passportId;
     }
 }

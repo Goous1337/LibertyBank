@@ -1,8 +1,8 @@
 package service;
 
 import api.core.RequestParam;
-import constant.CustomerServiceConstants;
 import io.restassured.http.Method;
+import constant.CustomerServiceConstants;
 import io.restassured.response.Response;
 import pojo.customerService.UserQuestion;
 import pojo.customerService_2_0.*;
@@ -11,13 +11,13 @@ import java.util.List;
 import java.util.Map;
 
 import static api.core.ApiClient.sendSimpleRequest;
-import static api.core.RequestParam.getRP;
 import static api.core.RequestParamType.*;
-import static api.utils.GsonHelper.createBody;
 import static com.google.common.net.HttpHeaders.AUTHORIZATION;
+import static constant.CustomerServiceConstants.PARAMETER_CUSTOMER_ID;
+import static api.utils.GsonHelper.createBody;
 import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
 import static constant.ApiEndpoints.*;
-import static constant.CustomerServiceConstants.PARAMETER_CUSTOMER_ID;
+import static api.core.RequestParam.getRP;
 import static constant.CustomerServiceConstants.PARAMETER_NOTIFICATION_STATUS;
 import static api.core.RequestParamType.HEADER;
 import static api.core.RequestParamType.PARAMETER;
@@ -74,15 +74,23 @@ public class CustomerService_2_0 {
     public Response userAuthorizationByMobilePhone(UserAuthorizationByPhone userAuthorizationByPhone) {
         return sendSimpleRequest(POST, CUSTOMER_LOGIN, userAuthorizationByPhone);
     }
+    public Response checkListUserAuthorizationWithInvalidUrl(UserAuthorizationByPhone userAuthorizationByPhone){
+        return sendSimpleRequest(POST,INVALID_CUSTOMER_LOGIN,userAuthorizationByPhone);
+    }
+    public Response checkListUserAuthorizationWithInvalidMethod(UserAuthorizationByPhone userAuthorizationByPhone,String method){
+        return sendSimpleRequest(Method.valueOf(method),CUSTOMER_LOGIN,userAuthorizationByPhone);
+    }
 
     public Response checkListAbilityChangePasswordInPersonalAccount(
-            ChangeUserAccountPasswordByPhone changeUserAccountPasswordByPhone) {
-        return sendSimpleRequest(PATCH, CUSTOMER_CHANGE_PASSWORD, changeUserAccountPasswordByPhone);
+            ChangeUserAccountPasswordByPhone changeUserAccountPasswordByPhone, String refreshToken) {
+        return sendSimpleRequest(PATCH, CUSTOMER_CHANGE_PASSWORD,
+                getRP(HEADER, AUTHORIZATION, String.format("Bearer %s", refreshToken)), changeUserAccountPasswordByPhone);
     }
 
     public Response checkListSavingVerificationCodeWithInvalidMethods
-            (ChangeUserAccountPasswordByPhone changeUserAccountPasswordByPhone, String httpMethod) {
-        return sendSimpleRequest(Method.valueOf(httpMethod), CUSTOMER_CHANGE_PASSWORD, changeUserAccountPasswordByPhone);
+            (ChangeUserAccountPasswordByPhone changeUserAccountPasswordByPhone, String httpMethod, String refreshToken) {
+        return sendSimpleRequest(Method.valueOf(httpMethod), CUSTOMER_CHANGE_PASSWORD,
+                getRP(HEADER, AUTHORIZATION, String.format("Bearer %s", refreshToken)), changeUserAccountPasswordByPhone);
     }
 
     public Response checkListUserVerificationWithValidData(UserVerificationWithCode userVerificationWithCode) {
