@@ -15,23 +15,18 @@ import static api.core.RequestParam.getRP;
 import static api.core.RequestParamType.*;
 import static api.utils.GsonHelper.createBody;
 import static com.google.common.net.HttpHeaders.AUTHORIZATION;
-import static api.utils.GsonHelper.createBody;
 import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
 import static constant.ApiEndpoints.*;
-import static api.core.RequestParam.getRP;
 import static constant.CustomerServiceConstants.PARAMETER_CUSTOMER_ID;
 import static constant.CustomerServiceConstants.PARAMETER_NOTIFICATION_STATUS;
 import static api.core.RequestParamType.HEADER;
 import static api.core.RequestParamType.PARAMETER;
-import static constant.ApiEndpoints.*;
 
 import static constant.CustomerService_2_0_Constants.PARAMETER_INCORRECT_CUSTOMER_ID;
 import static io.netty.handler.codec.http.HttpHeaders.Values.APPLICATION_JSON;
 import static io.restassured.http.Method.GET;
 import static io.restassured.http.Method.PATCH;
 import static io.restassured.http.Method.POST;
-import static org.apache.commons.lang3.StringUtils.SPACE;
-import static io.restassured.http.Method.*;
 import static org.apache.commons.lang3.StringUtils.SPACE;
 
 public class CustomerService_2_0 {
