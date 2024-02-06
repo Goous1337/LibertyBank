@@ -8,10 +8,7 @@ import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.hc.core5.http.HttpStatus;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Tags;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import pojo.customerService_2_0.CustomerService_2_0_Mobile;
@@ -21,7 +18,7 @@ import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CUSTOMER_SERVICE_2_0;
-
+@Disabled("Жду создания тестовых пользователей")
 @DisplayName("CRS-5 Установление нового пароля")
 public class CRS_5_SettingNewPasswordTest extends BaseTest {
 
