@@ -1,8 +1,8 @@
 package service;
 
 import api.core.RequestParam;
-import constant.CustomerServiceConstants;
 import io.restassured.http.Method;
+import constant.CustomerServiceConstants;
 import io.restassured.response.Response;
 import pojo.customerService.UserQuestion;
 import pojo.customerService_2_0.*;
@@ -10,15 +10,14 @@ import pojo.customerService_2_0.*;
 import java.util.List;
 import java.util.Map;
 
-
 import static api.core.ApiClient.sendSimpleRequest;
-import static api.core.RequestParam.getRP;
 import static api.core.RequestParamType.*;
-import static api.utils.GsonHelper.createBody;
 import static com.google.common.net.HttpHeaders.AUTHORIZATION;
+import static constant.CustomerServiceConstants.PARAMETER_CUSTOMER_ID;
+import static api.utils.GsonHelper.createBody;
 import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
 import static constant.ApiEndpoints.*;
-import static constant.CustomerServiceConstants.PARAMETER_CUSTOMER_ID;
+import static api.core.RequestParam.getRP;
 import static constant.CustomerServiceConstants.PARAMETER_NOTIFICATION_STATUS;
 import static api.core.RequestParamType.HEADER;
 import static api.core.RequestParamType.PARAMETER;
@@ -27,7 +26,6 @@ import static constant.CustomerService_2_0_Constants.PARAMETER_INCORRECT_CUSTOME
 import static io.netty.handler.codec.http.HttpHeaders.Values.APPLICATION_JSON;
 import static io.restassured.http.Method.*;
 import static org.apache.commons.lang3.StringUtils.SPACE;
-import static io.restassured.http.Method.*;
 
 public class CustomerService_2_0 {
     public Response checkListSavingVerificationCode(CustomerService_2_0_Mobile customerService_2_0_mobile0Mobile) {
@@ -56,23 +54,21 @@ public class CustomerService_2_0 {
         return sendSimpleRequest(PATCH, QUESTION_ANSWER_INVALID_URL_2_0, params, new UserQuestion(question, answer));
     }
 
-    public Response checkGetNotificationInPersonalAccount(String customerId) {
-        return sendSimpleRequest(GET, CUSTOMER_2_0_NOTIFICATION, getRP(PARAMETER, PARAMETER_CUSTOMER_ID, customerId));
+    public Response checkGetNotificationInPersonalAccount(String customerId, String token) {
+        List<RequestParam> params = List.of(
+                getRP(HEADER, AUTHORIZATION, String.format("Bearer %s", token)));
+        return sendSimpleRequest(GET, CUSTOMER_2_0_NOTIFICATION, params);
     }
 
-    public Response checkGetPersonalInfoClientsWithIncorrectCustomerId() {
-        return sendSimpleRequest(GET, CUSTOMER_2_0_NOTIFICATION,
-                getRP(PARAMETER, PARAMETER_CUSTOMER_ID, PARAMETER_INCORRECT_CUSTOMER_ID));
+    public Response checkGetPersonalInfoClientsWithIncorrectRequest(String incorrectRequest, String token) {
+        List<RequestParam> params = List.of(getRP(HEADER, AUTHORIZATION, String.format("Bearer %s", token)));
+        return sendSimpleRequest(Method.valueOf(incorrectRequest), CUSTOMER_2_0_NOTIFICATION, params);
     }
 
-    public Response checkGetPersonalInfoClientsWithIncorrectRequest(String incorrectRequest, String customerId) {
-        return sendSimpleRequest(Method.valueOf(incorrectRequest), CUSTOMER_2_0_NOTIFICATION,
-                getRP(PARAMETER, PARAMETER_CUSTOMER_ID, customerId));
-    }
-
-    public Response checkGetPersonalInfoClientsWithIncorrectURI() {
-        return sendSimpleRequest(GET, INCORRECT_CUSTOMER_2_0_NOTIFICATION,
-                getRP(PARAMETER, PARAMETER_CUSTOMER_ID, PARAMETER_INCORRECT_CUSTOMER_ID));
+    public Response checkGetPersonalInfoClientsWithIncorrectURI(String token) {
+        List<RequestParam> params = List.of(
+                getRP(HEADER, AUTHORIZATION, String.format("Bearer %s", token)));
+        return sendSimpleRequest(GET, INCORRECT_CUSTOMER_2_0_NOTIFICATION, params);
     }
 
     public Response userAuthorizationByMobilePhone(UserAuthorizationByPhone userAuthorizationByPhone) {
