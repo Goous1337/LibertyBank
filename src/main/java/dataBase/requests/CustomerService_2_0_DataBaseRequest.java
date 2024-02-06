@@ -141,4 +141,10 @@ public class CustomerService_2_0_DataBaseRequest {
         String mobilePhone = getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sql, String.class);
         return mobilePhone;
     }
+
+    public static Integer getBlockedUserPassportId() {
+        String sql = "SELECT passport_id FROM customer WHERE customer_status = '0' LIMIT 1";
+        Integer passportId = getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sql, Integer.class);
+        return passportId;
+    }
 }

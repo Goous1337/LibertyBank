@@ -128,11 +128,19 @@ public class CRS_6_UserAuthorizationNewPasswordTest extends BaseTest {
     public void checkUserAuthorizationWithInvalidUrl() {
         String mobilePhone = "79808901750";
         String jsonSchema = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";
-        Response response = customerService_2_0.checkListUserAuthorizationWithInvalidUrl
+        int passportId = CustomerService_2_0_DataBaseRequest.getCustomerPassportIdByMobilePhone(mobilePhone);
+        List<String> passportSeriesAndNumber = CustomerService_2_0_DataBaseRequest
+                .getCustomerPassportSeriesAndNumberByPassportId(passportId);
+        String identityDocNumber = passportSeriesAndNumber.stream().collect(Collectors.joining());
+        Response responsePhone = customerService_2_0.checkListUserAuthorizationWithInvalidUrl
                 (new UserAuthorizationByPhone(mobilePhone, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE));
+        Response responseDocNumber = customerService_2_0.checkListUserAuthorizationWithInvalidUrl
+                (new UserAuthorizationByPhone(identityDocNumber, CUSTOMER_USER_PASSWORD, CUSTOMER_IDENTITY_DOC_NUMBER_TYPE));
         assertAll(
-                () -> assertEquals(SC_NOT_FOUND, response.getStatusCode()),
-                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchema))
+                () -> assertEquals(SC_NOT_FOUND, responsePhone.getStatusCode()),
+                () -> responsePhone.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchema)),
+                () -> assertEquals(SC_NOT_FOUND, responseDocNumber.getStatusCode()),
+                () -> responseDocNumber.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchema))
         );
     }
 
@@ -147,11 +155,19 @@ public class CRS_6_UserAuthorizationNewPasswordTest extends BaseTest {
     public void checkUserAuthorizationWithInvalidMethod(String method) {
         String mobilePhone = "79808901750";
         String jsonSchemaPath = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";
-        Response response = customerService_2_0.checkListUserAuthorizationWithInvalidMethod
+        int passportId = CustomerService_2_0_DataBaseRequest.getCustomerPassportIdByMobilePhone(mobilePhone);
+        List<String> passportSeriesAndNumber = CustomerService_2_0_DataBaseRequest
+                .getCustomerPassportSeriesAndNumberByPassportId(passportId);
+        String identityDocNumber = passportSeriesAndNumber.stream().collect(Collectors.joining());
+        Response responsePhone = customerService_2_0.checkListUserAuthorizationWithInvalidMethod
                 (new UserAuthorizationByPhone(mobilePhone, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE), method);
+        Response responseDocNumber = customerService_2_0.checkListUserAuthorizationWithInvalidMethod
+                (new UserAuthorizationByPhone(identityDocNumber, CUSTOMER_USER_PASSWORD, CUSTOMER_IDENTITY_DOC_NUMBER_TYPE), method);
         assertAll(
-                () -> assertEquals(SC_METHOD_NOT_ALLOWED, response.getStatusCode()),
-                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+                () -> assertEquals(SC_METHOD_NOT_ALLOWED, responsePhone.getStatusCode()),
+                () -> responsePhone.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath)),
+                () -> assertEquals(SC_METHOD_NOT_ALLOWED, responseDocNumber.getStatusCode()),
+                () -> responseDocNumber.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 
@@ -165,11 +181,19 @@ public class CRS_6_UserAuthorizationNewPasswordTest extends BaseTest {
     public void checkBlockedUserAuthorization() {
         String blockedUserMobilePhone = CustomerService_2_0_DataBaseRequest.getBlockedUserMobilePhone();
         String jsonSchemaPath = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";
-        Response response = customerService_2_0.userAuthorizationByMobilePhone(new UserAuthorizationByPhone
+        int passportId = CustomerService_2_0_DataBaseRequest.getBlockedUserPassportId();
+        List<String> passportSeriesAndNumber = CustomerService_2_0_DataBaseRequest
+                .getCustomerPassportSeriesAndNumberByPassportId(passportId);
+        String identityDocNumber = passportSeriesAndNumber.stream().collect(Collectors.joining());
+        Response responsePhone = customerService_2_0.userAuthorizationByMobilePhone(new UserAuthorizationByPhone
                 (blockedUserMobilePhone, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE));
+        Response responseDocNumber = customerService_2_0.userAuthorizationByMobilePhone
+                (new UserAuthorizationByPhone(identityDocNumber, CUSTOMER_USER_PASSWORD, CUSTOMER_IDENTITY_DOC_NUMBER_TYPE));
         assertAll(
-                () -> assertEquals(SC_FORBIDDEN, response.getStatusCode()),
-                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+                () -> assertEquals(SC_FORBIDDEN, responsePhone.getStatusCode()),
+                () -> responsePhone.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath)),
+                () -> assertEquals(SC_FORBIDDEN, responseDocNumber.getStatusCode()),
+                () -> responseDocNumber.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 }
