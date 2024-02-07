@@ -4,6 +4,7 @@ import io.restassured.response.Response;
 import pojo.accountService.AccountData;
 import pojo.accountService.ChangeAccountNameRequest;
 import pojo.accountService.ChangeAccountStatusRequest;
+import pojo.accountService.ChangeMainAccountRequest;
 
 import static api.core.ApiClient.sendRequestWithoutParams;
 import static api.core.ApiClient.sendSimpleRequest;
@@ -64,5 +65,10 @@ public class AccountService {
 
     public Response getAccountInfoData(String accountId) {
         return sendRequestWithoutParams(GET, ACCOUNTS_LIST + "/" + accountId);
+    }
+
+    public Response setMainAccountStatus(String accountId, Boolean isMain) {
+        return sendSimpleRequest(PATCH, ACCOUNTS_LIST + "/" + accountId,
+                new ChangeMainAccountRequest(isMain));
     }
 }
