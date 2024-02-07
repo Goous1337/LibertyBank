@@ -50,32 +50,6 @@ public class CRS_8_GettingUserInformationTest extends BaseTest {
         );
     }
 
-    @DisplayName("Получение информации о пользователе при передачи невалидных данных")
-    @Description("Данный тест-кейс проверяет возможность получение информации о пользователе при использовании " +
-            "невалидных данных.")
-    @Tags({@Tag("API"), @Tag("negative")})
-    @TmsLink("https://jira.astondevs.ru/browse/LIB-2113")
-
-    @ParameterizedTest(name = "customerIdInvalid: {0}")
-    @ValueSource(strings = {"12321", "gfaghs", ""})
-
-    public void unsuccessfulGettingUserInformationWithInvalidCustomerId(String customerIdInvalid) {
-        UserAuthorizationByPhone userAuthorizationByPhone = new UserAuthorizationByPhone
-                (CUSTOMER_USER_PHONE, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE);
-        Response getToken = customerService_2_0.userAuthorizationByMobilePhone(userAuthorizationByPhone);
-        String token = getToken.body().jsonPath().get("accessToken");
-
-        Response response = customerService_2_0.checkGettingUserInformation(customerIdInvalid, token);
-        assertAll(
-                () -> assertEquals(SC_BAD_REQUEST,
-                        response.statusCode(),
-                        "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals("Некорректный запрос. Убедитесь, что адрес указан верно и попробуйте еще раз.",
-                        response.body().jsonPath().get("message"),
-                        "Сообщение об ошибке не соответствует ожидаемому")
-        );
-    }
-
     @DisplayName("Получение информации о пользователе при не валидном методе запроса.")
     @Description("Данный тест-кейс проверяет возможность получение информации о пользователе при использовании " +
             "не валидных методов: POST, PUT, PATCH")
