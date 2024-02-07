@@ -56,23 +56,22 @@ public class CustomerService_2_0 {
         return sendSimpleRequest(PATCH, QUESTION_ANSWER_INVALID_URL_2_0, params, new UserQuestion(question, answer));
     }
 
-    public Response checkGetNotificationInPersonalAccount(String customerId) {
-        return sendSimpleRequest(GET, CUSTOMER_2_0_NOTIFICATION, getRP(PARAMETER, PARAMETER_CUSTOMER_ID, customerId));
+    public Response checkGetNotificationInPersonalAccount(String customerId, String token) {
+        List<RequestParam> params = List.of(
+                getRP(HEADER, AUTHORIZATION, String.format("Bearer %s", token)));
+        return sendSimpleRequest(GET, CUSTOMER_2_0_NOTIFICATION, params);
     }
 
-    public Response checkGetPersonalInfoClientsWithIncorrectCustomerId() {
-        return sendSimpleRequest(GET, CUSTOMER_2_0_NOTIFICATION,
-                getRP(PARAMETER, PARAMETER_CUSTOMER_ID, PARAMETER_INCORRECT_CUSTOMER_ID));
+
+    public Response checkGetPersonalInfoClientsWithIncorrectRequest(String incorrectRequest, String token) {
+        List<RequestParam> params = List.of(getRP(HEADER, AUTHORIZATION, String.format("Bearer %s", token)));
+        return sendSimpleRequest(Method.valueOf(incorrectRequest), CUSTOMER_2_0_NOTIFICATION, params);
     }
 
-    public Response checkGetPersonalInfoClientsWithIncorrectRequest(String incorrectRequest, String customerId) {
-        return sendSimpleRequest(Method.valueOf(incorrectRequest), CUSTOMER_2_0_NOTIFICATION,
-                getRP(PARAMETER, PARAMETER_CUSTOMER_ID, customerId));
-    }
-
-    public Response checkGetPersonalInfoClientsWithIncorrectURI() {
-        return sendSimpleRequest(GET, INCORRECT_CUSTOMER_2_0_NOTIFICATION,
-                getRP(PARAMETER, PARAMETER_CUSTOMER_ID, PARAMETER_INCORRECT_CUSTOMER_ID));
+    public Response checkGetPersonalInfoClientsWithIncorrectURI(String token) {
+        List<RequestParam> params = List.of(
+                getRP(HEADER, AUTHORIZATION, String.format("Bearer %s", token)));
+        return sendSimpleRequest(GET, INCORRECT_CUSTOMER_2_0_NOTIFICATION, params);
     }
 
     public Response userAuthorizationByMobilePhone(UserAuthorizationByPhone userAuthorizationByPhone) {
