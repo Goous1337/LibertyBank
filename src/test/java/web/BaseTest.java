@@ -2,15 +2,19 @@ package web;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import web.drivers.DriverManager;
 import web.steps.*;
 
+import static property.UserPropertiesReader.USER_PASSWORD;
+import static property.UserPropertiesReader.USER_PHONE;
 import static web.constans.UrlConfig.BASE_URL;
+import static web.constans.UrlConfig.LOGIN_URL;
 
 public class BaseTest {
 
-    protected static final WebDriver driver = DriverManager.getDriver();
+    protected static WebDriver driver = DriverManager.getDriver();
 
     protected AccountSteps accountSteps = new AccountSteps();
 
@@ -22,17 +26,21 @@ public class BaseTest {
 
     protected RenameAccountSteps renameAccountSteps = new RenameAccountSteps();
 
-    @BeforeAll
-    public static void setUp() {
-        driver.get(BASE_URL);
-    }
+    protected static LoginSteps loginSteps = new LoginSteps();
 
     @AfterAll
     public static void tearDown() {
         driver.quit();
     }
 
-    protected void open(String pageUrl) {
+    protected static void open(String pageUrl) {
         driver.get(BASE_URL + pageUrl);
+    }
+
+    protected static void authorization() {
+        open(LOGIN_URL);
+        loginSteps.enterPhone(USER_PHONE);
+        loginSteps.enterPassword(USER_PASSWORD);
+        loginSteps.tapSubmitButton();
     }
 }
