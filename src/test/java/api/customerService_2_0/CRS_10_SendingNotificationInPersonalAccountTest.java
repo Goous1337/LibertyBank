@@ -41,7 +41,7 @@ public class CRS_10_SendingNotificationInPersonalAccountTest extends BaseTest {
                 (CUSTOMER_USER_PHONE, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE);
         Response getToken = customerService_2_0.userAuthorizationByMobilePhone(userAuthorizationByPhone);
         String token = getToken.body().jsonPath().get("accessToken");
-        Response response = customerService_2_0.checkGetNotificationInPersonalAccount(customerId, token);
+        Response response = customerService_2_0.checkGetNotificationInPersonalAccount(token);
         assertAll(
                 () -> assertEquals(HttpStatus.SC_OK,
                         response.statusCode(),
