@@ -22,6 +22,7 @@ public class ChangingUserAccountNameTest extends BaseTest {
 
     @BeforeEach
     public void setUpTest() {
+        authorization();
         open(ACCOUNTS_URL);
     }
 

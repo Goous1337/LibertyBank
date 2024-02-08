@@ -20,6 +20,7 @@ public class ViewingListOfActiveAccountsTest extends BaseTest {
 
     @BeforeEach
     public void setUpTest() {
+        authorization();
         open(ACCOUNTS_URL);
     }
 
