@@ -16,4 +16,6 @@ public class CustomerService_2_0_Constants {
     public static final String NEW_CUSTOMER_PASSWORD_RECOVERY = "MjMwNDUzMDY0MjNiYTQyNGU5NTlkOWM4MjY1MDkxZWYzNTJjNmQ5YTMwMzFkN2NhZGRmYzMzMzBkNzNmNDVmZA==";
     public static final String NEW_CUSTOMER_PASSWORD_RECOVERY_UPDATE = "NDViMzE2MTE4MzAyNWYxMjBkYzQ2ODExOWNmYTg5NTkzZjAwZGNjZjY0OGMyMmVlOTExNWRiYmFmMzBkZGNjMg==";
     public static final String CUSTOMER_IDENTITY_DOC_NUMBER_TYPE = "IDENTITY_DOC_NUMBER";
+
+    public static final String BEARER_TOKEN = "Bearer ";
 }

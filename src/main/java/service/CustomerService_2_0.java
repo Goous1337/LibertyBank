@@ -22,7 +22,7 @@ import static constant.CustomerServiceConstants.PARAMETER_NOTIFICATION_STATUS;
 import static api.core.RequestParamType.HEADER;
 import static api.core.RequestParamType.PARAMETER;
 
-import static constant.CustomerService_2_0_Constants.PARAMETER_INCORRECT_CUSTOMER_ID;
+import static constant.CustomerService_2_0_Constants.BEARER_TOKEN;
 import static io.netty.handler.codec.http.HttpHeaders.Values.APPLICATION_JSON;
 import static io.restassured.http.Method.GET;
 import static io.restassured.http.Method.PATCH;
@@ -56,23 +56,20 @@ public class CustomerService_2_0 {
         return sendSimpleRequest(PATCH, QUESTION_ANSWER_INVALID_URL_2_0, params, new UserQuestion(question, answer));
     }
 
-    public Response checkGetNotificationInPersonalAccount(String customerId) {
-        return sendSimpleRequest(GET, CUSTOMER_2_0_NOTIFICATION, getRP(PARAMETER, PARAMETER_CUSTOMER_ID, customerId));
-    }
-
-    public Response checkGetPersonalInfoClientsWithIncorrectCustomerId() {
+    public Response checkGetNotificationInPersonalAccount(String token) {
         return sendSimpleRequest(GET, CUSTOMER_2_0_NOTIFICATION,
-                getRP(PARAMETER, PARAMETER_CUSTOMER_ID, PARAMETER_INCORRECT_CUSTOMER_ID));
+                getRP(HEADER, AUTHORIZATION, BEARER_TOKEN + token));
     }
 
-    public Response checkGetPersonalInfoClientsWithIncorrectRequest(String incorrectRequest, String customerId) {
+
+    public Response checkGetPersonalInfoClientsWithIncorrectRequest(String incorrectRequest, String token) {
         return sendSimpleRequest(Method.valueOf(incorrectRequest), CUSTOMER_2_0_NOTIFICATION,
-                getRP(PARAMETER, PARAMETER_CUSTOMER_ID, customerId));
+                getRP(HEADER, AUTHORIZATION, BEARER_TOKEN + token));
     }
 
-    public Response checkGetPersonalInfoClientsWithIncorrectURI() {
+    public Response checkGetPersonalInfoClientsWithIncorrectURI(String token) {
         return sendSimpleRequest(GET, INCORRECT_CUSTOMER_2_0_NOTIFICATION,
-                getRP(PARAMETER, PARAMETER_CUSTOMER_ID, PARAMETER_INCORRECT_CUSTOMER_ID));
+                getRP(HEADER, AUTHORIZATION, BEARER_TOKEN + token));
     }
 
     public Response userAuthorizationByMobilePhone(UserAuthorizationByPhone userAuthorizationByPhone) {
@@ -88,13 +85,13 @@ public class CustomerService_2_0 {
     public Response checkListAbilityChangePasswordInPersonalAccount(
             ChangeUserAccountPasswordByPhone changeUserAccountPasswordByPhone, String refreshToken) {
         return sendSimpleRequest(PATCH, CUSTOMER_CHANGE_PASSWORD,
-                getRP(HEADER, AUTHORIZATION, String.format("Bearer %s", refreshToken)), changeUserAccountPasswordByPhone);
+                getRP(HEADER, AUTHORIZATION, BEARER_TOKEN + refreshToken), changeUserAccountPasswordByPhone);
     }
 
     public Response checkListSavingVerificationCodeWithInvalidMethods
             (ChangeUserAccountPasswordByPhone changeUserAccountPasswordByPhone, String httpMethod, String refreshToken) {
         return sendSimpleRequest(Method.valueOf(httpMethod), CUSTOMER_CHANGE_PASSWORD,
-                getRP(HEADER, AUTHORIZATION, String.format("Bearer %s", refreshToken)), changeUserAccountPasswordByPhone);
+                getRP(HEADER, AUTHORIZATION, BEARER_TOKEN + refreshToken), changeUserAccountPasswordByPhone);
     }
 
     public Response checkListUserVerificationWithValidData(UserVerificationWithCode userVerificationWithCode) {
@@ -118,14 +115,14 @@ public class CustomerService_2_0 {
 
     public Response checkGettingUserInformation(String customerId, String token) {
         List<RequestParam> params = List.of(getRP(PARAMETER, PARAMETER_CUSTOMER_ID, customerId)
-                , getRP(HEADER, AUTHORIZATION, String.format("Bearer %s", token)));
+                , getRP(HEADER, AUTHORIZATION, BEARER_TOKEN + token));
         return sendSimpleRequest(GET, RETRIEVING_USER_INFO, params);
     }
 
 
     public Response checkGettingUserInformationWithInvalidMethod(String invalidMethod, String customerId, String token) {
         List<RequestParam> params = List.of(getRP(PARAMETER, PARAMETER_CUSTOMER_ID, customerId)
-                , getRP(HEADER, AUTHORIZATION, String.format("Bearer %s", token)));
+                , getRP(HEADER, AUTHORIZATION, BEARER_TOKEN + token));
         return sendSimpleRequest(Method.valueOf(invalidMethod), RETRIEVING_USER_INFO, params);
     }
 
@@ -144,8 +141,8 @@ public class CustomerService_2_0 {
     }
 
     public Response checkPushNotificationWithHttpMethod(String method, String customerId, NotificationStatus notificationStatus) {
-        List<RequestParam> params = List.of(getRP(QUERY_PARAMETER, CustomerServiceConstants.PARAMETER_CUSTOMER_ID, customerId));
-        return sendSimpleRequest(Method.valueOf(method), PUSH_NOTIFICATION_2_0, params, notificationStatus);
+        return sendSimpleRequest(Method.valueOf(method), PUSH_NOTIFICATION_2_0,
+                getRP(QUERY_PARAMETER, CustomerServiceConstants.PARAMETER_CUSTOMER_ID, customerId), notificationStatus);
     }
 
     public Response checkPushNotificationWithInvalidURL(String customerId, Boolean notificationStatus) {
@@ -156,8 +153,8 @@ public class CustomerService_2_0 {
     }
 
     public Response checkPushNotificationWithNull(NotificationStatus notificationStatus, String customerId) {
-        List<RequestParam> params = List.of(getRP(PARAMETER, CustomerServiceConstants.PARAMETER_CUSTOMER_ID, customerId));
-        return sendSimpleRequest(PATCH, PUSH_NOTIFICATION_2_0, params, notificationStatus);
+        return sendSimpleRequest(PATCH, PUSH_NOTIFICATION_2_0,
+                getRP(PARAMETER, CustomerServiceConstants.PARAMETER_CUSTOMER_ID, customerId), notificationStatus);
     }
 
     public Response getSessionToken(GetSessionToken getSessionToken) {
@@ -176,23 +173,23 @@ public class CustomerService_2_0 {
 
     public Response updateEmailForClient(String token, UpdatedEmail email) {
         return sendSimpleRequest(PATCH, CUSTOMER_2_0_EMAIL,
-                getRP(HEADER, AUTHORIZATION, String.format("Bearer %s", token)), email);
+                getRP(HEADER, AUTHORIZATION, BEARER_TOKEN + token), email);
     }
 
     public Response updateEmailForClientWithoutEmail(String token) {
         return sendSimpleRequest(PATCH, CUSTOMER_2_0_EMAIL,
-                getRP(HEADER, AUTHORIZATION, String.format("Bearer %s", token)));
+                getRP(HEADER, AUTHORIZATION, BEARER_TOKEN + token));
     }
 
     public Response updateEmailForClientWithInvalidURL(String token, UpdatedEmail email, String url) {
         return sendSimpleRequest(PATCH, url,
-                getRP(HEADER, AUTHORIZATION, String.format("Bearer %s", token)), email);
+                getRP(HEADER, AUTHORIZATION, BEARER_TOKEN + token), email);
     }
 
     public Response updateEmailForClientWithHttpMethod(String token, String method, UpdatedEmail email) {
         System.out.println(Method.valueOf(method));
         return sendSimpleRequest(Method.valueOf(method), CUSTOMER_2_0_EMAIL, getRP(HEADER, AUTHORIZATION,
-                String.format("Bearer %s", token)), email);
+                BEARER_TOKEN + token), email);
     }
 
 
