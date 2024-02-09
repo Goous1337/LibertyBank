@@ -10,6 +10,7 @@ import static web.constans.AccountServiceConstants.NOT_DISPLAYED_MESSAGE;
 import static web.constans.AccountServiceConstants.NOT_EQUALS_MESSAGE;
 import static web.constans.UrlConfig.ACCOUNTS_URL;
 
+@Tag("Web")
 @Epic("4 - Счета")
 @Feature("US-4.4.3 Изменение пользовательского названия счета")
 @DisplayName("US-4.4.3 Изменение пользовательского названия счета")
