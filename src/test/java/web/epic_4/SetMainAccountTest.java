@@ -10,6 +10,7 @@ import static web.constans.AccountServiceConstants.*;
 
 import static web.constans.UrlConfig.ACCOUNTS_URL;
 
+@Tag("Web")
 @Epic("Epic-4")
 @Feature("US-4.4.4 Сделать счет основным")
 @DisplayName("US-4.4.4 Сделать счет основным")
