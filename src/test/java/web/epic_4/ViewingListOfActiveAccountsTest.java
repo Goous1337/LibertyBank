@@ -11,7 +11,7 @@ import static web.constans.AccountServiceConstants.*;
 import static web.constans.UrlConfig.ACCOUNTS_URL;
 
 @Tag("Web")
-@Epic("Epic-4")
+@Epic("4 - Счета")
 @Feature("US-4.2 Просмотр списка активных счетов")
 @DisplayName("US-4.2 Просмотр списка активных счетов")
 public class ViewingListOfActiveAccountsTest extends BaseTest {

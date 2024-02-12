@@ -58,5 +58,4 @@ public class ConfirmationSteps {
     public void clickNavigateToAccountsPageButton() {
         confirmationPage.clickNavigateToAccountsPageButton();
     }
-
 }
