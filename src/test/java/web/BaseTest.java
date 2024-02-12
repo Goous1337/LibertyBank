@@ -26,7 +26,7 @@ public class BaseTest {
 
     protected void open(String pageUrl) {
         DriverManager.getDriver()
-                     .get(BASE_URL + pageUrl);
+                .get(BASE_URL + pageUrl);
     }
 
     protected void authorization() {
