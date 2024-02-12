@@ -14,13 +14,9 @@ public class Waiters {
 
     public static final long TIME_TO_WAIT = 15L;
 
-    private final static WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(TIME_TO_WAIT));
-
-    private Waiters() {
-    }
-
     public static void waitElement(WebElement element) {
-        wait.ignoring(NoSuchElementException.class)
+        new WebDriverWait(getDriver(), Duration.ofSeconds(TIME_TO_WAIT))
+                .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
                 .until(ExpectedConditions.visibilityOf(element));
     }

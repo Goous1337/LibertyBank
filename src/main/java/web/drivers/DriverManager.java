@@ -51,5 +51,12 @@ public class DriverManager {
         SafariOptions options = new SafariOptions();
         return new SafariDriver(options);
     }
+
+    public static void resetDriver() {
+        if (driver != null) {
+            driver.quit();
+            driver = null;
+        }
+    }
 }
 

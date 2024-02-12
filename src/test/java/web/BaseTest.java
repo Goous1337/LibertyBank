@@ -1,7 +1,7 @@
 package web;
 
 import org.junit.jupiter.api.AfterAll;
-import org.openqa.selenium.WebDriver;
+import org.junit.jupiter.api.TestInstance;
 import web.drivers.DriverManager;
 import web.steps.*;
 
@@ -10,35 +10,44 @@ import static property.UserPropertiesReader.USER_PHONE;
 import static web.constans.UrlConfig.BASE_URL;
 import static web.constans.UrlConfig.LOGIN_URL;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class BaseTest {
 
-    protected static WebDriver driver = DriverManager.getDriver();
+    protected static AccountSteps accountSteps;
+    protected AccountInfoSteps accountInfoSteps;
+    protected CreateAccountSteps createAccountSteps;
+    protected ConfirmationSteps confirmationSteps;
+    protected RenameAccountSteps renameAccountSteps;
+    protected LoginSteps loginSteps;
 
-    protected AccountSteps accountSteps = new AccountSteps();
-
-    protected AccountInfoSteps accountInfoSteps = new AccountInfoSteps();
-
-    protected CreateAccountSteps createAccountSteps = new CreateAccountSteps();
-
-    protected ConfirmationSteps confirmationSteps = new ConfirmationSteps();
-
-    protected RenameAccountSteps renameAccountSteps = new RenameAccountSteps();
-
-    protected static LoginSteps loginSteps = new LoginSteps();
-
-    @AfterAll
-    public static void tearDown() {
-        driver.quit();
+    public BaseTest() {
+        refreshPages();
     }
 
-    protected static void open(String pageUrl) {
-        driver.get(BASE_URL + pageUrl);
+    protected void open(String pageUrl) {
+        DriverManager.getDriver()
+                     .get(BASE_URL + pageUrl);
     }
 
-    protected static void authorization() {
+    protected void authorization() {
         open(LOGIN_URL);
         loginSteps.enterPhone(USER_PHONE);
         loginSteps.enterPassword(USER_PASSWORD);
         loginSteps.tapSubmitButton();
+    }
+
+    @AfterAll
+    public void tearDown() {
+        DriverManager.resetDriver();
+        refreshPages();
+    }
+
+    private void refreshPages() {
+        accountSteps = new AccountSteps();
+        accountInfoSteps = new AccountInfoSteps();
+        createAccountSteps = new CreateAccountSteps();
+        confirmationSteps = new ConfirmationSteps();
+        renameAccountSteps = new RenameAccountSteps();
+        loginSteps = new LoginSteps();
     }
 }
