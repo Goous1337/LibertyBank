@@ -69,7 +69,7 @@ public class AccountInfoSteps {
 
     @Step("Вернуться к списку счетов")
     public void goBack() {
-     accountInfoPage.clickGoBackButton();
+        accountInfoPage.clickGoBackButton();
     }
 
     @Step("Нажать на кебаб-меню")
@@ -92,7 +92,7 @@ public class AccountInfoSteps {
         accountInfoPage.clickSetMainAccountOpt();
     }
 
-    @Step("Отображется пункт 'Сделать счет основным'")
+    @Step("Отображается пункт 'Сделать счет основным'")
     public boolean isSetMainAccountOptDisplayed() {
         return accountInfoPage.isSetMainAccountOptDisplayed();
     }
