@@ -18,5 +18,6 @@ public final class BaseProperties {
     public static String ABS_CLIENT_SERVICE = getPropertyValue("abs_client_service");
 
     public static String ACCOUNT_SERVICE = getPropertyValue("account_service");
+    public static String CARD_SERVICE = getPropertyValue("card_service");
 
 }

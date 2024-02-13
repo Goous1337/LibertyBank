@@ -86,5 +86,6 @@ public final class ApiEndpoints {
     public static final String CHANGE_PASSWORD_2_0 = "customer/api/v1/security/password";
     public static final String INVALID_CHANGE_PASSWORD_2_0 = "customer/api/v1/security/pas";
     public static final String ACCOUNTS_LIST_BY_CUSTOMER_ID = "account-service/api/v1/accounts/customer/";
+    public static final String CARDS_LIST = "card-service/api/v1/card-products";
 
 }
