@@ -14,8 +14,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import pojo.customerService_2_0.NotificationStatus;
+import pojo.customerService_2_0.UserAuthorizationByPhone;
 
 
+import static constant.CustomerService_2_0_Constants.*;
 import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -35,8 +37,12 @@ public class CRS_11_PushNotificationsTest extends BaseTest {
     @Test
 
     public void successfulReceivePUSHNotificationsTrue() {
-        String customerId = CustomerService_2_0_DataBaseRequest.receivingCustomerIdWithNotificationStatusFalse();
-        Response response = customerService_2_0.checkPushNotification(customerId, true);
+        String mobilePhone = "79527765108";
+        String customerId = "d44cfcb5-5263-4cf2-a7a3-03ea73359108";
+        Response responseByMobile = customerService_2_0.userAuthorizationByMobilePhone(
+                new UserAuthorizationByPhone(mobilePhone, CUSTOMER_USER_PASSWORD_CRS_11, CUSTOMER_MOBILE_PHONE_TYPE));
+        String accessToken = responseByMobile.jsonPath().get("accessToken");
+        Response response = customerService_2_0.checkPushNotification(customerId, true, accessToken);
         System.out.println(customerId);
         assertAll(
                 () -> assertEquals(SC_OK,
@@ -54,8 +60,13 @@ public class CRS_11_PushNotificationsTest extends BaseTest {
     @Test
 
     public void successfulReceivePUSHNotificationsFalse() {
-        String customerId = CustomerService_2_0_DataBaseRequest.receivingCustomerIdWithNotificationStatusTrue();
-        Response response = customerService_2_0.checkPushNotification(customerId, false);
+        String mobilePhone = "79527765108";
+        String customerId = "d44cfcb5-5263-4cf2-a7a3-03ea73359108";
+        Response responseByMobile = customerService_2_0.userAuthorizationByMobilePhone(
+                new UserAuthorizationByPhone(mobilePhone, CUSTOMER_USER_PASSWORD_CRS_11, CUSTOMER_MOBILE_PHONE_TYPE));
+        String accessToken = responseByMobile.jsonPath().get("accessToken");
+
+        Response response = customerService_2_0.checkPushNotification(customerId, false, accessToken);
         assertAll(
                 () -> assertEquals(SC_OK,
                         response.statusCode(),
@@ -73,8 +84,13 @@ public class CRS_11_PushNotificationsTest extends BaseTest {
     @ValueSource(strings = {"true", "12321", "gfaghs", ""})
 
     public void unsuccessfulReceivePUSHNotificationsNotBoolean(String notificationStatus) {
-        String customerId = CustomerService_2_0_DataBaseRequest.receivingCustomerIdWithNotificationStatusFalse();
-        Response response = customerService_2_0.checkPushNotificationWithNotBoolean(customerId, notificationStatus);
+        String mobilePhone = "79527765108";
+        String customerId = "d44cfcb5-5263-4cf2-a7a3-03ea73359108";
+        Response responseByMobile = customerService_2_0.userAuthorizationByMobilePhone(
+                new UserAuthorizationByPhone(mobilePhone, CUSTOMER_USER_PASSWORD_CRS_11, CUSTOMER_MOBILE_PHONE_TYPE));
+        String accessToken = responseByMobile.jsonPath().get("accessToken");
+
+        Response response = customerService_2_0.checkPushNotificationWithNotBoolean(customerId, notificationStatus, accessToken);
         assertAll(
                 () -> assertEquals(SC_UNSUPPORTED_MEDIA_TYPE,
                         response.statusCode(),
@@ -93,9 +109,12 @@ public class CRS_11_PushNotificationsTest extends BaseTest {
     @ValueSource(strings = {"GET", "PUT", "DELETE", "POST"})
 
     public void unsuccessfulReceivePUSHNotificationsWithInvalidMethod(String method) {
-        NotificationStatus notificationStatus = new NotificationStatus(true);
-        String customerId = CustomerService_2_0_DataBaseRequest.receivingCustomerIdWithNotificationStatusFalse();
-        Response response = customerService_2_0.checkPushNotificationWithHttpMethod(method, customerId, notificationStatus);
+        String mobilePhone = "79527765108";
+        String customerId = "d44cfcb5-5263-4cf2-a7a3-03ea73359108";
+        Response responseByMobile = customerService_2_0.userAuthorizationByMobilePhone(
+                new UserAuthorizationByPhone(mobilePhone, CUSTOMER_USER_PASSWORD_CRS_11, CUSTOMER_MOBILE_PHONE_TYPE));
+        String accessToken = responseByMobile.jsonPath().get("accessToken");
+        Response response = customerService_2_0.checkPushNotificationWithHttpMethod(method, customerId, accessToken);
         assertAll(
                 () -> assertEquals(SC_METHOD_NOT_ALLOWED,
                         response.statusCode(),
@@ -132,9 +151,13 @@ public class CRS_11_PushNotificationsTest extends BaseTest {
     @Test
 
     public void unsuccessfulReceivePUSHNotificationsWrongData() {
+        String mobilePhone = "79527765108";
+        String customerId = "d44cfcb5-5263-4cf2-a7a3-03ea73359108";
+        Response responseByMobile = customerService_2_0.userAuthorizationByMobilePhone(
+                new UserAuthorizationByPhone(mobilePhone, CUSTOMER_USER_PASSWORD_CRS_11, CUSTOMER_MOBILE_PHONE_TYPE));
+        String accessToken = responseByMobile.jsonPath().get("accessToken");
         NotificationStatus notificationStatus = new NotificationStatus(null);
-        String customerId = CustomerService_2_0_DataBaseRequest.receivingCustomerIdWithNotificationStatusFalse();
-        Response response = customerService_2_0.checkPushNotificationWithNull(notificationStatus, customerId);
+        Response response = customerService_2_0.checkPushNotificationWithNull(notificationStatus, customerId, accessToken);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST,
                         response.statusCode(),
