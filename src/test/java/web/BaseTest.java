@@ -19,6 +19,7 @@ public class BaseTest {
     protected ConfirmationSteps confirmationSteps;
     protected RenameAccountSteps renameAccountSteps;
     protected LoginSteps loginSteps;
+    protected HomeSteps homeSteps;
 
     public BaseTest() {
         refreshPages();
@@ -49,5 +50,6 @@ public class BaseTest {
         confirmationSteps = new ConfirmationSteps();
         renameAccountSteps = new RenameAccountSteps();
         loginSteps = new LoginSteps();
+        homeSteps = new HomeSteps();
     }
 }
