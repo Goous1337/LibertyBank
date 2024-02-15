@@ -20,7 +20,7 @@ public class LogoutFromAccountTest extends BaseTest {
     @DisplayName("Основной сценарий. Выход из аккаунта.")
     @Description("В данном тест-кейсе проводится проверка возможности выхода из аккаунта в личном кабинете")
     @Tags({@Tag("Web"), @Tag("Smoke")})
-    @TmsLink("https://jira.astondevs.ru/browse/LIB-2601")
+    @TmsLink("LIB-2601")
     @Test
     public void logoutFromAccount() {
         homeSteps.clickUserMenu();
