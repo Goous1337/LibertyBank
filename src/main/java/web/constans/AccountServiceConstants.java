@@ -23,5 +23,4 @@ public class AccountServiceConstants {
     public static final String OPEN_ACCOUNTS_TAB = "Открытые счета";
     public static final String CLOSED_ACCOUNTS_TAB = "Закрытые счета";
     public static final String BLOCKED_ACCOUNTS_TAB = "Заблокированные счета";
-    public static final String UNAUTHORIZED_HOME_PAGE = "Войдите в Liberty Bank";
 }

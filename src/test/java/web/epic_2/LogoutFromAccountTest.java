@@ -6,10 +6,8 @@ import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.*;
 import web.BaseTest;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static web.constans.AccountServiceConstants.DISPLAYED_MESSAGE;
-import static web.constans.AccountServiceConstants.UNAUTHORIZED_HOME_PAGE;
 
 @Epic("2 - Личный кабинет/Основное меню")
 @DisplayName("US-2.2.6 [web] Выход из аккаунта")
@@ -28,6 +26,6 @@ public class LogoutFromAccountTest extends BaseTest {
         homeSteps.clickUserMenu();
         assertTrue(homeSteps.isUserPanelDisplayed(), String.format(DISPLAYED_MESSAGE, "выпадающие меню пользователя"));
         homeSteps.clickExitFromUserAccount();
-        assertEquals(UNAUTHORIZED_HOME_PAGE, homeSteps.getUnauthorizedHomePageStatus());
+        assertTrue(homeSteps.isUnauthorizedHomeDisplayed());
     }
 }

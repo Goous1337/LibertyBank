@@ -5,22 +5,28 @@ import web.pages.HomePage;
 
 public class HomeSteps {
     protected HomePage homePage;
-    public HomeSteps(){
+
+    public HomeSteps() {
         homePage = new HomePage();
     }
+
     @Step("Кликнуть на кнопку с именем авторизованного пользователя")
-    public void clickUserMenu(){
+    public void clickUserMenu() {
         homePage.clickUserMenu();
     }
+
     @Step("Кликнуть на кнопку 'Выйти'")
-    public void clickExitFromUserAccount(){
+    public void clickExitFromUserAccount() {
         homePage.exitFromUserAccount();
     }
+
     @Step("Отображается выпадающие меню пользователя")
-    public boolean isUserPanelDisplayed(){
+    public boolean isUserPanelDisplayed() {
         return homePage.isUserPanelDisplayed();
     }
-    public String getUnauthorizedHomePageStatus(){
-        return homePage.getUnauthorizedHomePageStatus();
+
+    @Step("Отображается надпись 'Войдите в Liberty Bank'")
+    public boolean isUnauthorizedHomeDisplayed() {
+        return homePage.isUnauthorizedHomeDisplayed();
     }
 }
