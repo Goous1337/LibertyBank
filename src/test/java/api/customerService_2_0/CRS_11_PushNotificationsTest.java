@@ -16,7 +16,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import pojo.customerService_2_0.NotificationStatus;
 import pojo.customerService_2_0.UserAuthorizationByPhone;
 
-
 import static constant.CustomerService_2_0_Constants.*;
 import static constant.Message.ERROR_MESSAGE_NOT_EXPECTED;
 import static constant.Message.RESPONSE_CODE_NOT_EXPECTED;
@@ -35,7 +34,7 @@ public class CRS_11_PushNotificationsTest extends BaseTest {
     @DisplayName("Основной сценарий. Проверка возможности изменения получения PUSH-уведомлений.")
     @Description("В данном тест-кейсе проводится проверка возможности изменения настроек получения пользователем PUSH уведомлений.")
     @Tags({@Tag("smoke"), @Tag("API"), @Tag("positive")})
-    @TmsLink("https://jira.astondevs.ru/browse/LIB-2261")
+    @TmsLink("LIB-2261")
     @Test
 
     public void successfulReceivePUSHNotificationsTrue() {
@@ -58,7 +57,7 @@ public class CRS_11_PushNotificationsTest extends BaseTest {
     @DisplayName("Основной сценарий. Проверка возможности отказа от получения PUSH-уведомлений.")
     @Description("В данном тест-кейсе проводится проверка возможности отказа от получения пользователем PUSH уведомлений.")
     @Tags({@Tag("smoke"), @Tag("API"), @Tag("positive")})
-    @TmsLink("https://jira.astondevs.ru/browse/LIB-2261")
+    @TmsLink("LIB-2261")
     @Test
 
     public void successfulReceivePUSHNotificationsFalse() {
@@ -81,7 +80,7 @@ public class CRS_11_PushNotificationsTest extends BaseTest {
     @DisplayName("Проверка работы системы если тип параметра notificationStatus не является boolean при изменении PUSH-уведомлений.")
     @Description("В данном тест-кейсе проводится проверка работы системы, если тип параметра notificationStatus в теле запроса не является boolean")
     @Tags({@Tag("API"), @Tag("negative")})
-    @TmsLink("https://jira.astondevs.ru/browse/LIB-2263")
+    @TmsLink("LIB-2263")
     @ParameterizedTest(name = "notificationStatus: {0}")
     @ValueSource(strings = {"true", "12321", "gfaghs", ""})
 
@@ -106,7 +105,7 @@ public class CRS_11_PushNotificationsTest extends BaseTest {
     @DisplayName("Проверка работы системы при использовании метода помимо PATCH/OPTIONS при изменении PUSH-уведомлений.")
     @Description("Тест проверяет, возможно ли отправить запрос другим методом помимо PATCH/OPTIONS, которые разрешены на клиенте.")
     @Tags({@Tag("API"), @Tag("negative")})
-    @TmsLink("https://jira.astondevs.ru/browse/LIB-2264")
+    @TmsLink("LIB-2264")
     @ParameterizedTest(name = "method: {0}")
     @ValueSource(strings = {"GET", "PUT", "DELETE", "POST"})
 
@@ -130,7 +129,7 @@ public class CRS_11_PushNotificationsTest extends BaseTest {
     @DisplayName("Использование невалидного URL при изменении PUSH-уведомлений.")
     @Description("В данном тест-кейсе проводится проверка работы системы если используется невалидный URL.")
     @Tags({@Tag("API"), @Tag("negative")})
-    @TmsLink("https://jira.astondevs.ru/browse/LIB-2265")
+    @TmsLink("LIB-2265")
     @Test
 
     public void unsuccessfulReceivePUSHNotificationsWithInvalidURL() {
@@ -149,7 +148,7 @@ public class CRS_11_PushNotificationsTest extends BaseTest {
     @DisplayName("Проверка работы системы если пользователь передал не корректные данные при изменении PUSH-уведомлений.")
     @Description("В данном тест-кейсе проводится проверка работы системы, если тип параметра notificationStatus в теле запроса не валидный.")
     @Tags({@Tag("API"), @Tag("negative")})
-    @TmsLink("https://jira.astondevs.ru/browse/LIB-2267")
+    @TmsLink("LIB-2267")
     @Test
 
     public void unsuccessfulReceivePUSHNotificationsWrongData() {
