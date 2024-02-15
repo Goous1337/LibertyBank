@@ -2,7 +2,9 @@ package web;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.extension.ExtendWith;
 import web.drivers.DriverManager;
+import web.helpers.TestListener;
 import web.steps.*;
 
 import static property.UserPropertiesReader.USER_PASSWORD;
@@ -11,6 +13,7 @@ import static web.constans.UrlConfig.BASE_URL;
 import static web.constans.UrlConfig.LOGIN_URL;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@ExtendWith(TestListener.class)
 public class BaseTest {
 
     protected static AccountSteps accountSteps;
@@ -27,7 +30,7 @@ public class BaseTest {
 
     protected void open(String pageUrl) {
         DriverManager.getDriver()
-                     .get(BASE_URL + pageUrl);
+                .get(BASE_URL + pageUrl);
     }
 
     protected void authorization() {

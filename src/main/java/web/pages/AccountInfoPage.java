@@ -1,6 +1,7 @@
 package web.pages;
 
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import web.helpers.Waiters;
@@ -97,7 +98,7 @@ public class AccountInfoPage extends BasePage {
     public boolean isMainAccountLabelDisplayed() {
         try {
             return mainAccountLabel.isDisplayed();
-        } catch (NoSuchElementException e) {
+        } catch (StaleElementReferenceException | NoSuchElementException exception) {
             return false;
         }
     }
