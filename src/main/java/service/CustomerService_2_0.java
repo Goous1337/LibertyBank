@@ -126,23 +126,26 @@ public class CustomerService_2_0 {
         return sendSimpleRequest(Method.valueOf(invalidMethod), RETRIEVING_USER_INFO, params);
     }
 
-    public Response checkPushNotification(String customerId, Boolean notificationStatus) {
+    public Response checkPushNotification(String customerId, Boolean notificationStatus, String token) {
         String body = createBody(Map.of(PARAMETER_NOTIFICATION_STATUS,notificationStatus));
         List<RequestParam> params = List.of(getRP(PARAMETER, CustomerServiceConstants.PARAMETER_CUSTOMER_ID, customerId)
-                , getRP(HEADER, CONTENT_TYPE, APPLICATION_JSON), getRP(BODY, SPACE, body));
+                , getRP(HEADER, CONTENT_TYPE, APPLICATION_JSON),getRP(HEADER, AUTHORIZATION, BEARER_TOKEN + token), getRP(BODY, SPACE, body));
         return sendSimpleRequest(PATCH, PUSH_NOTIFICATION_2_0, params);
     }
 
-    public Response checkPushNotificationWithNotBoolean(String customerId, String notificationStatus) {
+    public Response checkPushNotificationWithNotBoolean(String customerId, String notificationStatus, String token) {
         String body = createBody(Map.of(PARAMETER_NOTIFICATION_STATUS,notificationStatus));
         List<RequestParam> params = List.of(getRP(PARAMETER, CustomerServiceConstants.PARAMETER_CUSTOMER_ID, customerId)
-                , getRP(HEADER, CONTENT_TYPE, APPLICATION_JSON), getRP(BODY, SPACE, body));
+                , getRP(HEADER, CONTENT_TYPE, APPLICATION_JSON), getRP(HEADER, AUTHORIZATION, BEARER_TOKEN + token),
+                getRP(BODY, SPACE, body));
         return sendSimpleRequest(PATCH, PUSH_NOTIFICATION_2_0, params);
     }
 
-    public Response checkPushNotificationWithHttpMethod(String method, String customerId, NotificationStatus notificationStatus) {
-        return sendSimpleRequest(Method.valueOf(method), PUSH_NOTIFICATION_2_0,
-                getRP(QUERY_PARAMETER, CustomerServiceConstants.PARAMETER_CUSTOMER_ID, customerId), notificationStatus);
+    public Response checkPushNotificationWithHttpMethod(String method, String customerId, String token) {
+        List<RequestParam> params = List.of(getRP(PARAMETER, CustomerServiceConstants.PARAMETER_CUSTOMER_ID, customerId)
+                , getRP(HEADER, CONTENT_TYPE, APPLICATION_JSON), getRP(HEADER, AUTHORIZATION, BEARER_TOKEN + token),
+                getRP(QUERY_PARAMETER, CustomerServiceConstants.PARAMETER_CUSTOMER_ID, customerId));
+        return sendSimpleRequest(Method.valueOf(method), PUSH_NOTIFICATION_2_0, params);
     }
 
     public Response checkPushNotificationWithInvalidURL(String customerId, Boolean notificationStatus) {
@@ -152,10 +155,12 @@ public class CustomerService_2_0 {
         return sendSimpleRequest(PATCH, INVALID_PUSH_NOTIFICATION_2_0, params);
     }
 
-    public Response checkPushNotificationWithNull(NotificationStatus notificationStatus, String customerId) {
-        return sendSimpleRequest(PATCH, PUSH_NOTIFICATION_2_0,
-                getRP(PARAMETER, CustomerServiceConstants.PARAMETER_CUSTOMER_ID, customerId), notificationStatus);
+    public Response checkPushNotificationWithNull(NotificationStatus notificationStatus, String customerId , String token) {
+        List<RequestParam> params = List.of(getRP(PARAMETER, CustomerServiceConstants.PARAMETER_CUSTOMER_ID, customerId)
+                , getRP(HEADER, CONTENT_TYPE, APPLICATION_JSON), getRP(HEADER, AUTHORIZATION, BEARER_TOKEN + token));
+        return sendSimpleRequest(PATCH, PUSH_NOTIFICATION_2_0, params, notificationStatus);
     }
+
 
     public Response getSessionToken(GetSessionToken getSessionToken) {
         return sendSimpleRequest(POST, CUSTOMER_2_0_SECURITY_VERIFICATION, getSessionToken);
