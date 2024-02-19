@@ -15,6 +15,8 @@ import pojo.customerService_2_0.UpdatedEmail;
 import pojo.customerService_2_0.UserAuthorizationByPhone;
 
 import static constant.CustomerService_2_0_Constants.*;
+import static constant.Message.ERROR_MESSAGE_NOT_EXPECTED;
+import static constant.Message.RESPONSE_CODE_NOT_EXPECTED;
 import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -38,7 +40,7 @@ public class CRS_9_UpdateEmailTest extends BaseTest {
         String token = getToken.body().jsonPath().get("accessToken");
 
         Response response = customerService_2_0.updateEmailForClient(token, new UpdatedEmail("vasyapupkin@gmail.com"));
-        assertEquals(SC_OK, response.statusCode(), "Код ответа не соответствует ожидаемому");
+        assertEquals(SC_OK, response.statusCode(), RESPONSE_CODE_NOT_EXPECTED);
     }
 
     @DisplayName("Успешное обновление email пользователя проверка валидации полей")
@@ -55,7 +57,7 @@ public class CRS_9_UpdateEmailTest extends BaseTest {
         String token = getToken.body().jsonPath().get("accessToken");
 
         Response response = customerService_2_0.updateEmailForClient(token, new UpdatedEmail(email));
-        assertEquals(SC_OK, response.statusCode(), "Код ответа не соответствует ожидаемому");
+        assertEquals(SC_OK, response.statusCode(), RESPONSE_CODE_NOT_EXPECTED);
     }
 
     @DisplayName("Проверка обязательности параметров при обновлении email пользователя в БД")
@@ -72,11 +74,11 @@ public class CRS_9_UpdateEmailTest extends BaseTest {
         Response response = customerService_2_0.updateEmailForClientWithoutEmail(token);
         assertAll(
                 () -> assertEquals(SC_UNSUPPORTED_MEDIA_TYPE, response.statusCode(),
-                        "Код ответа не соответствует ожидаемому"),
+                        RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertEquals(
                         "Формат запрашиваемых данных не поддерживается сервером, поэтому запрос отклонён.",
                         response.body().jsonPath().get("message"),
-                        "Возвращаемое сообщение не соотвествует ожидаемому")
+                        ERROR_MESSAGE_NOT_EXPECTED)
         );
     }
 
@@ -98,11 +100,11 @@ public class CRS_9_UpdateEmailTest extends BaseTest {
         Response response = customerService_2_0.updateEmailForClient(token, new UpdatedEmail(email));
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.statusCode(),
-                        "Код ответа не соответствует ожидаемому"),
+                        RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertEquals(
                         "Некорректный запрос. Убедитесь, что адрес указан верно и попробуйте еще раз.",
                         response.body().jsonPath().get("message"),
-                        "Возвращаемое сообщение не соотвествует ожидаемому")
+                        ERROR_MESSAGE_NOT_EXPECTED)
         );
     }
 
@@ -123,10 +125,10 @@ public class CRS_9_UpdateEmailTest extends BaseTest {
                 "customer/api/v1/auth/user/set/emailll");
         assertAll(
                 () -> assertEquals(SC_NOT_FOUND, response.statusCode(),
-                        "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals("Страница не найдена", response.body().jsonPath().get("message"))
+                        RESPONSE_CODE_NOT_EXPECTED),
+                () -> assertEquals("Страница не найдена", response.body().jsonPath().get("message"), ERROR_MESSAGE_NOT_EXPECTED)
         );
-        assertEquals(SC_NOT_FOUND, response.statusCode());
+        assertEquals(SC_NOT_FOUND, response.statusCode(), RESPONSE_CODE_NOT_EXPECTED);
     }
 
     @DisplayName("Обновление email пользователя в БД когда метод не PATCH.")
@@ -146,10 +148,10 @@ public class CRS_9_UpdateEmailTest extends BaseTest {
                 new UpdatedEmail("vasyapupkin@gmail.com"));
         assertAll(
                 () -> assertEquals(SC_METHOD_NOT_ALLOWED, response.statusCode(),
-                        "Код ответа не соответствует ожидаемому"),
+                        RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertEquals("Метод не разрешен. Сервер знает о запрашиваемом методе, но он был " +
                         "деактивирован и не может быть использован.", response.body().jsonPath().get("message"),
-                        "Возвращаемое сообщение не соотвествует ожидаемому")
+                        ERROR_MESSAGE_NOT_EXPECTED)
         );
     }
 }

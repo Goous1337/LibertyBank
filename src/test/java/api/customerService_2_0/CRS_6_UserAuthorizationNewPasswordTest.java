@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static constant.CustomerService_2_0_Constants.*;
+import static constant.Message.RESPONSE_CODE_NOT_EXPECTED;
 import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.CUSTOMER_SERVICE_2_0;
@@ -48,7 +49,7 @@ public class CRS_6_UserAuthorizationNewPasswordTest extends BaseTest {
         Response responseByPassport = customerService_2_0.userAuthorizationByMobilePhone
                 (new UserAuthorizationByPhone(identityDocNumber, CUSTOMER_USER_PASSWORD, CUSTOMER_IDENTITY_DOC_NUMBER_TYPE));
         assertAll(
-                () -> assertEquals(SC_OK, responseByMobile.getStatusCode()),
+                () -> assertEquals(SC_OK, responseByMobile.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertNotNull(responseByMobile.jsonPath().get("accessToken")),
                 () -> assertNotNull(responseByMobile.jsonPath().get("refreshToken")),
                 () -> assertEquals(SC_OK, responseByPassport.getStatusCode()),
@@ -83,10 +84,10 @@ public class CRS_6_UserAuthorizationNewPasswordTest extends BaseTest {
         Response responseDocNumberWithInvalidPassword = customerService_2_0.userAuthorizationByMobilePhone
                 (new UserAuthorizationByPhone(identityDocNumber, invalidPassword, CUSTOMER_IDENTITY_DOC_NUMBER_TYPE));
         assertAll(
-                () -> assertEquals(SC_BAD_REQUEST, responseWithInvalidPhone.getStatusCode()),
-                () -> assertEquals(SC_BAD_REQUEST, responseMobilePhoneWithInvalidPassword.getStatusCode()),
-                () -> assertEquals(SC_BAD_REQUEST, responseWithInvalidDocNumber.getStatusCode()),
-                () -> assertEquals(SC_BAD_REQUEST, responseDocNumberWithInvalidPassword.getStatusCode()),
+                () -> assertEquals(SC_BAD_REQUEST, responseWithInvalidPhone.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
+                () -> assertEquals(SC_BAD_REQUEST, responseMobilePhoneWithInvalidPassword.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
+                () -> assertEquals(SC_BAD_REQUEST, responseWithInvalidDocNumber.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
+                () -> assertEquals(SC_BAD_REQUEST, responseDocNumberWithInvalidPassword.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> responseWithInvalidPhone.then().assertThat().body(JsonSchemaValidator
                         .matchesJsonSchemaInClasspath(jsonSchemaPath)),
                 () -> responseMobilePhoneWithInvalidPassword.then().assertThat().body(JsonSchemaValidator
@@ -113,7 +114,7 @@ public class CRS_6_UserAuthorizationNewPasswordTest extends BaseTest {
         Response response = customerService_2_0.userAuthorizationByMobilePhone
                 (new UserAuthorizationByPhone(mobilePhone, CUSTOMER_USER_PASSWORD, invalidType));
         assertAll(
-                () -> assertEquals(SC_UNSUPPORTED_MEDIA_TYPE, response.getStatusCode()),
+                () -> assertEquals(SC_UNSUPPORTED_MEDIA_TYPE, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
@@ -137,9 +138,9 @@ public class CRS_6_UserAuthorizationNewPasswordTest extends BaseTest {
         Response responseDocNumber = customerService_2_0.checkListUserAuthorizationWithInvalidUrl
                 (new UserAuthorizationByPhone(identityDocNumber, CUSTOMER_USER_PASSWORD, CUSTOMER_IDENTITY_DOC_NUMBER_TYPE));
         assertAll(
-                () -> assertEquals(SC_NOT_FOUND, responsePhone.getStatusCode()),
+                () -> assertEquals(SC_NOT_FOUND, responsePhone.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> responsePhone.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchema)),
-                () -> assertEquals(SC_NOT_FOUND, responseDocNumber.getStatusCode()),
+                () -> assertEquals(SC_NOT_FOUND, responseDocNumber.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> responseDocNumber.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchema))
         );
     }
@@ -164,9 +165,9 @@ public class CRS_6_UserAuthorizationNewPasswordTest extends BaseTest {
         Response responseDocNumber = customerService_2_0.checkListUserAuthorizationWithInvalidMethod
                 (new UserAuthorizationByPhone(identityDocNumber, CUSTOMER_USER_PASSWORD, CUSTOMER_IDENTITY_DOC_NUMBER_TYPE), method);
         assertAll(
-                () -> assertEquals(SC_METHOD_NOT_ALLOWED, responsePhone.getStatusCode()),
+                () -> assertEquals(SC_METHOD_NOT_ALLOWED, responsePhone.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> responsePhone.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath)),
-                () -> assertEquals(SC_METHOD_NOT_ALLOWED, responseDocNumber.getStatusCode()),
+                () -> assertEquals(SC_METHOD_NOT_ALLOWED, responseDocNumber.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> responseDocNumber.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
@@ -190,9 +191,9 @@ public class CRS_6_UserAuthorizationNewPasswordTest extends BaseTest {
         Response responseDocNumber = customerService_2_0.userAuthorizationByMobilePhone
                 (new UserAuthorizationByPhone(identityDocNumber, CUSTOMER_USER_PASSWORD, CUSTOMER_IDENTITY_DOC_NUMBER_TYPE));
         assertAll(
-                () -> assertEquals(SC_FORBIDDEN, responsePhone.getStatusCode()),
+                () -> assertEquals(SC_FORBIDDEN, responsePhone.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> responsePhone.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath)),
-                () -> assertEquals(SC_FORBIDDEN, responseDocNumber.getStatusCode()),
+                () -> assertEquals(SC_FORBIDDEN, responseDocNumber.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> responseDocNumber.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }

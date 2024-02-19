@@ -16,6 +16,7 @@ import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
+import static constant.Message.RESPONSE_CODE_NOT_EXPECTED;
 import static org.apache.hc.core5.http.HttpStatus.SC_BAD_REQUEST;
 import static org.apache.hc.core5.http.HttpStatus.SC_METHOD_NOT_ALLOWED;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -44,7 +45,7 @@ public class CRS_15_ChangeSecurityQuestionAnswerTest extends BaseTest {
         assertAll(
                 () -> assertEquals(HttpStatus.SC_OK,
                         response.statusCode(),
-                        "Код ответа не соответствует ожидаемому"),
+                        RESPONSE_CODE_NOT_EXPECTED),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
@@ -67,7 +68,7 @@ public class CRS_15_ChangeSecurityQuestionAnswerTest extends BaseTest {
         Response response = customerService_2_0.updateQuestionAnswerInvalidHttpMethod(securityQuestion, securityAnswer, invalidHttpMethod);
         assertAll(
                 () -> assertEquals(SC_METHOD_NOT_ALLOWED, response.statusCode(),
-                        "Код ответа не соответствует ожидаемому"),
+                        RESPONSE_CODE_NOT_EXPECTED),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
@@ -87,7 +88,7 @@ public class CRS_15_ChangeSecurityQuestionAnswerTest extends BaseTest {
         assertAll(
                 () -> assertEquals(HttpStatus.SC_NOT_FOUND,
                         response.statusCode(),
-                        "Код ответа не соответствует ожидаемому"),
+                        RESPONSE_CODE_NOT_EXPECTED),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
@@ -109,7 +110,7 @@ public class CRS_15_ChangeSecurityQuestionAnswerTest extends BaseTest {
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST,
                         response.statusCode(),
-                        "Код ответа не соответствует ожидаемому"),
+                        RESPONSE_CODE_NOT_EXPECTED),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
