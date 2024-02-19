@@ -14,26 +14,26 @@ pipeline {
 //             }
 //         }
         stage('Run tests') {
-			agent {
-        		docker {
-					image "${TEST_CONTAINER_IMAGE}"
-					args "-w ${INNER_CONTAINER_WORK_DIR}"
-					reuseNode true
-				}
-			}
-				steps {
-					sh 'mvn clean test -Dgroups=${TEST_TAGS}'
-					sh 'ls -al'
-				}
-    	}
-		stage('Collect Allure report') {
-			steps {
-				allure([
-					includeProperties: false,
-					reportBuildPolicy: 'ALWAYS',
-					results: [[path: 'target/allure-results']]
-				])
-			}
-		}
+            agent {
+                docker {
+                    image "${TEST_CONTAINER_IMAGE}"
+                    args "-w ${INNER_CONTAINER_WORK_DIR}"
+                    reuseNode true
+                }
+            }
+                steps {
+                    sh 'mvn clean test -Dgroups=${TEST_TAGS}'
+                    sh 'ls -al'
+                }
+        }
+        stage('Collect Allure report') {
+            steps {
+                allure([
+                    includeProperties: false,
+                    reportBuildPolicy: 'ALWAYS',
+                    results: [[path: 'target/allure-results']]
+                ])
+            }
+        }
     }
 }
