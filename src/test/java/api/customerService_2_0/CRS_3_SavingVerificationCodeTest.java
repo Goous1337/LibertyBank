@@ -18,6 +18,7 @@ import pojo.customerService_2_0.CustomerService_2_0_Mobile;
 
 import java.util.List;
 
+import static constant.Message.RESPONSE_CODE_NOT_EXPECTED;
 import static org.apache.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.CUSTOMER_SERVICE_2_0;
@@ -42,7 +43,7 @@ public class CRS_3_SavingVerificationCodeTest extends BaseTest {
         String verificationCodeFirstRequest = CustomerService_2_0_DataBaseRequest
                 .getCustomerLastVerificationCodeById(customerId);
         assertAll(
-                () -> assertEquals(SC_OK, firstResponse.getStatusCode()),
+                () -> assertEquals(SC_OK, firstResponse.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertNotNull(firstResponse.jsonPath().get("blockSeconds")),
                 () -> assertNotNull(verificationCodeFirstRequest)
         );
@@ -52,7 +53,7 @@ public class CRS_3_SavingVerificationCodeTest extends BaseTest {
         String verificationCodeSecondRequest = CustomerService_2_0_DataBaseRequest
                 .getCustomerLastVerificationCodeById(customerId);
         assertAll(
-                () -> assertEquals(SC_OK, secondResponse.getStatusCode()),
+                () -> assertEquals(SC_OK, secondResponse.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertNotNull(secondResponse.jsonPath().get("blockSeconds")),
                 () -> assertNotEquals(verificationCodeFirstRequest, verificationCodeSecondRequest)
         );
@@ -77,7 +78,7 @@ public class CRS_3_SavingVerificationCodeTest extends BaseTest {
         Response response = customerService_2_0.checkListSavingVerificationCode(customerService_2_0_mobile);
         List<String> customerIdList = CustomerService_2_0_DataBaseRequest.getAllCustomerId();
         assertAll(
-                () -> assertEquals(SC_OK, response.getStatusCode()),
+                () -> assertEquals(SC_OK, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertNotNull(response.jsonPath().get("blockSeconds")),
                 () -> assertTrue(customerIdList.contains(customerId))
         );
@@ -98,7 +99,7 @@ public class CRS_3_SavingVerificationCodeTest extends BaseTest {
         CustomerService_2_0_Mobile customerService_2_0_mobile = new CustomerService_2_0_Mobile(mobilePhone);
         Response response = customerService_2_0.checkListSavingVerificationCode(customerService_2_0_mobile);
         assertAll(
-                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode()),
+                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> response.then().assertThat().body(JsonSchemaValidator
                         .matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
@@ -120,7 +121,7 @@ public class CRS_3_SavingVerificationCodeTest extends BaseTest {
         Response response = customerService_2_0.checkListSavingVerificationCodeWithInvalidMobilePhoneType
                 (customerService20InvalidMobilePhoneValue);
         assertAll(
-                () -> assertEquals(SC_UNSUPPORTED_MEDIA_TYPE, response.getStatusCode()),
+                () -> assertEquals(SC_UNSUPPORTED_MEDIA_TYPE, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> response.then().assertThat().body(JsonSchemaValidator
                         .matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
@@ -142,7 +143,7 @@ public class CRS_3_SavingVerificationCodeTest extends BaseTest {
         customerService_2_0.checkListSavingVerificationCode(customerService_2_0_mobile);
         Response secondResponse = customerService_2_0.checkListSavingVerificationCode(customerService_2_0_mobile);
         assertAll(
-                () -> assertEquals(SC_NOT_ACCEPTABLE, secondResponse.getStatusCode()),
+                () -> assertEquals(SC_NOT_ACCEPTABLE, secondResponse.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> secondResponse.then().assertThat().body(JsonSchemaValidator
                         .matchesJsonSchemaInClasspath(jsonSchemaPath))
         );

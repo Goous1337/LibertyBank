@@ -19,6 +19,7 @@ import pojo.customerService_2_0.RecoveryPassword;
 
 import static constant.CustomerService_2_0_Constants.NEW_CUSTOMER_PASSWORD_RECOVERY;
 import static constant.CustomerService_2_0_Constants.NEW_CUSTOMER_PASSWORD_RECOVERY_UPDATE;
+import static constant.Message.RESPONSE_CODE_NOT_EXPECTED;
 import static org.apache.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.CUSTOMER_SERVICE_2_0;
@@ -48,7 +49,7 @@ public class CRS_16_PasswordRecoveryTest extends BaseTest {
         Response response1 = customerService_2_0.checkRecoveryPasswordOnAuthorizationPage(getNewPassword, sessionToken);
         String newPassword = CustomerService_2_0_DataBaseRequest.getPasswordByCustomerId(customerId);
         assertAll(
-                () -> assertEquals(SC_OK, response1.getStatusCode()),
+                () -> assertEquals(SC_OK, response1.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertNotEquals(password, newPassword)
         );
         RecoveryPassword updateNewPassword = new RecoveryPassword(NEW_CUSTOMER_PASSWORD_RECOVERY_UPDATE);
@@ -75,7 +76,7 @@ public class CRS_16_PasswordRecoveryTest extends BaseTest {
         RecoveryPassword getNewPassword = new RecoveryPassword(NEW_CUSTOMER_PASSWORD_RECOVERY);
         Response response1 = customerService_2_0.checkRecoveryPasswordOnAuthorizationPageWithInvalidMethod(getNewPassword, sessionToken, httpMethod);
         assertAll(
-                () -> assertEquals(SC_METHOD_NOT_ALLOWED, response1.getStatusCode()),
+                () -> assertEquals(SC_METHOD_NOT_ALLOWED, response1.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> response1.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
@@ -100,7 +101,7 @@ public class CRS_16_PasswordRecoveryTest extends BaseTest {
         RecoveryPassword getNewPassword = new RecoveryPassword(newPassword);
         Response response1 = customerService_2_0.checkRecoveryPasswordOnAuthorizationPage(getNewPassword, sessionToken);
         assertAll(
-                () -> assertEquals(SC_BAD_REQUEST, response1.getStatusCode()),
+                () -> assertEquals(SC_BAD_REQUEST, response1.getStatusCode(),RESPONSE_CODE_NOT_EXPECTED),
                 () -> response1.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }

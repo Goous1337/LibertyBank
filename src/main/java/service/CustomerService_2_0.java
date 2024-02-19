@@ -199,17 +199,17 @@ public class CustomerService_2_0 {
 
 
     public Response changePasswordForUserUpdatedDatabase(String sessionToken, String newPassword) {
-        return sendSimpleRequest(PATCH, CHANGE_PASSWORD_2_0, getRP(HEADER, "Registration", sessionToken),
+        return sendSimpleRequest(PATCH, CHANGE_PASSWORD_2_0, getRP(HEADER, REGISTRATION_HEADER, sessionToken),
                 new PasswordChangeRequest(newPassword));
     }
 
     public Response changePasswordForUserUpdatedDatabaseWithInvalidMethod(String method, String sessionToken, String newPassword) {
-        return sendSimpleRequest(Method.valueOf(method), CHANGE_PASSWORD_2_0, getRP(HEADER, "Registration", sessionToken),
+        return sendSimpleRequest(Method.valueOf(method), CHANGE_PASSWORD_2_0, getRP(HEADER, REGISTRATION_HEADER, sessionToken),
                 new PasswordChangeRequest(newPassword));
     }
 
     public Response changePasswordForUserUpdatedDatabaseInvalidEndpoint(String sessionToken, String newPassword) {
-        return sendSimpleRequest(PATCH, INVALID_CHANGE_PASSWORD_2_0, getRP(HEADER, "Registration", sessionToken),
+        return sendSimpleRequest(PATCH, INVALID_CHANGE_PASSWORD_2_0, getRP(HEADER, REGISTRATION_HEADER, sessionToken),
                 new PasswordChangeRequest(newPassword));
     }
 }

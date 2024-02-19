@@ -15,6 +15,7 @@ import pojo.customerService_2_0.ChangeUserAccountPasswordByPhone;
 import pojo.customerService_2_0.UserAuthorizationByPhone;
 
 import static constant.CustomerService_2_0_Constants.*;
+import static constant.Message.RESPONSE_CODE_NOT_EXPECTED;
 import static org.apache.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.CUSTOMER_SERVICE_2_0;
@@ -43,7 +44,7 @@ public class CRS_14_ChangingPasswordInPersonalAccountTest extends BaseTest {
                 .checkListAbilityChangePasswordInPersonalAccount(changeUserAccountPasswordByPhone, refreshToken);
         String newPassword = CustomerService_2_0_DataBaseRequest.getCustomerPasswordById(customerId);
         assertAll(
-                () -> assertEquals(SC_OK, response.getStatusCode()),
+                () -> assertEquals(SC_OK, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertNotEquals(password, newPassword)
         );
         ChangeUserAccountPasswordByPhone resetPassword = new ChangeUserAccountPasswordByPhone
@@ -71,7 +72,7 @@ public class CRS_14_ChangingPasswordInPersonalAccountTest extends BaseTest {
         Response response = customerService_2_0.checkListAbilityChangePasswordInPersonalAccount
                 (changeUserAccountPasswordByPhone, refreshToken);
         assertAll(
-                () -> assertEquals(SC_UNSUPPORTED_MEDIA_TYPE, response.getStatusCode()),
+                () -> assertEquals(SC_UNSUPPORTED_MEDIA_TYPE, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
@@ -96,7 +97,7 @@ public class CRS_14_ChangingPasswordInPersonalAccountTest extends BaseTest {
         Response response = customerService_2_0
                 .checkListAbilityChangePasswordInPersonalAccount(changeUserAccountPasswordByPhone, refreshToken);
         assertAll(
-                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode()),
+                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
@@ -122,7 +123,7 @@ public class CRS_14_ChangingPasswordInPersonalAccountTest extends BaseTest {
                 .checkListSavingVerificationCodeWithInvalidMethods
                         (changeUserAccountPasswordByPhone, httpMethod, refreshToken);
         assertAll(
-                () -> assertEquals(SC_METHOD_NOT_ALLOWED, response.getStatusCode()),
+                () -> assertEquals(SC_METHOD_NOT_ALLOWED, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
