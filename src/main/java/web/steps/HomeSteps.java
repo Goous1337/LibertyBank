@@ -11,8 +11,9 @@ public class HomeSteps {
     }
 
     @Step("Кликнуть на кнопку с именем авторизованного пользователя")
-    public void clickUserMenu() {
+    public HomeSteps clickUserMenu() {
         homePage.clickUserMenu();
+        return this;
     }
 
     @Step("Кликнуть на кнопку 'Выйти'")
@@ -28,5 +29,11 @@ public class HomeSteps {
     @Step("Отображается надпись 'Войдите в Liberty Bank'")
     public boolean isUnauthorizedHomeDisplayed() {
         return homePage.isUnauthorizedHomeDisplayed();
+    }
+
+    @Step("Кликнуть на кнопку 'Безопасность'")
+    public HomeSteps clickSecurityBtn() {
+        homePage.clickSecurityBtn();
+        return this;
     }
 }

@@ -13,6 +13,8 @@ public class HomePage extends BasePage {
     private WebElement userPanel;
     @FindBy(xpath = "//h1[contains(text(),'Войдите в Liberty Bank')]")
     private WebElement unauthorizedHomePage;
+    @FindBy(xpath = "//a[@href='/customer/security']")
+    private WebElement securityBtn;
 
     public void clickUserMenu() {
         Waiters.waitElement(userMenuBtn).click();
@@ -22,6 +24,10 @@ public class HomePage extends BasePage {
         Waiters.waitElement(exitFromAccountBtn).click();
     }
 
+    public void clickSecurityBtn() {
+        Waiters.waitElement(securityBtn).click();
+    }
+
     public boolean isUserPanelDisplayed() {
         return userPanel.isDisplayed();
     }
@@ -29,4 +35,5 @@ public class HomePage extends BasePage {
     public boolean isUnauthorizedHomeDisplayed() {
         return unauthorizedHomePage.isDisplayed();
     }
+
 }
