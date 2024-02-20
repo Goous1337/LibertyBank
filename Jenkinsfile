@@ -22,7 +22,7 @@ pipeline {
                 }
             }
                 steps {
-                    sh 'mvn clean test -Dgroups=${TEST_TAGS}'
+                    sh 'mvn clean test -Dgroups=${TEST_TAGS} sonar:sonar'
                     sh 'ls -al'
                 }
         }
