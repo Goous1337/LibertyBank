@@ -18,6 +18,12 @@
         <allure.version>2.23.0</allure.version>
         <json.version>20220320</json.version>
         <junit.version>5.10.0</junit.version>
+        <!-- Sonar -->
+        <sonar.projectName>Liberty Bank - AQA - Web and API</sonar.projectName>
+        <sonar.qualitygate.wait>false</sonar.qualitygate.wait>
+        <sonar.host.url>http://sonarqube9.astondevs.ru:9000</sonar.host.url>
+        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+        <sonar.language>java</sonar.language>
     </properties>
 
     <dependencies>
