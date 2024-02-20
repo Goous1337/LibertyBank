@@ -6,6 +6,7 @@ pipeline {
         GIT_REPO_URL = 'https://git.astondevs.ru/aston/liberty-bank/liberty-bank-aqa-web-and-api.git'
         GIT_CREDS_ID = 'gitlab-aston'
         INNER_CONTAINER_WORK_DIR = "/usr/src/myapp"
+        SONAR_TOKEN = credentials('sonar-token')
     }
     stages{
 //         stage('Copy GIT') {
