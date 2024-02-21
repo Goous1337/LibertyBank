@@ -86,7 +86,7 @@ public class CRS_16_PasswordRecoveryTest extends BaseTest {
     @Tags({@Tag("API"), @Tag("Smoke")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2093")
     @ParameterizedTest
-    @CsvSource({" '' ", "null",}) //тест-кейс требует доработки
+    @CsvSource({" '' ", "null"}) //тест-кейс требует доработки
 
     public void checkFieldsRequiredWhenPasswordRecoveryOnAuthorizationPage(String newPassword) {
         String jsonSchemaPath = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";
@@ -101,7 +101,7 @@ public class CRS_16_PasswordRecoveryTest extends BaseTest {
         RecoveryPassword getNewPassword = new RecoveryPassword(newPassword);
         Response response1 = customerService_2_0.checkRecoveryPasswordOnAuthorizationPage(getNewPassword, sessionToken);
         assertAll(
-                () -> assertEquals(SC_BAD_REQUEST, response1.getStatusCode(),RESPONSE_CODE_NOT_EXPECTED),
+                () -> assertEquals(SC_BAD_REQUEST, response1.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> response1.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }

@@ -39,9 +39,9 @@ public class CRS_2_CheckRegistrationByPassportTest extends BaseTest {
             "1515, 457457, e670aafa-adfd-49e6-bdbf-b65d9e0c7d53, 79031553942"
     })
 
-    public void checkRegistrationByPassportRegisteredClient(String passportSeries,String passportNumber, String clientId, String phoneNumber) {
+    public void checkRegistrationByPassportRegisteredClient(String passportSeries, String passportNumber, String clientId, String phoneNumber) {
         String jsonSchemaPath = "schemas/customerService/CRS_2/checkRegistrationByPassportRegisteredClient.json";
-        Response response = customerService.checkRegistrationByPassport(passportSeries,passportNumber);
+        Response response = customerService.checkRegistrationByPassport(passportSeries, passportNumber);
         assertAll(
                 () -> assertEquals(SC_OK,
                         response.statusCode(),
@@ -66,7 +66,7 @@ public class CRS_2_CheckRegistrationByPassportTest extends BaseTest {
             "'151 ', 457457"
     })
 
-    public void checkRegistrationByPassportInvalidSeries(String passportSeries,String passportNumber) {
+    public void checkRegistrationByPassportInvalidSeries(String passportSeries, String passportNumber) {
         String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkRegistrationByPassport(passportSeries, passportNumber);
         assertAll(
@@ -87,15 +87,16 @@ public class CRS_2_CheckRegistrationByPassportTest extends BaseTest {
             "9999, 897777"
     })
 
-    public void checkRegistrationByPassportNotAClient(String passportSeries,String passportNumber) {
+    public void checkRegistrationByPassportNotAClient(String passportSeries, String passportNumber) {
         String jsonSchemaPath = "schemas/errorMessage.json";
-        Response response = customerService.checkRegistrationByPassport(passportSeries,passportNumber);
+        Response response = customerService.checkRegistrationByPassport(passportSeries, passportNumber);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
+
     @DisplayName("Проверка регистрации, если пользователь уже зарегистрирован в СДБО")
     @Description("Тест на проверку регистрации, если пользователь уже зарегистрирован в СДБО")
     @Tag("API")
@@ -104,10 +105,10 @@ public class CRS_2_CheckRegistrationByPassportTest extends BaseTest {
 
     public void checkRegistrationByPassportAlreadyRegisteredUser() {
         String jsonSchemaPath = "schemas/errorMessage.json";
-        HashMap<String,String> passport = getPassportWithCustomerStatus(2);
+        HashMap<String, String> passport = getPassportWithCustomerStatus(2);
         String passportSeries = passport.get("series");
         String passportNumber = passport.get("number");
-        Response response = customerService.checkRegistrationByPassport(passportSeries,passportNumber);
+        Response response = customerService.checkRegistrationByPassport(passportSeries, passportNumber);
         assertAll(
                 () -> assertEquals(SC_CONFLICT, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
@@ -126,9 +127,9 @@ public class CRS_2_CheckRegistrationByPassportTest extends BaseTest {
             "5151, 346363"
     })
 
-    public void checkRegistrationByPhoneBlockedUser(String passportSeries,String passportNumber) {
+    public void checkRegistrationByPhoneBlockedUser(String passportSeries, String passportNumber) {
         String jsonSchemaPath = "schemas/errorMessage.json";
-        Response response = customerService.checkRegistrationByPassport(passportSeries,passportNumber);
+        Response response = customerService.checkRegistrationByPassport(passportSeries, passportNumber);
         assertAll(
                 () -> assertEquals(SC_FORBIDDEN, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
@@ -175,7 +176,7 @@ public class CRS_2_CheckRegistrationByPassportTest extends BaseTest {
             "1515, '457457 '"
     })
 
-    public void checkRegistrationByPassportInvalidNumber(String passportSeries,String passportNumber) {
+    public void checkRegistrationByPassportInvalidNumber(String passportSeries, String passportNumber) {
         String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkRegistrationByPassport(passportSeries, passportNumber);
         assertAll(

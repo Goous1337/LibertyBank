@@ -1,7 +1,12 @@
 package api.customerService_2_0;
 
+import api.BaseTest;
 import dataBase.requests.CustomerService_2_0_DataBaseRequest;
+import io.qameta.allure.Description;
+import io.qameta.allure.TmsLink;
+import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
+import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -91,7 +96,7 @@ public class CRS_15_ChangeSecurityQuestionAnswerTest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2086")
     @Test()
 
-    public void checkUpdateQuestionAnswerInvalidUrl(){
+    public void checkUpdateQuestionAnswerInvalidUrl() {
         String customerId = CustomerService_2_0_DataBaseRequest.getAllCustomerId().get(0);
         String jsonSchemaPath = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";
         String securityQuestion = "Что измерят тахометр";

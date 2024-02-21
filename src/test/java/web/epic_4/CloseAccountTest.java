@@ -4,10 +4,7 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.WebDriver;
-import property.WebPropertiesReader;
 import web.BaseTest;
-import web.drivers.DriverManager;
 
 import static web.constans.AccountServiceConstants.*;
 import static web.constans.UrlConfig.ACCOUNTS_URL;

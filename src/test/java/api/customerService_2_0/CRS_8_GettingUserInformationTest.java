@@ -18,7 +18,8 @@ import pojo.customerService_2_0.UserAuthorizationByPhone;
 import static constant.CustomerService_2_0_Constants.*;
 import static constant.Message.ERROR_MESSAGE_NOT_EXPECTED;
 import static constant.Message.RESPONSE_CODE_NOT_EXPECTED;
-import static org.apache.hc.core5.http.HttpStatus.*;
+import static org.apache.hc.core5.http.HttpStatus.SC_METHOD_NOT_ALLOWED;
+import static org.apache.hc.core5.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CUSTOMER_SERVICE_2_0;
@@ -43,7 +44,7 @@ public class CRS_8_GettingUserInformationTest extends BaseTest {
         Response getToken = customerService_2_0.userAuthorizationByMobilePhone(userAuthorizationByPhone);
         String token = getToken.body().jsonPath().get("accessToken");
         String jsonSchemaPath = "schemas/customerService_2_0/CRS-8/checkInfoUser.json";
-        Response response = customerService_2_0.checkGettingUserInformation(customerId , token);
+        Response response = customerService_2_0.checkGettingUserInformation(customerId, token);
         assertAll(
                 () -> assertEquals(SC_OK, response.statusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))

@@ -5,8 +5,8 @@ import io.qameta.allure.Feature;
 import org.junit.jupiter.api.*;
 import web.BaseTest;
 
-import static web.constans.UrlConfig.ACCOUNTS_URL;
 import static web.constans.AccountServiceConstants.*;
+import static web.constans.UrlConfig.ACCOUNTS_URL;
 
 @Tag("Web")
 @Epic("4 - Счета")
