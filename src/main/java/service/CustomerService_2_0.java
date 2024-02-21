@@ -39,14 +39,14 @@ public class CustomerService_2_0 {
         return sendSimpleRequest(PATCH, CUSTOMER_SECURITY, customerService_2_0_mobile0Mobile);
     }
 
-    public Response  checkUpdateQuestionAnswer(String question, String answer,String customerId){
-        List<RequestParam> params = List.of(getRP(HEADER, CONTENT_TYPE, APPLICATION_JSON),
+    public Response  checkUpdateQuestionAnswer(String question, String answer,String customerId, String refreshToken){
+        List<RequestParam> params = List.of(getRP(HEADER, CONTENT_TYPE, APPLICATION_JSON),getRP(HEADER, AUTHORIZATION, BEARER_TOKEN + refreshToken),
                 getRP(PARAMETER,PARAMETER_CUSTOMER_ID, customerId));
         return sendSimpleRequest(PATCH, QUESTION_ANSWER_2_0, params, new UserQuestion(question, answer));
     }
 
-    public Response updateQuestionAnswerInvalidHttpMethod(String question, String answer, String invalidHttpMethod) {
-        List<RequestParam> params = List.of(getRP(HEADER, CONTENT_TYPE, APPLICATION_JSON));
+    public Response updateQuestionAnswerInvalidHttpMethod(String question, String answer, String invalidHttpMethod,String refreshToken) {
+        List<RequestParam> params = List.of(getRP(HEADER, CONTENT_TYPE, APPLICATION_JSON),getRP(HEADER, AUTHORIZATION, BEARER_TOKEN + refreshToken));
         return sendSimpleRequest(Method.valueOf(invalidHttpMethod), QUESTION_ANSWER_2_0, params, new UserQuestion(question, answer));
     }
 
