@@ -83,6 +83,7 @@ public class AbsInfoServiceDataBaseRequest {
         List<String> uuid = getDBConnection(ABS_INFO_SERVICE).queryForList(sql, String.class);
         return uuid;
     }
+
     public static String getUuid() {
         String sql = "SELECT uuid FROM bank_office WHERE id = 5";
         String uuid = getDBConnection(ABS_INFO_SERVICE).queryForObject(sql, String.class);

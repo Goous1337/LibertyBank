@@ -74,7 +74,7 @@ public class CRS_6_UpdateClientEmailTest extends BaseTest {
         Response response = customerService.checkUnsuccessfulUpdateEmailInvalidHttpMethod(httpMethod,
                 customerId, email);
         assertAll(
-                ()->assertEquals(SC_METHOD_NOT_ALLOWED, response.statusCode(),
+                () -> assertEquals(SC_METHOD_NOT_ALLOWED, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
@@ -108,7 +108,7 @@ public class CRS_6_UpdateClientEmailTest extends BaseTest {
         String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkUpdateClientEmail(customerId, email);
         assertAll(
-                ()->assertEquals(SC_BAD_REQUEST, response.statusCode(),
+                () -> assertEquals(SC_BAD_REQUEST, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
@@ -127,7 +127,7 @@ public class CRS_6_UpdateClientEmailTest extends BaseTest {
         String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkUpdateClientEmailInvalidURL(url, customerId, email);
         assertAll(
-                ()->assertEquals(SC_NOT_FOUND, response.statusCode(),
+                () -> assertEquals(SC_NOT_FOUND, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
@@ -148,7 +148,7 @@ public class CRS_6_UpdateClientEmailTest extends BaseTest {
         String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkUpdateClientEmail(customerId, email);
         assertAll(
-                ()->assertEquals(SC_INTERNAL_SERVER_ERROR, response.statusCode(),
+                () -> assertEquals(SC_INTERNAL_SERVER_ERROR, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
@@ -169,7 +169,7 @@ public class CRS_6_UpdateClientEmailTest extends BaseTest {
         String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkUpdateClientEmail(customerId, email);
         assertAll(
-                ()->assertEquals(SC_UNAUTHORIZED, response.statusCode(),
+                () -> assertEquals(SC_UNAUTHORIZED, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );

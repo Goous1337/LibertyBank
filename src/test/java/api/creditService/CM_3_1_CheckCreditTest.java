@@ -11,7 +11,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static org.apache.http.HttpStatus.*;
+import static org.apache.http.HttpStatus.SC_OK;
+import static org.apache.http.HttpStatus.SC_UNAUTHORIZED;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CREDIT_SERVICE;
@@ -20,14 +21,15 @@ public class CM_3_1_CheckCreditTest extends BaseTest {
     {
         RestAssured.baseURI = CREDIT_SERVICE;
     }
+
     @DisplayName("Получение информации по действующему кредиту пользователя")
     @Description("Данный тест-кейс направлен на проверку CM 3.1 по US 3.1 на получение краткой информации по действующим кредитам авторизованного пользователя")
     @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-84")
     @Test
     public void successfulGetUserCreditInfo() {
-       Response response = creditService.checkCreditInfo();
-       String jsonSchemaPath ="schemas/creditService/CM_3_1/successfulGetUserCreditInfo.json";
+        Response response = creditService.checkCreditInfo();
+        String jsonSchemaPath = "schemas/creditService/CM_3_1/successfulGetUserCreditInfo.json";
         assertAll(
                 () -> assertEquals(SC_OK,
                         response.statusCode(),

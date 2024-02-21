@@ -9,7 +9,8 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
 
 import static org.apache.hc.core5.http.HttpStatus.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CREDIT_SERVICE;
 
 @DisplayName("СM 3.7 Отзыв кредитной заявки")
@@ -24,7 +25,7 @@ public class CM_3_7_CheckWithdrawalOfLoanApplicationTest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-764")
     @Test
     public void checkWithdrawalOfLoanApplication() {
-        String jsonSchemaPath ="schemas/creditService/CM_3_7/checkWithdrawalOfLoanApplication.json";
+        String jsonSchemaPath = "schemas/creditService/CM_3_7/checkWithdrawalOfLoanApplication.json";
         Response responseReg = creditService.checkListApplyingLoan
                 (3, 2500000, 20, "RUB", "2023-11-28"
                         , 60000, 30000, "8698345212");

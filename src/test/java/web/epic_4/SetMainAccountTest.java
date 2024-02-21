@@ -60,7 +60,7 @@ public class SetMainAccountTest extends BaseTest {
     @Order(3)
     @TmsLink("LIB2-2456")
     @DisplayName("Отсутствие статуса 'Основной счет' после блокирования счета")
-    public void  mainAccountStatusNotDisplayedAfterBlocked() {
+    public void mainAccountStatusNotDisplayedAfterBlocked() {
         accountSteps.clickAccount();
         accountInfoSteps.clickDotsInfoButton();
         accountInfoSteps.selectBlockAccount();

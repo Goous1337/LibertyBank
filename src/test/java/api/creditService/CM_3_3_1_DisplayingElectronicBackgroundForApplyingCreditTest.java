@@ -10,7 +10,8 @@ import org.junit.jupiter.api.*;
 import service.CreditService;
 
 import static org.apache.hc.core5.http.HttpStatus.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CREDIT_SERVICE;
 
 @DisplayName("CM 3.3.1 Отображение электронной формы для оформления заявки на кредит")
@@ -25,8 +26,8 @@ public class CM_3_3_1_DisplayingElectronicBackgroundForApplyingCreditTest extend
     @TmsLink("https://jira.astondevs.ru/secure/StructureBoard.jspa?s=13#")
     @Test
     public void checkDisplayingElectronicBackgroundForApplyingCreditValidToken() {
-        String jsonSchemaPath ="schemas/creditService/CM_3_3_1/checkDisplayingElectronicBackgroundForApplyingCreditValidToken.json";
-        Response response = CreditService.checkGetRequestDisplayingElectronicBackground("3");//TODO сделать для всех существующих productId
+        String jsonSchemaPath = "schemas/creditService/CM_3_3_1/checkDisplayingElectronicBackgroundForApplyingCreditValidToken.json";
+        Response response = CreditService.checkGetRequestDisplayingElectronicBackground("3"); //TODO сделать для всех существующих productId
         assertAll(
                 () -> assertEquals(SC_OK, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
@@ -57,7 +58,7 @@ public class CM_3_3_1_DisplayingElectronicBackgroundForApplyingCreditTest extend
     @Test
     public void checkDisplayingElectronicBackgroundForApplyingCreditValidTokenWithoutParameters() {
         String jsonSchemaPath = "schemas/errorMessage.json";
-        Response response = CreditService.checkGetRequestDisplayingElectronicBackground("165");//TODO сделать для несуществующего productId
+        Response response = CreditService.checkGetRequestDisplayingElectronicBackground("165"); //TODO сделать для несуществующего productId
         assertAll(
                 () -> assertEquals(SC_NOT_FOUND, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
