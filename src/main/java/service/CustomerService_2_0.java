@@ -192,7 +192,6 @@ public class CustomerService_2_0 {
     }
 
     public Response updateEmailForClientWithHttpMethod(String token, String method, UpdatedEmail email) {
-        System.out.println(Method.valueOf(method));
         return sendSimpleRequest(Method.valueOf(method), CUSTOMER_2_0_EMAIL, getRP(HEADER, AUTHORIZATION,
                 BEARER_TOKEN + token), email);
     }
@@ -211,5 +210,27 @@ public class CustomerService_2_0 {
     public Response changePasswordForUserUpdatedDatabaseInvalidEndpoint(String sessionToken, String newPassword) {
         return sendSimpleRequest(PATCH, INVALID_CHANGE_PASSWORD_2_0, getRP(HEADER, REGISTRATION_HEADER, sessionToken),
                 new PasswordChangeRequest(newPassword));
+    }
+
+    public Response changeStatusSMSNotification(String token, NotificationStatus status) {
+        return sendSimpleRequest(PATCH, CUSTOMER_2_0_NOTIFICATION_SMS, getRP(HEADER, AUTHORIZATION,
+                BEARER_TOKEN + token), status);
+    }
+
+    public Response changeStatusSMSNotificationWithIncorrectURL(String token, NotificationStatus status) {
+        return sendSimpleRequest(PATCH, INCORRECT_CUSTOMER_2_0_NOTIFICATION_SMS, getRP(HEADER, AUTHORIZATION,
+                BEARER_TOKEN + token), status);
+    }
+
+    public Response changeStatusSMSNotificationWithHttpMethod(String token, String method, NotificationStatus status) {
+        return sendSimpleRequest(Method.valueOf(method), CUSTOMER_2_0_NOTIFICATION_SMS, getRP(HEADER, AUTHORIZATION,
+                BEARER_TOKEN + token), status);
+    }
+
+    public Response changeStatusSMSNotificationWithValue(String token, Object value) {
+        String body = createBody(Map.of(PARAMETER_NOTIFICATION_STATUS, value));
+        List<RequestParam> params = List.of(getRP(HEADER, CONTENT_TYPE, APPLICATION_JSON), getRP(HEADER, AUTHORIZATION, BEARER_TOKEN + token),
+                getRP(BODY, SPACE, body));
+        return sendSimpleRequest(PATCH, CUSTOMER_2_0_NOTIFICATION_SMS, params);
     }
 }

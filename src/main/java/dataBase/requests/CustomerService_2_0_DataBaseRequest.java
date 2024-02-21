@@ -153,4 +153,10 @@ public class CustomerService_2_0_DataBaseRequest {
         Integer passportId = getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sql, Integer.class);
         return passportId;
     }
+
+    public static Boolean getSMSStatusFromMobile(String mobile) {
+        String sql = "SELECT sms_notification FROM customer WHERE mobile_phone = '"+ mobile + "'";
+        return getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sql, Boolean.class);
+    }
+
 }
