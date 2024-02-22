@@ -4,6 +4,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import web.helpers.Waiters;
 
+import static web.helpers.Waiters.waitElementWithOwnTime;
+
 public class DropDownAccountMenuPage extends BasePage {
     @FindBy(xpath = "//a[@href='/logout']")
     private WebElement exitFromAccountBtn;
@@ -41,14 +43,14 @@ public class DropDownAccountMenuPage extends BasePage {
 
     public void checkVisibilityOfUserPanelButtons() {
         int wait = 5;
-        Waiters.waitElementWithOwnTime(contactBankBtn, wait);
-        Waiters.waitElementWithOwnTime(securityBtn, wait);
-        Waiters.waitElementWithOwnTime(servicePackagesBtn, wait);
-        Waiters.waitElementWithOwnTime(legalInfoBtn, wait);
-        Waiters.waitElementWithOwnTime(personalDateBtn, wait);
-        Waiters.waitElementWithOwnTime(notificationBtn, wait);
-        Waiters.waitElementWithOwnTime(securityBtn, wait);
-        Waiters.waitElementWithOwnTime(exitFromAccountBtn, wait);
-        Waiters.waitElementWithOwnTime(userName, wait);
+        waitElementWithOwnTime(contactBankBtn, wait);
+        waitElementWithOwnTime(securityBtn, wait);
+        waitElementWithOwnTime(servicePackagesBtn, wait);
+        waitElementWithOwnTime(legalInfoBtn, wait);
+        waitElementWithOwnTime(personalDateBtn, wait);
+        waitElementWithOwnTime(notificationBtn, wait);
+        waitElementWithOwnTime(securityBtn, wait);
+        waitElementWithOwnTime(exitFromAccountBtn, wait);
+        waitElementWithOwnTime(userName, wait);
     }
 }
