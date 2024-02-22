@@ -2,7 +2,8 @@ package web.pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import web.helpers.Waiters;
+
+import static web.helpers.Waiters.waitElement;
 
 public class ChangePasswordPage extends BasePage {
     @FindBy(xpath = "//button[contains(text(),'Отмена')]")
@@ -11,7 +12,7 @@ public class ChangePasswordPage extends BasePage {
     private WebElement changePasswordPage;
 
     public void clickCancelPasswordChangeBtn() {
-        Waiters.waitElement(cancelPasswordChangeBtn).click();
+        waitElement(cancelPasswordChangeBtn).click();
     }
 
     public boolean isChangePasswordPresent() {
