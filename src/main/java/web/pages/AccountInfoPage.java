@@ -75,7 +75,7 @@ public class AccountInfoPage extends BasePage {
         return accountName.getText();
     }
 
-    public void clickPencilImage () {
+    public void clickPencilImage() {
         pencilImage.click();
     }
 

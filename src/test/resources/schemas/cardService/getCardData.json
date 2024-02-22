@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "typeName": {
+      "type": "string"
+    },
+    "cardStatus": {
+      "type": "string"
+    },
+    "paymentSystem": {
+      "type": "string"
+    },
+    "level": {
+      "type": "string"
+    },
+    "balance": {
+      "type": "number"
+    },
+    "currency": {
+      "type": "string"
+    },
+    "cardNumber": {
+      "type": "string"
+    },
+    "securityCode": {
+      "type": "string"
+    },
+    "expiredAt": {
+      "type": "string"
+    },
+    "closedAt": {
+      "type": "null"
+    },
+    "favourite": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "typeName",
+    "cardStatus",
+    "paymentSystem",
+    "level",
+    "balance",
+    "currency",
+    "cardNumber",
+    "securityCode",
+    "expiredAt",
+    "closedAt",
+    "favourite"
+  ]
+}

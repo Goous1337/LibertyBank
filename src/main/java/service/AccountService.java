@@ -9,19 +9,17 @@ import pojo.accountService.ChangeMainAccountRequest;
 import static api.core.ApiClient.sendRequestWithoutParams;
 import static api.core.ApiClient.sendSimpleRequest;
 import static api.core.RequestParam.getRP;
-import static api.core.RequestParamType.*;
+import static api.core.RequestParamType.HEADER;
 import static constant.AccountServiceConstants.*;
 import static constant.ApiEndpoints.ACCOUNTS_LIST;
 import static constant.ApiEndpoints.ACCOUNTS_LIST_BY_CUSTOMER_ID;
-import static io.restassured.http.Method.GET;
-import static io.restassured.http.Method.POST;
-import static io.restassured.http.Method.PATCH;
+import static io.restassured.http.Method.*;
 
 public class AccountService {
 
     public Response getAccountsList() {
         return sendSimpleRequest(GET, ACCOUNTS_LIST,
-                    getRP(HEADER, HEADER_CUSTOMER_ID, VALID_CUSTOMER_ID));
+                getRP(HEADER, HEADER_CUSTOMER_ID, VALID_CUSTOMER_ID));
     }
 
     public Response getAccountsListByCustomerIdWithNoAccounts() {

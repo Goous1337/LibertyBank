@@ -128,6 +128,6 @@ public class DepositService {
     public Response checkSendingByEmail(String eMail, Integer id) {
         return sendSimpleRequest(POST, DEPOSIT_SEND_EMAIL,
                 getRP(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE),
-                new DepositCheckEmail(eMail,id));
+                new DepositCheckEmail(eMail, id));
     }
 }

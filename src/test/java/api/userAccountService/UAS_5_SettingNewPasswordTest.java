@@ -12,11 +12,10 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static constant.CustomerServiceConstants.REGISTERED_PHONE_NUMBER;
-
-
 import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.URL_USER_ACCOUNT_SERVICE;
+
 @DisplayName("UAS-5 Установление нового пароля")
 public class UAS_5_SettingNewPasswordTest extends BaseTest {
 

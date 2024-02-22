@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "array",
+  "items": [
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "firstTwelveNumbers": {
+          "type": "string"
+        },
+        "lastFourNumbers": {
+          "type": "string"
+        },
+        "account": {
+          "type": "string"
+        },
+        "typeName": {
+          "type": "string"
+        },
+        "paymentSystem": {
+          "type": "string"
+        },
+        "balance": {
+          "type": "number"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "closedAt": {
+          "type": "string"
+        },
+        "level": {
+          "type": "string"
+        },
+        "cardStatus": {
+          "type": "string"
+        },
+        "credit": {
+          "type": "boolean"
+        },
+        "favourite": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "firstTwelveNumbers",
+        "lastFourNumbers",
+        "account",
+        "typeName",
+        "paymentSystem",
+        "balance",
+        "currency",
+        "closedAt",
+        "level",
+        "cardStatus",
+        "credit",
+        "favourite"
+      ]
+    }
+  ]
+}
+

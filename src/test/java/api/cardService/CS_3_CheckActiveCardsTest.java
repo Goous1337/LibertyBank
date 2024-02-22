@@ -15,8 +15,8 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CARD_SERVICE;
 
-public class CS_1_CheckAllCardProductsTest extends BaseTest {
-    public static final String JSON_SCHEMA = "schemas/cardService/checkAllCardProducts.json";
+public class CS_3_CheckActiveCardsTest extends BaseTest {
+    public static String JSON_SCHEMA_WITH_CARDS = "schemas/cardService/checkActiveCards.json";
 
     {
         RestAssured.baseURI = CARD_SERVICE;
@@ -24,14 +24,14 @@ public class CS_1_CheckAllCardProductsTest extends BaseTest {
 
     @Test
     @Tag("API")
-    @TmsLink("LIB2-2769")
-    @DisplayName("Просмотр карточных продуктов")
-    @Description("Тест направлен на проверку просмотра карточных продуктов")
-    public void checkAllCardProducts() {
-        Response response = cardService.getCardsInfo();
+    @TmsLink("LIB2-40")
+    @DisplayName("Просмотр активных карт")
+    @Description("Тест направлен на проверку возможности просмотра активных карт")
+    public void checkActiveCardsWithActiveCards() {
+        Response response = cardService.getActiveCardsInfoUserHaveCards();
         assertAll(
                 () -> assertEquals(SC_OK, response.statusCode(), "Код ответа не соответствует ожидаемому"),
-                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(JSON_SCHEMA))
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(JSON_SCHEMA_WITH_CARDS))
         );
     }
 }

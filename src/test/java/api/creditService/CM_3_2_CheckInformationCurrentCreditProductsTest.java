@@ -12,7 +12,8 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static org.apache.hc.core5.http.HttpStatus.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CREDIT_SERVICE;
 
 @DisplayName("Получение информации о кредитных продуктах банка")
@@ -31,7 +32,7 @@ public class CM_3_2_CheckInformationCurrentCreditProductsTest extends BaseTest {
 
     public void checkInformationCurrentCreditProducts() {
         Response response = creditService.checkListCurrentCreditProducts();
-        String jsonSchemaPath ="schemas/creditService/CM_3_2/checkInformationCurrentCreditProducts.json";
+        String jsonSchemaPath = "schemas/creditService/CM_3_2/checkInformationCurrentCreditProducts.json";
         assertAll(
                 () -> assertEquals(SC_OK,
                         response.statusCode(),

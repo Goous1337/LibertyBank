@@ -1,9 +1,8 @@
 package model.response;
 
-import org.json.JSONObject;
-
 import io.restassured.http.Headers;
 import lombok.Getter;
+import org.json.JSONObject;
 
 /**
  * Возвращаемый тип HTTP-запроса

@@ -19,6 +19,7 @@ import pojo.customerService_2_0.UserVerificationWithInvalidTypeVerificationCode;
 import java.sql.SQLException;
 
 import static constant.CustomerService_2_0_Constants.*;
+import static constant.Message.RESPONSE_CODE_NOT_EXPECTED;
 import static org.apache.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.CUSTOMER_SERVICE_2_0;
@@ -41,7 +42,7 @@ public class CRS_4_UserVerificationByCodeTest extends BaseTest {
         Response response = customerService_2_0.checkListUserVerificationWithValidData
                 (new UserVerificationWithCode(CUSTOMER_USER_PHONE, verificationCode));
         assertAll(
-                () -> assertEquals(SC_OK, response.getStatusCode()),
+                () -> assertEquals(SC_OK, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertNotNull(response.jsonPath().get("sessionToken"))
         );
         CustomerService_2_0_DataBaseRequest.resetTimerOfVerificationCodeById(customerId);
@@ -62,7 +63,7 @@ public class CRS_4_UserVerificationByCodeTest extends BaseTest {
         Response response = customerService_2_0.checkListUserVerificationWithValidData
                 (new UserVerificationWithCode(UN_EXIST_CUSTOMER_USER_PHONE, verificationCode));
         assertAll(
-                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode()),
+                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
         CustomerService_2_0_DataBaseRequest.resetTimerOfVerificationCodeById(customerId);
@@ -84,7 +85,7 @@ public class CRS_4_UserVerificationByCodeTest extends BaseTest {
         Response response = customerService_2_0.checkListUserVerificationWithValidData
                 (new UserVerificationWithCode(CUSTOMER_MOBILE_PHONE, verificationCode));
         assertAll(
-                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode()),
+                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
         CustomerService_2_0_DataBaseRequest.resetTimerOfVerificationCodeById(customerId);
@@ -107,7 +108,7 @@ public class CRS_4_UserVerificationByCodeTest extends BaseTest {
         Response response = customerService_2_0.checkListUserVerificationWithInvalidMethod
                 (new UserVerificationWithCode(mobilePhone, verificationCode), "PATCH");
         assertAll(
-                () -> assertEquals(SC_METHOD_NOT_ALLOWED, response.getStatusCode()),
+                () -> assertEquals(SC_METHOD_NOT_ALLOWED, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
         CustomerService_2_0_DataBaseRequest.resetTimerOfVerificationCodeById(customerId);
@@ -138,7 +139,7 @@ public class CRS_4_UserVerificationByCodeTest extends BaseTest {
         Response response = customerService_2_0.checkListUserVerificationWithValidData
                 (new UserVerificationWithCode(mobilePhone, verificationCode));
         assertAll(
-                () -> assertEquals(SC_NOT_ACCEPTABLE, response.getStatusCode()),
+                () -> assertEquals(SC_NOT_ACCEPTABLE, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertEquals(0, wrongAttemptsValue),
                 () -> assertEquals(0, smsSentCounterValue),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
@@ -174,7 +175,7 @@ public class CRS_4_UserVerificationByCodeTest extends BaseTest {
         Response response = customerService_2_0.checkListUserVerificationWithValidData
                 (new UserVerificationWithCode(mobilePhone, verificationCode));
         assertAll(
-                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode()),
+                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
@@ -197,10 +198,10 @@ public class CRS_4_UserVerificationByCodeTest extends BaseTest {
         Response secondResponse = customerService_2_0.checkListUserVerificationWithInvalidTypeVerificationCode
                 (new UserVerificationWithInvalidTypeVerificationCode(mobilePhone, INVALID_TYPE_CUSTOMER_VERIFICATION_CODE));
         assertAll(
-                () -> assertEquals(SC_UNSUPPORTED_MEDIA_TYPE, firstResponse.getStatusCode()),
+                () -> assertEquals(SC_UNSUPPORTED_MEDIA_TYPE, firstResponse.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> firstResponse.then().assertThat().body(JsonSchemaValidator
                         .matchesJsonSchemaInClasspath(jsonSchemaPath)),
-                () -> assertEquals(SC_UNSUPPORTED_MEDIA_TYPE, secondResponse.getStatusCode()),
+                () -> assertEquals(SC_UNSUPPORTED_MEDIA_TYPE, secondResponse.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> secondResponse.then().assertThat().body(JsonSchemaValidator
                         .matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
@@ -232,7 +233,7 @@ public class CRS_4_UserVerificationByCodeTest extends BaseTest {
         Response firstResponse = customerService_2_0.checkListUserVerificationWithValidData
                 (new UserVerificationWithCode(mobilePhone, verificationCode));
         assertAll(
-                () -> assertEquals(SC_OK, firstResponse.getStatusCode()),
+                () -> assertEquals(SC_OK, firstResponse.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertEquals(1, wrongAttemptsValue),
                 () -> assertNotNull(firstResponse.jsonPath().get("sessionToken"))
         );
@@ -248,7 +249,7 @@ public class CRS_4_UserVerificationByCodeTest extends BaseTest {
         Response secondResponse = customerService_2_0.checkListUserVerificationWithValidData
                 (new UserVerificationWithCode(mobilePhone, secondVerificationCode));
         assertAll(
-                () -> assertEquals(SC_OK, secondResponse.getStatusCode()),
+                () -> assertEquals(SC_OK, secondResponse.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertEquals(2, secondWrongAttemptsValue),
                 () -> assertNotNull(secondResponse.jsonPath().get("sessionToken"))
         );
