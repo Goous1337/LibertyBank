@@ -39,8 +39,7 @@ public class CRS_15_ChangeSecurityQuestionAnswerTest extends BaseTest {
     @Test
 
     public void successfulUpdateQuestionAnswer() {
-        UserAuthorizationByPhone userAuthorizationByPhone = new UserAuthorizationByPhone
-                (CUSTOMER_USER_PHONE, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE);
+        UserAuthorizationByPhone userAuthorizationByPhone = new UserAuthorizationByPhone(CUSTOMER_USER_PHONE, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE);
         Response getToken = customerService_2_0.userAuthorizationByMobilePhone(userAuthorizationByPhone);
         String refreshToken = getToken.jsonPath().get("refreshToken");
 
@@ -48,13 +47,8 @@ public class CRS_15_ChangeSecurityQuestionAnswerTest extends BaseTest {
         String jsonSchemaPath = "schemas/customerService_2_0/CRS-15/updateQuestionAnswer.json";
         String securityQuestion = "Что измерят тахометр";
         String securityAnswer = "Скорость";
-        Response response = customerService_2_0.checkUpdateQuestionAnswer(securityQuestion, securityAnswer, customerId,refreshToken);
-        assertAll(
-                () -> assertEquals(HttpStatus.SC_OK,
-                        response.statusCode(),
-                        RESPONSE_CODE_NOT_EXPECTED),
-                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
-        );
+        Response response = customerService_2_0.checkUpdateQuestionAnswer(securityQuestion, securityAnswer, customerId, refreshToken);
+        assertAll(() -> assertEquals(HttpStatus.SC_OK, response.statusCode(), RESPONSE_CODE_NOT_EXPECTED), () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath)));
     }
 
     @DisplayName("Изменение контрольного вопроса/ответа, используя некорректный метод запроса")
@@ -62,27 +56,17 @@ public class CRS_15_ChangeSecurityQuestionAnswerTest extends BaseTest {
     @Tags({@Tag("API")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2084")
     @ParameterizedTest(name = "Http метод: {0}")
-    @CsvSource({
-            "POST",
-            "GET",
-            "PUT",
-            "DELETE"
-    })
+    @CsvSource({"POST", "GET", "PUT", "DELETE"})
     public void checkUpdateQuestionAnswerInvalidHttpMethod(String invalidHttpMethod) {
-        UserAuthorizationByPhone userAuthorizationByPhone = new UserAuthorizationByPhone
-                (CUSTOMER_USER_PHONE, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE);
+        UserAuthorizationByPhone userAuthorizationByPhone = new UserAuthorizationByPhone(CUSTOMER_USER_PHONE, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE);
         Response getToken = customerService_2_0.userAuthorizationByMobilePhone(userAuthorizationByPhone);
         String refreshToken = getToken.jsonPath().get("refreshToken");
 
         String jsonSchemaPath = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";
         String securityQuestion = "Что измерят тахометр";
         String securityAnswer = "Скорость";
-        Response response = customerService_2_0.updateQuestionAnswerInvalidHttpMethod(securityQuestion, securityAnswer, invalidHttpMethod,refreshToken);
-        assertAll(
-                () -> assertEquals(SC_METHOD_NOT_ALLOWED, response.statusCode(),
-                        RESPONSE_CODE_NOT_EXPECTED),
-                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
-        );
+        Response response = customerService_2_0.updateQuestionAnswerInvalidHttpMethod(securityQuestion, securityAnswer, invalidHttpMethod, refreshToken);
+        assertAll(() -> assertEquals(SC_METHOD_NOT_ALLOWED, response.statusCode(), RESPONSE_CODE_NOT_EXPECTED), () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath)));
     }
 
     @DisplayName("Изменение контрольного вопроса/ответа, используя невалидный (не существующий) URL")
@@ -97,12 +81,7 @@ public class CRS_15_ChangeSecurityQuestionAnswerTest extends BaseTest {
         String securityQuestion = "Что измерят тахометр";
         String securityAnswer = "Скорость";
         Response response = customerService_2_0.checkUpdateQuestionAnswerInvalidUrl(securityQuestion, securityAnswer, customerId);
-        assertAll(
-                () -> assertEquals(HttpStatus.SC_NOT_FOUND,
-                        response.statusCode(),
-                        RESPONSE_CODE_NOT_EXPECTED),
-                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
-        );
+        assertAll(() -> assertEquals(HttpStatus.SC_NOT_FOUND, response.statusCode(), RESPONSE_CODE_NOT_EXPECTED), () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath)));
     }
 
     @DisplayName("Изменение контрольного вопроса/ответа (переданы пустые/невалидные данные)")
@@ -110,24 +89,14 @@ public class CRS_15_ChangeSecurityQuestionAnswerTest extends BaseTest {
     @Tags({@Tag("API")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2087")
     @ParameterizedTest(name = "Вопрос: {1}")
-    @CsvSource({
-            "'', ''",
-            "аааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааа," +
-                    ", аааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааа"
-    })
+    @CsvSource({"'', ''", "аааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааа," + ", аааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааа"})
     public void checkUpdateQuestionAnswerInvalidInvalidData(String securityQuestion, String securityAnswer) {
-        UserAuthorizationByPhone userAuthorizationByPhone = new UserAuthorizationByPhone
-                (CUSTOMER_USER_PHONE, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE);
+        UserAuthorizationByPhone userAuthorizationByPhone = new UserAuthorizationByPhone(CUSTOMER_USER_PHONE, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE);
         Response getToken = customerService_2_0.userAuthorizationByMobilePhone(userAuthorizationByPhone);
         String refreshToken = getToken.jsonPath().get("refreshToken");
         String customerId = CustomerService_2_0_DataBaseRequest.getAllCustomerId().get(0);
         String jsonSchemaPath = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";
-        Response response = customerService_2_0.checkUpdateQuestionAnswer(securityQuestion, securityAnswer, customerId,refreshToken);
-        assertAll(
-                () -> assertEquals(SC_BAD_REQUEST,
-                        response.statusCode(),
-                        RESPONSE_CODE_NOT_EXPECTED),
-                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
-        );
+        Response response = customerService_2_0.checkUpdateQuestionAnswer(securityQuestion, securityAnswer, customerId, refreshToken);
+        assertAll(() -> assertEquals(SC_BAD_REQUEST, response.statusCode(), RESPONSE_CODE_NOT_EXPECTED), () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath)));
     }
 }
