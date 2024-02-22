@@ -1,13 +1,18 @@
 package web.steps;
 
 import io.qameta.allure.Step;
+import web.pages.DropDownAccountMenuPage;
 import web.pages.HomePage;
+
+import java.util.List;
 
 public class HomeSteps {
     protected HomePage homePage;
+    protected DropDownAccountMenuPage dropDownAccountMenuPage;
 
     public HomeSteps() {
         homePage = new HomePage();
+        dropDownAccountMenuPage = new DropDownAccountMenuPage();
     }
 
     @Step("Кликнуть на кнопку с именем авторизованного пользователя")
@@ -18,12 +23,12 @@ public class HomeSteps {
 
     @Step("Кликнуть на кнопку 'Выйти'")
     public void clickExitFromUserAccount() {
-        homePage.exitFromUserAccount();
+        dropDownAccountMenuPage.exitFromUserAccount();
     }
 
     @Step("Отображается выпадающие меню пользователя")
     public boolean isUserPanelDisplayed() {
-        return homePage.isUserPanelDisplayed();
+        return dropDownAccountMenuPage.isUserPanelDisplayed();
     }
 
     @Step("Отображается надпись 'Войдите в Liberty Bank'")
@@ -33,7 +38,7 @@ public class HomeSteps {
 
     @Step("Кликнуть на кнопку 'Безопасность'")
     public HomeSteps clickSecurityBtn() {
-        homePage.clickSecurityBtn();
+        dropDownAccountMenuPage.clickSecurityBtn();
         return this;
     }
 }
