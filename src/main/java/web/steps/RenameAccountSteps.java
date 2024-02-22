@@ -36,13 +36,18 @@ public class RenameAccountSteps {
         return renameAccountPage.isEmptyMessageDisplayed();
     }
 
-    @Step("Отображается сообщение 'Вы не можете ввести более 30 символов'")
-    public boolean isMoreThenThirtyCharactersMessageDisplayed() {
-        return renameAccountPage.isMoreThenThirtyCharactersMessageDisplayed();
+    @Step("Отображается сообщение 'Измените название поля'")
+    public boolean isChangeFieldNameMessageDisplayed() {
+        return renameAccountPage.isChangeFieldNameMessageDisplayed();
     }
 
     @Step("Отображается сообщение 'Вы ввели недопустимые символы'")
     public boolean isInvalidCharactersMessageDisplayed() {
         return renameAccountPage.isInvalidCharactersMessageDisplayed();
+    }
+
+    @Step("Отображается сообщение 'Вы не можете ввести больше 30 символов'")
+    public boolean isMoreThan30SymbolsMessageDisplayed() {
+        return renameAccountPage.isMoreThenThirtyCharactersMessageDisplayed();
     }
 }

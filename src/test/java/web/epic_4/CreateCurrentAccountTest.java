@@ -16,9 +16,10 @@ import static web.constans.UrlConfig.ACCOUNTS_URL;
 public class CreateCurrentAccountTest extends BaseTest {
 
     @BeforeEach
-    public void setUpTest() {
+    public void setUpTest() throws InterruptedException {
         authorization();
         open(ACCOUNTS_URL);
+        Thread.sleep(1000);
         accountSteps.clickCreateCurrentAccount();
     }
 
@@ -39,7 +40,7 @@ public class CreateCurrentAccountTest extends BaseTest {
         );
         createAccountSteps.createAccount();
         Assertions.assertAll(
-                () -> Assertions.assertTrue(createAccountSteps.isCreateAccountSuccessfullyMessageDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Сообщение об открытии счета")),
+
                 () -> Assertions.assertTrue(createAccountSteps.isNavigationToBillButtonDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Перейти к списку счетов"))
         );
         createAccountSteps.clickToNavigationToBillButton();

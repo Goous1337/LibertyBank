@@ -65,6 +65,9 @@ public class AccountInfoPage extends BasePage {
     @FindBy(xpath = "//button[contains(text(), 'Разблокировать счет')]")
     private WebElement unblockAccountOpt;
 
+    @FindBy(xpath = "//p[contains(text(), 'Закрыт')]")
+    private WebElement closedLabel;
+
     public boolean isAccountNameDisplayed() {
         Waiters.waitElement(accountName);
         return accountName.isDisplayed();
@@ -136,6 +139,7 @@ public class AccountInfoPage extends BasePage {
     }
 
     public void clickSetMainAccountOpt() {
+        Waiters.waitElement(setMainAccountOpt);
         setMainAccountOpt.click();
     }
 
@@ -162,5 +166,10 @@ public class AccountInfoPage extends BasePage {
     public void clickUnblockAccountOpt() {
         Waiters.waitElement(unblockAccountOpt);
         unblockAccountOpt.click();
+    }
+
+    public boolean isClosedLabelDisplayed() {
+        Waiters.waitElement(closedLabel);
+        return closedLabel.isDisplayed();
     }
 }

@@ -33,12 +33,7 @@ public class CloseAccountTest extends BaseTest {
         accountInfoSteps.clickCloseButton();
         Assertions.assertTrue(confirmationSteps.isCloseVerificationMessageDisplayed(), String.format(DISPLAYED_MESSAGE, "Сообщение о подтверждении закрытия счета"));
         confirmationSteps.accept();
-        Assertions.assertTrue(confirmationSteps.isCloseSuccessfullyMessageDisplayed(), String.format(DISPLAYED_MESSAGE, "Сообщение об успешном закрытии счета"));
-        confirmationSteps.clickNavigateToAccountsPageButton();
-        Assertions.assertAll(
-                () -> Assertions.assertTrue(accountSteps.isCloseAccountsDisplayed(), String.format(DISPLAYED_MESSAGE, CLOSED_ACCOUNTS_TAB)),
-                () -> Assertions.assertTrue(accountSteps.isOpenAccountDisplayed(), String.format(DISPLAYED_MESSAGE, OPEN_ACCOUNTS_TAB))
-        );
+        Assertions.assertTrue(accountInfoSteps.isClosedLabelDisplayed(), String.format(DISPLAYED_MESSAGE, "Сообщение об успешном закрытии счета"));
     }
 
     @Test

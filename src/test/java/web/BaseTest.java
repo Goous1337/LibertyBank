@@ -7,6 +7,8 @@ import web.drivers.DriverManager;
 import web.helpers.TestListener;
 import web.steps.*;
 
+import java.time.Duration;
+
 import static property.UserPropertiesReader.USER_PASSWORD;
 import static property.UserPropertiesReader.USER_PHONE;
 import static web.constans.UrlConfig.BASE_URL;
@@ -29,6 +31,7 @@ public class BaseTest {
     }
 
     protected void open(String pageUrl) {
+        DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         DriverManager.getDriver()
                 .get(BASE_URL + pageUrl);
     }

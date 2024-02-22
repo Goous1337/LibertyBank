@@ -116,4 +116,9 @@ public class AccountInfoSteps {
     public void selectUnblockAccount() {
         accountInfoPage.clickUnblockAccountOpt();
     }
+
+    @Step("Проверить наличие лейбла 'Закрыт'")
+    public boolean isClosedLabelDisplayed() {
+        return accountInfoPage.isClosedLabelDisplayed();
+    }
 }

@@ -1,5 +1,6 @@
 package web.drivers;
 
+import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -39,6 +40,7 @@ public class DriverManager {
         ChromeOptions options = new ChromeOptions();
         options.setImplicitWaitTimeout(Duration.ofSeconds(TIME_TO_WAIT));
         options.addArguments("start-maximized");
+        options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
         options.addArguments("--headless=new");
         options.addArguments("--disable-dev-shm-usage");
         return new ChromeDriver(options);

@@ -27,7 +27,7 @@ public class SetMainAccountTest extends BaseTest {
     @TmsLink("LIB2-2451")
     @DisplayName("Сделать открытый счет основным")
     public void setMainAccount() {
-        accountSteps.clickAccount();
+        accountSteps.clickSecondAccount();
         accountInfoSteps.clickDotsInfoButton();
         accountInfoSteps.selectSetMainAccount();
         Assertions.assertTrue(confirmationSteps.isSetMainAccountDialogBoxDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Диалоговое окно"));
@@ -40,7 +40,6 @@ public class SetMainAccountTest extends BaseTest {
     @Test
     @Order(2)
     @TmsLink("LIB2-2452")
-    @Disabled("Выключен, пока фронт не исправит баг с закреплением счета в начале списка")
     @DisplayName("Перенос статуса 'Основной счет' с одного открытого счета на другой")
     public void transferringMainAccountStatusFromOneAccountToAnother() {
         accountSteps.clickSecondAccount();
@@ -53,7 +52,6 @@ public class SetMainAccountTest extends BaseTest {
         Assertions.assertTrue(accountSteps.isMainAccountLabelDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Статус " + MAIN_ACCOUNT_STATUS));
         accountInfoSteps.goBack();
         Assertions.assertTrue(accountSteps.isMainAccountLabelDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Статус " + MAIN_ACCOUNT_STATUS));
-        Assertions.assertFalse(accountSteps.isMainAccountLabelDisplayed(), String.format(DISPLAYED_MESSAGE, "Статус " + MAIN_ACCOUNT_STATUS));
     }
 
     @Test

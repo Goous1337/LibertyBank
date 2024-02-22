@@ -21,7 +21,7 @@ public class AccountPage extends BasePage {
     @FindBy(xpath = "(//*[contains(text(), 'Основной счет')])[2]")
     private WebElement secondMainAccountLabel;
 
-    @FindBy(xpath = "//*[contains(text(), 'Текущий счет')]")
+    @FindBy(xpath = "//*[contains(text(), 'Откройте счет не выходя из дома')]")
     private WebElement createCurrentAccount;
 
     @FindBy(xpath = "//p[contains(text(), 'Текущий счет')]")
@@ -30,7 +30,7 @@ public class AccountPage extends BasePage {
     @FindBy(xpath = "(//p[contains(text(), 'Текущий счет')])[2]")
     private WebElement secondAccount;
 
-    @FindBy(css = "._label-width_adjustable_c42rp_10")
+    @FindBy(xpath = "//p[contains(@class, '_label_19f2j_1')]")
     private WebElement accountStatus;
 
     @FindBy(xpath = "//*[@href = '#icon-currency-ruble']")
@@ -42,16 +42,16 @@ public class AccountPage extends BasePage {
     @FindBy(xpath = "//*[@href = '#icon-currency-euro']")
     private WebElement euroImage;
 
-    @FindBy(css = "._account-name_15f10_25")
+    @FindBy(xpath = "//p[@class='_account-name_1sf0s_36']")
     private WebElement accountNameOrNumber;
 
-    @FindBy(css = "._amount_15f10_36")
+    @FindBy(xpath = "//p[@class='_amount_1sf0s_50']")
     private WebElement amount;
 
-    @FindBy(css = "._currency_15f10_47")
+    @FindBy(xpath = "//p[contains(@class, 'currency_1sf0s_61')]")
     private WebElement currency;
 
-    @FindBy(css = "._account-type_15f10_19")
+    @FindBy(xpath = "//p[contains(@class, '_account-type_1sf0s_30')]")
     private WebElement accountType;
 
     @FindBy(xpath = "//*[contains(text(), 'Все')]")

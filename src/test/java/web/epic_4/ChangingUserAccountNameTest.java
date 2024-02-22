@@ -27,7 +27,6 @@ public class ChangingUserAccountNameTest extends BaseTest {
 
     @Test
     @TmsLink("LIB2-2487")
-    @Disabled("Выключен, пока фронт не исправит баг с буквой 'Ё/ё'")
     @DisplayName("Отмена переименования счета")
     public void cancelingAccountRenaming() {
         accountSteps.clickAccount();
@@ -39,7 +38,6 @@ public class ChangingUserAccountNameTest extends BaseTest {
 
     @Test
     @TmsLink("LIB2-2488")
-    @Disabled("Выключен, пока фронт не исправит баг с буквой 'Ё/ё'")
     @DisplayName("Переименование счета")
     public void accountRemaining() {
         accountSteps.clickAccount();
@@ -61,7 +59,7 @@ public class ChangingUserAccountNameTest extends BaseTest {
         renameAccountSteps.clickNewAccountNameTextField();
         renameAccountSteps.setValueInNewAccountNameTextField(INVALID_LONG_ACCOUNT_NAME);
         renameAccountSteps.save();
-        Assertions.assertTrue(renameAccountSteps.isEmptyMessageDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Сообщение"));
+        Assertions.assertTrue(renameAccountSteps.isMoreThan30SymbolsMessageDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Сообщение"));
     }
 
     @Test
@@ -73,7 +71,7 @@ public class ChangingUserAccountNameTest extends BaseTest {
         renameAccountSteps.clickNewAccountNameTextField();
         renameAccountSteps.setValueInNewAccountNameTextField(INVALID_SHORT_ACCOUNT_NAME);
         renameAccountSteps.save();
-        Assertions.assertTrue(renameAccountSteps.isMoreThenThirtyCharactersMessageDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Сообщение"));
+        Assertions.assertTrue(renameAccountSteps.isChangeFieldNameMessageDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Сообщение"));
     }
 
     @Test
