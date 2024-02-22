@@ -26,6 +26,7 @@ public class BaseTest {
     protected SecuritySteps securitySteps;
     protected ChangePasswordSteps changePasswordSteps;
     protected DropDownAccountMenuSteps dropDownAccountMenuSteps;
+    protected ChangeNotificationStatusSteps changeNotificationStatusSteps;
 
     public BaseTest() {
         refreshPages();
@@ -59,5 +60,6 @@ public class BaseTest {
         securitySteps = new SecuritySteps();
         changePasswordSteps = new ChangePasswordSteps();
         dropDownAccountMenuSteps = new DropDownAccountMenuSteps();
+        changeNotificationStatusSteps = new ChangeNotificationStatusSteps();
     }
 }
