@@ -8,6 +8,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeSelected;
+import static org.openqa.selenium.support.ui.ExpectedConditions.not;
 import static web.drivers.DriverManager.getDriver;
 
 public class Waiters {
@@ -32,7 +34,7 @@ public class Waiters {
         new WebDriverWait(getDriver(), Duration.ofSeconds(TIME_TO_WAIT))
                 .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
-                .until(expectedState ? ExpectedConditions.elementToBeSelected(element) :
-                        ExpectedConditions.not(ExpectedConditions.elementToBeSelected(element)));
+                .until(expectedState ? elementToBeSelected(element)
+                        : not(elementToBeSelected(element)));
     }
 }

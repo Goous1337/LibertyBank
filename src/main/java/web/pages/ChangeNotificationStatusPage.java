@@ -2,7 +2,8 @@ package web.pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import web.helpers.Waiters;
+
+import static web.helpers.Waiters.waitCheckbox;
 
 public class ChangeNotificationStatusPage extends BasePage {
     @FindBy(xpath = "//input[@name = 'sms']")
@@ -19,9 +20,7 @@ public class ChangeNotificationStatusPage extends BasePage {
     }
 
     public boolean isChangedSMSNotificationCheckBox(boolean status) {
-        Waiters.waitCheckbox(!status, statusSMSNotificationCheckbox);
+        waitCheckbox(!status, statusSMSNotificationCheckbox);
         return statusSMSNotificationCheckbox.isSelected();
     }
-
-
 }
