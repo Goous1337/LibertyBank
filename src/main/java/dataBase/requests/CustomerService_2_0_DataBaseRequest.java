@@ -157,7 +157,7 @@ public class CustomerService_2_0_DataBaseRequest {
     }
 
     public static Boolean getSMSStatusFromMobile(String mobile) {
-        String sql = "SELECT sms_notification FROM customer WHERE mobile_phone = '"+ mobile + "'";
+        String sql = "SELECT sms_notification FROM customer WHERE mobile_phone = '" + mobile + "'";
         return getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sql, Boolean.class);
     }
 
