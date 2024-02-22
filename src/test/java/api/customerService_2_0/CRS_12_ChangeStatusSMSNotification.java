@@ -37,14 +37,14 @@ public class CRS_12_ChangeStatusSMSNotification extends BaseTest {
     @TmsLink("LIB-2758")
     @Test
     public void successChangeStatusSMSNotification() {
-        Response authResponse = customerService_2_0.userAuthorizationByMobilePhone( new UserAuthorizationByPhone
+        Response authResponse = customerService_2_0.userAuthorizationByMobilePhone(new UserAuthorizationByPhone
                 (CUSTOMER_USER_PHONE, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE));
         String token = authResponse.jsonPath().get("accessToken");
         boolean status = CustomerService_2_0_DataBaseRequest.getSMSStatusFromMobile(CUSTOMER_USER_PHONE);
 
         Response response = customerService_2_0.changeStatusSMSNotification(token, new NotificationStatus(!status));
         assertAll(
-                () -> assertEquals(SC_OK, response.getStatusCode(),RESPONSE_CODE_NOT_EXPECTED),
+                () -> assertEquals(SC_OK, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertEquals(
                         !status,
                         CustomerService_2_0_DataBaseRequest.getSMSStatusFromMobile(CUSTOMER_USER_PHONE),
@@ -59,12 +59,12 @@ public class CRS_12_ChangeStatusSMSNotification extends BaseTest {
     @TmsLink("LIB-2766")
     @Test
     public void unsuccessfulChangeStatusSMSNotificationWithEmptyBody() {
-        Response authResponse = customerService_2_0.userAuthorizationByMobilePhone( new UserAuthorizationByPhone
+        Response authResponse = customerService_2_0.userAuthorizationByMobilePhone(new UserAuthorizationByPhone
                 (CUSTOMER_USER_PHONE, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE));
         String token = authResponse.jsonPath().get("accessToken");
         Response response = customerService_2_0.changeStatusSMSNotification(token, new NotificationStatus(null));
         assertAll(
-                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode(),RESPONSE_CODE_NOT_EXPECTED),
+                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertEquals(
                         "Некорректный запрос. Убедитесь, что адрес указан верно и попробуйте еще раз.",
                         response.body().jsonPath().get("message"),
@@ -79,13 +79,13 @@ public class CRS_12_ChangeStatusSMSNotification extends BaseTest {
     @TmsLink("LIB-2767")
     @Test
     public void unsuccessfulChangeStatusSMSNotificationWithIncorrectURL() {
-        Response authResponse = customerService_2_0.userAuthorizationByMobilePhone( new UserAuthorizationByPhone
+        Response authResponse = customerService_2_0.userAuthorizationByMobilePhone(new UserAuthorizationByPhone
                 (CUSTOMER_USER_PHONE, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE));
         String token = authResponse.jsonPath().get("accessToken");
         Response response = customerService_2_0.changeStatusSMSNotificationWithIncorrectURL(
                 token, new NotificationStatus(false));
         assertAll(
-                () -> assertEquals(SC_NOT_FOUND, response.getStatusCode(),RESPONSE_CODE_NOT_EXPECTED),
+                () -> assertEquals(SC_NOT_FOUND, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertEquals("Страница не найдена",
                         response.body().jsonPath().get("message"),
                         ERROR_MESSAGE_NOT_EXPECTED)
@@ -100,13 +100,13 @@ public class CRS_12_ChangeStatusSMSNotification extends BaseTest {
     @ParameterizedTest
     @ValueSource(strings = {"GET", "PUT", "DELETE", "POST"})
     public void unsuccessfulChangeStatusSMSNotificationWithInvalidMethods(String method) {
-        Response authResponse = customerService_2_0.userAuthorizationByMobilePhone( new UserAuthorizationByPhone
+        Response authResponse = customerService_2_0.userAuthorizationByMobilePhone(new UserAuthorizationByPhone
                 (CUSTOMER_USER_PHONE, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE));
         String token = authResponse.jsonPath().get("accessToken");
         Response response = customerService_2_0.changeStatusSMSNotificationWithHttpMethod(
                 token, method, new NotificationStatus(false));
         assertAll(
-                () -> assertEquals(SC_METHOD_NOT_ALLOWED, response.getStatusCode(),RESPONSE_CODE_NOT_EXPECTED),
+                () -> assertEquals(SC_METHOD_NOT_ALLOWED, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertEquals("Метод не разрешен. Сервер знает о запрашиваемом методе, но он был деактивирован и не может быть использован.",
                         response.body().jsonPath().get("message"),
                         ERROR_MESSAGE_NOT_EXPECTED)
@@ -129,13 +129,13 @@ public class CRS_12_ChangeStatusSMSNotification extends BaseTest {
     @ParameterizedTest
     @MethodSource("provideArgumentsForTest")
     public void unsuccessfulChangeStatusSMSNotificationWithInvalidParameters(Object value) {
-        Response authResponse = customerService_2_0.userAuthorizationByMobilePhone( new UserAuthorizationByPhone
+        Response authResponse = customerService_2_0.userAuthorizationByMobilePhone(new UserAuthorizationByPhone
                 (CUSTOMER_USER_PHONE, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE));
         String token = authResponse.jsonPath().get("accessToken");
         Response response = customerService_2_0.changeStatusSMSNotificationWithValue(
                 token, value);
         assertAll(
-                () -> assertEquals(SC_UNSUPPORTED_MEDIA_TYPE, response.getStatusCode(),RESPONSE_CODE_NOT_EXPECTED),
+                () -> assertEquals(SC_UNSUPPORTED_MEDIA_TYPE, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertEquals("Формат запрашиваемых данных не поддерживается сервером, поэтому запрос отклонён.",
                         response.body().jsonPath().get("message"),
                         ERROR_MESSAGE_NOT_EXPECTED)

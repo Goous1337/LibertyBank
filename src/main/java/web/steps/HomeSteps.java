@@ -4,8 +4,6 @@ import io.qameta.allure.Step;
 import web.pages.DropDownAccountMenuPage;
 import web.pages.HomePage;
 
-import java.util.List;
-
 public class HomeSteps {
     protected HomePage homePage;
     protected DropDownAccountMenuPage dropDownAccountMenuPage;
