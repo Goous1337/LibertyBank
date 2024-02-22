@@ -6,8 +6,7 @@ import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.*;
 import web.BaseTest;
 
-import static web.constans.AccountServiceConstants.NOT_DISPLAYED_MESSAGE;
-import static web.constans.AccountServiceConstants.NOT_EQUALS_MESSAGE;
+import static web.constans.AccountServiceConstants.*;
 import static web.constans.UrlConfig.ACCOUNTS_URL;
 
 @Tag("Web")
@@ -15,11 +14,6 @@ import static web.constans.UrlConfig.ACCOUNTS_URL;
 @Feature("US-4.4.3 Изменение пользовательского названия счета")
 @DisplayName("US-4.4.3 Изменение пользовательского названия счета")
 public class ChangingUserAccountNameTest extends BaseTest {
-
-    public static final String VALID_ACCOUNT_NAME = "Иван_IvanovЁ@#$%&!?~1234567890";
-    public static final String INVALID_LONG_ACCOUNT_NAME = "Иван_Ivanov любит брокколи на завтрак";
-    public static final String INVALID_SHORT_ACCOUNT_NAME = " ";
-    public static final String INVALID_CHARACTERS_ACCOUNT_NAME = "小林さんは花子さんに花を上げました。";
 
     @BeforeEach
     public void setUpTest() {
@@ -29,7 +23,6 @@ public class ChangingUserAccountNameTest extends BaseTest {
 
     @Test
     @TmsLink("LIB2-2487")
-    @Disabled("Выключен, пока фронт не исправит баг с буквой 'Ё/ё'")
     @DisplayName("Отмена переименования счета")
     public void cancelingAccountRenaming() {
         accountSteps.clickAccount();
@@ -41,7 +34,6 @@ public class ChangingUserAccountNameTest extends BaseTest {
 
     @Test
     @TmsLink("LIB2-2488")
-    @Disabled("Выключен, пока фронт не исправит баг с буквой 'Ё/ё'")
     @DisplayName("Переименование счета")
     public void accountRemaining() {
         accountSteps.clickAccount();
@@ -49,9 +41,9 @@ public class ChangingUserAccountNameTest extends BaseTest {
         renameAccountSteps.clickNewAccountNameTextField();
         renameAccountSteps.setValueInNewAccountNameTextField(VALID_ACCOUNT_NAME);
         renameAccountSteps.save();
-        Assertions.assertTrue(confirmationSteps.isSuccessRenameAccountNameDialogBoxDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Диалоговое окно"));
+        confirmationSteps.assertSuccessRenameAccountNameDialogBoxIsDisplayed();
         confirmationSteps.returnToAccount();
-        Assertions.assertEquals(VALID_ACCOUNT_NAME, accountInfoSteps.getAccountName(), String.format(NOT_EQUALS_MESSAGE, "Название счета"));
+        accountInfoSteps.assertActualAccountNameEqualsExpectedName();
     }
 
     @Test
@@ -63,7 +55,7 @@ public class ChangingUserAccountNameTest extends BaseTest {
         renameAccountSteps.clickNewAccountNameTextField();
         renameAccountSteps.setValueInNewAccountNameTextField(INVALID_LONG_ACCOUNT_NAME);
         renameAccountSteps.save();
-        Assertions.assertTrue(renameAccountSteps.isEmptyMessageDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Сообщение"));
+        renameAccountSteps.assertEmptyMessageIsDisplayed();
     }
 
     @Test
@@ -75,7 +67,7 @@ public class ChangingUserAccountNameTest extends BaseTest {
         renameAccountSteps.clickNewAccountNameTextField();
         renameAccountSteps.setValueInNewAccountNameTextField(INVALID_SHORT_ACCOUNT_NAME);
         renameAccountSteps.save();
-        Assertions.assertTrue(renameAccountSteps.isMoreThenThirtyCharactersMessageDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Сообщение"));
+        renameAccountSteps.assertMoreThenThirtyCharactersMessageIsDisplayed();
     }
 
     @Test
@@ -87,6 +79,6 @@ public class ChangingUserAccountNameTest extends BaseTest {
         renameAccountSteps.clickNewAccountNameTextField();
         renameAccountSteps.setValueInNewAccountNameTextField(INVALID_CHARACTERS_ACCOUNT_NAME);
         renameAccountSteps.save();
-        Assertions.assertTrue(renameAccountSteps.isInvalidCharactersMessageDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Сообщение"));
+        renameAccountSteps.assertInvalidCharactersMessageIsDisplayed();
     }
 }

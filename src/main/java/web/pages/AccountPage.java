@@ -76,11 +76,11 @@ public class AccountPage extends BasePage {
         createCurrentAccount.click();
     }
 
-    public boolean isOpenAccountDisplayed() {
+    public boolean isOpenAccountsTabDisplayed() {
         return openAccountsTab.isDisplayed();
     }
 
-    public boolean isCloseAccountDisplayed() {
+    public boolean isCloseAccountsTabDisplayed() {
         return closedAccountsTab.isDisplayed();
     }
 

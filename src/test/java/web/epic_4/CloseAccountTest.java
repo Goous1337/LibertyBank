@@ -6,7 +6,6 @@ import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.*;
 import web.BaseTest;
 
-import static web.constans.AccountServiceConstants.*;
 import static web.constans.UrlConfig.ACCOUNTS_URL;
 
 @Tag("Web")
@@ -28,14 +27,12 @@ public class CloseAccountTest extends BaseTest {
     public void checkClosingAccountByUser() {
         accountInfoSteps.clickDotsInfoButton();
         accountInfoSteps.clickCloseButton();
-        Assertions.assertTrue(confirmationSteps.isCloseVerificationMessageDisplayed(), String.format(DISPLAYED_MESSAGE, "Сообщение о подтверждении закрытия счета"));
+        confirmationSteps.assertCloseVerificationMessageIsDisplayed();
         confirmationSteps.accept();
-        Assertions.assertTrue(confirmationSteps.isCloseSuccessfullyMessageDisplayed(), String.format(DISPLAYED_MESSAGE, "Сообщение об успешном закрытии счета"));
+        confirmationSteps.assertCloseSuccessfullyMessageDisplayed();
         confirmationSteps.clickNavigateToAccountsPageButton();
-        Assertions.assertAll(
-                () -> Assertions.assertTrue(accountSteps.isCloseAccountsDisplayed(), String.format(DISPLAYED_MESSAGE, CLOSED_ACCOUNTS_TAB)),
-                () -> Assertions.assertTrue(accountSteps.isOpenAccountDisplayed(), String.format(DISPLAYED_MESSAGE, OPEN_ACCOUNTS_TAB))
-        );
+        accountSteps.assertClosedAccountsTabIsDisplayed();
+        accountSteps.assertOpenAccountsTabIsDisplayed();
     }
 
     @Test
@@ -44,8 +41,8 @@ public class CloseAccountTest extends BaseTest {
     public void checkClosingAccountDeny() {
         accountInfoSteps.clickDotsInfoButton();
         accountInfoSteps.clickCloseButton();
-        Assertions.assertTrue(confirmationSteps.isCloseVerificationMessageDisplayed(), String.format(DISPLAYED_MESSAGE, "Сообщение о подтверждении закрытия счета"));
+        confirmationSteps.assertCloseVerificationMessageIsDisplayed();
         confirmationSteps.deny();
-        Assertions.assertNotEquals(CLOSED_ACCOUNT_STATUS, accountInfoSteps.getAccountStatus(), String.format(STATUS_ERROR_MESSAGE, CLOSED_ACCOUNT_STATUS));
+        accountInfoSteps.assertAccountStatusIsNotClosed();
     }
 }
