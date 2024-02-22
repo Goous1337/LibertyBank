@@ -12,7 +12,8 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static constant.AccountServiceConstants.STATUS_ACTIVE;
-import static constant.CardServiceConstants.INVALID_CARD_ID;
+import static constant.CardServiceConstants.INVALID_PRODUCT_TYPE_ID;
+import static constant.CardServiceConstants.INVALID_URL_PRODUCT_TYPE;
 import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,9 +23,6 @@ import static property.BaseProperties.CARD_SERVICE;
 public class CS_6_ViewInformationCardProductTest extends BaseTest {
     public static final String JSON_SCHEMA_VIEW_INFORMATION = "schemas/cardService/checkInformationCardProduct.json";
     public static final String JSON_SCHEMA_FOR_ERROR = "schemas/cardService/errorResponse.json";
-    public static final String INVALID_PRODUCT_TYPE_ID = "1edb77c4-b6ac-4562-af4d-fbd6fb78++++";
-    public static final String INVALID_URL_PRODUCT_TYPE = "1edb77c4-b6ac-4562-af4d-fbd6fb78576";
-
 
     {
         RestAssured.baseURI = CARD_SERVICE;
@@ -53,9 +51,9 @@ public class CS_6_ViewInformationCardProductTest extends BaseTest {
         Response response = cardService.getInformationCardProduct(INVALID_PRODUCT_TYPE_ID);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.statusCode(), "Код ответа не соответствует ожидаемому")
-                //() -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(JSON_SCHEMA_FOR_ERROR))
         );
     }
+
     @Test
     @Tag("API")
     @TmsLink("LIB2-41")
