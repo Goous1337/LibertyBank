@@ -2,8 +2,8 @@ package web.pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import web.helpers.Waiters;
 
+import static web.helpers.Waiters.waitElement;
 import static web.helpers.Waiters.waitElementWithOwnTime;
 
 public class DropDownAccountMenuPage extends BasePage {
@@ -29,12 +29,12 @@ public class DropDownAccountMenuPage extends BasePage {
     private WebElement userPanel;
 
     public void exitFromUserAccount() {
-        Waiters.waitElement(exitFromAccountBtn).click();
+        waitElement(exitFromAccountBtn).click();
 
     }
 
     public void clickSecurityBtn() {
-        Waiters.waitElement(securityBtn).click();
+        waitElement(securityBtn).click();
     }
 
     public boolean isUserPanelDisplayed() {
