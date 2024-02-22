@@ -1,19 +1,15 @@
 package dataBase;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.sql.DataSource;
-
+import constant.LibertyServiceName;
+import lombok.Data;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
-import constant.LibertyServiceName;
-import lombok.Data;
+import javax.sql.DataSource;
+import java.util.HashMap;
+import java.util.Map;
 
-import static constant.DataBaseConstants.DB_PASSWORD;
-import static constant.DataBaseConstants.DB_USER;
-import static constant.DataBaseConstants.POSTGRESQL_DB_DRIVER;
+import static constant.DataBaseConstants.*;
 import static property.PropertiesReader.getPropertyValue;
 
 @Data

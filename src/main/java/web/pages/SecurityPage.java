@@ -2,7 +2,8 @@ package web.pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import web.helpers.Waiters;
+
+import static web.helpers.Waiters.waitElement;
 
 public class SecurityPage extends BasePage {
     @FindBy(xpath = "//button[contains(text(),'Изменить')]")
@@ -11,7 +12,7 @@ public class SecurityPage extends BasePage {
     private WebElement securityBar;
 
     public void clickChangePasswordBtn() {
-        Waiters.waitElement(changePasswordBtn).click();
+        waitElement(changePasswordBtn).click();
     }
 
     public boolean isSecurityBarDisplayed() {

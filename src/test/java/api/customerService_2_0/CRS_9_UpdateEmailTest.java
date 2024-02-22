@@ -150,7 +150,7 @@ public class CRS_9_UpdateEmailTest extends BaseTest {
                 () -> assertEquals(SC_METHOD_NOT_ALLOWED, response.statusCode(),
                         RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertEquals("Метод не разрешен. Сервер знает о запрашиваемом методе, но он был " +
-                        "деактивирован и не может быть использован.", response.body().jsonPath().get("message"),
+                                "деактивирован и не может быть использован.", response.body().jsonPath().get("message"),
                         ERROR_MESSAGE_NOT_EXPECTED)
         );
     }

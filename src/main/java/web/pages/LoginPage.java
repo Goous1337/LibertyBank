@@ -5,7 +5,7 @@ import org.openqa.selenium.support.FindBy;
 
 import static web.helpers.Waiters.waitElement;
 
-public class LoginPage extends BasePage{
+public class LoginPage extends BasePage {
 
     @FindBy(name = "phone")
     private WebElement phoneInput;

@@ -1,7 +1,6 @@
 package api.customerService_2_0;
 
 import api.BaseTest;
-
 import dataBase.requests.CustomerService_2_0_DataBaseRequest;
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
@@ -16,12 +15,12 @@ import org.junit.jupiter.params.provider.ValueSource;
 import pojo.customerService_2_0.NotificationStatus;
 import pojo.customerService_2_0.UserAuthorizationByPhone;
 
-import static constant.CustomerService_2_0_Constants.*;
+import static constant.CustomerService_2_0_Constants.CUSTOMER_MOBILE_PHONE_TYPE;
+import static constant.CustomerService_2_0_Constants.CUSTOMER_USER_PASSWORD_CRS_11;
 import static constant.Message.ERROR_MESSAGE_NOT_EXPECTED;
 import static constant.Message.RESPONSE_CODE_NOT_EXPECTED;
 import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
-
 import static property.BaseProperties.CUSTOMER_SERVICE_2_0;
 
 @DisplayName("CRS-11 Изменение PUSH-уведомлений")

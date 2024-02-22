@@ -15,7 +15,14 @@ public class Waiters {
     public static final long TIME_TO_WAIT = 15L;
 
     public static WebElement waitElement(WebElement element) {
-       return new WebDriverWait(getDriver(), Duration.ofSeconds(TIME_TO_WAIT))
+        return new WebDriverWait(getDriver(), Duration.ofSeconds(TIME_TO_WAIT))
+                .ignoring(NoSuchElementException.class)
+                .ignoring(StaleElementReferenceException.class)
+                .until(ExpectedConditions.visibilityOf(element));
+    }
+
+    public static WebElement waitElementWithOwnTime(WebElement element, int time) {
+        return new WebDriverWait(getDriver(), Duration.ofSeconds(time))
                 .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
                 .until(ExpectedConditions.visibilityOf(element));

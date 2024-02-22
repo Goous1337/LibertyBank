@@ -1,11 +1,11 @@
 package service;
 
-import java.util.List;
-
 import api.core.RequestParam;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
 import pojo.creditService.CreateApplyingLoanRequest;
+
+import java.util.List;
 
 import static api.core.ApiClient.sendRequestWithoutParams;
 import static api.core.ApiClient.sendSimpleRequest;
@@ -13,15 +13,38 @@ import static api.core.RequestParamType.HEADER;
 import static api.core.RequestParamType.PARAMETER;
 import static com.google.common.net.HttpHeaders.AUTHORIZATION;
 import static constant.ApiEndpoints.*;
+import static constant.CreditServiceConstants.EMPTY_TOKEN;
 import static constant.CustomerServiceConstants.PARAMETER_ID;
 import static constant.CustomerServiceConstants.PARAMETER_PRODUCT_ID;
-import static constant.CreditServiceConstants.EMPTY_TOKEN;
 import static constant.DepositConstants.INVALID_ACCESS_TOKEN;
 import static io.restassured.http.Method.*;
 import static property.BaseProperties.ACCESS_TOKEN_CUSTOMER_SERVICE;
 import static property.BaseProperties.INVALID_TOKEN_CREDIT_SERVICE;
 
 public class CreditService {
+    public static Response checkGetRequestDisplayingElectronicBackground(String productId) {
+        List<RequestParam> param = List.of(new RequestParam(PARAMETER, PARAMETER_PRODUCT_ID, productId),
+                new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
+        return sendSimpleRequest(Method.GET, CREDIT_BACKGROUND, param);
+    }
+
+    public static Response checkViewInfoCurrentCreditsUsers(String id) {
+        List<RequestParam> param = List.of(new RequestParam(PARAMETER, PARAMETER_ID, id),
+                new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
+        return sendSimpleRequest(GET, CREDIT_INFORMATION, param);
+    }
+
+    public static Response checkGetRequestDisplayingElectronicBackgroundInvalidToken() {
+        return sendSimpleRequest(Method.GET, CREDIT_BACKGROUND,
+                new RequestParam(HEADER, AUTHORIZATION, INVALID_TOKEN_CREDIT_SERVICE));
+    }
+
+    public static Response checkViewInfoCurrentCreditsUsersInvalidToken(String id) {
+        List<RequestParam> param = List.of(new RequestParam(PARAMETER, PARAMETER_ID, id),
+                new RequestParam(HEADER, AUTHORIZATION, INVALID_TOKEN_CREDIT_SERVICE));
+        return sendSimpleRequest(GET, CREDIT_INFORMATION, param);
+    }
+
     public Response checkListCurrentCreditProducts() {
         return sendSimpleRequest(GET, CREDIT_PRODUCTS,
                 new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
@@ -87,30 +110,16 @@ public class CreditService {
                 new RequestParam(HEADER, AUTHORIZATION, EMPTY_TOKEN));
     }
 
-    public static Response checkGetRequestDisplayingElectronicBackground(String productId) {
-        List<RequestParam> param = List.of(new RequestParam(PARAMETER, PARAMETER_PRODUCT_ID, productId),
-                new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
-        return sendSimpleRequest(Method.GET, CREDIT_BACKGROUND, param);
-    }
-
-    public static Response checkViewInfoCurrentCreditsUsers(String id) {
-        List<RequestParam> param = List.of(new RequestParam(PARAMETER, PARAMETER_ID, id),
-                new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
-        return sendSimpleRequest(GET, CREDIT_INFORMATION, param);
-    }
-
-    public static Response checkGetRequestDisplayingElectronicBackgroundInvalidToken() {
-        return sendSimpleRequest(Method.GET, CREDIT_BACKGROUND,
-                new RequestParam(HEADER, AUTHORIZATION, INVALID_TOKEN_CREDIT_SERVICE));
-    }
     public Response checkListObtainingInformationOnBanksLoanProduct() {
         return sendSimpleRequest(GET, CREDIT_PRODUCTS_INFO,
                 new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
     }
+
     public Response checkListObtainingInformationOnBanksLoanProductInvalidToken() {
         return sendSimpleRequest(GET, CREDIT_PRODUCTS_INFO,
                 new RequestParam(HEADER, AUTHORIZATION, INVALID_TOKEN_CREDIT_SERVICE));
     }
+
     public Response checkListObtainingInformationOnBanksLoanProductNoRecordsInResultingTable() {
         return sendSimpleRequest(GET, INVALID_CREDIT_PRODUCT,
                 new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
@@ -123,11 +132,5 @@ public class CreditService {
 
     public Response checkCreditInfoNoToken() {
         return sendRequestWithoutParams(GET, CREDIT_INFO);
-    }
-
-    public static Response checkViewInfoCurrentCreditsUsersInvalidToken(String id) {
-        List<RequestParam> param = List.of(new RequestParam(PARAMETER, PARAMETER_ID, id),
-                new RequestParam(HEADER, AUTHORIZATION, INVALID_TOKEN_CREDIT_SERVICE));
-        return sendSimpleRequest(GET, CREDIT_INFORMATION, param);
     }
 }

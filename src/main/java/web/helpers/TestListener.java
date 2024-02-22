@@ -11,6 +11,11 @@ import java.util.Optional;
 
 public class TestListener implements TestWatcher {
 
+    @Attachment(value = "Screenshot", type = "image/png")
+    public static byte[] takeScreenshot() {
+        return ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.BYTES);
+    }
+
     @Override
     public void testDisabled(ExtensionContext context, Optional<String> reason) {
     }
@@ -27,10 +32,5 @@ public class TestListener implements TestWatcher {
     @Override
     public void testFailed(ExtensionContext context, Throwable cause) {
         takeScreenshot();
-    }
-
-    @Attachment(value = "Screenshot", type = "image/png")
-    public static byte[] takeScreenshot() {
-        return ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.BYTES);
     }
 }

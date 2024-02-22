@@ -1,7 +1,12 @@
 package api.customerService_2_0;
 
+import api.BaseTest;
 import dataBase.requests.CustomerService_2_0_DataBaseRequest;
+import io.qameta.allure.Description;
+import io.qameta.allure.TmsLink;
+import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
+import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -10,12 +15,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import api.BaseTest;
-import io.qameta.allure.Description;
-import io.qameta.allure.TmsLink;
-import io.restassured.RestAssured;
-import io.restassured.response.Response;
+import pojo.customerService_2_0.UserAuthorizationByPhone;
 
+import static constant.CustomerService_2_0_Constants.*;
 import static constant.Message.RESPONSE_CODE_NOT_EXPECTED;
 import static org.apache.hc.core5.http.HttpStatus.SC_BAD_REQUEST;
 import static org.apache.hc.core5.http.HttpStatus.SC_METHOD_NOT_ALLOWED;
@@ -37,11 +39,16 @@ public class CRS_15_ChangeSecurityQuestionAnswerTest extends BaseTest {
     @Test
 
     public void successfulUpdateQuestionAnswer() {
+        UserAuthorizationByPhone userAuthorizationByPhone = new UserAuthorizationByPhone
+                (CUSTOMER_USER_PHONE, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE);
+        Response getToken = customerService_2_0.userAuthorizationByMobilePhone(userAuthorizationByPhone);
+        String refreshToken = getToken.jsonPath().get("refreshToken");
+
         String customerId = CustomerService_2_0_DataBaseRequest.getAllCustomerId().get(0);
         String jsonSchemaPath = "schemas/customerService_2_0/CRS-15/updateQuestionAnswer.json";
         String securityQuestion = "Что измерят тахометр";
         String securityAnswer = "Скорость";
-        Response response = customerService_2_0.checkUpdateQuestionAnswer(securityQuestion, securityAnswer, customerId);
+        Response response = customerService_2_0.checkUpdateQuestionAnswer(securityQuestion, securityAnswer, customerId, refreshToken);
         assertAll(
                 () -> assertEquals(HttpStatus.SC_OK,
                         response.statusCode(),
@@ -62,10 +69,15 @@ public class CRS_15_ChangeSecurityQuestionAnswerTest extends BaseTest {
             "DELETE"
     })
     public void checkUpdateQuestionAnswerInvalidHttpMethod(String invalidHttpMethod) {
+        UserAuthorizationByPhone userAuthorizationByPhone = new UserAuthorizationByPhone
+                (CUSTOMER_USER_PHONE, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE);
+        Response getToken = customerService_2_0.userAuthorizationByMobilePhone(userAuthorizationByPhone);
+        String refreshToken = getToken.jsonPath().get("refreshToken");
+
         String jsonSchemaPath = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";
         String securityQuestion = "Что измерят тахометр";
         String securityAnswer = "Скорость";
-        Response response = customerService_2_0.updateQuestionAnswerInvalidHttpMethod(securityQuestion, securityAnswer, invalidHttpMethod);
+        Response response = customerService_2_0.updateQuestionAnswerInvalidHttpMethod(securityQuestion, securityAnswer, invalidHttpMethod, refreshToken);
         assertAll(
                 () -> assertEquals(SC_METHOD_NOT_ALLOWED, response.statusCode(),
                         RESPONSE_CODE_NOT_EXPECTED),
@@ -79,7 +91,7 @@ public class CRS_15_ChangeSecurityQuestionAnswerTest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2086")
     @Test()
 
-    public void checkUpdateQuestionAnswerInvalidUrl(){
+    public void checkUpdateQuestionAnswerInvalidUrl() {
         String customerId = CustomerService_2_0_DataBaseRequest.getAllCustomerId().get(0);
         String jsonSchemaPath = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";
         String securityQuestion = "Что измерят тахометр";
@@ -104,9 +116,13 @@ public class CRS_15_ChangeSecurityQuestionAnswerTest extends BaseTest {
                     ", аааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааа"
     })
     public void checkUpdateQuestionAnswerInvalidInvalidData(String securityQuestion, String securityAnswer) {
+        UserAuthorizationByPhone userAuthorizationByPhone = new UserAuthorizationByPhone
+                (CUSTOMER_USER_PHONE, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE);
+        Response getToken = customerService_2_0.userAuthorizationByMobilePhone(userAuthorizationByPhone);
+        String refreshToken = getToken.jsonPath().get("refreshToken");
         String customerId = CustomerService_2_0_DataBaseRequest.getAllCustomerId().get(0);
         String jsonSchemaPath = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";
-        Response response = customerService_2_0.checkUpdateQuestionAnswer(securityQuestion, securityAnswer, customerId);
+        Response response = customerService_2_0.checkUpdateQuestionAnswer(securityQuestion, securityAnswer, customerId, refreshToken);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST,
                         response.statusCode(),

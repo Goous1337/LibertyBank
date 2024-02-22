@@ -7,7 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static constant.LibertyServiceName.*;
+import static constant.LibertyServiceName.CUSTOMER_SERVICE_2_0;
+import static constant.LibertyServiceName.CUSTOMER_SERVICE_DB_2_0;
 import static dataBase.DataBaseConnector.getDBConnection;
 
 public class CustomerService_2_0_DataBaseRequest {
@@ -97,13 +98,13 @@ public class CustomerService_2_0_DataBaseRequest {
     }
 
     public static Boolean checkNotificationStatusByCustomerId(String customerId) {
-        String sql = "SELECT push_notification FROM customer WHERE customer_id ='"+customerId+"';";
+        String sql = "SELECT push_notification FROM customer WHERE customer_id ='" + customerId + "';";
         Boolean push_notification = getDBConnection(CUSTOMER_SERVICE_2_0).queryForObject(sql, Boolean.class);
         LOG.info(String.format("получен push_notification: %s по customer_id: %s", push_notification, customerId));
         return push_notification;
     }
 
-    public static String getMobilePhoneByCustomerId(String id){
+    public static String getMobilePhoneByCustomerId(String id) {
         String sql = "select mobile_phone\n" +
                 "from customer\n" +
                 "where customer_id =?::uuid";
@@ -111,7 +112,7 @@ public class CustomerService_2_0_DataBaseRequest {
         return mobile_phone;
     }
 
-    public static String getPasswordByCustomerId(String customerId){
+    public static String getPasswordByCustomerId(String customerId) {
         String sql = "select \"password\"  \n" +
                 "from user_profile up \n" +
                 "where customer_id = 'd54eb158-7499-4bda-bafb-d4bd965a1985'";
@@ -119,6 +120,7 @@ public class CustomerService_2_0_DataBaseRequest {
         LOG.info(String.format("Получен пароль пользователя  id: %s", customerId));
         return password;
     }
+
     public static void updatePasswordInUserProfileTableIsNull(String idCustomer) {
         String sql = "UPDATE user_profile SET password = NULL WHERE customer_id =?::uuid";
         getDBConnection(CUSTOMER_SERVICE_2_0).update(sql, idCustomer);
@@ -155,8 +157,8 @@ public class CustomerService_2_0_DataBaseRequest {
     }
 
     public static Boolean getSMSStatusFromMobile(String mobile) {
-        String sql = "SELECT sms_notification FROM customer WHERE mobile_phone = '"+ mobile + "'";
-        return getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sql, Boolean.class);
+        String sql = "SELECT sms_notification FROM customer WHERE mobile_phone =?";
+        return getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sql, Boolean.class, mobile);
     }
 
 }

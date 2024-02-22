@@ -20,6 +20,18 @@ import static io.restassured.http.Method.*;
 
 public class AbsInfoService {
 
+    public static Response gettingListOfBankBranches(String HttpMethod) {
+        return sendRequestWithoutParams(Method.valueOf(HttpMethod), BANK_LIST);
+    }
+
+    public static Response unGettingListOfBankBranches(String HttpMethod) {
+        return sendRequestWithoutParams(Method.valueOf(HttpMethod), BANK_LIST_MISTAKE);
+    }
+
+    public static Response checkListEditingInformationBranches(String office_uuid) {
+        return sendSimpleRequest(GET, ABS_INFO_SERVICE_UPDATE, getRP(PATH, UUID, office_uuid));
+    }
+
     public Response checkAddNewAtm(AbsInfoServiceData absInfoServiceData) {
         return sendSimpleRequest
                 (POST, ABS_INFO_SERVICE, absInfoServiceData);
@@ -58,20 +70,12 @@ public class AbsInfoService {
 
     public Response checkListEditingInformationAboutBranches
             (AbsInfoServiceDataBankBranch absInfoServiceDataBankBranch, String uuid) {
-        return sendSimpleRequest(PUT, ABS_INFO_SERVICE_UPDATE , uuid, absInfoServiceDataBankBranch);
+        return sendSimpleRequest(PUT, ABS_INFO_SERVICE_UPDATE, uuid, absInfoServiceDataBankBranch);
     }
 
     public Response checkListEditingInformationAboutBranchesInvalidEndpoint
             (AbsInfoServiceDataBankBranch absInfoServiceDataBankBranch, String uuid) {
         return sendSimpleRequest(PUT, ABS_INFO_SERVICE_INVALID, uuid, absInfoServiceDataBankBranch);
-    }
-
-    public static Response gettingListOfBankBranches(String HttpMethod) {
-        return sendRequestWithoutParams(Method.valueOf(HttpMethod), BANK_LIST);
-    }
-
-    public static Response unGettingListOfBankBranches(String HttpMethod) {
-        return sendRequestWithoutParams(Method.valueOf(HttpMethod), BANK_LIST_MISTAKE);
     }
 
     public Response checkListWhetherInformationIsReceivedFromNewsPageInvalidUrl(String uuid) {
@@ -80,10 +84,6 @@ public class AbsInfoService {
 
     public Response checkListWhetherInformationIsReceivedFromNewsPage(String uuid) {
         return sendSimpleRequest(GET, ABS_NEWS_BY_UUID, getRP(PATH, NEWS_UUID, uuid));
-    }
-
-    public static Response checkListEditingInformationBranches(String office_uuid) {
-        return sendSimpleRequest(GET, ABS_INFO_SERVICE_UPDATE, getRP(PATH, UUID, office_uuid));
     }
 
     public Response checkClientAccountsList() {

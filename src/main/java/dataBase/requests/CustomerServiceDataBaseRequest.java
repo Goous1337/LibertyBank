@@ -3,7 +3,7 @@ package dataBase.requests;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static constant.LibertyServiceName.*;
+import static constant.LibertyServiceName.CUSTOMER_SERVICE;
 import static dataBase.DataBaseConnector.getDBConnection;
 
 public class CustomerServiceDataBaseRequest {

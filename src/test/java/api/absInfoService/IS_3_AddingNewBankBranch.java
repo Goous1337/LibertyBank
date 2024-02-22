@@ -12,7 +12,8 @@ import org.junit.jupiter.api.Test;
 import pojo.absInfoService.AbsInfoServiceDataBankBranch;
 
 import static org.apache.http.HttpStatus.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.ABS_INFO_SERVICE;
 
 @DisplayName("Добавление нового филиала банка")
