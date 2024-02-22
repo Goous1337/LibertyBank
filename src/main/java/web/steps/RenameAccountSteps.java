@@ -1,7 +1,11 @@
 package web.steps;
 
 import io.qameta.allure.Step;
+import org.junit.jupiter.api.Assertions;
+import web.helpers.TestListener;
 import web.pages.RenameAccountPage;
+
+import static web.constans.AccountServiceConstants.NOT_DISPLAYED_MESSAGE;
 
 public class RenameAccountSteps {
 
@@ -32,17 +36,20 @@ public class RenameAccountSteps {
     }
 
     @Step("Отображается сообщение 'Поле не должно быть пустым'")
-    public boolean isEmptyMessageDisplayed() {
-        return renameAccountPage.isEmptyMessageDisplayed();
+    public void assertEmptyMessageIsDisplayed() {
+        Assertions.assertTrue(renameAccountPage.isEmptyMessageDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Сообщение"));
+        TestListener.takeScreenshot();
     }
 
     @Step("Отображается сообщение 'Вы не можете ввести более 30 символов'")
-    public boolean isMoreThenThirtyCharactersMessageDisplayed() {
-        return renameAccountPage.isMoreThenThirtyCharactersMessageDisplayed();
+    public void assertMoreThenThirtyCharactersMessageIsDisplayed() {
+        Assertions.assertTrue(renameAccountPage.isMoreThenThirtyCharactersMessageDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Сообщение"));
+        TestListener.takeScreenshot();
     }
 
     @Step("Отображается сообщение 'Вы ввели недопустимые символы'")
-    public boolean isInvalidCharactersMessageDisplayed() {
-        return renameAccountPage.isInvalidCharactersMessageDisplayed();
+    public void assertInvalidCharactersMessageIsDisplayed() {
+        Assertions.assertTrue(renameAccountPage.isInvalidCharactersMessageDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Сообщение"));
+        TestListener.takeScreenshot();
     }
 }
