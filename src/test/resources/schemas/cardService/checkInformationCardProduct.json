@@ -1,0 +1,204 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "typeName": {
+      "type": "string"
+    },
+    "paymentSystem": {
+      "type": "string"
+    },
+    "credit": {
+      "type": "boolean"
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "transferFee": {
+      "type": "object",
+      "properties": {
+        "ourClient": {
+          "type": "number"
+        },
+        "partnerClient": {
+          "type": "number"
+        },
+        "anotherClientRu": {
+          "type": "number"
+        },
+        "anotherClientWorld": {
+          "type": "number"
+        },
+        "onBankAccount": {
+          "type": "number"
+        },
+        "byPhoneNumber": {
+          "type": "number"
+        },
+        "minFeeWorld": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "ourClient",
+        "partnerClient",
+        "anotherClientRu",
+        "anotherClientWorld",
+        "onBankAccount",
+        "byPhoneNumber",
+        "minFeeWorld"
+      ]
+    },
+    "withdrawalCashFee": {
+      "type": "object",
+      "properties": {
+        "ourBank": {
+          "type": "number"
+        },
+        "partnersBank": {
+          "type": "number"
+        },
+        "anotherBankRu": {
+          "type": "number"
+        },
+        "anotherBankWorld": {
+          "type": "number"
+        },
+        "minCashFeeWorld": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "ourBank",
+        "partnersBank",
+        "anotherBankRu",
+        "anotherBankWorld",
+        "minCashFeeWorld"
+      ]
+    },
+    "costPerMonth": {
+      "type": "number"
+    },
+    "freeCostFrom": {
+      "type": "number"
+    },
+    "servicePrice": {
+      "type": "number"
+    },
+    "cardReissue": {
+      "type": "number"
+    },
+    "addCardCost": {
+      "type": "number"
+    },
+    "virtual": {
+      "type": "boolean"
+    },
+    "productLimit": {
+      "type": "object",
+      "properties": {
+        "operationPerDayMax": {
+          "type": "integer"
+        },
+        "operationPerMonthMax": {
+          "type": "integer"
+        },
+        "amountPerOperationMax": {
+          "type": "integer"
+        },
+        "amountPerDayMax": {
+          "type": "integer"
+        },
+        "amountPerMonthMax": {
+          "type": "integer"
+        },
+        "withdrawalCashPerDay": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "operationPerDayMax",
+        "operationPerMonthMax",
+        "amountPerOperationMax",
+        "amountPerDayMax",
+        "amountPerMonthMax",
+        "withdrawalCashPerDay"
+      ]
+    },
+    "cashback": {
+      "type": "object",
+      "properties": {
+        "interestPerMonth": {
+          "type": "number"
+        },
+        "interestForAll": {
+          "type": "number"
+        },
+        "interestForPartners": {
+          "type": "number"
+        },
+        "cashbackLimit": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "interestPerMonth",
+        "interestForAll",
+        "interestForPartners",
+        "cashbackLimit"
+      ]
+    },
+    "bonusProgram": {
+      "type": "object",
+      "properties": {
+        "partnersBonus": {
+          "type": "boolean"
+        },
+        "bestExchangeRate": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "partnersBonus",
+        "bestExchangeRate"
+      ]
+    },
+    "level": {
+      "type": "string"
+    },
+    "currency": {
+      "type": "string"
+    },
+    "validityTerm": {
+      "type": "integer"
+    },
+    "oneUse": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "id",
+    "typeName",
+    "paymentSystem",
+    "credit",
+    "active",
+    "transferFee",
+    "withdrawalCashFee",
+    "costPerMonth",
+    "freeCostFrom",
+    "servicePrice",
+    "cardReissue",
+    "addCardCost",
+    "virtual",
+    "productLimit",
+    "cashback",
+    "bonusProgram",
+    "level",
+    "currency",
+    "validityTerm",
+    "oneUse"
+  ]
+}

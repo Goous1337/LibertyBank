@@ -2,6 +2,7 @@ package service;
 
 import io.restassured.response.Response;
 
+import static api.core.ApiClient.sendRequestWithoutParams;
 import static api.core.ApiClient.sendSimpleRequest;
 import static api.core.RequestParam.getRP;
 import static api.core.RequestParamType.*;
@@ -18,12 +19,16 @@ public class CardService {
     }
 
     public Response getActiveCardsInfoUserHaveCards() {
-        return  sendSimpleRequest(GET, ACTIVE_CARDS,
+        return sendSimpleRequest(GET, ACTIVE_CARDS,
                 getRP(QUERY_PARAMETER, PARAMETER_CUSTOMER_ID, CUSTOMER_ID_WITH_ACTIVE_CARDS));
     }
 
     public Response getCardData(String cardId) {
-        return  sendSimpleRequest(GET, ACTIVE_CARDS + "/" + cardId,
+        return sendSimpleRequest(GET, ACTIVE_CARDS + "/" + cardId,
                 getRP(HEADER, HEADER_CUSTOMER_ID, CUSTOMER_ID_WITH_ACTIVE_CARDS));
+    }
+
+    public Response getInformationCardProduct(String productTypeId) {
+        return sendRequestWithoutParams(GET, CARDS_LIST + "/" + productTypeId);
     }
 }

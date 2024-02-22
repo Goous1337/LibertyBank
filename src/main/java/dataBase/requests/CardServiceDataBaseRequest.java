@@ -17,4 +17,11 @@ public class CardServiceDataBaseRequest {
         LOG.info(String.format("Получен id карты: %s", cardId));
         return cardId;
     }
+
+    public static String getProductTypeId(String cardStatus) {
+        String sql = "SELECT product_type FROM card WHERE customer = '" + CUSTOMER_ID_WITH_ACTIVE_CARDS + "' AND card_status = '" + cardStatus + "' LIMIT 1";
+        String productTypeId = getDBConnection(CARD_SERVICE_DB).queryForObject(sql, String.class);
+        LOG.info(String.format("Получен productTypeId карты: %s", productTypeId));
+        return productTypeId;
+    }
 }
