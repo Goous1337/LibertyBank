@@ -20,7 +20,6 @@ public class ChangeNotificationStatusPage extends BasePage {
     }
 
     public boolean isChangedSMSNotificationCheckBox(boolean status) {
-        waitCheckbox(!status, statusSMSNotificationCheckbox);
-        return statusSMSNotificationCheckbox.isSelected();
+        return waitCheckbox(!status, statusSMSNotificationCheckbox).isSelected();
     }
 }

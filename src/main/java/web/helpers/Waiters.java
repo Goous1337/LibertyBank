@@ -30,11 +30,12 @@ public class Waiters {
                 .until(ExpectedConditions.visibilityOf(element));
     }
 
-    public static void waitCheckbox(boolean expectedState, WebElement element) {
-        new WebDriverWait(getDriver(), Duration.ofSeconds(TIME_TO_WAIT))
+    public static WebElement waitCheckbox(boolean expectedState, WebElement element) {
+         new WebDriverWait(getDriver(), Duration.ofSeconds(TIME_TO_WAIT))
                 .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
                 .until(expectedState ? elementToBeSelected(element)
                         : not(elementToBeSelected(element)));
+         return element;
     }
 }
