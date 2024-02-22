@@ -1,12 +1,7 @@
 package api.customerService_2_0;
 
-import api.BaseTest;
 import dataBase.requests.CustomerService_2_0_DataBaseRequest;
-import io.qameta.allure.Description;
-import io.qameta.allure.TmsLink;
-import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
-import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
