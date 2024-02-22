@@ -11,7 +11,7 @@ public class DropDownAccountMenuSteps {
     }
 
     @Step("Выполняется проверка видимости кнопок в выподающем меню личного кабинета")
-    public void checkVisibilityOfUserPanelButtons(int time) {
-        dropDownAccountMenuPage.checkVisibilityOfUserPanelButtons(time);
+    public void checkVisibilityOfUserPanelButtons() {
+        dropDownAccountMenuPage.checkVisibilityOfUserPanelButtons();
     }
 }

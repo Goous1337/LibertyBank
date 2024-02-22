@@ -27,7 +27,7 @@ public class CheckDropDownMenuInPersonalAccountTest extends BaseTest {
     public void checkDropDownMenuText() {
         homeSteps.clickUserMenu();
         assertTrue(homeSteps.isUserPanelDisplayed(), String.format(DISPLAYED_MESSAGE, "выпадающие меню пользователя"));
-        dropDownAccountMenuSteps.checkVisibilityOfUserPanelButtons(5);
+        dropDownAccountMenuSteps.checkVisibilityOfUserPanelButtons();
     }
 }
 

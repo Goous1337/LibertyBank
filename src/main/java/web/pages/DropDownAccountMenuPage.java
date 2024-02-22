@@ -1,16 +1,8 @@
 package web.pages;
 
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import web.helpers.Waiters;
-
-import java.time.Duration;
-
-import static web.drivers.DriverManager.getDriver;
 
 public class DropDownAccountMenuPage extends BasePage {
     @FindBy(xpath = "//a[@href='/logout']")
@@ -47,22 +39,16 @@ public class DropDownAccountMenuPage extends BasePage {
         return userPanel.isDisplayed();
     }
 
-    public static WebElement waitElementWithOwnTime(WebElement element, int time) {
-        return new WebDriverWait(getDriver(), Duration.ofSeconds(time))
-                .ignoring(NoSuchElementException.class)
-                .ignoring(StaleElementReferenceException.class)
-                .until(ExpectedConditions.visibilityOf(element));
-    }
-
-    public void checkVisibilityOfUserPanelButtons(int time) {
-        waitElementWithOwnTime(contactBankBtn, time);
-        waitElementWithOwnTime(securityBtn, time);
-        waitElementWithOwnTime(servicePackagesBtn, time);
-        waitElementWithOwnTime(legalInfoBtn, time);
-        waitElementWithOwnTime(personalDateBtn, time);
-        waitElementWithOwnTime(notificationBtn, time);
-        waitElementWithOwnTime(securityBtn, time);
-        waitElementWithOwnTime(exitFromAccountBtn, time);
-        waitElementWithOwnTime(userName, time);
+    public void checkVisibilityOfUserPanelButtons() {
+        int wait = 5;
+        Waiters.waitElementWithOwnTime(contactBankBtn, wait);
+        Waiters.waitElementWithOwnTime(securityBtn, wait);
+        Waiters.waitElementWithOwnTime(servicePackagesBtn, wait);
+        Waiters.waitElementWithOwnTime(legalInfoBtn, wait);
+        Waiters.waitElementWithOwnTime(personalDateBtn, wait);
+        Waiters.waitElementWithOwnTime(notificationBtn, wait);
+        Waiters.waitElementWithOwnTime(securityBtn, wait);
+        Waiters.waitElementWithOwnTime(exitFromAccountBtn, wait);
+        Waiters.waitElementWithOwnTime(userName, wait);
     }
 }
