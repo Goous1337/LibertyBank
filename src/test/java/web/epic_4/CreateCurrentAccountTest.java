@@ -16,10 +16,9 @@ import static web.constans.UrlConfig.ACCOUNTS_URL;
 public class CreateCurrentAccountTest extends BaseTest {
 
     @BeforeEach
-    public void setUpTest() throws InterruptedException {
+    public void setUpTest() {
         authorization();
         open(ACCOUNTS_URL);
-        Thread.sleep(1000);
         accountSteps.clickCreateCurrentAccount();
     }
 
@@ -39,10 +38,8 @@ public class CreateCurrentAccountTest extends BaseTest {
                 () -> Assertions.assertTrue(createAccountSteps.isCreateAccountButtonEnabled(), String.format(NOT_ENABLED_MESSAGE, "Открыть счет"))
         );
         createAccountSteps.createAccount();
-        Assertions.assertAll(
+        Assertions.assertTrue(createAccountSteps.isNavigationToBillButtonDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Перейти к списку счетов"));
 
-                () -> Assertions.assertTrue(createAccountSteps.isNavigationToBillButtonDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Перейти к списку счетов"))
-        );
         createAccountSteps.clickToNavigationToBillButton();
         Assertions.assertTrue(accountSteps.isOpenAccountDisplayed(), String.format(STATUS_ERROR_MESSAGE, OPEN_ACCOUNT_STATUS));
     }

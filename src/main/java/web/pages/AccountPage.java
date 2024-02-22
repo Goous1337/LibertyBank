@@ -30,7 +30,7 @@ public class AccountPage extends BasePage {
     @FindBy(xpath = "(//p[contains(text(), 'Текущий счет')])[2]")
     private WebElement secondAccount;
 
-    @FindBy(xpath = "//p[contains(@class, '_label_19f2j_1')]")
+    @FindBy(css = "//p[contains(@class, '_label_19f2j_1')]")
     private WebElement accountStatus;
 
     @FindBy(xpath = "//*[@href = '#icon-currency-ruble']")

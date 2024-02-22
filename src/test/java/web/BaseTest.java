@@ -31,7 +31,6 @@ public class BaseTest {
     }
 
     protected void open(String pageUrl) {
-        DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         DriverManager.getDriver()
                 .get(BASE_URL + pageUrl);
     }
