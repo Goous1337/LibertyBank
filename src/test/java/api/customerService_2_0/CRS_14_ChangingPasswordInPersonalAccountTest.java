@@ -3,12 +3,14 @@ package api.customerService_2_0;
 import api.BaseTest;
 import dataBase.requests.CustomerService_2_0_DataBaseRequest;
 import io.qameta.allure.Description;
-import io.qameta.allure.Issue;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import pojo.customerService_2_0.ChangeUserAccountPasswordByPhone;
@@ -77,7 +79,6 @@ public class CRS_14_ChangingPasswordInPersonalAccountTest extends BaseTest {
         );
     }
 
-    @Disabled("Bug https://jira.astondevs.ru/browse/LIB-2602")
     @DisplayName(" Проверка системы валидации параметров в BODY при запросе восстановления пароля.")
     @Description("""
             Данный тест-кейс проверяет возможность изменения пароля в личном кабинете пользователя при
@@ -85,7 +86,6 @@ public class CRS_14_ChangingPasswordInPersonalAccountTest extends BaseTest {
             """)
     @Tags({@Tag("API"), @Tag("Negative")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2089")
-    @Issue("https://jira.astondevs.ru/browse/LIB-2602")
     @Test
     public void checkSavingVerificationCodeWithNullParameters() {
         String jsonSchemaPath = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";

@@ -13,6 +13,7 @@ public class DepositDataCalculator {
     private Float initialSum;
     private Integer termTime;
     private Boolean isCapitalisation;
+    private String currencyCode;
 
     public DepositDataCalculator(Integer depositProductId, Integer termTime, Boolean isCapitalisation) {
         this.depositProductId = depositProductId;

@@ -22,6 +22,9 @@ public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseT
         RestAssured.baseURI = DEPOSIT_SERVICE_NEW;
     }
 
+    private final int depositProductIdUsd = DepositServiceDataBaseRequest.getDepositProductId(CURRENCY_CODE_USD);
+    private final int depositProductIdRub = DepositServiceDataBaseRequest.getDepositProductId(CURRENCY_CODE_RUB);
+
     @DisplayName("Проверка позитивных сценариев граничных значений")
     @Description("Данный тест-кейс направлен на проверку позитивных сценариев граничных значений" +
             " в расчете потенциального дохода по депозиту на определенный срок")
@@ -31,7 +34,7 @@ public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseT
     @ValueSource(floats = {99999, 100000, 1000, 1001})
     public void checkPositiveBoundaryValueScenarios(Float initialSum) {
         Response response = depositService.checkListBoundaryValueScenarios
-                (2, initialSum, 13, true);
+                (depositProductIdRub, initialSum, TERM_TIME, true, CURRENCY_CODE_RUB);
         assertAll(
                 () -> assertEquals(SC_OK, response.getStatusCode()),
                 () -> assertNotNull(response.jsonPath().get("finalSum")),
@@ -47,10 +50,10 @@ public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseT
     @Tags({@Tag("API"), @Tag("Negative")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-818")
     @ParameterizedTest(name = "initialSum: {1}")
-    @ValueSource(floats = {-1, 500001})
+    @ValueSource(floats = {-1, 1000001, 2999})
     public void checkNegativeBoundaryValueScenarios(Float initialSum) {
         Response response = depositService.checkListBoundaryValueScenarios
-                (2, initialSum, 13, true);
+                (depositProductIdUsd, initialSum, TERM_TIME, true, CURRENCY_CODE_USD);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode()),
                 () -> assertEquals(DEPOSIT_TITLE, response.jsonPath().get("title"))
@@ -65,12 +68,12 @@ public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseT
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-735")
     @Test
     public void checkCalculationIncomeFromDepositForCertainPeriodCapitalizationFalse() {
-        String annualInsertRate = DepositServiceDataBaseRequest.getCapitalisationValue(DEPOSIT_ID_PRODUCT, TERM_TIME);
+        String annualInsertRate = DepositServiceDataBaseRequest.getCapitalisationValue(depositProductIdRub, TERM_TIME);
         Float convertAnnualInsertRate = Float.valueOf(annualInsertRate);
         Float valueFromFormulaIfFalse = depositService.calculationFinalDepositAmountIsFalse
                 (INITIAL_SUM, convertAnnualInsertRate, TERM_TIME);
         Response response = depositService.checkListBoundaryValueScenarios
-                (DEPOSIT_ID_PRODUCT, INITIAL_SUM, TERM_TIME, false);
+                (depositProductIdRub, INITIAL_SUM, TERM_TIME, false, CURRENCY_CODE_RUB);
         assertAll(
                 () -> assertEquals(SC_OK, response.getStatusCode()),
                 () -> assertNotNull(response.jsonPath().get("finalSum")),
@@ -88,7 +91,7 @@ public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseT
     @Test
     public void checkCalculationIncomeFromDepositForCertainPeriodWithoutCapitalization() {
         Response response = depositService.checkListCalculatingOfPotentialIncomeOnDepositWithoutCapitalisation
-                (2, 1000f, 13);
+                (depositProductIdRub, 1000f, TERM_TIME);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode()),
                 () -> assertEquals(DEPOSIT_TITLE, response.jsonPath().get("title"))
@@ -103,7 +106,7 @@ public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseT
     @Test
     public void checkCalculatingOfPotentialIncomeOnDepositWithoutId() {
         Response response = depositService.checkListCalculatingOfPotentialIncomeOnDepositWithoutId
-                (1000f, 13, true);
+                (1000f, TERM_TIME, true);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode()),
                 () -> assertEquals(DEPOSIT_TITLE, response.jsonPath().get("title"))
@@ -118,7 +121,7 @@ public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseT
     @Test
     public void checkCalculatingOfPotentialIncomeOnDepositWithoutInitialSum() {
         Response response = depositService.checkListCalculatingOfPotentialIncomeOnDepositWithoutInitialSum
-                (2, 13, true);
+                (depositProductIdRub, TERM_TIME, true);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode()),
                 () -> assertEquals(DEPOSIT_TITLE, response.jsonPath().get("title"))
@@ -133,14 +136,13 @@ public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseT
     @Test
     public void checkCalculatingOfPotentialIncomeOnDepositWithoutTermTime() {
         Response response = depositService.checkListCalculatingOfPotentialIncomeOnDepositWithoutTermTime
-                (2, 1000f, true);
+                (depositProductIdRub, 1000f, true);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode()),
                 () -> assertEquals(DEPOSIT_TITLE, response.jsonPath().get("title"))
         );
     }
 
-    @Disabled("Bug https://jira.astondevs.ru/browse/LIB3-1340")
     @DisplayName("Расчет потенциального дохода по депозиту на определенный срок c капитализацией")
     @Description("Данный тест-кейс направлен на расчет потенциального дохода по депозиту на определенный" +
             "срок с капитализацией")
@@ -148,12 +150,12 @@ public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseT
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-734")
     @Test
     public void checkCalculationIncomeFromDepositForCertainPeriodCapitalizationTrue() {
-        String annualInsertRate = DepositServiceDataBaseRequest.getCapitalisationValue(DEPOSIT_ID_PRODUCT, TERM_TIME);
+        String annualInsertRate = DepositServiceDataBaseRequest.getCapitalisationValue(depositProductIdRub, TERM_TIME);
         Float convertAnnualInsertRate = Float.valueOf(annualInsertRate);
         Float getValueFromFormulaIfTrue = depositService.calculationFinalDepositAmountIsTrue
                 (INITIAL_SUM, convertAnnualInsertRate, TERM_TIME);
         Response response = depositService.checkListBoundaryValueScenarios
-                (DEPOSIT_ID_PRODUCT, INITIAL_SUM, TERM_TIME, true);
+                (depositProductIdRub, INITIAL_SUM, TERM_TIME, true, CURRENCY_CODE_RUB);
         assertAll(
                 () -> assertEquals(SC_OK, response.statusCode()),
                 () -> assertEquals(getValueFromFormulaIfTrue, response.jsonPath().get("finalSum"))
