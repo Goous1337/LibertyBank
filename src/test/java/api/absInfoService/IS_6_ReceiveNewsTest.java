@@ -10,9 +10,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-
-import static org.apache.http.HttpStatus.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.apache.http.HttpStatus.SC_NOT_FOUND;
+import static org.apache.http.HttpStatus.SC_OK;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.ABS_INFO_SERVICE;
 
 @DisplayName("IS_6 Получение новостей")

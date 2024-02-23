@@ -78,6 +78,9 @@ public final class ApiEndpoints {
     public static final String CUSTOMER_2_0_RECOVERY = "customer/api/v1/security/password/recovery";
     public static final String CUSTOMER_2_0_SECURITY_VERIFICATION = "customer/api/v1/security/session/verification";
     public static final String CUSTOMER_2_0_EMAIL = "customer/api/v1/auth/user/settings/email";
+    public static final String CUSTOMER_2_0_NOTIFICATION_SMS = "customer/api/v1/auth/user/settings/notifications/sms";
+    public static final String INCORRECT_CUSTOMER_2_0_NOTIFICATION_SMS =
+            "customer/api/v1/auth/user/settings/notifications/sm";
 
     public static final String QUESTION_ANSWER_2_0 = "customer/api/v1/auth/user/settings/controls";
     public static final String QUESTION_ANSWER_INVALID_URL_2_0 = "customer/api/v1/auth/user/settings/control";
@@ -88,5 +91,6 @@ public final class ApiEndpoints {
     public static final String ACCOUNTS_LIST_BY_CUSTOMER_ID = "account-service/api/v1/accounts/customer/";
     public static final String CARDS_LIST = "card-service/api/v1/card-products";
     public static final String ACTIVE_CARDS = "card-service/api/v1/cards";
+    public static final String REGISTRATION_HEADER = "Registration";
 
 }

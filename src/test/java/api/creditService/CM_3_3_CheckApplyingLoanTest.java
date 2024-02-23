@@ -10,7 +10,8 @@ import org.junit.jupiter.api.*;
 
 import static constant.CreditServiceConstants.*;
 import static org.apache.hc.core5.http.HttpStatus.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CREDIT_SERVICE;
 
 @DisplayName("СМ 3.3 Оформление заявки на кредит")
@@ -28,7 +29,7 @@ public class CM_3_3_CheckApplyingLoanTest extends BaseTest {
     public void checkApplyingLoan() {
         Response response = creditService.checkListApplyingLoan
                 (1, 250, 20, "RUB", "2023-11-28"
-                        , 60000, 30000, "8698345212");//TODO сделать генерацию валидных данных зависящих от productId
+                        , 60000, 30000, "8698345212"); //TODO сделать генерацию валидных данных зависящих от productId
 
         assertAll(
                 () -> assertEquals(SC_OK,
@@ -81,7 +82,7 @@ public class CM_3_3_CheckApplyingLoanTest extends BaseTest {
     @Tags({@Tag("API"), @Tag("Negative")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-612")
     @Test
-    public void checkApplyingLoanInvalidConfig() {//TODO сделать параметризацию по каждому полю по очереди
+    public void checkApplyingLoanInvalidConfig() { //TODO сделать параметризацию по каждому полю по очереди
         String jsonSchemaPath = "schemas/creditService/CM_3_3/errorMessage.json";
         Response response = creditService.checkListApplyingLoan
                 (null, 2500000, 20, "RUB", "2023-11-28",

@@ -11,8 +11,10 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 import service.CreditService;
+
 import static org.apache.hc.core5.http.HttpStatus.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CREDIT_SERVICE;
 
 public class CM_3_5_CheckViewInformationAboutCurrentCreditsUsersTest extends BaseTest {
@@ -27,7 +29,7 @@ public class CM_3_5_CheckViewInformationAboutCurrentCreditsUsersTest extends Bas
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-921")
     @Test
     public void checkUserInformationIncludeRealCreditProducts() {
-        String jsonSchemaPath ="schemas/creditService/CM_3_5/checkUserInformationIncludeRealCreditProducts.json";
+        String jsonSchemaPath = "schemas/creditService/CM_3_5/checkUserInformationIncludeRealCreditProducts.json";
         Response response = CreditService.checkViewInfoCurrentCreditsUsers("1");
         assertAll(
                 () -> assertEquals(SC_OK, response.statusCode(),

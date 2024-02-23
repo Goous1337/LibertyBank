@@ -6,7 +6,6 @@ import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.*;
 import web.BaseTest;
 
-import static web.constans.AccountServiceConstants.*;
 import static web.constans.UrlConfig.ACCOUNTS_URL;
 
 @Tag("Web")
@@ -30,11 +29,11 @@ public class SetMainAccountTest extends BaseTest {
         accountSteps.clickSecondAccount();
         accountInfoSteps.clickDotsInfoButton();
         accountInfoSteps.selectSetMainAccount();
-        Assertions.assertTrue(confirmationSteps.isSetMainAccountDialogBoxDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Диалоговое окно"));
+        confirmationSteps.assertSetMainAccountDialogBoxIsDisplayed();
         confirmationSteps.accept();
-        Assertions.assertTrue(confirmationSteps.isSuccessDialogBoxDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Диалоговое окно"));
+        confirmationSteps.assertSuccessDialogBoxIsDisplayed();
         confirmationSteps.returnToAccount();
-        Assertions.assertTrue(accountSteps.isMainAccountLabelDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Статус " + MAIN_ACCOUNT_STATUS));
+        accountSteps.assertMainAccountLabelIsDisplayed();
     }
 
     @Test
@@ -45,26 +44,29 @@ public class SetMainAccountTest extends BaseTest {
         accountSteps.clickSecondAccount();
         accountInfoSteps.clickDotsInfoButton();
         accountInfoSteps.selectSetMainAccount();
-        Assertions.assertTrue(confirmationSteps.isSetMainAccountDialogBoxDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Диалоговое окно"));
+        confirmationSteps.assertSetMainAccountDialogBoxIsDisplayed();
         confirmationSteps.accept();
-        Assertions.assertTrue(confirmationSteps.isSuccessDialogBoxDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Диалоговое окно"));
+        confirmationSteps.assertSuccessDialogBoxIsDisplayed();
         confirmationSteps.returnToAccount();
-        Assertions.assertTrue(accountSteps.isMainAccountLabelDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Статус " + MAIN_ACCOUNT_STATUS));
+        accountSteps.assertMainAccountLabelIsDisplayed();
         accountInfoSteps.goBack();
         Assertions.assertTrue(accountSteps.isMainAccountLabelDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Статус " + MAIN_ACCOUNT_STATUS));
+        
+        accountSteps.assertMainAccountLabelIsDisplayed();
+        accountSteps.assertMainAccountLabelIsNotDisplayed();
     }
 
     @Test
     @Order(3)
     @TmsLink("LIB2-2456")
     @DisplayName("Отсутствие статуса 'Основной счет' после блокирования счета")
-    public void  mainAccountStatusNotDisplayedAfterBlocked() {
+    public void mainAccountStatusNotDisplayedAfterBlocked() {
         accountSteps.clickAccount();
         accountInfoSteps.clickDotsInfoButton();
         accountInfoSteps.selectBlockAccount();
-        Assertions.assertTrue(confirmationSteps.isBlockAccountDialogBoxDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Диалоговое окно"));
+        confirmationSteps.assertBlockAccountDialogBoxIsDisplayed();
         confirmationSteps.accept();
-        Assertions.assertFalse(accountInfoSteps.isMainAccountLabelDisplayed(), String.format(DISPLAYED_MESSAGE, "Статус " + MAIN_ACCOUNT_STATUS));
+        accountInfoSteps.assertMainAccountLabelIsNotDisplayed();
     }
 
     @Test
@@ -75,7 +77,7 @@ public class SetMainAccountTest extends BaseTest {
         accountSteps.selectClosedAccounts();
         accountSteps.clickAccount();
         accountInfoSteps.clickDotsInfoButton();
-        Assertions.assertFalse(accountInfoSteps.isSetMainAccountOptDisplayed(), String.format(DISPLAYED_MESSAGE, "Опция 'Сделать счет основным'"));
+        accountInfoSteps.assertSetMainAccountOptIsNotDisplayed();
     }
 
     @Test
@@ -86,6 +88,6 @@ public class SetMainAccountTest extends BaseTest {
         accountSteps.selectBlockedAccounts();
         accountSteps.clickAccount();
         accountInfoSteps.clickDotsInfoButton();
-        Assertions.assertFalse(accountInfoSteps.isSetMainAccountOptDisplayed(), String.format(DISPLAYED_MESSAGE, "Опция 'Сделать счет основным'"));
+        accountInfoSteps.assertSetMainAccountOptIsNotDisplayed();
     }
 }

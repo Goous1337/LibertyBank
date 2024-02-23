@@ -4,12 +4,8 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.WebDriver;
-import property.WebPropertiesReader;
 import web.BaseTest;
-import web.drivers.DriverManager;
 
-import static web.constans.AccountServiceConstants.*;
 import static web.constans.UrlConfig.ACCOUNTS_URL;
 
 @Tag("Web")
@@ -31,9 +27,14 @@ public class CloseAccountTest extends BaseTest {
     public void checkClosingAccountByUser() {
         accountInfoSteps.clickDotsInfoButton();
         accountInfoSteps.clickCloseButton();
-        Assertions.assertTrue(confirmationSteps.isCloseVerificationMessageDisplayed(), String.format(DISPLAYED_MESSAGE, "Сообщение о подтверждении закрытия счета"));
+        confirmationSteps.assertCloseVerificationMessageIsDisplayed();
         confirmationSteps.accept();
+        
         Assertions.assertTrue(accountInfoSteps.isClosedLabelDisplayed(), String.format(DISPLAYED_MESSAGE, "Сообщение об успешном закрытии счета"));
+        confirmationSteps.assertCloseSuccessfullyMessageDisplayed();
+        confirmationSteps.clickNavigateToAccountsPageButton();
+        accountSteps.assertClosedAccountsTabIsDisplayed();
+        accountSteps.assertOpenAccountsTabIsDisplayed();
     }
 
     @Test
@@ -42,8 +43,8 @@ public class CloseAccountTest extends BaseTest {
     public void checkClosingAccountDeny() {
         accountInfoSteps.clickDotsInfoButton();
         accountInfoSteps.clickCloseButton();
-        Assertions.assertTrue(confirmationSteps.isCloseVerificationMessageDisplayed(), String.format(DISPLAYED_MESSAGE, "Сообщение о подтверждении закрытия счета"));
+        confirmationSteps.assertCloseVerificationMessageIsDisplayed();
         confirmationSteps.deny();
-        Assertions.assertNotEquals(CLOSED_ACCOUNT_STATUS, accountInfoSteps.getAccountStatus(), String.format(STATUS_ERROR_MESSAGE, CLOSED_ACCOUNT_STATUS));
+        accountInfoSteps.assertAccountStatusIsNotClosed();
     }
 }

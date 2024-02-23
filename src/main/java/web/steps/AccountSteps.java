@@ -2,7 +2,11 @@ package web.steps;
 
 import io.qameta.allure.Step;
 import web.helpers.Waiters;
+import org.junit.jupiter.api.Assertions;
+import web.helpers.TestListener;
 import web.pages.AccountPage;
+
+import static web.constans.AccountServiceConstants.*;
 
 public class AccountSteps {
 
@@ -47,18 +51,30 @@ public class AccountSteps {
         accountPage.clickCreateCurrentAccount();
     }
 
-    public boolean isOpenAccountDisplayed() {
-        return accountPage.isOpenAccountDisplayed();
+    @Step("Отображается вкладка 'Открытые счета'")
+    public void assertOpenAccountsTabIsDisplayed() {
+        Assertions.assertTrue(accountPage.isOpenAccountsTabDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, OPEN_ACCOUNTS_TAB));
+        TestListener.takeScreenshot();
     }
 
-    public boolean isCloseAccountsDisplayed() {
-        return accountPage.isCloseAccountDisplayed();
+    @Step("Отображается вкладка 'Закрытые счета'")
+    public void assertClosedAccountsTabIsDisplayed() {
+        Assertions.assertTrue(accountPage.isCloseAccountsTabDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, CLOSED_ACCOUNTS_TAB));
+        TestListener.takeScreenshot();
     }
 
     @Step("Отображается статус 'Основной счет'")
-    public boolean isMainAccountLabelDisplayed() {
-        return accountPage.isMainAccountLabelDisplayed();
+    public void assertMainAccountLabelIsDisplayed() {
+        Assertions.assertTrue(accountPage.isMainAccountLabelDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Статус " + MAIN_ACCOUNT_STATUS));
+        TestListener.takeScreenshot();
     }
+
+    @Step("Не отображается статус 'Основной счет'")
+    public void assertMainAccountLabelIsNotDisplayed() {
+        Assertions.assertFalse(accountPage.isMainAccountLabelDisplayed(), String.format(DISPLAYED_MESSAGE, "Статус " + MAIN_ACCOUNT_STATUS));
+        TestListener.takeScreenshot();
+    }
+
 
     @Step("Отображается статус 'Основной счет' у второго счета")
     public boolean isSecondMainAccountLabelDisplayed() {
@@ -66,8 +82,9 @@ public class AccountSteps {
     }
 
     @Step("Отображается статус счета")
-    public boolean accountStatusIsDisplayed() {
-        return accountPage.isAccountStatusDisplayed();
+    public void assertAccountStatusIsDisplayed() {
+        Assertions.assertTrue(accountPage.isAccountStatusDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Статус счета"));
+        TestListener.takeScreenshot();
     }
 
     @Step("Получить статус счета")
@@ -76,23 +93,27 @@ public class AccountSteps {
     }
 
     @Step("Отображается значок валюты в рублях")
-    public boolean rubleImageIsDisplayed() {
-        return accountPage.isRubleImageDisplayed();
+    public void assertRubleImageIsDisplayed() {
+        Assertions.assertTrue(accountPage.isRubleImageDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, RUB));
+        TestListener.takeScreenshot();
     }
 
     @Step("Отображается значок валюты в долларах")
-    public boolean dollarImageIsDisplayed() {
-        return accountPage.isDollarImageDisplayed();
+    public void assertDollarImageIsDisplayed() {
+        Assertions.assertTrue(accountPage.isDollarImageDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, USD));
+        TestListener.takeScreenshot();
     }
 
     @Step("Отображается значок валюты в евро")
-    public boolean euroImageIsDisplayed() {
-        return accountPage.isEuroImageDisplayed();
+    public void assertEuroImageIsDisplayed() {
+        Assertions.assertTrue(accountPage.isEuroImageDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, EUR));
+        TestListener.takeScreenshot();
     }
 
     @Step("Отображается название или номер счета")
-    public boolean accountNameOrNumberIsDisplayed() {
-        return accountPage.isAccountNameOrNumberDisplayed();
+    public void accountNameOrNumberIsDisplayed() {
+        Assertions.assertTrue(accountPage.isAccountNameOrNumberDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Номер или имя счета"));
+        TestListener.takeScreenshot();
     }
 
     @Step("Получить название или номер счета")
@@ -101,18 +122,21 @@ public class AccountSteps {
     }
 
     @Step("Отображается сумма счета")
-    public boolean amountIsDisplayed() {
-        return accountPage.isAmountDisplayed();
+    public void amountIsDisplayed() {
+        Assertions.assertTrue(accountPage.isAmountDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Сумма счета"));
+        TestListener.takeScreenshot();
     }
 
     @Step("Отображается валюта счета")
-    public boolean currencyIsDisplayed() {
-        return accountPage.isCurrencyDisplayed();
+    public void currencyIsDisplayed() {
+        Assertions.assertTrue(accountPage.isCurrencyDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Валюта счета"));
+        TestListener.takeScreenshot();
     }
 
     @Step("Отображается тип счета")
-    public boolean accountTypeIsDisplayed() {
-        return accountPage.isAccountTypeDisplayed();
+    public void accountTypeIsDisplayed() {
+        Assertions.assertTrue(accountPage.isAccountTypeDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Тип счета"));
+        TestListener.takeScreenshot();
     }
 
     @Step("Получить тип счета")
@@ -138,5 +162,23 @@ public class AccountSteps {
     @Step("Отфильтровать счета по валюте в евро")
     public void filterByEuro() {
         accountPage.clickFilterByEur();
+    }
+
+    @Step("Статус счета соответствует статусу 'Активный'")
+    public void assertAccountStatusIsOpen() {
+        Assertions.assertEquals(OPEN_ACCOUNT_STATUS, getAccountStatus(), String.format(STATUS_ERROR_MESSAGE, OPEN_ACCOUNT_STATUS));
+        TestListener.takeScreenshot();
+    }
+
+    @Step("Статус счета соответствует статусу 'Закрыт'")
+    public void assertAccountStatusIsClosed() {
+        Assertions.assertEquals(CLOSED_ACCOUNT_STATUS, getAccountStatus(), String.format(STATUS_ERROR_MESSAGE, CLOSED_ACCOUNT_STATUS));
+        TestListener.takeScreenshot();
+    }
+
+    @Step("Статус счета соответствует статусу 'Заблокирован'")
+    public void assertAccountStatusIsBlocked() {
+        Assertions.assertEquals(BLOCKED_ACCOUNT_STATUS, getAccountStatus(), String.format(STATUS_ERROR_MESSAGE, BLOCKED_ACCOUNT_STATUS));
+        TestListener.takeScreenshot();
     }
 }

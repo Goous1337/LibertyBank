@@ -17,6 +17,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import pojo.customerService_2_0.UserAuthorizationByPhone;
 
 import static constant.CustomerService_2_0_Constants.*;
+import static constant.Message.RESPONSE_CODE_NOT_EXPECTED;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CUSTOMER_SERVICE_2_0;
@@ -45,7 +46,7 @@ public class CRS_10_SendingNotificationInPersonalAccountTest extends BaseTest {
         assertAll(
                 () -> assertEquals(HttpStatus.SC_OK,
                         response.statusCode(),
-                        "Код ответа не соответствует ожидаемому"),
+                        RESPONSE_CODE_NOT_EXPECTED),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
         CustomerService_2_0_DataBaseRequest.resetTimerOfVerificationCodeById(customerId);
@@ -69,7 +70,7 @@ public class CRS_10_SendingNotificationInPersonalAccountTest extends BaseTest {
         assertAll(
                 () -> assertEquals(HttpStatus.SC_METHOD_NOT_ALLOWED,
                         response.statusCode(),
-                        "Код ответа не соответствует ожидаемому"),
+                        RESPONSE_CODE_NOT_EXPECTED),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
         CustomerService_2_0_DataBaseRequest.resetTimerOfVerificationCodeById(customerId);
@@ -91,7 +92,7 @@ public class CRS_10_SendingNotificationInPersonalAccountTest extends BaseTest {
         assertAll(
                 () -> assertEquals(HttpStatus.SC_NOT_FOUND,
                         response1.statusCode(),
-                        "Код ответа не соответствует ожидаемому")
+                        RESPONSE_CODE_NOT_EXPECTED)
         );
         CustomerService_2_0_DataBaseRequest.resetTimerOfVerificationCodeById(customerId);
     }

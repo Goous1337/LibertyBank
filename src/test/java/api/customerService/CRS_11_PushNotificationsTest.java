@@ -15,11 +15,13 @@ import static dataBase.DataBaseConnector.getDBConnection;
 import static dataProviders.DataUtils.getCustomerIdWithCustomerStatus;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.CUSTOMER_SERVICE;
+
 @DisplayName("CRS-11 Изменение PUSH-уведомлений")
 public class CRS_11_PushNotificationsTest extends BaseTest {
     {
         RestAssured.baseURI = CUSTOMER_SERVICE;
     }
+
     @Disabled("пока не работает'")
     @DisplayName("Основной сценарий. Проверка возможности изменения получения PUSH-уведомлений.")
     @Description("В данном тест-кейсе проводится проверка возможности изменения настроек получения пользователем PUSH уведомлений.")
@@ -29,7 +31,7 @@ public class CRS_11_PushNotificationsTest extends BaseTest {
     public void successfulPushNotificationTest() {
         String jsonSchemaPath = "schemas/errorMessage.json";
         String customerId = getCustomerIdWithCustomerStatus(true);
-        Response response = customerService.checkPushNotification(customerId,"true");
+        Response response = customerService.checkPushNotification(customerId, "true");
         assertAll(
                 () -> assertEquals(HttpStatus.SC_OK,
                         response.statusCode(),
@@ -37,7 +39,7 @@ public class CRS_11_PushNotificationsTest extends BaseTest {
                 () -> {
                     String sql = "SELECT push_notification FROM public.customer WHERE customer_id = ?";
                     assertFalse(getDBConnection(LibertyServiceName.CUSTOMER_SERVICE)
-                            .queryForList(sql, Boolean.class,customerId).get(0));
+                            .queryForList(sql, Boolean.class, customerId).get(0));
                 }
         );
     }
@@ -76,7 +78,7 @@ public class CRS_11_PushNotificationsTest extends BaseTest {
     })
     public void unsuccessfulPushNotificationWrongHttpMethod(String httpMethod) {
         String customerId = getCustomerIdWithCustomerStatus(true);
-        Response response = customerService.checkPushNotificationWithHttpMethod(customerId,httpMethod);
+        Response response = customerService.checkPushNotificationWithHttpMethod(customerId, httpMethod);
         assertAll(
                 () -> assertEquals(HttpStatus.SC_METHOD_NOT_ALLOWED,
                         response.statusCode(),

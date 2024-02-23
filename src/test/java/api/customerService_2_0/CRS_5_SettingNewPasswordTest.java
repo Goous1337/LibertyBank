@@ -8,15 +8,19 @@ import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.hc.core5.http.HttpStatus;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import pojo.customerService_2_0.CustomerService_2_0_Mobile;
 import pojo.customerService_2_0.UserVerificationWithCode;
 
+import static constant.Message.RESPONSE_CODE_NOT_EXPECTED;
+import static constant.Message.THERE_NOT_ERROR_MESSAGE;
 import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CUSTOMER_SERVICE_2_0;
 
 @DisplayName("CRS-5 Установление нового пароля")
@@ -46,7 +50,7 @@ public class CRS_5_SettingNewPasswordTest extends BaseTest {
 
         assertAll(
                 () -> assertEquals(HttpStatus.SC_OK, response.statusCode(),
-                        "Код ответа не соответствует ожидаемому"),
+                        RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertNotEquals(oldHashPassword, newPassword)
         );
         CustomerService_2_0_DataBaseRequest.resetTimerOfVerificationCodeById(customerId);
@@ -76,7 +80,7 @@ public class CRS_5_SettingNewPasswordTest extends BaseTest {
 
         assertAll(
                 () -> assertEquals(SC_METHOD_NOT_ALLOWED, response.statusCode(),
-                        "Код ответа не соответствует ожидаемому"),
+                        RESPONSE_CODE_NOT_EXPECTED),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
         CustomerService_2_0_DataBaseRequest.resetTimerOfVerificationCodeById(customerId);
@@ -95,8 +99,8 @@ public class CRS_5_SettingNewPasswordTest extends BaseTest {
         Response response = customerService_2_0.changePasswordForUserUpdatedDatabase(token, newPassword);
         assertAll(
                 () -> assertEquals(SC_UNAUTHORIZED, response.statusCode(),
-                        "Код ответа не соответствует ожидаемому"),
-                () -> assertNotNull(response.getBody(), "Сообщение об ошибке отсутсвует")
+                        RESPONSE_CODE_NOT_EXPECTED),
+                () -> assertNotNull(response.getBody(), THERE_NOT_ERROR_MESSAGE)
         );
     }
 
@@ -120,8 +124,8 @@ public class CRS_5_SettingNewPasswordTest extends BaseTest {
 
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.statusCode(),
-                        "Код ответа не соответствует ожидаемому"),
-                () -> assertNotNull(response.getBody(), "Сообщение об ошибке отсутсвует")
+                        RESPONSE_CODE_NOT_EXPECTED),
+                () -> assertNotNull(response.getBody(), THERE_NOT_ERROR_MESSAGE)
         );
         CustomerService_2_0_DataBaseRequest.resetTimerOfVerificationCodeById(customerId);
     }
@@ -145,8 +149,8 @@ public class CRS_5_SettingNewPasswordTest extends BaseTest {
 
         assertAll(
                 () -> assertEquals(SC_CONFLICT, response.statusCode(),
-                        "Код ответа не соответствует ожидаемому"),
-                () -> assertNotNull(response.getBody(), "Сообщение об ошибке отсутсвует")
+                        RESPONSE_CODE_NOT_EXPECTED),
+                () -> assertNotNull(response.getBody(), THERE_NOT_ERROR_MESSAGE)
         );
         CustomerService_2_0_DataBaseRequest.resetTimerOfVerificationCodeById(customerId);
     }
@@ -165,7 +169,7 @@ public class CRS_5_SettingNewPasswordTest extends BaseTest {
         assertAll(
                 () -> assertEquals(SC_NOT_FOUND, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
-                () -> assertNotNull(response.getBody(), "Сообщение об ошибке отсутсвует")
+                () -> assertNotNull(response.getBody(), THERE_NOT_ERROR_MESSAGE)
         );
     }
 
@@ -192,7 +196,7 @@ public class CRS_5_SettingNewPasswordTest extends BaseTest {
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
-                () -> assertNotNull(response.getBody(), "Сообщение об ошибке отсутсвует")
+                () -> assertNotNull(response.getBody(), THERE_NOT_ERROR_MESSAGE)
         );
         CustomerService_2_0_DataBaseRequest.resetTimerOfVerificationCodeById(customerId);
     }

@@ -1,0 +1,20 @@
+package dataBase.requests;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import static constant.CardServiceConstants.CUSTOMER_ID_WITH_ACTIVE_CARDS;
+import static constant.LibertyServiceName.CARD_SERVICE_DB;
+import static dataBase.DataBaseConnector.getDBConnection;
+
+public class CardServiceDataBaseRequest {
+
+    private static final Logger LOG = LogManager.getLogger("DBRequest");
+
+    public static String getCardId(String cardStatus) {
+        String sql = "SELECT id FROM card WHERE customer = '" + CUSTOMER_ID_WITH_ACTIVE_CARDS + "' AND card_status = '" + cardStatus + "' LIMIT 1";
+        String cardId = getDBConnection(CARD_SERVICE_DB).queryForObject(sql, String.class);
+        LOG.info(String.format("Получен id карты: %s", cardId));
+        return cardId;
+    }
+}

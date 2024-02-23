@@ -25,6 +25,10 @@ public class BaseTest {
     protected RenameAccountSteps renameAccountSteps;
     protected LoginSteps loginSteps;
     protected HomeSteps homeSteps;
+    protected SecuritySteps securitySteps;
+    protected ChangePasswordSteps changePasswordSteps;
+    protected DropDownAccountMenuSteps dropDownAccountMenuSteps;
+    protected ChangeNotificationStatusSteps changeNotificationStatusSteps;
 
     public BaseTest() {
         refreshPages();
@@ -45,7 +49,6 @@ public class BaseTest {
     @AfterAll
     public void tearDown() {
         DriverManager.resetDriver();
-        refreshPages();
     }
 
     private void refreshPages() {
@@ -56,5 +59,9 @@ public class BaseTest {
         renameAccountSteps = new RenameAccountSteps();
         loginSteps = new LoginSteps();
         homeSteps = new HomeSteps();
+        securitySteps = new SecuritySteps();
+        changePasswordSteps = new ChangePasswordSteps();
+        dropDownAccountMenuSteps = new DropDownAccountMenuSteps();
+        changeNotificationStatusSteps = new ChangeNotificationStatusSteps();
     }
 }

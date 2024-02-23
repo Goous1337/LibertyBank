@@ -39,7 +39,7 @@ public class IS_2_AddingAtmTest extends BaseTest {
                         response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
 
-                () -> assertTrue(response.jsonPath().get("message").toString().startsWith("Банкомат c UUID ")&&
+                () -> assertTrue(response.jsonPath().get("message").toString().startsWith("Банкомат c UUID ") &&
                                 response.jsonPath().get("message").toString().endsWith(" добавлен"),
                         "Сообщение ответа не соответствует ожидаемому")
         );

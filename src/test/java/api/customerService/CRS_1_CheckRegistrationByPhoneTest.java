@@ -120,7 +120,7 @@ public class CRS_1_CheckRegistrationByPhoneTest extends BaseTest {
         Response response = customerService.checkRegistrationByPhoneWithoutParam();
         assertAll(
                 () -> assertEquals(SC_INTERNAL_SERVER_ERROR,
-                       response.statusCode(),
+                        response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
@@ -165,11 +165,11 @@ public class CRS_1_CheckRegistrationByPhoneTest extends BaseTest {
         String jsonSchemaPath = "schemas/errorMessage.json";
         Response response = customerService.checkRegistrationByPhoneInvalidURL(invalidURL, validPhoneNumber);
         assertAll(
-                ()->assertEquals(SC_NOT_FOUND,
-                response.statusCode(),
-                "Код ответа не соответствует ожидаемому"),
+                () -> assertEquals(SC_NOT_FOUND,
+                        response.statusCode(),
+                        "Код ответа не соответствует ожидаемому"),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
-                );
+        );
     }
 
     @DisplayName("Проверка регистрации если пользователь уже зарегистрирован в СДБО")

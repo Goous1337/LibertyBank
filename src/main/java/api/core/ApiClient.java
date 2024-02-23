@@ -1,21 +1,20 @@
 package api.core;
 
-import java.util.Collections;
-import java.util.List;
-
-import io.restassured.http.ContentType;
-import org.json.JSONObject;
-
 import io.restassured.RestAssured;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
+import io.restassured.http.ContentType;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSender;
 import io.restassured.specification.RequestSpecification;
 import model.response.ClassResponse;
 import model.response.JsonResponse;
+import org.json.JSONObject;
+
+import java.util.Collections;
+import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.config.HttpClientConfig.httpClientConfig;

@@ -1,12 +1,5 @@
 package api.customerService;
 
-import org.apache.http.HttpStatus;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Tags;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-
 import api.BaseTest;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
@@ -14,10 +7,14 @@ import io.qameta.allure.Issues;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import org.apache.http.HttpStatus;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
-import static org.apache.hc.core5.http.HttpStatus.SC_BAD_REQUEST;
-import static org.apache.hc.core5.http.HttpStatus.SC_METHOD_NOT_ALLOWED;
-import static org.apache.hc.core5.http.HttpStatus.SC_NOT_FOUND;
+import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CUSTOMER_SERVICE;
