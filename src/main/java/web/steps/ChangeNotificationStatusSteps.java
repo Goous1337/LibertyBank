@@ -25,4 +25,20 @@ public class ChangeNotificationStatusSteps {
     public boolean isChangedSMSNotificationCheckBox(boolean status) {
         return changeNotificationStatusPage.isChangedSMSNotificationCheckBox(status);
     }
+
+    @Step("Кликнуть по checkbox Email-оповещения")
+    public ChangeNotificationStatusSteps clickEmailNotificationCheckbox() {
+        changeNotificationStatusPage.clickEmailNotificationCheckbox();
+        return this;
+    }
+
+    @Step("Проверка изменился ли checkbox Email-оповещения  Проверка статуса checkbox Email-оповещения")
+    public boolean isSelectedEmailNotificationCheckBox() {
+        return changeNotificationStatusPage.isSelectedEmailNotificationCheckBox();
+    }
+
+    @Step("Проверка изменился ли checkbox Email-оповещения")
+    public boolean isChangedEmailNotificationCheckBox(boolean status) {
+        return changeNotificationStatusPage.isChangedEmailNotificationCheckBox(status);
+    }
 }

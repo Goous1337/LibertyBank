@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static web.constans.AccountServiceConstants.DISPLAYED_MESSAGE;
 import static web.constans.UrlConfig.CHANGE_NOTIFICATION_URL;
 
-public class ChangeStatusSMSNotification extends BaseTest {
+public class ChangeStatusNotificationTest extends BaseTest {
     @BeforeEach
     public void setUpTest() {
         authorization();
@@ -28,5 +28,19 @@ public class ChangeStatusSMSNotification extends BaseTest {
                 .isChangedSMSNotificationCheckBox(beforeChanging);
         assertTrue(beforeChanging != afterChanging, String.format(DISPLAYED_MESSAGE,
                 "Checkbox SMS-оповещения не изменился"));
+    }
+
+    @DisplayName("Основной сценарий. Проверка изменения статуса настройки получения Email-оповещения")
+    @Description("В данном тест-кейсе проводится проверка возможности изменения настроек получения пользователем" +
+            " Email-оповещения в личном кабинете")
+    @TmsLink("LIB-2492")
+    @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Positive")})
+    @Test
+    public void changeStatusEmailNotification() {
+        boolean beforeChanging = changeNotificationStatusSteps.isSelectedEmailNotificationCheckBox();
+        boolean afterChanging = changeNotificationStatusSteps.clickEmailNotificationCheckbox()
+                .isChangedEmailNotificationCheckBox(beforeChanging);
+        assertTrue(beforeChanging != afterChanging, String.format(DISPLAYED_MESSAGE,
+                "Checkbox Email-оповещения не изменился"));
     }
 }
