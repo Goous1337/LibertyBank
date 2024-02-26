@@ -31,7 +31,7 @@ public class CRS_14_ChangingPasswordInPersonalAccountTest extends BaseTest {
     @DisplayName("Основной сценарий. Проверка возможности изменения пароля в личном кабинете.")
     @Description("Данный тест-кейс проверяет возможность изменения пароля в личном кабинете пользователя.")
     @Tags({@Tag("API"), @Tag("Smoke")})
-    @TmsLink("https://jira.astondevs.ru/browse/LIB-2085")
+    @TmsLink("LIB-2085")
     @Test
     public void checkSuccessSavingVerificationCode() {
         String customerId = CustomerService_2_0_DataBaseRequest.getCustomerIdByMobilePhone(CUSTOMER_USER_PHONE);
@@ -60,7 +60,7 @@ public class CRS_14_ChangingPasswordInPersonalAccountTest extends BaseTest {
             при не валидных обязательных параметрах в BODY запроса.
             """)
     @Tags({@Tag("API"), @Tag("Negative")})
-    @TmsLink("https://jira.astondevs.ru/browse/LIB-2100")
+    @TmsLink("LIB-2100")
     @ParameterizedTest
     @CsvSource({"., ", "$,#"})
     public void checkSavingVerificationCodeWithInvalidValues(String password, String newPassword) {
@@ -85,7 +85,7 @@ public class CRS_14_ChangingPasswordInPersonalAccountTest extends BaseTest {
             не валидных обязательных параметрах в BODY запроса.
             """)
     @Tags({@Tag("API"), @Tag("Negative")})
-    @TmsLink("https://jira.astondevs.ru/browse/LIB-2089")
+    @TmsLink("LIB-2089")
     @Test
     public void checkSavingVerificationCodeWithNullParameters() {
         String jsonSchemaPath = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";
@@ -108,7 +108,7 @@ public class CRS_14_ChangingPasswordInPersonalAccountTest extends BaseTest {
             не валидных обязательных параметрах в BODY запроса.
             """)
     @Tags({@Tag("API"), @Tag("Negative")})
-    @TmsLink("https://jira.astondevs.ru/browse/LIB-2095")
+    @TmsLink("LIB-2095")
     @ParameterizedTest
     @CsvSource({"GET", "POST", "PUT", "DELETE"})
     public void checkSavingVerificationCodeWithInvalidMethods(String httpMethod) {
