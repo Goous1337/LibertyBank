@@ -75,10 +75,10 @@ public class DepositService {
     }
 
     public Response checkListBoundaryValueScenarios
-            (Integer depositProductId, Float initialSum, Integer termTime, Boolean isCapitalisation) {
+            (Integer depositProductId, Float initialSum, Integer termTime, Boolean isCapitalisation, String currencyCode) {
         return sendSimpleRequest(POST, DEPOSIT_CALCULATOR,
                 getRP(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE),
-                new DepositDataCalculator(depositProductId, initialSum, termTime, isCapitalisation));
+                new DepositDataCalculator(depositProductId, initialSum, termTime, isCapitalisation, currencyCode));
     }
 
     public Response checkListCalculatingOfPotentialIncomeOnDepositWithoutId
