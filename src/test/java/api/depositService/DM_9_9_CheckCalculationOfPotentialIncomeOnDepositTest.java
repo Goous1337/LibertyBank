@@ -29,7 +29,7 @@ public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseT
     @Description("Данный тест-кейс направлен на проверку позитивных сценариев граничных значений" +
             " в расчете потенциального дохода по депозиту на определенный срок")
     @Tags({@Tag("API"), @Tag("Smoke")})
-    @TmsLink("https://jira.astondevs.ru/browse/LIB3-744")
+    @TmsLink("LIB3-744")
     @ParameterizedTest(name = "initialSum: {1}")
     @ValueSource(floats = {99999, 100000, 1000, 1001})
     public void checkPositiveBoundaryValueScenarios(Float initialSum) {
@@ -48,7 +48,7 @@ public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseT
     @Description("Данный тест-кейс направлен на проверку негативных сценариев граничных значений" +
             " в расчете потенциального дохода по депозиту на определенный срок")
     @Tags({@Tag("API"), @Tag("Negative")})
-    @TmsLink("https://jira.astondevs.ru/browse/LIB3-818")
+    @TmsLink("LIB3-818")
     @ParameterizedTest(name = "initialSum: {1}")
     @ValueSource(floats = {-1, 1000001, 2999})
     public void checkNegativeBoundaryValueScenarios(Float initialSum) {
@@ -65,7 +65,7 @@ public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseT
     @Description("Данный тест-кейс направлен на расчет потенциального дохода по депозиту на определенный" +
             " срок без капитализации")
     @Tags({@Tag("API"), @Tag("Smoke")})
-    @TmsLink("https://jira.astondevs.ru/browse/LIB3-735")
+    @TmsLink("LIB3-735")
     @Test
     public void checkCalculationIncomeFromDepositForCertainPeriodCapitalizationFalse() {
         String annualInsertRate = DepositServiceDataBaseRequest.getCapitalisationValue(depositProductIdRub, TERM_TIME);
@@ -87,7 +87,7 @@ public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseT
     @Description("Данный тест-кейс направлен на расчет потенциального дохода по депозиту на определенный" +
             " срок без параметра isCapitalisation")
     @Tags({@Tag("API"), @Tag("Negative")})
-    @TmsLink("https://jira.astondevs.ru/browse/LIB3-739")
+    @TmsLink("LIB3-739")
     @Test
     public void checkCalculationIncomeFromDepositForCertainPeriodWithoutCapitalization() {
         Response response = depositService.checkListCalculatingOfPotentialIncomeOnDepositWithoutCapitalisation
@@ -102,7 +102,7 @@ public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseT
     @Description("Данный тест-кейс направлен на расчет потенциального дохода по депозиту на определенный срок" +
             " без параметра depositProductId")
     @Tags({@Tag("API"), @Tag("Negative")})
-    @TmsLink("https://jira.astondevs.ru/browse/LIB3-736")
+    @TmsLink("LIB3-736")
     @Test
     public void checkCalculatingOfPotentialIncomeOnDepositWithoutId() {
         Response response = depositService.checkListCalculatingOfPotentialIncomeOnDepositWithoutId
@@ -117,7 +117,7 @@ public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseT
     @Description("Данный тест-кейс направлен на расчет потенциального дохода по депозиту на определенный срок" +
             " без параметра initialSum")
     @Tags({@Tag("API"), @Tag("Negative")})
-    @TmsLink("https://jira.astondevs.ru/browse/LIB3-737")
+    @TmsLink("LIB3-737")
     @Test
     public void checkCalculatingOfPotentialIncomeOnDepositWithoutInitialSum() {
         Response response = depositService.checkListCalculatingOfPotentialIncomeOnDepositWithoutInitialSum
@@ -132,7 +132,7 @@ public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseT
     @Description("Данный тест-кейс направлен на расчет потенциального дохода по депозиту на определенный срок" +
             " без параметра termTime")
     @Tags({@Tag("API"), @Tag("Negative")})
-    @TmsLink("https://jira.astondevs.ru/browse/LIB3-738")
+    @TmsLink("LIB3-738")
     @Test
     public void checkCalculatingOfPotentialIncomeOnDepositWithoutTermTime() {
         Response response = depositService.checkListCalculatingOfPotentialIncomeOnDepositWithoutTermTime
@@ -147,7 +147,7 @@ public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseT
     @Description("Данный тест-кейс направлен на расчет потенциального дохода по депозиту на определенный" +
             "срок с капитализацией")
     @Tags({@Tag("API"), @Tag("Smoke")})
-    @TmsLink("https://jira.astondevs.ru/browse/LIB3-734")
+    @TmsLink("LIB3-734")
     @Test
     public void checkCalculationIncomeFromDepositForCertainPeriodCapitalizationTrue() {
         String annualInsertRate = DepositServiceDataBaseRequest.getCapitalisationValue(depositProductIdRub, TERM_TIME);
