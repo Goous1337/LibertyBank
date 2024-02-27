@@ -7,6 +7,8 @@ import web.drivers.DriverManager;
 import web.helpers.TestListener;
 import web.steps.*;
 
+import java.time.Duration;
+
 import static property.UserPropertiesReader.USER_PASSWORD;
 import static property.UserPropertiesReader.USER_PHONE;
 import static web.constans.UrlConfig.BASE_URL;
@@ -26,6 +28,7 @@ public class BaseTest {
     protected SecuritySteps securitySteps;
     protected ChangePasswordSteps changePasswordSteps;
     protected DropDownAccountMenuSteps dropDownAccountMenuSteps;
+    protected ChangeNotificationStatusSteps changeNotificationStatusSteps;
 
     public BaseTest() {
         refreshPages();
@@ -59,5 +62,6 @@ public class BaseTest {
         securitySteps = new SecuritySteps();
         changePasswordSteps = new ChangePasswordSteps();
         dropDownAccountMenuSteps = new DropDownAccountMenuSteps();
+        changeNotificationStatusSteps = new ChangeNotificationStatusSteps();
     }
 }

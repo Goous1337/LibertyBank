@@ -6,7 +6,6 @@ import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.*;
 import web.BaseTest;
 
-import static web.constans.AccountServiceConstants.*;
 import static web.constans.UrlConfig.ACCOUNTS_URL;
 
 @Tag("Web")
@@ -27,33 +26,34 @@ public class SetMainAccountTest extends BaseTest {
     @TmsLink("LIB2-2451")
     @DisplayName("Сделать открытый счет основным")
     public void setMainAccount() {
-        accountSteps.clickAccount();
+        accountSteps.clickSecondAccount();
         accountInfoSteps.clickDotsInfoButton();
         accountInfoSteps.selectSetMainAccount();
-        Assertions.assertTrue(confirmationSteps.isSetMainAccountDialogBoxDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Диалоговое окно"));
+        confirmationSteps.assertSetMainAccountDialogBoxIsDisplayed();
         confirmationSteps.accept();
-        Assertions.assertTrue(confirmationSteps.isSuccessDialogBoxDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Диалоговое окно"));
+        confirmationSteps.assertSuccessDialogBoxIsDisplayed();
         confirmationSteps.returnToAccount();
-        Assertions.assertTrue(accountSteps.isMainAccountLabelDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Статус " + MAIN_ACCOUNT_STATUS));
+        accountSteps.assertMainAccountLabelIsDisplayed();
     }
 
     @Test
     @Order(2)
     @TmsLink("LIB2-2452")
-    @Disabled("Выключен, пока фронт не исправит баг с закреплением счета в начале списка")
     @DisplayName("Перенос статуса 'Основной счет' с одного открытого счета на другой")
     public void transferringMainAccountStatusFromOneAccountToAnother() {
         accountSteps.clickSecondAccount();
         accountInfoSteps.clickDotsInfoButton();
         accountInfoSteps.selectSetMainAccount();
-        Assertions.assertTrue(confirmationSteps.isSetMainAccountDialogBoxDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Диалоговое окно"));
+        confirmationSteps.assertSetMainAccountDialogBoxIsDisplayed();
         confirmationSteps.accept();
-        Assertions.assertTrue(confirmationSteps.isSuccessDialogBoxDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Диалоговое окно"));
+        confirmationSteps.assertSuccessDialogBoxIsDisplayed();
         confirmationSteps.returnToAccount();
-        Assertions.assertTrue(accountSteps.isMainAccountLabelDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Статус " + MAIN_ACCOUNT_STATUS));
+        accountSteps.assertMainAccountLabelIsDisplayed();
         accountInfoSteps.goBack();
         Assertions.assertTrue(accountSteps.isMainAccountLabelDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Статус " + MAIN_ACCOUNT_STATUS));
-        Assertions.assertFalse(accountSteps.isMainAccountLabelDisplayed(), String.format(DISPLAYED_MESSAGE, "Статус " + MAIN_ACCOUNT_STATUS));
+        
+        accountSteps.assertMainAccountLabelIsDisplayed();
+        accountSteps.assertMainAccountLabelIsNotDisplayed();
     }
 
     @Test
@@ -64,9 +64,9 @@ public class SetMainAccountTest extends BaseTest {
         accountSteps.clickAccount();
         accountInfoSteps.clickDotsInfoButton();
         accountInfoSteps.selectBlockAccount();
-        Assertions.assertTrue(confirmationSteps.isBlockAccountDialogBoxDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Диалоговое окно"));
+        confirmationSteps.assertBlockAccountDialogBoxIsDisplayed();
         confirmationSteps.accept();
-        Assertions.assertFalse(accountInfoSteps.isMainAccountLabelDisplayed(), String.format(DISPLAYED_MESSAGE, "Статус " + MAIN_ACCOUNT_STATUS));
+        accountInfoSteps.assertMainAccountLabelIsNotDisplayed();
     }
 
     @Test
@@ -77,7 +77,7 @@ public class SetMainAccountTest extends BaseTest {
         accountSteps.selectClosedAccounts();
         accountSteps.clickAccount();
         accountInfoSteps.clickDotsInfoButton();
-        Assertions.assertFalse(accountInfoSteps.isSetMainAccountOptDisplayed(), String.format(DISPLAYED_MESSAGE, "Опция 'Сделать счет основным'"));
+        accountInfoSteps.assertSetMainAccountOptIsNotDisplayed();
     }
 
     @Test
@@ -88,6 +88,6 @@ public class SetMainAccountTest extends BaseTest {
         accountSteps.selectBlockedAccounts();
         accountSteps.clickAccount();
         accountInfoSteps.clickDotsInfoButton();
-        Assertions.assertFalse(accountInfoSteps.isSetMainAccountOptDisplayed(), String.format(DISPLAYED_MESSAGE, "Опция 'Сделать счет основным'"));
+        accountInfoSteps.assertSetMainAccountOptIsNotDisplayed();
     }
 }

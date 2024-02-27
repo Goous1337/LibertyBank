@@ -23,4 +23,8 @@ public class AccountServiceConstants {
     public static final String OPEN_ACCOUNTS_TAB = "Открытые счета";
     public static final String CLOSED_ACCOUNTS_TAB = "Закрытые счета";
     public static final String BLOCKED_ACCOUNTS_TAB = "Заблокированные счета";
+    public static final String VALID_ACCOUNT_NAME = "Иван_IvanovЁ@#$%&!?~1234567890";
+    public static final String INVALID_LONG_ACCOUNT_NAME = "Иван_Ivanov любит брокколи на завтрак";
+    public static final String INVALID_SHORT_ACCOUNT_NAME = " ";
+    public static final String INVALID_CHARACTERS_ACCOUNT_NAME = "小林さんは花子さんに花を上げました。";
 }
