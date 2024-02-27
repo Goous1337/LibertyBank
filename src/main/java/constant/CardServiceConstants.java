@@ -12,6 +12,8 @@ public class CardServiceConstants {
     public static final String CARD_NAME_SECURE = "Liberty Card Secure";
     public static final String CARD_NAME_TRAVEL = "Liberty Card Travel";
     public static final String INVALID_CARD_ID = "00000000-0000-0000-0000-000000000000";
+    public static final String INVALID_PRODUCT_TYPE_ID = "1edb77c4-b6ac-4562-af4d-fbd6fb78++++";
+    public static final String INVALID_URL_PRODUCT_TYPE = "1edb77c4-b6ac-4562-af4d-fbd6fb78576";
     public static final String STATUS_ACTIVE = "ACTIVE";
     public static final String STATUS_CLOSED = "CLOSED";
     public static final String STATUS_BLOCKED = "BLOCKED";

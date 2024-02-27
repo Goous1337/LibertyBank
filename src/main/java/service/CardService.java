@@ -5,6 +5,8 @@ import io.restassured.response.Response;
 import pojo.cardService.CardData;
 import pojo.cardService.UpdateCardStatusRequest;
 
+import static api.core.ApiClient.sendRequestWithoutParams;
+import static api.core.ApiClient.sendSimpleRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +51,9 @@ public class CardService {
         return sendSimpleRequest(GET, ACTIVE_CARDS + "/" + cardId,
                 getRP(HEADER, HEADER_CUSTOMER_ID, CUSTOMER_ID_WITH_ACTIVE_CARDS));
     }
+
+    public Response getInformationCardProduct(String productTypeId) {
+        return sendRequestWithoutParams(GET, CARDS_LIST + "/" + productTypeId);
 
     public Response updateCardStatus(String cardId, String cardStatus) {
         return  sendSimpleRequest(PATCH, ACTIVE_CARDS + "/" + cardId,
