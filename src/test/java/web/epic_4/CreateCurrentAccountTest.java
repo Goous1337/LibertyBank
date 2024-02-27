@@ -35,6 +35,9 @@ public class CreateCurrentAccountTest extends BaseTest {
         createAccountSteps.assertMakeAccountMainTextIsDisplayed();
         createAccountSteps.assertCreateAccountButtonIsEnabled();
         createAccountSteps.createAccount();
+        
+        Assertions.assertTrue(createAccountSteps.isNavigationToBillButtonDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Перейти к списку счетов"));
+
         createAccountSteps.assertCreateAccountSuccessfullyMessageIsDisplayed();
         createAccountSteps.assertNavigationToBillButtonIsDisplayed();
         createAccountSteps.clickToNavigationToBillButton();

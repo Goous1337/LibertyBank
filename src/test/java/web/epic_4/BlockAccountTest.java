@@ -35,10 +35,18 @@ public class BlockAccountTest extends BaseTest {
     @DisplayName("Блокировка основного счета")
     @Test
     public void blockMainAccount() {
-        openMainAccount();
+        openActiveAccount();
+        if (!accountInfoSteps.isMainAccountLabelDisplayed()) {
+            accountInfoSteps.clickDotsInfoButton();
+            accountInfoSteps.selectSetMainAccount();
+            confirmationSteps.accept();
+            confirmationSteps.returnToAccount();
+        }
         accountInfoSteps.clickDotsInfoButton();
         accountInfoSteps.selectBlockAccount();
         confirmationSteps.accept();
+        Assertions.assertEquals(BLOCKED_ACCOUNT_STATUS, accountInfoSteps.getAccountStatus(), String.format(STATUS_ERROR_MESSAGE, BLOCKED_ACCOUNT_STATUS));
+        
         accountInfoSteps.assertMainAccountLabelIsNotDisplayed();
         accountInfoSteps.assertAccountStatusIsBlocked();
     }

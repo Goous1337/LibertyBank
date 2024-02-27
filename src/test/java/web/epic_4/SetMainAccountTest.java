@@ -26,7 +26,7 @@ public class SetMainAccountTest extends BaseTest {
     @TmsLink("LIB2-2451")
     @DisplayName("Сделать открытый счет основным")
     public void setMainAccount() {
-        accountSteps.clickAccount();
+        accountSteps.clickSecondAccount();
         accountInfoSteps.clickDotsInfoButton();
         accountInfoSteps.selectSetMainAccount();
         confirmationSteps.assertSetMainAccountDialogBoxIsDisplayed();
@@ -50,6 +50,8 @@ public class SetMainAccountTest extends BaseTest {
         confirmationSteps.returnToAccount();
         accountSteps.assertMainAccountLabelIsDisplayed();
         accountInfoSteps.goBack();
+        Assertions.assertTrue(accountSteps.isMainAccountLabelDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Статус " + MAIN_ACCOUNT_STATUS));
+        
         accountSteps.assertMainAccountLabelIsDisplayed();
         accountSteps.assertMainAccountLabelIsNotDisplayed();
     }

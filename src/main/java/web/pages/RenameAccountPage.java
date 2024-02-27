@@ -17,6 +17,9 @@ public class RenameAccountPage extends BasePage {
     @FindBy(xpath = "//p[contains(text(), 'Поле не должно быть пустым')]")
     private WebElement emptyFieldMessage;
 
+    @FindBy(xpath = "//p[contains(text(), 'Измените название поля')]")
+    private WebElement changeFieldName;
+
     @FindBy(xpath = "//p[contains(text(), 'Вы не можете ввести более 30 символов')]")
     private WebElement moreThanThirtyCharactersMessage;
 
@@ -49,5 +52,9 @@ public class RenameAccountPage extends BasePage {
 
     public boolean isInvalidCharactersMessageDisplayed() {
         return invalidCharactersMessage.isDisplayed();
+    }
+
+    public boolean isChangeFieldNameMessageDisplayed() {
+        return changeFieldName.isDisplayed();
     }
 }

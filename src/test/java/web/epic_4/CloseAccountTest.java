@@ -29,6 +29,8 @@ public class CloseAccountTest extends BaseTest {
         accountInfoSteps.clickCloseButton();
         confirmationSteps.assertCloseVerificationMessageIsDisplayed();
         confirmationSteps.accept();
+        
+        Assertions.assertTrue(accountInfoSteps.isClosedLabelDisplayed(), String.format(DISPLAYED_MESSAGE, "Сообщение об успешном закрытии счета"));
         confirmationSteps.assertCloseSuccessfullyMessageDisplayed();
         confirmationSteps.clickNavigateToAccountsPageButton();
         accountSteps.assertClosedAccountsTabIsDisplayed();
