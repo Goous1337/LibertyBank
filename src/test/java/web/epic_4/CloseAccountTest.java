@@ -6,6 +6,7 @@ import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.*;
 import web.BaseTest;
 
+import static web.constans.AccountServiceConstants.DISPLAYED_MESSAGE;
 import static web.constans.UrlConfig.ACCOUNTS_URL;
 
 @Tag("Web")
@@ -29,7 +30,7 @@ public class CloseAccountTest extends BaseTest {
         accountInfoSteps.clickCloseButton();
         confirmationSteps.assertCloseVerificationMessageIsDisplayed();
         confirmationSteps.accept();
-        
+
         Assertions.assertTrue(accountInfoSteps.isClosedLabelDisplayed(), String.format(DISPLAYED_MESSAGE, "Сообщение об успешном закрытии счета"));
         confirmationSteps.assertCloseSuccessfullyMessageDisplayed();
         confirmationSteps.clickNavigateToAccountsPageButton();

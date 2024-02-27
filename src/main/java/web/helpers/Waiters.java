@@ -31,11 +31,11 @@ public class Waiters {
     }
 
     public static WebElement waitCheckbox(boolean expectedState, WebElement element) {
-         new WebDriverWait(getDriver(), Duration.ofSeconds(TIME_TO_WAIT))
+        new WebDriverWait(getDriver(), Duration.ofSeconds(TIME_TO_WAIT))
                 .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
                 .until(expectedState ? elementToBeSelected(element)
                         : not(elementToBeSelected(element)));
-         return element;
+        return element;
     }
 }
