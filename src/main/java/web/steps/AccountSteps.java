@@ -1,7 +1,6 @@
 package web.steps;
 
 import io.qameta.allure.Step;
-import web.helpers.Waiters;
 import org.junit.jupiter.api.Assertions;
 import web.helpers.TestListener;
 import web.pages.AccountPage;

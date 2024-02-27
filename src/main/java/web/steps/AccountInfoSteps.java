@@ -154,6 +154,7 @@ public class AccountInfoSteps {
     @Step("Проверить наличие лейбла 'Закрыт'")
     public boolean isClosedLabelDisplayed() {
         return accountInfoPage.isClosedLabelDisplayed();
+    }
 
     @Step("Статус счета не соответствует статусу 'Закрыт'")
     public void assertAccountStatusIsNotClosed() {

@@ -50,8 +50,8 @@ public class SetMainAccountTest extends BaseTest {
         confirmationSteps.returnToAccount();
         accountSteps.assertMainAccountLabelIsDisplayed();
         accountInfoSteps.goBack();
-        Assertions.assertTrue(accountSteps.isMainAccountLabelDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Статус " + MAIN_ACCOUNT_STATUS));
-        
+        accountInfoSteps.assertMainAccountLabelIsDisplayed();
+
         accountSteps.assertMainAccountLabelIsDisplayed();
         accountSteps.assertMainAccountLabelIsNotDisplayed();
     }

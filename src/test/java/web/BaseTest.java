@@ -7,8 +7,6 @@ import web.drivers.DriverManager;
 import web.helpers.TestListener;
 import web.steps.*;
 
-import java.time.Duration;
-
 import static property.UserPropertiesReader.USER_PASSWORD;
 import static property.UserPropertiesReader.USER_PHONE;
 import static web.constans.UrlConfig.BASE_URL;
