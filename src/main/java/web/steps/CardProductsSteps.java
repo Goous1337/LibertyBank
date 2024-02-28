@@ -252,7 +252,7 @@ public class CardProductsSteps {
         Assertions.assertTrue(cardProductsPage.allCardsServiceCostDisplayed());
     }
 
-    @Step
+    @Step("Отображается валюта каждой карты")
     public void assertAllCardCurrenciesAreDisplayed() {
         Assertions.assertTrue(cardProductsPage.allCardsCurrenciesDisplayed());
     }
