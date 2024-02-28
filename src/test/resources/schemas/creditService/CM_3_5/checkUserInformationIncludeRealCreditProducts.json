@@ -24,7 +24,7 @@
     "currMainCreditPayment": {
       "type": "number"
     },
-    "percentCerditPayment": {
+    "percentCreditPayment": {
       "type": "number"
     },
     "paymentDate": {
@@ -40,7 +40,7 @@
       "type": "string"
     },
     "isActive": {
-      "type": "string"
+      "type": "boolean"
     }
   },
   "required": [
@@ -51,7 +51,7 @@
     "interestRate",
     "generalDebt",
     "currMainCreditPayment",
-    "percentCerditPayment",
+    "percentCreditPayment",
     "paymentDate",
     "outstandingPrincipal",
     "number",
