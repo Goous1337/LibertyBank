@@ -14,27 +14,27 @@ public class CardProductInfoSteps {
         cardProductInfoPage = new CardProductInfoPage();
     }
 
-    @Step("Проверить название карты")
+    @Step("Название карты соответствует ожидаемому")
     public void assertCardTitleEquals(String cardTitle) {
         Assertions.assertEquals(cardTitle, cardProductInfoPage.getCardTitle(), String.format(NOT_EQUALS_MESSAGE, "Название карты"));
     }
 
-    @Step("Проверить срок действия карты")
+    @Step("Срок действия карты соответствует ожидаемому")
     public void assertCardValidityEquals(String validity) {
         Assertions.assertEquals(validity, cardProductInfoPage.getValidity(), String.format(NOT_EQUALS_MESSAGE, "Срок действия"));
     }
 
-    @Step("Проверить стоимость обслуживания карты")
+    @Step("Стоимость обслуживания карты соответствует ожидаемому")
     public void assertCardServiceCostEquals(String serviceCost) {
         Assertions.assertEquals(serviceCost, cardProductInfoPage.getServiceCost(), String.format(NOT_EQUALS_MESSAGE, "Стоимость обслуживания"));
     }
 
-    @Step("Проверить валюту карты")
+    @Step("Валюта карты соответствует ожидаемой")
     public void assertCardCurrencyEquals(String currency) {
         Assertions.assertEquals(currency, cardProductInfoPage.getCardCurrency(), String.format(NOT_EQUALS_MESSAGE, "Валюта карты"));
     }
 
-    @Step("Изображение карты отображается")
+    @Step("Отображается изображение карты")
     public void assertIsCardImageDisplayed() {
         Assertions.assertTrue(cardProductInfoPage.isImageDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Изображение карты"));
     }
