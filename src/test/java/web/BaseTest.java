@@ -29,6 +29,8 @@ public class BaseTest {
     protected DropDownAccountMenuSteps dropDownAccountMenuSteps;
     protected ChangeNotificationStatusSteps changeNotificationStatusSteps;
     protected UpdateEmailSteps updateEmailSteps;
+    protected CardProductsSteps cardProductsSteps;
+    protected CardInfoSteps cardInfoSteps;
 
     public BaseTest() {
         refreshPages();
@@ -65,5 +67,7 @@ public class BaseTest {
         changeNotificationStatusSteps = new ChangeNotificationStatusSteps();
         updateEmailSteps = new UpdateEmailSteps();
         personalDataSteps = new PersonalDataSteps();
+        cardProductsSteps = new CardProductsSteps();
+        cardInfoSteps = new CardInfoSteps();
     }
 }
