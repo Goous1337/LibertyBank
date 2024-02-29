@@ -24,7 +24,7 @@ public class CardProductInfoSteps {
         Assertions.assertEquals(validity, cardProductInfoPage.getValidity(), String.format(NOT_EQUALS_MESSAGE, "Срок действия"));
     }
 
-    @Step("Стоимость обслуживания карты соответствует ожидаемому")
+    @Step("Стоимость обслуживания карты соответствует ожидаемой")
     public void assertCardServiceCostEquals(String serviceCost) {
         Assertions.assertEquals(serviceCost, cardProductInfoPage.getServiceCost(), String.format(NOT_EQUALS_MESSAGE, "Стоимость обслуживания"));
     }
