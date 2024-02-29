@@ -5,11 +5,6 @@ import pojo.cardService.UpdateCardStatusRequest;
 
 import static api.core.ApiClient.sendSimpleRequest;
 import static api.core.RequestParam.getRP;
-import static api.core.RequestParamType.*;
-import static constant.AccountServiceConstants.*;
-import static constant.ApiEndpoints.*;
-import static constant.CardServiceConstants.*;
-import static io.restassured.RestAssured.given;
 import static api.core.RequestParamType.HEADER;
 import static api.core.RequestParamType.QUERY_PARAMETER;
 import static constant.AccountServiceConstants.HEADER_CUSTOMER_ID;
