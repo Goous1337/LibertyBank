@@ -6,9 +6,11 @@ import web.helpers.Waiters;
 
 import java.util.List;
 
-public class CardInfoPage extends BasePage {
+public class CardProductInfoPage extends BasePage {
     @FindBy(xpath = "//h2[@data-testid]")
     private WebElement cardTitle;
+    @FindBy(xpath = "//*[contains(@href, 'icon-cards-card')]")
+    private WebElement cardImage;
     @FindBy(xpath = "//span[contains(text(), 'Срок')]/preceding-sibling::span")
     private WebElement cardValidity;
     @FindBy(xpath = "//span[contains(text(), 'Обслуживание карты')]/preceding-sibling::span")
@@ -19,6 +21,7 @@ public class CardInfoPage extends BasePage {
     private WebElement cardOrderButton;
     @FindBy(xpath = "//*[contains(@href, 'icon-cards-ps')]")
     private List<WebElement> cardPaymentSystems;
+
 
     public String getCardTitle() {
         Waiters.waitElement(cardTitle);
@@ -38,5 +41,10 @@ public class CardInfoPage extends BasePage {
     public String getCardCurrency() {
         Waiters.waitElement(cardCurrency);
         return cardCurrency.getText();
+    }
+
+    public boolean isImageDisplayed() {
+        Waiters.waitElement(cardImage);
+        return cardImage.isDisplayed();
     }
 }
