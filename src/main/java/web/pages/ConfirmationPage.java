@@ -9,7 +9,7 @@ public class ConfirmationPage extends BasePage {
     @FindBy(xpath = "//*[contains(text(), 'Вы действительно хотите сделать счет основным?')]")
     private WebElement setMainAccountDialogBox;
 
-    @FindBy(xpath = "//div[contains(@class, '_description_vnbx4_123')]")
+    @FindBy(xpath = "//p[contains(text(), 'Вы действительно хотите закрыть счет?')]")
     private WebElement closeVerificationMessage;
 
     @FindBy(xpath = "//*[contains(text(), 'Ваш счет успешно стал основным')]")

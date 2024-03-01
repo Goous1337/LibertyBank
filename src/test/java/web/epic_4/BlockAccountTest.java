@@ -6,6 +6,8 @@ import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.*;
 import web.BaseTest;
 
+import static web.constans.AccountServiceConstants.BLOCKED_ACCOUNT_STATUS;
+import static web.constans.AccountServiceConstants.STATUS_ERROR_MESSAGE;
 import static web.constans.UrlConfig.ACCOUNTS_URL;
 
 @Tag("Web")
@@ -35,10 +37,13 @@ public class BlockAccountTest extends BaseTest {
     @DisplayName("Блокировка основного счета")
     @Test
     public void blockMainAccount() {
-        openMainAccount();
+        openActiveAccount();
+
         accountInfoSteps.clickDotsInfoButton();
         accountInfoSteps.selectBlockAccount();
         confirmationSteps.accept();
+        Assertions.assertEquals(BLOCKED_ACCOUNT_STATUS, accountInfoSteps.getAccountStatus(), String.format(STATUS_ERROR_MESSAGE, BLOCKED_ACCOUNT_STATUS));
+
         accountInfoSteps.assertMainAccountLabelIsNotDisplayed();
         accountInfoSteps.assertAccountStatusIsBlocked();
     }

@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "depositProductId": {
+      "type": "integer"
+    },
+    "initialAmount": {
+      "type": "number"
+    },
+    "periodMonths": {
+      "type": "string"
+    },
+    "autoRenewal": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "depositProductId",
+    "initialAmount",
+    "periodMonths",
+    "autoRenewal"
+  ]
+}

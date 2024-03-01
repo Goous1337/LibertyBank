@@ -41,6 +41,11 @@ public class RenameAccountSteps {
         TestListener.takeScreenshot();
     }
 
+    @Step("Отображается сообщение 'Измените название поля'")
+    public boolean isChangeFieldNameMessageDisplayed() {
+        return renameAccountPage.isChangeFieldNameMessageDisplayed();
+    }
+
     @Step("Отображается сообщение 'Вы не можете ввести более 30 символов'")
     public void assertMoreThenThirtyCharactersMessageIsDisplayed() {
         Assertions.assertTrue(renameAccountPage.isMoreThenThirtyCharactersMessageDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Сообщение"));
@@ -51,5 +56,10 @@ public class RenameAccountSteps {
     public void assertInvalidCharactersMessageIsDisplayed() {
         Assertions.assertTrue(renameAccountPage.isInvalidCharactersMessageDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Сообщение"));
         TestListener.takeScreenshot();
+    }
+
+    @Step("Отображается сообщение 'Вы не можете ввести больше 30 символов'")
+    public boolean isMoreThan30SymbolsMessageDisplayed() {
+        return renameAccountPage.isMoreThenThirtyCharactersMessageDisplayed();
     }
 }

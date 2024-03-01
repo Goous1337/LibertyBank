@@ -2,7 +2,10 @@ package web.epic_4;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 import web.BaseTest;
 
 import static web.constans.UrlConfig.ACCOUNTS_URL;

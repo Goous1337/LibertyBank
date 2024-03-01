@@ -151,6 +151,11 @@ public class AccountInfoSteps {
         accountInfoPage.clickUnblockAccountOpt();
     }
 
+    @Step("Проверить наличие лейбла 'Закрыт'")
+    public boolean isClosedLabelDisplayed() {
+        return accountInfoPage.isClosedLabelDisplayed();
+    }
+
     @Step("Статус счета не соответствует статусу 'Закрыт'")
     public void assertAccountStatusIsNotClosed() {
         Assertions.assertNotEquals(CLOSED_ACCOUNT_STATUS, getAccountStatus(), String.format(STATUS_ERROR_MESSAGE, CLOSED_ACCOUNT_STATUS));

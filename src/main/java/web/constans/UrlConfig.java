@@ -10,4 +10,5 @@ public class UrlConfig {
     public static final String CREATE_ACCOUNT_URL = "/create-current-account";
     public static final String LOGIN_URL = "/login";
     public static final String CHANGE_NOTIFICATION_URL = "/customer/notification";
+    public static final String CARD_PRODUCTS_URL = "/cards/card-products";
 }

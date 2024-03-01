@@ -5,7 +5,7 @@ import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.*;
 import web.BaseTest;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static web.constans.AccountServiceConstants.DISPLAYED_MESSAGE;
 import static web.constans.UrlConfig.CHANGE_NOTIFICATION_URL;
 

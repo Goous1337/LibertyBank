@@ -39,7 +39,7 @@ public class CS_2_UpdateCardStatusByCardIdTest extends BaseTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = { STATUS_BLOCKED, STATUS_CLOSED, STATUS_ACTIVE })
+    @ValueSource(strings = {STATUS_BLOCKED, STATUS_CLOSED, STATUS_ACTIVE})
     @Tag("API")
     @TmsLink("LIB2-877")
     @DisplayName("Изменение статуса карты на 'Заблокированный', 'Закрытый', 'Активный'")
