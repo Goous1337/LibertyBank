@@ -54,7 +54,7 @@ public class INS_2_CheckNewApplicationRequest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB5-898")
     @Test()
     public void unsuccessfulRequestInvalidMileage() {
-        String jsonSchemaPath = "schemas/insuranceService/package.json";
+        String jsonSchemaPath = "schemas/insuranceService/checkApplyingContractFail.json";
         CreateVehicleApplicationInsuranceRequest createVehicleApplicationInsuranceRequest = createPojoForVehicleApplication(
                 "CAR", "Kalina", "LADA", 2021,"ПР256С-63",  1000000, 150, 11111111,
                 "Михаил", "Попов", "2001-01-24", "12АА 125896", "2024-02-10","РФ, г.Москва, ул. 1-й Армии, д. 35, кв. 124",
@@ -73,7 +73,7 @@ public class INS_2_CheckNewApplicationRequest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB5-897")
     @Test()
     public void unsuccessfulRequestWithoutMileage() {
-        String jsonSchemaPath = "schemas/insuranceService/package.json";
+        String jsonSchemaPath = "schemas/insuranceService/checkApplyingContractFail.json";
         CreateVehicleApplicationInsuranceRequest createVehicleApplicationInsuranceRequest = createPojoForVehicleApplication(
                 "CAR", "Kalina", "LADA", 2021,"ПР256С-63",  1000000, 150, null,
                 "Михаил", "Попов", "2001-01-24", "12АА 125896", "2024-02-10","РФ, г.Москва, ул. 1-й Армии, д. 35, кв. 124",
@@ -93,7 +93,7 @@ public class INS_2_CheckNewApplicationRequest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB5-896")
     @Test()
     public void unsuccessfulRequestWithoutPower() {
-        String jsonSchemaPath = "schemas/insuranceService/package.json";
+        String jsonSchemaPath = "schemas/insuranceService/checkApplyingContractFail.json";
         CreateVehicleApplicationInsuranceRequest createVehicleApplicationInsuranceRequest = createPojoForVehicleApplication(
                 "CAR", "Kalina", "LADA", 2021,"ПР256С-63",  1000000, null, 1111111,
                 "Михаил", "Попов", "2001-01-24", "12АА 125896", "2024-02-10","РФ, г.Москва, ул. 1-й Армии, д. 35, кв. 124",
@@ -113,7 +113,7 @@ public class INS_2_CheckNewApplicationRequest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB5-893")
     @Test()
     public void unsuccessfulRequestInvalidPrice() {
-        String jsonSchemaPath = "schemas/insuranceService/package.json";
+        String jsonSchemaPath = "schemas/insuranceService/checkApplyingContractFail.json";
         CreateVehicleApplicationInsuranceRequest createVehicleApplicationInsuranceRequest = createPojoForVehicleApplication(
                 "CAR", "Kalina", "LADA", 2021,"ПР256С-63",  -100000, 150, 1111111,
                 "Михаил", "Попов", "2001-01-24", "12АА 125896", "2024-02-10","РФ, г.Москва, ул. 1-й Армии, д. 35, кв. 124",
@@ -133,7 +133,7 @@ public class INS_2_CheckNewApplicationRequest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB5-890")
     @Test()
     public void unsuccessfulRequestWithoutPrice() {
-        String jsonSchemaPath = "schemas/insuranceService/package.json";
+        String jsonSchemaPath = "schemas/insuranceService/checkApplyingContractFail.json";
         CreateVehicleApplicationInsuranceRequest createVehicleApplicationInsuranceRequest = createPojoForVehicleApplication(
                 "CAR", "Kalina", "LADA", 2021,"ПР256С-63",  null, 150, 1111111,
                 "Михаил", "Попов", "2001-01-24", "12АА 125896", "2024-02-10","РФ, г.Москва, ул. 1-й Армии, д. 35, кв. 124",
@@ -153,7 +153,7 @@ public class INS_2_CheckNewApplicationRequest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB5-888")
     @Test()
     public void unsuccessfulRequestWithoutNumberPlate() {
-        String jsonSchemaPath = "schemas/insuranceService/package.json";
+        String jsonSchemaPath = "schemas/insuranceService/checkApplyingContractFail.json";
         CreateVehicleApplicationInsuranceRequest createVehicleApplicationInsuranceRequest = createPojoForVehicleApplication(
                 "CAR", "Kalina", "LADA", 2021,null,  100000, 150, 1111111,
                 "Михаил", "Попов", "2001-01-24", "12АА 125896", "2024-02-10","РФ, г.Москва, ул. 1-й Армии, д. 35, кв. 124",
@@ -173,7 +173,7 @@ public class INS_2_CheckNewApplicationRequest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB5-884")
     @Test()
     public void unsuccessfulRequestWithoutBrand() {
-        String jsonSchemaPath = "schemas/insuranceService/package.json";
+        String jsonSchemaPath = "schemas/insuranceService/checkApplyingContractFail.json";
         CreateVehicleApplicationInsuranceRequest createVehicleApplicationInsuranceRequest = createPojoForVehicleApplication(
                 "CAR", "Kalina", null, 2021,"ПР256С-63",  100000, 150, 1111111,
                 "Михаил", "Попов", "2001-01-24", "12АА 125896", "2024-02-10","РФ, г.Москва, ул. 1-й Армии, д. 35, кв. 124",
@@ -193,7 +193,7 @@ public class INS_2_CheckNewApplicationRequest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB5-881")
     @Test()
     public void unsuccessfulRequestWithoutModel() {
-        String jsonSchemaPath = "schemas/insuranceService/package.json";
+        String jsonSchemaPath = "schemas/insuranceService/checkApplyingContractFail.json";
         CreateVehicleApplicationInsuranceRequest createVehicleApplicationInsuranceRequest = createPojoForVehicleApplication(
                 "CAR", null, "LADA", 2021,"ПР256С-63",  100000, 150, 1111111,
                 "Михаил", "Попов", "2001-01-24", "12АА 125896", "2024-02-10","РФ, г.Москва, ул. 1-й Армии, д. 35, кв. 124",
