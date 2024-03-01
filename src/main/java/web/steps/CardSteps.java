@@ -2,6 +2,7 @@ package web.steps;
 
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.NoSuchElementException;
 import web.helpers.TestListener;
 import web.pages.CardPage;
@@ -26,6 +27,20 @@ public class CardSteps {
     public void assertMainStatusNotDisplayed() {
         Assertions.assertThrows(NoSuchElementException.class, () -> {
             cardPage.isMainStatusDisplayed();
+        });
+        TestListener.takeScreenshot();
+    }
+
+    @Step("Отображается статус карты 'Заблокированная'")
+    public void assertBlockedStatusDisplayed() {
+        Assertions.assertTrue(cardPage.isBlockedStatusDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Статаус 'Заблокированная'"));
+        TestListener.takeScreenshot();
+    }
+
+    @Step("Не отображается статус карты 'Заблокированная'")
+    public void assertBlockedStatusNotDisplayed() {
+        Assertions.assertThrows(NoSuchElementException.class, () -> {
+            cardPage.isBlockedStatusDisplayed();
         });
         TestListener.takeScreenshot();
     }

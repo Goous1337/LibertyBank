@@ -33,6 +33,10 @@ public class CardPage extends BasePage{
         return mainStatus.isDisplayed();
     }
 
+    public boolean isBlockedStatusDisplayed() {
+        return blockedStatus.isDisplayed();
+    }
+
     public void clickCardInfoButtonForSecondCard() {
         cardInfoButtonForSecondCard.click();
     }
