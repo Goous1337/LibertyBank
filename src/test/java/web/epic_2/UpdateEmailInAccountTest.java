@@ -30,8 +30,8 @@ public class UpdateEmailInAccountTest extends BaseTest {
     @Test
     public void successUpdateEmail() {
         String oldEmail = personalDataSteps.getOldEmailFromInput();
-        personalDataSteps.clickChangePasswordBtn();
+        personalDataSteps.clickChangeEmailBtn();
         updateEmailSteps.sendKeysToEmailInput(getNewEmail(oldEmail)).clickToSubmitBtn();
-        securitySteps.assertSecurityBarIsDisplayed();
+        personalDataSteps.assertLastNotificationStatus();
     }
 }
