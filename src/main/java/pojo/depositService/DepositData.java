@@ -9,7 +9,7 @@ import lombok.Data;
 public class DepositData {
     private Integer depositProductId;
     private Float initialAmount;
-    private String periodMonths;
+    private String depositTerm;
     private Boolean autoRenewal;
 
     public DepositData(Integer depositProductId, Float initialAmount, Boolean autoRenewal) {
