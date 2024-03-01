@@ -27,6 +27,8 @@ public class BaseTest {
     protected ChangePasswordSteps changePasswordSteps;
     protected DropDownAccountMenuSteps dropDownAccountMenuSteps;
     protected ChangeNotificationStatusSteps changeNotificationStatusSteps;
+    protected CardSteps cardSteps;
+    protected CardInfoSteps cardInfoSteps;
     protected CardProductsSteps cardProductsSteps;
     protected CardProductInfoSteps cardProductInfoSteps;
 
@@ -63,6 +65,8 @@ public class BaseTest {
         changePasswordSteps = new ChangePasswordSteps();
         dropDownAccountMenuSteps = new DropDownAccountMenuSteps();
         changeNotificationStatusSteps = new ChangeNotificationStatusSteps();
+        cardSteps = new CardSteps();
+        cardInfoSteps = new CardInfoSteps();
         cardProductsSteps = new CardProductsSteps();
         cardProductInfoSteps = new CardProductInfoSteps();
     }
