@@ -30,6 +30,21 @@ public class ConfirmationPage extends BasePage {
     @FindBy(xpath = "//*[contains(text(), 'Вы действительно хотите заблокировать счет?')]")
     private WebElement blockAccountDialogBox;
 
+    @FindBy(xpath = "//p[contains(text(), 'Вы действительно хотите заблокировать карту?')]")
+    private WebElement blockCardDialogBox;
+
+    @FindBy(xpath = "//p[contains(text(), 'Вы действительно хотите закрыть карту?')]")
+    private WebElement closeCardDialogBox;
+
+    @FindBy(xpath = "//p[contains(text(), 'Введите код из смс')]")
+    private WebElement enterCodeFromSmsBox;
+
+    @FindBy(xpath = "//div[contains(@class, '_enterPhone')]")
+    private WebElement confirmationCodeField;
+
+    @FindBy(xpath = "//button[contains(text(), 'Подтвердить')]")
+    private WebElement confirmButton;
+
     @FindBy(xpath = "//button[contains(text(), 'Да')]")
     private WebElement acceptButton;
 
@@ -76,5 +91,25 @@ public class ConfirmationPage extends BasePage {
 
     public void clickNavigateToAccountsPageButton() {
         navigateToAccountsPageButton.click();
+    }
+
+    public boolean isBlockCardDialogBoxDisplayed() {
+        return blockCardDialogBox.isDisplayed();
+    }
+
+    public boolean isCloseCardDialogBoxDisplayed() {
+        return closeCardDialogBox.isDisplayed();
+    }
+
+    public boolean isEnterCodeFromSmsBoxDisplayed() {
+        return enterCodeFromSmsBox.isDisplayed();
+    }
+
+    public void setValueInConfirmationCodeField(String value) {
+        confirmationCodeField.sendKeys(value);
+    }
+
+    public void clickConfirmButton() {
+        confirmButton.click();
     }
 }

@@ -30,7 +30,10 @@ public class BaseTest {
     protected ChangeNotificationStatusSteps changeNotificationStatusSteps;
     protected UpdateEmailSteps updateEmailSteps;
     protected CardProductsSteps cardProductsSteps;
+    protected CardSteps cardSteps;
     protected CardInfoSteps cardInfoSteps;
+    protected CardProductsSteps cardProductsSteps;
+    protected CardProductInfoSteps cardProductInfoSteps;
 
     public BaseTest() {
         refreshPages();
@@ -68,6 +71,9 @@ public class BaseTest {
         updateEmailSteps = new UpdateEmailSteps();
         personalDataSteps = new PersonalDataSteps();
         cardProductsSteps = new CardProductsSteps();
+        cardSteps = new CardSteps();
         cardInfoSteps = new CardInfoSteps();
+        cardProductsSteps = new CardProductsSteps();
+        cardProductInfoSteps = new CardProductInfoSteps();
     }
 }

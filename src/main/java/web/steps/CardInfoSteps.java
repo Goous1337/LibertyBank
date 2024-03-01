@@ -2,34 +2,59 @@ package web.steps;
 
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.NoSuchElementException;
+import web.helpers.TestListener;
 import web.pages.CardInfoPage;
 
-import static web.constans.AccountServiceConstants.NOT_EQUALS_MESSAGE;
+import static web.constans.AccountServiceConstants.NOT_DISPLAYED_MESSAGE;
 
 public class CardInfoSteps {
+
     protected CardInfoPage cardInfoPage;
 
     public CardInfoSteps() {
         cardInfoPage = new CardInfoPage();
     }
 
-    @Step("Проверить название карты")
-    public void cardTitleCheck(String cardTitle) {
-        Assertions.assertEquals(cardTitle, cardInfoPage.getCardTitle(), String.format(NOT_EQUALS_MESSAGE, "Название карты"));
+    @Step("Выбрать 'Сделать карту основной'")
+    public void setMainCard() {
+        cardInfoPage.clickSetMainSwitchButton();
     }
 
-    @Step("Проверить срок действия карты")
-    public void cardValidityCheck(String validity) {
-        Assertions.assertEquals(validity, cardInfoPage.getValidity(), String.format(NOT_EQUALS_MESSAGE, "Срок действия"));
+    @Step("Не отображается функция 'Сделать карту основной'")
+    public void assertSetMainCardIsNotDisplayed() {
+        Assertions.assertThrows(NoSuchElementException.class, () -> {
+            cardInfoPage.isSetMainSwitchButtonDisplayed();
+        });
+        TestListener.takeScreenshot();
     }
 
-    @Step("Проверить стоимость обслуживания карты")
-    public void cardServiceCostCheck(String serviceCost) {
-        Assertions.assertEquals(serviceCost, cardInfoPage.getServiceCost(), String.format(NOT_EQUALS_MESSAGE, "Стоимость обслуживания"));
+    @Step("Отображается статус карты 'Основная'")
+    public void assertMainCardStatusDisplayed() {
+        Assertions.assertTrue(cardInfoPage.isMainCardStatusDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Статус 'Основная карта'"));
+        TestListener.takeScreenshot();
     }
 
-    @Step("Проверить валюту карты")
-    public void cardCurrencyCheck(String currency) {
-        Assertions.assertEquals(currency, cardInfoPage.getCardCurrency(), String.format(NOT_EQUALS_MESSAGE, "Валюта карты"));
+    @Step("Не отображается статус карты 'Основная'")
+    public void assertMainCardStatusNotDisplayed() {
+        Assertions.assertThrows(NoSuchElementException.class, () -> {
+            cardInfoPage.isMainCardStatusDisplayed();
+        });
+        TestListener.takeScreenshot();
+    }
+
+    @Step("Вернутся назад к списку карт")
+    public void goBack() {
+        cardInfoPage.clickBackButton();
+    }
+
+    @Step("Заблокировать карту")
+    public void blockCard() {
+        cardInfoPage.clickBlockCardButton();
+    }
+
+    @Step("Закрыть карту")
+    public void closeCard() {
+        cardInfoPage.clickCloseCardButton();
     }
 }
