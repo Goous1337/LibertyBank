@@ -34,14 +34,14 @@ public class CustomerService_2_0 {
         return sendSimpleRequest(PATCH, CUSTOMER_SECURITY, customerService_2_0_mobile0Mobile);
     }
 
-    public Response  checkUpdateQuestionAnswer(String question, String answer,String customerId, String refreshToken){
-        List<RequestParam> params = List.of(getRP(HEADER, CONTENT_TYPE, APPLICATION_JSON),getRP(HEADER, AUTHORIZATION, BEARER_TOKEN + refreshToken),
-                getRP(PARAMETER,PARAMETER_CUSTOMER_ID, customerId));
+    public Response checkUpdateQuestionAnswer(String question, String answer, String customerId, String refreshToken) {
+        List<RequestParam> params = List.of(getRP(HEADER, CONTENT_TYPE, APPLICATION_JSON), getRP(HEADER, AUTHORIZATION, BEARER_TOKEN + refreshToken),
+                getRP(PARAMETER, PARAMETER_CUSTOMER_ID, customerId));
         return sendSimpleRequest(PATCH, QUESTION_ANSWER_2_0, params, new UserQuestion(question, answer));
     }
 
-    public Response updateQuestionAnswerInvalidHttpMethod(String question, String answer, String invalidHttpMethod,String refreshToken) {
-        List<RequestParam> params = List.of(getRP(HEADER, CONTENT_TYPE, APPLICATION_JSON),getRP(HEADER, AUTHORIZATION, BEARER_TOKEN + refreshToken));
+    public Response updateQuestionAnswerInvalidHttpMethod(String question, String answer, String invalidHttpMethod, String refreshToken) {
+        List<RequestParam> params = List.of(getRP(HEADER, CONTENT_TYPE, APPLICATION_JSON), getRP(HEADER, AUTHORIZATION, BEARER_TOKEN + refreshToken));
         return sendSimpleRequest(Method.valueOf(invalidHttpMethod), QUESTION_ANSWER_2_0, params, new UserQuestion(question, answer));
     }
 
@@ -229,5 +229,30 @@ public class CustomerService_2_0 {
         List<RequestParam> params = List.of(getRP(HEADER, CONTENT_TYPE, APPLICATION_JSON), getRP(HEADER, AUTHORIZATION, BEARER_TOKEN + token),
                 getRP(BODY, SPACE, body));
         return sendSimpleRequest(PATCH, CUSTOMER_2_0_NOTIFICATION_SMS, params);
+    }
+
+    public Response changeStatusOfSettingsReceivingEmailNewsletters(String accessToken, Object value) {
+        String body = createBody(Map.of(PARAMETER_NOTIFICATION_STATUS, value));
+        List<RequestParam> params = List.of(getRP(HEADER, AUTHORIZATION, BEARER_TOKEN + accessToken),
+                getRP(BODY, SPACE, body));
+        return sendSimpleRequest(PATCH, CUSTOMER_2_0_NOTIFICATION_EMAIL, params);
+
+    }
+
+    public Response changeStatusEmailNotificationWithHttpMethod(String accessToken, Object value, String httpMethod) {
+        String body = createBody(Map.of(PARAMETER_NOTIFICATION_STATUS, value));
+        List<RequestParam> params = List.of(getRP(HEADER, AUTHORIZATION, BEARER_TOKEN + accessToken),
+                getRP(BODY, SPACE, body));
+        return sendSimpleRequest(Method.valueOf(httpMethod), CUSTOMER_2_0_NOTIFICATION_EMAIL, params);
+    }
+
+    public boolean changeNotificationStatus(boolean actualStatus) {
+        boolean changedStatus;
+        if (actualStatus == true) {
+            changedStatus = false;
+        } else {
+            changedStatus = true;
+        }
+        return changedStatus;
     }
 }

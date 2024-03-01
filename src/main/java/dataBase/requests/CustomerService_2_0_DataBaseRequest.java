@@ -160,5 +160,9 @@ public class CustomerService_2_0_DataBaseRequest {
         String sql = "SELECT sms_notification FROM customer WHERE mobile_phone = '"+ mobile + "'";
         return getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sql, Boolean.class);
     }
-
+    public static Boolean getEmailStatusByMobile(String mobilePhone){
+        String sql = "SELECT email_subscription FROM customer WHERE mobile_phone =?";
+        LOG.info(String.format("Получен статус email подписки пользователя по номеру телефона = %s ",mobilePhone));
+        return getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sql, Boolean.class,mobilePhone);
+    }
 }
