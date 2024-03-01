@@ -32,7 +32,6 @@ public class BaseTest {
     protected CardProductsSteps cardProductsSteps;
     protected CardSteps cardSteps;
     protected CardInfoSteps cardInfoSteps;
-    protected CardProductsSteps cardProductsSteps;
     protected CardProductInfoSteps cardProductInfoSteps;
 
     public BaseTest() {
