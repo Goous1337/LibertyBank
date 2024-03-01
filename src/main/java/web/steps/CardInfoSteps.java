@@ -43,6 +43,12 @@ public class CardInfoSteps {
         TestListener.takeScreenshot();
     }
 
+    @Step("Отображается статус карты 'Активная'")
+    public void assertActiveCardStatusDisplayed() {
+        Assertions.assertTrue(cardInfoPage.isActiveCardStatusDisplayed());
+        TestListener.takeScreenshot();
+    }
+
     @Step("Отображается статус карты 'Заблокированная'")
     public void assertBlockedCardStatusDisplayed() {
         Assertions.assertTrue(cardInfoPage.isBlockedCardStatusDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Статус 'Заблокированная'"));

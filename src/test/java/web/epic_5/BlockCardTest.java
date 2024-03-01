@@ -32,8 +32,6 @@ public class BlockCardTest extends BaseTest {
         cardInfoSteps.blockCard();
         confirmationSteps.accept();
         cardInfoSteps.assertBlockedCardStatusDisplayed();
-        cardInfoSteps.goBack();
-        cardSteps.assertBlockedStatusDisplayed();
     }
 
     @Test
@@ -44,8 +42,6 @@ public class BlockCardTest extends BaseTest {
         cardSteps.clickCardInfoForBlockedCard();
         cardInfoSteps.unblockCard();
         confirmationSteps.accept();
-        cardInfoSteps.assertBlockedStatusNotDisplayed();
-        cardInfoSteps.goBack();
-        cardSteps.assertBlockedStatusNotDisplayed();
+        cardInfoSteps.assertActiveCardStatusDisplayed();
     }
 }

@@ -11,6 +11,9 @@ public class CardInfoPage extends BasePage {
     @FindBy(xpath = "//p[contains(text(), 'Основная карта')]")
     private WebElement mainCardStatus;
 
+    @FindBy(xpath = "//p[text()='Активная']")
+    private WebElement activeCardStatus;
+
     @FindBy(xpath = "//p[text()='Заблокированная']")
     private WebElement blockedCardStatus;
 
@@ -38,6 +41,11 @@ public class CardInfoPage extends BasePage {
     public boolean isMainCardStatusDisplayed() {
         scrollToElement(mainCardStatus);
         return mainCardStatus.isDisplayed();
+    }
+
+    public boolean isActiveCardStatusDisplayed() {
+        scrollToElement(activeCardStatus);
+        return activeCardStatus.isDisplayed();
     }
 
     public boolean isBlockedCardStatusDisplayed() {
