@@ -18,6 +18,7 @@ public class BaseTest {
 
     protected static AccountSteps accountSteps;
     protected AccountInfoSteps accountInfoSteps;
+    protected CreditInfoSteps creditInfoSteps;
     protected CreateAccountSteps createAccountSteps;
     protected ConfirmationSteps confirmationSteps;
     protected RenameAccountSteps renameAccountSteps;
@@ -61,5 +62,6 @@ public class BaseTest {
         changePasswordSteps = new ChangePasswordSteps();
         dropDownAccountMenuSteps = new DropDownAccountMenuSteps();
         changeNotificationStatusSteps = new ChangeNotificationStatusSteps();
+        creditInfoSteps = new CreditInfoSteps();
     }
 }
