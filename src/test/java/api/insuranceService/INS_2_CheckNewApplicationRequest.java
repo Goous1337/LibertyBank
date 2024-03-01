@@ -1,7 +1,6 @@
 package api.insuranceService;
 
 import api.BaseTest;
-import dataBase.requests.CustomerService_2_0_DataBaseRequest;
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
@@ -10,13 +9,10 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
 import pojo.insuranceService.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.stream.Stream;
 
 import static constant.InsuranceServiceConstants.INSURANCE_TYPE_VALUE;
 import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
@@ -43,7 +39,7 @@ public class INS_2_CheckNewApplicationRequest extends BaseTest {
                         "CAR", "Kalina", "LADA", 2021,"ПР256С-63",  1000000, 150, 1111111,
                         "Михаил", "Попов", "2001-01-24", "12АА 125896", "2024-02-10","РФ, г.Москва, ул. 1-й Армии, д. 35, кв. 124",
                         1,  643, 15, false);
-        Response response = insuranceService.checkMakeNewApplicationRequest(createVehicleApplicationInsuranceRequest);
+        Response response = insuranceService.checkMakeNewVehicleApplicationRequest(createVehicleApplicationInsuranceRequest);
         assertAll(
                 () -> assertEquals(SC_CREATED,
                         response.statusCode(),
@@ -52,15 +48,18 @@ public class INS_2_CheckNewApplicationRequest extends BaseTest {
         );
     }
 
-    @DisplayName("Заявка не может быть подана обязательные поля не заполнены или заполнены невалидными данными")
-    @Description("Тест направлен на проверку обязательности и валидации полей")
+    @DisplayName("Заявка не может быть подана если в данных об автомобиле значение mileage не валидное")
+    @Description("Тест направлен на проверку невозможность подачи заявки при невалидном значении поля автомобиля mileage")
     @Tag("API")
-    @TmsLink("https://jira.astondevs.ru/browse/LIB5-834")
-    @ParameterizedTest()
-    @MethodSource("VehicleApplicationSource")
-    public void unsuccessfulRequestWithoutLicenseIssuingDate(CreateVehicleApplicationInsuranceRequest createVehicleApplicationInsuranceRequest) {
-        String jsonSchemaPath = "schemas/insuranceService/checkApplyingContractFail.json";
-        Response response = insuranceService.checkMakeNewApplicationRequest(createVehicleApplicationInsuranceRequest);
+    @TmsLink("https://jira.astondevs.ru/browse/LIB5-898")
+    @Test()
+    public void unsuccessfulRequestInvalidMileage() {
+        String jsonSchemaPath = "schemas/insuranceService/package.json";
+        CreateVehicleApplicationInsuranceRequest createVehicleApplicationInsuranceRequest = createPojoForVehicleApplication(
+                "CAR", "Kalina", "LADA", 2021,"ПР256С-63",  1000000, 150, 11111111,
+                "Михаил", "Попов", "2001-01-24", "12АА 125896", "2024-02-10","РФ, г.Москва, ул. 1-й Армии, д. 35, кв. 124",
+                1,  643, 15, false);
+        Response response = insuranceService.checkMakeNewVehicleApplicationRequest(createVehicleApplicationInsuranceRequest);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST,
                         response.statusCode(),
@@ -68,18 +67,144 @@ public class INS_2_CheckNewApplicationRequest extends BaseTest {
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
-    
-    public static Stream<CreateVehicleApplicationInsuranceRequest> VehicleApplicationSource() {
-        CreateVehicleApplicationInsuranceRequest app1 = createPojoForVehicleApplication(
-                "CAR", "Kalina", "LADA", 2021,"ПР256С-63",  1000000, 150, 11111111,
-                 "Михаил", "Попов", "2001-01-24", "12АА 125896", "2024-02-10","РФ, г.Москва, ул. 1-й Армии, д. 35, кв. 124",
+    @DisplayName("Заявка не может быть подана если в данных об автомобиле значение mileage пустое")
+    @Description("Тест направлен на проверку невозможность подачи заявки при невалидном значении поля автомобиля mileage")
+    @Tag("API")
+    @TmsLink("https://jira.astondevs.ru/browse/LIB5-897")
+    @Test()
+    public void unsuccessfulRequestWithoutMileage() {
+        String jsonSchemaPath = "schemas/insuranceService/package.json";
+        CreateVehicleApplicationInsuranceRequest createVehicleApplicationInsuranceRequest = createPojoForVehicleApplication(
+                "CAR", "Kalina", "LADA", 2021,"ПР256С-63",  1000000, 150, null,
+                "Михаил", "Попов", "2001-01-24", "12АА 125896", "2024-02-10","РФ, г.Москва, ул. 1-й Армии, д. 35, кв. 124",
                 1,  643, 15, false);
-        CreateVehicleApplicationInsuranceRequest app2 = createPojoForVehicleApplication(
-                "CAR", "Kalina", "LADA", 2021,"ПР256С-63",  1000000, 150, 1111111,
-                "Михаил", "Попов", "2001-01-24", "12АА 125896", "2024-02-23", "РФ, г.Москва, ул. 1-й Армии, д. 35, кв. 124",
-                1,  643, 15, false);
+        Response response = insuranceService.checkMakeNewVehicleApplicationRequest(createVehicleApplicationInsuranceRequest);
+        assertAll(
+                () -> assertEquals(SC_BAD_REQUEST,
+                        response.statusCode(),
+                        "Код ответа соответствует ожидаемому"),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+        );
+    }
 
-        return Stream.of(app1, app2);
+    @DisplayName("Заявка не может быть подана если в данных об автомобиле значение поля power пустое")
+    @Description("Тест направлен на проверку невозможность подачи заявки при отсутствии значения обязательного поля автомобиля power")
+    @Tag("API")
+    @TmsLink("https://jira.astondevs.ru/browse/LIB5-896")
+    @Test()
+    public void unsuccessfulRequestWithoutPower() {
+        String jsonSchemaPath = "schemas/insuranceService/package.json";
+        CreateVehicleApplicationInsuranceRequest createVehicleApplicationInsuranceRequest = createPojoForVehicleApplication(
+                "CAR", "Kalina", "LADA", 2021,"ПР256С-63",  1000000, null, 1111111,
+                "Михаил", "Попов", "2001-01-24", "12АА 125896", "2024-02-10","РФ, г.Москва, ул. 1-й Армии, д. 35, кв. 124",
+                1,  643, 15, false);
+        Response response = insuranceService.checkMakeNewVehicleApplicationRequest(createVehicleApplicationInsuranceRequest);
+        assertAll(
+                () -> assertEquals(SC_BAD_REQUEST,
+                        response.statusCode(),
+                        "Код ответа соответствует ожидаемому"),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+        );
+    }
+
+    @DisplayName("Заявка не может быть подана если в данных об автомобиле значение поля price невалидное")
+    @Description("Тест направлен на проверку невозможность подачи заявки при невалидном значении поля автомобиля price")
+    @Tag("API")
+    @TmsLink("https://jira.astondevs.ru/browse/LIB5-893")
+    @Test()
+    public void unsuccessfulRequestInvalidPrice() {
+        String jsonSchemaPath = "schemas/insuranceService/package.json";
+        CreateVehicleApplicationInsuranceRequest createVehicleApplicationInsuranceRequest = createPojoForVehicleApplication(
+                "CAR", "Kalina", "LADA", 2021,"ПР256С-63",  -100000, 150, 1111111,
+                "Михаил", "Попов", "2001-01-24", "12АА 125896", "2024-02-10","РФ, г.Москва, ул. 1-й Армии, д. 35, кв. 124",
+                1,  643, 15, false);
+        Response response = insuranceService.checkMakeNewVehicleApplicationRequest(createVehicleApplicationInsuranceRequest);
+        assertAll(
+                () -> assertEquals(SC_BAD_REQUEST,
+                        response.statusCode(),
+                        "Код ответа соответствует ожидаемому"),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+        );
+    }
+
+    @DisplayName("Заявка не может быть подана если в данных об автомобиле значение поля price пустое")
+    @Description("Тест направлен на проверку невозможность подачи заявки при отстутствии значении поля автомобиля price")
+    @Tag("API")
+    @TmsLink("https://jira.astondevs.ru/browse/LIB5-890")
+    @Test()
+    public void unsuccessfulRequestWithoutPrice() {
+        String jsonSchemaPath = "schemas/insuranceService/package.json";
+        CreateVehicleApplicationInsuranceRequest createVehicleApplicationInsuranceRequest = createPojoForVehicleApplication(
+                "CAR", "Kalina", "LADA", 2021,"ПР256С-63",  null, 150, 1111111,
+                "Михаил", "Попов", "2001-01-24", "12АА 125896", "2024-02-10","РФ, г.Москва, ул. 1-й Армии, д. 35, кв. 124",
+                1,  643, 15, false);
+        Response response = insuranceService.checkMakeNewVehicleApplicationRequest(createVehicleApplicationInsuranceRequest);
+        assertAll(
+                () -> assertEquals(SC_BAD_REQUEST,
+                        response.statusCode(),
+                        "Код ответа соответствует ожидаемому"),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+        );
+    }
+
+    @DisplayName("Заявка не может быть подана если в данных об автомобиле значение поля numberPlate пустое")
+    @Description("Тест направлен на проверку невозможность подачи заявки при отсутствии значении поля автомобиля numberPlate")
+    @Tag("API")
+    @TmsLink("https://jira.astondevs.ru/browse/LIB5-888")
+    @Test()
+    public void unsuccessfulRequestWithoutNumberPlate() {
+        String jsonSchemaPath = "schemas/insuranceService/package.json";
+        CreateVehicleApplicationInsuranceRequest createVehicleApplicationInsuranceRequest = createPojoForVehicleApplication(
+                "CAR", "Kalina", "LADA", 2021,null,  100000, 150, 1111111,
+                "Михаил", "Попов", "2001-01-24", "12АА 125896", "2024-02-10","РФ, г.Москва, ул. 1-й Армии, д. 35, кв. 124",
+                1,  643, 15, false);
+        Response response = insuranceService.checkMakeNewVehicleApplicationRequest(createVehicleApplicationInsuranceRequest);
+        assertAll(
+                () -> assertEquals(SC_BAD_REQUEST,
+                        response.statusCode(),
+                        "Код ответа соответствует ожидаемому"),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+        );
+    }
+
+    @DisplayName("Заявка не может быть подана если в данных об автомобиле значение поля brand пустое")
+    @Description("Тест направлен на проверку невозможность подачи заявки при отстутсвии значении поля автомобиля brand")
+    @Tag("API")
+    @TmsLink("https://jira.astondevs.ru/browse/LIB5-884")
+    @Test()
+    public void unsuccessfulRequestWithoutBrand() {
+        String jsonSchemaPath = "schemas/insuranceService/package.json";
+        CreateVehicleApplicationInsuranceRequest createVehicleApplicationInsuranceRequest = createPojoForVehicleApplication(
+                "CAR", "Kalina", null, 2021,"ПР256С-63",  100000, 150, 1111111,
+                "Михаил", "Попов", "2001-01-24", "12АА 125896", "2024-02-10","РФ, г.Москва, ул. 1-й Армии, д. 35, кв. 124",
+                1,  643, 15, false);
+        Response response = insuranceService.checkMakeNewVehicleApplicationRequest(createVehicleApplicationInsuranceRequest);
+        assertAll(
+                () -> assertEquals(SC_BAD_REQUEST,
+                        response.statusCode(),
+                        "Код ответа соответствует ожидаемому"),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+        );
+    }
+
+    @DisplayName("Заявка не может быть подана если в данных об автомобиле значение поля model пустое")
+    @Description("Тест направлен на проверку невозможность подачи заявки отсутствует значение поля автомобиля model")
+    @Tag("API")
+    @TmsLink("https://jira.astondevs.ru/browse/LIB5-881")
+    @Test()
+    public void unsuccessfulRequestWithoutModel() {
+        String jsonSchemaPath = "schemas/insuranceService/package.json";
+        CreateVehicleApplicationInsuranceRequest createVehicleApplicationInsuranceRequest = createPojoForVehicleApplication(
+                "CAR", null, "LADA", 2021,"ПР256С-63",  100000, 150, 1111111,
+                "Михаил", "Попов", "2001-01-24", "12АА 125896", "2024-02-10","РФ, г.Москва, ул. 1-й Армии, д. 35, кв. 124",
+                1,  643, 15, false);
+        Response response = insuranceService.checkMakeNewVehicleApplicationRequest(createVehicleApplicationInsuranceRequest);
+        assertAll(
+                () -> assertEquals(SC_BAD_REQUEST,
+                        response.statusCode(),
+                        "Код ответа соответствует ожидаемому"),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+        );
     }
 
     public static CreateVehicleApplicationInsuranceRequest createPojoForVehicleApplication(

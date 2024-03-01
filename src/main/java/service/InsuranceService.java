@@ -16,7 +16,7 @@ import static io.restassured.http.Method.POST;
 
 public class InsuranceService {
 
-    public Response checkMakeNewApplicationRequest(CreateVehicleApplicationInsuranceRequest createVehicleApplicationInsuranceRequest) {
+    public Response checkMakeNewVehicleApplicationRequest(CreateVehicleApplicationInsuranceRequest createVehicleApplicationInsuranceRequest) {
         String clientId = "813f5509-7696-44be-a321-3a094c48a6e7";
         List<RequestParam> params = List.of(getRP(HEADER, "accept", ACCEPT_VALUE),
                 getRP(HEADER, "clientId", clientId),
