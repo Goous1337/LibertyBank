@@ -13,7 +13,8 @@ import web.BaseTest;
 
 import static constant.CardInfoConstants.*;
 import static constant.CardServiceConstants.*;
-import static web.constans.UrlConfig.*;
+import static web.constans.UrlConfig.CARD_PRODUCTS_URL;
+
 @Tag("Web")
 @Epic("5 - Карты")
 @Feature("US-5.7.ALL Просмотр подробной информации по карточному продукту")

@@ -2,7 +2,6 @@ package web.steps;
 
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.openqa.selenium.NoSuchElementException;
 import web.helpers.TestListener;
 import web.pages.CardPage;

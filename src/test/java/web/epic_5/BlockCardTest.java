@@ -18,7 +18,7 @@ import static web.constans.UrlConfig.CARDS_URL;
 public class BlockCardTest extends BaseTest {
 
     @BeforeEach
-    public void setUpTest(){
+    public void setUpTest() {
         authorization();
         open(CARDS_URL);
     }

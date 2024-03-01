@@ -3,7 +3,7 @@ package web.pages;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class CardPage extends BasePage{
+public class CardPage extends BasePage {
 
     @FindBy(xpath = "(//button[contains(text(), 'Информация по карте')])[2]")
     private WebElement cardInfoButtonForSecondCard;
