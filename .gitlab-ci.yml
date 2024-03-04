@@ -1,0 +1,10 @@
+stages:
+  - static_analysis
+
+checkstyle:
+  image: maven:3.8.4-openjdk-17-slim
+  stage: static_analysis
+  script:
+      - mvn checkstyle:check
+  only:
+      - merge_requests
