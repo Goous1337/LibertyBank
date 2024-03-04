@@ -20,4 +20,5 @@ public class CustomerService_2_0_Constants {
     public static final String BEARER_TOKEN = "Bearer ";
     public static final String ERROR_MASSAGE_415 = "Формат запрашиваемых данных не поддерживается сервером, поэтому запрос отклонён.";
     public static final String ERROR_MASSAGE_405 = "Метод не разрешен. Сервер знает о запрашиваемом методе, но он был деактивирован и не может быть использован.";
+    public static final String ERROR_MASSAGE_401 = "Ошибка авторизации. Для доступа к запрашиваемому ресурсу требуется аутентификация.";
 }
