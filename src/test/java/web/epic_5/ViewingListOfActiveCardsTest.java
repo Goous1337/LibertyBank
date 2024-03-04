@@ -24,7 +24,7 @@ public class ViewingListOfActiveCardsTest extends BaseTest {
     }
 
     @Test
-    @Tag(    "Web"    )
+    @Tag("Web")
     @TmsLink("LIB2-991")
     @DisplayName("Просмотр списка активных карт пользователя")
     public void viewActiveCards() {
