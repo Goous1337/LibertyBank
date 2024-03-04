@@ -51,6 +51,12 @@ public class ConfirmationPage extends BasePage {
     @FindBy(xpath = "//button[contains(text(), 'Нет')]")
     private WebElement denyButton;
 
+    @FindBy(xpath = "//p[contains(text(), 'На данный момент у Вас отсутствуют карточные продукты')]")
+    private WebElement missingCardProductsMessage;
+
+    @FindBy(xpath = "//button[contains(text(), 'Открыть карточный продукт')]")
+    private WebElement openCardProductButton;
+
     public boolean isSetMainAccountDialogBoxDisplayed() {
         return setMainAccountDialogBox.isDisplayed();
     }
@@ -111,5 +117,13 @@ public class ConfirmationPage extends BasePage {
 
     public void clickConfirmButton() {
         confirmButton.click();
+    }
+
+    public boolean isMissingCardProductsMessageDisplayed() {
+        return missingCardProductsMessage.isDisplayed();
+    }
+
+    public boolean isOpenCardProductButtonEnabled() {
+        return openCardProductButton.isEnabled();
     }
 }
