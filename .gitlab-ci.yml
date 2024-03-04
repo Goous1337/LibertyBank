@@ -8,5 +8,4 @@ checkstyle:
       - mvn checkstyle:check
   only:
       - merge_requests
-      changes:
-        - .gitlab-ci.yml
+      - main
