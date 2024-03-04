@@ -18,6 +18,7 @@ public class BaseTest {
 
     protected static AccountSteps accountSteps;
     protected AccountInfoSteps accountInfoSteps;
+    protected CreditInfoSteps creditInfoSteps;
     protected CreateAccountSteps createAccountSteps;
     protected ConfirmationSteps confirmationSteps;
     protected RenameAccountSteps renameAccountSteps;
@@ -71,5 +72,6 @@ public class BaseTest {
         cardProductsSteps = new CardProductsSteps();
         cardProductInfoSteps = new CardProductInfoSteps();
         filterCardsSteps = new FilterCardsSteps();
+        creditInfoSteps = new CreditInfoSteps();
     }
 }
