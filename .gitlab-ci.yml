@@ -6,6 +6,6 @@ checkstyle:
   stage: static_analysis
   script:
       - mvn checkstyle:check
-  #only:
-  #    - merge_requests
-  #    - main
+  only:
+      - merge_requests
+      - main

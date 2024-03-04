@@ -6,6 +6,7 @@ import web.helpers.TestListener;
 import web.pages.ConfirmationPage;
 
 import static web.constans.AccountServiceConstants.NOT_DISPLAYED_MESSAGE;
+import static web.constans.AccountServiceConstants.NOT_ENABLED_MESSAGE;
 
 public class ConfirmationSteps {
 
@@ -86,6 +87,7 @@ public class ConfirmationSteps {
     @Step("Отображается форма ввода кода подтверждения из смс")
     public void assertEnterCodeFromSmsBoxDisplayed() {
         Assertions.assertTrue(confirmationPage.isEnterCodeFromSmsBoxDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Форма ввода кода из смс"));
+        TestListener.takeScreenshot();
     }
 
     @Step("Ввести код подтверждения из смс")
@@ -96,5 +98,17 @@ public class ConfirmationSteps {
     @Step("Подтвердить закрытие")
     public void confirm() {
         confirmationPage.clickConfirmButton();
+    }
+
+    @Step("Отображается сообщение об отсутствии карточных продуктов")
+    public void assertMissingCardProductsMessageIsDisplayed() {
+        Assertions.assertTrue(confirmationPage.isMissingCardProductsMessageDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Сообщение"));
+        TestListener.takeScreenshot();
+    }
+
+    @Step("Доступна кнопка 'Открыть карточный продукт'")
+    public void assertOpenCardProductIsEnabled() {
+        Assertions.assertTrue(confirmationPage.isOpenCardProductButtonEnabled(), String.format(NOT_ENABLED_MESSAGE, "Открыть карточный продукт"));
+        TestListener.takeScreenshot();
     }
 }

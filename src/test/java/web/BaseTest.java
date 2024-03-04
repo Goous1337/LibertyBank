@@ -32,6 +32,7 @@ public class BaseTest {
     protected CardInfoSteps cardInfoSteps;
     protected CardProductsSteps cardProductsSteps;
     protected CardProductInfoSteps cardProductInfoSteps;
+    protected FilterCardsSteps filterCardsSteps;
 
     public BaseTest() {
         refreshPages();
@@ -70,6 +71,7 @@ public class BaseTest {
         cardInfoSteps = new CardInfoSteps();
         cardProductsSteps = new CardProductsSteps();
         cardProductInfoSteps = new CardProductInfoSteps();
+        filterCardsSteps = new FilterCardsSteps();
         creditInfoSteps = new CreditInfoSteps();
     }
 }
