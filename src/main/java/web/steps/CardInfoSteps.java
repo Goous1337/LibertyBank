@@ -43,6 +43,26 @@ public class CardInfoSteps {
         TestListener.takeScreenshot();
     }
 
+    @Step("Отображается статус карты 'Активная'")
+    public void assertActiveCardStatusDisplayed() {
+        Assertions.assertTrue(cardInfoPage.isActiveCardStatusDisplayed());
+        TestListener.takeScreenshot();
+    }
+
+    @Step("Отображается статус карты 'Заблокированная'")
+    public void assertBlockedCardStatusDisplayed() {
+        Assertions.assertTrue(cardInfoPage.isBlockedCardStatusDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Статус 'Заблокированная'"));
+        TestListener.takeScreenshot();
+    }
+
+    @Step("Не отображается статус карты 'Заблокированная'")
+    public void assertBlockedStatusNotDisplayed() {
+        Assertions.assertThrows(NoSuchElementException.class, () -> {
+            cardInfoPage.isBlockedCardStatusDisplayed();
+        });
+        TestListener.takeScreenshot();
+    }
+
     @Step("Вернутся назад к списку карт")
     public void goBack() {
         cardInfoPage.clickBackButton();
@@ -51,6 +71,11 @@ public class CardInfoSteps {
     @Step("Заблокировать карту")
     public void blockCard() {
         cardInfoPage.clickBlockCardButton();
+    }
+
+    @Step("Разблокировать карту")
+    public void unblockCard() {
+        cardInfoPage.clickUnblockCardButton();
     }
 
     @Step("Закрыть карту")

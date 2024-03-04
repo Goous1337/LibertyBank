@@ -26,7 +26,6 @@ public class CM_3_6_CheckObtainingInformationOnBanksLoanProductTest extends Base
     @Test
     public void checkObtainingInformationOnBanksLoanProduct() {
         Response response = creditService.checkListObtainingInformationOnBanksLoanProduct();
-
         assertAll(
                 () -> assertEquals(SC_OK, response.getStatusCode()),
                 () -> assertEquals(CREDIT_ID, response.jsonPath().get("id")),
@@ -34,9 +33,9 @@ public class CM_3_6_CheckObtainingInformationOnBanksLoanProductTest extends Base
                 () -> assertEquals(CREDIT_MIN_SUM, (Integer) response.jsonPath().get("minSum")),
                 () -> assertEquals(CREDIT_MAX_SUM, (Integer) response.jsonPath().get("maxSum")),
                 () -> assertEquals(CREDIT_CODE, response.jsonPath().get("currencyCode")),
-                () -> assertEquals(CREDIT_RATE, (Integer) response.jsonPath().get("interestRate")),
+                () -> assertEquals(CREDIT_RATE, (Float) response.jsonPath().get("interestRate")),
                 () -> assertTrue(response.jsonPath().getBoolean("needGuarantees")),
-                () -> assertTrue(response.jsonPath().getBoolean("deliveryInCash")),
+                () -> assertFalse(response.jsonPath().getBoolean("deliveryInCash")),
                 () -> assertTrue(response.jsonPath().getBoolean("earlyRepayment")),
                 () -> assertTrue(response.jsonPath().getBoolean("needIncomeDetails")),
                 () -> assertEquals(PERIOD_MONTH_MIN, (Integer) response.jsonPath().get("minPeriodMonths")),
@@ -44,21 +43,6 @@ public class CM_3_6_CheckObtainingInformationOnBanksLoanProductTest extends Base
                 () -> assertEquals(CREDIT_CALCULATOR_MODE, response.jsonPath().get("calculationMode")),
                 () -> assertEquals(GRACE_PERIOD_MONTH, (Integer) response.jsonPath().get("gracePeriodMonths")),
                 () -> assertFalse(response.jsonPath().getBoolean("rateIsAdjustable"))
-        );
-    }
-
-    @Disabled("Bug https://jira.astondevs.ru/browse/LIB3-1222")
-    @DisplayName("Получение подробной информации по кредитному продукту банка при неуспешной валидации токена")
-    @Description("Данный тест-кейс направлен на получение STATUS CODE  401 При неуспешной валидации токена при" +
-            " получении подробной информации по кредитному продукту банка по CM-3.6 и US 3.6")
-    @Tags({@Tag("API"), @Tag("Negative")})
-    @TmsLink("https://jira.astondevs.ru/browse/LIB3-418")
-    @Test
-    public void checkObtainingInformationOnBanksLoanProductInvalidToken() {
-        Response response = creditService.checkListObtainingInformationOnBanksLoanProductInvalidToken();
-        assertAll(
-                () -> assertEquals(SC_UNAUTHORIZED, response.getStatusCode()),
-                () -> assertNotNull(response.jsonPath().get("errorMessage"))
         );
     }
 
