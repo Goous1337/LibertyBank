@@ -43,4 +43,18 @@ public class ChangeStatusNotificationTest extends BaseTest {
         assertTrue(beforeChanging != afterChanging, String.format(DISPLAYED_MESSAGE,
                 "Checkbox Email-оповещения не изменился"));
     }
+
+    @DisplayName("Основной сценарий. Проверка изменения статуса настройки получения Push-оповещения")
+    @Description("В данном тест-кейсе проводится проверка возможности изменения настроек получения пользователем" +
+            " Push-оповещения в личном кабинете")
+    @TmsLink("LIB-2496")
+    @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Positive")})
+    @Test
+    public void changeStatusPushNotification() {
+        boolean beforeChanging = changeNotificationStatusSteps.isSelectedPushNotificationCheckBox();
+        boolean afterChanging = changeNotificationStatusSteps.clickPushNotificationCheckbox()
+                .isChangedPushNotificationCheckBox(beforeChanging);
+        assertTrue(beforeChanging != afterChanging, String.format(DISPLAYED_MESSAGE,
+                "Checkbox Push-оповещения не изменился"));
+    }
 }
