@@ -71,7 +71,7 @@ public class CardSteps {
         TestListener.takeScreenshot();
     }
 
-    @Step("Отображается номер карты списке карт")
+    @Step("Отображается номер карты в списке карт")
     public void assertCardNumberIsDisplayed() {
         Assertions.assertTrue(cardPage.isCardNumberDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Номер карты"));
         TestListener.takeScreenshot();

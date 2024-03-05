@@ -29,7 +29,6 @@ public class UserCardsInfoTest extends BaseTest {
     @Tag("Web")
     @TmsLink("LIB2-1019")
     @DisplayName("Просмотр информации по активной карте пользователя")
-    @Description("Просмотр информации по активной карте пользователя")
     public void userCardInformationTest() {
         cardInfoSteps.assertActiveCardStatusDisplayed();
         cardInfoSteps.assertUserCardTypeIsDisplayed();
@@ -43,7 +42,6 @@ public class UserCardsInfoTest extends BaseTest {
     @Tag("Web")
     @TmsLink("LIB2-1015")
     @DisplayName("Отображение элементов на странице с информацией по карте пользователя")
-    @Description("Отображение элементов на странице с информацией по карте пользователя")
     public void userCardOptionsTest() {
         cardInfoSteps.assertCardTransactionHistoryButtonIsDisplayed();
         cardInfoSteps.assertCardInformationBlocDisplayed();
