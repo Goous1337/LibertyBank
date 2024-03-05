@@ -37,6 +37,10 @@ public class DropDownAccountMenuPage extends BasePage {
         waitElement(securityBtn).click();
     }
 
+    public void clickPersonDataBtn() {
+        waitElement(personalDateBtn).click();
+    }
+
     public boolean isUserPanelDisplayed() {
         return userPanel.isDisplayed();
     }

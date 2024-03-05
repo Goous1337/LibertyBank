@@ -39,4 +39,10 @@ public class HomeSteps {
         dropDownAccountMenuPage.clickSecurityBtn();
         return this;
     }
+
+    @Step("Кликнуть на кнопку 'Личные данные'")
+    public HomeSteps clickPersonalDataBtn() {
+        dropDownAccountMenuPage.clickPersonDataBtn();
+        return this;
+    }
 }

@@ -25,12 +25,14 @@ public class BaseTest {
     protected LoginSteps loginSteps;
     protected HomeSteps homeSteps;
     protected SecuritySteps securitySteps;
+    protected PersonalDataSteps personalDataSteps;
     protected ChangePasswordSteps changePasswordSteps;
     protected DropDownAccountMenuSteps dropDownAccountMenuSteps;
     protected ChangeNotificationStatusSteps changeNotificationStatusSteps;
+    protected UpdateEmailSteps updateEmailSteps;
+    protected CardProductsSteps cardProductsSteps;
     protected CardSteps cardSteps;
     protected CardInfoSteps cardInfoSteps;
-    protected CardProductsSteps cardProductsSteps;
     protected CardProductInfoSteps cardProductInfoSteps;
     protected FilterCardsSteps filterCardsSteps;
 
@@ -67,6 +69,9 @@ public class BaseTest {
         changePasswordSteps = new ChangePasswordSteps();
         dropDownAccountMenuSteps = new DropDownAccountMenuSteps();
         changeNotificationStatusSteps = new ChangeNotificationStatusSteps();
+        updateEmailSteps = new UpdateEmailSteps();
+        personalDataSteps = new PersonalDataSteps();
+        cardProductsSteps = new CardProductsSteps();
         cardSteps = new CardSteps();
         cardInfoSteps = new CardInfoSteps();
         cardProductsSteps = new CardProductsSteps();
