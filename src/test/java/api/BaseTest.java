@@ -29,6 +29,7 @@ public class BaseTest {
     protected CustomerService_2_0 customerService_2_0;
     protected AccountService accountService;
     protected CardService cardService;
+    protected InsuranceService insuranceService;
 
     public BaseTest() {
         params = new ArrayList<>();
@@ -42,6 +43,7 @@ public class BaseTest {
         customerService_2_0 = new CustomerService_2_0();
         accountService = new AccountService();
         cardService = new CardService();
+        insuranceService = new InsuranceService();
     }
 
     @BeforeEach
