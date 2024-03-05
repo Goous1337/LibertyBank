@@ -1,6 +1,5 @@
 package web.epic_5;
 
-import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.TmsLink;
