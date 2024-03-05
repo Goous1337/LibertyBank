@@ -1,5 +1,8 @@
 package web;
 
+import api.model.webAndApi.CreditProductService;
+import api.model.webAndApi.credit.CreditDetails;
+import api.model.webAndApi.credit.CreditProduct;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,6 +30,11 @@ public class BaseTest {
     protected ChangePasswordSteps changePasswordSteps;
     protected DropDownAccountMenuSteps dropDownAccountMenuSteps;
     protected ChangeNotificationStatusSteps changeNotificationStatusSteps;
+    protected CreditInfoSteps creditInfoSteps;
+    protected CreditProduct creditProduct;
+    protected CreditDetails creditDetails;
+    protected CreditProductService creditProductService;
+
 
     public BaseTest() {
         refreshPages();
@@ -61,5 +69,9 @@ public class BaseTest {
         changePasswordSteps = new ChangePasswordSteps();
         dropDownAccountMenuSteps = new DropDownAccountMenuSteps();
         changeNotificationStatusSteps = new ChangeNotificationStatusSteps();
+        creditInfoSteps = new CreditInfoSteps();
+        creditProduct = new CreditProduct();
+        creditDetails = new CreditDetails();
+        creditProductService = new CreditProductService();
     }
 }
