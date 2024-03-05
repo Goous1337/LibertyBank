@@ -82,4 +82,74 @@ public class CardInfoSteps {
     public void closeCard() {
         cardInfoPage.clickCloseCardButton();
     }
+
+    @Step("Отображается тип карты в подробной информации о карте пользователя")
+    public void assertUserCardTypeIsDisplayed() {
+        Assertions.assertTrue(cardInfoPage.isUserCardTypeDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Тип карты"));
+        TestListener.takeScreenshot();
+    }
+
+    @Step("Отображается номер карты при просмотре информации по карте пользователя")
+    public void assertUserCardNumberIsDisplayed() {
+        Assertions.assertTrue(cardInfoPage.isUserCardNumberDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Номер карты"));
+        TestListener.takeScreenshot();
+    }
+
+    @Step("Отображается срок действия карты при просмотре информации по карте пользователя")
+    public void assertUserCardValidityPeriodIsDisplayed() {
+        Assertions.assertTrue(cardInfoPage.isUserCardValidityPeriodDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Номер карты"));
+        TestListener.takeScreenshot();
+    }
+
+    @Step("Отображается иконка копирования номера карты")
+    public void assertCopyCardNumberIsDisplayed() {
+        Assertions.assertTrue(cardInfoPage.isCopyCardNumberIconDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Иконка 'Копировать номер карты'"));
+        TestListener.takeScreenshot();
+    }
+
+    @Step("Отображается иконка копирования CVV кода")
+    public void assertCopyCvvCodeIsDisplayed() {
+        Assertions.assertTrue(cardInfoPage.isCopyCvvCodeIconDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Иконка 'Копировать CVV-код'"));
+        TestListener.takeScreenshot();
+    }
+
+    @Step("Отображается вкладка 'История'")
+    public void assertCardTransactionHistoryButtonIsDisplayed() {
+        Assertions.assertTrue((cardInfoPage.isCardTransactionHistoryButtonDisplayed()), String.format(NOT_DISPLAYED_MESSAGE, "Вкладка 'История'"));
+        TestListener.takeScreenshot();
+    }
+
+    @Step("Отображается блок 'Информация по карте'")
+    public void assertCardInformationBlocDisplayed() {
+        Assertions.assertAll(
+                this::assertCardInformationTitleDisplayed,
+                this::assertAccountInformationButtonDisplayed,
+                this::assertCardTariffButtonDisplayed,
+                this::assertCardLimitsButtonDisplayed
+        );
+    }
+
+    @Step("Отображается заголовок 'Информация по карте'")
+    public void assertCardInformationTitleDisplayed() {
+        Assertions.assertTrue(cardInfoPage.isCardInformationTitleDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Заголовок 'Информация по карте'"));
+        TestListener.takeScreenshot();
+    }
+
+    @Step("Отображается кнопка 'Детали счета'")
+    public void assertAccountInformationButtonDisplayed() {
+        Assertions.assertTrue(cardInfoPage.isAccountInformationButtonDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Кнопка 'Детали счета'"));
+        TestListener.takeScreenshot();
+    }
+
+    @Step("Отображается кнопка 'Тариф'")
+    public void assertCardTariffButtonDisplayed() {
+        Assertions.assertTrue(cardInfoPage.isCardTariffButtonDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Кнопка 'Тариф'"));
+        TestListener.takeScreenshot();
+    }
+
+    @Step("Отображается кнопка 'Лимиты по карте'")
+    public void assertCardLimitsButtonDisplayed() {
+        Assertions.assertTrue(cardInfoPage.isCardLimitsDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Кнопка 'Лимиты по карте'"));
+        TestListener.takeScreenshot();
+    }
 }
