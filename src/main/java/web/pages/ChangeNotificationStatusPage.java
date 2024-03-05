@@ -10,11 +10,11 @@ public class ChangeNotificationStatusPage extends BasePage {
     private WebElement statusSMSNotificationCheckbox;
     @FindBy(xpath = "//li[contains(text(), 'SMS-оповещения')]//label")
     private WebElement statusSMSNotificationLabel;
-    @FindBy(xpath = "//input[@name='email']")
+    @FindBy(xpath = "//input[@name = 'email']")
     private WebElement statusEmailNotificationCheckbox;
     @FindBy(xpath = "//li[contains(text(), 'Email-оповещения')]//label")
     private WebElement statusEmailNotificationLabel;
-    @FindBy(xpath = "//input[@name='push']")
+    @FindBy(xpath = "//input[@name = 'push']")
     private WebElement statusPushNotificationCheckbox;
     @FindBy(xpath = "//li[contains(text(), 'Push-оповещения')]//label")
     private WebElement statusPushNotificationLabel;
