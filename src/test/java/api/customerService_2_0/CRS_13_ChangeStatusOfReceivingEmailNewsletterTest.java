@@ -12,7 +12,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import pojo.customerService_2_0.UpdatedEmail;
-import pojo.customerService_2_0.UserAuthorizationByPhone;
 
 import java.util.stream.Stream;
 
@@ -42,9 +41,7 @@ public class CRS_13_ChangeStatusOfReceivingEmailNewsletterTest extends BaseTest 
     @TmsLink("LIB-2759")
     @RepeatedTest(2)
     public void checkChangeStatusOfSettingsReceivingEmailNewsletters() {
-        Response getToken = customerService_2_0.userAuthorizationByMobilePhone
-                (new UserAuthorizationByPhone(mobilePhone, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE));
-        String accessToken = getToken.jsonPath().get("accessToken");
+        String accessToken = userAuthorization.getAccessToken(mobilePhone, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE);
         boolean actualNotificationStatus = CustomerService_2_0_DataBaseRequest.getEmailStatusByMobile(mobilePhone);
         boolean notificationValue = customerService_2_0.changeNotificationStatus(actualNotificationStatus);
         Response response = customerService_2_0.changeStatusOfSettingsReceivingEmailNewsletters
@@ -67,9 +64,7 @@ public class CRS_13_ChangeStatusOfReceivingEmailNewsletterTest extends BaseTest 
     @ParameterizedTest
     @MethodSource("notificationStatusesForTest")
     public void checkChangeStatusOfSettingsReceivingEmailNewslettersWithInvalidType(Object notificationStatus) {
-        Response getToken = customerService_2_0.userAuthorizationByMobilePhone
-                (new UserAuthorizationByPhone(mobilePhone, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE));
-        String accessToken = getToken.jsonPath().get("accessToken");
+        String accessToken = userAuthorization.getAccessToken(mobilePhone, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE);
         boolean actualNotificationStatus = CustomerService_2_0_DataBaseRequest.getEmailStatusByMobile(mobilePhone);
         Response response = customerService_2_0.changeStatusOfSettingsReceivingEmailNewsletters
                 (accessToken, notificationStatus);
@@ -92,9 +87,7 @@ public class CRS_13_ChangeStatusOfReceivingEmailNewsletterTest extends BaseTest 
     @ParameterizedTest
     @ValueSource(strings = {"GET", "POST", "PUT", "DELETE"})
     public void checkChangeStatusOfSettingsReceivingEmailNewslettersWithInvalidMethod(String method) {
-        Response getToken = customerService_2_0.userAuthorizationByMobilePhone
-                (new UserAuthorizationByPhone(mobilePhone, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE));
-        String accessToken = getToken.jsonPath().get("accessToken");
+        String accessToken = userAuthorization.getAccessToken(mobilePhone, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE);
         boolean actualNotificationStatus = CustomerService_2_0_DataBaseRequest.getEmailStatusByMobile(mobilePhone);
         boolean notificationValue = customerService_2_0.changeNotificationStatus(actualNotificationStatus);
         Response response = customerService_2_0.changeStatusEmailNotificationWithHttpMethod
@@ -133,9 +126,7 @@ public class CRS_13_ChangeStatusOfReceivingEmailNewsletterTest extends BaseTest 
     @TmsLink("LIB-2765")
     @Test
     public void checkChangeStatusOfSettingsReceivingEmailNewslettersWithInvalidEmail() {
-        Response getToken = customerService_2_0.userAuthorizationByMobilePhone
-                (new UserAuthorizationByPhone(mobilePhone, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE));
-        String accessToken = getToken.jsonPath().get("accessToken");
+        String accessToken = userAuthorization.getAccessToken(mobilePhone, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE);
         boolean actualNotificationStatus = CustomerService_2_0_DataBaseRequest.getEmailStatusByMobile(mobilePhone);
         boolean notificationStatusValue = customerService_2_0.changeNotificationStatus(actualNotificationStatus);
         String actualUserEmail = CustomerService_2_0_DataBaseRequest.getCustomerEmailByPhone(mobilePhone);
@@ -149,5 +140,26 @@ public class CRS_13_ChangeStatusOfReceivingEmailNewsletterTest extends BaseTest 
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
         customerService_2_0.updateEmailForClient(accessToken, new UpdatedEmail(actualUserEmail));
+    }
+
+    @DisplayName("Пользователь ввёл несуществующий URL")
+    @Description("""
+            Проверка работы сервиса изменения статуса настройки получения email-уведомлений при указании некорректного URL.
+            """)
+    @Tags({@Tag("API"), @Tag("Negative")})
+    @TmsLink("LIB-2773")
+    @Test
+    public void checkChangeStatusOfSettingsReceivingEmailNewslettersWithInvalidUrl() {
+        String accessToken = userAuthorization.getAccessToken(mobilePhone, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE);
+        boolean actualNotificationStatus = CustomerService_2_0_DataBaseRequest.getEmailStatusByMobile(mobilePhone);
+        boolean notificationStatusValue = customerService_2_0.changeNotificationStatus(actualNotificationStatus);
+        Response response = customerService_2_0.changeStatusEmailNotificationWithInvalidUrl
+                (accessToken, notificationStatusValue);
+        boolean newNotificationStatus = CustomerService_2_0_DataBaseRequest.getEmailStatusByMobile(mobilePhone);
+        assertAll(
+                () -> assertEquals(SC_NOT_FOUND, response.getStatusCode()),
+                () -> assertEquals(actualNotificationStatus, newNotificationStatus),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+        );
     }
 }

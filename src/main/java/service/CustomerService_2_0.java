@@ -246,6 +246,13 @@ public class CustomerService_2_0 {
         return sendSimpleRequest(Method.valueOf(httpMethod), CUSTOMER_2_0_NOTIFICATION_EMAIL, params);
     }
 
+    public Response changeStatusEmailNotificationWithInvalidUrl(String accessToken, Object value) {
+        String body = createBody(Map.of(PARAMETER_NOTIFICATION_STATUS, value));
+        List<RequestParam> params = List.of(getRP(HEADER, AUTHORIZATION, BEARER_TOKEN + accessToken),
+                getRP(BODY, SPACE, body));
+        return sendSimpleRequest(PATCH, INVALID_CUSTOMER_2_0_NOTIFICATION_EMAIL, params);
+    }
+
     public boolean changeNotificationStatus(boolean actualStatus) {
         boolean changedStatus;
         if (actualStatus == true) {
