@@ -52,7 +52,7 @@ public class CloseCardTest extends BaseTest {
     @Tag("Web")
     @TmsLink("LIB2-2943")
     @Disabled("Отключен пока не исправят баг. Не выводиться сообщение о ошибке. Можно ввести не валидные значения")
-    @DisplayName("Проверка отображения сообщения при вводжде не валидных значений")
+    @DisplayName("Проверка отображения сообщения при вводе не валидных значений")
     public void checkEnterInvalidValuesCard() {
         cardSteps.clickCardInfoForActiveCard();
         cardInfoSteps.closeCard();

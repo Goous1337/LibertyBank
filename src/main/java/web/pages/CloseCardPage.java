@@ -29,5 +29,4 @@ public class CloseCardPage extends BasePage {
     public boolean confirmButtonIsDisplayed() {
         return confirmButton.isDisplayed();
     }
-
 }
