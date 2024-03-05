@@ -6,7 +6,8 @@ import org.openqa.selenium.NoSuchElementException;
 import web.helpers.TestListener;
 import web.pages.CardPage;
 
-import static web.constans.AccountServiceConstants.*;
+import static web.constans.AccountServiceConstants.NOT_DISPLAYED_MESSAGE;
+import static web.constans.AccountServiceConstants.NOT_EQUALS_MESSAGE;
 
 public class CardSteps {
 
@@ -70,7 +71,7 @@ public class CardSteps {
         TestListener.takeScreenshot();
     }
 
-    @Step("Отображается номер карты")
+    @Step("Отображается номер карты в списке карт")
     public void assertCardNumberIsDisplayed() {
         Assertions.assertTrue(cardPage.isCardNumberDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Номер карты"));
         TestListener.takeScreenshot();
