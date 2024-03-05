@@ -226,3 +226,4 @@ public class INS_2_CheckNewApplicationRequest extends BaseTest {
         return new CreateVehicleApplicationInsuranceRequest(INSURANCE_TYPE_VALUE, vehicleApplication);
     }
 }
+
