@@ -2,6 +2,7 @@ package web.pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
 public class CardInfoPage extends BasePage {
 
     @FindBy(xpath = "//label[contains(@class, '_switch-label')]")
@@ -18,6 +19,10 @@ public class CardInfoPage extends BasePage {
 
     @FindBy(xpath = "//p[contains(text(), 'Закрыть карту')]")
     private WebElement closeCardButton;
+    @FindBy(xpath = "//p[text() = 'Закрытая']")
+    private WebElement statusCardClosed;
+    @FindBy(xpath = "//p[text() = 'Активная']")
+    private WebElement statusCardActive;
 
     public void clickSetMainSwitchButton() {
         scrollToElement(setMainSwitchButton);
@@ -33,6 +38,11 @@ public class CardInfoPage extends BasePage {
         return mainCardStatus.isDisplayed();
     }
 
+    public boolean statusCardActive() {
+        scrollToElement(statusCardActive);
+        return statusCardActive.isDisplayed();
+    }
+
     public void clickBackButton() {
         backButton.click();
     }
@@ -45,5 +55,9 @@ public class CardInfoPage extends BasePage {
     public void clickCloseCardButton() {
         scrollToElement(closeCardButton);
         closeCardButton.click();
+    }
+
+    public boolean statusCardClosed() {
+        return statusCardClosed.isDisplayed();
     }
 }
