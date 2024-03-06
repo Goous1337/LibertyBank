@@ -26,12 +26,15 @@ public class ChangePasswordInAccountTest extends BaseTest {
     @TmsLink("LIB-2600")
     @Test
     public void changePasswordInAccountTest() {
+        String newPassword = USER_PASSWORD + '1';
         changePasswordSteps
                 .setKeysToOldPasswordInput(USER_PASSWORD)
-                .setKeysToNewPasswordInput(USER_PASSWORD)
-                .setKeysToConfirmPasswordInput(USER_PASSWORD)
+                .setKeysToNewPasswordInput(newPassword)
+                .setKeysToConfirmPasswordInput(newPassword)
                 .clickSubmitPasswordChangeBtn();
         personalDataSteps.assertLastNotificationStatus();
+        securitySteps.clickChangePasswordBtn();
+        changePasswordSteps.resetPasswordForUser(newPassword);
     }
 
     @DisplayName("Проверка возможности отмены изменения пароля в личном кабинете")
