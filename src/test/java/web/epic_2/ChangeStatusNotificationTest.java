@@ -7,6 +7,7 @@ import web.BaseTest;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static web.constans.AccountServiceConstants.DISPLAYED_MESSAGE;
+import static web.constans.AccountServiceConstants.NOT_EQUALS_MESSAGE;
 import static web.constans.UrlConfig.CHANGE_NOTIFICATION_URL;
 
 public class ChangeStatusNotificationTest extends BaseTest {
@@ -26,8 +27,8 @@ public class ChangeStatusNotificationTest extends BaseTest {
         boolean beforeChanging = changeNotificationStatusSteps.isSelectedSMSNotificationCheckBox();
         boolean afterChanging = changeNotificationStatusSteps.clickSMSNotificationCheckbox()
                 .isChangedSMSNotificationCheckBox(beforeChanging);
-        assertTrue(beforeChanging != afterChanging, String.format(DISPLAYED_MESSAGE,
-                "Checkbox SMS-оповещения не изменился"));
+        assertTrue(beforeChanging != afterChanging, String.format(NOT_EQUALS_MESSAGE,
+                "Checkbox"));
     }
 
     @DisplayName("Основной сценарий. Проверка изменения статуса настройки получения Email-оповещения")
@@ -40,7 +41,21 @@ public class ChangeStatusNotificationTest extends BaseTest {
         boolean beforeChanging = changeNotificationStatusSteps.isSelectedEmailNotificationCheckBox();
         boolean afterChanging = changeNotificationStatusSteps.clickEmailNotificationCheckbox()
                 .isChangedEmailNotificationCheckBox(beforeChanging);
+        assertTrue(beforeChanging != afterChanging, String.format(NOT_EQUALS_MESSAGE,
+                "Checkbox"));
+    }
+
+    @DisplayName("Основной сценарий. Проверка изменения статуса настройки получения Push-оповещения")
+    @Description("В данном тест-кейсе проводится проверка возможности изменения настроек получения пользователем" +
+            " Push-оповещения в личном кабинете")
+    @TmsLink("LIB-2496")
+    @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Positive")})
+    @Test
+    public void changeStatusPushNotification() {
+        boolean beforeChanging = changeNotificationStatusSteps.isSelectedPushNotificationCheckBox();
+        boolean afterChanging = changeNotificationStatusSteps.clickPushNotificationCheckbox()
+                .isChangedPushNotificationCheckBox(beforeChanging);
         assertTrue(beforeChanging != afterChanging, String.format(DISPLAYED_MESSAGE,
-                "Checkbox Email-оповещения не изменился"));
+                "Checkbox Push-оповещения не изменился"));
     }
 }

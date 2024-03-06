@@ -35,7 +35,7 @@ public final class ApiEndpoints {
     public static final String CREDIT_PRODUCTS = "credits/api/v1/credit-product";
     public static final String CREDIT_PRODUCTS_INFO = "credits/api/v1/credit-product/3";
     public static final String INVALID_CREDIT_PRODUCTS = "credits/api/v1/credit-product/.";
-    public static final String INVALID_CREDIT_PRODUCT = "credits/api/v1/credit-product/6";
+    public static final String INVALID_CREDIT_PRODUCT = "credits/api/v1/credit-product/7";
     public static final String DEPOSIT_SETTINGS = "deposits/api/v1/deposit/new";
     public static final String DEPOSIT_CALCULATOR = "deposits/api/v1/deposit-product/profit-calculating";
     public static final String DEPOSIT_SEND_EMAIL = "deposits/api/v1/deposit/check";
@@ -79,6 +79,8 @@ public final class ApiEndpoints {
     public static final String CUSTOMER_2_0_SECURITY_VERIFICATION = "customer/api/v1/security/session/verification";
     public static final String CUSTOMER_2_0_EMAIL = "customer/api/v1/auth/user/settings/email";
     public static final String CUSTOMER_2_0_NOTIFICATION_SMS = "customer/api/v1/auth/user/settings/notifications/sms";
+    public static final String CUSTOMER_2_0_NOTIFICATION_EMAIL = "customer/api/v1/auth/user/settings/notifications/email";
+    public static final String INVALID_CUSTOMER_2_0_NOTIFICATION_EMAIL = "customer/api/v1/***auth/user/settings/notifications/email";
     public static final String INCORRECT_CUSTOMER_2_0_NOTIFICATION_SMS =
             "customer/api/v1/auth/user/settings/notifications/sm";
 

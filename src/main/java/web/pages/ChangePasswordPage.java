@@ -18,30 +18,21 @@ public class ChangePasswordPage extends BasePage {
     private WebElement newPasswordInput;
     @FindBy(xpath = "//input[@name='confirmPassword']")
     private WebElement confirmPasswordInput;
-    @FindBy(xpath = "//p[contains(text(), 'Успех')]")
-    private WebElement successResult;
 
-    public ChangePasswordPage setKeysToOldPasswordInput(String oldPassword) {
+    public void setKeysToOldPasswordInput(String oldPassword) {
         oldPasswordInput.sendKeys(oldPassword);
-        return this;
     }
 
-    public ChangePasswordPage setKeysToNewPasswordInput(String newPassword) {
+    public void setKeysToNewPasswordInput(String newPassword) {
         newPasswordInput.sendKeys(newPassword);
-        return this;
     }
 
-    public ChangePasswordPage setKeysToConfirmPasswordInput(String confirmPassword) {
+    public void setKeysToConfirmPasswordInput(String confirmPassword) {
         confirmPasswordInput.sendKeys(confirmPassword);
-        return this;
     }
 
     public void clickSubmitPasswordChangeBtn() {
         submitPasswordChangeBtn.click();
-    }
-
-    public boolean isSuccessResult() {
-        return waitElement(successResult).isDisplayed();
     }
 
     public void clickCancelPasswordChangeBtn() {

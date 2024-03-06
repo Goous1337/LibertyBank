@@ -161,4 +161,21 @@ public class CustomerService_2_0_DataBaseRequest {
         return getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sql, Boolean.class, mobile);
     }
 
+    public static Boolean getEmailStatusByMobile(String mobilePhone) {
+        String sql = "SELECT email_subscription FROM customer WHERE mobile_phone =?";
+        LOG.info(String.format("Получен статус email подписки пользователя по номеру телефона = %s ", mobilePhone));
+        return getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sql, Boolean.class, mobilePhone);
+    }
+
+    public static String getCustomerEmailByPhone(String mobilePhone) {
+        String sql = "SELECT email FROM customer WHERE mobile_phone =?";
+        LOG.info(String.format("Получен email адрес по номеру телефона %s", mobilePhone));
+        return getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sql, String.class, mobilePhone);
+    }
+
+    public static void updateCustomerEmailToNullByPhone(String mobilePhone) {
+        String sql = "UPDATE customer SET email = NULL WHERE mobile_phone =?";
+        getDBConnection(CUSTOMER_SERVICE_DB_2_0).update(sql, mobilePhone);
+        LOG.info(String.format("емаил пользователя по телефону %s был установлен на NULL", mobilePhone));
+    }
 }

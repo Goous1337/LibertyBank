@@ -4,7 +4,7 @@ import io.qameta.allure.Step;
 import web.pages.ChangePasswordPage;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static web.constans.AccountServiceConstants.DISPLAYED_MESSAGE;
+import static web.constans.AccountServiceConstants.NOT_DISPLAYED_MESSAGE;
 
 public class ChangePasswordSteps {
     protected ChangePasswordPage changePasswordPage;
@@ -14,28 +14,26 @@ public class ChangePasswordSteps {
     }
 
     @Step("Ввести старый пароль")
-    public ChangePasswordPage setKeysToOldPasswordInput(String oldPassword) {
-        return changePasswordPage.setKeysToOldPasswordInput(oldPassword);
+    public ChangePasswordSteps setKeysToOldPasswordInput(String oldPassword) {
+        changePasswordPage.setKeysToOldPasswordInput(oldPassword);
+        return this;
     }
 
     @Step("Ввести новый пароль")
-    public ChangePasswordPage setKeysToNewPasswordInput(String newPassword) {
-        return changePasswordPage.setKeysToNewPasswordInput(newPassword);
+    public ChangePasswordSteps setKeysToNewPasswordInput(String newPassword) {
+        changePasswordPage.setKeysToNewPasswordInput(newPassword);
+        return this;
     }
 
     @Step("Повторно ввести новыый пароль")
-    public ChangePasswordPage setKeysToConfirmPasswordInput(String confirmPassword) {
-        return changePasswordPage.setKeysToConfirmPasswordInput(confirmPassword);
+    public ChangePasswordSteps setKeysToConfirmPasswordInput(String confirmPassword) {
+        changePasswordPage.setKeysToConfirmPasswordInput(confirmPassword);
+        return this;
     }
 
     @Step("Нажать на кнопку изменения пароля")
     public void clickSubmitPasswordChangeBtn() {
         changePasswordPage.clickSubmitPasswordChangeBtn();
-    }
-
-    @Step("Проверить результат изменения пароля")
-    public boolean isSuccessResult() {
-        return changePasswordPage.isSuccessResult();
     }
 
     @Step("Кликнуть на кнопку 'Отмена'.")
@@ -48,14 +46,9 @@ public class ChangePasswordSteps {
         return changePasswordPage.isChangePasswordPresent();
     }
 
-    @Step("Статус изменения пароля соотвествует статусу 'success'")
-    public void assertChangePasswordStatusIsSuccess() {
-        assertTrue(isSuccessResult(), String.format(DISPLAYED_MESSAGE, "Положительныый результат"));
-    }
-
     @Step("Проверка отображения кнопки 'Изменить пароль'")
     public void assertChangePasswordBtnIsPresent() {
-        assertTrue(isChangePasswordPresent(), String.format(DISPLAYED_MESSAGE,
-                "Отображается кнопка 'Изменить пароль'"));
+        assertTrue(isChangePasswordPresent(), String.format(NOT_DISPLAYED_MESSAGE,
+                "кнопка 'Изменить пароль'"));
     }
 }

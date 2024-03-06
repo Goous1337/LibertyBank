@@ -8,6 +8,7 @@ import static web.helpers.Waiters.waitElement;
 public class SecurityPage extends BasePage {
     @FindBy(xpath = "//button[contains(text(),'Изменить')]")
     private WebElement changePasswordBtn;
+
     @FindBy(xpath = "//p[contains(text(),'Безопасность')]")
     private WebElement securityBar;
 
