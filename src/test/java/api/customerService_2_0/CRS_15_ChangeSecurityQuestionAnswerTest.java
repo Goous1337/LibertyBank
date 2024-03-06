@@ -14,12 +14,6 @@ import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
-import api.BaseTest;
-import io.qameta.allure.Description;
-import io.qameta.allure.TmsLink;
-import io.restassured.RestAssured;
-import io.restassured.response.Response;
 import pojo.customerService_2_0.UserAuthorizationByPhone;
 
 import static constant.CustomerService_2_0_Constants.*;
@@ -53,7 +47,7 @@ public class CRS_15_ChangeSecurityQuestionAnswerTest extends BaseTest {
         String jsonSchemaPath = "schemas/customerService_2_0/CRS-15/updateQuestionAnswer.json";
         String securityQuestion = "Что измерят тахометр";
         String securityAnswer = "Скорость";
-        Response response = customerService_2_0.checkUpdateQuestionAnswer(securityQuestion, securityAnswer, customerId,refreshToken);
+        Response response = customerService_2_0.checkUpdateQuestionAnswer(securityQuestion, securityAnswer, customerId, refreshToken);
         assertAll(
                 () -> assertEquals(HttpStatus.SC_OK,
                         response.statusCode(),
@@ -82,7 +76,7 @@ public class CRS_15_ChangeSecurityQuestionAnswerTest extends BaseTest {
         String jsonSchemaPath = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";
         String securityQuestion = "Что измерят тахометр";
         String securityAnswer = "Скорость";
-        Response response = customerService_2_0.updateQuestionAnswerInvalidHttpMethod(securityQuestion, securityAnswer, invalidHttpMethod,refreshToken);
+        Response response = customerService_2_0.updateQuestionAnswerInvalidHttpMethod(securityQuestion, securityAnswer, invalidHttpMethod, refreshToken);
         assertAll(
                 () -> assertEquals(SC_METHOD_NOT_ALLOWED, response.statusCode(),
                         RESPONSE_CODE_NOT_EXPECTED),
@@ -127,7 +121,7 @@ public class CRS_15_ChangeSecurityQuestionAnswerTest extends BaseTest {
         String refreshToken = getToken.jsonPath().get("refreshToken");
         String customerId = CustomerService_2_0_DataBaseRequest.getAllCustomerId().get(0);
         String jsonSchemaPath = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";
-        Response response = customerService_2_0.checkUpdateQuestionAnswer(securityQuestion, securityAnswer, customerId,refreshToken);
+        Response response = customerService_2_0.checkUpdateQuestionAnswer(securityQuestion, securityAnswer, customerId, refreshToken);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST,
                         response.statusCode(),

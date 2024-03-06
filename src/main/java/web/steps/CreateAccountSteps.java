@@ -1,7 +1,11 @@
 package web.steps;
 
 import io.qameta.allure.Step;
+import org.junit.jupiter.api.Assertions;
+import web.helpers.TestListener;
 import web.pages.CreateAccountPage;
+
+import static web.constans.AccountServiceConstants.*;
 
 public class CreateAccountSteps {
 
@@ -11,40 +15,88 @@ public class CreateAccountSteps {
         createAccountPage = new CreateAccountPage();
     }
 
-    public boolean isChooseCurrencyTextDisplayed() {
-        return createAccountPage.isChooseCurrencyTextDisplayed();
+    @Step("Отображается текст 'Выберите валюту'")
+    public void assertChooseCurrencyTextIsDisplayed() {
+        Assertions.assertTrue(createAccountPage.isChooseCurrencyTextDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Выберите валюту"));
+        TestListener.takeScreenshot();
     }
 
-    public boolean isCurrencyRubSelected() {
-        return createAccountPage.isCurrencyRubSelected();
+    @Step("Выбрана валюта RUB")
+    public void assertCurrencyRubIsSelected() {
+        Assertions.assertFalse(createAccountPage.isCurrencyRubSelected(), String.format(NOT_SELECTED_MESSAGE, RUB));
+        TestListener.takeScreenshot();
     }
 
-    public boolean isCurrencyEurSelected() {
-        return createAccountPage.isCurrencyEurSelected();
+    @Step("Не выбрана валюта RUB")
+    public void assertCurrencyRubIsNotSelected() {
+        Assertions.assertTrue(createAccountPage.isCurrencyRubSelected(), String.format(SELECTED_MESSAGE, RUB));
+        TestListener.takeScreenshot();
     }
 
-    public boolean isCurrencyUsdSelected() {
-        return createAccountPage.isCurrencyUsdSelected();
+    @Step("Выбрана валюта EUR")
+    public void assertCurrencyEurIsSelected() {
+        Assertions.assertFalse(createAccountPage.isCurrencyEurSelected(), String.format(NOT_SELECTED_MESSAGE, EUR));
+        TestListener.takeScreenshot();
     }
 
-    public boolean isMakeAccountMainTextDisplayed() {
-        return createAccountPage.isMakeAccountMainTextDisplayed();
+    @Step("Не выбрана валюта EUR")
+    public void assertCurrencyEurIsNotSelected() {
+        Assertions.assertTrue(createAccountPage.isCurrencyEurSelected(), String.format(SELECTED_MESSAGE, EUR));
+        TestListener.takeScreenshot();
     }
 
-    public boolean isMainAccountSwitcherSelected() {
-        return createAccountPage.isMainAccountSwitcherSelected();
+    @Step("Выбрана валюта USD")
+    public void assertCurrencyUsdIsSelected() {
+        Assertions.assertFalse(createAccountPage.isCurrencyUsdSelected(), String.format(NOT_SELECTED_MESSAGE, USD));
+        TestListener.takeScreenshot();
     }
 
-    public boolean isCreateAccountButtonEnabled() {
-        return createAccountPage.isCreateAccountButtonEnabled();
+    @Step("Не выбрана валюта USD")
+    public void assertCurrencyUsdIsNotSelected() {
+        Assertions.assertTrue(createAccountPage.isCurrencyUsdSelected(), String.format(SELECTED_MESSAGE, USD));
+        TestListener.takeScreenshot();
     }
 
-    public boolean isCreateAccountSuccessfullyMessageDisplayed() {
-        return createAccountPage.isCreateAccountSuccessfullyMessageDisplayed();
+    @Step("Отображается текст 'Сделать основным'")
+    public void assertMakeAccountMainTextIsDisplayed() {
+        Assertions.assertTrue(createAccountPage.isMakeAccountMainTextDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Сделать основным"));
+        TestListener.takeScreenshot();
     }
 
-    public boolean isNavigationToBillButtonDisplayed() {
-        return createAccountPage.isNavigationToBillButtonDisplayed();
+    @Step("Выбран переключатель 'Сделать основным'")
+    public void assertMainAccountSwitcherIsSelected() {
+        Assertions.assertFalse(createAccountPage.isMainAccountSwitcherSelected(), String.format(NOT_SELECTED_MESSAGE, "Сделать основным"));
+        TestListener.takeScreenshot();
+    }
+
+    @Step("Не выбран переключатель 'Сделать основным'")
+    public void assertMainAccountSwitcherIsNotSelected() {
+        Assertions.assertFalse(createAccountPage.isMainAccountSwitcherSelected(), String.format(SELECTED_MESSAGE, "Сделать основным"));
+        TestListener.takeScreenshot();
+    }
+
+    @Step("Активна кнопка 'Открыть счет'")
+    public void assertCreateAccountButtonIsEnabled() {
+        Assertions.assertFalse(createAccountPage.isCreateAccountButtonEnabled(), String.format(NOT_ENABLED_MESSAGE, "Открыть счет"));
+        TestListener.takeScreenshot();
+    }
+
+    @Step("Не активна кнопка 'Открыть счет'")
+    public void assertCreateAccountButtonIsNotEnabled() {
+        Assertions.assertFalse(createAccountPage.isCreateAccountButtonEnabled(), String.format(ENABLED_MESSAGE, "Открыть счет"));
+        TestListener.takeScreenshot();
+    }
+
+    @Step("Отображается сообщение об успешном открытии счета")
+    public void assertCreateAccountSuccessfullyMessageIsDisplayed() {
+        Assertions.assertTrue(createAccountPage.isCreateAccountSuccessfullyMessageDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Сообщение об открытии счета"));
+        TestListener.takeScreenshot();
+    }
+
+    @Step("Отображается кнопка 'Перейти к списку счетов'")
+    public void assertNavigationToBillButtonIsDisplayed() {
+        Assertions.assertTrue(createAccountPage.isNavigationToBillButtonDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Перейти к списку счетов"));
+        TestListener.takeScreenshot();
     }
 
     @Step("Выбрать валюту RUB")

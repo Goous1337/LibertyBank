@@ -2,10 +2,12 @@ package web.epic_4;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 import web.BaseTest;
 
-import static web.constans.AccountServiceConstants.*;
 import static web.constans.UrlConfig.ACCOUNTS_URL;
 
 @Tag("Web")
@@ -26,7 +28,7 @@ public class AccountInfoTest extends BaseTest {
         accountSteps.selectOpenAccounts();
         accountSteps.clickAccount();
         commonInfoChecks();
-        Assertions.assertEquals(OPEN_ACCOUNT_STATUS, accountInfoSteps.getAccountStatus(), String.format(STATUS_ERROR_MESSAGE, OPEN_ACCOUNT_STATUS));
+        accountInfoSteps.assertAccountStatusIsOpen();
     }
 
     @Test
@@ -35,10 +37,8 @@ public class AccountInfoTest extends BaseTest {
         accountSteps.selectClosedAccounts();
         accountSteps.clickAccount();
         commonInfoChecks();
-        Assertions.assertAll(
-                () -> Assertions.assertTrue(accountInfoSteps.isCloseDateDisplayed(), String.format(DISPLAYED_MESSAGE, "Дата закрытия счета")),
-                () -> Assertions.assertEquals(CLOSED_ACCOUNT_STATUS, accountInfoSteps.getAccountStatus(), String.format(STATUS_ERROR_MESSAGE, CLOSED_ACCOUNT_STATUS))
-        );
+        accountInfoSteps.assertCloseDateIsDisplayed();
+        accountInfoSteps.assertAccountStatusIsClosed();
     }
 
     @Test
@@ -47,18 +47,16 @@ public class AccountInfoTest extends BaseTest {
         accountSteps.selectBlockedAccounts();
         accountSteps.clickAccount();
         commonInfoChecks();
-        Assertions.assertEquals(BLOCKED_ACCOUNT_STATUS, accountInfoSteps.getAccountStatus(), String.format(STATUS_ERROR_MESSAGE, BLOCKED_ACCOUNT_STATUS));
+        accountInfoSteps.assertAccountStatusIsBlocked();
     }
 
     private void commonInfoChecks() {
-        Assertions.assertAll(
-                () -> Assertions.assertTrue(accountInfoSteps.isAccountNameDisplayed(), String.format(DISPLAYED_MESSAGE, "Название счета")),
-                () -> Assertions.assertTrue(accountInfoSteps.isAccountNumberDisplayed(), String.format(DISPLAYED_MESSAGE, "Номер счета")),
-                () -> Assertions.assertTrue(accountInfoSteps.isOpenDateDisplayed(), String.format(DISPLAYED_MESSAGE, "Дата открытия счета")),
-                () -> Assertions.assertTrue(accountInfoSteps.isContractNumberDisplayed(), String.format(DISPLAYED_MESSAGE, "Номер договора")),
-                () -> Assertions.assertTrue(accountInfoSteps.isAccountStatusDisplayed(), String.format(DISPLAYED_MESSAGE, "Статус счета")),
-                () -> Assertions.assertTrue(accountInfoSteps.isCurrencyIconDisplayed(), String.format(DISPLAYED_MESSAGE, "Иконка валюты")),
-                () -> Assertions.assertTrue(accountInfoSteps.isBalanceDisplayed(), String.format(DISPLAYED_MESSAGE, "Баланс"))
-        );
+        accountInfoSteps.assertAccountNameIsDisplayed();
+        accountInfoSteps.assertAccountNumberIsDisplayed();
+        accountInfoSteps.assertOpenDateDisplayed();
+        accountInfoSteps.assertContractNumberIsDisplayed();
+        accountInfoSteps.assertAccountStatusIsDisplayed();
+        accountInfoSteps.assertCurrencyIconIsDisplayed();
+        accountInfoSteps.assertBalanceIsDisplayed();
     }
 }

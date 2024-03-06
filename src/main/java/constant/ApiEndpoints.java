@@ -35,7 +35,7 @@ public final class ApiEndpoints {
     public static final String CREDIT_PRODUCTS = "credits/api/v1/credit-product";
     public static final String CREDIT_PRODUCTS_INFO = "credits/api/v1/credit-product/3";
     public static final String INVALID_CREDIT_PRODUCTS = "credits/api/v1/credit-product/.";
-    public static final String INVALID_CREDIT_PRODUCT = "credits/api/v1/credit-product/6";
+    public static final String INVALID_CREDIT_PRODUCT = "credits/api/v1/credit-product/7";
     public static final String DEPOSIT_SETTINGS = "deposits/api/v1/deposit/new";
     public static final String DEPOSIT_CALCULATOR = "deposits/api/v1/deposit-product/profit-calculating";
     public static final String DEPOSIT_SEND_EMAIL = "deposits/api/v1/deposit/check";
@@ -93,6 +93,6 @@ public final class ApiEndpoints {
     public static final String ACCOUNTS_LIST_BY_CUSTOMER_ID = "account-service/api/v1/accounts/customer/";
     public static final String CARDS_LIST = "card-service/api/v1/card-products";
     public static final String ACTIVE_CARDS = "card-service/api/v1/cards";
+    public static final String CARD_BY_NAME = "card-service/api/v1/card-products/typeName";
     public static final String REGISTRATION_HEADER = "Registration";
-
 }

@@ -6,7 +6,8 @@ import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.*;
 import web.BaseTest;
 
-import static web.constans.AccountServiceConstants.*;
+import static web.constans.AccountServiceConstants.BLOCKED_ACCOUNT_STATUS;
+import static web.constans.AccountServiceConstants.STATUS_ERROR_MESSAGE;
 import static web.constans.UrlConfig.ACCOUNTS_URL;
 
 @Tag("Web")
@@ -29,19 +30,22 @@ public class BlockAccountTest extends BaseTest {
         accountInfoSteps.clickDotsInfoButton();
         accountInfoSteps.selectBlockAccount();
         confirmationSteps.accept();
-        Assertions.assertEquals(BLOCKED_ACCOUNT_STATUS, accountInfoSteps.getAccountStatus(), String.format(STATUS_ERROR_MESSAGE, BLOCKED_ACCOUNT_STATUS));
+        accountInfoSteps.assertAccountStatusIsBlocked();
     }
 
     @TmsLink("LIB2-666")
     @DisplayName("Блокировка основного счета")
     @Test
     public void blockMainAccount() {
-        openMainAccount();
+        openActiveAccount();
+
         accountInfoSteps.clickDotsInfoButton();
         accountInfoSteps.selectBlockAccount();
         confirmationSteps.accept();
-        Assertions.assertFalse(accountInfoSteps.isMainAccountLabelDisplayed(), "Счет является основным");
         Assertions.assertEquals(BLOCKED_ACCOUNT_STATUS, accountInfoSteps.getAccountStatus(), String.format(STATUS_ERROR_MESSAGE, BLOCKED_ACCOUNT_STATUS));
+
+        accountInfoSteps.assertMainAccountLabelIsNotDisplayed();
+        accountInfoSteps.assertAccountStatusIsBlocked();
     }
 
     @TmsLink("LIB2-463")
@@ -52,7 +56,7 @@ public class BlockAccountTest extends BaseTest {
         accountInfoSteps.clickDotsInfoButton();
         accountInfoSteps.selectUnblockAccount();
         confirmationSteps.accept();
-        Assertions.assertEquals(OPEN_ACCOUNT_STATUS, accountInfoSteps.getAccountStatus(), String.format(STATUS_ERROR_MESSAGE, OPEN_ACCOUNT_STATUS));
+        accountInfoSteps.assertAccountStatusIsOpen();
     }
 
     @TmsLink("LIB2-464")
@@ -63,7 +67,7 @@ public class BlockAccountTest extends BaseTest {
         accountInfoSteps.clickDotsInfoButton();
         accountInfoSteps.selectBlockAccount();
         confirmationSteps.deny();
-        Assertions.assertEquals(OPEN_ACCOUNT_STATUS, accountInfoSteps.getAccountStatus(), String.format(STATUS_ERROR_MESSAGE, OPEN_ACCOUNT_STATUS));
+        accountInfoSteps.assertAccountStatusIsOpen();
     }
 
     @TmsLink("LIB2-465")
@@ -74,7 +78,7 @@ public class BlockAccountTest extends BaseTest {
         accountInfoSteps.clickDotsInfoButton();
         accountInfoSteps.selectUnblockAccount();
         confirmationSteps.deny();
-        Assertions.assertEquals(BLOCKED_ACCOUNT_STATUS, accountInfoSteps.getAccountStatus(), String.format(STATUS_ERROR_MESSAGE, OPEN_ACCOUNT_STATUS));
+        accountInfoSteps.assertAccountStatusIsBlocked();
     }
 
     private void openBlockedAccount() {

@@ -4,8 +4,6 @@ import io.qameta.allure.Step;
 import web.pages.DropDownAccountMenuPage;
 import web.pages.HomePage;
 
-import java.util.List;
-
 public class HomeSteps {
     protected HomePage homePage;
     protected DropDownAccountMenuPage dropDownAccountMenuPage;
@@ -39,6 +37,12 @@ public class HomeSteps {
     @Step("Кликнуть на кнопку 'Безопасность'")
     public HomeSteps clickSecurityBtn() {
         dropDownAccountMenuPage.clickSecurityBtn();
+        return this;
+    }
+
+    @Step("Кликнуть на кнопку 'Личные данные'")
+    public HomeSteps clickPersonalDataBtn() {
+        dropDownAccountMenuPage.clickPersonDataBtn();
         return this;
     }
 }

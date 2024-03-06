@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.ACCOUNT_SERVICE;
 
-@DisplayName("Открыть счет")
+@DisplayName("AS-1 Открыть счет")
 public class AS_1_CreateNewAccountTest extends BaseTest {
 
     {

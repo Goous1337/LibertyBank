@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.ACCOUNT_SERVICE;
 
-@DisplayName("Сделать счет основным")
+@DisplayName("AS-4 Сделать счет основным")
 public class AS_4_SetMainStatusOnAccountTest extends BaseTest {
 
     {
