@@ -12,6 +12,7 @@ import static property.UserPropertiesReader.USER_PHONE;
 import static web.constans.UrlConfig.BASE_URL;
 import static web.constans.UrlConfig.LOGIN_URL;
 
+
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith(TestListener.class)
 public class BaseTest {
@@ -34,6 +35,7 @@ public class BaseTest {
     protected CardSteps cardSteps;
     protected CardInfoSteps cardInfoSteps;
     protected CardProductInfoSteps cardProductInfoSteps;
+    protected CloseCardSteps closeCardSteps;
     protected FilterCardsSteps filterCardsSteps;
 
     public BaseTest() {
@@ -76,6 +78,7 @@ public class BaseTest {
         cardInfoSteps = new CardInfoSteps();
         cardProductsSteps = new CardProductsSteps();
         cardProductInfoSteps = new CardProductInfoSteps();
+        closeCardSteps = new CloseCardSteps();
         filterCardsSteps = new FilterCardsSteps();
         creditInfoSteps = new CreditInfoSteps();
     }

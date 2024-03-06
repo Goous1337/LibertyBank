@@ -29,6 +29,10 @@ public class CardInfoPage extends BasePage {
 
     @FindBy(xpath = "//p[contains(text(), 'Закрыть карту')]")
     private WebElement closeCardButton;
+    @FindBy(xpath = "//p[text() = 'Закрытая']")
+    private WebElement statusCardClosed;
+    @FindBy(xpath = "//p[text() = 'Активная']")
+    private WebElement statusCardActive;
 
     @FindBy(xpath = "//p[contains(text(), 'Номер карты')]")
     private WebElement userCardNumber;
@@ -74,6 +78,11 @@ public class CardInfoPage extends BasePage {
         return mainCardStatus.isDisplayed();
     }
 
+    public boolean statusCardActive() {
+        scrollToElement(statusCardActive);
+        return statusCardActive.isDisplayed();
+    }
+
     public boolean isActiveCardStatusDisplayed() {
         Waiters.waitElement(activeCardStatus);
         scrollToElement(activeCardStatus);
@@ -97,6 +106,10 @@ public class CardInfoPage extends BasePage {
     public void clickCloseCardButton() {
         scrollToElement(closeCardButton);
         closeCardButton.click();
+    }
+
+    public boolean statusCardClosed() {
+        return statusCardClosed.isDisplayed();
     }
 
     public void clickUnblockCardButton() {
@@ -145,4 +158,5 @@ public class CardInfoPage extends BasePage {
     public boolean isCardTariffButtonDisplayed() {
         return cardTariffButton.isDisplayed();
     }
+
 }
