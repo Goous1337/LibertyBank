@@ -43,9 +43,8 @@ public class CRS_13_ChangeStatusOfReceivingEmailNewsletterTest extends BaseTest 
     public void checkChangeStatusOfSettingsReceivingEmailNewsletters() {
         String accessToken = userAuthorization.getAccessToken(mobilePhone, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE);
         boolean actualNotificationStatus = CustomerService_2_0_DataBaseRequest.getEmailStatusByMobile(mobilePhone);
-        boolean notificationValue = customerService_2_0.changeNotificationStatus(actualNotificationStatus);
         Response response = customerService_2_0.changeStatusOfSettingsReceivingEmailNewsletters
-                (accessToken, notificationValue);
+                (accessToken, !actualNotificationStatus);
         boolean newNotificationStatus = CustomerService_2_0_DataBaseRequest.getEmailStatusByMobile(mobilePhone);
         assertAll(
                 () -> assertEquals(SC_OK, response.getStatusCode()),
@@ -89,9 +88,8 @@ public class CRS_13_ChangeStatusOfReceivingEmailNewsletterTest extends BaseTest 
     public void checkChangeStatusOfSettingsReceivingEmailNewslettersWithInvalidMethod(String method) {
         String accessToken = userAuthorization.getAccessToken(mobilePhone, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE);
         boolean actualNotificationStatus = CustomerService_2_0_DataBaseRequest.getEmailStatusByMobile(mobilePhone);
-        boolean notificationValue = customerService_2_0.changeNotificationStatus(actualNotificationStatus);
         Response response = customerService_2_0.changeStatusEmailNotificationWithHttpMethod
-                (accessToken, notificationValue, method);
+                (accessToken, !actualNotificationStatus, method);
         boolean newNotificationStatus = CustomerService_2_0_DataBaseRequest.getEmailStatusByMobile(mobilePhone);
         assertAll(
                 () -> assertEquals(SC_METHOD_NOT_ALLOWED, response.getStatusCode()),
@@ -108,9 +106,8 @@ public class CRS_13_ChangeStatusOfReceivingEmailNewsletterTest extends BaseTest 
     @Test
     public void checkChangeStatusOfSettingsReceivingEmailNewslettersWithInvalidToken() {
         boolean actualNotificationStatus = CustomerService_2_0_DataBaseRequest.getEmailStatusByMobile(mobilePhone);
-        boolean notificationValue = customerService_2_0.changeNotificationStatus(actualNotificationStatus);
         Response response = customerService_2_0.changeStatusOfSettingsReceivingEmailNewsletters
-                (ACCESS_TOKEN_CUSTOMER_SERVICE, notificationValue);
+                (ACCESS_TOKEN_CUSTOMER_SERVICE, !actualNotificationStatus);
         boolean newNotificationStatus = CustomerService_2_0_DataBaseRequest.getEmailStatusByMobile(mobilePhone);
         assertAll(
                 () -> assertEquals(SC_UNAUTHORIZED, response.getStatusCode()),
@@ -128,11 +125,10 @@ public class CRS_13_ChangeStatusOfReceivingEmailNewsletterTest extends BaseTest 
     public void checkChangeStatusOfSettingsReceivingEmailNewslettersWithInvalidEmail() {
         String accessToken = userAuthorization.getAccessToken(mobilePhone, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE);
         boolean actualNotificationStatus = CustomerService_2_0_DataBaseRequest.getEmailStatusByMobile(mobilePhone);
-        boolean notificationStatusValue = customerService_2_0.changeNotificationStatus(actualNotificationStatus);
         String actualUserEmail = CustomerService_2_0_DataBaseRequest.getCustomerEmailByPhone(mobilePhone);
         CustomerService_2_0_DataBaseRequest.updateCustomerEmailToNullByPhone(mobilePhone);
         Response response = customerService_2_0.changeStatusOfSettingsReceivingEmailNewsletters
-                (accessToken, notificationStatusValue);
+                (accessToken, !actualNotificationStatus);
         boolean newNotificationStatus = CustomerService_2_0_DataBaseRequest.getEmailStatusByMobile(mobilePhone);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode()),
@@ -152,9 +148,8 @@ public class CRS_13_ChangeStatusOfReceivingEmailNewsletterTest extends BaseTest 
     public void checkChangeStatusOfSettingsReceivingEmailNewslettersWithInvalidUrl() {
         String accessToken = userAuthorization.getAccessToken(mobilePhone, CUSTOMER_USER_PASSWORD, CUSTOMER_MOBILE_PHONE_TYPE);
         boolean actualNotificationStatus = CustomerService_2_0_DataBaseRequest.getEmailStatusByMobile(mobilePhone);
-        boolean notificationStatusValue = customerService_2_0.changeNotificationStatus(actualNotificationStatus);
         Response response = customerService_2_0.changeStatusEmailNotificationWithInvalidUrl
-                (accessToken, notificationStatusValue);
+                (accessToken, !actualNotificationStatus);
         boolean newNotificationStatus = CustomerService_2_0_DataBaseRequest.getEmailStatusByMobile(mobilePhone);
         assertAll(
                 () -> assertEquals(SC_NOT_FOUND, response.getStatusCode()),

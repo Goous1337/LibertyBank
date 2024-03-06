@@ -252,14 +252,4 @@ public class CustomerService_2_0 {
                 getRP(BODY, SPACE, body));
         return sendSimpleRequest(PATCH, INVALID_CUSTOMER_2_0_NOTIFICATION_EMAIL, params);
     }
-
-    public boolean changeNotificationStatus(boolean actualStatus) {
-        boolean changedStatus;
-        if (actualStatus == true) {
-            changedStatus = false;
-        } else {
-            changedStatus = true;
-        }
-        return changedStatus;
-    }
 }
