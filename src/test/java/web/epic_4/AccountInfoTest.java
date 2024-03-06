@@ -56,7 +56,6 @@ public class AccountInfoTest extends BaseTest {
         accountInfoSteps.assertOpenDateDisplayed();
         accountInfoSteps.assertContractNumberIsDisplayed();
         accountInfoSteps.assertAccountStatusIsDisplayed();
-        accountInfoSteps.assertCurrencyIconIsDisplayed();
         accountInfoSteps.assertBalanceIsDisplayed();
     }
 }

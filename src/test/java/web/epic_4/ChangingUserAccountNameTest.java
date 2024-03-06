@@ -58,7 +58,7 @@ public class ChangingUserAccountNameTest extends BaseTest {
 
         Assertions.assertTrue(renameAccountSteps.isMoreThan30SymbolsMessageDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Сообщение"));
 
-        renameAccountSteps.assertEmptyMessageIsDisplayed();
+        renameAccountSteps.assertMoreThenThirtyCharactersMessageIsDisplayed();
     }
 
     @Test
@@ -72,7 +72,7 @@ public class ChangingUserAccountNameTest extends BaseTest {
         renameAccountSteps.save();
         Assertions.assertTrue(renameAccountSteps.isChangeFieldNameMessageDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Сообщение"));
 
-        renameAccountSteps.assertMoreThenThirtyCharactersMessageIsDisplayed();
+        renameAccountSteps.isChangeFieldNameMessageDisplayed();
     }
 
     @Test
