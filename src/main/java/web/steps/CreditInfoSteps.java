@@ -20,50 +20,59 @@ public class CreditInfoSteps {
         Liberty Cash
      */
     @Step("Отображается название кредита")
-    public void assertNameOfCredit(){
+    public void assertNameOfCredit() {
         Assertions.assertEquals(LIBERTY_IN_CASH, creditInfoPage.getLibertyCashCreditName(), MISMATCH);
         TestListener.takeScreenshot();
     }
+
     @Step("Отображается процентная ставка")
-    public void assertProcentOfCredit(){
+    public void assertProcentOfCredit() {
         Assertions.assertEquals(LIBERTY_IN_CASH_PROCENT, creditInfoPage.getLibertyCashProcent(), MISMATCH);
         TestListener.takeScreenshot();
     }
+
     @Step("Отображение описания кредита")
-    public void assertDescription(){
+    public void assertDescription() {
         Assertions.assertTrue(creditInfoPage.getDescriptionLibertyCash(), String.format(NOT_DISPLAYED_MESSAGE, "Описание"));
     }
+
     @Step("Отображение 'Показать больше'")
-    public void assertShowMore(){
+    public void assertShowMore() {
         Assertions.assertTrue(creditInfoPage.isShowMoreLibertyCash(), String.format(NOT_DISPLAYED_MESSAGE, "Показать больше"));
     }
+
     @Step("Отображение 'Подать заявку'")
-    public void assertGetApplication(){
+    public void assertGetApplication() {
         Assertions.assertTrue(creditInfoPage.isGetApplicationLibertyCash(), String.format(NOT_DISPLAYED_MESSAGE, "Подать заявку"));
     }
+
     /*
           Liberty Cash
      */
     @Step("Отображается название кредита")
-    public void assertNameOfLibertyExpressCredit(){
+    public void assertNameOfLibertyExpressCredit() {
         Assertions.assertEquals(LIBERTY_EXPRESS, creditInfoPage.getLibertyExpressCreditName(), MISMATCH);
         TestListener.takeScreenshot();
     }
+
     @Step("Отображается процентная ставка")
-    public void assertProcentLibertyExpressCredit(){
+    public void assertProcentLibertyExpressCredit() {
         Assertions.assertEquals(LIBERTY_EXPRESS_PROCENT, creditInfoPage.getLibertyExpressProcent(), MISMATCH);
         TestListener.takeScreenshot();
     }
+
     @Step("Отображение описания кредита")
-    public void assertDescriptionLibertyExpress(){
+    public void assertDescriptionLibertyExpress() {
         Assertions.assertTrue(creditInfoPage.getDescriptionLibertyExpress(), String.format(NOT_DISPLAYED_MESSAGE, "Описание"));
     }
+
     @Step("Отображение 'Показать больше'")
-    public void assertShowMoreLibertyExpress(){
+    public void assertShowMoreLibertyExpress() {
         Assertions.assertTrue(creditInfoPage.isShowMoreLibertyExpress(), String.format(NOT_DISPLAYED_MESSAGE, "Показать больше"));
     }
+
     @Step("Отображение 'Подать заявку'")
-    public void assertGetApplicationLibertyExpress(){
+    public void assertGetApplicationLibertyExpress() {
         Assertions.assertTrue(creditInfoPage.isGetApplicationLibertyExpress(), String.format(NOT_DISPLAYED_MESSAGE, "Подать заявку"));
     }
 }

@@ -1,4 +1,5 @@
 package web.epic_3;
+
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import org.junit.jupiter.api.DisplayName;
@@ -23,16 +24,17 @@ public class CreditInfoTest extends BaseTest {
 
     @Test
     @DisplayName("Проверка отображения информации о кредите - Liberty Наличными")
-    public void checkLibertyCashCreditInfo(){
+    public void checkLibertyCashCreditInfo() {
         creditInfoSteps.assertNameOfCredit();
         creditInfoSteps.assertProcentOfCredit();
         creditInfoSteps.assertDescription();
         creditInfoSteps.assertShowMore();
         creditInfoSteps.assertGetApplication();
     }
+
     @Test
     @DisplayName("Проверка отображения информации о кредите - Liberty Срочный")
-    public void checkLibertyExpressCreditInfo(){
+    public void checkLibertyExpressCreditInfo() {
         creditInfoSteps.assertNameOfLibertyExpressCredit();
         creditInfoSteps.assertProcentLibertyExpressCredit();
         creditInfoSteps.assertDescriptionLibertyExpress();

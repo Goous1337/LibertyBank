@@ -79,6 +79,8 @@ public final class ApiEndpoints {
     public static final String CUSTOMER_2_0_SECURITY_VERIFICATION = "customer/api/v1/security/session/verification";
     public static final String CUSTOMER_2_0_EMAIL = "customer/api/v1/auth/user/settings/email";
     public static final String CUSTOMER_2_0_NOTIFICATION_SMS = "customer/api/v1/auth/user/settings/notifications/sms";
+    public static final String CUSTOMER_2_0_NOTIFICATION_EMAIL = "customer/api/v1/auth/user/settings/notifications/email";
+    public static final String INVALID_CUSTOMER_2_0_NOTIFICATION_EMAIL = "customer/api/v1/***auth/user/settings/notifications/email";
     public static final String INCORRECT_CUSTOMER_2_0_NOTIFICATION_SMS =
             "customer/api/v1/auth/user/settings/notifications/sm";
 

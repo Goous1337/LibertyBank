@@ -29,7 +29,7 @@ public class CM_3_3_CheckApplyingLoanTest extends BaseTest {
     public void checkApplyingLoan() {
         Response response = creditService.checkListApplyingLoan
                 (1, 250, 20, "RUB", "2023-11-28"
-                        , 60000, 30000, "8698345212"); //TODO сделать генерацию валидных данных зависящих от productId
+                        , 60000, 30000, "8698345212");
 
         assertAll(
                 () -> assertEquals(SC_OK,
