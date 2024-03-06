@@ -23,37 +23,37 @@ public class CreateAccountSteps {
 
     @Step("Выбрана валюта RUB")
     public void assertCurrencyRubIsSelected() {
-        Assertions.assertFalse(createAccountPage.isCurrencyRubSelected(), String.format(NOT_SELECTED_MESSAGE, RUB));
+        Assertions.assertTrue(createAccountPage.isCurrencyRubSelected(), String.format(NOT_SELECTED_MESSAGE, RUB));
         TestListener.takeScreenshot();
     }
 
     @Step("Не выбрана валюта RUB")
     public void assertCurrencyRubIsNotSelected() {
-        Assertions.assertTrue(createAccountPage.isCurrencyRubSelected(), String.format(SELECTED_MESSAGE, RUB));
+        Assertions.assertFalse(createAccountPage.isCurrencyRubSelected(), String.format(SELECTED_MESSAGE, RUB));
         TestListener.takeScreenshot();
     }
 
     @Step("Выбрана валюта EUR")
     public void assertCurrencyEurIsSelected() {
-        Assertions.assertFalse(createAccountPage.isCurrencyEurSelected(), String.format(NOT_SELECTED_MESSAGE, EUR));
+        Assertions.assertTrue(createAccountPage.isCurrencyEurSelected(), String.format(NOT_SELECTED_MESSAGE, EUR));
         TestListener.takeScreenshot();
     }
 
     @Step("Не выбрана валюта EUR")
     public void assertCurrencyEurIsNotSelected() {
-        Assertions.assertTrue(createAccountPage.isCurrencyEurSelected(), String.format(SELECTED_MESSAGE, EUR));
+        Assertions.assertFalse(createAccountPage.isCurrencyEurSelected(), String.format(SELECTED_MESSAGE, EUR));
         TestListener.takeScreenshot();
     }
 
     @Step("Выбрана валюта USD")
     public void assertCurrencyUsdIsSelected() {
-        Assertions.assertFalse(createAccountPage.isCurrencyUsdSelected(), String.format(NOT_SELECTED_MESSAGE, USD));
+        Assertions.assertTrue(createAccountPage.isCurrencyUsdSelected(), String.format(NOT_SELECTED_MESSAGE, USD));
         TestListener.takeScreenshot();
     }
 
     @Step("Не выбрана валюта USD")
     public void assertCurrencyUsdIsNotSelected() {
-        Assertions.assertTrue(createAccountPage.isCurrencyUsdSelected(), String.format(SELECTED_MESSAGE, USD));
+        Assertions.assertFalse(createAccountPage.isCurrencyUsdSelected(), String.format(SELECTED_MESSAGE, USD));
         TestListener.takeScreenshot();
     }
 
@@ -77,7 +77,7 @@ public class CreateAccountSteps {
 
     @Step("Активна кнопка 'Открыть счет'")
     public void assertCreateAccountButtonIsEnabled() {
-        Assertions.assertFalse(createAccountPage.isCreateAccountButtonEnabled(), String.format(NOT_ENABLED_MESSAGE, "Открыть счет"));
+        Assertions.assertTrue(createAccountPage.isCreateAccountButtonEnabled(), String.format(NOT_ENABLED_MESSAGE, "Открыть счет"));
         TestListener.takeScreenshot();
     }
 
