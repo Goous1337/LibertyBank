@@ -3,6 +3,7 @@ package web.pages;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import web.helpers.Waiters;
+
 public class CreditInfoPage extends BasePage {
 
     @FindBy(xpath = "//*[contains(@class,'_title_1oczs_12')][text()='Liberty Наличными']")
@@ -31,23 +32,27 @@ public class CreditInfoPage extends BasePage {
     /*
         Liberty Cash
      */
-    public String getLibertyCashCreditName(){
+    public String getLibertyCashCreditName() {
         Waiters.waitElement(nameOfLibertyCashCredit);
         return nameOfLibertyCashCredit.getText();
     }
-    public String getLibertyCashProcent(){
+
+    public String getLibertyCashProcent() {
         Waiters.waitElement(procentOfLibertyCashCredit);
         return procentOfLibertyCashCredit.getText();
     }
-    public boolean getDescriptionLibertyCash(){
+
+    public boolean getDescriptionLibertyCash() {
         Waiters.waitElement(descriptionLibertyCash);
         return descriptionLibertyCash.isDisplayed();
     }
-    public boolean isShowMoreLibertyCash(){
+
+    public boolean isShowMoreLibertyCash() {
         Waiters.waitElement(buttonShowMoreLibertyCash);
         return buttonShowMoreLibertyCash.isDisplayed();
     }
-    public boolean isGetApplicationLibertyCash(){
+
+    public boolean isGetApplicationLibertyCash() {
         Waiters.waitElement(buttonGetApplicationLibertyCash);
         return buttonGetApplicationLibertyCash.isDisplayed();
     }
@@ -55,23 +60,27 @@ public class CreditInfoPage extends BasePage {
     /*
         liberty Express
      */
-    public String getLibertyExpressCreditName(){
+    public String getLibertyExpressCreditName() {
         Waiters.waitElement(nameOfLibertyExpress);
         return nameOfLibertyExpress.getText();
     }
-    public String getLibertyExpressProcent(){
+
+    public String getLibertyExpressProcent() {
         Waiters.waitElement(procentOfLibertyExpress);
         return procentOfLibertyExpress.getText();
     }
-    public boolean getDescriptionLibertyExpress(){
+
+    public boolean getDescriptionLibertyExpress() {
         Waiters.waitElement(descriptionLibertyExpress);
         return descriptionLibertyExpress.isDisplayed();
     }
-    public boolean isShowMoreLibertyExpress(){
+
+    public boolean isShowMoreLibertyExpress() {
         Waiters.waitElement(buttonShowMoreLibertyExpress);
         return buttonShowMoreLibertyExpress.isDisplayed();
     }
-    public boolean isGetApplicationLibertyExpress(){
+
+    public boolean isGetApplicationLibertyExpress() {
         Waiters.waitElement(buttonGetApplicationLibertyExpress);
         return buttonGetApplicationLibertyExpress.isDisplayed();
     }
