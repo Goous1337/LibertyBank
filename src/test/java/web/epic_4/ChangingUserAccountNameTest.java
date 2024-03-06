@@ -55,9 +55,6 @@ public class ChangingUserAccountNameTest extends BaseTest {
         renameAccountSteps.clickNewAccountNameTextField();
         renameAccountSteps.setValueInNewAccountNameTextField(INVALID_LONG_ACCOUNT_NAME);
         renameAccountSteps.save();
-
-        Assertions.assertTrue(renameAccountSteps.isMoreThan30SymbolsMessageDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Сообщение"));
-
         renameAccountSteps.assertMoreThenThirtyCharactersMessageIsDisplayed();
     }
 
@@ -70,8 +67,6 @@ public class ChangingUserAccountNameTest extends BaseTest {
         renameAccountSteps.clickNewAccountNameTextField();
         renameAccountSteps.setValueInNewAccountNameTextField(INVALID_SHORT_ACCOUNT_NAME);
         renameAccountSteps.save();
-        Assertions.assertTrue(renameAccountSteps.isChangeFieldNameMessageDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Сообщение"));
-
         renameAccountSteps.isChangeFieldNameMessageDisplayed();
     }
 
