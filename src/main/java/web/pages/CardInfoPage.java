@@ -81,6 +81,7 @@ public class CardInfoPage extends BasePage {
     public boolean statusCardActive() {
         scrollToElement(statusCardActive);
         return statusCardActive.isDisplayed();
+    }
 
     public boolean isActiveCardStatusDisplayed() {
         Waiters.waitElement(activeCardStatus);
@@ -109,6 +110,7 @@ public class CardInfoPage extends BasePage {
 
     public boolean statusCardClosed() {
         return statusCardClosed.isDisplayed();
+    }
 
     public void clickUnblockCardButton() {
         scrollToElement(unblockCardButton);
@@ -156,4 +158,5 @@ public class CardInfoPage extends BasePage {
     public boolean isCardTariffButtonDisplayed() {
         return cardTariffButton.isDisplayed();
     }
+
 }
