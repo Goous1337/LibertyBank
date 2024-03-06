@@ -24,7 +24,7 @@ public class CloseCardTest extends BaseTest {
     @Test
     @Tag("Web")
     @TmsLink("LIB2-2943")
-    @DisplayName("Проверка закрытие карты")
+    @DisplayName("Закрытие карты")
     public void checkClosedCard() {
         cardSteps.clickCardInfoForActiveCard();
         cardInfoSteps.closeCard();
@@ -39,7 +39,7 @@ public class CloseCardTest extends BaseTest {
     @Test
     @Tag("Web")
     @TmsLink("LIB2-2943")
-    @DisplayName("Проверка статуса карты после отмены действия 'Закрыть карту'")
+    @DisplayName("Отмена действия 'Закрыть карту'")
     public void cancellationActionClosedCard() {
         cardSteps.clickCardInfoForActiveCard();
         cardInfoSteps.closeCard();
@@ -52,7 +52,7 @@ public class CloseCardTest extends BaseTest {
     @Tag("Web")
     @TmsLink("LIB2-2943")
     @Disabled("Отключен пока не исправят баг. Не выводиться сообщение о ошибке. Можно ввести не валидные значения")
-    @DisplayName("Проверка отображения сообщения при вводе не валидных значений")
+    @DisplayName("Отображение сообщения об ошибке при вводе не валидных значений")
     public void checkEnterInvalidValuesCard() {
         cardSteps.clickCardInfoForActiveCard();
         cardInfoSteps.closeCard();

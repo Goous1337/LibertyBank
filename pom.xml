@@ -6,7 +6,7 @@
 
     <groupId>com.gitlab.liberty-aqa</groupId>
     <artifactId>liberty-bank-aqa-java</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -97,7 +97,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-                <version>4.11.0</version>
+            <version>4.11.0</version>
         </dependency>
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
@@ -172,9 +172,9 @@
                 </configuration>
             </plugin>
             <plugin>
-                    <groupId>org.sonarsource.scanner.maven</groupId>
-                    <artifactId>sonar-maven-plugin</artifactId>
-                    <version>3.10.0.2594</version>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.10.0.2594</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

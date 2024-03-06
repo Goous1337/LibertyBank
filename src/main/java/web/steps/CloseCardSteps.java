@@ -5,6 +5,7 @@ import web.helpers.TestListener;
 import web.pages.CloseCardPage;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static web.constans.AccountServiceConstants.NOT_ENABLED_MESSAGE;
 
 public class CloseCardSteps {
     protected CloseCardPage closeCardPage;
@@ -24,9 +25,9 @@ public class CloseCardSteps {
         closeCardPage.clickConfirmCloseCardButton();
     }
 
-    @Step("Кнопка 'Подтвердить' активна")
+    @Step("Активна кнопка 'Подтвердить'")
     public void assertButtonConfirmActive() {
-        assertTrue(closeCardPage.confirmButtonIsDisplayed(), String.format("Кнопка 'Подтвердить' активна"));
+        assertTrue(closeCardPage.confirmButtonIsDisplayed(), String.format(NOT_ENABLED_MESSAGE, "Подтвердить"));
         TestListener.takeScreenshot();
     }
 }
