@@ -19,20 +19,24 @@ public class BaseTest {
 
     protected static AccountSteps accountSteps;
     protected AccountInfoSteps accountInfoSteps;
+    protected CreditInfoSteps creditInfoSteps;
     protected CreateAccountSteps createAccountSteps;
     protected ConfirmationSteps confirmationSteps;
     protected RenameAccountSteps renameAccountSteps;
     protected LoginSteps loginSteps;
     protected HomeSteps homeSteps;
     protected SecuritySteps securitySteps;
+    protected PersonalDataSteps personalDataSteps;
     protected ChangePasswordSteps changePasswordSteps;
     protected DropDownAccountMenuSteps dropDownAccountMenuSteps;
     protected ChangeNotificationStatusSteps changeNotificationStatusSteps;
+    protected UpdateEmailSteps updateEmailSteps;
+    protected CardProductsSteps cardProductsSteps;
     protected CardSteps cardSteps;
     protected CardInfoSteps cardInfoSteps;
-    protected CardProductsSteps cardProductsSteps;
     protected CardProductInfoSteps cardProductInfoSteps;
     protected CloseCardSteps closeCardSteps;
+    protected FilterCardsSteps filterCardsSteps;
 
     public BaseTest() {
         refreshPages();
@@ -67,10 +71,15 @@ public class BaseTest {
         changePasswordSteps = new ChangePasswordSteps();
         dropDownAccountMenuSteps = new DropDownAccountMenuSteps();
         changeNotificationStatusSteps = new ChangeNotificationStatusSteps();
+        updateEmailSteps = new UpdateEmailSteps();
+        personalDataSteps = new PersonalDataSteps();
+        cardProductsSteps = new CardProductsSteps();
         cardSteps = new CardSteps();
         cardInfoSteps = new CardInfoSteps();
         cardProductsSteps = new CardProductsSteps();
         cardProductInfoSteps = new CardProductInfoSteps();
         closeCardSteps = new CloseCardSteps();
+        filterCardsSteps = new FilterCardsSteps();
+        creditInfoSteps = new CreditInfoSteps();
     }
 }

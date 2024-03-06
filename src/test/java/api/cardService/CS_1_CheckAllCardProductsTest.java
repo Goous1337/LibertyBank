@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CARD_SERVICE;
 
+@DisplayName("CS-1 Просмотр карточных продуктов")
 public class CS_1_CheckAllCardProductsTest extends BaseTest {
     public static final String JSON_SCHEMA = "schemas/cardService/checkAllCardProducts.json";
 

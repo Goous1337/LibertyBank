@@ -31,7 +31,7 @@ public class ChangePasswordInAccountTest extends BaseTest {
                 .setKeysToNewPasswordInput(USER_PASSWORD)
                 .setKeysToConfirmPasswordInput(USER_PASSWORD)
                 .clickSubmitPasswordChangeBtn();
-        changePasswordSteps.assertChangePasswordBtnIsPresent();
+        personalDataSteps.assertLastNotificationStatus();
     }
 
     @DisplayName("Проверка возможности отмены изменения пароля в личном кабинете")
