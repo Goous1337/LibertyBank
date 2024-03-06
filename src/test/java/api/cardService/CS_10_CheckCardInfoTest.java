@@ -20,8 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CARD_SERVICE;
 
-@DisplayName("Просмотр подробной информации по карточному продукту")
-public class CS_6_CheckCardInfoTest extends BaseTest {
+@DisplayName("CS-10 Просмотр подробной информации по карточному продукту")
+public class CS_10_CheckCardInfoTest extends BaseTest {
     public static String JSON_SCHEMA_VALID_NAME = "schemas/cardService/checkCardInfo.json";
     public static String JSON_SCHEMA_INVALID_NAME = "schemas/cardService/checkCardInfoInvalidName.json";
     public static String cardName = CARD_NAME_CLASSIC;

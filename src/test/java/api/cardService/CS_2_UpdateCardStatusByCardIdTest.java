@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CARD_SERVICE;
 
-@DisplayName("Изменение статуса карты")
+@DisplayName("CS-2 Изменение статуса карты")
 public class CS_2_UpdateCardStatusByCardIdTest extends BaseTest {
 
     public static final String CARD_ID = CardServiceDataBaseRequest.getCardId(STATUS_ACTIVE);
