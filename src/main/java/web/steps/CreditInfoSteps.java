@@ -12,11 +12,7 @@ import static web.constans.CreditServiceConstants.*;
 
 public class CreditInfoSteps {
 
-    public CreditInfoPage creditInfoPage;
-    public CreditProduct creditProduct;
-    public CreditDetails creditDetails;
-    public CreditProductService creditProductService;
-
+    private CreditInfoPage creditInfoPage;
     public CreditInfoSteps() {
         creditInfoPage = new CreditInfoPage();
     }
@@ -190,13 +186,39 @@ public class CreditInfoSteps {
     }
 
     /*Кредитные продукты банка*/
-    @Step("")
+    @Step("Сравнение названия кредита с БД и UI")
     public void assertTextNameCreditProductPageText(){
-        Assertions.assertEquals(creditInfoPage.getAllProdutsBank(),creditInfoPage.getNameCreditProductPageText(),"test");
+        Assertions.assertEquals(creditInfoPage.getNameProductsCreditBank(),creditInfoPage.getNameCreditProductPageText(),"test");
     }
-
     @Step("")
+    public void assertInterestRateCreditProductPageText(){
+        Assertions.assertEquals(creditInfoPage.getInterestRateProductCredit(), creditInfoPage.getInterestRateCreditProductPageText(), "test");
+    }
+    /*
+        Клик кнопки 'Показать больше'
+     */
+    @Step("Клик кнопки 'Показать больше' у Liberty Наличными '")
     public void clickShowMoreLibertyCashButton () {
         creditInfoPage.clickButtonShowMoreLibertyCash();
+    }
+    @Step("Клик кнопки 'Показать больше' у Liberty Срочный '")
+    public void clickShowMoreLibertyExpressButton () {
+        creditInfoPage.clickButtonShowMoreLibertyExpress();
+    }
+    @Step("Клик кнопки 'Показать больше' у Liberty Money '")
+    public void clickShowMoreLibertyMoneyButton () {
+        creditInfoPage.clickButtonShowMoreLibertyMoney();
+    }
+    @Step("Клик кнопки 'Показать больше' у Liberty Easy '")
+    public void clickShowMoreLibertyEasyButton () {
+        creditInfoPage.clickButtonShowMoreLibertyEasy();
+    }
+    @Step("Клик кнопки 'Показать больше' у Liberty Car '")
+    public void clickShowMoreLibertyCarButton () {
+        creditInfoPage.clickButtonShowMoreLibertyCar();
+    }
+    @Step("Клик кнопки 'Показать больше' у Liberty Моя квартира '")
+    public void clickShowMoreLibertyMyFlatButton () {
+        creditInfoPage.clickButtonShowMoreLibertyMyFlat();
     }
 }

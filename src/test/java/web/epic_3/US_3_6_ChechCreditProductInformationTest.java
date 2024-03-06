@@ -13,15 +13,35 @@ public class US_3_6_ChechCreditProductInformationTest extends BaseTest {
 
     @Test
     @Tags({@Tag("Web"), @Tag("Positive")})
-    @DisplayName("Просмотр подробной информации о кредитном продукте банка")
+    @DisplayName("Просмотр подробной информации о кредитном продукте Liberty Наличными")
     @TmsLink("LIB3-181")
-    public void checkBasicInfoAboutMyCredit() {
+    public void checkBasicInfoAboutLibertyCash() {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickCreditProductButton();
         creditInfoSteps.clickShowMoreLibertyCashButton();
         creditInfoSteps.assertTextNameCreditProductPageText();
-
-        System.out.println();
-
+        creditInfoSteps.assertInterestRateCreditProductPageText();
+    }
+    @Test
+    @Tags({@Tag("Web"), @Tag("Positive")})
+    @DisplayName("Просмотр подробной информации о кредитном продукте Liberty Срочный")
+    @TmsLink("LIB3-181")
+    public void checkBasicInfoAboutLibertyExpress() {
+        creditInfoSteps.clickCreditButton();
+        creditInfoSteps.clickCreditProductButton();
+        creditInfoSteps.clickShowMoreLibertyExpressButton();
+        creditInfoSteps.assertTextNameCreditProductPageText();
+        creditInfoSteps.assertInterestRateCreditProductPageText();
+    }
+    @Test
+    @Tags({@Tag("Web"), @Tag("Positive")})
+    @DisplayName("Просмотр подробной информации о кредитном продукте Liberty Money")
+    @TmsLink("LIB3-181")
+    public void checkBasicInfoAboutLibertyMoney() {
+        creditInfoSteps.clickCreditButton();
+        creditInfoSteps.clickCreditProductButton();
+        creditInfoSteps.clickShowMoreLibertyMoneyButton();
+        creditInfoSteps.assertTextNameCreditProductPageText();
+        creditInfoSteps.assertInterestRateCreditProductPageText();
     }
 }
