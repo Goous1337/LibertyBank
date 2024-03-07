@@ -22,7 +22,7 @@ public class UserAuthorization {
 
     public String getRefreshToken(String mobilePhone, String password, String type) {
         Response getRefreshToken = customerService_2_0.userAuthorizationByMobilePhone
-                (new UserAuthorizationByPhone());
+                (new UserAuthorizationByPhone(mobilePhone, password, type));
         return getRefreshToken.jsonPath().get("refreshToken");
     }
 }
