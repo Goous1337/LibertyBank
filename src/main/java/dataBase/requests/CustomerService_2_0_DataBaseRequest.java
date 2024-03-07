@@ -178,15 +178,4 @@ public class CustomerService_2_0_DataBaseRequest {
         getDBConnection(CUSTOMER_SERVICE_DB_2_0).update(sql, mobilePhone);
         LOG.info(String.format("емаил пользователя по телефону %s был установлен на NULL", mobilePhone));
     }
-
-    public static String getPassword(String customer_id) {
-        String sql = "SELECT password FROM user_profile WHERE customer_id = " + customer_id;
-        return getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sql, String.class);
-    }
-
-//    public static String getCustomerEmailByPhone(String mobilePhone) {
-//        String sql = "SELECT email FROM customer WHERE mobile_phone =?";
-//        LOG.info(String.format("Получен email адрес по номеру телефона %s", mobilePhone));
-//        return getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sql, String.class, mobilePhone);
-//    }
 }
