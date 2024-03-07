@@ -1,11 +1,31 @@
 package web;
 
-import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
+
 import web.drivers.DriverManager;
 import web.helpers.TestListener;
-import web.steps.*;
+import web.steps.AccountInfoSteps;
+import web.steps.AccountSteps;
+import web.steps.CardInfoSteps;
+import web.steps.CardProductInfoSteps;
+import web.steps.CardProductsSteps;
+import web.steps.CardSteps;
+import web.steps.ChangeNotificationStatusSteps;
+import web.steps.ChangePasswordSteps;
+import web.steps.ConfirmationSteps;
+import web.steps.CreateAccountSteps;
+import web.steps.CreditInfoSteps;
+import web.steps.DropDownAccountMenuSteps;
+import web.steps.FilterCardsSteps;
+import web.steps.HomeSteps;
+import web.steps.LoginSteps;
+import web.steps.PersonalDataSteps;
+import web.steps.RenameAccountSteps;
+import web.steps.SecuritySteps;
+import web.steps.UpdateEmailSteps;
 
 import static property.UserPropertiesReader.USER_PASSWORD;
 import static property.UserPropertiesReader.USER_PHONE;
@@ -52,8 +72,14 @@ public class BaseTest {
         loginSteps.tapSubmitButton();
     }
 
-    @AfterAll
+    @BeforeEach
+    public void driverInitialization() {
+        DriverManager.getDriver();
+    }
+
+    @AfterEach
     public void tearDown() {
+        TestListener.takeScreenshot();
         DriverManager.resetDriver();
     }
 
