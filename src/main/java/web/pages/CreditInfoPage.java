@@ -2,10 +2,13 @@ package web.pages;
 
 import api.model.webAndApi.CreditProductService;
 import api.model.webAndApi.credit.CreditProduct;
+import api.model.webAndApi.credit.MoreCreditProduct;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import web.drivers.DriverManager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CreditInfoPage extends BasePage {
@@ -20,20 +23,23 @@ public class CreditInfoPage extends BasePage {
 
     @FindBy(xpath = "//a[@href='/credits']")
     private WebElement creditButton;
+    /*Кнопки подразделов 'Кредиты'*/
     @FindBy(xpath = "//a[@data-testid='nav-link-0']")
     private WebElement myCreditButton;
     @FindBy(xpath = "//a[@data-testid='nav-link-1']")
     private WebElement creditProductsBankButton;
     @FindBy(xpath = "//a[@data-testid='nav-link-2']")
     private WebElement submittedCreditАpplicationsButton;
-    @FindBy(xpath = "//ul//li[1]//div/h2")
+    /*Краткая информация 'Мои кредиты'*/
+    @FindBy(xpath = "//h2[@data-testid='currencyBlockText']")
     private WebElement sumCreditText;
-    @FindBy(xpath = "//ul//li[1]//div/h3")
+    @FindBy(xpath = "//div/h3")
     private WebElement nameCreditText;
     @FindBy(xpath = "//ul//li[1]/div/p[@data-testid='creditTerm']")
     private WebElement termCreditText;
     @FindBy(xpath = "//ul//li[1]//div/a")
     private WebElement showMoreAboutCreditButton;
+    /*Подробная информация 'Мои кредиты'*/
     @FindBy(xpath = "//div/span[@data-testid='title']")
     private WebElement nameTitleCreditText;
     @FindBy(xpath = "//div/p[@data-testid='creditAccountNumber']")
@@ -66,15 +72,18 @@ public class CreditInfoPage extends BasePage {
     private WebElement paymentScheduleButton;
     @FindBy(xpath = "//*[text()='Скопировано']")
     private WebElement outputCopiedText;
-    /*Кредитные продукты*/
-    @FindBy(xpath = " //h1[@class = '_text_h1_xv9cv_1 _text_bold_xv9cv_33']")
+    /*Краткая информация по Кредитным продуктам*/
+    @FindBy(xpath = "//h3[contains(text(), 'Liberty Наличными')]")
+    private WebElement nameShortCreditProductPageText;
+    @FindBy(xpath = "//h3[contains(text(), 'Liberty Срочный')]")
+    private WebElement nameShortCreditExpressProductPageText;
+
+    /*Подробная информация по Кредитным продуктам*/
+    @FindBy(xpath = "//h1[@class = '_text_h1_xv9cv_1 _text_bold_xv9cv_33']")
     private WebElement nameCreditProductPageText;
     @FindBy(xpath = "//p[text() = 'Процентная ставка']/following-sibling::div/span[2]")
     private WebElement interestRateCreditProductText;
-    /*
-
-        'Показать больше' кредитные продукты
-     */
+    /*Кнопки 'Показать больше' в разделе кредитные продукты банка*/
     @FindBy(xpath = "//li[./span[@data-testid='Liberty Наличными']]//button/span[contains(text(), 'Показать больше')]")
     private WebElement buttonShowMoreLibertyCash;
     @FindBy(xpath = "//li[./span[@data-testid='Liberty Срочный']]//button/span[contains(text(), 'Показать больше')]")
@@ -92,6 +101,11 @@ public class CreditInfoPage extends BasePage {
         return DriverManager.getDriver().getCurrentUrl();
     }
 
+    public void clickCreditButton() {
+        creditButton.click();
+    }
+
+    /*Раздел кредиты*/
     public boolean isMyCreditButtonDisplayed() {
         return myCreditButton.isDisplayed();
     }
@@ -104,6 +118,7 @@ public class CreditInfoPage extends BasePage {
         return submittedCreditАpplicationsButton.isDisplayed();
     }
 
+    /*Подраздел 'Мои кредиты'*/
     public boolean isMyCreditSumTextDisplayed() {
         return sumCreditText.isDisplayed();
     }
@@ -120,10 +135,11 @@ public class CreditInfoPage extends BasePage {
         return showMoreAboutCreditButton.isDisplayed();
     }
 
-    public void clickCreditButton() {
-        creditButton.click();
+    public void clickShowMoreMyCreditButton() {
+        showMoreAboutCreditButton.click();
     }
 
+    /*Кнопки для перехода в подразделы раздела 'Кредиты'*/
     public void clickMyCreditButton() {
         myCreditButton.click();
     }
@@ -136,10 +152,7 @@ public class CreditInfoPage extends BasePage {
         submittedCreditАpplicationsButton.click();
     }
 
-    public void clickShowMoreMyCreditButton() {
-        showMoreAboutCreditButton.click();
-    }
-
+    /*Раздел подробной информации 'Мои кредиты'*/
     public boolean nameTitleCreditTextDisplayed() {
         return nameTitleCreditText.isDisplayed();
     }
@@ -204,53 +217,80 @@ public class CreditInfoPage extends BasePage {
         return paymentScheduleButton.isDisplayed();
     }
 
-    /*Подробная информация о кредитных продуктах банка*/
+    /*Краткая информация по Кредитным продуктам банка*/
 
-    public String getNameCreditProductPageText() {
-        return nameCreditProductPageText.getText();
+    public String getShortNameCreditProductPageText() {
+        return nameShortCreditProductPageText.getText();
     }
-    public String getInterestRateCreditProductPageText(){
-        return interestRateCreditProductText.getText();
+
+    public String getShortNameCreditExpressProductPageText() {
+        return nameShortCreditExpressProductPageText.getText();
     }
-    public String getNameProductsCreditBank() {
-        creditProductService.getUsersFromPage();
-        List<CreditProduct> list = creditProductService.getCreditProductList();
+
+    public String getShortNameProductsCreditBank() {
+        creditProductService.getProductCredit();
+        List<CreditProduct> list = creditProductService.getCreditProductsList();
         for(CreditProduct creditProduct:list){
-            if (creditProduct.getName().equals(getNameCreditProductPageText())){
+            if (creditProduct.getName().equals(getShortNameCreditExpressProductPageText())){
                 nameOfCreditProduct = creditProduct.getName();
             }
         }
         return nameOfCreditProduct;
     }
-    public String getInterestRateProductCredit(){
+
+    /*Подробная информация о кредитных продуктах банка*/
+    public String getNameCreditProductPageText() {
+        return nameCreditProductPageText.getText();
+    }
+
+    public String getInterestRateCreditProductPageText() {
+        return interestRateCreditProductText.getText();
+    }
+
+    public String getNameProductsCreditBank() {
         creditProductService.getUsersFromPage();
-        List<CreditProduct> list = creditProductService.getCreditProductList();
-        for(CreditProduct creditProduct:list){
-            if (creditProduct.convertInterestRateToString(creditProduct.getInterestRate()).equals(getInterestRateCreditProductPageText())){
-                interestRateCreditProduct = creditProduct.convertInterestRateToString(creditProduct.getInterestRate());
+        List<MoreCreditProduct> list = creditProductService.getMoreCreditProductList();//getCreditProductList();
+        for (MoreCreditProduct moreCreditProduct : list) {
+            if (moreCreditProduct.getName().equals(getNameCreditProductPageText())) {
+                nameOfCreditProduct = moreCreditProduct.getName();
+            }
+        }
+        return nameOfCreditProduct;
+    }
+
+    public String getInterestRateProductCredit() {
+        creditProductService.getUsersFromPage();
+        List<MoreCreditProduct> list = creditProductService.getMoreCreditProductList();//getCreditProductList();
+        for (MoreCreditProduct moreCreditProduct : list) {
+            if (moreCreditProduct.convertInterestRateToString(moreCreditProduct.getInterestRate()).equals(getInterestRateCreditProductPageText())) {
+                interestRateCreditProduct = moreCreditProduct.convertInterestRateToString(moreCreditProduct.getInterestRate());
             }
         }
         return interestRateCreditProduct;
     }
-    /*
-        Клик кнопок 'Показать больше'
-     */
-    public void clickButtonShowMoreLibertyCash () {
+
+    /*Клик кнопок 'Показать больше' в разделе 'Мои кредитные продукты'*/
+    public void clickButtonShowMoreLibertyCash() {
         buttonShowMoreLibertyCash.click();
     }
-    public void clickButtonShowMoreLibertyExpress () {
+
+    public void clickButtonShowMoreLibertyExpress() {
         buttonShowMoreLibertyExpress.click();
     }
-    public void clickButtonShowMoreLibertyMoney () {
+
+    public void clickButtonShowMoreLibertyMoney() {
         buttonShowMoreLibertyMoney.click();
     }
-    public void clickButtonShowMoreLibertyEasy () {
+
+    public void clickButtonShowMoreLibertyEasy() {
         buttonShowMoreLibertyEasy.click();
     }
-    public void clickButtonShowMoreLibertyCar () {
+
+    public void clickButtonShowMoreLibertyCar() {
         buttonShowMoreLibertyCar.click();
     }
-    public void clickButtonShowMoreLibertyMyFlat () {
+
+    public void clickButtonShowMoreLibertyMyFlat() {
         buttonShowMoreMyFlat.click();
     }
 

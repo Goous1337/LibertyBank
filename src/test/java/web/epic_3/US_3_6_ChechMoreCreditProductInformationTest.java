@@ -4,7 +4,7 @@ import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.*;
 import web.BaseTest;
 
-public class US_3_6_ChechCreditProductInformationTest extends BaseTest {
+public class US_3_6_ChechMoreCreditProductInformationTest extends BaseTest {
 
     @BeforeEach
     public void setUpTest() {
@@ -43,5 +43,15 @@ public class US_3_6_ChechCreditProductInformationTest extends BaseTest {
         creditInfoSteps.clickShowMoreLibertyMoneyButton();
         creditInfoSteps.assertTextNameCreditProductPageText();
         creditInfoSteps.assertInterestRateCreditProductPageText();
+    }
+
+    @Test
+    @Tags({@Tag("Web"), @Tag("Positive")})
+    @DisplayName("US 3-2 Просмотр подробной информации о кредитном продукте Liberty Money")
+    @TmsLink("LIB3-181")
+    public void checkShortInfoAboutLibertyMoney() {
+        creditInfoSteps.clickCreditButton();
+        creditInfoSteps.clickCreditProductButton();
+        creditInfoSteps.assertShortTextNameCreditProductPageText();
     }
 }

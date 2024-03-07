@@ -1,8 +1,5 @@
 package web.steps;
 
-import api.model.webAndApi.CreditProductService;
-import api.model.webAndApi.credit.CreditDetails;
-import api.model.webAndApi.credit.CreditProduct;
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
 import web.helpers.TestListener;
@@ -13,6 +10,7 @@ import static web.constans.CreditServiceConstants.*;
 public class CreditInfoSteps {
 
     private CreditInfoPage creditInfoPage;
+
     public CreditInfoSteps() {
         creditInfoPage = new CreditInfoPage();
     }
@@ -175,50 +173,64 @@ public class CreditInfoSteps {
         TestListener.takeScreenshot();
     }
 
-    public void clickCopyAccountNumberCreditButton(){
+    @Step("Нажатие кнопки скопировать номер счет клиента")
+    public void clickCopyAccountNumberCreditButton() {
         creditInfoPage.clickCopyAccountNumberCreditButton();
     }
 
     @Step("Проверка отображения текста 'Скопированное после нажатия кнопки скопировать счет'")
-    public void assertTextOutputCopiedIsDisplayed () {
+    public void assertTextOutputCopiedIsDisplayed() {
         Assertions.assertTrue(creditInfoPage.outputCopiedTextDisplayed(), String.format(NOT_DISPLAYED_CREDIT_WEB_ELEMENT_MESSAGE, creditInfoPage.outputCopiedTextDisplayed()));
         TestListener.takeScreenshot();
     }
 
-    /*Кредитные продукты банка*/
-    @Step("Сравнение названия кредита с БД и UI")
-    public void assertTextNameCreditProductPageText(){
-        Assertions.assertEquals(creditInfoPage.getNameProductsCreditBank(),creditInfoPage.getNameCreditProductPageText(),"test");
+    /*Краткая информация о 'Кредитные продукты банка'*/
+    @Step("Сравнение названия кредита в краткой информации с БД и UI")
+    public void assertShortTextNameCreditProductPageText() {
+        Assertions.assertEquals(creditInfoPage.getShortNameProductsCreditBank(), creditInfoPage.getShortNameCreditExpressProductPageText(), "test");
     }
-    @Step("")
-    public void assertInterestRateCreditProductPageText(){
+
+    /*Подрабная информация о 'Кредитные продукты банка'*/
+    @Step("Сравнение названия кредита с БД и UI")
+    public void assertTextNameCreditProductPageText() {
+        Assertions.assertEquals(creditInfoPage.getNameProductsCreditBank(), creditInfoPage.getNameCreditProductPageText(), "test");
+    }
+
+    @Step("Сравнение процентной ставки кредита с БД и UI")
+    public void assertInterestRateCreditProductPageText() {
         Assertions.assertEquals(creditInfoPage.getInterestRateProductCredit(), creditInfoPage.getInterestRateCreditProductPageText(), "test");
     }
+
     /*
         Клик кнопки 'Показать больше'
      */
     @Step("Клик кнопки 'Показать больше' у Liberty Наличными '")
-    public void clickShowMoreLibertyCashButton () {
+    public void clickShowMoreLibertyCashButton() {
         creditInfoPage.clickButtonShowMoreLibertyCash();
     }
+
     @Step("Клик кнопки 'Показать больше' у Liberty Срочный '")
-    public void clickShowMoreLibertyExpressButton () {
+    public void clickShowMoreLibertyExpressButton() {
         creditInfoPage.clickButtonShowMoreLibertyExpress();
     }
+
     @Step("Клик кнопки 'Показать больше' у Liberty Money '")
-    public void clickShowMoreLibertyMoneyButton () {
+    public void clickShowMoreLibertyMoneyButton() {
         creditInfoPage.clickButtonShowMoreLibertyMoney();
     }
+
     @Step("Клик кнопки 'Показать больше' у Liberty Easy '")
-    public void clickShowMoreLibertyEasyButton () {
+    public void clickShowMoreLibertyEasyButton() {
         creditInfoPage.clickButtonShowMoreLibertyEasy();
     }
+
     @Step("Клик кнопки 'Показать больше' у Liberty Car '")
-    public void clickShowMoreLibertyCarButton () {
+    public void clickShowMoreLibertyCarButton() {
         creditInfoPage.clickButtonShowMoreLibertyCar();
     }
+
     @Step("Клик кнопки 'Показать больше' у Liberty Моя квартира '")
-    public void clickShowMoreLibertyMyFlatButton () {
+    public void clickShowMoreLibertyMyFlatButton() {
         creditInfoPage.clickButtonShowMoreLibertyMyFlat();
     }
 }

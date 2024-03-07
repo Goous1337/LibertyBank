@@ -1,8 +1,8 @@
 package web;
 
 import api.model.webAndApi.CreditProductService;
-import api.model.webAndApi.credit.CreditDetails;
-import api.model.webAndApi.credit.CreditProduct;
+import api.model.webAndApi.credit.MoreCreditDetails;
+import api.model.webAndApi.credit.MoreCreditProduct;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,8 +31,8 @@ public class BaseTest {
     protected DropDownAccountMenuSteps dropDownAccountMenuSteps;
     protected ChangeNotificationStatusSteps changeNotificationStatusSteps;
     protected CreditInfoSteps creditInfoSteps;
-    protected CreditProduct creditProduct;
-    protected CreditDetails creditDetails;
+    protected MoreCreditProduct moreCreditProduct;
+    protected MoreCreditDetails moreCreditDetails;
     protected CreditProductService creditProductService;
 
 
@@ -70,8 +70,8 @@ public class BaseTest {
         dropDownAccountMenuSteps = new DropDownAccountMenuSteps();
         changeNotificationStatusSteps = new ChangeNotificationStatusSteps();
         creditInfoSteps = new CreditInfoSteps();
-        creditProduct = new CreditProduct();
-        creditDetails = new CreditDetails();
+        moreCreditProduct = new MoreCreditProduct();
+        moreCreditDetails = new MoreCreditDetails();
         creditProductService = new CreditProductService();
     }
 }

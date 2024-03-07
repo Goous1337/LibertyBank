@@ -1,6 +1,7 @@
 package api.model.webAndApi;
 
 import api.model.webAndApi.credit.CreditProduct;
+import api.model.webAndApi.credit.MoreCreditProduct;
 import io.restassured.RestAssured;
 import lombok.Getter;
 import org.junit.jupiter.api.Test;
@@ -14,20 +15,37 @@ import static web.constans.CreditServiceConstants.BASE_URL_API;
 public class CreditProductService {
 
     @Getter
-    private CreditProduct creditProduct;
+    private MoreCreditProduct moreCreditProduct;
     @Getter
-    private List<CreditProduct> creditProductList;
+    private List<MoreCreditProduct> moreCreditProductList;
+    @Getter
+    private List<CreditProduct> creditProductsList;
 
-    public void getUsersFromPage( ) {
-        creditProductList = new ArrayList<CreditProduct>();
 
-        for (int i = 1; i <= COUNT_CREDITS_PRODUCT; i++){
-            creditProduct = RestAssured.given()
+    public void getUsersFromPage() {
+        moreCreditProductList = new ArrayList<MoreCreditProduct>();
+
+        for (int i = 1; i <= COUNT_CREDITS_PRODUCT; i++) {
+            moreCreditProduct = RestAssured.given()
                     .baseUri(BASE_URL_API)
                     .when()
                     .get("/credits/api/v1/credit-product/" + i)
-                    .as(CreditProduct.class);
-            creditProductList.add(creditProduct);
+                    .as(MoreCreditProduct.class);
+            moreCreditProductList.add(moreCreditProduct);
         }
     }
+
+    public void getProductCredit() {
+        creditProductsList = RestAssured.given()
+                .baseUri(BASE_URL_API)
+                .when()
+                .get("credits/api/v1/credit-product")
+                .then()
+                .log()
+                .all()
+                .extract().body().jsonPath().getList(".",CreditProduct.class);
+
+    }
+
 }
+
