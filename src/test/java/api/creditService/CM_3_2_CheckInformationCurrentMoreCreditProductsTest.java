@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CREDIT_SERVICE;
 
 @DisplayName("Получение информации о кредитных продуктах банка")
-public class CM_3_2_CheckInformationCurrentCreditProductsTest extends BaseTest {
+public class CM_3_2_CheckInformationCurrentMoreCreditProductsTest extends BaseTest {
 
     {
         RestAssured.baseURI = CREDIT_SERVICE;

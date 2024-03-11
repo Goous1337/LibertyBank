@@ -1,5 +1,8 @@
 package web;
 
+import api.model.webAndApi.CreditProductService;
+import api.model.webAndApi.credit.MoreCreditDetails;
+import api.model.webAndApi.credit.MoreCreditProduct;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInstance;
@@ -7,36 +10,16 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import web.drivers.DriverManager;
 import web.helpers.TestListener;
-import web.steps.AccountInfoSteps;
-import web.steps.AccountSteps;
-import web.steps.CardInfoSteps;
-import web.steps.CardProductInfoSteps;
-import web.steps.CardProductsSteps;
-import web.steps.CardSteps;
-import web.steps.ChangeNotificationStatusSteps;
-import web.steps.ChangePasswordSteps;
-import web.steps.ConfirmationSteps;
-import web.steps.CreateAccountSteps;
-import web.steps.CreditInfoSteps;
-import web.steps.DropDownAccountMenuSteps;
-import web.steps.FilterCardsSteps;
-import web.steps.HomeSteps;
-import web.steps.LoginSteps;
-import web.steps.PersonalDataSteps;
-import web.steps.RenameAccountSteps;
-import web.steps.SecuritySteps;
-import web.steps.UpdateEmailSteps;
+import web.steps.*;
 
 import static property.UserPropertiesReader.USER_PASSWORD;
 import static property.UserPropertiesReader.USER_PHONE;
 import static web.constans.UrlConfig.BASE_URL;
 import static web.constans.UrlConfig.LOGIN_URL;
 
-
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith(TestListener.class)
 public class BaseTest {
-
     protected static AccountSteps accountSteps;
     protected AccountInfoSteps accountInfoSteps;
     protected CreditInfoSteps creditInfoSteps;
@@ -50,6 +33,9 @@ public class BaseTest {
     protected ChangePasswordSteps changePasswordSteps;
     protected DropDownAccountMenuSteps dropDownAccountMenuSteps;
     protected ChangeNotificationStatusSteps changeNotificationStatusSteps;
+    protected MoreCreditProduct moreCreditProduct;
+    protected MoreCreditDetails moreCreditDetails;
+    protected CreditProductService creditProductService;
     protected UpdateEmailSteps updateEmailSteps;
     protected CardProductsSteps cardProductsSteps;
     protected CardSteps cardSteps;
@@ -97,6 +83,10 @@ public class BaseTest {
         changePasswordSteps = new ChangePasswordSteps();
         dropDownAccountMenuSteps = new DropDownAccountMenuSteps();
         changeNotificationStatusSteps = new ChangeNotificationStatusSteps();
+        creditInfoSteps = new CreditInfoSteps();
+        moreCreditProduct = new MoreCreditProduct();
+        moreCreditDetails = new MoreCreditDetails();
+        creditProductService = new CreditProductService();
         updateEmailSteps = new UpdateEmailSteps();
         personalDataSteps = new PersonalDataSteps();
         cardProductsSteps = new CardProductsSteps();
@@ -106,6 +96,6 @@ public class BaseTest {
         cardProductInfoSteps = new CardProductInfoSteps();
         closeCardSteps = new CloseCardSteps();
         filterCardsSteps = new FilterCardsSteps();
-        creditInfoSteps = new CreditInfoSteps();
     }
+
 }
