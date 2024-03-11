@@ -1,15 +1,12 @@
 package web.pages;
 
-<<<<<<< src/main/java/web/pages/CreditInfoPage.java
 import api.model.webAndApi.CreditProductService;
 import api.model.webAndApi.credit.CreditProduct;
 import api.model.webAndApi.credit.MoreCreditProduct;
-import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import web.drivers.DriverManager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CreditInfoPage extends BasePage {
@@ -110,16 +107,11 @@ public class CreditInfoPage extends BasePage {
     private WebElement descriptionLibertyCash;
     @FindBy(xpath = "//li[2]/div[2]/p")
     private WebElement descriptionLibertyExpress;
-    @FindBy(xpath = "//li[1]/div[3]/button/span")
-    private WebElement buttonShowMoreLibertyCash;
-    @FindBy(xpath = "//li[2]/div[3]/button/span")
-    private WebElement buttonShowMoreLibertyExpress;
+
     @FindBy(xpath = "//li[1]/div[3]/button[contains(text(), 'Подать заявку')]")
     private WebElement buttonGetApplicationLibertyCash;
     @FindBy(xpath = "//li[2]/div[3]/button[contains(text(), 'Подать заявку')]")
     private WebElement buttonGetApplicationLibertyExpress;
-    @FindBy(xpath = "//a[@data-testid='nav-link-1']")
-    private WebElement creditProductsBankButton;
 
     public String getActualTitleCredit() {
         return DriverManager.getDriver().getCurrentUrl();
@@ -138,7 +130,7 @@ public class CreditInfoPage extends BasePage {
         return creditProductsBankButton.isDisplayed();
     }
 
-    public boolean isSubmittedCreditАpplicationsDisplayed() {
+    public boolean isSubmittedCreditRequestDisplayed() {
         return submittedCreditАpplicationsButton.isDisplayed();
     }
 
@@ -172,7 +164,7 @@ public class CreditInfoPage extends BasePage {
         creditProductsBankButton.click();
     }
 
-    public void clickSubmittedCreditАpplicationsButton() {
+    public void clickSubmittedCreditRequestButton() {
         submittedCreditАpplicationsButton.click();
     }
 
@@ -254,8 +246,8 @@ public class CreditInfoPage extends BasePage {
     public String getShortNameProductsCreditBank() {
         creditProductService.getProductCredit();
         List<CreditProduct> list = creditProductService.getCreditProductsList();
-        for(CreditProduct creditProduct:list){
-            if (creditProduct.getName().equals(getShortNameCreditExpressProductPageText())){
+        for (CreditProduct creditProduct : list) {
+            if (creditProduct.getName().equals(getShortNameCreditExpressProductPageText())) {
                 nameOfCreditProduct = creditProduct.getName();
             }
         }
@@ -273,7 +265,7 @@ public class CreditInfoPage extends BasePage {
 
     public String getNameProductsCreditBank() {
         creditProductService.getUsersFromPage();
-        List<MoreCreditProduct> list = creditProductService.getMoreCreditProductList();//getCreditProductList();
+        List<MoreCreditProduct> list = creditProductService.getMoreCreditProductList();
         for (MoreCreditProduct moreCreditProduct : list) {
             if (moreCreditProduct.getName().equals(getNameCreditProductPageText())) {
                 nameOfCreditProduct = moreCreditProduct.getName();
@@ -284,7 +276,7 @@ public class CreditInfoPage extends BasePage {
 
     public String getInterestRateProductCredit() {
         creditProductService.getUsersFromPage();
-        List<MoreCreditProduct> list = creditProductService.getMoreCreditProductList();//getCreditProductList();
+        List<MoreCreditProduct> list = creditProductService.getMoreCreditProductList();
         for (MoreCreditProduct moreCreditProduct : list) {
             if (moreCreditProduct.convertInterestRateToString(moreCreditProduct.getInterestRate()).equals(getInterestRateCreditProductPageText())) {
                 interestRateCreditProduct = moreCreditProduct.convertInterestRateToString(moreCreditProduct.getInterestRate());

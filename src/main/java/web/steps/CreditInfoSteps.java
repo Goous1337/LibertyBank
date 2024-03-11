@@ -6,8 +6,6 @@ import web.helpers.TestListener;
 import web.pages.CreditInfoPage;
 
 import static web.constans.CreditServiceConstants.*;
-import static web.constans.AccountServiceConstants.*;
-import static web.constans.CreditConstants.*;
 
 public class CreditInfoSteps {
 
@@ -30,8 +28,8 @@ public class CreditInfoSteps {
     }
 
     @Step("Отображается кнопка с текстом 'Поданные заявки'")
-    public void assertButtonSubmittedCreditАpplicationsIsDisplayed() {
-        Assertions.assertTrue(creditInfoPage.isSubmittedCreditАpplicationsDisplayed(), String.format(NOT_DISPLAYED_CREDIT_WEB_ELEMENT_MESSAGE, "Поданные кредитные заявки"));
+    public void assertButtonSubmittedCreditRequestIsDisplayed() {
+        Assertions.assertTrue(creditInfoPage.isSubmittedCreditRequestDisplayed(), String.format(NOT_DISPLAYED_CREDIT_WEB_ELEMENT_MESSAGE, "Поданные кредитные заявки"));
         TestListener.takeScreenshot();
     }
 
@@ -70,8 +68,8 @@ public class CreditInfoSteps {
     }
 
     @Step("Проверка url Поданные кредитные заявки")
-    public void assertUrlSubmittedCreditАpplications() {
-        Assertions.assertEquals(CREDIT_SUBMITTED_АPPLICATIONS_PAGE_URL, creditInfoPage.getActualTitleCredit(), String.format(NOT_EQUALS_URL_MESSAGE, CREDIT_SUBMITTED_АPPLICATIONS_PAGE_URL, creditInfoPage.getActualTitleCredit()));
+    public void assertUrlSubmittedCreditRequest() {
+        Assertions.assertEquals(CREDIT_SUBMITTED_REQUEST_PAGE_URL, creditInfoPage.getActualTitleCredit(), String.format(NOT_EQUALS_URL_MESSAGE, CREDIT_SUBMITTED_REQUEST_PAGE_URL, creditInfoPage.getActualTitleCredit()));
     }
 
     @Step("Проверка url подробной информации о моем кредите")
@@ -95,8 +93,8 @@ public class CreditInfoSteps {
     }
 
     @Step("Нажатие кнопки 'Поданные заявки' в разделе 'Кредиты'")
-    public void clickSubmittedCreditАpplicationsButton() {
-        creditInfoPage.clickSubmittedCreditАpplicationsButton();
+    public void clickSubmittedCreditRequestButton() {
+        creditInfoPage.clickSubmittedCreditRequestButton();
     }
 
     @Step("Нажатие кнопки 'Показать больше' действующего кредиты у авторизированного пользователя")

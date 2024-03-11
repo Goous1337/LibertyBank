@@ -22,6 +22,7 @@ public class US_3_6_ChechMoreCreditProductInformationTest extends BaseTest {
         creditInfoSteps.assertTextNameCreditProductPageText();
         creditInfoSteps.assertInterestRateCreditProductPageText();
     }
+
     @Test
     @Tags({@Tag("Web"), @Tag("Positive")})
     @DisplayName("Просмотр подробной информации о кредитном продукте Liberty Срочный")
@@ -33,6 +34,7 @@ public class US_3_6_ChechMoreCreditProductInformationTest extends BaseTest {
         creditInfoSteps.assertTextNameCreditProductPageText();
         creditInfoSteps.assertInterestRateCreditProductPageText();
     }
+
     @Test
     @Tags({@Tag("Web"), @Tag("Positive")})
     @DisplayName("Просмотр подробной информации о кредитном продукте Liberty Money")
@@ -45,13 +47,4 @@ public class US_3_6_ChechMoreCreditProductInformationTest extends BaseTest {
         creditInfoSteps.assertInterestRateCreditProductPageText();
     }
 
-    @Test
-    @Tags({@Tag("Web"), @Tag("Positive")})
-    @DisplayName("US 3-2 Просмотр подробной информации о кредитном продукте Liberty Money")
-    @TmsLink("LIB3-181")
-    public void checkShortInfoAboutLibertyMoney() {
-        creditInfoSteps.clickCreditButton();
-        creditInfoSteps.clickCreditProductButton();
-        creditInfoSteps.assertShortTextNameCreditProductPageText();
-    }
 }

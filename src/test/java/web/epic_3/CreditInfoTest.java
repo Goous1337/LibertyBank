@@ -2,12 +2,9 @@ package web.epic_3;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import io.qameta.allure.TmsLink;
+import org.junit.jupiter.api.*;
 import web.BaseTest;
-
-import org.junit.jupiter.api.BeforeEach;
 
 import static web.constans.UrlConfig.*;
 
@@ -23,24 +20,13 @@ public class CreditInfoTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Проверка отображения информации о кредите - Liberty Наличными")
-    public void checkLibertyCashCreditInfo() {
-        creditInfoSteps.assertNameOfCredit();
-        creditInfoSteps.assertProcentOfCredit();
-        creditInfoSteps.assertDescription();
-        creditInfoSteps.assertShowMore();
-        creditInfoSteps.assertGetApplication();
+    @Tags({@Tag("Web"), @Tag("Positive")})
+    @DisplayName("US 3-2 Просмотр подробной информации о кредитном продукте Liberty Money")
+    @TmsLink("LIB3-181")
+    public void checkShortInfoAboutLibertyMoney() {
+        creditInfoSteps.clickCreditButton();
+        creditInfoSteps.clickCreditProductButton();
+        creditInfoSteps.assertShortTextNameCreditProductPageText();
     }
-
-    @Test
-    @DisplayName("Проверка отображения информации о кредите - Liberty Срочный")
-    public void checkLibertyExpressCreditInfo() {
-        creditInfoSteps.assertNameOfLibertyExpressCredit();
-        creditInfoSteps.assertProcentLibertyExpressCredit();
-        creditInfoSteps.assertDescriptionLibertyExpress();
-        creditInfoSteps.assertShowMoreLibertyExpress();
-        creditInfoSteps.assertGetApplicationLibertyExpress();
-    }
-
 
 }

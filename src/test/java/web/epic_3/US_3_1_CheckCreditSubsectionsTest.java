@@ -25,7 +25,7 @@ public class US_3_1_CheckCreditSubsectionsTest extends BaseTest {
         creditInfoSteps.assertUrlMyCretits();
         creditInfoSteps.assertButtonMyCreditIsDisplayed();
         creditInfoSteps.assertButtonCreditProductsBankIsDisplayed();
-        creditInfoSteps.assertButtonSubmittedCreditАpplicationsIsDisplayed();
+        creditInfoSteps.assertButtonSubmittedCreditRequestIsDisplayed();
     }
 
     @Test
@@ -55,10 +55,10 @@ public class US_3_1_CheckCreditSubsectionsTest extends BaseTest {
     @Tags({@Tag("Web"), @Tag("Positive")})
     @DisplayName("Осуществление перехода на страницу с поданными кредитными заявками из раздела 'Кредиты'")
     @TmsLink("LIB3-807")
-    public void checkUrlSubmittedCreditАpplications() {
+    public void checkUrlSubmittedCreditRequest() {
         creditInfoSteps.clickCreditButton();
-        creditInfoSteps.clickSubmittedCreditАpplicationsButton();
-        creditInfoSteps.assertUrlSubmittedCreditАpplications();
+        creditInfoSteps.clickSubmittedCreditRequestButton();
+        creditInfoSteps.assertUrlSubmittedCreditRequest();
     }
 
     @Test
