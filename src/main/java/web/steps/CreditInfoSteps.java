@@ -6,10 +6,12 @@ import web.helpers.TestListener;
 import web.pages.CreditInfoPage;
 
 import static web.constans.CreditServiceConstants.*;
+import static web.constans.AccountServiceConstants.*;
+import static web.constans.CreditConstants.*;
 
 public class CreditInfoSteps {
 
-    private CreditInfoPage creditInfoPage;
+    protected CreditInfoPage creditInfoPage;
 
     public CreditInfoSteps() {
         creditInfoPage = new CreditInfoPage();
@@ -233,4 +235,5 @@ public class CreditInfoSteps {
     public void clickShowMoreLibertyMyFlatButton() {
         creditInfoPage.clickButtonShowMoreLibertyMyFlat();
     }
+
 }

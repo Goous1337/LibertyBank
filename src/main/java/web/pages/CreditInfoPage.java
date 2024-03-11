@@ -1,5 +1,6 @@
 package web.pages;
 
+<<<<<<< src/main/java/web/pages/CreditInfoPage.java
 import api.model.webAndApi.CreditProductService;
 import api.model.webAndApi.credit.CreditProduct;
 import api.model.webAndApi.credit.MoreCreditProduct;
@@ -96,6 +97,29 @@ public class CreditInfoPage extends BasePage {
     private WebElement buttonShowMoreLibertyCar;
     @FindBy(xpath = "//li[./span[@data-testid='Моя квартира']]//button/span[contains(text(), 'Показать больше')]")
     private WebElement buttonShowMoreMyFlat;
+    /*Xpath for US3.2*/
+    @FindBy(xpath = "//*[contains(@class,'_title_1oczs_12')][text()='Liberty Наличными']")
+    private WebElement nameOfLibertyCashCredit;
+    @FindBy(xpath = "//*[contains(@class,'_title_1oczs_12')][text()='Liberty Срочный']")
+    private WebElement nameOfLibertyExpress;
+    @FindBy(xpath = "//*[contains(@class, '_rate_1oczs_31')][@data-testid='Liberty Наличными']")
+    private WebElement procentOfLibertyCashCredit;
+    @FindBy(xpath = "//*[contains(@class, '_rate_1oczs_31')][@data-testid='Liberty Срочный']")
+    private WebElement procentOfLibertyExpress;
+    @FindBy(xpath = "//li[1]/div[2]/p")
+    private WebElement descriptionLibertyCash;
+    @FindBy(xpath = "//li[2]/div[2]/p")
+    private WebElement descriptionLibertyExpress;
+    @FindBy(xpath = "//li[1]/div[3]/button/span")
+    private WebElement buttonShowMoreLibertyCash;
+    @FindBy(xpath = "//li[2]/div[3]/button/span")
+    private WebElement buttonShowMoreLibertyExpress;
+    @FindBy(xpath = "//li[1]/div[3]/button[contains(text(), 'Подать заявку')]")
+    private WebElement buttonGetApplicationLibertyCash;
+    @FindBy(xpath = "//li[2]/div[3]/button[contains(text(), 'Подать заявку')]")
+    private WebElement buttonGetApplicationLibertyExpress;
+    @FindBy(xpath = "//a[@data-testid='nav-link-1']")
+    private WebElement creditProductsBankButton;
 
     public String getActualTitleCredit() {
         return DriverManager.getDriver().getCurrentUrl();

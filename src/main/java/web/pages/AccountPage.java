@@ -85,6 +85,7 @@ public class AccountPage extends BasePage {
     }
 
     public boolean isMainAccountLabelDisplayed() {
+        Waiters.waitElement(mainAccountLabel);
         return mainAccountLabel.isDisplayed();
     }
 

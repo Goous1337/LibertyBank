@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CARD_SERVICE;
 
-@DisplayName("CS-6 Просмотр подробной информации покарточному продукту")
+@DisplayName("CS-6 Просмотр подробной информации по карте")
 public class CS_6_ViewInformationCardProductTest extends BaseTest {
     public static final String JSON_SCHEMA_VIEW_INFORMATION = "schemas/cardService/checkInformationCardProduct.json";
     public static final String JSON_SCHEMA_FOR_ERROR = "schemas/cardService/errorResponse.json";

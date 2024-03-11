@@ -18,4 +18,7 @@ public class CustomerService_2_0_Constants {
     public static final String CUSTOMER_IDENTITY_DOC_NUMBER_TYPE = "IDENTITY_DOC_NUMBER";
     public static final String CUSTOMER_USER_PASSWORD_CRS_11 = "ODI1NGQ1MzBhN2VjMTRiODkzZWExYWIyMGZhNDk3NzQ0MDlhMDJlMDA0MjUyNDJlYWYzYjI4YzBkNzhjYjU3Mw==";
     public static final String BEARER_TOKEN = "Bearer ";
+    public static final String ERROR_MASSAGE_415 = "Формат запрашиваемых данных не поддерживается сервером, поэтому запрос отклонён.";
+    public static final String ERROR_MASSAGE_405 = "Метод не разрешен. Сервер знает о запрашиваемом методе, но он был деактивирован и не может быть использован.";
+    public static final String ERROR_MASSAGE_401 = "Ошибка авторизации. Для доступа к запрашиваемому ресурсу требуется аутентификация.";
 }

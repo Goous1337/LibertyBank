@@ -230,4 +230,26 @@ public class CustomerService_2_0 {
                 getRP(BODY, SPACE, body));
         return sendSimpleRequest(PATCH, CUSTOMER_2_0_NOTIFICATION_SMS, params);
     }
+
+    public Response changeStatusOfSettingsReceivingEmailNewsletters(String accessToken, Object value) {
+        String body = createBody(Map.of(PARAMETER_NOTIFICATION_STATUS, value));
+        List<RequestParam> params = List.of(getRP(HEADER, AUTHORIZATION, BEARER_TOKEN + accessToken),
+                getRP(BODY, SPACE, body));
+        return sendSimpleRequest(PATCH, CUSTOMER_2_0_NOTIFICATION_EMAIL, params);
+
+    }
+
+    public Response changeStatusEmailNotificationWithHttpMethod(String accessToken, Object value, String httpMethod) {
+        String body = createBody(Map.of(PARAMETER_NOTIFICATION_STATUS, value));
+        List<RequestParam> params = List.of(getRP(HEADER, AUTHORIZATION, BEARER_TOKEN + accessToken),
+                getRP(BODY, SPACE, body));
+        return sendSimpleRequest(Method.valueOf(httpMethod), CUSTOMER_2_0_NOTIFICATION_EMAIL, params);
+    }
+
+    public Response changeStatusEmailNotificationWithInvalidUrl(String accessToken, Object value) {
+        String body = createBody(Map.of(PARAMETER_NOTIFICATION_STATUS, value));
+        List<RequestParam> params = List.of(getRP(HEADER, AUTHORIZATION, BEARER_TOKEN + accessToken),
+                getRP(BODY, SPACE, body));
+        return sendSimpleRequest(PATCH, INVALID_CUSTOMER_2_0_NOTIFICATION_EMAIL, params);
+    }
 }
