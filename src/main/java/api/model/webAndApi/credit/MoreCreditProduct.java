@@ -28,8 +28,8 @@ public class MoreCreditProduct {
     private Boolean rateIsAdjustable;
     private List<MoreCreditDetails> creditDetails;
 
-    public String convertInterestRateToString(Double number){
-        String str = String.valueOf(number).replace(".",",") + "%";
+    public String convertInterestRateToString(Double number) {
+        String str = String.valueOf(number).replace(".", ",") + "%";
         return str;
     }
 }

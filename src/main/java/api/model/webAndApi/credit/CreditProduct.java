@@ -4,12 +4,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
-
 @Getter
 @Setter
 @NoArgsConstructor
-public class CreditProduct{
+public class CreditProduct {
 
     private Integer id;
     private String name;

@@ -4,7 +4,6 @@ import api.model.webAndApi.credit.CreditProduct;
 import api.model.webAndApi.credit.MoreCreditProduct;
 import io.restassured.RestAssured;
 import lombok.Getter;
-import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +12,6 @@ import static constant.CreditServiceConstants.COUNT_CREDITS_PRODUCT;
 import static web.constans.CreditServiceConstants.BASE_URL_API;
 
 public class CreditProductService {
-
     @Getter
     private MoreCreditProduct moreCreditProduct;
     @Getter
@@ -21,10 +19,8 @@ public class CreditProductService {
     @Getter
     private List<CreditProduct> creditProductsList;
 
-
     public void getUsersFromPage() {
         moreCreditProductList = new ArrayList<MoreCreditProduct>();
-
         for (int i = 1; i <= COUNT_CREDITS_PRODUCT; i++) {
             moreCreditProduct = RestAssured.given()
                     .baseUri(BASE_URL_API)
@@ -43,9 +39,8 @@ public class CreditProductService {
                 .then()
                 .log()
                 .all()
-                .extract().body().jsonPath().getList(".",CreditProduct.class);
+                .extract().body().jsonPath().getList(".", CreditProduct.class);
 
     }
 
 }
-
