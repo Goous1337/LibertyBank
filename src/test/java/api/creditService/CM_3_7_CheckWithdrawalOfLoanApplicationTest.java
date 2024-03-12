@@ -27,9 +27,8 @@ public class CM_3_7_CheckWithdrawalOfLoanApplicationTest extends BaseTest {
     public void checkWithdrawalOfLoanApplication() {
         String jsonSchemaPath = "schemas/creditService/CM_3_7/checkWithdrawalOfLoanApplication.json";
         Response responseReg = creditService.checkListApplyingLoan
-                (3, 2500000, 20, "RUB", "2023-11-28"
-                        , 60000, 30000, "8698345212");
-        Integer idValue = responseReg.jsonPath().getInt("id");
+                (3, 25000, 20, 60000, 30000, "8698345212");
+        Integer idValue = responseReg.jsonPath().get("id");
 
         Response responseWithdrawal = creditService.checkListWithdrawalOfLoanApplication(idValue);
         assertAll(

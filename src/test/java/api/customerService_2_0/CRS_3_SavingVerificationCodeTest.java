@@ -36,7 +36,7 @@ public class CRS_3_SavingVerificationCodeTest extends BaseTest {
     @Test
     public void checkSuccessSavingVerificationCode() throws InterruptedException {
         int sleepTime;
-        String mobilePhone = "79958984928";
+        String mobilePhone = "79527765108";
         String customerId = CustomerService_2_0_DataBaseRequest.getCustomerIdByMobilePhone(mobilePhone);
         CustomerService_2_0_Mobile customerService_2_0_mobile = new CustomerService_2_0_Mobile(mobilePhone);
         Response firstResponse = customerService_2_0.checkListSavingVerificationCode(customerService_2_0_mobile);
