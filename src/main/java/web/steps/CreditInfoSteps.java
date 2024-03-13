@@ -184,13 +184,14 @@ public class CreditInfoSteps {
         TestListener.takeScreenshot();
     }
 
-    /*Краткая информация о 'Кредитные продукты банка'*/
-    @Step("Сравнение названия кредита в краткой информации с БД и UI")
-    public void assertShortTextNameCreditProductPageText() {
-        Assertions.assertEquals(creditInfoPage.getShortNameProductsCreditBank(), creditInfoPage.getShortNameCreditExpressProductPageText(), "test");
+    /*Краткая информация о Кредитных продуктах банка*/
+
+    @Step("Сравнение названия кредита Liberty Cash в БД и UI")
+    public void assertShortInfoAboutCreditProducts(Enum nameOfCredit) {
+        Assertions.assertEquals(creditInfoPage.getObjectFromBackEnd(nameOfCredit), creditInfoPage.getObjectFromWeb(nameOfCredit) , "test");
     }
 
-    /*Подрабная информация о 'Кредитные продукты банка'*/
+    /*Подробная информация о 'Кредитные продукты банка'*/
     @Step("Сравнение названия кредита с БД и UI")
     public void assertTextNameCreditProductPageText() {
         Assertions.assertEquals(creditInfoPage.getNameProductsCreditBank(), creditInfoPage.getNameCreditProductPageText(), "test");

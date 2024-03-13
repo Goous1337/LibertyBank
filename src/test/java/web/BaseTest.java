@@ -3,14 +3,16 @@ package web;
 import api.model.webAndApi.CreditProductService;
 import api.model.webAndApi.credit.MoreCreditDetails;
 import api.model.webAndApi.credit.MoreCreditProduct;
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+
 import web.drivers.DriverManager;
 import web.helpers.TestListener;
 import web.steps.*;
+
 
 import static property.UserPropertiesReader.USER_PASSWORD;
 import static property.UserPropertiesReader.USER_PHONE;
@@ -65,7 +67,7 @@ public class BaseTest {
         DriverManager.getDriver();
     }
 
-    @AfterEach
+    @AfterAll
     public void tearDown() {
         TestListener.takeScreenshot();
         DriverManager.resetDriver();

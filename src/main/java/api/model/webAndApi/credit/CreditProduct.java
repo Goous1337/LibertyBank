@@ -1,12 +1,10 @@
 package api.model.webAndApi.credit;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 public class CreditProduct {
 
     private Integer id;
@@ -15,8 +13,28 @@ public class CreditProduct {
     private String currencyCode;
     private String details;
 
-    public String convertInterestRateToString(Double number) {
-        String str = String.valueOf(number).replace(".", ",") + "%";
-        return str;
+    public CreditProduct() {
+
     }
+
+    public CreditProduct(String name, Double interestRate) {
+        this.name = name;
+        this.interestRate = interestRate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (!(o instanceof CreditProduct)) {
+            return false;
+        }
+
+        CreditProduct creditProduct = (CreditProduct) o;
+        return  getName().equals(creditProduct.getName()) &&
+                getInterestRate().equals(creditProduct.getInterestRate());
+    }
+
 }
