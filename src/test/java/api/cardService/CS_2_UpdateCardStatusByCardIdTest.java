@@ -10,6 +10,7 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -47,6 +48,19 @@ public class CS_2_UpdateCardStatusByCardIdTest extends BaseTest {
     @Description("Тест направлен на проверку возможности изменения статуса карты на 'Заблокированный', 'Закрытый', 'Активный'")
     public void updateCardStatusTest(String cardStatus) {
         Response response = cardService.updateCardStatus(CARD_ID, cardStatus);
+        assertAll(
+                () -> assertEquals(SC_OK, response.statusCode(), "Код ответа не соответствует ожидаемому"),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(JSON_SCHEMA))
+        );
+    }
+
+    @Test
+    @Tag("API")
+    @TmsLink("LIB2-877")
+    @DisplayName("Изменение лимитов карты")
+    @Description("Тест направлен на проверку возможности изменения лимитов карты")
+    public void updateCardLimitsTest() {
+        Response response = cardService.updateCardLimits(CARD_ID, 1, 1, 1, 1, 1);
         assertAll(
                 () -> assertEquals(SC_OK, response.statusCode(), "Код ответа не соответствует ожидаемому"),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(JSON_SCHEMA))

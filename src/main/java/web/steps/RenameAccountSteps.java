@@ -42,8 +42,8 @@ public class RenameAccountSteps {
     }
 
     @Step("Отображается сообщение 'Измените название поля'")
-    public boolean isChangeFieldNameMessageDisplayed() {
-        return renameAccountPage.isChangeFieldNameMessageDisplayed();
+    public void assertChangeFieldNameMessageDisplayed() {
+        Assertions.assertTrue(renameAccountPage.isChangeFieldNameMessageDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Сообщение"));
     }
 
     @Step("Отображается сообщение 'Вы не можете ввести более 30 символов'")
