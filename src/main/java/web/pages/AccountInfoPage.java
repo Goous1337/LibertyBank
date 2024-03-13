@@ -11,7 +11,7 @@ public class AccountInfoPage extends BasePage {
     @FindBy(xpath = "//*[contains(@class, 'my-bill-page__current')]")
     private WebElement accountName;
 
-    @FindBy(xpath = "//*[contains(@data-testid, 'icon-pencil')]")
+    @FindBy(xpath = "//*[@data-testid='icon-pencil']")
     private WebElement pencilImage;
 
     @FindBy(xpath = "//*[contains(@class, 'my-bill-card__top-number-text')]")

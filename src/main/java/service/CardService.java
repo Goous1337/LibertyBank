@@ -1,6 +1,7 @@
 package service;
 
 import io.restassured.response.Response;
+import pojo.cardService.UpdateCardLimitsRequest;
 import pojo.cardService.UpdateCardStatusRequest;
 
 import static api.core.ApiClient.sendRequestWithoutParams;
@@ -49,5 +50,18 @@ public class CardService {
         return sendSimpleRequest(PATCH, ACTIVE_CARDS + "/" + cardId,
                 getRP(HEADER, HEADER_CUSTOMER_ID, CUSTOMER_ID_WITH_ACTIVE_CARDS),
                 UpdateCardStatusRequest.builder().status(cardStatus).build());
+    }
+
+    public Response updateCardLimits(String cardId, int operationPerDay, int operationPerMonth, int amountPerOperation,
+                                     int amountPerDay, int amountPerMonth) {
+        return sendSimpleRequest(PATCH, ACTIVE_CARDS + "/" + cardId,
+                getRP(HEADER, HEADER_CUSTOMER_ID, CUSTOMER_ID_WITH_ACTIVE_CARDS),
+                UpdateCardLimitsRequest.builder()
+                        .operationPerDay(operationPerDay)
+                        .operationPerMonth(operationPerMonth)
+                        .amountPerOperation(amountPerOperation)
+                        .amountPerDay(amountPerDay)
+                        .amountPerMonth(amountPerMonth)
+                        .build());
     }
 }
