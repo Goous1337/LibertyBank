@@ -62,7 +62,7 @@ public class BaseTest {
         loginSteps.tapSubmitButton();
     }
 
-    @BeforeEach
+    @BeforeAll
     public void driverInitialization() {
         DriverManager.getDriver();
     }

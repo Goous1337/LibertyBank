@@ -38,12 +38,10 @@ public class BlockAccountTest extends BaseTest {
     @Test
     public void blockMainAccount() {
         openActiveAccount();
-
         accountInfoSteps.clickDotsInfoButton();
         accountInfoSteps.selectBlockAccount();
         confirmationSteps.accept();
         Assertions.assertEquals(BLOCKED_ACCOUNT_STATUS, accountInfoSteps.getAccountStatus(), String.format(STATUS_ERROR_MESSAGE, BLOCKED_ACCOUNT_STATUS));
-
         accountInfoSteps.assertMainAccountLabelIsNotDisplayed();
         accountInfoSteps.assertAccountStatusIsBlocked();
     }
