@@ -3,9 +3,7 @@ package web;
 import api.model.webAndApi.CreditProductService;
 import api.model.webAndApi.credit.MoreCreditDetails;
 import api.model.webAndApi.credit.MoreCreditProduct;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import web.drivers.DriverManager;
@@ -60,12 +58,12 @@ public class BaseTest {
         loginSteps.tapSubmitButton();
     }
 
-    @BeforeEach
+    @BeforeAll
     public void driverInitialization() {
         DriverManager.getDriver();
     }
 
-    @AfterEach
+    @AfterAll
     public void tearDown() {
         TestListener.takeScreenshot();
         DriverManager.resetDriver();
