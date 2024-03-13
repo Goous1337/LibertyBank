@@ -16,6 +16,7 @@ import pojo.creditService.CreditInfo;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static constant.Message.RESPONSE_CODE_NOT_EXPECTED;
 import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.CREDIT_SERVICE;
@@ -37,13 +38,16 @@ public class CM_3_3_CheckApplyingLoanTest extends BaseTest {
     }
 
     @DisplayName("Оформление заявки на кредит")
-    @Description("Данный тест-кейс направлен на проверку CM 3.3 по US 3.3 на оформление" +
-            " заявки на кредит авторизованным пользователем.")
-    @Tag("API")
-    @TmsLink("https://jira.astondevs.ru/browse/LIB3-606")
+    @Description("""
+            Данный тест-кейс направлен на проверку CM 3.3 по US 3.3 на оформление
+            заявки на кредит авторизованным пользователем.
+            """)
+    @Tags({@Tag("API"), @Tag("CM"), @Tag("Smoke")})
+    @TmsLink("LIB3-606")
     @ParameterizedTest
     @MethodSource("testData")
     public void checkApplyingLoan(String creditName, int monthlyIncome, int monthlyExpenditure, String employerIdentificationNumber) {
+        String jsonSchemaPath = "schemas/creditService/CM_3_3/checkApplyingLoan.json";
         CreditInfo creditInfo = CreditServiceDataBaseRequests.getCreditInfoByName(creditName);
         Response responseWithMinParams = creditService.checkListApplyingLoan
                 (creditInfo.getId(), creditInfo.getMin_sum(), creditInfo.getMin_period_months(), monthlyIncome,
@@ -55,28 +59,36 @@ public class CM_3_3_CheckApplyingLoanTest extends BaseTest {
         int actualCreditOrderIdWithMaxParams = responseWithMaxParams.jsonPath().get("id");
         assertAll(
                 () -> assertEquals(SC_OK,
-                        responseWithMinParams.getStatusCode(),
-                        "Код ответа не соответствует ожидаемому"),
+                        responseWithMinParams.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertTrue(idList.contains(actualCreditOrderIdWithMinParams)),
+                () -> responseWithMinParams.then().assertThat().body(JsonSchemaValidator
+                        .matchesJsonSchemaInClasspath(jsonSchemaPath)),
                 () -> assertEquals(SC_OK, responseWithMaxParams.getStatusCode()),
-                () -> assertTrue(idList.contains(actualCreditOrderIdWithMaxParams))
+                () -> assertTrue(idList.contains(actualCreditOrderIdWithMaxParams)),
+                () -> responseWithMaxParams.then().assertThat().body(JsonSchemaValidator
+                        .matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
         CreditServiceDataBaseRequests.deleteCreditById(actualCreditOrderIdWithMinParams);
         CreditServiceDataBaseRequests.deleteCreditById(actualCreditOrderIdWithMaxParams);
     }
 
     @DisplayName("Оформление заявки на кредит с невалидным токеном")
-    @Description("Данный тест-кейс направлен на проверку CM 3.3 по US 3.3 на оформление заявки" +
-            " на кредит авторизованным пользователем в случае неуспешной валидации токена.")
-    @Tag("API")
-    @TmsLink("https://jira.astondevs.ru/browse/LIB3-611")
-    @Test
-    public void checkApplyingLoanInvalidToken() {
+    @Description("""
+            Данный тест-кейс направлен на проверку CM 3.3 по US 3.3 на оформление заявки
+            на кредит авторизованным пользователем в случае неуспешной валидации токена.
+            """)
+    @Tags({@Tag("API"), @Tag("CM"), @Tag("Negative")})
+    @TmsLink("LIB3-611")
+    @ParameterizedTest
+    @MethodSource("testData")
+    public void checkApplyingLoanInvalidToken(String creditName, int monthlyIncome, int monthlyExpenditure, String employerIdentificationNumber) {
         String jsonSchemaPath = "schemas/creditService/CM_3_3/errorMessage.json";
+        CreditInfo creditInfo = CreditServiceDataBaseRequests.getCreditInfoByName(creditName);
         Response response = creditService.checkListApplyingLoanInvalidToken
-                (3, 2500000, 20, 60000, 30000, "8698345212");
-        Assertions.assertAll(
-                () -> assertEquals(SC_UNAUTHORIZED, response.getStatusCode()),
+                (creditInfo.getId(), creditInfo.getMin_sum(), creditInfo.getMin_period_months(), monthlyIncome,
+                        monthlyExpenditure, employerIdentificationNumber);
+        assertAll(
+                () -> assertEquals(SC_UNAUTHORIZED, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }

@@ -14,12 +14,12 @@ import static constant.DepositConstants.*;
 import static org.apache.hc.core5.http.HttpStatus.SC_BAD_REQUEST;
 import static org.apache.hc.core5.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.*;
-import static property.BaseProperties.DEPOSIT_SERVICE_NEW;
+import static property.BaseProperties.DEPOSIT_SERVICE;
 
 @DisplayName("DM-9.9 Расчет потенциального дохода по депозиту на определенный срок.")
 public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseTest {
     {
-        RestAssured.baseURI = DEPOSIT_SERVICE_NEW;
+        RestAssured.baseURI = DEPOSIT_SERVICE;
     }
 
     private final int depositProductIdUsd = DepositServiceDataBaseRequest.getDepositProductId(CURRENCY_CODE_USD);
