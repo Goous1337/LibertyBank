@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "account_info": {
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "type": "string"
+        },
+        "customer_name": {
+          "type": "string"
+        },
+        "customer_surname": {
+          "type": "string"
+        },
+        "customer_patronymic": {
+          "type": "string"
+        },
+        "account_number": {
+          "type": "string"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "balance": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "accountId",
+        "customer_name",
+        "customer_surname",
+        "customer_patronymic",
+        "account_number",
+        "currency",
+        "balance"
+      ]
+    },
+    "bank_info": {
+      "type": "object",
+      "properties": {
+        "bankNameFull": {
+          "type": "string"
+        },
+        "bankPostalAddress": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "bankNameFull",
+        "bankPostalAddress"
+      ]
+    }
+  },
+  "required": [
+    "account_info",
+    "bank_info"
+  ]
+}

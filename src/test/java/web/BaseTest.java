@@ -1,11 +1,18 @@
 package web;
 
+import api.model.webAndApi.CreditProductService;
+import api.model.webAndApi.credit.MoreCreditDetails;
+import api.model.webAndApi.credit.MoreCreditProduct;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
+
+
 import web.drivers.DriverManager;
 import web.helpers.TestListener;
 import web.steps.*;
+
 
 import static property.UserPropertiesReader.USER_PASSWORD;
 import static property.UserPropertiesReader.USER_PHONE;
@@ -15,7 +22,6 @@ import static web.constans.UrlConfig.LOGIN_URL;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith(TestListener.class)
 public class BaseTest {
-
     protected static AccountSteps accountSteps;
     protected AccountInfoSteps accountInfoSteps;
     protected CreditInfoSteps creditInfoSteps;
@@ -29,11 +35,15 @@ public class BaseTest {
     protected ChangePasswordSteps changePasswordSteps;
     protected DropDownAccountMenuSteps dropDownAccountMenuSteps;
     protected ChangeNotificationStatusSteps changeNotificationStatusSteps;
+    protected MoreCreditProduct moreCreditProduct;
+    protected MoreCreditDetails moreCreditDetails;
+    protected CreditProductService creditProductService;
     protected UpdateEmailSteps updateEmailSteps;
     protected CardProductsSteps cardProductsSteps;
     protected CardSteps cardSteps;
     protected CardInfoSteps cardInfoSteps;
     protected CardProductInfoSteps cardProductInfoSteps;
+    protected CloseCardSteps closeCardSteps;
     protected FilterCardsSteps filterCardsSteps;
 
     public BaseTest() {
@@ -52,8 +62,14 @@ public class BaseTest {
         loginSteps.tapSubmitButton();
     }
 
+    @BeforeAll
+    public void driverInitialization() {
+        DriverManager.getDriver();
+    }
+
     @AfterAll
     public void tearDown() {
+        TestListener.takeScreenshot();
         DriverManager.resetDriver();
     }
 
@@ -69,6 +85,10 @@ public class BaseTest {
         changePasswordSteps = new ChangePasswordSteps();
         dropDownAccountMenuSteps = new DropDownAccountMenuSteps();
         changeNotificationStatusSteps = new ChangeNotificationStatusSteps();
+        creditInfoSteps = new CreditInfoSteps();
+        moreCreditProduct = new MoreCreditProduct();
+        moreCreditDetails = new MoreCreditDetails();
+        creditProductService = new CreditProductService();
         updateEmailSteps = new UpdateEmailSteps();
         personalDataSteps = new PersonalDataSteps();
         cardProductsSteps = new CardProductsSteps();
@@ -76,7 +96,8 @@ public class BaseTest {
         cardInfoSteps = new CardInfoSteps();
         cardProductsSteps = new CardProductsSteps();
         cardProductInfoSteps = new CardProductInfoSteps();
+        closeCardSteps = new CloseCardSteps();
         filterCardsSteps = new FilterCardsSteps();
-        creditInfoSteps = new CreditInfoSteps();
     }
+
 }

@@ -51,9 +51,6 @@ public class SetMainAccountTest extends BaseTest {
         accountSteps.assertMainAccountLabelIsDisplayed();
         accountInfoSteps.goBack();
         accountInfoSteps.assertMainAccountLabelIsDisplayed();
-
-        accountSteps.assertMainAccountLabelIsDisplayed();
-        accountSteps.assertMainAccountLabelIsNotDisplayed();
     }
 
     @Test

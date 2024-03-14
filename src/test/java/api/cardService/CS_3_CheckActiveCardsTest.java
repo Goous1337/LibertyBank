@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CARD_SERVICE;
 
+@DisplayName("CS-3 Просмотр активных карт")
 public class CS_3_CheckActiveCardsTest extends BaseTest {
     public static String JSON_SCHEMA_WITH_CARDS = "schemas/cardService/checkActiveCards.json";
     public static String JSON_SCHEMA_WITHOUT_CARDS = "schemas/cardService/checkActiveCardsWithoutCards.json";

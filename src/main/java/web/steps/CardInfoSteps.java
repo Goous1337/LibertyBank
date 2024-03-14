@@ -6,6 +6,7 @@ import org.openqa.selenium.NoSuchElementException;
 import web.helpers.TestListener;
 import web.pages.CardInfoPage;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static web.constans.AccountServiceConstants.NOT_DISPLAYED_MESSAGE;
 
 public class CardInfoSteps {
@@ -31,8 +32,19 @@ public class CardInfoSteps {
 
     @Step("Отображается статус карты 'Основная'")
     public void assertMainCardStatusDisplayed() {
-        Assertions.assertTrue(cardInfoPage.isMainCardStatusDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Статус 'Основная карта'"));
+        assertTrue(cardInfoPage.isMainCardStatusDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Статус 'Основная карта'"));
         TestListener.takeScreenshot();
+    }
+
+    @Step("Отображается статус карты 'Основная'")
+    public void assertStatusCardActiveDisplayed() {
+        assertTrue(cardInfoPage.statusCardActive(), String.format(NOT_DISPLAYED_MESSAGE, "Статус 'Активная'"));
+        TestListener.takeScreenshot();
+    }
+
+    @Step("Отображается статус карты 'Закрытая'")
+    public void assertCardStatusClosed() {
+        assertTrue(cardInfoPage.statusCardClosed(), String.format(NOT_DISPLAYED_MESSAGE, "Статус 'Закрытая'"));
     }
 
     @Step("Не отображается статус карты 'Основная'")

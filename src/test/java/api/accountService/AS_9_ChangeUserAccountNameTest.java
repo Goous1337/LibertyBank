@@ -7,7 +7,6 @@ import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -33,7 +32,6 @@ public class AS_9_ChangeUserAccountNameTest extends BaseTest {
 
     @Test
     @Tag("API")
-    @Disabled("Выключен, пока бэк не исправит баг с буквой 'Ё/ё'")
     @TmsLink("LIB2-2679")
     @DisplayName("Изменение названия счета")
     @Description("Тест направлен на проверку возможности переименования счета")
@@ -49,7 +47,6 @@ public class AS_9_ChangeUserAccountNameTest extends BaseTest {
 
     @Test
     @Tag("API")
-    @Disabled("Выключен, пока бэк не исправит баг с допустимой длиной символов")
     @TmsLink("LIB2-2680")
     @DisplayName("Изменить название счета, более 30 символов")
     @Description("Тест-кейс направлен на проверку невозможности переименования счета при вводе более 30 символов")

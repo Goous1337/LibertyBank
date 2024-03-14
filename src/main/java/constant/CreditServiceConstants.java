@@ -13,4 +13,5 @@ public class CreditServiceConstants {
     public static final String CREDIT_NAME = "Liberty Money";
     public static final String EMPTY_TOKEN = "";
 
+    public static final int COUNT_CREDITS_PRODUCT = 6;
 }

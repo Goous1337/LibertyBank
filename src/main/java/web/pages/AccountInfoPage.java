@@ -11,16 +11,16 @@ public class AccountInfoPage extends BasePage {
     @FindBy(xpath = "//*[contains(@class, 'my-bill-page__current')]")
     private WebElement accountName;
 
-    @FindBy(name = "pencil")
+    @FindBy(xpath = "//*[@data-testid='icon-pencil']")
     private WebElement pencilImage;
 
     @FindBy(xpath = "//*[contains(@class, 'my-bill-card__top-number-text')]")
     private WebElement accountNumber;
 
-    @FindBy(xpath = "//*[contains(@class, 'my-bill-card__bot-items')]/div[2]")
+    @FindBy(xpath = "//p[text()='Дата открытия счета']/following-sibling::p")
     private WebElement openDate;
 
-    @FindBy(xpath = "//*[contains(@class, 'my-bill-card__bot-items')]/div[3]")
+    @FindBy(xpath = "//p[text()='Дата закрытия счета']/following-sibling::p")
     private WebElement closeDate;
 
     @FindBy(xpath = "//*[contains(@class, 'my-bill-card__bot-items')]/div[1]")
@@ -119,6 +119,7 @@ public class AccountInfoPage extends BasePage {
     }
 
     public String getAccountStatus() {
+        Waiters.waitElement(accountStatus);
         return accountStatus.getText();
     }
 

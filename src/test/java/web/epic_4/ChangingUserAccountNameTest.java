@@ -3,7 +3,10 @@ package web.epic_4;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.TmsLink;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 import web.BaseTest;
 
 import static web.constans.AccountServiceConstants.*;
@@ -55,10 +58,7 @@ public class ChangingUserAccountNameTest extends BaseTest {
         renameAccountSteps.clickNewAccountNameTextField();
         renameAccountSteps.setValueInNewAccountNameTextField(INVALID_LONG_ACCOUNT_NAME);
         renameAccountSteps.save();
-
-        Assertions.assertTrue(renameAccountSteps.isMoreThan30SymbolsMessageDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Сообщение"));
-
-        renameAccountSteps.assertEmptyMessageIsDisplayed();
+        renameAccountSteps.assertMoreThenThirtyCharactersMessageIsDisplayed();
     }
 
     @Test
@@ -70,9 +70,7 @@ public class ChangingUserAccountNameTest extends BaseTest {
         renameAccountSteps.clickNewAccountNameTextField();
         renameAccountSteps.setValueInNewAccountNameTextField(INVALID_SHORT_ACCOUNT_NAME);
         renameAccountSteps.save();
-        Assertions.assertTrue(renameAccountSteps.isChangeFieldNameMessageDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Сообщение"));
-
-        renameAccountSteps.assertMoreThenThirtyCharactersMessageIsDisplayed();
+        renameAccountSteps.assertChangeFieldNameMessageDisplayed();
     }
 
     @Test

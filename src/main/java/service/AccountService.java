@@ -69,4 +69,8 @@ public class AccountService {
         return sendSimpleRequest(PATCH, ACCOUNTS_LIST + "/" + accountId,
                 new ChangeMainAccountRequest(isMain));
     }
+
+    public Response getInformationAboutAvailableBalance(String accountId) {
+        return sendRequestWithoutParams(GET, ACCOUNTS_LIST + "/" + accountId + "/balance");
+    }
 }
