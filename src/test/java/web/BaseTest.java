@@ -3,12 +3,16 @@ package web;
 import api.model.webAndApi.CreditProductService;
 import api.model.webAndApi.credit.MoreCreditDetails;
 import api.model.webAndApi.credit.MoreCreditProduct;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
+
 
 import web.drivers.DriverManager;
 import web.helpers.TestListener;
 import web.steps.*;
+
 
 import static property.UserPropertiesReader.USER_PASSWORD;
 import static property.UserPropertiesReader.USER_PHONE;
