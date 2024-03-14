@@ -23,7 +23,7 @@ import static property.BaseProperties.ACCOUNT_SERVICE;
 public class AS_5_ViewAccountInformationTest extends BaseTest {
 
     public static final String JSON_SCHEMA = "schemas/accountService/successfulGetAccountInfoData.json";
-    public static final String JSON_SCHEMA_FOR_ERROR = "schemas/accountService/errorResponse.json";
+    public static final String JSON_SCHEMA_FOR_ERROR = "schemas/accountService/errorNotFound.json";
 
     {
         RestAssured.baseURI = ACCOUNT_SERVICE;
