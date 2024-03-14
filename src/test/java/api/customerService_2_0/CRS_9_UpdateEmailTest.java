@@ -30,7 +30,7 @@ public class CRS_9_UpdateEmailTest extends BaseTest {
 
     @DisplayName("Основной сценарий. Обновление email Клиента")
     @Description("Данный тест-кейс проверяет возможность обновления email пользователя в БД")
-    @Tags({@Tag("smoke"), @Tag("API"), @Tag("positive")})
+    @Tags({@Tag("smoke"), @Tag("API"), @Tag("positive"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2121")
     @Test
     public void successfulUpdateEmail() {
@@ -45,7 +45,7 @@ public class CRS_9_UpdateEmailTest extends BaseTest {
 
     @DisplayName("Успешное обновление email пользователя проверка валидации полей")
     @Description("Данный тест-кейс проверяет возможность обновления email пользователя в БД")
-    @Tags({@Tag("smoke"), @Tag("API"), @Tag("positive")})
+    @Tags({@Tag("smoke"), @Tag("API"), @Tag("positive"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2164")
     @ParameterizedTest()
     @ValueSource(strings = {"va@ya.ru", "vasiavasiavasiavasiavasiavasi@yahooyahooyahoo.com", "vasiaPUPKIN@yahoo.com",
@@ -62,7 +62,7 @@ public class CRS_9_UpdateEmailTest extends BaseTest {
 
     @DisplayName("Проверка обязательности параметров при обновлении email пользователя в БД")
     @Description("Данный тест-кейс проверяет обязательность параметров при обновлении email пользователя")
-    @Tags({@Tag("smoke"), @Tag("API"), @Tag("negative")})
+    @Tags({@Tag("smoke"), @Tag("API"), @Tag("negative"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2135")
     @Test
     public void unsuccessfulUpdateEmailWithoutBody() {
@@ -84,7 +84,7 @@ public class CRS_9_UpdateEmailTest extends BaseTest {
 
     @DisplayName("Обновление email пользователя в БД при вводе не валидных данных")
     @Description("Данный тест-кейс проверяет возможность обновления email пользователя в БД")
-    @Tags({@Tag("API"), @Tag("negative")})
+    @Tags({@Tag("API"), @Tag("negative"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2124")
     @ParameterizedTest()
     @ValueSource(strings = {"vasiapupkinvasiapupkinvasiapupkinvasiapupki@mail.ru", "vasiapupkinvasiapupkinvasiapupk@mail.ru",
@@ -111,7 +111,7 @@ public class CRS_9_UpdateEmailTest extends BaseTest {
     @DisplayName("Обновление email клиента в БД при указании не валидного URL")
     @Description("Данный тест-кейс проверяет возможность обновления email пользователя в БД при использовании " +
             "не валидного URL")
-    @Tags({@Tag("smoke"), @Tag("API"), @Tag("negative")})
+    @Tags({@Tag("smoke"), @Tag("API"), @Tag("negative"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2123")
     @Test
     public void unsuccessfulUpdateEmailWithInvalidURL() {
@@ -134,7 +134,7 @@ public class CRS_9_UpdateEmailTest extends BaseTest {
     @DisplayName("Обновление email пользователя в БД когда метод не PATCH.")
     @Description("В данном  тест-кейсе проверяем возвращение ответа от сервера Status code 405 на запрос любым методом" +
             " вместо PATCH")
-    @Tags({@Tag("API"), @Tag("negative")})
+    @Tags({@Tag("API"), @Tag("negative"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2122")
     @ParameterizedTest(name = "method: {0}")
     @ValueSource(strings = {"POST", "PUT", "DELETE", "GET"})

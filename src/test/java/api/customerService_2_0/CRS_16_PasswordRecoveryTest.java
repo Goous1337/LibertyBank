@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import pojo.customerService_2_0.CustomerService_2_0_Mobile;
 import pojo.customerService_2_0.GetSessionToken;
 import pojo.customerService_2_0.RecoveryPassword;
@@ -32,8 +33,8 @@ public class CRS_16_PasswordRecoveryTest extends BaseTest {
 
     @DisplayName("Основной сценарий. Восстановление пароля пользователя на странице авторизации.")
     @Description("Данный тест-кейс проверяет возможность восстановления пароля Пользователя на странице авторизации в случае если пользователь забыл пароль.")
-    @Tags({@Tag("API"), @Tag("Smoke")})
-    @TmsLink("https://jira.astondevs.ru/browse/LIB-2082")
+    @Tags({@Tag("API"), @Tag("Smoke"), @Tag("CRS")})
+    @TmsLink("LIB-2082")
     @Test
 
     public void checkPasswordRecoveryOnAuthorizationPage() {
@@ -41,7 +42,7 @@ public class CRS_16_PasswordRecoveryTest extends BaseTest {
         String customerId = CustomerService_2_0_DataBaseRequest.getCustomerIdByMobilePhone(mobile);
         String password = CustomerService_2_0_DataBaseRequest.getPasswordByCustomerId(customerId);
         CustomerService_2_0_Mobile customerService_2_0_mobile = new CustomerService_2_0_Mobile(mobile);
-        Response response = customerService_2_0.checkListSavingVerificationCode(customerService_2_0_mobile);
+        customerService_2_0.checkListSavingVerificationCode(customerService_2_0_mobile);
         String verificationCodeRequest = CustomerService_2_0_DataBaseRequest.getCustomerLastVerificationCodeById(customerId);
         Response getSessionTokenToken = customerService_2_0.getSessionToken(new GetSessionToken(mobile, verificationCodeRequest));
         String sessionToken = getSessionTokenToken.jsonPath().get("sessionToken");
@@ -58,8 +59,8 @@ public class CRS_16_PasswordRecoveryTest extends BaseTest {
 
     @DisplayName("Восстановление пароля пользователя на странице авторизации используя метод помимо PATCH.")
     @Description("Данный тест-кейс проверяет возможность восстановления пароля Пользователя на странице авторизации в случае если пользователь забыл пароль. Используя при этом невалидный метод")
-    @Tags({@Tag("API"), @Tag("Smoke")})
-    @TmsLink("https://jira.astondevs.ru/browse/LIB-2091")
+    @Tags({@Tag("API"), @Tag("Smoke"), @Tag("CRS"), @Tag("Negative")})
+    @TmsLink("LIB-2091")
     @ParameterizedTest
     @CsvSource({"POST", "PUT", "GET", "DELETE"})
 
@@ -67,9 +68,8 @@ public class CRS_16_PasswordRecoveryTest extends BaseTest {
         String jsonSchemaPath = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";
         String mobile = CustomerService_2_0_DataBaseRequest.getMobilePhoneByCustomerId("d54eb158-7499-4bda-bafb-d4bd965a1985");
         String customerId = CustomerService_2_0_DataBaseRequest.getCustomerIdByMobilePhone(mobile);
-        String password = CustomerService_2_0_DataBaseRequest.getPasswordByCustomerId(customerId);
         CustomerService_2_0_Mobile customerService_2_0_mobile = new CustomerService_2_0_Mobile(mobile);
-        Response response = customerService_2_0.checkListSavingVerificationCode(customerService_2_0_mobile);
+        customerService_2_0.checkListSavingVerificationCode(customerService_2_0_mobile);
         String verificationCodeRequest = CustomerService_2_0_DataBaseRequest.getCustomerLastVerificationCodeById(customerId);
         Response getSessionTokenToken = customerService_2_0.getSessionToken(new GetSessionToken(mobile, verificationCodeRequest));
         String sessionToken = getSessionTokenToken.jsonPath().get("sessionToken");
@@ -83,26 +83,25 @@ public class CRS_16_PasswordRecoveryTest extends BaseTest {
 
     @DisplayName("Проверка обязательности полей при запросе восстановление пароля пользователя на странице авторизации.")
     @Description("Данный тест-кейс проверяет возможность восстановления пароля Пользователя на странице авторизации в случае если пользователь забыл пароль.")
-    @Tags({@Tag("API"), @Tag("Smoke")})
-    @TmsLink("https://jira.astondevs.ru/browse/LIB-2093")
+    @Tags({@Tag("API"), @Tag("Smoke"), @Tag("CRS"), @Tag("Negative")})
+    @TmsLink("LIB-2093")
     @ParameterizedTest
-    @CsvSource({" '' ", "null"}) //тест-кейс требует доработки
+    @NullAndEmptySource
 
     public void checkFieldsRequiredWhenPasswordRecoveryOnAuthorizationPage(String newPassword) {
         String jsonSchemaPath = "schemas/customerService_2_0/customerService_2_0_BadRequest400.json";
         String mobile = CustomerService_2_0_DataBaseRequest.getMobilePhoneByCustomerId("d54eb158-7499-4bda-bafb-d4bd965a1985");
         String customerId = CustomerService_2_0_DataBaseRequest.getCustomerIdByMobilePhone(mobile);
-        String password = CustomerService_2_0_DataBaseRequest.getPasswordByCustomerId(customerId);
         CustomerService_2_0_Mobile customerService_2_0_mobile = new CustomerService_2_0_Mobile(mobile);
-        Response response = customerService_2_0.checkListSavingVerificationCode(customerService_2_0_mobile);
+        customerService_2_0.checkListSavingVerificationCode(customerService_2_0_mobile);
         String verificationCodeRequest = CustomerService_2_0_DataBaseRequest.getCustomerLastVerificationCodeById(customerId);
         Response getSessionTokenToken = customerService_2_0.getSessionToken(new GetSessionToken(mobile, verificationCodeRequest));
         String sessionToken = getSessionTokenToken.jsonPath().get("sessionToken");
         RecoveryPassword getNewPassword = new RecoveryPassword(newPassword);
-        Response response1 = customerService_2_0.checkRecoveryPasswordOnAuthorizationPage(getNewPassword, sessionToken);
+        Response response = customerService_2_0.checkRecoveryPasswordOnAuthorizationPage(getNewPassword, sessionToken);
         assertAll(
-                () -> assertEquals(SC_BAD_REQUEST, response1.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
-                () -> response1.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 }

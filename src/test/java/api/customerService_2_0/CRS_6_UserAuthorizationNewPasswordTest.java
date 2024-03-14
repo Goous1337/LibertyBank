@@ -35,7 +35,7 @@ public class CRS_6_UserAuthorizationNewPasswordTest extends BaseTest {
             Данный тест кейс проверяет процесс авторизации клиента по введенному логину
             (телефону или номеру паспорта или вида на жительство) и паролю.
             """)
-    @Tags({@Tag("API"), @Tag("Smoke")})
+    @Tags({@Tag("API"), @Tag("Smoke"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2158")
     @Test
     public void checkUserAuthorizationWithMobileAndPassport() {
@@ -63,7 +63,7 @@ public class CRS_6_UserAuthorizationNewPasswordTest extends BaseTest {
     @Description("""
             Данный тест кейс проверяет процесс авторизации клиента используя невалидные учётные данные.
             """)
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tags({@Tag("API"), @Tag("Negative"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2159")
     @ParameterizedTest
     @CsvSource({"11111,TSRiNDU0OTM4ODYwMzk5YzZmYzVlOTFlMzQxMzExZDkzM2JlYTk4MDgyYzg0YzMyMjU4NWMxZmVmMTFmZGY0Yg==",
@@ -104,7 +104,7 @@ public class CRS_6_UserAuthorizationNewPasswordTest extends BaseTest {
     @Description("""
             Данный тест кейс проверяет процесс авторизации клиента используя невалидный параметр type в теле запроса.
             """)
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tags({@Tag("API"), @Tag("Negative"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2160")
     @Test
     public void checkUserAuthorizationWithInvalidType() {
@@ -123,7 +123,7 @@ public class CRS_6_UserAuthorizationNewPasswordTest extends BaseTest {
     @Description("""
             Данный тест кейс проверяет процесс авторизации клиента используя невалидный (не существующий) URL.
             """)
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tags({@Tag("API"), @Tag("Negative"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2161")
     @Test
     public void checkUserAuthorizationWithInvalidUrl() {
@@ -149,7 +149,7 @@ public class CRS_6_UserAuthorizationNewPasswordTest extends BaseTest {
     @Description("""
             Данный тест кейс проверяет процесс авторизации клиента используя некорректный метод запроса.
             """)
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tags({@Tag("API"), @Tag("Negative"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2162")
     @ParameterizedTest
     @CsvSource({"GET", "PUT", "PATCH", "DELETE"})
@@ -176,7 +176,7 @@ public class CRS_6_UserAuthorizationNewPasswordTest extends BaseTest {
     @Description("""
             Данный тест кейс проверяет процесс авторизации используя данные если клиент заблокирован работниками банка.
             """)
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tags({@Tag("API"), @Tag("Negative"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2163")
     @Test
     public void checkBlockedUserAuthorization() {

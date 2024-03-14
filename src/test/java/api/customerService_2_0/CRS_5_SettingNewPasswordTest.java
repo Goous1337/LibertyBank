@@ -32,7 +32,7 @@ public class CRS_5_SettingNewPasswordTest extends BaseTest {
 
     @DisplayName("Основной сценарий. Установка нового пароля")
     @Description("Данный тест-кейс проверяет успешную установку нового пароля пользователю.")
-    @Tags({@Tag("API"), @Tag("Smoke"), @Tag("Positive")})
+    @Tags({@Tag("API"), @Tag("Smoke"), @Tag("Positive"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2128")
     @Test
     public void checkSettingNewPasswordUser() {
@@ -58,7 +58,7 @@ public class CRS_5_SettingNewPasswordTest extends BaseTest {
 
     @DisplayName("Валидация метода запроса установления пароля")
     @Description("Данный тест-кейс проверяет возможность отправки запроса методом отличным от PATCH.")
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tags({@Tag("API"), @Tag("Negative"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2129")
     @ParameterizedTest(name = "method: {0}, mobilePhone: {1}")
     @CsvSource({"POST, 79527765102",
@@ -88,7 +88,7 @@ public class CRS_5_SettingNewPasswordTest extends BaseTest {
 
     @DisplayName("Проверка обязательности значения token в теле запроса при установлении нового пароля")
     @Description("Данный тест-кейс проверяет обязательность token в теле запроса")
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tags({@Tag("API"), @Tag("Negative"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2130")
     @ParameterizedTest(name = "token: {0}, newPassword: {1}")
     @CsvSource({"asd , YjMzYjM2Mzg3Y2U1YWExZGRkZmMyOGRkZGNiZDQxNGVkYjQ4NTRiNWZhZWM5ZDAzOGRmZWQzMmIyZTEyYWZjYQ==",
@@ -106,7 +106,7 @@ public class CRS_5_SettingNewPasswordTest extends BaseTest {
 
     @DisplayName("Проверка обязательности значения password в теле запроса при установлении нового пароля")
     @Description("Данный тест-кейс проверяет обязательность password в теле запроса")
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tags({@Tag("API"), @Tag("Negative"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2130")
     @Test
 
@@ -132,7 +132,7 @@ public class CRS_5_SettingNewPasswordTest extends BaseTest {
 
     @DisplayName("Проверка обязательности значения password в теле запроса при установлении нового пароля")
     @Description("Данный тест-кейс проверяет обязательность password в теле запроса")
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tags({@Tag("API"), @Tag("Negative"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2131")
     @Test
 
@@ -157,7 +157,7 @@ public class CRS_5_SettingNewPasswordTest extends BaseTest {
 
     @DisplayName("Проверка обязательности значения password в теле запроса при установлении нового пароля")
     @Description("Данный тест-кейс проверяет обязательность password в теле запроса")
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tags({@Tag("API"), @Tag("Negative"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2132")
     @Test
 
@@ -175,7 +175,7 @@ public class CRS_5_SettingNewPasswordTest extends BaseTest {
 
     @DisplayName("Валидация входных параметров при установлении нового пароля")
     @Description("Данный тест-кейс проверяет валидацию входных параметров: newPassword.")
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tags({@Tag("API"), @Tag("Negative"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2133")
     @ParameterizedTest(name = "newPassword: {0}, mobilePhone: {1}")
     @CsvSource({"cXdlcnR5MjU2, 79527765102",

@@ -32,7 +32,7 @@ public class CRS_11_PushNotificationsTest extends BaseTest {
 
     @DisplayName("Основной сценарий. Проверка возможности изменения получения PUSH-уведомлений.")
     @Description("В данном тест-кейсе проводится проверка возможности изменения настроек получения пользователем PUSH уведомлений.")
-    @Tags({@Tag("smoke"), @Tag("API"), @Tag("positive")})
+    @Tags({@Tag("smoke"), @Tag("API"), @Tag("positive"), @Tag("CRS")})
     @TmsLink("LIB-2261")
     @Test
 
@@ -55,7 +55,7 @@ public class CRS_11_PushNotificationsTest extends BaseTest {
 
     @DisplayName("Основной сценарий. Проверка возможности отказа от получения PUSH-уведомлений.")
     @Description("В данном тест-кейсе проводится проверка возможности отказа от получения пользователем PUSH уведомлений.")
-    @Tags({@Tag("smoke"), @Tag("API"), @Tag("positive")})
+    @Tags({@Tag("smoke"), @Tag("API"), @Tag("positive"), @Tag("CRS")})
     @TmsLink("LIB-2261")
     @Test
 
@@ -78,7 +78,7 @@ public class CRS_11_PushNotificationsTest extends BaseTest {
 
     @DisplayName("Проверка работы системы если тип параметра notificationStatus не является boolean при изменении PUSH-уведомлений.")
     @Description("В данном тест-кейсе проводится проверка работы системы, если тип параметра notificationStatus в теле запроса не является boolean")
-    @Tags({@Tag("API"), @Tag("negative")})
+    @Tags({@Tag("API"), @Tag("negative"), @Tag("CRS")})
     @TmsLink("LIB-2263")
     @ParameterizedTest(name = "notificationStatus: {0}")
     @ValueSource(strings = {"true", "12321", "gfaghs", ""})
@@ -103,7 +103,7 @@ public class CRS_11_PushNotificationsTest extends BaseTest {
 
     @DisplayName("Проверка работы системы при использовании метода помимо PATCH/OPTIONS при изменении PUSH-уведомлений.")
     @Description("Тест проверяет, возможно ли отправить запрос другим методом помимо PATCH/OPTIONS, которые разрешены на клиенте.")
-    @Tags({@Tag("API"), @Tag("negative")})
+    @Tags({@Tag("API"), @Tag("negative"), @Tag("CRS")})
     @TmsLink("LIB-2264")
     @ParameterizedTest(name = "method: {0}")
     @ValueSource(strings = {"GET", "PUT", "DELETE", "POST"})
@@ -127,7 +127,7 @@ public class CRS_11_PushNotificationsTest extends BaseTest {
 
     @DisplayName("Использование невалидного URL при изменении PUSH-уведомлений.")
     @Description("В данном тест-кейсе проводится проверка работы системы если используется невалидный URL.")
-    @Tags({@Tag("API"), @Tag("negative")})
+    @Tags({@Tag("API"), @Tag("negative"), @Tag("CRS")})
     @TmsLink("LIB-2265")
     @Test
 
@@ -146,7 +146,7 @@ public class CRS_11_PushNotificationsTest extends BaseTest {
 
     @DisplayName("Проверка работы системы если пользователь передал не корректные данные при изменении PUSH-уведомлений.")
     @Description("В данном тест-кейсе проводится проверка работы системы, если тип параметра notificationStatus в теле запроса не валидный.")
-    @Tags({@Tag("API"), @Tag("negative")})
+    @Tags({@Tag("API"), @Tag("negative"), @Tag("CRS")})
     @TmsLink("LIB-2267")
     @Test
 

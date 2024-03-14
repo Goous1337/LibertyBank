@@ -32,7 +32,7 @@ public class CRS_4_UserVerificationByCodeTest extends BaseTest {
 
     @DisplayName("Основной сценарий. Верификация пользователя с валидными данными")
     @Description("Данный тест-кейс проверяет поведение системы при верификации пользователя с валидными данными.")
-    @Tags({@Tag("API"), @Tag("Smoke")})
+    @Tags({@Tag("API"), @Tag("Smoke"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2115")
     @Test
     public void checkUserVerificationWithValidData() {
@@ -52,7 +52,7 @@ public class CRS_4_UserVerificationByCodeTest extends BaseTest {
     @Description("""
             Данный тест-кейс проверяет поведение системы при попытке верификации пользователя, номера которого нет в БД
             """)
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tags({@Tag("API"), @Tag("Negative"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2126")
     @Test
     public void checkUserVerificationWithUnExistMobilePhone() {
@@ -73,7 +73,7 @@ public class CRS_4_UserVerificationByCodeTest extends BaseTest {
     @Description("""
             Данный тест-кейс проверяет верификацию пользователя с истекшим кодом верификации.
             """)
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tags({@Tag("API"), @Tag("Negative"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2117")
     @Test
     public void checkUserVerificationWithExpiredVerificationCode() throws SQLException {
@@ -96,7 +96,7 @@ public class CRS_4_UserVerificationByCodeTest extends BaseTest {
             Данный тест-кейс проверяет, что при указании метода PATCH вместо POST,
              система выдает сообщение с 405 ошибкой
             """)
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tags({@Tag("API"), @Tag("Negative"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2127")
     @Test
     public void checkUserVerificationWithInvalidMethod() {
@@ -119,7 +119,7 @@ public class CRS_4_UserVerificationByCodeTest extends BaseTest {
             Данный тест-кейс проверяет верификацию пользователя при введении валидного кода, после того
             как пользователь ввел 3 раза невалидный код и заблокировался.
             """)
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tags({@Tag("API"), @Tag("Negative"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2119")
     @Test
     public void checkUserVerificationAfterBlocking() {
@@ -151,7 +151,7 @@ public class CRS_4_UserVerificationByCodeTest extends BaseTest {
     @Description("""
             Данный тест-кейс проверяет валидацию поля "mobilePhone" и "verificationCode" при верификации пользователя
             """)
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tags({@Tag("API"), @Tag("Negative"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2116")
     @ParameterizedTest
     @CsvSource({
@@ -184,7 +184,7 @@ public class CRS_4_UserVerificationByCodeTest extends BaseTest {
     @Description("""
             Данный тест-кейс проверяет валидацию поля "mobilePhone" и "verificationCode" при верификации пользователя
             """)
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tags({@Tag("API"), @Tag("Negative"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2116")
     @Test
     public void checkValidationOfInputParametersDuringUserVerificationWithWrongType() {
@@ -214,7 +214,7 @@ public class CRS_4_UserVerificationByCodeTest extends BaseTest {
             Данный тест-кейс проверяет верификацию пользователя при введении валидного кода,
              после 2 попыток введения невалидного кода.
             """)
-    @Tags({@Tag("API"), @Tag("Positive")})
+    @Tags({@Tag("API"), @Tag("Positive"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2120")
     @Issue("https://jira.astondevs.ru/browse/LIB-2599")
     @Test

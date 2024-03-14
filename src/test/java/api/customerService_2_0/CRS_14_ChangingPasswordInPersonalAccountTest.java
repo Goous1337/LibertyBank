@@ -30,7 +30,7 @@ public class CRS_14_ChangingPasswordInPersonalAccountTest extends BaseTest {
 
     @DisplayName("Основной сценарий. Проверка возможности изменения пароля в личном кабинете.")
     @Description("Данный тест-кейс проверяет возможность изменения пароля в личном кабинете пользователя.")
-    @Tags({@Tag("API"), @Tag("Smoke")})
+    @Tags({@Tag("API"), @Tag("Smoke"), @Tag("CRS")})
     @TmsLink("LIB-2085")
     @Test
     public void checkSuccessSavingVerificationCode() {
@@ -59,7 +59,7 @@ public class CRS_14_ChangingPasswordInPersonalAccountTest extends BaseTest {
             Данный тест-кейс проверяет возможность изменения пароля в личном кабинете пользователя
             при не валидных обязательных параметрах в BODY запроса.
             """)
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tags({@Tag("API"), @Tag("Negative"), @Tag("CRS")})
     @TmsLink("LIB-2100")
     @ParameterizedTest
     @CsvSource({"., ", "$,#"})
@@ -84,7 +84,7 @@ public class CRS_14_ChangingPasswordInPersonalAccountTest extends BaseTest {
             Данный тест-кейс проверяет возможность изменения пароля в личном кабинете пользователя при
             не валидных обязательных параметрах в BODY запроса.
             """)
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tags({@Tag("API"), @Tag("Negative"), @Tag("CRS")})
     @TmsLink("LIB-2089")
     @Test
     public void checkSavingVerificationCodeWithNullParameters() {
@@ -107,7 +107,7 @@ public class CRS_14_ChangingPasswordInPersonalAccountTest extends BaseTest {
             Данный тест-кейс проверяет возможность изменения пароля в личном кабинете пользователя при 
             не валидных обязательных параметрах в BODY запроса.
             """)
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tags({@Tag("API"), @Tag("Negative"), @Tag("CRS")})
     @TmsLink("LIB-2095")
     @ParameterizedTest
     @CsvSource({"GET", "POST", "PUT", "DELETE"})

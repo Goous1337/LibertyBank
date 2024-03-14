@@ -33,7 +33,7 @@ public class CRS_8_GettingUserInformationTest extends BaseTest {
     @DisplayName("Получение информации о пользователе в личном кабинете")
     @Description("Данный тест-кейс проверяет возможность получение информации о пользователе при просмотре общей " +
             "информации в основном меню и личном кабинете.")
-    @Tags({@Tag("smoke"), @Tag("API"), @Tag("positive")})
+    @Tags({@Tag("smoke"), @Tag("API"), @Tag("positive"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2107")
     @Test
 
@@ -54,7 +54,7 @@ public class CRS_8_GettingUserInformationTest extends BaseTest {
     @DisplayName("Получение информации о пользователе при не валидном методе запроса.")
     @Description("Данный тест-кейс проверяет возможность получение информации о пользователе при использовании " +
             "не валидных методов: POST, PUT, PATCH")
-    @Tags({@Tag("API"), @Tag("negative")})
+    @Tags({@Tag("API"), @Tag("negative"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2114")
 
     @ParameterizedTest(name = "Method: {0}")

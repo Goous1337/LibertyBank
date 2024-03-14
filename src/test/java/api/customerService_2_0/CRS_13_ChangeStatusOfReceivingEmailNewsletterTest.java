@@ -37,7 +37,7 @@ public class CRS_13_ChangeStatusOfReceivingEmailNewsletterTest extends BaseTest 
 
     @DisplayName("Основной сценарий. Проверка возможности изменения статуса настройки получения email-рассылки.")
     @Description("Проверка возможности изменения статуса настройки получения Email-рассылки.")
-    @Tags({@Tag("API"), @Tag("Smoke")})
+    @Tags({@Tag("API"), @Tag("Smoke"), @Tag("CRS")})
     @TmsLink("LIB-2759")
     @RepeatedTest(2)
     public void checkChangeStatusOfSettingsReceivingEmailNewsletters() {
@@ -58,7 +58,7 @@ public class CRS_13_ChangeStatusOfReceivingEmailNewsletterTest extends BaseTest 
             Проверка работы системы при успешной валидации токена, если тип параметра
             notificationStatus в теле запроса не является boolean.
             """)
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tags({@Tag("API"), @Tag("Negative"), @Tag("CRS")})
     @TmsLink("LIB-2761")
     @ParameterizedTest
     @MethodSource("notificationStatusesForTest")
@@ -81,7 +81,7 @@ public class CRS_13_ChangeStatusOfReceivingEmailNewsletterTest extends BaseTest 
             Тест проверяет, возможно ли отправить запрос другим методом помимо PATCH,
             которые разрешены на клиенте.
             """)
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tags({@Tag("API"), @Tag("Negative"), @Tag("CRS")})
     @TmsLink("LIB-2762")
     @ParameterizedTest
     @ValueSource(strings = {"GET", "POST", "PUT", "DELETE"})
@@ -101,7 +101,7 @@ public class CRS_13_ChangeStatusOfReceivingEmailNewsletterTest extends BaseTest 
 
     @DisplayName("Проверка работы системы при неуспешной валидации токена")
     @Description("Проверка работы системы, если указывается невалидный токен.")
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tags({@Tag("API"), @Tag("Negative"), @Tag("CRS")})
     @TmsLink("LIB-2763")
     @Test
     public void checkChangeStatusOfSettingsReceivingEmailNewslettersWithInvalidToken() {
@@ -119,7 +119,7 @@ public class CRS_13_ChangeStatusOfReceivingEmailNewsletterTest extends BaseTest 
 
     @DisplayName("Проверка работы системы в случае отсутствия email в БД")
     @Description("Проверка работы системы, если у пользователя отсутствует email в базе данных.")
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tags({@Tag("API"), @Tag("Negative"), @Tag("CRS")})
     @TmsLink("LIB-2765")
     @Test
     public void checkChangeStatusOfSettingsReceivingEmailNewslettersWithInvalidEmail() {
@@ -142,7 +142,7 @@ public class CRS_13_ChangeStatusOfReceivingEmailNewsletterTest extends BaseTest 
     @Description("""
             Проверка работы сервиса изменения статуса настройки получения email-уведомлений при указании некорректного URL.
             """)
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tags({@Tag("API"), @Tag("Negative"), @Tag("CRS")})
     @TmsLink("LIB-2773")
     @Test
     public void checkChangeStatusOfSettingsReceivingEmailNewslettersWithInvalidUrl() {

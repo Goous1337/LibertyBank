@@ -36,7 +36,7 @@ public class CRS_12_ChangeStatusSMSNotification extends BaseTest {
     @Description("Данный тест-кейс позволяет вносить изменения в учетной записи Пользователя в части настроек" +
             " получения SMS-уведомлений notificationStatus. В настройках пользователь может активировать или " +
             "деактивировать чек-бокс на получение SMS-уведомлений. ")
-    @Tags({@Tag("API"), @Tag("N-F"), @Tag("Positive"), @Tag("Smoke")})
+    @Tags({@Tag("API"), @Tag("N-F"), @Tag("Positive"), @Tag("Smoke"), @Tag("CRS")})
     @TmsLink("LIB-2758")
     @Test
     public void successChangeStatusSMSNotification() {
@@ -58,7 +58,7 @@ public class CRS_12_ChangeStatusSMSNotification extends BaseTest {
     @DisplayName("Проверка работы системы при отсутствии данных в BODY")
     @Description("Данном тест-кейсе проводится проверка работы сервиса изменения статуса настройки получения " +
             "SMS-уведомлений, если передано пустое поле")
-    @Tags({@Tag("API"), @Tag("N-F"), @Tag("Negative")})
+    @Tags({@Tag("API"), @Tag("N-F"), @Tag("Negative"), @Tag("CRS")})
     @TmsLink("LIB-2766")
     @Test
     public void unsuccessfulChangeStatusSMSNotificationWithEmptyBody() {
@@ -78,7 +78,7 @@ public class CRS_12_ChangeStatusSMSNotification extends BaseTest {
     @DisplayName("Проверка работы системы при использовании некорректного URL")
     @Description("Данном тест-кейсе проводится проверка работы сервиса изменения статуса настройки получения " +
             "SMS-уведомлений при указании некорректного URL ")
-    @Tags({@Tag("API"), @Tag("N-F"), @Tag("Negative")})
+    @Tags({@Tag("API"), @Tag("N-F"), @Tag("Negative"), @Tag("CRS")})
     @TmsLink("LIB-2767")
     @Test
     public void unsuccessfulChangeStatusSMSNotificationWithIncorrectURL() {
@@ -98,7 +98,7 @@ public class CRS_12_ChangeStatusSMSNotification extends BaseTest {
     @DisplayName("Проверка работы системы при использовании метода запроса не PATCH/OPTIONS")
     @Description("Данном тест-кейсе проводится проверка возможности отправки другим методом помимо PATCH/OPTIONS, " +
             "которые являются разрешенными")
-    @Tags({@Tag("API"), @Tag("N-F"), @Tag("Negative")})
+    @Tags({@Tag("API"), @Tag("N-F"), @Tag("Negative"), @Tag("CRS")})
     @TmsLink("LIB-2768")
     @ParameterizedTest
     @ValueSource(strings = {"GET", "PUT", "DELETE", "POST"})
@@ -127,7 +127,7 @@ public class CRS_12_ChangeStatusSMSNotification extends BaseTest {
     @DisplayName("Проверка работы системы при передаче неправильного типа параметра notificationStatus")
     @Description("Данном тест-кейсе проводится проверка работы сервиса при передаче неправильного типа параметра " +
             "notificationStatus")
-    @Tags({@Tag("API"), @Tag("N-F"), @Tag("Negative")})
+    @Tags({@Tag("API"), @Tag("N-F"), @Tag("Negative"), @Tag("CRS")})
     @TmsLink("LIB-2769")
     @ParameterizedTest
     @MethodSource("provideArgumentsForTest")

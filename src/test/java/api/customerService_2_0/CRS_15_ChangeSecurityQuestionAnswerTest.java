@@ -33,7 +33,7 @@ public class CRS_15_ChangeSecurityQuestionAnswerTest extends BaseTest {
 
     @DisplayName("Основной сценарий. Изменение контрольного вопроса/ответа")
     @Description("Данный тест-кейс проверяет возможность изменения контрольного вопроса/ответа.")
-    @Tags({@Tag("smoke"), @Tag("API")})
+    @Tags({@Tag("smoke"), @Tag("API"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2083")
     @Test
 
@@ -58,7 +58,7 @@ public class CRS_15_ChangeSecurityQuestionAnswerTest extends BaseTest {
 
     @DisplayName("Изменение контрольного вопроса/ответа, используя некорректный метод запроса")
     @Description("Данный тест-кейс проверяет возможность изменения контрольного вопроса/ответа используя некорректный метод запроса (POST, GET, PUT, DELETE вместо PATCH / OPTIONS)")
-    @Tags({@Tag("API")})
+    @Tags({@Tag("API"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2084")
     @ParameterizedTest(name = "Http метод: {0}")
     @CsvSource({
@@ -86,7 +86,7 @@ public class CRS_15_ChangeSecurityQuestionAnswerTest extends BaseTest {
 
     @DisplayName("Изменение контрольного вопроса/ответа, используя невалидный (не существующий) URL")
     @Description("Данный тест-кейс проверяет возможность изменения контрольного вопроса/ответа используя невалидный (не существующий) URL")
-    @Tags({@Tag("API")})
+    @Tags({@Tag("API"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2086")
     @Test()
 
@@ -106,7 +106,7 @@ public class CRS_15_ChangeSecurityQuestionAnswerTest extends BaseTest {
 
     @DisplayName("Изменение контрольного вопроса/ответа (переданы пустые/невалидные данные)")
     @Description("Данный тест-кейс проверяет возможность изменения контрольного вопроса/ответа при передаче в теле запроса пустых или невалидных данных.")
-    @Tags({@Tag("API")})
+    @Tags({@Tag("API"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2087")
     @ParameterizedTest(name = "Вопрос: {1}")
     @CsvSource({
