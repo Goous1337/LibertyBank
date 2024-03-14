@@ -7,7 +7,10 @@ import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -94,34 +97,45 @@ public class CM_3_3_CheckApplyingLoanTest extends BaseTest {
     }
 
     @DisplayName("Оформление заявки на кредит в случае, если в результирующей таблице нет записей по указанным критериям")
-    @Description("Данный тест-кейс направлен на проверку CM 3.3 по US 3.3 на оформление заявки на кредит" +
-            " авторизованным пользователем в случае, если в результирующей таблице нет записей по указанным критериям.")
-    @Tags({@Tag("API"), @Tag("Negative")})
-    @TmsLink("https://jira.astondevs.ru/browse/LIB3-614")
-    @Test
-    public void checkApplyingLoanServerNoRecordsMatchingCriteria() {
+    @Description("""
+            Данный тест-кейс направлен на проверку CM 3.3 по US 3.3 на оформление заявки на кредит
+            авторизованным пользователем в случае, если в результирующей таблице нет записей по указанным критериям.
+            """)
+    @Tags({@Tag("API"), @Tag("CM"), @Tag("Negative")})
+    @TmsLink("LIB3-614")
+    @ParameterizedTest
+    @MethodSource("testData")
+    public void checkApplyingLoanServerNoRecordsMatchingCriteria
+            (String creditName, int monthlyIncome, int monthlyExpenditure, String employerIdentificationNumber) {
         String jsonSchemaPath = "schemas/creditService/CM_3_3/errorMessage.json";
+        CreditInfo creditInfo = CreditServiceDataBaseRequests.getCreditInfoByName(creditName);
         Response response = creditService.checkListApplyingLoan
-                (0, 2500000, 20, 60000, 30000, "8698345212");
+                (CreditServiceDataBaseRequests.getCreditId(creditName) + 100, creditInfo.getMin_sum(),
+                        creditInfo.getMin_period_months(), monthlyIncome, monthlyExpenditure, employerIdentificationNumber);
         Assertions.assertAll(
-                () -> assertEquals(SC_NOT_FOUND, response.getStatusCode()),
+                () -> assertEquals(SC_NOT_FOUND, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 
     @DisplayName("Оформление заявки на кредит в случае некорректной конфигурации запроса")
-    @Description("Данный тест-кейс направлен на проверку CM 3.3 по US 3.3 на оформление заявки" +
-            " на кредит авторизованным пользователем в случае некорректной конфигурации запроса.")
-    @Tags({@Tag("API"), @Tag("Negative")})
-    @TmsLink("https://jira.astondevs.ru/browse/LIB3-612")
-    @Test
-    public void checkApplyingLoanInvalidConfig() {
+    @Description("""
+            Данный тест-кейс направлен на проверку CM 3.3 по US 3.3 на оформление заявки
+            на кредит авторизованным пользователем в случае некорректной конфигурации запроса.
+            """)
+    @Tags({@Tag("API"), @Tag("Negative"), @Tag("CM")})
+    @TmsLink("LIB3-612")
+    @ParameterizedTest
+    @MethodSource("testData")
+    public void checkApplyingLoanInvalidConfig
+            (String creditName, int monthlyIncome, int monthlyExpenditure, String employerIdentificationNumber) {
         String jsonSchemaPath = "schemas/creditService/CM_3_3/errorMessage.json";
+        CreditInfo creditInfo = CreditServiceDataBaseRequests.getCreditInfoByName(creditName);
         Response response = creditService.checkListApplyingLoan
-                (null, 2500000, 20,
-                        60000, 30000, "8698345212");
+                (null, creditInfo.getMin_sum(), creditInfo.getMin_period_months(),
+                        monthlyIncome, monthlyExpenditure, employerIdentificationNumber);
         Assertions.assertAll(
-                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode()),
+                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }

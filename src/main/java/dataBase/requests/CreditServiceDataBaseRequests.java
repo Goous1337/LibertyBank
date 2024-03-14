@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import pojo.creditService.CreditInfo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static constant.LibertyServiceName.CREDIT_SERVICE;
@@ -28,10 +27,15 @@ public class CreditServiceDataBaseRequests {
     }
 
     public static List<Integer> getCreditsOrders() {
-        List<Integer> idList = new ArrayList<>();
         String sql = "SELECT id FROM credit_order";
-        idList = getDBConnection(CREDIT_SERVICE).queryForList(sql, Integer.class);
+        getDBConnection(CREDIT_SERVICE).queryForList(sql, Integer.class);
         LOG.info("Получен список id заказов на кредит");
-        return idList;
+        return getDBConnection(CREDIT_SERVICE).queryForList(sql, Integer.class);
+    }
+
+    public static Integer getCreditId(String creditName) {
+        String sql = "SELECT id FROM credit_product WHERE name =?";
+        LOG.info(String.format("Получен id кредита %s.", creditName));
+        return getDBConnection(CREDIT_SERVICE).queryForObject(sql, Integer.class, creditName);
     }
 }
