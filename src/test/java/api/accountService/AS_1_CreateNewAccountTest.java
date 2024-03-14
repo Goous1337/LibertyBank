@@ -56,7 +56,7 @@ public class AS_1_CreateNewAccountTest extends BaseTest {
     @Test
     public void checkCreateNewAccountForNotRegisteredUser() {
         Response response = accountService.checkCreateNewAccountWithInvalidUserData(CURRENCY_RUB, ACCOUNT_TYPE_PAYMENT, true);
-        String jsonSchemaPath = "schemas/accountService/errorResponse.json";
+        String jsonSchemaPath = "schemas/accountService/errorNotFound.json";
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST,
                         response.statusCode(),
@@ -76,7 +76,7 @@ public class AS_1_CreateNewAccountTest extends BaseTest {
     })
     public void checkCreateNewAccountWithInvalidData(String currency, String accountType, Boolean isMain) {
         Response response = accountService.checkCreateNewAccount(currency, accountType, isMain);
-        String jsonSchemaPath = "schemas/accountService/errorResponse.json";
+        String jsonSchemaPath = "schemas/accountService/errorNotFound.json";
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST,
                         response.statusCode(),

@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import static constant.AccountServiceConstants.VALID_CUSTOMER_ID;
+import static constant.AccountServiceConstants.VALID_CUSTOMER_ID_WITH_MONEY;
 import static constant.LibertyServiceName.ACCOUNT_SERVICE_DB;
 import static dataBase.DataBaseConnector.getDBConnection;
 
@@ -15,6 +16,13 @@ public class AccountServiceDataBaseRequest {
         String sql = "SELECT id FROM account WHERE customer_id = '" + VALID_CUSTOMER_ID + "' AND status = '" + accountStatus + "' AND balance = 0 LIMIT 1";
         String accountId = getDBConnection(ACCOUNT_SERVICE_DB).queryForObject(sql, String.class);
         LOG.info(String.format("Получен id счета: %s", accountId));
+        return accountId;
+    }
+
+    public static String getAccountIdWithMoney(String accountStatus) {
+        String sql = "SELECT id FROM account WHERE customer_id = '" + VALID_CUSTOMER_ID_WITH_MONEY + "' AND status = '" + accountStatus + "' AND balance > 10 LIMIT 1";
+        String accountId = getDBConnection(ACCOUNT_SERVICE_DB).queryForObject(sql, String.class);
+        LOG.info(String.format("Получен id счета с ненулевым балансом: %s", accountId));
         return accountId;
     }
 
