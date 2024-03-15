@@ -64,4 +64,9 @@ public class CardService {
                         .amountPerMonth(amountPerMonth)
                         .build());
     }
+
+    public Response getCardLimits(String cardId) {
+        return sendSimpleRequest(GET, ACTIVE_CARDS + "/" + cardId + "/limits",
+                getRP(HEADER, HEADER_CUSTOMER_ID, CUSTOMER_ID_WITH_ACTIVE_CARDS));
+    }
 }
