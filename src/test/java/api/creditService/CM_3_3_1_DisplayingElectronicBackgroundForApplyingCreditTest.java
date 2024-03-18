@@ -1,6 +1,7 @@
 package api.creditService;
 
 import api.BaseTest;
+import dataBase.requests.CreditServiceDataBaseRequest;
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
@@ -27,7 +28,8 @@ public class CM_3_3_1_DisplayingElectronicBackgroundForApplyingCreditTest extend
     @Test
     public void checkDisplayingElectronicBackgroundForApplyingCreditValidToken() {
         String jsonSchemaPath = "schemas/creditService/CM_3_3_1/checkDisplayingElectronicBackgroundForApplyingCreditValidToken.json";
-        Response response = CreditService.checkGetRequestDisplayingElectronicBackground("3"); //TODO сделать для всех существующих productId
+        Integer productId = CreditServiceDataBaseRequest.getFirstCreditProductId();
+        Response response = CreditService.checkGetRequestDisplayingElectronicBackground(productId);
         assertAll(
                 () -> assertEquals(SC_OK, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
@@ -51,6 +53,7 @@ public class CM_3_3_1_DisplayingElectronicBackgroundForApplyingCreditTest extend
         );
     }
 
+
     @DisplayName("Отображение электронной формы для оформления заявки на кредит в случае, если в результирующей таблице нет записей по указанным критериям")
     @Description("Данный тест-кейс направлен на проверку отображения ошибки в ответе сервера в случае, если в результирующей таблице нет записи по указанным критериям")
     @Tags({@Tag("Negative"), @Tag("API")})
@@ -58,7 +61,8 @@ public class CM_3_3_1_DisplayingElectronicBackgroundForApplyingCreditTest extend
     @Test
     public void checkDisplayingElectronicBackgroundForApplyingCreditValidTokenWithoutParameters() {
         String jsonSchemaPath = "schemas/errorMessage.json";
-        Response response = CreditService.checkGetRequestDisplayingElectronicBackground("165"); //TODO сделать для несуществующего productId
+        int countProducts = CreditServiceDataBaseRequest.getCountOfProducts();
+        Response response = CreditService.checkGetRequestDisplayingElectronicBackground(countProducts + 1); //TODO сделать для несуществующего productId
         assertAll(
                 () -> assertEquals(SC_NOT_FOUND, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
