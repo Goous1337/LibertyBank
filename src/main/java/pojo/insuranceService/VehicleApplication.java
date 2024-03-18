@@ -11,6 +11,4 @@ public class VehicleApplication {
     private Integer duration;
     private Boolean insurerIsOwner;
     private VehicleDocumentRequest vehicleDocumentRequest;
-
-
 }

@@ -9,12 +9,18 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import pojo.insuranceService.*;
+import pojo.insuranceService.CreateVehicleApplicationInsuranceRequest;
+import pojo.insuranceService.Driver;
+import pojo.insuranceService.VehicleOwner;
+import pojo.insuranceService.VehicleDocumentRequest;
+import pojo.insuranceService.VehicleApplication;
+import pojo.insuranceService.Vehicle;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import static constant.InsuranceServiceConstants.INSURANCE_TYPE_VALUE;
+import static constant.InsuranceServiceConstants.CLIENT_ID;
 import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.apache.http.HttpStatus.SC_CREATED;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -39,7 +45,7 @@ public class INS_2_CheckNewApplicationRequest extends BaseTest {
                         "CAR", "Kalina", "LADA", 2021,"ПР256С-63",  1000000, 150, 1111111,
                         "Михаил", "Попов", "2001-01-24", "12АА 125896", "2024-02-10","РФ, г.Москва, ул. 1-й Армии, д. 35, кв. 124",
                         1,  643, 15, false);
-        Response response = insuranceService.checkMakeNewVehicleApplicationRequest(createVehicleApplicationInsuranceRequest);
+        Response response = insuranceService.checkMakeNewVehicleApplicationRequest(CLIENT_ID, createVehicleApplicationInsuranceRequest);
         assertAll(
                 () -> assertEquals(SC_CREATED,
                         response.statusCode(),
@@ -59,7 +65,7 @@ public class INS_2_CheckNewApplicationRequest extends BaseTest {
                 "CAR", "Kalina", "LADA", 2021,"ПР256С-63",  1000000, 150, 11111111,
                 "Михаил", "Попов", "2001-01-24", "12АА 125896", "2024-02-10","РФ, г.Москва, ул. 1-й Армии, д. 35, кв. 124",
                 1,  643, 15, false);
-        Response response = insuranceService.checkMakeNewVehicleApplicationRequest(createVehicleApplicationInsuranceRequest);
+        Response response = insuranceService.checkMakeNewVehicleApplicationRequest(CLIENT_ID, createVehicleApplicationInsuranceRequest);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST,
                         response.statusCode(),
@@ -78,7 +84,7 @@ public class INS_2_CheckNewApplicationRequest extends BaseTest {
                 "CAR", "Kalina", "LADA", 2021,"ПР256С-63",  1000000, 150, null,
                 "Михаил", "Попов", "2001-01-24", "12АА 125896", "2024-02-10","РФ, г.Москва, ул. 1-й Армии, д. 35, кв. 124",
                 1,  643, 15, false);
-        Response response = insuranceService.checkMakeNewVehicleApplicationRequest(createVehicleApplicationInsuranceRequest);
+        Response response = insuranceService.checkMakeNewVehicleApplicationRequest(CLIENT_ID, createVehicleApplicationInsuranceRequest);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST,
                         response.statusCode(),
@@ -98,7 +104,7 @@ public class INS_2_CheckNewApplicationRequest extends BaseTest {
                 "CAR", "Kalina", "LADA", 2021,"ПР256С-63",  1000000, null, 1111111,
                 "Михаил", "Попов", "2001-01-24", "12АА 125896", "2024-02-10","РФ, г.Москва, ул. 1-й Армии, д. 35, кв. 124",
                 1,  643, 15, false);
-        Response response = insuranceService.checkMakeNewVehicleApplicationRequest(createVehicleApplicationInsuranceRequest);
+        Response response = insuranceService.checkMakeNewVehicleApplicationRequest(CLIENT_ID, createVehicleApplicationInsuranceRequest);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST,
                         response.statusCode(),
@@ -118,7 +124,7 @@ public class INS_2_CheckNewApplicationRequest extends BaseTest {
                 "CAR", "Kalina", "LADA", 2021,"ПР256С-63",  -100000, 150, 1111111,
                 "Михаил", "Попов", "2001-01-24", "12АА 125896", "2024-02-10","РФ, г.Москва, ул. 1-й Армии, д. 35, кв. 124",
                 1,  643, 15, false);
-        Response response = insuranceService.checkMakeNewVehicleApplicationRequest(createVehicleApplicationInsuranceRequest);
+        Response response = insuranceService.checkMakeNewVehicleApplicationRequest(CLIENT_ID, createVehicleApplicationInsuranceRequest);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST,
                         response.statusCode(),
@@ -138,7 +144,7 @@ public class INS_2_CheckNewApplicationRequest extends BaseTest {
                 "CAR", "Kalina", "LADA", 2021,"ПР256С-63",  null, 150, 1111111,
                 "Михаил", "Попов", "2001-01-24", "12АА 125896", "2024-02-10","РФ, г.Москва, ул. 1-й Армии, д. 35, кв. 124",
                 1,  643, 15, false);
-        Response response = insuranceService.checkMakeNewVehicleApplicationRequest(createVehicleApplicationInsuranceRequest);
+        Response response = insuranceService.checkMakeNewVehicleApplicationRequest(CLIENT_ID, createVehicleApplicationInsuranceRequest);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST,
                         response.statusCode(),
@@ -158,7 +164,7 @@ public class INS_2_CheckNewApplicationRequest extends BaseTest {
                 "CAR", "Kalina", "LADA", 2021,null,  100000, 150, 1111111,
                 "Михаил", "Попов", "2001-01-24", "12АА 125896", "2024-02-10","РФ, г.Москва, ул. 1-й Армии, д. 35, кв. 124",
                 1,  643, 15, false);
-        Response response = insuranceService.checkMakeNewVehicleApplicationRequest(createVehicleApplicationInsuranceRequest);
+        Response response = insuranceService.checkMakeNewVehicleApplicationRequest(CLIENT_ID, createVehicleApplicationInsuranceRequest);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST,
                         response.statusCode(),
@@ -178,7 +184,7 @@ public class INS_2_CheckNewApplicationRequest extends BaseTest {
                 "CAR", "Kalina", null, 2021,"ПР256С-63",  100000, 150, 1111111,
                 "Михаил", "Попов", "2001-01-24", "12АА 125896", "2024-02-10","РФ, г.Москва, ул. 1-й Армии, д. 35, кв. 124",
                 1,  643, 15, false);
-        Response response = insuranceService.checkMakeNewVehicleApplicationRequest(createVehicleApplicationInsuranceRequest);
+        Response response = insuranceService.checkMakeNewVehicleApplicationRequest(CLIENT_ID, createVehicleApplicationInsuranceRequest);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST,
                         response.statusCode(),
@@ -198,7 +204,7 @@ public class INS_2_CheckNewApplicationRequest extends BaseTest {
                 "CAR", null, "LADA", 2021,"ПР256С-63",  100000, 150, 1111111,
                 "Михаил", "Попов", "2001-01-24", "12АА 125896", "2024-02-10","РФ, г.Москва, ул. 1-й Армии, д. 35, кв. 124",
                 1,  643, 15, false);
-        Response response = insuranceService.checkMakeNewVehicleApplicationRequest(createVehicleApplicationInsuranceRequest);
+        Response response = insuranceService.checkMakeNewVehicleApplicationRequest(CLIENT_ID, createVehicleApplicationInsuranceRequest);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST,
                         response.statusCode(),

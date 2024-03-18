@@ -8,10 +8,8 @@ import lombok.Data;
 public class VehicleOwner {
     private String name;
     private String surname;
-    //
     private String patronym;
     private String birthdate;
     private String registrationAddress;
     private String actualAddress;
-
 }

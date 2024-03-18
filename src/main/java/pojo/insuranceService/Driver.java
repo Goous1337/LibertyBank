@@ -8,7 +8,6 @@ import lombok.Data;
 public class Driver {
     private String name;
     private String surname;
-    //
     private String patronym;
     private String birthdate;
     private String licenseId;

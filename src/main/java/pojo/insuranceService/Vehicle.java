@@ -15,11 +15,8 @@ public class Vehicle {
     private Integer productionDate;
     private String numberPlate;
     private Integer price;
-    //
     private String vinCode;
-    //
     private String bodyCode;
-    //
     private String chassisCode;
     private Integer power;
     private Integer mileage;
