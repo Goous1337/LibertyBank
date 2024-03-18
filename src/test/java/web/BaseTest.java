@@ -12,6 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import web.drivers.DriverManager;
 import web.helpers.TestListener;
 import web.steps.*;
+import web.steps.depositsSteps.DepositsProductsSteps;
 
 
 import static property.UserPropertiesReader.USER_PASSWORD;
@@ -24,6 +25,8 @@ import static web.constans.UrlConfig.LOGIN_URL;
 public class BaseTest {
     protected static AccountSteps accountSteps;
     protected AccountInfoSteps accountInfoSteps;
+
+    protected DepositsProductsSteps depositsProductsSteps;
     protected CreditInfoSteps creditInfoSteps;
     protected CreateAccountSteps createAccountSteps;
     protected ConfirmationSteps confirmationSteps;
@@ -98,6 +101,7 @@ public class BaseTest {
         cardProductInfoSteps = new CardProductInfoSteps();
         closeCardSteps = new CloseCardSteps();
         filterCardsSteps = new FilterCardsSteps();
+        depositsProductsSteps = new DepositsProductsSteps();
     }
 
 }

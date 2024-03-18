@@ -11,12 +11,10 @@ import java.util.List;
 import static constant.CreditServiceConstants.COUNT_CREDITS_PRODUCT;
 import static web.constans.CreditServiceConstants.BASE_URL_API;
 
+@Getter
 public class CreditProductService {
-    @Getter
     private MoreCreditProduct moreCreditProduct;
-    @Getter
     private List<MoreCreditProduct> moreCreditProductList;
-    @Getter
     private List<CreditProduct> creditProductsList;
 
     public void getUsersFromPage() {
