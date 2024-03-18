@@ -1,6 +1,8 @@
 package web.epic_5;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -10,6 +12,9 @@ import web.BaseTest;
 
 import static web.constans.UrlConfig.CARD_PRODUCTS_URL;
 
+@Tag("Web")
+@Epic("5 - Карты")
+@Feature("US - 5.1.ALL Просмотр карточных продуктов")
 @DisplayName("US - 5.1.ALL Просмотр карточных продуктов")
 public class CardProductsInfoTest extends BaseTest {
     @BeforeEach

@@ -1,13 +1,14 @@
 package web.helpers;
 
-import io.qameta.allure.Attachment;
+import java.util.Optional;
+
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.TestWatcher;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import web.drivers.DriverManager;
 
-import java.util.Optional;
+import io.qameta.allure.Attachment;
+import web.drivers.DriverManager;
 
 public class TestListener implements TestWatcher {
 
@@ -22,7 +23,6 @@ public class TestListener implements TestWatcher {
 
     @Override
     public void testSuccessful(ExtensionContext context) {
-        takeScreenshot();
     }
 
     @Override
@@ -31,6 +31,6 @@ public class TestListener implements TestWatcher {
 
     @Override
     public void testFailed(ExtensionContext context, Throwable cause) {
-        takeScreenshot();
+
     }
 }

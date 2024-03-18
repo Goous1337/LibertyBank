@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.ACCOUNT_SERVICE;
 
-@DisplayName("Сделать счет основным")
+@DisplayName("AS-4 Сделать счет основным")
 public class AS_4_SetMainStatusOnAccountTest extends BaseTest {
 
     {
@@ -52,7 +52,7 @@ public class AS_4_SetMainStatusOnAccountTest extends BaseTest {
     public void setMainStatusOnClosedAccount() {
         String accountId = AccountServiceDataBaseRequest.getAccountId(STATUS_CLOSED);
         Response response = accountService.setMainAccountStatus(accountId, IS_MAIN);
-        String jsonSchemaPath = "schemas/accountService/errorResponse.json";
+        String jsonSchemaPath = "schemas/accountService/errorNotFound.json";
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST,
                         response.statusCode(),
@@ -69,7 +69,7 @@ public class AS_4_SetMainStatusOnAccountTest extends BaseTest {
     public void setMainStatusOnBlockedAccount() {
         String accountId = AccountServiceDataBaseRequest.getAccountId(STATUS_BLOCKED);
         Response response = accountService.setMainAccountStatus(accountId, IS_MAIN);
-        String jsonSchemaPath = "schemas/accountService/errorResponse.json";
+        String jsonSchemaPath = "schemas/accountService/errorNotFound.json";
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST,
                         response.statusCode(),
@@ -89,7 +89,7 @@ public class AS_4_SetMainStatusOnAccountTest extends BaseTest {
     })
     public void setMainAccountStatusWithInvalidData(String accountId, Boolean isMain) {
         Response response = accountService.setMainAccountStatus(accountId, isMain);
-        String jsonSchemaPath = "schemas/accountService/errorResponse.json";
+        String jsonSchemaPath = "schemas/accountService/errorNotFound.json";
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST,
                         response.statusCode(),

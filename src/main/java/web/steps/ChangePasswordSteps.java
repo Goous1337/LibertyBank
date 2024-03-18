@@ -4,6 +4,7 @@ import io.qameta.allure.Step;
 import web.pages.ChangePasswordPage;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static property.UserPropertiesReader.USER_PASSWORD;
 import static web.constans.AccountServiceConstants.NOT_DISPLAYED_MESSAGE;
 
 public class ChangePasswordSteps {
@@ -50,5 +51,13 @@ public class ChangePasswordSteps {
     public void assertChangePasswordBtnIsPresent() {
         assertTrue(isChangePasswordPresent(), String.format(NOT_DISPLAYED_MESSAGE,
                 "кнопка 'Изменить пароль'"));
+    }
+
+    @Step("Сброс нового пароля")
+    public void resetPasswordForUser(String oldPassword) {
+        setKeysToOldPasswordInput(oldPassword)
+                .setKeysToNewPasswordInput(USER_PASSWORD)
+                .setKeysToConfirmPasswordInput(USER_PASSWORD)
+                .clickSubmitPasswordChangeBtn();
     }
 }

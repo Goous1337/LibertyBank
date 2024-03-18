@@ -39,7 +39,7 @@ public class AccountInfoSteps {
 
     @Step("Отображается дата открытия счета")
     public void assertOpenDateDisplayed() {
-        Assertions.assertTrue(accountInfoPage.isCloseDateDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Дата открытия счета"));
+        Assertions.assertTrue(accountInfoPage.isOpenDateDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Дата открытия счета"));
         TestListener.takeScreenshot();
     }
 

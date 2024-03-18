@@ -1,5 +1,7 @@
 package web.drivers;
 
+import java.time.Duration;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -7,11 +9,12 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
+
 import property.WebPropertiesReader;
 
-import java.time.Duration;
-
-import static web.constans.DriverConfig.*;
+import static web.constans.DriverConfig.CHROME;
+import static web.constans.DriverConfig.FIREFOX;
+import static web.constans.DriverConfig.SAFARI;
 import static web.helpers.Waiters.TIME_TO_WAIT;
 
 public class DriverManager {

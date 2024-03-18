@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInfo;
+import preconditions.UserAuthorization;
 import service.*;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class BaseTest {
     protected AccountService accountService;
     protected CardService cardService;
     protected InsuranceService insuranceService;
+    protected UserAuthorization userAuthorization;
 
     public BaseTest() {
         params = new ArrayList<>();
@@ -44,6 +46,7 @@ public class BaseTest {
         accountService = new AccountService();
         cardService = new CardService();
         insuranceService = new InsuranceService();
+        userAuthorization = new UserAuthorization();
     }
 
     @BeforeEach

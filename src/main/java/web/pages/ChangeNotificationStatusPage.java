@@ -10,10 +10,14 @@ public class ChangeNotificationStatusPage extends BasePage {
     private WebElement statusSMSNotificationCheckbox;
     @FindBy(xpath = "//li[contains(text(), 'SMS-оповещения')]//label")
     private WebElement statusSMSNotificationLabel;
-    @FindBy(xpath = "//input[@name=\"email\"]")
+    @FindBy(xpath = "//input[@name = 'email']")
     private WebElement statusEmailNotificationCheckbox;
     @FindBy(xpath = "//li[contains(text(), 'Email-оповещения')]//label")
     private WebElement statusEmailNotificationLabel;
+    @FindBy(xpath = "//input[@name = 'push']")
+    private WebElement statusPushNotificationCheckbox;
+    @FindBy(xpath = "//li[contains(text(), 'Push-оповещения')]//label")
+    private WebElement statusPushNotificationLabel;
 
 
     public void clickSMSNotificationCheckbox() {
@@ -38,5 +42,17 @@ public class ChangeNotificationStatusPage extends BasePage {
 
     public boolean isChangedEmailNotificationCheckBox(boolean status) {
         return waitCheckbox(!status, statusEmailNotificationCheckbox).isSelected();
+    }
+
+    public void clickPushNotificationCheckbox() {
+        statusPushNotificationLabel.click();
+    }
+
+    public boolean isSelectedPushNotificationCheckBox() {
+        return statusPushNotificationCheckbox.isSelected();
+    }
+
+    public boolean isChangedPushNotificationCheckBox(boolean status) {
+        return waitCheckbox(!status, statusPushNotificationCheckbox).isSelected();
     }
 }

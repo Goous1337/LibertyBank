@@ -29,11 +29,11 @@ public class DM_9_2_MakeNewDepositTest extends BaseTest {
 
     String jsonSchemaPath = "schemas/depositService/newDepositResponse.json";
     String jsonSchemaPathIncorrectValues = "schemas/depositService/depositIncorrectValues.json";
-    private static final int depositProductIdUsd = DepositServiceDataBaseRequest.getDepositProductId(CURRENCY_CODE_USD);
-    private static final int depositProductIdRub = DepositServiceDataBaseRequest.getDepositProductId(CURRENCY_CODE_RUB);
+    private static final int DEPOSIT_PRODUCT_ID_USD = DepositServiceDataBaseRequest.getDepositProductId(CURRENCY_CODE_USD);
+    private static final int DEPOSIT_PRODUCT_ID_RUB = DepositServiceDataBaseRequest.getDepositProductId(CURRENCY_CODE_RUB);
 
     static Stream<Integer> dataProviderDepositProductId() {
-        return Stream.of(depositProductIdRub, depositProductIdUsd);
+        return Stream.of(DEPOSIT_PRODUCT_ID_RUB, DEPOSIT_PRODUCT_ID_USD);
     }
 
     @DisplayName("Оформление нового депозита")
