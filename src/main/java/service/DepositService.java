@@ -125,9 +125,9 @@ public class DepositService {
         return (float) Math.round(formula * 100) / 100;
     }
 
-    public Response checkSendingByEmail(String eMail, Integer id) {
+    public Response checkSendingByEmail(String email, Integer id) {
         return sendSimpleRequest(POST, DEPOSIT_SEND_EMAIL,
                 getRP(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE),
-                new DepositCheckEmail(eMail, id));
+                new DepositCheckEmail(email, id));
     }
 }

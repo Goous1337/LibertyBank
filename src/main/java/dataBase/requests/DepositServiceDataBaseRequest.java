@@ -51,4 +51,14 @@ public class DepositServiceDataBaseRequest {
         LOG.info(String.format("Получен список customer_id по id продукта = %s", productId));
         return getDBConnection(DEPOSIT_SERVICE_DB).queryForList(sql, String.class, productId);
     }
+
+    public static Integer getFirstDepositId() {
+        LOG.info("Получен id первого депозита");
+        return getDBConnection(DEPOSIT_SERVICE_DB).queryForObject(
+                "SELECT id FROM deposit LIMIT 1", Integer.class);
+    }
+    public static void changeDepositStatus(int id, boolean status) {
+        LOG.info(String.format("Изменен статус депозита с id=%s", id));
+        getDBConnection(DEPOSIT_SERVICE_DB).update("UPDATE deposit SET is_active = ? WHERE id = ?", status, id);
+    }
 }
