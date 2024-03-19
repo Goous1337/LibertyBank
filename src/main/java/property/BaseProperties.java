@@ -16,8 +16,7 @@ public final class BaseProperties {
     public static String INVALID_TOKEN_CREDIT_SERVICE = "JSO1q6y8muhBjpLlviMOUOIc";
     public static String ABS_INFO_SERVICE = getPropertyValue("abs_info_service");
     public static String ABS_CLIENT_SERVICE = getPropertyValue("abs_client_service");
-
     public static String ACCOUNT_SERVICE = getPropertyValue("account_service");
     public static String CARD_SERVICE = getPropertyValue("card_service");
-
+    public static String INSURANCE_SERVICE = getPropertyValue("insurance_service");
 }
