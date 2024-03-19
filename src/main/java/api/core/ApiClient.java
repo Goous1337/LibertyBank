@@ -1,5 +1,6 @@
 package api.core;
 
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.filter.log.RequestLoggingFilter;
@@ -130,7 +131,8 @@ public class ApiClient {
                 .relaxedHTTPSValidation()
                 .config(RestAssured.config().httpClient(httpClientConfig()
                         .setParam(CONNECTION_TIMEOUT, 5000)
-                        .setParam(SO_TIMEOUT, 5000)));
+                        .setParam(SO_TIMEOUT, 5000)))
+                .filter(new AllureRestAssured());
     }
 
 
