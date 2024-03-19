@@ -31,7 +31,7 @@ public class CRS_3_SavingVerificationCodeTest extends BaseTest {
 
     @DisplayName("Основной сценарий. Успешное сохранение кода верификации")
     @Description("Проверка успешного сохранения кода верификации в БД")
-    @Tags({@Tag("API"), @Tag("Smoke")})
+    @Tags({@Tag("API"), @Tag("Smoke"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2099")
     @Test
     public void checkSuccessSavingVerificationCode() throws InterruptedException {
@@ -67,7 +67,7 @@ public class CRS_3_SavingVerificationCodeTest extends BaseTest {
                   Запись customer_id в БД (customer2_service_db) в таблице user_profile отсутствует в БД.
                   После запроса кода верификации новая запись должна сохраниться в БД.
             """)
-    @Tags({@Tag("API"), @Tag("Smoke")})
+    @Tags({@Tag("API"), @Tag("Smoke"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2105")
     @Test
     public void checkSendingPhoneNumberThatNotInDataBase() {
@@ -90,7 +90,7 @@ public class CRS_3_SavingVerificationCodeTest extends BaseTest {
             В данном эндпоинте проверяется попытка регистрации отправка номера мобильного телефона
             с невалидными значениями.
             """)
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tags({@Tag("API"), @Tag("Negative"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2104")
     @ParameterizedTest
     @ValueSource(strings = {"7999123456", "799912345678", "+7(999)1234567", "privet"})
@@ -110,7 +110,7 @@ public class CRS_3_SavingVerificationCodeTest extends BaseTest {
             В данном эндпоинте проверяется попытка регистрации отправка номера мобильного телефона
              с невалидными значениями.
             """)
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tags({@Tag("API"), @Tag("Negative"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2104")
     @ParameterizedTest
     @ValueSource(longs = {1, 7999123456L, 799912345678L, -79808901750L})
@@ -132,7 +132,7 @@ public class CRS_3_SavingVerificationCodeTest extends BaseTest {
             Пользователь делает повторный запрос SMS-кода верификации, когда время блокировки еще не истекло
             (не позднее 30 секунд)
             """)
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tags({@Tag("API"), @Tag("Negative"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2099")
     @Test
     public void checkSavingVerificationCodeIfBlockingTimeIsActive() {

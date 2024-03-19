@@ -31,7 +31,7 @@ public class CRS_10_SendingNotificationInPersonalAccountTest extends BaseTest {
 
     @DisplayName("[CRS-10] [STATUS CODE 200] (GET) Отправка настроек уведомлений.")
     @Description("Данный тест-кейс проверяет отправку настроек уведомлений после запроса информации о настройках уведомлений  от пользователя в личном кабинете.")
-    @Tags({@Tag("API")})
+    @Tags({@Tag("API"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2145")
     @Test
 
@@ -54,7 +54,7 @@ public class CRS_10_SendingNotificationInPersonalAccountTest extends BaseTest {
 
     @DisplayName("[CRS-10] [STATUS CODE 405] (GET) Отправка настроек уведомлений.")
     @Description("Данный тест-кейс проверяет, что выбор некорректного метода запроса возвращается STATUS CODE 405 METHOD NOT ALLOWED .")
-    @Tags({@Tag("API")})
+    @Tags({@Tag("API"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2148")
     @ParameterizedTest(name = "Method: {0}")
     @CsvSource({"POST", "PATCH", "PUT"})
@@ -78,7 +78,7 @@ public class CRS_10_SendingNotificationInPersonalAccountTest extends BaseTest {
 
     @DisplayName("[CRS-10] [STATUS CODE 404] (GET) Отправка настроек уведомлений.")
     @Description("Данный тест-кейс проверяет, что в случае если не удалось обнаружить данные, возвращается STATUS CODE 404 NOT FOUND.")
-    @Tags({@Tag("API")})
+    @Tags({@Tag("API"), @Tag("CRS")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-2149")
     @Test
 
