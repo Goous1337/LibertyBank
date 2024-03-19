@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "productId": {
+      "type": "integer"
+    },
+    "status": {
+      "type": "string"
+    },
+    "amount": {
+      "type": "integer"
+    },
+    "periodMonths": {
+      "type": "integer"
+    },
+    "creationDate": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "productId",
+    "status",
+    "amount",
+    "periodMonths",
+    "creationDate"
+  ]
+}

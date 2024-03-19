@@ -1,32 +1,16 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "properties": {
-    "productId": {
-      "type": "number"
+    "creditOrderId": {
+      "type": "integer"
     },
-    "amount": {
-      "type": "number"
-    },
-    "periodMonths": {
-      "type": "number"
-    },
-    "monthlyIncome": {
-      "type": "number"
-    },
-    "monthlyExpenditure": {
-      "type": "number"
-    },
-    "employerIdentificationNumber": {
+    "status": {
       "type": "string"
     }
   },
   "required": [
-    "productId",
-    "amount",
-    "periodMonths",
-    "monthlyIncome",
-    "monthlyExpenditure",
-    "employerIdentificationNumber"
+    "creditOrderId",
+    "status"
   ]
 }
