@@ -28,11 +28,6 @@ public class HomeSteps {
         return this;
     }
 
-    @Step("Отображается выпадающие меню пользователя")
-    public boolean isUserPanelDisplayed() {
-        return dropDownAccountMenuPage.isUserPanelDisplayed();
-    }
-
     @Step("Проверка отображения выпадающего меню пользователя")
     public HomeSteps assertIsUserPanelDisplayed() {
         assertTrue(dropDownAccountMenuPage.isUserPanelDisplayed(), String.format(DISPLAYED_MESSAGE, "выпадающие меню пользователя"));
