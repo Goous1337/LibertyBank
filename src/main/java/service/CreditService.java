@@ -22,8 +22,8 @@ import static io.restassured.http.Method.*;
 import static property.BaseProperties.*;
 
 public class CreditService {
-    public static Response checkGetRequestDisplayingElectronicBackground(String productId) {
-        List<RequestParam> param = List.of(new RequestParam(PARAMETER, PARAMETER_PRODUCT_ID, productId),
+    public static Response checkGetRequestDisplayingElectronicBackground(Integer productId) {
+        List<RequestParam> param = List.of(new RequestParam(PARAMETER, PARAMETER_PRODUCT_ID, productId.toString()),
                 new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
         return sendSimpleRequest(Method.GET, CREDIT_BACKGROUND, param);
     }

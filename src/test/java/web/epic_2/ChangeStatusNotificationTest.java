@@ -1,6 +1,7 @@
 package web.epic_2;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
 import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.*;
 import web.BaseTest;
@@ -10,6 +11,8 @@ import static web.constans.AccountServiceConstants.DISPLAYED_MESSAGE;
 import static web.constans.AccountServiceConstants.NOT_EQUALS_MESSAGE;
 import static web.constans.UrlConfig.CHANGE_NOTIFICATION_URL;
 
+@Epic("2 - Личный кабинет/Основное меню")
+@DisplayName("US-2.2.4 [web] Уведомления")
 public class ChangeStatusNotificationTest extends BaseTest {
     @BeforeEach
     public void setUpTest() {
