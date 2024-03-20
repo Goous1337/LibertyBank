@@ -4,6 +4,9 @@ import io.qameta.allure.Step;
 import web.pages.DropDownAccountMenuPage;
 import web.pages.HomePage;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static web.constans.AccountServiceConstants.DISPLAYED_MESSAGE;
+
 public class HomeSteps {
     protected HomePage homePage;
     protected DropDownAccountMenuPage dropDownAccountMenuPage;
@@ -20,18 +23,20 @@ public class HomeSteps {
     }
 
     @Step("Кликнуть на кнопку 'Выйти'")
-    public void clickExitFromUserAccount() {
+    public HomeSteps clickExitFromUserAccount() {
         dropDownAccountMenuPage.exitFromUserAccount();
+        return this;
     }
 
-    @Step("Отображается выпадающие меню пользователя")
-    public boolean isUserPanelDisplayed() {
-        return dropDownAccountMenuPage.isUserPanelDisplayed();
+    @Step("Проверка отображения выпадающего меню пользователя")
+    public HomeSteps assertIsUserPanelDisplayed() {
+        assertTrue(dropDownAccountMenuPage.isUserPanelDisplayed(), String.format(DISPLAYED_MESSAGE, "выпадающие меню пользователя"));
+        return this;
     }
 
-    @Step("Отображается надпись 'Войдите в Liberty Bank'")
-    public boolean isUnauthorizedHomeDisplayed() {
-        return homePage.isUnauthorizedHomeDisplayed();
+    @Step("Проверка выхода из аккаунта авторизированным пользователем.")
+    public void assertIsUnauthorizedHomeDisplayed() {
+        assertTrue(homePage.isUnauthorizedHomeDisplayed());
     }
 
     @Step("Кликнуть на кнопку 'Безопасность'")
