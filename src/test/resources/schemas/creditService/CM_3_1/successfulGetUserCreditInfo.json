@@ -16,7 +16,7 @@
       "terminationDate": {
         "type": "string"
       },
-      "principalDebt": {
+      "generalDebt": {
         "type": "number"
       }
     },
@@ -25,7 +25,7 @@
       "name",
       "currencyCode",
       "terminationDate",
-      "principalDebt"
+      "generalDebt"
     ]
   }
 }
