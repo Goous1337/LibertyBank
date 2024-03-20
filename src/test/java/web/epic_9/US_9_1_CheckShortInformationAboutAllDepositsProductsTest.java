@@ -8,7 +8,7 @@ import web.BaseTest;
 import web.enums.DepositsEnum;
 
 @Tag("Web")
-@Epic("9 - Кредиты")
+@Epic("9 - Депозиты")
 @Feature("US-9.1 Просмотр краткой информации по всем депозитным продуктам банка ")
 @DisplayName("US-9.1 Просмотр краткой информации по всем депозитным продуктам банка ")
 public class US_9_1_CheckShortInformationAboutAllDepositsProductsTest extends BaseTest {

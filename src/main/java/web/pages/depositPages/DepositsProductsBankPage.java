@@ -133,6 +133,8 @@ public class DepositsProductsBankPage extends BasePage {
     private WebElement maxDurationMonthOfLibertyStandard;
     @FindBy(xpath = "//h3[contains(text(), 'Liberty Стандарт')]/ancestor::li//h3[@data-testid = 'amountMin']")
     private WebElement amountMinOfLibertyStandard;
+    @FindBy(xpath = "//a[@href='/deposits/my-deposits']")
+    private WebElement myDepositProductsBankButton;
 
     public void clickDepositsButton() {
         depositsButton.click();
@@ -140,6 +142,10 @@ public class DepositsProductsBankPage extends BasePage {
 
     public void clickDepositsProductsBankButton() {
         depositProductsBankButton.click();
+    }
+
+    public void clickMyDepositsButton() {
+        myDepositProductsBankButton.click();
     }
 
     public EnumMap<DepositsEnum, DepositProduct> putEnumAndXpathToMap() {

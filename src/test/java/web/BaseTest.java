@@ -13,6 +13,7 @@ import web.drivers.DriverManager;
 import web.helpers.TestListener;
 import web.steps.*;
 import web.steps.depositsSteps.DepositsProductsSteps;
+import web.steps.depositsSteps.MyDepositsProductsSteps;
 
 
 import static property.UserPropertiesReader.USER_PASSWORD;
@@ -48,6 +49,7 @@ public class BaseTest {
     protected CardProductInfoSteps cardProductInfoSteps;
     protected CloseCardSteps closeCardSteps;
     protected FilterCardsSteps filterCardsSteps;
+    protected MyDepositsProductsSteps myDepositsProductsSteps;
 
     public BaseTest() {
         refreshPages();
@@ -102,6 +104,7 @@ public class BaseTest {
         closeCardSteps = new CloseCardSteps();
         filterCardsSteps = new FilterCardsSteps();
         depositsProductsSteps = new DepositsProductsSteps();
+        myDepositsProductsSteps = new MyDepositsProductsSteps();
     }
 
 }
