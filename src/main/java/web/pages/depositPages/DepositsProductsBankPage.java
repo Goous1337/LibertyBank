@@ -4,8 +4,9 @@ import api.model.webAndApi.DepositProductService;
 import api.model.webAndApi.deposit.DepositProduct;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import web.constans.DepositsConstants;
+import static web.helpers.Converter.*;
 import web.enums.DepositsEnum;
+import web.helpers.Converter;
 import web.pages.BasePage;
 
 import java.util.EnumMap;
@@ -15,6 +16,7 @@ import java.util.Map;
 public class DepositsProductsBankPage extends BasePage {
     private DepositProductService depositProductService;
     private EnumMap<DepositsEnum, DepositProduct> enumMap;
+    private Converter converter;
     private String nameFromWeb;
     private String nameFromBackEnd;
     private Double maxInterestRateFromWeb;
@@ -144,10 +146,6 @@ public class DepositsProductsBankPage extends BasePage {
         depositProductsBankButton.click();
     }
 
-    public void clickMyDepositsButton() {
-        myDepositProductsBankButton.click();
-    }
-
     public EnumMap<DepositsEnum, DepositProduct> putEnumAndXpathToMap() {
         enumMap = new EnumMap<>(DepositsEnum.class);
         enumMap.put(
@@ -274,20 +272,5 @@ public class DepositsProductsBankPage extends BasePage {
                 "Подробная информация о депозите",
                 maxDurationMonthLibertyChildFromBackEnd,
                 amountMinLibertyChildFromBackEnd);
-    }
-
-    private static Double convertToDouble(String str) {
-        str = String.valueOf(str).replace(DepositsConstants.DELIMITER, DepositsConstants.POINT).trim();
-        str = String.valueOf(str).replace(DepositsConstants.PROCENT, "").trim();
-        str = String.valueOf(str).replace(DepositsConstants.SPACE, "").trim();
-        str = String.valueOf(str).replace(DepositsConstants.RUB, "").trim();
-        str = String.valueOf(str).replace(DepositsConstants.EUR, "").trim();
-        str = String.valueOf(str).replace(DepositsConstants.USD, "").trim();
-        return Double.parseDouble(str);
-    }
-
-    private static int convertToInteger(String str) {
-        str = String.valueOf(str).replace(DepositsConstants.MONTHS, "").trim();
-        return Integer.parseInt(str);
     }
 }

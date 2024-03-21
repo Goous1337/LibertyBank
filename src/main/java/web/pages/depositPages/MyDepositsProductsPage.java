@@ -5,14 +5,13 @@ import api.model.webAndApi.deposit.MyDepositProduct;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import web.constans.DepositsConstants;
 import web.drivers.DriverManager;
+import static web.helpers.Converter.*;
 import web.pages.BasePage;
 
 import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
+
 
 public class MyDepositsProductsPage extends BasePage  {
 
@@ -95,27 +94,5 @@ public class MyDepositsProductsPage extends BasePage  {
             }
         }
         return new MyDepositProduct(nameFromBack, interestRateFromBack, currentBalanceFromBack, closeDateFromBack);
-    }
-
-    private static Double convertToDouble(String str) {
-        str = String.valueOf(str).replace(DepositsConstants.DELIMITER, DepositsConstants.POINT).trim();
-        str = String.valueOf(str).replace(DepositsConstants.PROCENT, "").trim();
-        str = String.valueOf(str).replace(DepositsConstants.SPACE, "").trim();
-        str = String.valueOf(str).replace(DepositsConstants.RUB, "").trim();
-        str = String.valueOf(str).replace(DepositsConstants.EUR, "").trim();
-        str = String.valueOf(str).replace(DepositsConstants.USD, "").trim();
-        str = String.valueOf(str).replace("RUB", "").trim();
-        return Double.parseDouble(str);
-    }
-
-    public static java.sql.Date parseDate(String s) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat(DepositsConstants.DATE_FORMAT);
-        java.sql.Date result = null;
-        try {
-            result = new java.sql.Date(dateFormat.parse(s).getTime());
-        } catch (ParseException e) {
-            System.err.println(e);
-        }
-        return result;
     }
 }

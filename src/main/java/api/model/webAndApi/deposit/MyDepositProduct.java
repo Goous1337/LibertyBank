@@ -3,6 +3,7 @@ package api.model.webAndApi.deposit;
 import lombok.Getter;
 import lombok.Setter;
 import web.constans.DepositsConstants;
+import web.helpers.Converter;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -17,6 +18,7 @@ public class MyDepositProduct {
     private java.sql.Date closeDate;
     private Double interestRate;
     private String depAccountNumber;
+    private Converter converter;
 
     public MyDepositProduct() {
 
@@ -28,6 +30,7 @@ public class MyDepositProduct {
         this.currentBalance = currentBalance;
         this.closeDate = closeDate;
     }
+
 
     public java.sql.Date getCloseDate() {
         return closeDate;
