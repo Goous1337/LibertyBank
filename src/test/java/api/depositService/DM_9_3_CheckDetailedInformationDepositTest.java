@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import static constant.Message.RESPONSE_CODE_NOT_EXPECTED;
 import static org.apache.hc.core5.http.HttpStatus.SC_NOT_FOUND;
 import static org.apache.hc.core5.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -41,7 +42,7 @@ public class DM_9_3_CheckDetailedInformationDepositTest extends BaseTest {
         assertAll(
                 () -> assertEquals(SC_OK,
                         response.statusCode(),
-                        "Код ответа не соответствует ожидаемому"),
+                        RESPONSE_CODE_NOT_EXPECTED),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
@@ -62,7 +63,7 @@ public class DM_9_3_CheckDetailedInformationDepositTest extends BaseTest {
         assertAll(
                 () -> assertEquals(SC_NOT_FOUND,
                         response.statusCode(),
-                        "Код ответа не соответствует ожидаемому")
+                        RESPONSE_CODE_NOT_EXPECTED)
         );
     }
 }

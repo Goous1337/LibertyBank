@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static constant.DepositConstants.*;
+import static constant.Message.RESPONSE_CODE_NOT_EXPECTED;
 import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.DEPOSIT_SERVICE;
@@ -63,10 +64,10 @@ public class DM_9_2_MakeNewDepositTest extends BaseTest {
                 (depositProductId, initialAmountMax, periodMonthMax, false);
         Float createdInitialAmountMax = DepositServiceDataBaseRequest.getInitialAmountById(DEPOSIT_CUSTOMER_ID, depositProductId);
         assertAll(
-                () -> assertEquals(SC_OK, responseMin.getStatusCode()),
+                () -> assertEquals(SC_OK, responseMin.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertEquals(initialAmountMin, createdInitialAmountMin),
                 () -> responseMin.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath)),
-                () -> assertEquals(SC_OK, responseMax.getStatusCode()),
+                () -> assertEquals(SC_OK, responseMax.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertEquals(initialAmountMax, createdInitialAmountMax),
                 () -> responseMax.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
@@ -92,8 +93,8 @@ public class DM_9_2_MakeNewDepositTest extends BaseTest {
         Response responseMax = depositService.checkMakeNewDepositInvalidRequest
                 (depositProductId, initialAmountMax, false);
         assertAll(
-                () -> assertEquals(SC_BAD_REQUEST, responseMin.getStatusCode()),
-                () -> assertEquals(SC_BAD_REQUEST, responseMax.getStatusCode()),
+                () -> assertEquals(SC_BAD_REQUEST, responseMin.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
+                () -> assertEquals(SC_BAD_REQUEST, responseMax.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertNotNull(responseMin.jsonPath().get("errorMessage")),
                 () -> assertNotNull(responseMax.jsonPath().get("errorMessage"))
         );
@@ -116,7 +117,7 @@ public class DM_9_2_MakeNewDepositTest extends BaseTest {
         Response response = depositService.checkListMakeNewDepositInvalidToken
                 (depositProductId, initialAmountMax, periodMonthMax, false);
         assertAll(
-                () -> assertEquals(SC_UNAUTHORIZED, response.getStatusCode()),
+                () -> assertEquals(SC_UNAUTHORIZED, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertNotNull(response.jsonPath().get("errorMessage"))
         );
     }
@@ -139,7 +140,7 @@ public class DM_9_2_MakeNewDepositTest extends BaseTest {
                 (depositProductId, "десять 10", periodMonth, false);
         List<String> depositCustomersId = DepositServiceDataBaseRequest.getAllCustomersId(depositProductId);
         assertAll(
-                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode()),
+                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertFalse(depositCustomersId.contains(DEPOSIT_CUSTOMER_ID)),
                 () -> response.then().assertThat().body(JsonSchemaValidator
                         .matchesJsonSchemaInClasspath(jsonSchemaPathIncorrectValues))
@@ -163,7 +164,7 @@ public class DM_9_2_MakeNewDepositTest extends BaseTest {
                 (depositProductId, initialAmount, "двадцать 20", false);
         List<String> depositCustomersId = DepositServiceDataBaseRequest.getAllCustomersId(depositProductId);
         assertAll(
-                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode()),
+                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertFalse(depositCustomersId.contains(DEPOSIT_CUSTOMER_ID)),
                 () -> response.then().assertThat()
                         .body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPathIncorrectValues))

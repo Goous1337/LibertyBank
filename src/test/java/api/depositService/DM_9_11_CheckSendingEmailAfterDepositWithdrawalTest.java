@@ -10,6 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static constant.Message.RESPONSE_CODE_NOT_EXPECTED;
 import static org.apache.hc.core5.http.HttpStatus.SC_BAD_REQUEST;
 import static org.apache.hc.core5.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,11 +24,17 @@ public class DM_9_11_CheckSendingEmailAfterDepositWithdrawalTest extends BaseTes
     }
 
     public void assertSendingByEmail(String email, int statusCode) {
-        Integer id = DepositServiceDataBaseRequest.getFirstDepositId();
-        DepositServiceDataBaseRequest.changeDepositStatus(id, false);
-        assertEquals(statusCode, depositService.checkSendingByEmail(email, id).statusCode(),
-                "Код ответа не соответствует ожидаемому");
-        DepositServiceDataBaseRequest.changeDepositStatus(id, true);
+        Integer id = null;
+        try {
+            id = DepositServiceDataBaseRequest.getFirstDepositId();
+            DepositServiceDataBaseRequest.changeDepositStatus(id, false);
+            assertEquals(statusCode, depositService.checkSendingByEmail(email, id).statusCode(),
+                    RESPONSE_CODE_NOT_EXPECTED);
+        } finally {
+            if (id != null) {
+                DepositServiceDataBaseRequest.changeDepositStatus(id, true);
+            }
+        }
     }
 
     @DisplayName("Отправка чека на электронную почту отзыва депозита")
