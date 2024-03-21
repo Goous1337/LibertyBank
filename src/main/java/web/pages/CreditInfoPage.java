@@ -249,12 +249,37 @@ public class CreditInfoPage extends BasePage {
     /*Краткая информация по Кредитным продуктам банка*/
     public EnumMap<CreditsEnum, CreditProduct> putEnumAndXpathToMap() {
         enumMapObject = new EnumMap<>(CreditsEnum.class);
-        enumMapObject.put(CreditsEnum.LIBERTY_CASH, new CreditProduct(nameShortCreditCashProductPageText.getText(), convertStringToDouble(interestRateLibertyCash.getText())));
-        enumMapObject.put(CreditsEnum.LIBERTY_EXPRESS, new CreditProduct(nameShortCreditExpressProductPageText.getText(), convertStringToDouble(interestRateLibertyExpress.getText())));
-        enumMapObject.put(CreditsEnum.LIBERTY_MONEY, new CreditProduct(nameShortCreditMoneyProductPageText.getText(), convertStringToDouble(interestRateLibertyMoney.getText())));
-        enumMapObject.put(CreditsEnum.LIBERTY_EASY, new CreditProduct(nameShortCreditEasyProductPageText.getText(), convertStringToDouble(interestRateLibertyEasy.getText())));
-        enumMapObject.put(CreditsEnum.LIBERTY_CAR, new CreditProduct(nameShortCreditCarProductPageText.getText(),  convertStringToDouble(interestRateLibertyCar.getText())));
-        enumMapObject.put(CreditsEnum.LIBERTY_MY_FLAT, new CreditProduct(nameShortCreditMyFlatProductPageText.getText(), convertStringToDouble(interestRateLibertyMyFlat.getText())));
+        enumMapObject.put(
+                CreditsEnum.LIBERTY_CASH,
+                new CreditProduct(
+                        nameShortCreditCashProductPageText.getText(),
+                        convertStringToDouble(interestRateLibertyCash.getText())));
+        enumMapObject.put(
+                CreditsEnum.LIBERTY_EXPRESS,
+                new CreditProduct(
+                        nameShortCreditExpressProductPageText.getText(),
+                        convertStringToDouble(interestRateLibertyExpress.getText())));
+        enumMapObject.put(
+                CreditsEnum.LIBERTY_MONEY,
+                new CreditProduct(
+                        nameShortCreditMoneyProductPageText.getText(),
+                        convertStringToDouble(interestRateLibertyMoney.getText())));
+        enumMapObject.put(
+                CreditsEnum.LIBERTY_EASY,
+                new CreditProduct(
+                        nameShortCreditEasyProductPageText.getText(),
+                        convertStringToDouble(interestRateLibertyEasy.getText())));
+        enumMapObject.put(
+                CreditsEnum.LIBERTY_CAR,
+                new CreditProduct(
+                        nameShortCreditCarProductPageText.getText(),
+                        convertStringToDouble(interestRateLibertyCar.getText())));
+        enumMapObject.put(
+                CreditsEnum.LIBERTY_MY_FLAT,
+                new CreditProduct(
+                        nameShortCreditMyFlatProductPageText.getText(),
+                        convertStringToDouble(interestRateLibertyMyFlat.getText())));
+
         return enumMapObject;
     }
 

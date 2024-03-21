@@ -12,6 +12,11 @@ public class CreditProduct {
     private Double interestRate;
     private String currencyCode;
     private String details;
+    private Integer minPeriodMonths;
+    private Integer maxPeriodMonths;
+    private Double minSum;
+    private Double maxSum;
+    private String typeCredit;
 
     public CreditProduct() {
 
