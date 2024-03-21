@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Map;
 
+import static constant.Message.RESPONSE_CODE_NOT_EXPECTED;
 import static org.apache.hc.core5.http.HttpStatus.SC_OK;
 import static org.apache.hc.core5.http.HttpStatus.SC_UNAUTHORIZED;
 import static org.junit.jupiter.api.Assertions.*;
@@ -39,7 +40,7 @@ public class DM_9_4_CheckCurrentDepositProductsUserTest extends BaseTest {
         assertAll(
                 () -> assertEquals(SC_OK,
                         response.statusCode(),
-                        "Код ответа не соответствует ожидаемому"),
+                        RESPONSE_CODE_NOT_EXPECTED),
                 () -> {
                     List<Map<String, Object>> items = response.jsonPath().getList("$");
                     for (int i = 0; i < items.size(); i++) {
@@ -67,7 +68,7 @@ public class DM_9_4_CheckCurrentDepositProductsUserTest extends BaseTest {
         assertAll(
                 () -> assertEquals(SC_UNAUTHORIZED,
                         response.statusCode(),
-                        "Код ответа не соответствует ожидаемому"),
+                        RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertEquals(response.jsonPath().get("errorMessage"), "Unsuccessful token validation: Empty token",
                         "Сообщение в ответе не соответствует ожидаемому")
         );
