@@ -18,34 +18,45 @@ public class US_3_5_CheckBasicInfoMyCredit extends BaseTest {
 
     @Test
     @Tags({@Tag("Web"), @Tag("Positive")})
-    @DisplayName("Просмотр подробной информации о действующих кредитах пользователя")
+    @DisplayName("Просмотр отображения веб элементов в подробной информации о действующих кредитах пользователя")
     @TmsLink("LIB3-928")
-    public void checkBasicInfoAboutMyCredit() {
+    public void checkBasicInformationAboutMyCredit() {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickMyCreditButton();
-        creditInfoSteps.clickShowMoreAboutMyCreditButton();
-        creditInfoSteps.assertTextNameTitleCreditIsDisplayed();
-        creditInfoSteps.assertTextAccountNumberCreditIsDisplayed();
-        creditInfoSteps.assertTextStatusCreditIsDisplayed();
-        creditInfoSteps.assertTextNextPaymentCreditIsDisplayed();
-        creditInfoSteps.assertTextPaymentDateCreditTextIsDisplayed();
-        creditInfoSteps.assertTextLimitCreditIsDisplayed();
-        creditInfoSteps.assertTextRepayCreditIsDisplayed();
-        creditInfoSteps.assertTextPeriodMonthsCreditIsDisplayed();
-        creditInfoSteps.assertTextInterestRateCreditIsDisplayed();
+        myCreditSteps.clickShowMoreAboutMyCreditButton();
+        myCreditDetailedInformationSteps.assertTextNameTitleCreditIsDisplayed();
+        myCreditDetailedInformationSteps.assertTextAccountNumberCreditIsDisplayed();
+        myCreditDetailedInformationSteps.assertTextStatusCreditIsDisplayed();
+        myCreditDetailedInformationSteps.assertTextNextPaymentCreditIsDisplayed();
+        myCreditDetailedInformationSteps.assertTextPaymentDateCreditTextIsDisplayed();
+        myCreditDetailedInformationSteps.assertTextLimitCreditIsDisplayed();
+        myCreditDetailedInformationSteps.assertTextRepayCreditIsDisplayed();
+        myCreditDetailedInformationSteps.assertTextPeriodMonthsCreditIsDisplayed();
+        myCreditDetailedInformationSteps.assertTextInterestRateCreditIsDisplayed();
+    }
+
+    @Test
+    @Tags({@Tag("Web"), @Tag("Positive")})
+    @DisplayName("Просмотр подробной информации о действующем кредите пользователя (сравнение UI c BackEnd)")
+    @TmsLink("LIB3-928")
+    public void checkBasicInformationMyCredit() {
+        creditInfoSteps.clickCreditButton();
+        creditInfoSteps.clickMyCreditButton();
+        myCreditSteps.clickShowMoreAboutMyCreditButton();
+        myCreditDetailedInformationSteps.assertMoreInfoAboutCreditProducts();
     }
 
     @Test
     @Tags({@Tag("Web"), @Tag("Positive")})
     @DisplayName("Просмотр подробной информации о кредите при нажатии на Action bar('Многоточие')")
     @TmsLink("LIB3-930")
-    public void checkInfoDotsButton() {
+    public void checkInformationDotsButton() {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickMyCreditButton();
-        creditInfoSteps.clickShowMoreAboutMyCreditButton();
-        creditInfoSteps.clickDotsButton();
-        creditInfoSteps.assertButtonRequisitesIsDisplayed();
-        creditInfoSteps.assertButtonPaymentScheduleIsDisplayed();
+        myCreditSteps.clickShowMoreAboutMyCreditButton();
+        myCreditDetailedInformationSteps.clickDotsButton();
+        myCreditDetailedInformationSteps.assertButtonRequisitesIsDisplayed();
+        myCreditDetailedInformationSteps.assertButtonPaymentScheduleIsDisplayed();
     }
 
     @Test
@@ -55,8 +66,8 @@ public class US_3_5_CheckBasicInfoMyCredit extends BaseTest {
     public void checkCopyAccountNumberText() {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickMyCreditButton();
-        creditInfoSteps.clickShowMoreAboutMyCreditButton();
-        creditInfoSteps.clickCopyAccountNumberCreditButton();
-        creditInfoSteps.assertTextOutputCopiedIsDisplayed();
+        myCreditSteps.clickShowMoreAboutMyCreditButton();
+        myCreditDetailedInformationSteps.clickCopyAccountNumberCreditButton();
+        myCreditDetailedInformationSteps.assertTextOutputCopiedIsDisplayed();
     }
 }

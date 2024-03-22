@@ -35,10 +35,10 @@ public class US_3_1_CheckCreditSubsectionsTest extends BaseTest {
     public void checkBasicInfoMyCredit() {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickMyCreditButton();
-        creditInfoSteps.assertTextMyCreditSumIsDisplayed();
-        creditInfoSteps.assertTextNameCreditIsDisplayed();
-        creditInfoSteps.assertTextTermCreditIsDisplayed();
-        creditInfoSteps.assertButtonShowMoreAboutCreditIsDisplayed();
+        myCreditSteps.assertTextMyCreditSumIsDisplayed();
+        myCreditSteps.assertTextNameCreditIsDisplayed();
+        myCreditSteps.assertTextTermCreditIsDisplayed();
+        myCreditSteps.assertButtonShowMoreAboutCreditIsDisplayed();
     }
 
     @Test
@@ -68,7 +68,7 @@ public class US_3_1_CheckCreditSubsectionsTest extends BaseTest {
     public void checkShowMoreButtonInMyCreditPage() {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickMyCreditButton();
-        creditInfoSteps.clickShowMoreAboutMyCreditButton();
+        myCreditSteps.clickShowMoreAboutMyCreditButton();
         creditInfoSteps.assertUrlFirstMyCredit();
     }
 
