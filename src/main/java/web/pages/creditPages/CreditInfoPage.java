@@ -1,15 +1,9 @@
 package web.pages.creditPages;
 
-import api.model.webAndApi.credit.CreditProduct;
-import api.model.webAndApi.credit.MoreCreditProduct;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import web.drivers.DriverManager;
-import web.enums.CreditsEnum;
 import web.pages.BasePage;
-
-import java.util.EnumMap;
-import java.util.List;
 
 public class CreditInfoPage extends BasePage {
 

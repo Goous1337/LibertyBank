@@ -6,7 +6,6 @@ import api.model.webAndApi.credit.MyCreditMoreInformation;
 import io.restassured.RestAssured;
 import lombok.Getter;
 import lombok.Setter;
-import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;

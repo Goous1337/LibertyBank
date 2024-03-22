@@ -8,7 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import web.pages.BasePage;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +33,6 @@ public class MyCreditDetailedInformationPage extends BasePage {
     private String creditAccountNumberFromWeb;
     private List<MyCreditMoreInformation> listXpath;
     private List<MyCreditMoreInformation> listFromBackEnd;
-    private MyCreditMoreInformation myCreditMoreInformation;
 
     public MyCreditDetailedInformationPage() {
         creditProductService = new CreditProductService();
