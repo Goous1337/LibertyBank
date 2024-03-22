@@ -27,6 +27,23 @@ public class Converter {
         return Integer.parseInt(value);
     }
 
+    public static String convertStringToString(String value) {
+        value = String.valueOf(value).replace("№", "");
+        value = String.valueOf(value).replace("счёта:", "");
+        value = String.valueOf(value).replace(" ", "");
+        return value;
+    }
+
+    public static Integer convertStringToInteger(String str) {
+        str = String.valueOf(str).replace("₽", "");
+        str = String.valueOf(str).replace("$", "");
+        str = String.valueOf(str).replace("%", "");
+        str = String.valueOf(str).replace("мeсяцев", "");
+        str = String.valueOf(str).replace(" ", "");
+        str.trim();
+        return Integer.parseInt(str);
+    }
+
     public static java.sql.Date parseDate(String value) {
         SimpleDateFormat dateFormat = new SimpleDateFormat(DepositsConstants.DATE_FORMAT);
         java.sql.Date result = null;
@@ -36,5 +53,10 @@ public class Converter {
             System.err.println(e);
         }
         return result;
+    }
+
+    public static String convertInterestRateToString(Double number) {
+        String str = String.valueOf(number).replace(".", ",") + "%";
+        return str;
     }
 }
