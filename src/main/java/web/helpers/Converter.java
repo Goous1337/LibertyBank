@@ -4,6 +4,8 @@ import web.constans.DepositsConstants;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Converter {
 
@@ -19,6 +21,7 @@ public class Converter {
         value = String.valueOf(value).replace(DepositsConstants.EUR, "").trim();
         value = String.valueOf(value).replace(DepositsConstants.USD, "").trim();
         value = String.valueOf(value).replace(DepositsConstants.CAPS_RUB, "").trim();
+        value = String.valueOf(value).replace(DepositsConstants.CAPS_USD, "").trim();
         return Double.parseDouble(value);
     }
 
@@ -53,6 +56,12 @@ public class Converter {
             System.err.println(e);
         }
         return result;
+    }
+
+    public static List<String> parseToList(String str) {
+        List<String> list = new ArrayList<>();
+        list.add(str);
+        return list;
     }
 
     public static String convertInterestRateToString(Double number) {

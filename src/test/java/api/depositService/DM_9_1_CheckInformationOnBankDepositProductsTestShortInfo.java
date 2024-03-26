@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.DEPOSIT_SERVICE;
 
 @DisplayName("DM 9.1 Просмотр информации по депозитным продуктам банка")
-public class DM_9_1_CheckInformationOnBankDepositProductsTest extends BaseTest {
+public class DM_9_1_CheckInformationOnBankDepositProductsTestShortInfo extends BaseTest {
 
     {
         RestAssured.baseURI = DEPOSIT_SERVICE;

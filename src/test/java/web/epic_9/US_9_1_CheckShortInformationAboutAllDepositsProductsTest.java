@@ -23,7 +23,7 @@ public class US_9_1_CheckShortInformationAboutAllDepositsProductsTest extends Ba
     @Tags({@Tag("Web"), @Tag("Positive")})
     @DisplayName("US 9.1 Просмотр краткой информации по всем депозитным продуктам банка ")
     @TmsLink("LIB3-1895")
-    public void checkShortInfoAboutCreditProducts() {
+    public void checkShortInfoAboutDepositsProducts() {
         depositsProductsSteps.assertShortInfoAboutDeposits(DepositsEnum.LIBERTY_CHILD);
         depositsProductsSteps.assertShortInfoAboutDeposits(DepositsEnum.LIBERTY_CURRENCY_EUR);
         depositsProductsSteps.assertShortInfoAboutDeposits(DepositsEnum.LIBERTY_CALCULATED);

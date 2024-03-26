@@ -24,7 +24,7 @@ public class US_9_4_CheckMyDeposits extends BaseTest {
     @Tags({@Tag("Web"), @Tag("Positive")})
     @DisplayName("US 9.4 Просмотр пользователем своих действующих депозитов")
     @TmsLink("LIB3-1895")
-    public void checkShortInfoAboutCreditProducts() {
+    public void checkMyDepositProducts() {
        myDepositsProductsSteps.assertObjects();
     }
 }
