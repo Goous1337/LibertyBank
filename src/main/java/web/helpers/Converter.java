@@ -42,6 +42,8 @@ public class Converter {
         str = String.valueOf(str).replace("$", "");
         str = String.valueOf(str).replace("%", "");
         str = String.valueOf(str).replace("мeсяцев", "");
+        str = String.valueOf(str).replace("от", "");
+        str = String.valueOf(str).replace("до", "");
         str = String.valueOf(str).replace(" ", "");
         str.trim();
         return Integer.parseInt(str);

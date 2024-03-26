@@ -133,9 +133,8 @@ public class CreditProductDetailedInformationPage extends BasePage {
             minSumFromWeb = moreCreditProductWeb.getMinSum();
             maxSumFromWeb = moreCreditProductWeb.getMaxSum();
             for (MoreCreditDetails moreCreditDetails : listDetailsXpath) {
-                headerDetailFromWeb = moreCreditProductWeb.getCreditDetails().toString();
+                headerDetailFromWeb = moreCreditDetails.getHeader();
             }
-
         }
         return new MoreCreditProduct(
                 nameofCreditProductFromWeb,
@@ -150,6 +149,7 @@ public class CreditProductDetailedInformationPage extends BasePage {
         creditProductService.getMoreProductCredit();
         listXpath = addMoreCreditProductXpathToList();
         listFromBackEnd = creditProductService.getMoreCreditProductList();
+        listDetailsFromBackEnd = new ArrayList<>();
         for (MoreCreditProduct moreCreditProductBack : listFromBackEnd) {
             for (MoreCreditProduct moreCreditProductWeb : listXpath) {
                 if (moreCreditProductBack.getName().equals(moreCreditProductWeb.getName())) {
@@ -165,9 +165,7 @@ public class CreditProductDetailedInformationPage extends BasePage {
                     maxSumFromBackEnd = moreCreditProductBack.getMaxSum();
                 }
                 if (moreCreditProductBack.getCreditDetails().equals(moreCreditProductWeb.getCreditDetails())) {
-                    for (MoreCreditDetails moreCreditDetails : listDetailsFromBackEnd) {
-                        headerDetailFromBackEnd = moreCreditDetails.getHeader();
-                    }
+                    listDetailsFromBackEnd = moreCreditProductBack.getCreditDetails();
                 }
             }
         }
