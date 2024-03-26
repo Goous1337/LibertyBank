@@ -12,6 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import web.drivers.DriverManager;
 import web.helpers.TestListener;
 import web.steps.*;
+import web.steps.depositsSteps.DepositsProductsFullInfoStep;
 import web.steps.depositsSteps.DepositsProductsSteps;
 import web.steps.depositsSteps.MyDepositsProductsSteps;
 
@@ -50,6 +51,7 @@ public class BaseTest {
     protected CloseCardSteps closeCardSteps;
     protected FilterCardsSteps filterCardsSteps;
     protected MyDepositsProductsSteps myDepositsProductsSteps;
+    protected DepositsProductsFullInfoStep depositsProductsFullInfoStep;
 
     public BaseTest() {
         refreshPages();
@@ -105,6 +107,7 @@ public class BaseTest {
         filterCardsSteps = new FilterCardsSteps();
         depositsProductsSteps = new DepositsProductsSteps();
         myDepositsProductsSteps = new MyDepositsProductsSteps();
+        depositsProductsFullInfoStep = new DepositsProductsFullInfoStep();
     }
 
 }
