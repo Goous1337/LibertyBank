@@ -5,7 +5,6 @@ import org.junit.jupiter.api.*;
 import web.BaseTest;
 
 public class US_3_6_ChechMoreCreditProductInformationTest extends BaseTest {
-
     @BeforeEach
     public void setUpTest() {
         authorization();
@@ -18,9 +17,8 @@ public class US_3_6_ChechMoreCreditProductInformationTest extends BaseTest {
     public void checkBasicInfoAboutLibertyCash() {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickCreditProductButton();
-        creditInfoSteps.clickShowMoreLibertyCashButton();
-        creditInfoSteps.assertTextNameCreditProductPageText();
-        creditInfoSteps.assertInterestRateCreditProductPageText();
+        сreditProductsSteps.clickShowMoreLibertyCashButton();
+        creditProductDetailedInformationSteps.assertMoreInfoAboutCreditProducts();
     }
 
     @Test
@@ -30,9 +28,8 @@ public class US_3_6_ChechMoreCreditProductInformationTest extends BaseTest {
     public void checkBasicInfoAboutLibertyExpress() {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickCreditProductButton();
-        creditInfoSteps.clickShowMoreLibertyExpressButton();
-        creditInfoSteps.assertTextNameCreditProductPageText();
-        creditInfoSteps.assertInterestRateCreditProductPageText();
+        сreditProductsSteps.clickShowMoreLibertyExpressButton();
+        creditProductDetailedInformationSteps.assertMoreInfoAboutCreditProducts();
     }
 
     @Test
@@ -42,9 +39,41 @@ public class US_3_6_ChechMoreCreditProductInformationTest extends BaseTest {
     public void checkBasicInfoAboutLibertyMoney() {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickCreditProductButton();
-        creditInfoSteps.clickShowMoreLibertyMoneyButton();
-        creditInfoSteps.assertTextNameCreditProductPageText();
-        creditInfoSteps.assertInterestRateCreditProductPageText();
+        сreditProductsSteps.clickShowMoreLibertyMoneyButton();
+        creditProductDetailedInformationSteps.assertMoreInfoAboutCreditProducts();
+    }
+
+    @Test
+    @Tags({@Tag("Web"), @Tag("Positive")})
+    @DisplayName("Просмотр подробной информации о кредитном продукте Liberty Easy")
+    @TmsLink("LIB3-181")
+    public void checkBasicInfoAboutLibertyEasy() {
+        creditInfoSteps.clickCreditButton();
+        creditInfoSteps.clickCreditProductButton();
+        сreditProductsSteps.clickShowMoreLibertyEasyButton();
+        creditProductDetailedInformationSteps.assertMoreInfoAboutCreditProducts();
+    }
+
+    @Test
+    @Tags({@Tag("Web"), @Tag("Positive")})
+    @DisplayName("Просмотр подробной информации о кредитном продукте Liberty Car")
+    @TmsLink("LIB3-181")
+    public void checkBasicInfoAboutLibertyCar() {
+        creditInfoSteps.clickCreditButton();
+        creditInfoSteps.clickCreditProductButton();
+        сreditProductsSteps.clickShowMoreLibertyCarButton();
+        creditProductDetailedInformationSteps.assertMoreInfoAboutCreditProducts();
+    }
+
+    @Test
+    @Tags({@Tag("Web"), @Tag("Positive")})
+    @DisplayName("Просмотр подробной информации о кредитном продукте Моя квартира")
+    @TmsLink("LIB3-181")
+    public void checkBasicInfoAboutLibertyMyFlat() {
+        creditInfoSteps.clickCreditButton();
+        creditInfoSteps.clickCreditProductButton();
+        сreditProductsSteps.clickShowMoreLibertyMyFlatButton();
+        creditProductDetailedInformationSteps.assertMoreInfoAboutCreditProducts();
     }
 
 }
