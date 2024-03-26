@@ -26,4 +26,17 @@ public class MoreCreditDetails {
         this.details = details;
     }
 
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof MoreCreditDetails)) {
+            return false;
+        }
+        MoreCreditDetails moreCreditDetails = (MoreCreditDetails) obj;
+        return getHeader().equals(moreCreditDetails.getHeader());
+    }
+
 }
