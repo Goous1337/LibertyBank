@@ -26,7 +26,6 @@ public class MoreCreditDetails {
         this.details = details;
     }
 
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
