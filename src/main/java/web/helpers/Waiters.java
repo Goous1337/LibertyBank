@@ -38,4 +38,12 @@ public class Waiters {
                         : not(elementToBeSelected(element)));
         return element;
     }
+
+    public static void waitElementWithColor(WebElement element, String color) {
+        new WebDriverWait(getDriver(), Duration.ofSeconds(TIME_TO_WAIT))
+                .ignoring(NoSuchElementException.class)
+                .ignoring(StaleElementReferenceException.class)
+                .until(driver -> element.getCssValue("background-color").
+                        equals(color));
+    }
 }

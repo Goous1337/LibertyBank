@@ -9,6 +9,7 @@ public class AccountServiceConstants {
     public static final String ENABLED_MESSAGE = "Кнопка [%s] кликабельна";
     public static final String NOT_ENABLED_MESSAGE = "Кнопка [%s] не кликабельна";
     public static final String STATUS_ERROR_MESSAGE = "Статус не совпадает с '%s'";
+    public static final String INVALID_COLOR = "Цвет элемента не совпадает с [%s]";
     public static final String RUB = "RUB";
     public static final String EUR = "EUR";
     public static final String USD = "USD";
