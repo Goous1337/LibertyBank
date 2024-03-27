@@ -12,7 +12,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import web.drivers.DriverManager;
 import web.helpers.TestListener;
 import web.steps.*;
+import web.steps.depositsSteps.DepositsProductsFullInfoStep;
+import web.steps.creditSteps.*;
 import web.steps.depositsSteps.DepositsProductsSteps;
+import web.steps.depositsSteps.MyDepositsProductsSteps;
 
 
 import static property.UserPropertiesReader.USER_PASSWORD;
@@ -25,9 +28,12 @@ import static web.constans.UrlConfig.LOGIN_URL;
 public class BaseTest {
     protected static AccountSteps accountSteps;
     protected AccountInfoSteps accountInfoSteps;
-
     protected DepositsProductsSteps depositsProductsSteps;
     protected CreditInfoSteps creditInfoSteps;
+    protected CreditProductsDetailedInformationSteps creditProductDetailedInformationSteps;
+    protected СreditProductsSteps сreditProductsSteps;
+    protected MyCreditSteps myCreditSteps;
+    protected MyCreditDetailedInformationSteps myCreditDetailedInformationSteps;
     protected CreateAccountSteps createAccountSteps;
     protected ConfirmationSteps confirmationSteps;
     protected RenameAccountSteps renameAccountSteps;
@@ -41,6 +47,7 @@ public class BaseTest {
     protected MoreCreditProduct moreCreditProduct;
     protected MoreCreditDetails moreCreditDetails;
     protected CreditProductService creditProductService;
+
     protected UpdateEmailSteps updateEmailSteps;
     protected CardProductsSteps cardProductsSteps;
     protected CardSteps cardSteps;
@@ -48,6 +55,8 @@ public class BaseTest {
     protected CardProductInfoSteps cardProductInfoSteps;
     protected CloseCardSteps closeCardSteps;
     protected FilterCardsSteps filterCardsSteps;
+    protected MyDepositsProductsSteps myDepositsProductsSteps;
+    protected DepositsProductsFullInfoStep depositsProductsFullInfoStep;
 
     public BaseTest() {
         refreshPages();
@@ -89,6 +98,10 @@ public class BaseTest {
         dropDownAccountMenuSteps = new DropDownAccountMenuSteps();
         changeNotificationStatusSteps = new ChangeNotificationStatusSteps();
         creditInfoSteps = new CreditInfoSteps();
+        сreditProductsSteps = new СreditProductsSteps();
+        creditProductDetailedInformationSteps = new CreditProductsDetailedInformationSteps();
+        myCreditSteps = new MyCreditSteps();
+        myCreditDetailedInformationSteps = new MyCreditDetailedInformationSteps();
         moreCreditProduct = new MoreCreditProduct();
         moreCreditDetails = new MoreCreditDetails();
         creditProductService = new CreditProductService();
@@ -102,6 +115,7 @@ public class BaseTest {
         closeCardSteps = new CloseCardSteps();
         filterCardsSteps = new FilterCardsSteps();
         depositsProductsSteps = new DepositsProductsSteps();
+        myDepositsProductsSteps = new MyDepositsProductsSteps();
     }
 
 }

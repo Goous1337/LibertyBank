@@ -10,7 +10,7 @@ import lombok.Data;
 
 public class DepositCheckEmail {
 
-    @JsonSetter("eMail")
-    private String eMail;
+    @JsonSetter("email")
+    private String email;
     private Integer id;
 }

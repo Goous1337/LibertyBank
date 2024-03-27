@@ -27,7 +27,7 @@
       "type": "string"
     },
     "blockedCash": {
-      "type": "number"
+      "type": ["null", "integer", "number"]
     },
     "isMain": {
       "type": "boolean"
@@ -36,7 +36,7 @@
       "type": "string"
     },
     "closeDate": {
-      "type": "null"
+      "type": ["null", "string"]
     }
   },
   "required": [

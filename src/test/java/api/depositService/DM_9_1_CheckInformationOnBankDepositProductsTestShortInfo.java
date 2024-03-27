@@ -13,13 +13,14 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Map;
 
+import static constant.Message.RESPONSE_CODE_NOT_EXPECTED;
 import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.DEPOSIT_SERVICE;
 
 @DisplayName("DM 9.1 Просмотр информации по депозитным продуктам банка")
-public class DM_9_1_CheckInformationOnBankDepositProductsTest extends BaseTest {
+public class DM_9_1_CheckInformationOnBankDepositProductsTestShortInfo extends BaseTest {
 
     {
         RestAssured.baseURI = DEPOSIT_SERVICE;
@@ -38,7 +39,7 @@ public class DM_9_1_CheckInformationOnBankDepositProductsTest extends BaseTest {
         assertAll(
                 () -> assertEquals(SC_OK,
                         response.statusCode(),
-                        "Код ответа не соответствует ожидаемому"),
+                        RESPONSE_CODE_NOT_EXPECTED),
 
                 () -> {
                     List<Map<String, Object>> items = response.jsonPath().getList("$");
@@ -61,7 +62,7 @@ public class DM_9_1_CheckInformationOnBankDepositProductsTest extends BaseTest {
         assertAll(
                 () -> assertEquals(SC_UNAUTHORIZED,
                         response.statusCode(),
-                        "Код ответа не соответствует ожидаемому"),
+                        RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertEquals(response.jsonPath().get("errorMessage"), "Unsuccessful token validation: Empty token",
                         "Сообщение в ответе не соответствует ожидаемому")
         );
@@ -79,7 +80,7 @@ public class DM_9_1_CheckInformationOnBankDepositProductsTest extends BaseTest {
         assertAll(
                 () -> assertEquals(SC_UNAUTHORIZED,
                         response.statusCode(),
-                        "Код ответа не соответствует ожидаемому"),
+                        RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertEquals(response.jsonPath().get("errorMessage"), "Unsuccessful token validation: Empty token",
                         "Сообщение в ответе не соответствует ожидаемому")
         );
@@ -98,7 +99,7 @@ public class DM_9_1_CheckInformationOnBankDepositProductsTest extends BaseTest {
         assertAll(
                 () -> assertEquals(SC_INTERNAL_SERVER_ERROR,
                         response.statusCode(),
-                        "Код ответа не соответствует ожидаемому"),
+                        RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertEquals(response.jsonPath().get("errorMessage"), "Unsuccessful token validation: Empty token",
                         "Сообщение в ответе не соответствует ожидаемому")
         );
@@ -116,7 +117,7 @@ public class DM_9_1_CheckInformationOnBankDepositProductsTest extends BaseTest {
         assertAll(
                 () -> assertEquals(SC_NOT_FOUND,
                         response.statusCode(),
-                        "Код ответа не соответствует ожидаемому"),
+                        RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertEquals(response.jsonPath().get("error"), "Not Found",
                         "Сообщение в ответе не соответствует ожидаемому")
         );
