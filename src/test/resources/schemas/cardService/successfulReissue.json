@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "productType": {
+      "type": "string"
+    },
+    "account": {
+      "type": "string"
+    },
+    "customer": {
+      "type": "string"
+    },
+    "balance": {
+      "type": "null"
+    },
+    "cardSecureData": {
+      "type": "string"
+    },
+    "favourite": {
+      "type": "boolean"
+    },
+    "cardStatus": {
+      "type": "string"
+    },
+    "userLimit": {
+      "type": "string"
+    },
+    "embossed": {
+      "type": "boolean"
+    },
+    "permitVirtualPayment": {
+      "type": "boolean"
+    },
+    "createdAt": {
+      "type": "string"
+    },
+    "expiredAt": {
+      "type": "string"
+    },
+    "closedAt": {
+      "type": "null"
+    }
+  },
+  "required": [
+    "id",
+    "productType",
+    "account",
+    "customer",
+    "balance",
+    "cardSecureData",
+    "favourite",
+    "cardStatus",
+    "userLimit",
+    "embossed",
+    "permitVirtualPayment",
+    "createdAt",
+    "expiredAt",
+    "closedAt"
+  ]
+}

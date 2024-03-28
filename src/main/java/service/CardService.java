@@ -1,6 +1,8 @@
 package service;
 
+import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import pojo.cardService.ReissueRequestBody;
 import pojo.cardService.UpdateCardLimitsRequest;
 import pojo.cardService.UpdateCardStatusRequest;
 
@@ -13,8 +15,8 @@ import static constant.AccountServiceConstants.HEADER_CUSTOMER_ID;
 import static constant.AccountServiceConstants.VALID_CUSTOMER_ID;
 import static constant.ApiEndpoints.*;
 import static constant.CardServiceConstants.*;
-import static io.restassured.http.Method.GET;
-import static io.restassured.http.Method.PATCH;
+import static io.restassured.http.Method.*;
+import static specs.Specs.requestSpec;
 
 public class CardService {
 
@@ -68,5 +70,21 @@ public class CardService {
     public Response getCardLimits(String cardId) {
         return sendSimpleRequest(GET, ACTIVE_CARDS + "/" + cardId + "/limits",
                 getRP(HEADER, HEADER_CUSTOMER_ID, CUSTOMER_ID_WITH_ACTIVE_CARDS));
+    }
+
+    public static Response getReissueRequest(ReissueRequestBody body, String cardId) {
+        return RestAssured.given(requestSpec)
+                .header(HEADER_CUSTOMER_ID, CUSTOMER_ID_WITH_ACTIVE_CARDS)
+                .body(body)
+                .when()
+                .post(ACTIVE_CARDS + "/" + cardId);
+    }
+
+    public static Response getReissueRequestNotFound(ReissueRequestBody body) {
+        return RestAssured.given(requestSpec)
+                .header(HEADER_CUSTOMER_ID, CUSTOMER_ID_WITH_ACTIVE_CARDS)
+                .body(body)
+                .when()
+                .post(ACTIVE_CARDS + "/" + INVALID_CARD_ID);
     }
 }
