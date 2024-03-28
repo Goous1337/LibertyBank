@@ -8,6 +8,9 @@ public class AccountServiceConstants {
     public static final String INVALID_CUSTOMER_ID = "0";
     public static final String HEADER_CUSTOMER_ID = "X-Customer-Id";
     public static final String INVALID_ACCOUNT_ID = "00000000-0000-0000-0000-000000000000";
+    public static final String VALID_ACCOUNT_ID = "a60f746b-7faf-4bcd-bf5c-8d53c4cf0a3a";
+    public static final String NULL_ACCOUNT_ID = "NULL";
+    public static final String INVALID_ID = "InvalidID";
     public static final String CURRENCY_RUB = "RUB";
     public static final String CURRENCY_USD = "USD";
     public static final String CURRENCY_EUR = "EUR";
