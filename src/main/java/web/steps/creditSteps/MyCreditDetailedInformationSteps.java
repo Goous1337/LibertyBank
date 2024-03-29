@@ -3,7 +3,7 @@ package web.steps.creditSteps;
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
 import web.helpers.TestListener;
-import web.pages.creditPages.*;
+import web.pages.creditPages.MyCreditDetailedInformationPage;
 
 import static web.constans.CreditServiceConstants.NOT_DISPLAYED_CREDIT_WEB_ELEMENT_MESSAGE;
 

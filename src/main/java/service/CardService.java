@@ -15,7 +15,8 @@ import static constant.AccountServiceConstants.HEADER_CUSTOMER_ID;
 import static constant.AccountServiceConstants.VALID_CUSTOMER_ID;
 import static constant.ApiEndpoints.*;
 import static constant.CardServiceConstants.*;
-import static io.restassured.http.Method.*;
+import static io.restassured.http.Method.GET;
+import static io.restassured.http.Method.PATCH;
 import static specs.Specs.requestSpec;
 
 public class CardService {
@@ -86,5 +87,10 @@ public class CardService {
                 .body(body)
                 .when()
                 .post(ACTIVE_CARDS + "/" + INVALID_CARD_ID);
+    }
+
+    public Response getCardTariffs(String cardId) {
+        return sendSimpleRequest(GET, ACTIVE_CARDS + "/" + cardId + "/tariffs",
+                getRP(HEADER, HEADER_CUSTOMER_ID, CUSTOMER_ID_WITH_ACTIVE_CARDS));
     }
 }

@@ -4,7 +4,6 @@ import api.model.webAndApi.DepositProductService;
 import api.model.webAndApi.deposit.DepositProductShortInfo;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import static web.helpers.Converter.*;
 import web.enums.DepositsEnum;
 import web.helpers.Converter;
 import web.pages.BasePage;
@@ -12,6 +11,9 @@ import web.pages.BasePage;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+
+import static web.helpers.Converter.convertToDouble;
+import static web.helpers.Converter.convertToInteger;
 
 public class DepositsProductsBankPage extends BasePage {
     private DepositProductService depositProductService;

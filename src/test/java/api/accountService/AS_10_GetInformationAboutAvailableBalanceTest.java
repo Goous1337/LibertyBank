@@ -14,7 +14,8 @@ import org.junit.jupiter.api.Test;
 
 import static constant.AccountServiceConstants.INVALID_ACCOUNT_ID;
 import static constant.AccountServiceConstants.STATUS_ACTIVE;
-import static org.apache.hc.core5.http.HttpStatus.*;
+import static org.apache.hc.core5.http.HttpStatus.SC_NOT_FOUND;
+import static org.apache.hc.core5.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.ACCOUNT_SERVICE;
 

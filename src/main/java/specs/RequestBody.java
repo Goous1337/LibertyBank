@@ -3,8 +3,8 @@ package specs;
 import pojo.cardService.ReissueRequestBody;
 
 import static constant.AccountServiceConstants.*;
-import static constant.CardServiceConstants.*;
 import static constant.CardServiceConstants.STATUS_ACTIVE;
+import static constant.CardServiceConstants.*;
 
 public class RequestBody {
     public static ReissueRequestBody buildReissueRequestBody(String accountId) {

@@ -1,14 +1,13 @@
 package web.helpers;
 
-import java.util.Optional;
-
+import io.qameta.allure.Attachment;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.TestWatcher;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-
-import io.qameta.allure.Attachment;
 import web.drivers.DriverManager;
+
+import java.util.Optional;
 
 public class TestListener implements TestWatcher {
 

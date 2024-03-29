@@ -39,7 +39,7 @@ public class DepositProductShortInfo {
         }
 
         DepositProductShortInfo depositProductShortInfo = (DepositProductShortInfo) o;
-        return  getName().equals(depositProductShortInfo.getName()) &&
+        return getName().equals(depositProductShortInfo.getName()) &&
                 getMaxInterestRate().equals(depositProductShortInfo.getMaxInterestRate()) &&
                 getProductDetails().equals(depositProductShortInfo.getProductDetails()) &&
                 getMaxDurationMonths().equals(depositProductShortInfo.getMaxDurationMonths()) &&

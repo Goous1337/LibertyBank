@@ -9,18 +9,13 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import pojo.insuranceService.CreateVehicleApplicationInsuranceRequest;
-import pojo.insuranceService.Driver;
-import pojo.insuranceService.VehicleOwner;
-import pojo.insuranceService.VehicleDocumentRequest;
-import pojo.insuranceService.VehicleApplication;
-import pojo.insuranceService.Vehicle;
+import pojo.insuranceService.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static constant.InsuranceServiceConstants.INSURANCE_TYPE_VALUE;
 import static constant.InsuranceServiceConstants.CLIENT_ID;
+import static constant.InsuranceServiceConstants.INSURANCE_TYPE_VALUE;
 import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.apache.http.HttpStatus.SC_CREATED;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -42,9 +37,9 @@ public class INS_2_CheckNewApplicationRequest extends BaseTest {
     public void successfulRequestWithoutLicenseIssuingDate() {
         String jsonSchemaPath = "schemas/insuranceService/checkApplyingContract.json";
         CreateVehicleApplicationInsuranceRequest createVehicleApplicationInsuranceRequest = createPojoForVehicleApplication(
-                        "CAR", "Kalina", "LADA", 2021, "ПР256С-63",  1000000, 150, 1111111,
-                        "Михаил", "Попов", "2001-01-24", "12АА 125896", "2024-02-10", "РФ, г.Москва, ул. 1-й Армии, д. 35, кв. 124",
-                        1,  643, 15, false);
+                "CAR", "Kalina", "LADA", 2021, "ПР256С-63", 1000000, 150, 1111111,
+                "Михаил", "Попов", "2001-01-24", "12АА 125896", "2024-02-10", "РФ, г.Москва, ул. 1-й Армии, д. 35, кв. 124",
+                1, 643, 15, false);
         Response response = insuranceService.checkMakeNewVehicleApplicationRequest(CLIENT_ID, createVehicleApplicationInsuranceRequest);
         assertAll(
                 () -> assertEquals(SC_CREATED,
@@ -142,7 +137,7 @@ public class INS_2_CheckNewApplicationRequest extends BaseTest {
     public void unsuccessfulRequestWithoutPrice() {
         String jsonSchemaPath = "schemas/insuranceService/checkApplyingContractFail.json";
         CreateVehicleApplicationInsuranceRequest createVehicleApplicationInsuranceRequest = createPojoForVehicleApplication(
-                "CAR", "Kalina", "LADA", 2021, "ПР256С-63",  null, 150, 1111111,
+                "CAR", "Kalina", "LADA", 2021, "ПР256С-63", null, 150, 1111111,
                 "Михаил", "Попов", "2001-01-24", "12АА 125896", "2024-02-10", "РФ, г.Москва, ул. 1-й Армии, д. 35, кв. 124",
                 1, 643, 15, false);
         Response response = insuranceService.checkMakeNewVehicleApplicationRequest(CLIENT_ID, createVehicleApplicationInsuranceRequest);
@@ -218,7 +213,7 @@ public class INS_2_CheckNewApplicationRequest extends BaseTest {
             String vehicleType, String model, String brand, Integer productionDate, String numberPlate, Integer price, Integer power, Integer mileage,
             String name, String surname, String birthdate, String licenseId, String licenseIssuingDate, String registrationAddress,
             Integer InsuranceProductId, Integer currencyNumberCode, Integer duration, Boolean insuranceOwner
-            ) {
+    ) {
         Driver driver = new Driver(name, surname, "Станиславович", birthdate,
                 licenseId, licenseIssuingDate, "2021-05-17");
         VehicleOwner vehicleOwner = new VehicleOwner("Иван", "Иванов", "Иванович",

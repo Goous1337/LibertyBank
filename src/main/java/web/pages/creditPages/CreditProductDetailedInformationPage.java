@@ -12,7 +12,8 @@ import web.pages.BasePage;
 import java.util.ArrayList;
 import java.util.List;
 
-import static web.helpers.Converter.*;
+import static web.helpers.Converter.convertStringToInteger;
+import static web.helpers.Converter.convertToDouble;
 
 @Getter
 @Setter

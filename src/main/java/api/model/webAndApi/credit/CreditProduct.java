@@ -38,7 +38,7 @@ public class CreditProduct {
         }
 
         CreditProduct creditProduct = (CreditProduct) o;
-        return  getName().equals(creditProduct.getName()) &&
+        return getName().equals(creditProduct.getName()) &&
                 getInterestRate().equals(creditProduct.getInterestRate());
     }
 
