@@ -13,7 +13,7 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-import static web.helpers.Converter.*;
+import static web.helpers.Converter.convertToDouble;
 
 @Getter
 @Setter

@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateVehicleApplicationInsuranceRequest {
-  private String type;
-  private VehicleApplication vehicleApplication;
+    private String type;
+    private VehicleApplication vehicleApplication;
 }

@@ -1,0 +1,31 @@
+{
+  "productType": "Liberty Card Gold",
+  "servicePrice": 3,
+  "costPerMonth": 5,
+  "freeCostFrom": 1000,
+  "addCardCost": 10,
+  "cardReissueCost": 10,
+  "currency": "EUR",
+  "transferFee": {
+    "ourClient": 0,
+    "partnerClient": 0.001,
+    "anotherClientRu": 0.4,
+    "anotherClientWorld": 2,
+    "onBankAccount": 0.5,
+    "byPhoneNumber": 0.5,
+    "minFeeWorld": 1
+  },
+  "withdrawalCashFee": {
+    "ourBank": 0,
+    "partnersBank": 0.001,
+    "anotherBankRu": 0.5,
+    "anotherBankWorld": 3,
+    "minCashFeeWorld": 1
+  },
+  "cashback": {
+    "interestPerMonth": 1,
+    "interestForAll": 1,
+    "interestForPartners": 30,
+    "cashbackLimit": 100
+  }
+}

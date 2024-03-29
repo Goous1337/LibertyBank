@@ -19,7 +19,8 @@ import static constant.CustomerServiceConstants.PARAMETER_ID;
 import static constant.CustomerServiceConstants.PARAMETER_PRODUCT_ID;
 import static constant.DepositConstants.INVALID_ACCESS_TOKEN;
 import static io.restassured.http.Method.*;
-import static property.BaseProperties.*;
+import static property.BaseProperties.ACCESS_TOKEN_CUSTOMER_SERVICE;
+import static property.BaseProperties.INVALID_TOKEN_CREDIT_SERVICE;
 
 public class CreditService {
     public static Response checkGetRequestDisplayingElectronicBackground(Integer productId) {

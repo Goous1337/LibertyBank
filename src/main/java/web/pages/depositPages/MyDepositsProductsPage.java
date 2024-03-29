@@ -6,14 +6,17 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import web.drivers.DriverManager;
-import static web.helpers.Converter.*;
 import web.pages.BasePage;
 
 import java.sql.Date;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import static web.helpers.Converter.convertToDouble;
+import static web.helpers.Converter.parseDate;
 
 
-public class MyDepositsProductsPage extends BasePage  {
+public class MyDepositsProductsPage extends BasePage {
 
     private DepositProductService depositProductService;
     private List<WebElement> nameWebElements;
@@ -81,8 +84,8 @@ public class MyDepositsProductsPage extends BasePage  {
         depositProductService.getMyDepositsFromPage();
         List<MyDepositProduct> myDepositProducts = depositProductService.getMyDepositProductsList();
         mapInitialization();
-        for (MyDepositProduct myDepositProductFromBack:myDepositProducts) {
-            for (MyDepositProduct myDepositProductFromWeb:mapInitialization()) {
+        for (MyDepositProduct myDepositProductFromBack : myDepositProducts) {
+            for (MyDepositProduct myDepositProductFromWeb : mapInitialization()) {
                 if (myDepositProductFromBack.getName().equals(myDepositProductFromWeb.getName()) &&
                         myDepositProductFromBack.getInterestRate().equals(myDepositProductFromWeb.getInterestRate()) &&
                         myDepositProductFromBack.getCurrentBalance().equals(myDepositProductFromWeb.getCurrentBalance())) {

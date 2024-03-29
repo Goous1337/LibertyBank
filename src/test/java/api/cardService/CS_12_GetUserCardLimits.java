@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static api.cardService.CS_2_UpdateCardStatusByCardIdTest.CARD_ID;
-import static constant.CardServiceConstants.*;
+import static constant.CardServiceConstants.INVALID_CARD_ID;
 import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;

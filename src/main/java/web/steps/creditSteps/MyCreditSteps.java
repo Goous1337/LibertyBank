@@ -24,8 +24,6 @@ public class MyCreditSteps {
     }
 
 
-
-
     @Step("Отображается сумма первого кредита по списку авторизированного пользователя")
     public void assertTextMyCreditSumIsDisplayed() {
         Assertions.assertTrue(myCreditPage.isMyCreditSumTextDisplayed(), String.format(NOT_DISPLAYED_CREDIT_WEB_ELEMENT_MESSAGE, myCreditPage.isMyCreditSumTextDisplayed()));
@@ -54,7 +52,6 @@ public class MyCreditSteps {
     public void clickShowMoreAboutMyCreditButton() {
         myCreditPage.clickShowMoreMyCreditButton();
     }
-
 
 
 }

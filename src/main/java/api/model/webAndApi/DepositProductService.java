@@ -2,12 +2,10 @@ package api.model.webAndApi;
 
 import api.model.webAndApi.deposit.DepositProductFullInfo;
 import api.model.webAndApi.deposit.DepositProductShortInfo;
-
 import api.model.webAndApi.deposit.MyDepositProduct;
 import io.restassured.RestAssured;
 import lombok.Getter;
 import lombok.Setter;
-
 import web.constans.DepositsConstants;
 
 import java.util.ArrayList;

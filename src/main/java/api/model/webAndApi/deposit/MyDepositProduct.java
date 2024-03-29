@@ -52,7 +52,7 @@ public class MyDepositProduct {
         }
 
         MyDepositProduct myDepositProduct = (MyDepositProduct) o;
-        return  getName().equals(myDepositProduct.getName()) &&
+        return getName().equals(myDepositProduct.getName()) &&
                 getInterestRate().equals(myDepositProduct.getInterestRate()) &&
                 getCurrentBalance().equals(myDepositProduct.getCurrentBalance()) &&
                 getCloseDate().equals(myDepositProduct.getCloseDate());

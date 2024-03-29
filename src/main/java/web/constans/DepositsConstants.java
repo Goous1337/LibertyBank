@@ -16,7 +16,4 @@ public class DepositsConstants {
     public static final String CAPS_USD = "USD";
 
 
-
-
-
 }

@@ -10,12 +10,12 @@ import web.drivers.DriverManager;
 import web.enums.DepositsEnum;
 import web.pages.BasePage;
 
-import static web.helpers.Converter.*;
-
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+
+import static web.helpers.Converter.*;
 
 public class DepositsProductsFullInfoPage extends BasePage {
     private DepositProductService depositProductService;

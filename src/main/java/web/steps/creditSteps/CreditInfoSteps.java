@@ -3,7 +3,8 @@ package web.steps.creditSteps;
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
 import web.helpers.TestListener;
-import web.pages.creditPages.*;
+import web.pages.creditPages.CreditInfoPage;
+import web.pages.creditPages.MyCreditsPage;
 
 import static web.constans.CreditServiceConstants.*;
 
@@ -35,7 +36,6 @@ public class CreditInfoSteps {
         Assertions.assertTrue(creditInfoPage.isSubmittedCreditRequestDisplayed(), String.format(NOT_DISPLAYED_CREDIT_WEB_ELEMENT_MESSAGE, "Поданные кредитные заявки"));
         TestListener.takeScreenshot();
     }
-
 
 
     @Step("Проверка url Мои кредиты")
