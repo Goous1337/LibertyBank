@@ -69,7 +69,7 @@ public class BaseTest {
         open(LOGIN_URL);
         loginSteps.enterPhone(USER_PHONE);
         loginSteps.enterPassword(USER_PASSWORD);
-        loginSteps.tapSubmitButton();
+        loginSteps.tapSubmitButtonToMain();
     }
 
     @BeforeAll

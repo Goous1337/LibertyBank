@@ -6,6 +6,7 @@ import web.pages.LoginPage;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static web.constans.AccountServiceConstants.INVALID_COLOR;
+import static web.constans.AccountServiceConstants.INVALID_TEXT_IN_ELEMENT;
 
 public class LoginSteps {
 
@@ -25,16 +26,31 @@ public class LoginSteps {
         loginPage.enterPassword(password);
     }
 
-    @Step("Нажать кнопку 'Вперед'")
-    public void tapSubmitButton() {
-        loginPage.submit();
+    @Step("Нажать кнопку 'Вперед' и перейти на страницу main")
+    public void tapSubmitButtonToMain() {
+        loginPage.submitToMainPage();
     }
 
-    @Step("Проверка изменения цвета поля ввода и кнопки")
-    public void assertSubmitButtonEnabled(String bgColor, String inputColor) {
+    @Step("Кликнуть по кнопке 'Вперед'")
+    public void clickSubmitButton() {
+        loginPage.clickSubmitButton();
+    }
+
+    @Step("Проверка кнопки и поля ввода на правильных значениях")
+    public void assertSubmitButtonAndInputSuccessful(String bgButtonColor, String textButtonColor, String inputColor) {
         assertAll(
-                () -> assertTrue(loginPage.isActiveSubmitButton(bgColor), INVALID_COLOR),
-                () -> assertTrue(loginPage.isSuccessInput(inputColor), INVALID_COLOR)
+                () -> assertTrue(loginPage.verifyButtonColors(bgButtonColor, textButtonColor), INVALID_COLOR),
+                () -> assertTrue(loginPage.verifyInputColors(inputColor), INVALID_COLOR)
+        );
+    }
+
+    @Step("Проверка кнопки и поля ввода при неправильных значениях")
+    public void assertSubmitButtonAndInputInvalid(String bgButtonColor, String textButtonColor, String inputColor) {
+        assertAll(
+                () -> assertTrue(loginPage.verifyButtonColors(bgButtonColor, textButtonColor), INVALID_COLOR),
+                () -> assertTrue(loginPage.verifyInputColors(inputColor), INVALID_COLOR),
+                () -> assertTrue(loginPage.checkErrorHint("Неверный пароль или номер телефона"),
+                        INVALID_TEXT_IN_ELEMENT)
         );
     }
 }

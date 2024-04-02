@@ -3,14 +3,13 @@ package web.epic_1;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.TmsLink;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Tags;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import web.BaseTest;
 
+import static property.UserPropertiesReader.USER_PASSWORD;
 import static property.UserPropertiesReader.USER_PHONE;
 
 @Epic("Epic -1 Регистрация/Авторизация/Безопасность")
@@ -30,6 +29,25 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
     public void checkValidationLoginPasswordTest(String password) {
         loginSteps.enterPhone(USER_PHONE);
         loginSteps.enterPassword(password);
-        loginSteps.assertSubmitButtonEnabled("rgba(0, 90, 254, 1)", "rgb(117, 127, 138)");
+        loginSteps.assertSubmitButtonAndInputSuccessful(
+                "rgba(0, 90, 254, 1)",
+                "rgba(245, 245, 245, 1)",
+                "rgb(117, 127, 138)");
+    }
+
+    @DisplayName("Проверка авторизации незарегистрированного пользователя по номеру телефона")
+    @Description("Проверка соответствия введенного номера телефона и пароля при прохождении авторизации")
+    @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Negative")})
+    @TmsLink("LIB-2435")
+    @ParameterizedTest
+    @CsvSource({"71111111111, Login-1", "79228134511, Login-107543"})
+    public void checkAuthUnregisteredUserTest() {
+        loginSteps.enterPhone("71111111111");
+        loginSteps.enterPassword(USER_PASSWORD);
+        loginSteps.clickSubmitButton();
+        loginSteps.assertSubmitButtonAndInputInvalid(
+                "rgba(216, 223, 234, 1)",
+                "rgba(77, 95, 113, 1)",
+                "rgb(245, 60, 20)");
     }
 }
