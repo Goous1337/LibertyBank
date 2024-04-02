@@ -3,7 +3,9 @@ package web.pages;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import static web.helpers.Waiters.waitElement;
+import java.util.Objects;
+
+import static web.helpers.Waiters.*;
 
 public class LoginPage extends BasePage {
 
@@ -19,6 +21,12 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//*[contains(text(), 'Главная')]")
     private WebElement mainView;
 
+    @FindBy(xpath = "//input[@name = 'password']/..")
+    private WebElement borderForInput;
+
+    @FindBy(xpath = "//p[contains(text(), 'Неверный пароль или номер телефона')]")
+    private WebElement errorHint;
+
     public void enterPhone(String phoneNumber) {
         waitElement(phoneInput);
         phoneInput.sendKeys(phoneNumber);
@@ -29,9 +37,28 @@ public class LoginPage extends BasePage {
         passwordInput.sendKeys(password);
     }
 
-    public void submit() {
-        waitElement(submitButton);
-        submitButton.click();
+    public void submitToMainPage() {
+        clickSubmitButton();
         waitElement(mainView);
+    }
+
+    public void clickSubmitButton() {
+        waitElement(submitButton).click();
+    }
+
+    public boolean checkButtonCondition(String bgColor, String textColor, boolean isEnabled) {
+        waitElementWithColor(submitButton, bgColor);
+        return submitButton.isEnabled() == isEnabled
+                && submitButton.getCssValue("background-color").equals(bgColor)
+                && submitButton.getCssValue("color").equals(textColor);
+    }
+
+    public boolean isValidInput(String color) {
+        return borderForInput.getCssValue("border-color").
+                equals(color);
+    }
+
+    public boolean checkErrorHint(String text) {
+        return Objects.equals(errorHint.getText(), text);
     }
 }
