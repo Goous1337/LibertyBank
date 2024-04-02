@@ -7,11 +7,17 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
+
 import web.drivers.DriverManager;
 import web.helpers.TestListener;
 import web.steps.*;
-import web.steps.creditSteps.*;
+import web.steps.accountSteps.AccountInfoSteps;
+import web.steps.accountSteps.AccountSteps;
+import web.steps.accountSteps.CreateAccountSteps;
+import web.steps.accountSteps.RenameAccountSteps;
+import web.steps.cardSteps.*;
 import web.steps.depositsSteps.DepositsProductsFullInfoStep;
+import web.steps.creditSteps.*;
 import web.steps.depositsSteps.DepositsProductsSteps;
 import web.steps.depositsSteps.MyDepositsProductsSteps;
 
@@ -44,7 +50,6 @@ public class BaseTest {
     protected MoreCreditProduct moreCreditProduct;
     protected MoreCreditDetails moreCreditDetails;
     protected CreditProductService creditProductService;
-
     protected UpdateEmailSteps updateEmailSteps;
     protected CardProductsSteps cardProductsSteps;
     protected CardSteps cardSteps;

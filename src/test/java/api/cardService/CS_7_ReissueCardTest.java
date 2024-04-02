@@ -46,7 +46,6 @@ public class CS_7_ReissueCardTest extends BaseTest {
                 .assertThat().body(matchesJsonSchemaInClasspath(JSON_SCHEMA))
                 .spec(response201)
                 .extract().as(ReissueResponse.class);
-
         assertAll(
                 () -> assertEquals(VALID_PRODUCT_TYPE_ID, response.getProductType()),
                 () -> assertEquals("a60f746b-7faf-4bcd-bf5c-8d53c4cf0a3a", response.getAccount()),
