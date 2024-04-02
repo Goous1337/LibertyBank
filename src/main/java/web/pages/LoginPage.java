@@ -46,16 +46,14 @@ public class LoginPage extends BasePage {
         waitElement(submitButton).click();
     }
 
-    public boolean verifyButtonColors(String bgColor, String textColor) {
+    public boolean checkButtonCondition(String bgColor, String textColor, boolean isEnabled) {
         waitElementWithColor(submitButton, bgColor);
-        System.out.println(submitButton.getCssValue("background-color"));
-        System.out.println(submitButton.getCssValue("color"));
-        return submitButton.getCssValue("background-color").
-                equals(bgColor) && submitButton.getCssValue("color").equals(textColor);
+        return submitButton.isEnabled() == isEnabled
+                && submitButton.getCssValue("background-color").equals(bgColor)
+                && submitButton.getCssValue("color").equals(textColor);
     }
 
-    public boolean verifyInputColors(String color) {
-        System.out.println(borderForInput.getCssValue("border-color"));
+    public boolean isValidInput(String color) {
         return borderForInput.getCssValue("border-color").
                 equals(color);
     }

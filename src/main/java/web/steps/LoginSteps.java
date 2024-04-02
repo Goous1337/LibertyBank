@@ -37,18 +37,22 @@ public class LoginSteps {
     }
 
     @Step("Проверка кнопки и поля ввода на правильных значениях")
-    public void assertSubmitButtonAndInputSuccessful(String bgButtonColor, String textButtonColor, String inputColor) {
+    public void assertSubmitButtonAndInputSuccessful(
+            String bgButtonColor, String textButtonColor, String inputColor) {
         assertAll(
-                () -> assertTrue(loginPage.verifyButtonColors(bgButtonColor, textButtonColor), INVALID_COLOR),
-                () -> assertTrue(loginPage.verifyInputColors(inputColor), INVALID_COLOR)
+                () -> assertTrue(loginPage.checkButtonCondition(bgButtonColor, textButtonColor, true),
+                        INVALID_COLOR),
+                () -> assertTrue(loginPage.isValidInput(inputColor), INVALID_COLOR)
         );
     }
 
     @Step("Проверка кнопки и поля ввода при неправильных значениях")
-    public void assertSubmitButtonAndInputInvalid(String bgButtonColor, String textButtonColor, String inputColor) {
+    public void assertSubmitButtonAndInputInvalid(
+            String bgButtonColor, String textButtonColor, String inputColor) {
         assertAll(
-                () -> assertTrue(loginPage.verifyButtonColors(bgButtonColor, textButtonColor), INVALID_COLOR),
-                () -> assertTrue(loginPage.verifyInputColors(inputColor), INVALID_COLOR),
+                () -> assertTrue(loginPage.checkButtonCondition(bgButtonColor, textButtonColor, false),
+                        INVALID_COLOR),
+                () -> assertTrue(loginPage.isValidInput(inputColor), INVALID_COLOR),
                 () -> assertTrue(loginPage.checkErrorHint("Неверный пароль или номер телефона"),
                         INVALID_TEXT_IN_ELEMENT)
         );
