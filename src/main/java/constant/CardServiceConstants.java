@@ -18,4 +18,6 @@ public class CardServiceConstants {
     public static final String STATUS_ACTIVE = "ACTIVE";
     public static final String STATUS_CLOSED = "CLOSED";
     public static final String STATUS_BLOCKED = "BLOCKED";
+    public static final Boolean CARD_IS_NOT_FAVORITE = false;
+
 }

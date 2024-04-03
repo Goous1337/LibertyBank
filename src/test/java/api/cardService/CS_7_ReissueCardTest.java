@@ -41,7 +41,7 @@ public class CS_7_ReissueCardTest extends BaseTest {
     @DisplayName("Перевыпуск карты")
     @Description("Тест направлен на проверку возможности перевыпуска карты с аналогичными параметрами, что и предыдущая")
     public void reissueCardTest() {
-        ReissueResponse response = getReissueRequest(reissueRequestBody, cardId)
+        ReissueResponse response = getReissueRequest(REISSUE_REQUEST_BODY, cardId)
                 .then()
                 .assertThat().body(matchesJsonSchemaInClasspath(JSON_SCHEMA))
                 .spec(response201)
@@ -66,7 +66,7 @@ public class CS_7_ReissueCardTest extends BaseTest {
     @DisplayName("Невалидное поле в теле запроса")
     @Description("Тест направлен на проверку возможности перевыпуска карты с невалидным полем в теле запроса")
     public void reissueCardInvalidBodyTest() {
-        ReissueBadRequest response = getReissueRequest(reissueRequestBodyInvalidAccountId, cardId)
+        ReissueBadRequest response = getReissueRequest(REISSUE_REQUEST_BODY_INVALID_ACCOUNT_ID, cardId)
                 .then()
                 .assertThat().body(matchesJsonSchemaInClasspath(JSON_SCHEMA_BAD_REQUEST))
                 .spec(response400)
@@ -82,7 +82,7 @@ public class CS_7_ReissueCardTest extends BaseTest {
     @DisplayName("Перевыпуск карты с полем, не допускающим значение NULL")
     @Description("Тест направлен на проверку возможности перевыпуска карты  с полем, не допускающим значение NULL")
     public void reissueCardNullAccountIdTest() {
-        ReissueBadRequest response = getReissueRequest(reissueRequestBodyNullAccountId, cardId)
+        ReissueBadRequest response = getReissueRequest(REISSUE_REQUEST_BODY_NULL_ACCOUNT_ID, cardId)
                 .then()
                 .assertThat().body(matchesJsonSchemaInClasspath(JSON_SCHEMA_BAD_REQUEST))
                 .spec(response400)
@@ -98,7 +98,7 @@ public class CS_7_ReissueCardTest extends BaseTest {
     @DisplayName("Невалидное значение cardId")
     @Description("Тест направлен на проверку возможности перевыпуска карты с неверным значением в поле cardId ")
     public void reissueCardNotFoundTest() {
-        ReissueNotFoundResponse response = getReissueRequestNotFound(reissueRequestBody)
+        ReissueNotFoundResponse response = getReissueRequestNotFound(REISSUE_REQUEST_BODY)
                 .then()
                 .assertThat().body(matchesJsonSchemaInClasspath(JSON_SCHEMA_NOT_FOUND))
                 .spec(response404)
