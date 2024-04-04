@@ -1,5 +1,6 @@
 package service;
 
+import constant.CardProducts;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import pojo.cardService.RegistrDebitBody;
@@ -74,6 +75,10 @@ public class CardService {
                 getRP(HEADER, HEADER_CUSTOMER_ID, CUSTOMER_ID_WITH_ACTIVE_CARDS));
     }
 
+    public Response getBenefitsOfCardProducts(CardProducts cardProducts) {
+        return sendRequestWithoutParams(GET, CARD_PRODUCT_BENEFITS + cardProducts.getCardName());
+    }
+    
     public static Response getReissueRequest(ReissueRequestBody body, String cardId) {
         return RestAssured.given(requestSpec)
                 .header(HEADER_CUSTOMER_ID, CUSTOMER_ID_WITH_ACTIVE_CARDS)

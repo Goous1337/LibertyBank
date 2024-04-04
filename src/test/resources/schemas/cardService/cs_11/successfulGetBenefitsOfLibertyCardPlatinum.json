@@ -1,0 +1,44 @@
+{
+  "cardProductBenefits": [
+    {
+      "benefitType": "allCurrencies",
+      "title": "Рубль, Евро, Доллар",
+      "description": "Выбирайте валюту, которая удобна именно вам"
+    },
+    {
+      "benefitType": "allPaymentSystem",
+      "title": "MIR, VISA, MasterCard",
+      "description": "Безграничные возможности c любой платежной системой"
+    },
+    {
+      "benefitType": "noLimits",
+      "title": "Безлимитно",
+      "description": "Нет лимитов по операциям"
+    },
+    {
+      "benefitType": "noFee",
+      "title": "Без комиссии",
+      "description": "Снятие наличных в банкоматах и кассах банков партнеров"
+    },
+    {
+      "benefitType": "cashbackLimit",
+      "title": "До 30 % кешбэка",
+      "description": "По спецпредложениям партнеров"
+    },
+    {
+      "benefitType": "exchange",
+      "title": "Выгодный курс",
+      "description": "При покупке валюты"
+    },
+    {
+      "benefitType": "partnerBonus",
+      "title": "Бонусы",
+      "description": "При покупке товаров или услуг от партнеров"
+    },
+    {
+      "benefitType": "noFeeTransfer",
+      "title": "Без комиссии",
+      "description": "Переводы клиентам банков партнеров"
+    }
+  ]
+}

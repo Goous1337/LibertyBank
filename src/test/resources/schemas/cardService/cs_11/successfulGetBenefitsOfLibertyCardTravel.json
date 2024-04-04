@@ -1,0 +1,19 @@
+{
+  "cardProductBenefits": [
+    {
+      "benefitType": "noLimits",
+      "title": "Безлимитно",
+      "description": "Нет лимитов по операциям"
+    },
+    {
+      "benefitType": "noFee",
+      "title": "Без комиссии",
+      "description": "Снятие наличных в банкоматах и кассах банков партнеров"
+    },
+    {
+      "benefitType": "cashbackLimit",
+      "title": "До 30 % кешбэка",
+      "description": "По спецпредложениям партнеров"
+    }
+  ]
+}
