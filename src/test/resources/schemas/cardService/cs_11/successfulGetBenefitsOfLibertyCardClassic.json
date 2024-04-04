@@ -1,0 +1,19 @@
+{
+  "cardProductBenefits": [
+    {
+      "benefitType": "costPerMonth",
+      "title": "Бесплатно",
+      "description": "Выпуск и обслуживание, при выполнении условий"
+    },
+    {
+      "benefitType": "interestPerMonth",
+      "title": "3% годовых",
+      "description": "На остаток средств"
+    },
+    {
+      "benefitType": "cashbackLimit",
+      "title": "Безлимитный кешбэк",
+      "description": "На все покупки"
+    }
+  ]
+}

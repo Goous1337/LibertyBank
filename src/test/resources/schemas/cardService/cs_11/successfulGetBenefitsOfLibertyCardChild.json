@@ -1,0 +1,19 @@
+{
+  "cardProductBenefits": [
+    {
+      "benefitType": "costPerMonth",
+      "title": "Бесплатно",
+      "description": "Выпуск и обслуживание"
+    },
+    {
+      "benefitType": "cashbackLimit",
+      "title": "3 % кешбэка",
+      "description": "На любые покупки"
+    },
+    {
+      "benefitType": "childControl",
+      "title": "Удобно",
+      "description": "Мобильный банк у вас и ребёнка"
+    }
+  ]
+}

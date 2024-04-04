@@ -1,0 +1,24 @@
+{
+  "cardProductBenefits": [
+    {
+      "benefitType": "costPerMonth",
+      "title": "Бесплатно",
+      "description": "Выпуск и обслуживание"
+    },
+    {
+      "benefitType": "allCurrencies",
+      "title": "Рубль, Евро, Доллар",
+      "description": "Выбирайте валюту, которая удобна именно вам"
+    },
+    {
+      "benefitType": "noFee",
+      "title": "Без комиссии",
+      "description": "Снятие наличных в любых банкоматах банков"
+    },
+    {
+      "benefitType": "noFeeTransfer",
+      "title": "Без комиссии",
+      "description": "Переводы клиентам банков партнеров"
+    }
+  ]
+}

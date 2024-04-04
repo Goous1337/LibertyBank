@@ -96,4 +96,5 @@ public final class ApiEndpoints {
     public static final String CARD_BY_NAME = "card-service/api/v1/card-products/typeName";
     public static final String REGISTRATION_HEADER = "Registration";
     public static final String APPLICATION_INSURANCE = "insurance-service/api/v1/insurance/applications";
+    public static final String CARD_PRODUCT_BENEFITS = "card-service/api/v1/card-product-benefits/";
 }
