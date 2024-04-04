@@ -1,0 +1,19 @@
+{
+  "cardProductBenefits": [
+    {
+      "benefitType": "allCurrencies",
+      "title": "Рубль, Евро, Доллар",
+      "description": "Выбирайте валюту, которая удобна именно вам"
+    },
+    {
+      "benefitType": "allPaymentSystem",
+      "title": "MIR, VISA, MasterCard",
+      "description": "Безграничные возможности c любой платежной системой"
+    },
+    {
+      "benefitType": "cashbackLimit",
+      "title": "До 30 % кешбэка",
+      "description": "По спецпредложениям партнеров"
+    }
+  ]
+}
