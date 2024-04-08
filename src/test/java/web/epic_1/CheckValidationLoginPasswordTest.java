@@ -50,4 +50,22 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
                 "rgba(77, 95, 113, 1)",
                 "rgb(245, 60, 20)");
     }
+
+    @DisplayName("US-1.2.1 Авторизация по номеру телефона (первичный вход)")
+    @Description("Авторизоваться в личном кабинете с валидными значениями телефона и пароля")
+    @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Positive")})
+    @TmsLink("LIB-2432")
+    @ParameterizedTest
+    @CsvSource({"79228134511, Login-1"})
+    public void checkValidationAuthTest() {
+        loginSteps.enterPhone(USER_PHONE);
+        loginSteps.enterPassword(USER_PASSWORD);
+        loginSteps.assertSubmitButtonAndInputSuccessful(
+                "rgba(0, 90, 254, 1)",
+                "rgba(245, 245, 245, 1)",
+                "rgb(117, 127, 138)");
+        loginSteps.clickSubmitButton();
+        homeSteps.clickUserMenu();
+        homeSteps.assertIsUserPanelDisplayed();
+    }
 }
