@@ -61,4 +61,8 @@ public class LoginPage extends BasePage {
     public boolean checkErrorHint(String text) {
         return Objects.equals(errorHint.getText(), text);
     }
+
+    public String getTextFromPhoneInput() {
+        return phoneInput.getAttribute("value");
+    }
 }

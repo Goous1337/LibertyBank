@@ -18,6 +18,7 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
     @BeforeEach
     public void setUpTest() {
         open("");
+        loginSteps.clearAssertions();
     }
 
     @DisplayName("Основной сценарий: проверка валидации полей формы авторизации")
@@ -49,5 +50,12 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
                 "rgba(216, 223, 234, 1)",
                 "rgba(77, 95, 113, 1)",
                 "rgb(245, 60, 20)");
+    }
+
+    @Test
+    public void checkPhoneInput() {
+        loginSteps.enterPhone("711111111111");
+        loginSteps.assertPhoneInput("711111111111");
+        loginSteps.assertAllChecks();
     }
 }
