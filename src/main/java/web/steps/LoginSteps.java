@@ -1,6 +1,7 @@
 package web.steps;
 
 import io.qameta.allure.Step;
+import org.assertj.core.api.SoftAssertions;
 import web.pages.LoginPage;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -9,11 +10,16 @@ import static web.constans.AccountServiceConstants.INVALID_COLOR;
 import static web.constans.AccountServiceConstants.INVALID_TEXT_IN_ELEMENT;
 
 public class LoginSteps {
-
     protected LoginPage loginPage;
+
+    SoftAssertions softAssertions = new SoftAssertions();
 
     public LoginSteps() {
         loginPage = new LoginPage();
+    }
+
+    public void clearAssertions() {
+        softAssertions = new SoftAssertions();
     }
 
     @Step("Ввести валидный номер телефона")
@@ -56,5 +62,44 @@ public class LoginSteps {
                 () -> assertTrue(loginPage.checkErrorHint("Неверный пароль или номер телефона"),
                         INVALID_TEXT_IN_ELEMENT)
         );
+    }
+
+    @Step("Проверка кол-ва символов поля \"Номер телефона\"")
+    public void assertAmountSymbolsPhoneInput(int amountSymbols) {
+        softAssertions.assertThat(loginPage.getTextFromPhoneInput().length())
+                .as("Проверка кол-ва символов поля \"Номер телефона\"")
+                .isEqualTo(amountSymbols);
+    }
+
+    @Step("Проверка цвета поля \"Номер телефона\"")
+    public void assertColorPhoneInput(String colorPhoneInput) {
+        softAssertions.assertThat(loginPage.getPhoneInputBorderColor())
+                .as("Проверка цвета поля \"Номер телефона\"")
+                .isEqualTo(colorPhoneInput);
+    }
+
+    @Step("Проверка цвета рамки поля \"Номер телефона\"")
+    public void assertBorderColorPhoneInput(String inputPhoneColor) {
+        softAssertions.assertThat(loginPage.getPhoneInputBorderColor())
+                .as("Проверка цвета поля \"Номер телефона\"")
+                .isEqualTo(inputPhoneColor);
+    }
+
+    @Step("Проверка цвета плэйсхолдера поля \"Номер телефона\"")
+    public void assertColorPlaceholderPhoneInput(String colorPlaceholderPhone) {
+        softAssertions.assertThat(loginPage.getColorPlaceholderPhone())
+                .as("Проверка цвета плэйсхолдера поля \"Номер телефона\"")
+                .isEqualTo(colorPlaceholderPhone);
+    }
+
+    @Step("Проверка текста сообщения об ошибке поля \"Номер телфона\"")
+    public void assertErrorPhoneInput(String textErrorPhone) {
+            softAssertions.assertThat(loginPage.checkErrorPhoneHint(textErrorPhone))
+                    .as("Проверка сообщения об ошибке поля \"Номер телфона\"")
+                    .isEqualTo(true);
+    }
+
+    public void assertAllChecks() {
+        softAssertions.assertAll();
     }
 }
