@@ -14,7 +14,9 @@ import pojo.insuranceService.HealthApplication;
 import pojo.insuranceService.InsuredPerson;
 
 import static constant.InsuranceServiceConstants.CLIENT_ID;
-import static org.apache.http.HttpStatus.*;
+import static org.apache.http.HttpStatus.SC_CREATED;
+import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
+import static org.apache.http.HttpStatus.SC_NOT_FOUND;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.INSURANCE_SERVICE;
