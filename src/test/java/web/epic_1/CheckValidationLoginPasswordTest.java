@@ -55,8 +55,7 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
     @Description("Авторизоваться в личном кабинете с валидными значениями телефона и пароля")
     @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Positive")})
     @TmsLink("LIB-2432")
-    @ParameterizedTest
-    @CsvSource({"79228134511, Login-1"})
+    @Test
     public void checkValidationAuthTest() {
         loginSteps.enterPhone(USER_PHONE);
         loginSteps.enterPassword(USER_PASSWORD);
