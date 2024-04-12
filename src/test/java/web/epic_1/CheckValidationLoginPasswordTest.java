@@ -52,10 +52,32 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
                 "rgb(245, 60, 20)");
     }
 
+    @DisplayName("Проверка валидации полей формы авторизации при использовании невалидных данных")
+    @Description("Проверить валидацию поля \"Номер телефона\" по количеству символов с недостаточным количеством символов")
+    @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Negative")})
+    @TmsLink("LIB-2429")
     @Test
-    public void checkPhoneInput() {
-        loginSteps.enterPhone("711111111111");
-        loginSteps.assertPhoneInput("711111111111");
+    public void checkValidationTenSymbolsPhoneInput() {
+        loginSteps.enterPhone("7912212122");
+        loginSteps.clickSubmitButton();
+        loginSteps.assertAmountSymbolsPhoneInput(16);
+        loginSteps.assertColorPhoneInput("rgb(245, 60, 20)");
+        loginSteps.assertErrorPhoneInput("Номер телефона должен содержать 11 цифр");
+        loginSteps.assertAllChecks();
+    }
+
+    @DisplayName("Проверка валидации полей формы авторизации при использовании невалидных данных")
+    @Description("Проверить валидацию поля \"Номер телефона\" по количеству символов с недостаточным количеством символов")
+    @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Negative")})
+    @TmsLink("LIB-2429")
+    @ParameterizedTest
+    @CsvSource({"7912123456, 16, rgb(245, 60, 20), Номер телефона должен содержать 11 цифр"})
+    public void checkValidationPhoneInput(String phoneNumber, int amountSymbols, String inputPhoneColor, String textErrorPhone) {
+        loginSteps.enterPhone(phoneNumber);
+        loginSteps.clickSubmitButton();
+        loginSteps.assertAmountSymbolsPhoneInput(amountSymbols);
+        loginSteps.assertColorPhoneInput(inputPhoneColor);
+        loginSteps.assertErrorPhoneInput(textErrorPhone);
         loginSteps.assertAllChecks();
     }
 }

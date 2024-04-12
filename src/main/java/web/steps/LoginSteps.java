@@ -64,11 +64,32 @@ public class LoginSteps {
         );
     }
 
-    @Step("Проверка проверка на вход неправмльного текста")
-    public void assertPhoneInput(String text) {
+//    @Step("\"Номер телефона\" 10 символов")
+//    public void assertEmptyPhoneInput() {
+//        softAssertions.assertThat(loginPage.getTextFromPhoneInput().length())
+//                .as("\"Номер телефона\" пустой")
+//                .isEqualTo(0);
+//    }
+
+    @Step
+    public void assertAmountSymbolsPhoneInput(int amountSymbols) {
         softAssertions.assertThat(loginPage.getTextFromPhoneInput().length())
-                .as("Проверка на возможность ввести неправильный текст")
-                .isEqualTo(17);
+                .as("Проверка кол-ва символов поля \"Номер телефона\"")
+                .isEqualTo(amountSymbols);
+    }
+
+    @Step("Проверка цвета поля \"Номер телефона\"")
+    public void assertColorPhoneInput(String inputPhoneColor) {
+        softAssertions.assertThat(loginPage.isValidPhoneInput(inputPhoneColor))
+                .as("Проверка цвета поля \"Номер телефона\"")
+                .isEqualTo(true);
+    }
+
+    @Step("Проверка сообщения об ошибке")
+    public void assertErrorPhoneInput(String textErrorPhone) {
+        softAssertions.assertThat(loginPage.checkErrorPhoneHint(textErrorPhone))
+                .as("Проверка сообщения об ошибке поля \"Номер телфона\"")
+                .isEqualTo(true);
     }
 
     public void assertAllChecks() {
