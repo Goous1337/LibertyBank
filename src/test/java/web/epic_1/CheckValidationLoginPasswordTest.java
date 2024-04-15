@@ -1,18 +1,22 @@
 package web.epic_1;
 
-import io.qameta.allure.Description;
-import io.qameta.allure.Epic;
-import io.qameta.allure.TmsLink;
-import org.junit.jupiter.api.*;
+import java.util.stream.Stream;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import web.BaseTest;
 
-import java.util.stream.Stream;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.TmsLink;
+import web.BaseTest;
+import web.pages.LoginPage;
 
 import static property.UserPropertiesReader.USER_PASSWORD;
 import static property.UserPropertiesReader.USER_PHONE;
@@ -73,14 +77,14 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
 
     static Stream<Object[]> provideTestDataForPhoneNumber() {
         return Stream.of(
-                new Object[]{"", 0, "rgb(117, 127, 138)", "rgba(77, 95, 113, 1)", ""},
-                new Object[]{"7912123452", 16, "rgb(245, 60, 20)", "rgba(116, 87, 91, 1)",
+                new Object[]{"", 0, "rgb(245, 60, 20)", "rgba(245, 60, 20, 1)", ""},
+                new Object[]{"7912123452", 16, "rgb(245, 60, 20)", "rgba(245, 60, 20, 1)",
                         "Номер телефона должен содержать 11 цифр"},
                 new Object[]{"791212345333", 17, "rgb(243, 244, 248)", "rgba(77, 95, 113, 1)", ""},
                 new Object[]{"aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ", 4,
-                            "rgb(245, 60, 20)", "rgba(79, 95, 112, 1)", "Номер телефона должен содержать 11 цифр"},
-                new Object[]{"!'(%)*$+,#-./:\";<=>?@[]^_`{|}~[]", 4, "rgb(245, 60, 20)", "rgba(116, 87, 92, 1)",
-                            "Номер телефона должен содержать 11 цифр"},
+                        "rgb(245, 60, 20)", "rgba(245, 60, 20, 1)", "Номер телефона должен содержать 11 цифр"},
+                new Object[]{"!'(%)*$+,#-./:\";<=>?@[]^_`{|}~[]", 4, "rgb(245, 60, 20)", "rgba(245, 60, 20, 1)",
+                        "Номер телефона должен содержать 11 цифр"},
                 new Object[]{" 7 9 1 2 1 2 3 4 5 6 7 ", 17, "rgb(243, 244, 248)", "rgba(77, 95, 113, 1)", ""}
         );
     }
@@ -109,11 +113,12 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("provideTestDataForPhoneNumber")
     public void checkValidationPhoneInput(String phoneNumber, int amountSymbols, String colorPhoneInput,
-                                          String colorPlaceholderPhone, String textErrorPhone) {
+            String colorPlaceholderPhone, String textErrorPhone)
+            throws InterruptedException {
+
         loginSteps.enterPhone(phoneNumber);
-        if (!phoneNumber.isEmpty()) {
-            loginSteps.clickSubmitButton();
-        }
+        loginSteps.clickSubmitButton();
+        Thread.sleep(1000);
         loginSteps.assertAmountSymbolsPhoneInput(amountSymbols);
         loginSteps.assertColorPhoneInput(colorPhoneInput);
         loginSteps.assertColorPlaceholderPhoneInput(colorPlaceholderPhone);

@@ -76,11 +76,11 @@ public class LoginPage extends BasePage {
     }
 
     public boolean checkErrorPhoneHint(String text) {
-        return Objects.equals(errorPhoneHint.getText(), text);
+        return errorPhoneHint.getText().equals(text);
     }
 
     public boolean checkErrorHint(String text) {
-        return Objects.equals(errorHint.getText(), text);
+        return errorHint.getText().equals(text);
     }
 
     public String getTextFromPhoneInput() {
