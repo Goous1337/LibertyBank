@@ -6,8 +6,13 @@ import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import web.BaseTest;
+
+import java.util.stream.Stream;
 
 import static property.UserPropertiesReader.USER_PASSWORD;
 import static property.UserPropertiesReader.USER_PHONE;
@@ -66,18 +71,75 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
         loginSteps.assertAllChecks();
     }
 
+    static Stream<Object[]> provideTestDataForPhoneNumber() {
+        return Stream.of(
+                new Object[]{"", 0, "rgb(117, 127, 138)", "rgba(77, 95, 113, 1)", ""},
+                new Object[]{"7912123452", 16, "rgb(245, 60, 20)", "rgba(116, 87, 91, 1)",
+                        "Номер телефона должен содержать 11 цифр"},
+                new Object[]{"791212345333", 17, "rgb(243, 244, 248)", "rgba(77, 95, 113, 1)", ""},
+                new Object[]{"aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ", 4,
+                            "rgb(245, 60, 20)", "rgba(79, 95, 112, 1)", "Номер телефона должен содержать 11 цифр"},
+                new Object[]{"!'(%)*$+,#-./:\";<=>?@[]^_`{|}~[]", 4, "rgb(245, 60, 20)", "rgba(116, 87, 92, 1)",
+                            "Номер телефона должен содержать 11 цифр"},
+                new Object[]{" 7 9 1 2 1 2 3 4 5 6 7 ", 17, "rgb(243, 244, 248)", "rgba(77, 95, 113, 1)", ""}
+        );
+    }
+
+//    static Stream<Object[]> provideTestDataForPassword() {
+//        return Stream.of(
+//                new Object[]{"пустой"},
+//                new Object[]{"5 символов"},
+//                new Object[]{"21 символ"},
+//                new Object[]{"пробел в начале"},
+//                new Object[]{"пробел в конце"},
+//                new Object[]{"пробел внутри"},
+//                new Object[]{"цифры, спецсимволы, только заглавные буквы"},
+//                new Object[]{"цифры, спецсимволы, только строчные буквы"},
+//                new Object[]{"спецсимволы, строчные и заглавные буквы"},
+//                new Object[]{"цифры, строчные и заглавные буквы"},
+//                new Object[]{"кирилица"},
+//                new Object[]{"только цифры 000000"}
+//        );
+//    }
+
     @DisplayName("Проверка валидации полей формы авторизации при использовании невалидных данных")
-    @Description("Проверить валидацию поля \"Номер телефона\" по количеству символов с недостаточным количеством символов")
+    @Description("Проверить валидацию поля \"Номер телефона\"")
     @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Negative")})
     @TmsLink("LIB-2429")
     @ParameterizedTest
-    @CsvSource({"7912123456, 16, rgb(245, 60, 20), Номер телефона должен содержать 11 цифр"})
-    public void checkValidationPhoneInput(String phoneNumber, int amountSymbols, String inputPhoneColor, String textErrorPhone) {
+    @MethodSource("provideTestDataForPhoneNumber")
+    public void checkValidationPhoneInput(String phoneNumber, int amountSymbols, String colorPhoneInput,
+                                          String colorPlaceholderPhone, String textErrorPhone) {
         loginSteps.enterPhone(phoneNumber);
-        loginSteps.clickSubmitButton();
+        if (!phoneNumber.isEmpty()) {
+            loginSteps.clickSubmitButton();
+        }
         loginSteps.assertAmountSymbolsPhoneInput(amountSymbols);
-        loginSteps.assertColorPhoneInput(inputPhoneColor);
-        loginSteps.assertErrorPhoneInput(textErrorPhone);
+        loginSteps.assertColorPhoneInput(colorPhoneInput);
+        loginSteps.assertColorPlaceholderPhoneInput(colorPlaceholderPhone);
+        if (!textErrorPhone.isEmpty()) {
+            loginSteps.assertErrorPhoneInput(textErrorPhone);
+        }
         loginSteps.assertAllChecks();
     }
+
+//    @DisplayName("Проверка валидации полей формы авторизации при использовании невалидных данных")
+//    @Description("Проверить валидацию поля \"Пароль\"")
+//    @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Negative")})
+//    @TmsLink("LIB-2429")
+//    @ParameterizedTest
+//    @MethodSource("provideTestDataForPassword")
+//    public void checkValidationPasswordInput(
+//            String password, int amountSymbols, String inputPasswordColor, String textErrorPassword) {
+//        loginSteps.enterPhone(password);
+//        if (!password.isEmpty()) {
+//            loginSteps.clickSubmitButton();
+//        }
+//        loginSteps.assertAmountSymbolsPhoneInput(amountSymbols);
+//        loginSteps.assertColorPhoneInput(inputPasswordColor);
+//        if (!textErrorPassword.isEmpty()) {
+//            loginSteps.assertErrorPhoneInput(textErrorPassword);
+//        }
+//        loginSteps.assertAllChecks();
+//    }
 }

@@ -33,6 +33,9 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//p[contains(text(), 'Номер телефона должен содержать 11 цифр')]")
     private WebElement errorPhoneHint;
 
+    @FindBy(xpath = "//label[text()='Номер телефона']")
+    private WebElement placeholderPhone;
+
     public void enterPhone(String phoneNumber) {
         waitElement(phoneInput);
         phoneInput.sendKeys(phoneNumber);
@@ -59,9 +62,12 @@ public class LoginPage extends BasePage {
                 && submitButton.getCssValue("color").equals(textColor);
     }
 
-    public boolean isValidPhoneInput(String color) {
-        return borderForPhoneInput.getCssValue("border-color").
-                equals(color);
+    public String getPhoneInputBorderColor() {
+        return borderForPhoneInput.getCssValue("border-color");
+    }
+
+    public String getColorPlaceholderPhone() {
+        return placeholderPhone.getCssValue("color");
     }
 
     public boolean isValidInput(String color) {

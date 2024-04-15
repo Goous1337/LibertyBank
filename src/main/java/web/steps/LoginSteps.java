@@ -64,13 +64,6 @@ public class LoginSteps {
         );
     }
 
-//    @Step("\"Номер телефона\" 10 символов")
-//    public void assertEmptyPhoneInput() {
-//        softAssertions.assertThat(loginPage.getTextFromPhoneInput().length())
-//                .as("\"Номер телефона\" пустой")
-//                .isEqualTo(0);
-//    }
-
     @Step
     public void assertAmountSymbolsPhoneInput(int amountSymbols) {
         softAssertions.assertThat(loginPage.getTextFromPhoneInput().length())
@@ -79,17 +72,31 @@ public class LoginSteps {
     }
 
     @Step("Проверка цвета поля \"Номер телефона\"")
-    public void assertColorPhoneInput(String inputPhoneColor) {
-        softAssertions.assertThat(loginPage.isValidPhoneInput(inputPhoneColor))
+    public void assertColorPhoneInput(String colorPhoneInput) {
+        softAssertions.assertThat(loginPage.getPhoneInputBorderColor())
                 .as("Проверка цвета поля \"Номер телефона\"")
-                .isEqualTo(true);
+                .isEqualTo(colorPhoneInput);
     }
 
-    @Step("Проверка сообщения об ошибке")
+    @Step("Проверка цвета рамки поля \"Номер телефона\"")
+    public void assertBorderColorPhoneInput(String inputPhoneColor) {
+        softAssertions.assertThat(loginPage.getPhoneInputBorderColor())
+                .as("Проверка цвета поля \"Номер телефона\"")
+                .isEqualTo(inputPhoneColor);
+    }
+
+    @Step("Проверка цвета плэйсхолдера поля \"Номер телефона\"")
+    public void assertColorPlaceholderPhoneInput(String colorPlaceholderPhone) {
+        softAssertions.assertThat(loginPage.getColorPlaceholderPhone())
+                .as("Проверка цвета плэйсхолдера поля \"Номер телефона\"")
+                .isEqualTo(colorPlaceholderPhone);
+    }
+
+    @Step("Проверка текста сообщения об ошибке")
     public void assertErrorPhoneInput(String textErrorPhone) {
-        softAssertions.assertThat(loginPage.checkErrorPhoneHint(textErrorPhone))
-                .as("Проверка сообщения об ошибке поля \"Номер телфона\"")
-                .isEqualTo(true);
+            softAssertions.assertThat(loginPage.checkErrorPhoneHint(textErrorPhone))
+                    .as("Проверка сообщения об ошибке поля \"Номер телфона\"")
+                    .isEqualTo(true);
     }
 
     public void assertAllChecks() {
