@@ -71,6 +71,13 @@ public class LoginSteps {
                 .isEqualTo(amountSymbols);
     }
 
+    @Step("Проверка кол-ва символов поля \"Пароль\"")
+    public void assertAmountSymbolsPasswordInput(int amountSymbols) {
+        softAssertions.assertThat(loginPage.getTextFromPasswordInput().length())
+                .as("Проверка кол-ва символов поля \"Пароль\"")
+                .isEqualTo(amountSymbols);
+    }
+
     @Step("Проверка цвета поля \"Номер телефона\"")
     public void assertColorPhoneInput(String colorPhoneInput) {
         softAssertions.assertThat(loginPage.getPhoneInputBorderColor())
@@ -78,11 +85,11 @@ public class LoginSteps {
                 .isEqualTo(colorPhoneInput);
     }
 
-    @Step("Проверка цвета рамки поля \"Номер телефона\"")
-    public void assertBorderColorPhoneInput(String inputPhoneColor) {
-        softAssertions.assertThat(loginPage.getPhoneInputBorderColor())
-                .as("Проверка цвета поля \"Номер телефона\"")
-                .isEqualTo(inputPhoneColor);
+    @Step("Проверка цвета поля \"Пароль\"")
+    public void assertColorPasswordInput(String colorPasswordInput) {
+        softAssertions.assertThat(loginPage.getPasswordInputBorderColor())
+                .as("Проверка цвета поля \"Пароль\"")
+                .isEqualTo(colorPasswordInput);
     }
 
     @Step("Проверка цвета плэйсхолдера поля \"Номер телефона\"")
@@ -92,11 +99,32 @@ public class LoginSteps {
                 .isEqualTo(colorPlaceholderPhone);
     }
 
-    @Step("Проверка текста сообщения об ошибке поля \"Номер телфона\"")
+    @Step("Проверка цвета плэйсхолдера поля \"Пароль\"")
+    public void assertColorPlaceholderPasswordInput(String colorPlaceholderPassword) {
+        softAssertions.assertThat(loginPage.getColorPlaceholderPassword())
+                .as("Проверка цвета плэйсхолдера поля \"Номер телефона\"")
+                .isEqualTo(colorPlaceholderPassword);
+    }
+
+    @Step("Проверка текста сообщения об ошибке поля \"Номер телефона\"")
     public void assertErrorPhoneInput(String textErrorPhone) {
             softAssertions.assertThat(loginPage.checkErrorPhoneHint(textErrorPhone))
                     .as("Проверка сообщения об ошибке поля \"Номер телфона\"")
                     .isEqualTo(true);
+    }
+
+    @Step("Проверка текста сообщения об ошибке поля \"Пароль\" при недостаточном кол-ве символов")
+    public void assertErrorPasswordInput(String textErrorPassword) {
+        softAssertions.assertThat(loginPage.checkErrorPasswordHint(textErrorPassword))
+                .as("Проверка сообщения об ошибке поля \"Пароль\" при недостаточном кол-ве символов")
+                .isEqualTo(true);
+    }
+
+    @Step("Проверка текста сообщения об ошибке поля \"Пароль\" при невалидных значениях")
+    public void assertErrorPasswordInputInvalidSymbols(String textErrorPassword) {
+        softAssertions.assertThat(loginPage.checkErrorHint(textErrorPassword))
+                .as("Проверка сообщения об ошибке поля \"Пароль\" при невалидных значениях")
+                .isEqualTo(true);
     }
 
     public void assertAllChecks() {
