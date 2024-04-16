@@ -38,6 +38,7 @@ public class INS_9_GetInfoInsurancePolicy extends BaseTest {
         );
     }
 
+
     @DisplayName("Получение подробной информации о конкретном страховом полисе КАСКО/ОСАГО")
     @Description("Тест направлен на проверку получения информации о конкртеном страховом полисе КАСКО/ОСАГО")
     @Tag("API")

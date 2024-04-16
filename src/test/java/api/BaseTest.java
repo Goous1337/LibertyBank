@@ -65,8 +65,4 @@ public class BaseTest {
         log.info("\n_____________________________________________________\n");
         log.info(String.format("Test-case link: %s\nTest description: %s\n", testLink, testDescription));
     }
-
-    public Response getPolicyInfo(String insuranceID) {
-        return sendRequestWithoutParams(GET, POLICY_INSURANCE + "/" + insuranceID);
-    }
 }
