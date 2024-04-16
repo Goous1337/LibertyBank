@@ -1,0 +1,141 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "policyInfo": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "integer"
+        },
+        "productName": {
+          "type": "string"
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "expirationDate": {
+          "type": "string"
+        },
+        "duration": {
+          "type": "integer"
+        },
+        "agreementNumber": {
+          "type": "string"
+        },
+        "policyStatus": {
+          "type": "string"
+        },
+        "currencyNumericCode": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "productId",
+        "productName",
+        "startDate",
+        "expirationDate",
+        "duration",
+        "agreementNumber",
+        "policyStatus",
+        "currencyNumericCode"
+      ]
+    },
+    "insurerInfo": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "surname": {
+          "type": "string"
+        },
+        "patronym": {
+          "type": "string"
+        },
+        "birthdate": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "surname",
+        "patronym",
+        "birthdate"
+      ]
+    },
+    "vehicleApplication": {
+      "type": "object",
+      "properties": {
+        "vinCode": {
+          "type": "string"
+        },
+        "numberPlate": {
+          "type": "string"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "vehicleType": {
+          "type": "string"
+        },
+        "vehicleDocumentType": {
+          "type": "string"
+        },
+        "documentNumber": {
+          "type": "string"
+        },
+        "carOwner": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "vinCode",
+        "numberPlate",
+        "brand",
+        "model",
+        "vehicleType",
+        "vehicleDocumentType",
+        "documentNumber",
+        "carOwner"
+      ]
+    },
+    "drivers": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "surname": {
+              "type": "string"
+            },
+            "patronym": {
+              "type": "string"
+            },
+            "licenseId": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "name",
+            "surname",
+            "patronym",
+            "licenseId"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "policyInfo",
+    "insurerInfo",
+    "vehicleApplication",
+    "drivers"
+  ]
+}
