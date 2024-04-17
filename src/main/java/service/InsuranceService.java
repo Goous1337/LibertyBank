@@ -2,7 +2,6 @@ package service;
 
 import api.core.RequestParam;
 import io.restassured.response.Response;
-import pojo.insuranceService.CreateHealthApplicationRequest;
 import pojo.insuranceService.CreateVehicleApplicationInsuranceRequest;
 
 import java.util.List;
@@ -28,12 +27,6 @@ public class InsuranceService {
         return sendSimpleRequest(POST, APPLICATION_INSURANCE, params, createVehicleApplicationInsuranceRequest);
     }
 
-    public Response checkMakeNewHealthApplicationsRequest(String clientId, CreateHealthApplicationRequest createHealthApplicationRequest) {
-        List<RequestParam> params = List.of(getRP(HEADER, "accept", ACCEPT_VALUE),
-                getRP(HEADER, "clientId", clientId),
-                getRP(HEADER, CONTENT_TYPE, CONTENT_TYPE_VALUE));
-        return sendSimpleRequest(POST, APPLICATION_INSURANCE, params, createHealthApplicationRequest);
-    }
 
     public Response getPolicyInfo(String insuranceID) {
         return sendRequestWithoutParams(GET, POLICY_INSURANCE + "/" + insuranceID);
