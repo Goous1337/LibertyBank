@@ -18,7 +18,7 @@
           "type": "string"
         },
         "duration": {
-          "type": "integer"
+          "type": "null"
         },
         "agreementNumber": {
           "type": "string"
@@ -44,32 +44,29 @@
     "insurerInfo": {
       "type": "object",
       "properties": {
-        "name": {
+        "insurerName": {
           "type": "string"
         },
-        "surname": {
+        "insurerSurname": {
           "type": "string"
         },
-        "patronym": {
+        "insurerPatronymic": {
           "type": "string"
         },
-        "birthdate": {
+        "insurerBirthdate": {
           "type": "string"
         }
       },
       "required": [
-        "name",
-        "surname",
-        "patronym",
-        "birthdate"
+        "insurerName",
+        "insurerSurname",
+        "insurerPatronymic",
+        "insurerBirthdate"
       ]
     },
-    "thingApplication": {
+    "concretePolicyDetailsDto": {
       "type": "object",
       "properties": {
-        "location": {
-          "type": "string"
-        },
         "things": {
           "type": "array",
           "items": [
@@ -93,17 +90,20 @@
               ]
             }
           ]
+        },
+        "location": {
+          "type": "string"
         }
       },
       "required": [
-        "location",
-        "things"
+        "things",
+        "location"
       ]
     }
   },
   "required": [
     "policyInfo",
     "insurerInfo",
-    "thingApplication"
+    "concretePolicyDetailsDto"
   ]
 }
