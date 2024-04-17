@@ -33,8 +33,14 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//p[contains(text(), 'Номер телефона должен содержать 11 цифр')]")
     private WebElement errorPhoneHint;
 
+    @FindBy(xpath = "//p[contains(text(), 'Пароль должен содержать от 6 до 20 символов')]")
+    private WebElement errorPasswordHint;
+
     @FindBy(xpath = "//label[text()='Номер телефона']")
     private WebElement placeholderPhone;
+
+    @FindBy(xpath = "//label[text()='Пароль']")
+    private WebElement placeholderPassword;
 
     public void enterPhone(String phoneNumber) {
         waitElement(phoneInput);
@@ -66,8 +72,16 @@ public class LoginPage extends BasePage {
         return borderForPhoneInput.getCssValue("border-color");
     }
 
+    public String getPasswordInputBorderColor() {
+        return borderForPasswordInput.getCssValue("border-color");
+    }
+
     public String getColorPlaceholderPhone() {
         return placeholderPhone.getCssValue("color");
+    }
+
+    public String getColorPlaceholderPassword() {
+        return placeholderPassword.getCssValue("color");
     }
 
     public boolean isValidInput(String color) {
@@ -79,11 +93,19 @@ public class LoginPage extends BasePage {
         return errorPhoneHint.getText().equals(text);
     }
 
+    public boolean checkErrorPasswordHint(String text) {
+        return errorPasswordHint.getText().equals(text);
+    }
+
     public boolean checkErrorHint(String text) {
         return errorHint.getText().equals(text);
     }
 
     public String getTextFromPhoneInput() {
         return phoneInput.getAttribute("value");
+    }
+
+    public String getTextFromPasswordInput() {
+        return passwordInput.getAttribute("value");
     }
 }

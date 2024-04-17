@@ -6,7 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -16,7 +15,6 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.TmsLink;
 import web.BaseTest;
-import web.pages.LoginPage;
 
 import static property.UserPropertiesReader.USER_PASSWORD;
 import static property.UserPropertiesReader.USER_PHONE;
@@ -61,20 +59,6 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
                 "rgb(245, 60, 20)");
     }
 
-    @DisplayName("Проверка валидации полей формы авторизации при использовании невалидных данных")
-    @Description("Проверить валидацию поля \"Номер телефона\" по количеству символов с недостаточным количеством символов")
-    @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Negative")})
-    @TmsLink("LIB-2429")
-    @Test
-    public void checkValidationTenSymbolsPhoneInput() {
-        loginSteps.enterPhone("7912212122");
-        loginSteps.clickSubmitButton();
-        loginSteps.assertAmountSymbolsPhoneInput(16);
-        loginSteps.assertColorPhoneInput("rgb(245, 60, 20)");
-        loginSteps.assertErrorPhoneInput("Номер телефона должен содержать 11 цифр");
-        loginSteps.assertAllChecks();
-    }
-
     static Stream<Object[]> provideTestDataForPhoneNumber() {
         return Stream.of(
                 new Object[]{"", 0, "rgb(245, 60, 20)", "rgba(245, 60, 20, 1)", ""},
@@ -89,31 +73,15 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
         );
     }
 
-//    static Stream<Object[]> provideTestDataForPassword() {
-//        return Stream.of(
-//                new Object[]{"пустой"},
-//                new Object[]{"5 символов"},
-//                new Object[]{"21 символ"},
-//                new Object[]{"пробел в начале"},
-//                new Object[]{"пробел в конце"},
-//                new Object[]{"пробел внутри"},
-//                new Object[]{"цифры, спецсимволы, только заглавные буквы"},
-//                new Object[]{"цифры, спецсимволы, только строчные буквы"},
-//                new Object[]{"спецсимволы, строчные и заглавные буквы"},
-//                new Object[]{"цифры, строчные и заглавные буквы"},
-//                new Object[]{"кирилица"},
-//                new Object[]{"только цифры 000000"}
-//        );
-//    }
-
     @DisplayName("Проверка валидации полей формы авторизации при использовании невалидных данных")
     @Description("Проверить валидацию поля \"Номер телефона\"")
     @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Negative")})
     @TmsLink("LIB-2429")
     @ParameterizedTest
     @MethodSource("provideTestDataForPhoneNumber")
-    public void checkValidationPhoneInput(String phoneNumber, int amountSymbols, String colorPhoneInput,
-            String colorPlaceholderPhone, String textErrorPhone)
+    public void checkValidationPhoneInput(
+            String phoneNumber, int amountSymbols, String colorPhoneInput, String colorPlaceholderPhone,
+            String textErrorPhone)
             throws InterruptedException {
 
         loginSteps.enterPhone(phoneNumber);
@@ -128,23 +96,82 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
         loginSteps.assertAllChecks();
     }
 
-//    @DisplayName("Проверка валидации полей формы авторизации при использовании невалидных данных")
-//    @Description("Проверить валидацию поля \"Пароль\"")
-//    @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Negative")})
-//    @TmsLink("LIB-2429")
-//    @ParameterizedTest
-//    @MethodSource("provideTestDataForPassword")
-//    public void checkValidationPasswordInput(
-//            String password, int amountSymbols, String inputPasswordColor, String textErrorPassword) {
-//        loginSteps.enterPhone(password);
-//        if (!password.isEmpty()) {
-//            loginSteps.clickSubmitButton();
-//        }
-//        loginSteps.assertAmountSymbolsPhoneInput(amountSymbols);
-//        loginSteps.assertColorPhoneInput(inputPasswordColor);
-//        if (!textErrorPassword.isEmpty()) {
-//            loginSteps.assertErrorPhoneInput(textErrorPassword);
-//        }
-//        loginSteps.assertAllChecks();
-//    }
+    static Stream<Object[]> provideTestDataForPasswordAmountSymbols() {
+        return Stream.of(
+                new Object[]{"", 0, "rgb(245, 60, 20)", "rgba(245, 60, 20, 1)",
+                        "Пароль должен содержать от 6 до 20 символов"},
+                new Object[]{"1Aa2@", 5, "rgb(245, 60, 20)", "rgba(245, 60, 20, 1)",
+                        "Пароль должен содержать от 6 до 20 символов"},
+                new Object[]{"1234567890AaAaAaAa@#", 20, "rgb(243, 244, 248)",
+                        "rgba(77, 95, 113, 1)", ""}
+        );
+    }
+
+    @DisplayName("Проверка валидации полей формы авторизации при использовании невалидных данных")
+    @Description("Проверить валидацию поля \"Пароль\" при недостаточном кол-ве символов, шаги 7-9")
+    @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Negative")})
+    @TmsLink("LIB-2429")
+    @ParameterizedTest
+    @MethodSource("provideTestDataForPasswordAmountSymbols")
+    public void checkValidationPasswordInputAmountSymbols(
+            String password, int amountSymbols, String inputPasswordColor, String colorPlaceholderPassword,
+            String textErrorPassword) throws InterruptedException {
+
+        loginSteps.enterPassword(password);
+        loginSteps.clickSubmitButton();
+        Thread.sleep(1000);
+        loginSteps.assertAmountSymbolsPasswordInput(amountSymbols);
+        loginSteps.assertColorPasswordInput(inputPasswordColor);
+        loginSteps.assertColorPlaceholderPasswordInput(colorPlaceholderPassword);
+        if (!textErrorPassword.isEmpty()) {
+            loginSteps.assertErrorPasswordInput(textErrorPassword);
+        }
+        loginSteps.assertAllChecks();
+    }
+
+    static Stream<Object[]> provideTestDataForPasswordInvalidSymbols() {
+        return Stream.of(
+                new Object[]{" 789DFs%", 8, "rgb(245, 60, 20)", "rgba(245, 60, 20, 1)",
+                        "Неверный пароль или номер телефона"},
+                new Object[]{"4321HgT&* ", 10, "rgb(245, 60, 20)", "rgba(245, 60, 20, 1)",
+                        "Неверный пароль или номер телефона"},
+                new Object[]{"14 75E ea!$", 11, "rgb(245, 60, 20)", "rgba(245, 60, 20, 1)",
+                        "Неверный пароль или номер телефона"},
+                new Object[]{"1928AZ!@", 8, "rgb(245, 60, 20)", "rgba(245, 60, 20, 1)",
+                        "Неверный пароль или номер телефона"},
+                new Object[]{"1987pea&", 8, "rgb(245, 60, 20)", "rgba(245, 60, 20, 1)",
+                        "Неверный пароль или номер телефона"},
+                new Object[]{"!@#$%AZds&*(", 12, "rgb(245, 60, 20)", "rgba(245, 60, 20, 1)",
+                        "Неверный пароль или номер телефона"},
+                new Object[]{"2024QWEasd123", 13, "rgb(245, 60, 20)", "rgba(245, 60, 20, 1)",
+                        "Неверный пароль или номер телефона"},
+                new Object[]{"Привет2020№;%*", 14, "rgb(245, 60, 20)", "rgba(245, 60, 20, 1)",
+                        "Неверный пароль или номер телефона"},
+                new Object[]{"0192837", 7, "rgb(245, 60, 20)", "rgba(245, 60, 20, 1)",
+                        "Неверный пароль или номер телефона"}
+        );
+    }
+
+    @DisplayName("Проверка валидации полей формы авторизации при использовании невалидных данных")
+    @Description("Проверить валидацию поля \"Пароль\" при невалидных значениях, шаги 10-18")
+    @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Negative")})
+    @TmsLink("LIB-2429")
+    @ParameterizedTest
+    @MethodSource("provideTestDataForPasswordInvalidSymbols")
+    public void checkValidationPasswordInputInvalidSymbols(
+            String password, int amountSymbols, String inputPasswordColor, String colorPlaceholderPassword,
+            String textErrorPassword) throws InterruptedException {
+
+        loginSteps.enterPassword(password);
+        loginSteps.clickSubmitButton();
+        Thread.sleep(1000);
+        loginSteps.assertAmountSymbolsPasswordInput(amountSymbols);
+        loginSteps.assertColorPasswordInput(inputPasswordColor);
+        loginSteps.assertColorPlaceholderPasswordInput(colorPlaceholderPassword);
+        if (!textErrorPassword.isEmpty()) {
+            loginSteps.assertErrorPasswordInputInvalidSymbols(textErrorPassword);
+        }
+        loginSteps.assertAllChecks();
+    }
+
 }
