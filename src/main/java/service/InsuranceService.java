@@ -27,7 +27,6 @@ public class InsuranceService {
         return sendSimpleRequest(POST, APPLICATION_INSURANCE, params, createVehicleApplicationInsuranceRequest);
     }
 
-
     public Response getPolicyInfo(String insuranceID) {
         return sendRequestWithoutParams(GET, POLICY_INSURANCE + "/" + insuranceID);
     }

@@ -3,7 +3,6 @@ package api;
 import api.core.RequestParam;
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
-import io.restassured.response.Response;
 import lombok.Data;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,9 +13,6 @@ import service.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static api.core.ApiClient.sendRequestWithoutParams;
-import static constant.ApiEndpoints.POLICY_INSURANCE;
-import static io.restassured.http.Method.GET;
 
 /**
  * Базовый тестовый класс
