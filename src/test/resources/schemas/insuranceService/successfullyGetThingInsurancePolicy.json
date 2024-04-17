@@ -18,7 +18,7 @@
           "type": "string"
         },
         "duration": {
-          "type": "null"
+          "type": "integer"
         },
         "agreementNumber": {
           "type": "string"
@@ -44,98 +44,66 @@
     "insurerInfo": {
       "type": "object",
       "properties": {
-        "insurerName": {
+        "name": {
           "type": "string"
         },
-        "insurerSurname": {
+        "surname": {
           "type": "string"
         },
-        "insurerPatronymic": {
+        "patronym": {
           "type": "string"
         },
-        "insurerBirthdate": {
+        "birthdate": {
           "type": "string"
         }
       },
       "required": [
-        "insurerName",
-        "insurerSurname",
-        "insurerPatronymic",
-        "insurerBirthdate"
+        "name",
+        "surname",
+        "patronym",
+        "birthdate"
       ]
     },
-    "concretePolicyDetailsDto": {
+    "thingApplication": {
       "type": "object",
       "properties": {
-        "vinCode": {
+        "location": {
           "type": "string"
         },
-        "numberPlate": {
-          "type": "string"
-        },
-        "brand": {
-          "type": "string"
-        },
-        "model": {
-          "type": "string"
-        },
-        "vehicleType": {
-          "type": "string"
-        },
-        "vehicleDocumentType": {
-          "type": "string"
-        },
-        "documentNumber": {
-          "type": "string"
-        },
-        "carOwner": {
-          "type": "string"
-        },
-        "drivers": {
+        "things": {
           "type": "array",
           "items": [
             {
               "type": "object",
               "properties": {
-                "driverName": {
+                "name": {
                   "type": "string"
                 },
-                "driverSurname": {
+                "type": {
                   "type": "string"
                 },
-                "driverPatronymic": {
-                  "type": "string"
-                },
-                "licenseId": {
-                  "type": "string"
+                "cost": {
+                  "type": "integer"
                 }
               },
               "required": [
-                "driverName",
-                "driverSurname",
-                "driverPatronymic",
-                "licenseId"
+                "name",
+                "type",
+                "cost"
               ]
             }
           ]
         }
       },
       "required": [
-        "vinCode",
-        "numberPlate",
-        "brand",
-        "model",
-        "vehicleType",
-        "vehicleDocumentType",
-        "documentNumber",
-        "carOwner",
-        "drivers"
+        "location",
+        "things"
       ]
     }
   },
   "required": [
     "policyInfo",
     "insurerInfo",
-    "concretePolicyDetailsDto"
+    "thingApplication"
   ]
 }
