@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -174,4 +175,20 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
         loginSteps.assertAllChecks();
     }
 
+    @DisplayName("US-1.2.1 Авторизация по номеру телефона (первичный вход)")
+    @Description("Авторизоваться в личном кабинете с валидными значениями телефона и пароля")
+    @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Positive")})
+    @TmsLink("LIB-2432")
+    @Test
+    public void checkValidationAuthTest() {
+        loginSteps.enterPhone(USER_PHONE);
+        loginSteps.enterPassword(USER_PASSWORD);
+        loginSteps.assertSubmitButtonAndInputSuccessful(
+                "rgba(0, 90, 254, 1)",
+                "rgba(245, 245, 245, 1)",
+                "rgb(117, 127, 138)");
+        loginSteps.clickSubmitButton();
+        homeSteps.clickUserMenu();
+        homeSteps.assertIsUserPanelDisplayed();
+    }
 }
