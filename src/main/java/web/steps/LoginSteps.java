@@ -108,23 +108,23 @@ public class LoginSteps {
 
     @Step("Проверка текста сообщения об ошибке поля \"Номер телефона\"")
     public void assertErrorPhoneInput(String textErrorPhone) {
-            softAssertions.assertThat(loginPage.checkErrorPhoneHint(textErrorPhone))
+            softAssertions.assertThat(loginPage.checkErrorPhoneHint())
                     .as("Проверка сообщения об ошибке поля \"Номер телфона\"")
-                    .isEqualTo(true);
+                    .isEqualTo(textErrorPhone);
     }
 
     @Step("Проверка текста сообщения об ошибке поля \"Пароль\" при недостаточном кол-ве символов")
     public void assertErrorPasswordInput(String textErrorPassword) {
-        softAssertions.assertThat(loginPage.checkErrorPasswordHint(textErrorPassword))
+        softAssertions.assertThat(loginPage.checkErrorPasswordHint())
                 .as("Проверка сообщения об ошибке поля \"Пароль\" при недостаточном кол-ве символов")
-                .isEqualTo(true);
+                .isEqualTo(textErrorPassword);
     }
 
     @Step("Проверка текста сообщения об ошибке поля \"Пароль\" при невалидных значениях")
     public void assertErrorPasswordInputInvalidSymbols(String textErrorPassword) {
-        softAssertions.assertThat(loginPage.checkErrorHint(textErrorPassword))
+        softAssertions.assertThat(loginPage.checkErrorPhoneAndPasswordHint())
                 .as("Проверка сообщения об ошибке поля \"Пароль\" при невалидных значениях")
-                .isEqualTo(true);
+                .isEqualTo(textErrorPassword);
     }
 
     public void assertAllChecks() {

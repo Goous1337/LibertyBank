@@ -88,16 +88,20 @@ public class LoginPage extends BasePage {
                 equals(color);
     }
 
-    public boolean checkErrorPhoneHint(String text) {
-        return errorPhoneHint.getText().equals(text);
+    public String checkErrorPhoneHint() {
+        return errorPhoneHint.getText();
     }
 
-    public boolean checkErrorPasswordHint(String text) {
-        return errorPasswordHint.getText().equals(text);
+    public String checkErrorPasswordHint() {
+        return errorPasswordHint.getText();
     }
 
     public boolean checkErrorHint(String text) {
         return errorHint.getText().equals(text);
+    }
+
+    public String checkErrorPhoneAndPasswordHint() {
+        return errorHint.getText();
     }
 
     public String getTextFromPhoneInput() {
