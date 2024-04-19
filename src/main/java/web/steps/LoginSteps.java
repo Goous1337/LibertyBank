@@ -108,9 +108,9 @@ public class LoginSteps {
 
     @Step("Проверка текста сообщения об ошибке поля \"Номер телефона\"")
     public void assertErrorPhoneInput(String textErrorPhone) {
-            softAssertions.assertThat(loginPage.checkErrorPhoneHint())
-                    .as("Проверка сообщения об ошибке поля \"Номер телфона\"")
-                    .isEqualTo(textErrorPhone);
+        softAssertions.assertThat(loginPage.checkErrorPhoneHint())
+                .as("Проверка сообщения об ошибке поля \"Номер телфона\"")
+                .isEqualTo(textErrorPhone);
     }
 
     @Step("Проверка текста сообщения об ошибке поля \"Пароль\" при недостаточном кол-ве символов")
