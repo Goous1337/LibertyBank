@@ -67,4 +67,12 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
         homeSteps.clickUserMenu();
         homeSteps.assertIsUserPanelDisplayed();
     }
+
+    @DisplayName("US-1.2.5 Восстановление пароля")
+    @Description("Проверка восстановления пароля по номеру телефона через веб-сайт")
+    @Tag({@Tag("Web"), @Tag("Smoke"), @Tag("Positive")})
+    @TmsLink("LIB-2494")
+    @Test
+    public void 
+}
 }
