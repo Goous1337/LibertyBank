@@ -26,6 +26,11 @@ public class LoginSteps {
         loginPage.enterPassword(password);
     }
 
+    @Step("Выйти из поля пароль")
+    public void outFormPassword() {
+        loginPage.outFormPassword();
+    }
+
     @Step("Нажать кнопку 'Вперед' и перейти на страницу main")
     public void tapSubmitButtonToMain() {
         loginPage.submitToMainPage();
@@ -39,6 +44,8 @@ public class LoginSteps {
     @Step("Проверка кнопки и поля ввода на правильных значениях")
     public void assertSubmitButtonAndInputSuccessful(
             String bgButtonColor, String textButtonColor, String inputColor) {
+//        System.out.println(loginPage.checkButtonCondition(bgButtonColor, textButtonColor, true));
+        System.out.println(loginPage.isValidInput(inputColor));
         assertAll(
                 () -> assertTrue(loginPage.checkButtonCondition(bgButtonColor, textButtonColor, true),
                         INVALID_COLOR),
