@@ -32,6 +32,11 @@ public class LoginSteps {
         loginPage.enterPassword(password);
     }
 
+    @Step("Выйти из поля пароль")
+    public void outFormPassword() {
+        loginPage.outFormPassword();
+    }
+
     @Step("Нажать кнопку 'Вперед' и перейти на страницу main")
     public void tapSubmitButtonToMain() {
         loginPage.submitToMainPage();

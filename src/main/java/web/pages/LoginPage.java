@@ -20,11 +20,11 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//*[contains(text(), 'Главная')]")
     private WebElement mainView;
 
-    @FindBy(xpath = "//input[@name = 'phone']/..")
-    private WebElement borderForPhoneInput;
-
-    @FindBy(xpath = "//input[@name = 'password']/..")
+    @FindBy(xpath = "//input[@name = 'password']/../..")
     private WebElement borderForPasswordInput;
+
+    @FindBy(xpath = "//input[@name = 'phone']/../..")
+    private WebElement borderForPhoneInput;
 
     @FindBy(xpath = "//p[contains(text(), 'Неверный пароль или номер телефона')]")
     private WebElement errorHint;
@@ -42,13 +42,19 @@ public class LoginPage extends BasePage {
     private WebElement placeholderPassword;
 
     public void enterPhone(String phoneNumber) {
-        waitElement(phoneInput);
+        waitElement(borderForPhoneInput);
+        borderForPhoneInput.click();
         phoneInput.sendKeys(phoneNumber);
     }
 
     public void enterPassword(String password) {
-        waitElement(passwordInput);
+        waitElement(borderForPasswordInput);
+        borderForPasswordInput.click();
         passwordInput.sendKeys(password);
+    }
+
+    public void outFormPassword() {
+        passwordInput.sendKeys(Keys.TAB);
     }
 
     public void submitToMainPage() {
@@ -84,31 +90,12 @@ public class LoginPage extends BasePage {
     }
 
     public boolean isValidInput(String color) {
+        System.out.println(borderForPasswordInput.getCssValue("border-color"));
         return borderForPasswordInput.getCssValue("border-color").
                 equals(color);
     }
 
-    public String checkErrorPhoneHint() {
-        return errorPhoneHint.getText();
-    }
-
-    public String checkErrorPasswordHint() {
-        return errorPasswordHint.getText();
-    }
-
     public boolean checkErrorHint(String text) {
-        return errorHint.getText().equals(text);
-    }
-
-    public String checkErrorPhoneAndPasswordHint() {
-        return errorHint.getText();
-    }
-
-    public String getTextFromPhoneInput() {
-        return phoneInput.getAttribute("value");
-    }
-
-    public String getTextFromPasswordInput() {
-        return passwordInput.getAttribute("value");
+        return Objects.equals(errorHint.getText(), text);
     }
 }
