@@ -21,7 +21,7 @@ public class US_3_2_CreditInfoTest extends BaseTest {
 
     @Test
     @Tags({@Tag("Web"), @Tag("Positive")})
-    @DisplayName("US 3-2 Просмотр подробной информации о кредитном продукте Liberty Наличными")
+    @DisplayName("US 3-2 Просмотр краткой информации о кредитных продуктах банках")
     @TmsLink("LIB3-181")
     public void checkShortInfoAboutCreditProducts() {
         сreditProductsSteps.assertShortInfoAboutCreditProducts(CreditsEnum.LIBERTY_CASH);

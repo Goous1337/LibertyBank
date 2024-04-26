@@ -16,15 +16,25 @@ public class CreditProduct {
     private Integer maxPeriodMonths;
     private Double minSum;
     private Double maxSum;
-    private String typeCredit;
+    private String creditPurpose;
 
     public CreditProduct() {
 
     }
 
-    public CreditProduct(String name, Double interestRate) {
+    public CreditProduct(String name, Double interestRate, String details, Double minSum) {
         this.name = name;
         this.interestRate = interestRate;
+        this.details = details;
+        this.minSum = minSum;
+    }
+
+    public CreditProduct(String name, Double interestRate, String details, Double minSum, Integer maxPeriodMonths) {
+        this.name = name;
+        this.interestRate = interestRate;
+        this.details = details;
+        this.minSum = minSum;
+        this.maxPeriodMonths = maxPeriodMonths;
     }
 
     @Override
@@ -39,7 +49,10 @@ public class CreditProduct {
 
         CreditProduct creditProduct = (CreditProduct) o;
         return getName().equals(creditProduct.getName()) &&
-                getInterestRate().equals(creditProduct.getInterestRate());
+                getInterestRate().equals(creditProduct.getInterestRate()) &&
+                getDetails().equals(creditProduct.getDetails()) &&
+                getMinSum().equals(creditProduct.getMinSum()) &&
+                getMaxPeriodMonths().equals(creditProduct.getMaxPeriodMonths());
     }
 
 }
