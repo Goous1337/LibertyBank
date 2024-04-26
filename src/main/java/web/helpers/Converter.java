@@ -38,14 +38,13 @@ public class Converter {
     }
 
     public static Integer convertStringToInteger(String str) {
-        str = String.valueOf(str).replace("₽", "");
-        str = String.valueOf(str).replace("$", "");
-        str = String.valueOf(str).replace("%", "");
-        str = String.valueOf(str).replace("мeсяцев", "");
-        str = String.valueOf(str).replace("от", "");
-        str = String.valueOf(str).replace("до", "");
-        str = String.valueOf(str).replace(" ", "");
-        str.trim();
+        str = String.valueOf(str).replace("₽", "").trim();
+        str = String.valueOf(str).replace("$", "").trim();
+        str = String.valueOf(str).replace("%", "").trim();
+        str = String.valueOf(str).replace("мeсяцев", "").trim();
+        str = String.valueOf(str).replace("от", "").trim();
+        str = String.valueOf(str).replace("до", "").trim();
+        str = String.valueOf(str).replace(" ", "").trim();
         return Integer.parseInt(str);
     }
 
