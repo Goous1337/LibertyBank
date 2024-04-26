@@ -71,7 +71,9 @@ public class BaseTest {
 
     protected void authorization() {
         open(LOGIN_URL);
+        loginSteps.clickInputPhone();
         loginSteps.enterPhone(USER_PHONE);
+        loginSteps.clickInputPassword();
         loginSteps.enterPassword(USER_PASSWORD);
         loginSteps.tapSubmitButtonToMain();
     }

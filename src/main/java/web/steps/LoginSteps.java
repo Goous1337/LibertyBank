@@ -21,9 +21,19 @@ public class LoginSteps {
         loginPage.enterPhone(phoneNumber);
     }
 
+    @Step("Нажать на поле логин")
+    public void clickInputPhone() {
+        loginPage.clickInputPhone();
+    }
+
     @Step("Ввести валидный пароль")
     public void enterPassword(String password) {
         loginPage.enterPassword(password);
+    }
+
+    @Step("Нажать на поле пароль")
+    public void clickInputPassword() {
+        loginPage.clickInputPassword();
     }
 
     @Step("Нажать кнопку 'Вперед' и перейти на страницу main")
