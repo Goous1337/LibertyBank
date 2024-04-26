@@ -31,11 +31,11 @@ public class InsuranceService {
         return sendRequestWithoutParams(GET, POLICY_INSURANCE + "/" + insuranceID);
     }
 
-    public String getResponsePolicyName(Response response){
-        return (String) response.body().jsonPath().getMap("policyInfo").get("productName");
+    public String getResponsePolicyName(Response response) {
+        return response.body().jsonPath().getMap("policyInfo").get("productName").toString();
     }
 
-    public String getResponsePolicyErrorMessage(Response response){
-        return (String) response.body().jsonPath().get("message");
+    public String getResponsePolicyErrorMessage(Response response) {
+        return response.body().jsonPath().get("message");
     }
 }
