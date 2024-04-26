@@ -44,8 +44,6 @@ public class LoginSteps {
     @Step("Проверка кнопки и поля ввода на правильных значениях")
     public void assertSubmitButtonAndInputSuccessful(
             String bgButtonColor, String textButtonColor, String inputColor) {
-//        System.out.println(loginPage.checkButtonCondition(bgButtonColor, textButtonColor, true));
-        System.out.println(loginPage.isValidInput(inputColor));
         assertAll(
                 () -> assertTrue(loginPage.checkButtonCondition(bgButtonColor, textButtonColor, true),
                         INVALID_COLOR),
