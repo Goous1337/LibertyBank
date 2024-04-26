@@ -30,4 +30,12 @@ public class InsuranceService {
     public Response getPolicyInfo(String insuranceID) {
         return sendRequestWithoutParams(GET, POLICY_INSURANCE + "/" + insuranceID);
     }
+
+    public String getResponsePolicyName(Response response){
+        return (String) response.body().jsonPath().getMap("policyInfo").get("productName");
+    }
+
+    public String getResponsePolicyErrorMessage(Response response){
+        return (String) response.body().jsonPath().get("message");
+    }
 }

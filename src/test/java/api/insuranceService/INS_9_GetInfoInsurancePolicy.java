@@ -10,10 +10,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static constant.InsuranceServiceConstants.POLICY_THING_ID;
-import static constant.InsuranceServiceConstants.POLICY_VEHICLE_ID;
-import static org.apache.hc.core5.http.HttpStatus.SC_BAD_REQUEST;
-import static org.apache.hc.core5.http.HttpStatus.SC_OK;
+import static constant.InsuranceServiceConstants.*;
+import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.INSURANCE_POLICY_SERVICE;
@@ -35,6 +33,7 @@ public class INS_9_GetInfoInsurancePolicy extends BaseTest {
         Response response = insuranceService.getPolicyInfo(POLICY_THING_ID);
         assertAll(
                 () -> assertEquals(SC_OK, response.statusCode(), "Код ответа не соответствует ожидаемому"),
+                () -> assertEquals(THING_INSURANCE_SERVICE_PRODUCT_NAME, insuranceService.getResponsePolicyName(response)),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
@@ -49,6 +48,7 @@ public class INS_9_GetInfoInsurancePolicy extends BaseTest {
         Response response = insuranceService.getPolicyInfo(POLICY_VEHICLE_ID);
         assertAll(
                 () -> assertEquals(SC_OK, response.statusCode(), "Код ответа не соответствует ожидаемому"),
+                () -> assertEquals(VEHICLE_OSAGO_INSURANCE_SERVICE_PRODUCT_NAME, insuranceService.getResponsePolicyName(response)),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
@@ -63,6 +63,37 @@ public class INS_9_GetInfoInsurancePolicy extends BaseTest {
         Response response = insuranceService.getPolicyInfo("");
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.statusCode(), "Код ответа не соответствует ожидаемому"),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+        );
+    }
+
+    @DisplayName("Получения подробной информации о несуществующем страховом полисе")
+    @Description("Тест направлен на проверку получения информации о несуществующем страховом полисе")
+    @Tag("API")
+    @TmsLink("https://jira.astondevs.ru/browse/LIB5-491")
+    @Test()
+    public void getInsurancePolicyWithFakePolicyId() {
+        String jsonSchemaPath = "schemas/insuranceService/fakePolicyIdGetInsurancePolicy.json";
+        Response response = insuranceService.getPolicyInfo(FAKE_INSURANCE_POLICY_ID);
+        assertAll(
+                () -> assertEquals(SC_NOT_FOUND, response.statusCode(), "Код ответа не соответствует ожидаемому"),
+                () -> assertEquals(FAKE_POLICY_ID_ERROR_MESSAGE, insuranceService.getResponsePolicyErrorMessage(response)),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+        );
+    }
+
+    @DisplayName("Получения подробной информации конкретном страховом полисе по невалидному policyId")
+    @Description("Тест направлен на проверку получения информации о конкретном страховом полисе по не валидному policyId")
+    @Tag("API")
+    @TmsLink("https://jira.astondevs.ru/browse/LIB5-492")
+    @Test()
+    public void getInsurancePolicyWithInvalidPolicyId() {
+        String jsonSchemaPath = "schemas/insuranceService/invalidPolicyIdGetInsurancePolicy.json";
+        Response response = insuranceService.getPolicyInfo("invalidId");
+        System.out.println(insuranceService.getResponsePolicyErrorMessage(response));
+        assertAll(
+                () -> assertEquals(SC_BAD_REQUEST, response.statusCode(), "Код ответа не соответствует ожидаемому"),
+                () -> assertEquals(INVALID_POLICY_ID_ERROR_MESSAGE, insuranceService.getResponsePolicyErrorMessage(response)),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
