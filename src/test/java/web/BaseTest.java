@@ -41,6 +41,7 @@ public class BaseTest {
     protected ConfirmationSteps confirmationSteps;
     protected RenameAccountSteps renameAccountSteps;
     protected LoginSteps loginSteps;
+    protected ResetPasswordSteps resetPasswordSteps;
     protected HomeSteps homeSteps;
     protected SecuritySteps securitySteps;
     protected PersonalDataSteps personalDataSteps;
@@ -95,6 +96,7 @@ public class BaseTest {
         renameAccountSteps = new RenameAccountSteps();
         loginSteps = new LoginSteps();
         homeSteps = new HomeSteps();
+        resetPasswordSteps = new ResetPasswordSteps();
         securitySteps = new SecuritySteps();
         changePasswordSteps = new ChangePasswordSteps();
         dropDownAccountMenuSteps = new DropDownAccountMenuSteps();

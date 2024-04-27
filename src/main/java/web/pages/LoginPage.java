@@ -31,16 +31,13 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//p[contains(text(), 'Неверный пароль или номер телефона')]")
     private WebElement errorHint;
 
-    @FindBy(xpath = "//a[text()='Забыли пароль?']")
-    private WebElement forgotPassword;
-
     public void enterPhone(String phoneNumber) {
         waitElement(borderForPhoneInput);
         borderForPhoneInput.click();
         phoneInput.sendKeys(phoneNumber);
     }
 
-    public void enterPassword(String password) {
+      public void enterPassword(String password) {
         waitElement(borderForPasswordInput);
         borderForPasswordInput.click();
         passwordInput.sendKeys(password);
@@ -57,10 +54,6 @@ public class LoginPage extends BasePage {
 
     public void clickSubmitButton() {
         waitElement(submitButton).click();
-    }
-
-    public void clickForgotPassword() {
-        waitElement(forgotPassword).click();
     }
 
     public boolean checkButtonCondition(String bgColor, String textColor, boolean isEnabled) {
