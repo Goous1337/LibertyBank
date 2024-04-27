@@ -1,6 +1,5 @@
 package web.pages;
 
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -10,11 +9,17 @@ import static web.helpers.Waiters.*;
 
 public class LoginPage extends BasePage {
 
-    @FindBy(name = "phone")
+    @FindBy(xpath = "//*[@name='phone']")
     private WebElement phoneInput;
 
-    @FindBy(name = "password")
+    @FindBy(xpath = "//*[@name='phone']/../..")
+    private WebElement phoneInputClick;
+
+    @FindBy(xpath = "//*[@name='password']")
     private WebElement passwordInput;
+
+    @FindBy(xpath = "//*[@name='password']/../..")
+    private WebElement passwordInputClick;
 
     @FindBy(xpath = "//button[@type='submit']")
     private WebElement submitButton;
@@ -43,8 +48,14 @@ public class LoginPage extends BasePage {
         passwordInput.sendKeys(password);
     }
 
-    public void outFormPassword() {
-        passwordInput.sendKeys(Keys.TAB);
+    public void clickInputPhone() {
+        waitElement(phoneInputClick);
+        phoneInputClick.click();
+    }
+
+    public void clickInputPassword() {
+        waitElement(passwordInputClick);
+        passwordInputClick.click();
     }
 
     public void submitToMainPage() {

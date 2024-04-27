@@ -27,9 +27,10 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
     @ParameterizedTest
     @ValueSource(strings = {"A!123a", "!\"#$%&'()*+,-./:;Zz0", "<=>?@[]^_`{|}~8qA"})
     public void checkValidationLoginPasswordTest(String password) {
+        loginSteps.clickInputPhone();
         loginSteps.enterPhone(USER_PHONE);
+        loginSteps.clickInputPassword();
         loginSteps.enterPassword(password);
-        loginSteps.outFormPassword();
         loginSteps.assertSubmitButtonAndInputSuccessful(
                 "rgba(0, 90, 254, 1)",
                 "rgba(245, 245, 245, 1)",
@@ -43,7 +44,9 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
     @ParameterizedTest
     @CsvSource({"71111111111, Login-1", "79228134511, Login-107543"})
     public void checkAuthUnregisteredUserTest(String phone, String password) {
+        loginSteps.clickInputPhone();
         loginSteps.enterPhone(phone);
+        loginSteps.clickInputPassword();
         loginSteps.enterPassword(password);
         loginSteps.clickSubmitButton();
         loginSteps.assertSubmitButtonAndInputInvalid(
@@ -59,7 +62,9 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
     @TmsLink("LIB-2432")
     @Test
     public void checkValidationAuthTest() {
+        loginSteps.clickInputPhone();
         loginSteps.enterPhone(USER_PHONE);
+        loginSteps.clickInputPassword();
         loginSteps.enterPassword(USER_PASSWORD);
         loginSteps.assertSubmitButtonAndInputSuccessful(
                 "rgba(0, 90, 254, 1)",
