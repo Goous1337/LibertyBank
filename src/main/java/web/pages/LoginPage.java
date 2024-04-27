@@ -1,5 +1,6 @@
 package web.pages;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -27,19 +28,24 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//*[contains(text(), 'Главная')]")
     private WebElement mainView;
 
-    @FindBy(xpath = "//input[@name = 'password']/..")
-    private WebElement borderForInput;
+    @FindBy(xpath = "//input[@name = 'password']/../..")
+    private WebElement borderForPasswordInput;
+
+    @FindBy(xpath = "//input[@name = 'phone']/../..")
+    private WebElement borderForPhoneInput;
 
     @FindBy(xpath = "//p[contains(text(), 'Неверный пароль или номер телефона')]")
     private WebElement errorHint;
 
     public void enterPhone(String phoneNumber) {
-        waitElement(phoneInput);
+        waitElement(borderForPhoneInput);
+        borderForPhoneInput.click();
         phoneInput.sendKeys(phoneNumber);
     }
 
     public void enterPassword(String password) {
-        waitElement(passwordInput);
+        waitElement(borderForPasswordInput);
+        borderForPasswordInput.click();
         passwordInput.sendKeys(password);
     }
 
@@ -70,7 +76,8 @@ public class LoginPage extends BasePage {
     }
 
     public boolean isValidInput(String color) {
-        return borderForInput.getCssValue("border-color").
+        System.out.println(borderForPasswordInput.getCssValue("border-color"));
+        return borderForPasswordInput.getCssValue("border-color").
                 equals(color);
     }
 

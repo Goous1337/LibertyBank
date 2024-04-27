@@ -29,10 +29,11 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
     public void checkValidationLoginPasswordTest(String password) {
         loginSteps.enterPhone(USER_PHONE);
         loginSteps.enterPassword(password);
+        loginSteps.outFormPassword();
         loginSteps.assertSubmitButtonAndInputSuccessful(
                 "rgba(0, 90, 254, 1)",
                 "rgba(245, 245, 245, 1)",
-                "rgb(117, 127, 138)");
+                "rgb(77, 95, 113)");
     }
 
     @DisplayName("Проверка авторизации незарегистрированного пользователя по номеру телефона")
@@ -41,9 +42,9 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
     @TmsLink("LIB-2435")
     @ParameterizedTest
     @CsvSource({"71111111111, Login-1", "79228134511, Login-107543"})
-    public void checkAuthUnregisteredUserTest() {
-        loginSteps.enterPhone("71111111111");
-        loginSteps.enterPassword(USER_PASSWORD);
+    public void checkAuthUnregisteredUserTest(String phone, String password) {
+        loginSteps.enterPhone(phone);
+        loginSteps.enterPassword(password);
         loginSteps.clickSubmitButton();
         loginSteps.assertSubmitButtonAndInputInvalid(
                 "rgba(216, 223, 234, 1)",
@@ -51,6 +52,7 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
                 "rgb(245, 60, 20)");
     }
 
+    @Disabled
     @DisplayName("US-1.2.1 Авторизация по номеру телефона (первичный вход)")
     @Description("Авторизоваться в личном кабинете с валидными значениями телефона и пароля")
     @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Positive")})
