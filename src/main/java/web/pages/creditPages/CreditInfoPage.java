@@ -7,10 +7,6 @@ import web.pages.BasePage;
 
 public class CreditInfoPage extends BasePage {
 
-    public CreditInfoPage() {
-
-    }
-
     @FindBy(xpath = "//a[text()='Кредиты']")
     private WebElement creditButton;
     /*Кнопки подразделов 'Кредиты'*/

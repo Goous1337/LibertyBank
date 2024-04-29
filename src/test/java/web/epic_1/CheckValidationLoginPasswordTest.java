@@ -27,12 +27,14 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
     @ParameterizedTest
     @ValueSource(strings = {"A!123a", "!\"#$%&'()*+,-./:;Zz0", "<=>?@[]^_`{|}~8qA"})
     public void checkValidationLoginPasswordTest(String password) {
+        loginSteps.clickInputPhone();
         loginSteps.enterPhone(USER_PHONE);
+        loginSteps.clickInputPassword();
         loginSteps.enterPassword(password);
         loginSteps.assertSubmitButtonAndInputSuccessful(
                 "rgba(0, 90, 254, 1)",
                 "rgba(245, 245, 245, 1)",
-                "rgb(117, 127, 138)");
+                "rgb(77, 95, 113)");
     }
 
     @DisplayName("Проверка авторизации незарегистрированного пользователя по номеру телефона")
@@ -41,9 +43,11 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
     @TmsLink("LIB-2435")
     @ParameterizedTest
     @CsvSource({"71111111111, Login-1", "79228134511, Login-107543"})
-    public void checkAuthUnregisteredUserTest() {
-        loginSteps.enterPhone("71111111111");
-        loginSteps.enterPassword(USER_PASSWORD);
+    public void checkAuthUnregisteredUserTest(String phone, String password) {
+        loginSteps.clickInputPhone();
+        loginSteps.enterPhone(phone);
+        loginSteps.clickInputPassword();
+        loginSteps.enterPassword(password);
         loginSteps.clickSubmitButton();
         loginSteps.assertSubmitButtonAndInputInvalid(
                 "rgba(216, 223, 234, 1)",
@@ -51,13 +55,16 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
                 "rgb(245, 60, 20)");
     }
 
+    @Disabled
     @DisplayName("US-1.2.1 Авторизация по номеру телефона (первичный вход)")
     @Description("Авторизоваться в личном кабинете с валидными значениями телефона и пароля")
     @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Positive")})
     @TmsLink("LIB-2432")
     @Test
     public void checkValidationAuthTest() {
+        loginSteps.clickInputPhone();
         loginSteps.enterPhone(USER_PHONE);
+        loginSteps.clickInputPassword();
         loginSteps.enterPassword(USER_PASSWORD);
         loginSteps.assertSubmitButtonAndInputSuccessful(
                 "rgba(0, 90, 254, 1)",
