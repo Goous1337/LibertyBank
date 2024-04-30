@@ -17,4 +17,9 @@ public class CreditProductsDetailedInformationSteps {
                 creditProductDetailedInformationPage.getCreditProductObjectFromWeb(),
                 "Актуальный результат не соответствует ожидаемому");
     }
+
+    @Step("Нажать кнопку показать больше")
+    public void clickShowMoreButton() {
+        creditProductDetailedInformationPage.buttonСheckoutCredit();
+    }
 }

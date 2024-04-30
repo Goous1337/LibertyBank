@@ -14,6 +14,7 @@ import java.util.List;
 
 import static web.helpers.Converter.convertStringToInteger;
 import static web.helpers.Converter.convertToDouble;
+import static web.helpers.Waiters.waitElement;
 
 @Getter
 @Setter
@@ -101,6 +102,8 @@ public class CreditProductDetailedInformationPage extends BasePage {
     private WebElement headerSevenCreditDetails;
     @FindBy(xpath = "//div//following-sibling::span[2]")
     private WebElement creditDetails;
+    @FindBy(xpath = "//button[contains(text(), 'Оформить')]")
+    private WebElement buttonСheckoutCredit;
 
     /*Подробная информация о кредитных продуктах банка*/
     public List<MoreCreditProduct> addMoreCreditProductXpathToList() {
@@ -173,4 +176,8 @@ public class CreditProductDetailedInformationPage extends BasePage {
         return new MoreCreditProduct(nameOfCreditProductFromBackEnd, interestRateFromBackEnd, minSumFromBackEnd, maxSumFromBackEnd, listDetailsFromBackEnd);
     }
 
+    public void buttonСheckoutCredit() {
+        waitElement(buttonСheckoutCredit);
+        buttonСheckoutCredit.click();
+    }
 }
