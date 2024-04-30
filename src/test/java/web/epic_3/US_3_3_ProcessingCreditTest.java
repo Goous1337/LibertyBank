@@ -19,31 +19,43 @@ public class US_3_3_ProcessingCreditTest extends BaseTest {
 
     private static Stream<Object> testDataLibertyMoney() {
         return Stream.of(Arguments.of("3000", "12", "1234567890", "1000", "1000"),
+                Arguments.of("3001", "13", "1234567890", "1000", "1000"),
+                Arguments.of("99999", "59", "1234567890", "1000", "1000"),
                 Arguments.of("100000", "60", "123456789012", "10000", "10000"));
     }
 
     private static Stream<Object> testDataLibertyExpress() {
         return Stream.of(Arguments.of("50000", "12", "1234567890", "1000", "1000"),
+                Arguments.of("50001", "12", "1234567890", "1000", "1000"),
+                Arguments.of("2999999", "59", "1234567890", "1000", "1000"),
                 Arguments.of("3000000", "60", "123456789123", "5194", "51352"));
     }
 
     private static Stream<Object> testDataLibertyCash() {
         return Stream.of(Arguments.of("50000", "12", "1234567890", "1000", "1000"),
+                Arguments.of("50001", "13", "1234567890", "1000", "1000"),
+                Arguments.of("4999999", "59", "1234567890", "1000", "1000"),
                 Arguments.of("5000000", "60", "423456123512", "5194", "51352"));
     }
 
     private static Stream<Object> testDataLibertyEasy() {
         return Stream.of(Arguments.of("50000", "12", "1234567890", "1500", "3000"),
+                Arguments.of("50001", "13", "1234567890", "1000", "1000"),
+                Arguments.of("2999999", "59", "1234567890", "1000", "1000"),
                 Arguments.of("3000000", "60", "423456123512", "1000", "2500"));
     }
 
     private static Stream<Object> testDataLibertyCar() {
         return Stream.of(Arguments.of("500000", "36", "1234567890", "15000", "39000"),
+                Arguments.of("500001", "37", "1234567890", "1000", "1000"),
+                Arguments.of("49999999", "83", "1234567890", "1000", "1000"),
                 Arguments.of("50000000", "84", "423456123512", "31500", "62300"));
     }
 
     private static Stream<Object> testDataLibertyMyFlat() {
         return Stream.of(Arguments.of("1000000", "120", "1234567890", "15000", "39000"),
+                Arguments.of("1000001", "121", "1234567890", "1000", "1000"),
+                Arguments.of("499999999", "239", "912348765012", "1000", "1000"),
                 Arguments.of("500000000", "240", "912348765012", "301500", "623300"));
     }
 
@@ -65,9 +77,7 @@ public class US_3_3_ProcessingCreditTest extends BaseTest {
                 Arguments.of("3200000", "215", "1234567890", "12600", " "),
                 Arguments.of("3200000", "178", "123456789", "10000", "79000"),
                 Arguments.of("3200000", "178", "12345678900", "10000", "79000"),
-
                 Arguments.of("3200000", "178", "912345678", "10000", "79000"),
-
                 Arguments.of("3200000", "178", "0012345678", "10000", "79000"),
                 Arguments.of("3201000", "150", "1234567890", "5000", " "),
                 Arguments.of("3200000", "178", "^!%*^@$#", "10000", "39000"),
@@ -277,12 +287,11 @@ public class US_3_3_ProcessingCreditTest extends BaseTest {
         creditApplicationSteps.assertTotalDebtLoadErrorMessageIsDisplayed(totalDebtLoad);
         creditApplicationSteps.enterMonthlyIncomeCreditInput(averageMonthlyIncome);
         creditApplicationSteps.assertTotalDebtLoadErrorMessageIsDisplayed(averageMonthlyIncome);
-
+        //Дописать метод на проверку значений averageMonthlyIncome
         creditApplicationSteps.assertSubmitButtonInvalid(
                 "rgba(216, 223, 234, 1)",
                 "rgba(77, 95, 113, 1)"
         );
     }
-
 
 }
