@@ -176,7 +176,7 @@ public class CreditProductDetailedInformationPage extends BasePage {
         return new MoreCreditProduct(nameOfCreditProductFromBackEnd, interestRateFromBackEnd, minSumFromBackEnd, maxSumFromBackEnd, listDetailsFromBackEnd);
     }
 
-    public void buttonСheckoutCredit() {
+    public void buttonCheckoutCredit() {
         waitElement(buttonСheckoutCredit);
         buttonСheckoutCredit.click();
     }

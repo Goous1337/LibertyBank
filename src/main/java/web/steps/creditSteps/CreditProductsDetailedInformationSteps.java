@@ -20,6 +20,6 @@ public class CreditProductsDetailedInformationSteps {
 
     @Step("Нажать кнопку показать больше")
     public void clickShowMoreButton() {
-        creditProductDetailedInformationPage.buttonСheckoutCredit();
+        creditProductDetailedInformationPage.buttonCheckoutCredit();
     }
 }

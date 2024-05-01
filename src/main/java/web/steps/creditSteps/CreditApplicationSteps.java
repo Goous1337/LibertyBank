@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.NoSuchElementException;
 import web.pages.creditPages.CreditApplicationPage;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static web.constans.AccountServiceConstants.INVALID_COLOR;
 
