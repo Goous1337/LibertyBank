@@ -12,8 +12,27 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static constant.InsuranceServiceConstants.*;
-import static org.apache.http.HttpStatus.*;
+import static constant.InsuranceServiceConstants.ACCIDENT_INSURANCE_SERVICE_PRODUCT_NAME;
+import static constant.InsuranceServiceConstants.FLAT_INSURANCE_SERVICE_PRODUCT_NAME;
+import static constant.InsuranceServiceConstants.HOME_INSURANCE_SERVICE_PRODUCT_NAME;
+import static constant.InsuranceServiceConstants.MEDICINE_PREMIUM_INSURANCE_SERVICE_PRODUCT_NAME;
+import static constant.InsuranceServiceConstants.MEDICINE_STANDART_INSURANCE_SERVICE_PRODUCT_NAME;
+import static constant.InsuranceServiceConstants.MEDICINE_STANDART_PLUS_INSURANCE_SERVICE_PRODUCT_NAME;
+import static constant.InsuranceServiceConstants.MEDICINE_VIP_INSURANCE_SERVICE_PRODUCT_NAME;
+import static constant.InsuranceServiceConstants.THING_INSURANCE_SERVICE_PRODUCT_NAME;
+import static constant.InsuranceServiceConstants.TRAVELING_INSURANCE_SERVICE_PRODUCT_NAME;
+import static constant.InsuranceServiceConstants.TYPE_OF_INSURANCE_ACCIDENT;
+import static constant.InsuranceServiceConstants.TYPE_OF_INSURANCE_CAR;
+import static constant.InsuranceServiceConstants.TYPE_OF_INSURANCE_HEALTH;
+import static constant.InsuranceServiceConstants.TYPE_OF_INSURANCE_PROPERTY;
+import static constant.InsuranceServiceConstants.TYPE_OF_INSURANCE_TRAVELING;
+import static constant.InsuranceServiceConstants.VEHICLE_KASKO_INSURANCE_SERVICE_PRODUCT_NAME;
+import static constant.InsuranceServiceConstants.VEHICLE_OSAGO_INSURANCE_SERVICE_PRODUCT_NAME;
+import static constant.Message.NOT_FOUND_ERROR_MESSAGE;
+import static constant.Message.NOT_VALID_VALUE_INSURANCE_PRODUCT_ID_ERROR_MESSAGE;
+import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
+import static org.apache.http.HttpStatus.SC_NOT_FOUND;
+import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.INSURANCE_SERVICE;
@@ -53,10 +72,10 @@ public class INS_1_GetInfoAboutInsuranceProducts extends BaseTest {
         List<Response> jsonList = response.jsonPath().getList("products.name");
         assertAll(
                 () -> assertEquals(SC_OK, response.statusCode(), "Статус код ответа не соответствует ожидаемому"),
-                () -> assertEquals(INSURANCE_MEDICINE_VIP, jsonList.get(0), "Медецинское страхование VIP отсутствует"),
-                () -> assertEquals(INSURANCE_MEDICINE_STANDART, jsonList.get(1), "Медецинское страхование Standart отсутствует"),
-                () -> assertEquals(INSURANCE_MEDICINE_STANDART_PLUS, jsonList.get(2), "Медецинское страхование Standart+ отсутствует"),
-                () -> assertEquals(INSURANCE_MEDICINE_PREMIUM, jsonList.get(3), "Медецинское страхование Premium отсутствует"),
+                () -> assertEquals(MEDICINE_VIP_INSURANCE_SERVICE_PRODUCT_NAME, jsonList.get(0), "Медецинское страхование VIP отсутствует"),
+                () -> assertEquals(MEDICINE_STANDART_INSURANCE_SERVICE_PRODUCT_NAME, jsonList.get(1), "Медецинское страхование Standart отсутствует"),
+                () -> assertEquals(MEDICINE_STANDART_PLUS_INSURANCE_SERVICE_PRODUCT_NAME, jsonList.get(2), "Медецинское страхование Standart+ отсутствует"),
+                () -> assertEquals(MEDICINE_PREMIUM_INSURANCE_SERVICE_PRODUCT_NAME, jsonList.get(3), "Медецинское страхование Premium отсутствует"),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
@@ -72,7 +91,7 @@ public class INS_1_GetInfoAboutInsuranceProducts extends BaseTest {
         Response response = insuranceService.checkGetInfoAboutInsuranceProducts(TYPE_OF_INSURANCE_TRAVELING);
         assertAll(
                 () -> assertEquals(SC_OK, response.statusCode(), "Статус код ответа не соответствует ожидаемому"),
-                () -> assertEquals(INSURANCE_TRAVELING, response.jsonPath().getList("products.name").get(0), "Страхование выезжающих за границу отсутствует"),
+                () -> assertEquals(TRAVELING_INSURANCE_SERVICE_PRODUCT_NAME, response.jsonPath().getList("products.name").get(0), "Страхование выезжающих за границу отсутствует"),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
@@ -89,9 +108,9 @@ public class INS_1_GetInfoAboutInsuranceProducts extends BaseTest {
         List<Response> jsonList = response.jsonPath().getList("products.name");
         assertAll(
                 () -> assertEquals(SC_OK, response.statusCode(), "Статус код ответа не соответствует ожидаемому"),
-                () -> assertEquals(INSURANCE_HOME, jsonList.get(0), "Страхование дома отсутствует"),
+                () -> assertEquals(HOME_INSURANCE_SERVICE_PRODUCT_NAME, jsonList.get(0), "Страхование дома отсутствует"),
                 () -> assertEquals(THING_INSURANCE_SERVICE_PRODUCT_NAME, jsonList.get(1), "Страхование домашнего имущества отсутствует"),
-                () -> assertEquals(INSURANCE_FLAT, jsonList.get(2), "Страхование квартиры отсутствует"),
+                () -> assertEquals(FLAT_INSURANCE_SERVICE_PRODUCT_NAME, jsonList.get(2), "Страхование квартиры отсутствует"),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
@@ -107,7 +126,7 @@ public class INS_1_GetInfoAboutInsuranceProducts extends BaseTest {
         Response response = insuranceService.checkGetInfoAboutInsuranceProducts(TYPE_OF_INSURANCE_ACCIDENT);
         assertAll(
                 () -> assertEquals(SC_OK, response.statusCode(), "Статус код ответа не соответствует ожидаемому"),
-                () -> assertEquals(INSURANCE_ACCIDENT, response.jsonPath().getList("products.name").get(0), "Страхование от несчастных случаев отсутствует"),
+                () -> assertEquals(ACCIDENT_INSURANCE_SERVICE_PRODUCT_NAME, response.jsonPath().getList("products.name").get(0), "Страхование от несчастных случаев отсутствует"),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
@@ -121,7 +140,9 @@ public class INS_1_GetInfoAboutInsuranceProducts extends BaseTest {
 
         Response response = insuranceService.checkGetInfoAboutInsuranceProducts("1.5");
         assertAll(
-                () -> assertEquals(SC_BAD_REQUEST, response.statusCode(), "Статус код ответа не соответствует ожидаемому")
+                () -> assertEquals(SC_BAD_REQUEST, response.statusCode(), "Статус код ответа не соответствует ожидаемому"),
+                () -> assertEquals(NOT_VALID_VALUE_INSURANCE_PRODUCT_ID_ERROR_MESSAGE, response.jsonPath().get("message").toString()),
+                () -> assertEquals(NOT_VALID_VALUE_INSURANCE_PRODUCT_ID_ERROR_MESSAGE, response.jsonPath().get("message").toString())
         );
     }
 
@@ -134,7 +155,8 @@ public class INS_1_GetInfoAboutInsuranceProducts extends BaseTest {
 
         Response response = insuranceService.checkGetInfoAboutInsuranceProducts("9999");
         assertAll(
-                () -> assertEquals(SC_BAD_REQUEST, response.statusCode(), "Статус код ответа не соответствует ожидаемому")
+                () -> assertEquals(SC_BAD_REQUEST, response.statusCode(), "Статус код ответа не соответствует ожидаемому"),
+                () -> assertEquals(NOT_VALID_VALUE_INSURANCE_PRODUCT_ID_ERROR_MESSAGE, response.jsonPath().get("message").toString())
         );
     }
 
@@ -147,7 +169,8 @@ public class INS_1_GetInfoAboutInsuranceProducts extends BaseTest {
 
         Response response = insuranceService.checkGetInfoAboutInsuranceProducts("");
         assertAll(
-                () -> assertEquals(SC_NOT_FOUND, response.statusCode(), "Статус код ответа не соответствует ожидаемому")
+                () -> assertEquals(SC_NOT_FOUND, response.statusCode(), "Статус код ответа не соответствует ожидаемому"),
+                () -> assertEquals(NOT_FOUND_ERROR_MESSAGE, response.jsonPath().get("error").toString())
         );
     }
 }
