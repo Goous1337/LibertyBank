@@ -49,7 +49,6 @@ public class CreditProdutsPage extends BasePage {
     private WebElement nameShortCreditCarProductPageText;
     @FindBy(xpath = "//h3[contains(text(), 'Моя Квартира')]")
     private WebElement nameShortCreditMyFlatProductPageText;
-
     //Interest Rate Credits from UI
     @FindBy(xpath = "//h3[contains(text(), 'Liberty Наличными')]/ancestor::li//h3[@data-testid = 'interestRate']")
     private WebElement interestRateLibertyCash;
@@ -63,7 +62,6 @@ public class CreditProdutsPage extends BasePage {
     private WebElement interestRateLibertyCar;
     @FindBy(xpath = "//h3[contains(text(), 'Моя Квартира')]/ancestor::li//h3[@data-testid = 'interestRate']")
     private WebElement interestRateLibertyMyFlat;
-
     //Details of Credits from UI
     @FindBy(xpath = "//h3[contains(text(), 'Liberty Money')]/ancestor::li//p[@data-testid = 'productDetails']")
     private WebElement detailsLibertyMoney;
@@ -77,7 +75,6 @@ public class CreditProdutsPage extends BasePage {
     private WebElement detailsLibertyCar;
     @FindBy(xpath = "//h3[contains(text(), 'Liberty Срочный')]/ancestor::li//p[@data-testid = 'productDetails']")
     private WebElement detailsLibertyExpress;
-
     //Min amount of Credits from UI
     @FindBy(xpath = "//h3[contains(text(), 'Liberty Money')]/ancestor::li//h3[@data-testid = 'amountMin']")
     private WebElement amountMinLibertyMoney;
@@ -91,7 +88,6 @@ public class CreditProdutsPage extends BasePage {
     private WebElement amountMinLibertyCar;
     @FindBy(xpath = "//h3[contains(text(), 'Liberty Срочный')]/ancestor::li//h3[@data-testid = 'amountMin']")
     private WebElement amountMinLibertyExpress;
-
     //Max duration of Credits from UI
     @FindBy(xpath = "//h3[contains(text(), 'Liberty Money')]/ancestor::li//h3[@data-testid = 'maxDurationMonth']")
     private WebElement maxDurationMonthLibertyMoney;
@@ -107,17 +103,17 @@ public class CreditProdutsPage extends BasePage {
     private WebElement maxDurationMonthLibertyExpress;
 
     //Кнопки 'Показать больше' в разделе кредитные продукты банка
-    @FindBy(xpath = "//li[./span[@data-testid='Liberty Наличными']]//button/span[contains(text(), 'Показать больше')]")
+    @FindBy(xpath = "//h3[contains(text(), 'Liberty Наличными')]/ancestor::div/following-sibling::div/button[contains(text(), 'Показать больше')]")
     private WebElement buttonShowMoreLibertyCash;
-    @FindBy(xpath = "//li[./span[@data-testid='Liberty Срочный']]//button/span[contains(text(), 'Показать больше')]")
+    @FindBy(xpath = "//h3[contains(text(), 'Liberty Срочный')]/ancestor::div/following-sibling::div/button[contains(text(), 'Показать больше')]")
     private WebElement buttonShowMoreLibertyExpress;
-    @FindBy(xpath = "//li[./span[@data-testid='Liberty Money']]//button/span[contains(text(), 'Показать больше')]")
+    @FindBy(xpath = "//h3[contains(text(), 'Liberty Money')]/ancestor::div/following-sibling::div/button[contains(text(), 'Показать больше')]")
     private WebElement buttonShowMoreLibertyMoney;
-    @FindBy(xpath = "//li[./span[@data-testid='Liberty Easy']]//button/span[contains(text(), 'Показать больше')]")
+    @FindBy(xpath = "//h3[contains(text(), 'Liberty Easy')]/ancestor::div/following-sibling::div/button[contains(text(), 'Показать больше')]")
     private WebElement buttonShowMoreLibertyEasy;
-    @FindBy(xpath = "//li[./span[@data-testid='Liberty Car']]//button/span[contains(text(), 'Показать больше')]")
+    @FindBy(xpath = "//h3[contains(text(), 'Liberty Car')]/ancestor::div/following-sibling::div/button[contains(text(), 'Показать больше')]")
     private WebElement buttonShowMoreLibertyCar;
-    @FindBy(xpath = "//li[./span[@data-testid='Моя Квартира']]//button/span[contains(text(), 'Показать больше')]")
+    @FindBy(xpath = "//h3[contains(text(), 'Моя Квартира')]/ancestor::div/following-sibling::div/button[contains(text(), 'Показать больше')]")
     private WebElement buttonShowMoreMyFlat;
     @FindBy(xpath = "//li[1]/div[3]/button[contains(text(), 'Подать заявку')]")
     private WebElement buttonGetApplicationLibertyCash;

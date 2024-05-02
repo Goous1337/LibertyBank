@@ -6,12 +6,14 @@ import pojo.insuranceService.CreateVehicleApplicationInsuranceRequest;
 
 import java.util.List;
 
+import static api.core.ApiClient.sendRequestWithoutParams;
 import static api.core.ApiClient.sendSimpleRequest;
 import static api.core.RequestParam.getRP;
 import static api.core.RequestParamType.HEADER;
 import static com.google.common.net.HttpHeaders.AUTHORIZATION;
 import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
 import static constant.ApiEndpoints.APPLICATION_INSURANCE;
+import static constant.ApiEndpoints.POLICY_INSURANCE;
 import static constant.ApiEndpoints.LIST_OF_INSURANCE;
 import static constant.ApiEndpoints.LIST_OF_INSURANCE_POLICES;
 import static constant.InsuranceServiceConstants.ACCEPT_VALUE;
@@ -27,6 +29,18 @@ public class InsuranceService {
                 getRP(HEADER, "clientId", clientId),
                 getRP(HEADER, CONTENT_TYPE, CONTENT_TYPE_VALUE));
         return sendSimpleRequest(POST, APPLICATION_INSURANCE, params, createVehicleApplicationInsuranceRequest);
+    }
+
+    public Response getPolicyInfo(String insuranceID) {
+        return sendRequestWithoutParams(GET, POLICY_INSURANCE + "/" + insuranceID);
+    }
+
+    public String getResponsePolicyName(Response response) {
+        return response.body().jsonPath().getMap("policyInfo").get("productName").toString();
+    }
+
+    public String getResponsePolicyErrorMessage(Response response) {
+        return response.body().jsonPath().get("message");
     }
 
     public Response checkGetInfoAboutInsuranceProducts(String typeOfInsurance) {

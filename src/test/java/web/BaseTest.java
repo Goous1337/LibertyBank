@@ -35,6 +35,7 @@ public class BaseTest {
     protected CreditInfoSteps creditInfoSteps;
     protected CreditProductsDetailedInformationSteps creditProductDetailedInformationSteps;
     protected СreditProductsSteps сreditProductsSteps;
+    protected CreditApplicationSteps creditApplicationSteps;
     protected MyCreditSteps myCreditSteps;
     protected MyCreditDetailedInformationSteps myCreditDetailedInformationSteps;
     protected CreateAccountSteps createAccountSteps;
@@ -103,6 +104,7 @@ public class BaseTest {
         changeNotificationStatusSteps = new ChangeNotificationStatusSteps();
         creditInfoSteps = new CreditInfoSteps();
         сreditProductsSteps = new СreditProductsSteps();
+        creditApplicationSteps = new CreditApplicationSteps();
         creditProductDetailedInformationSteps = new CreditProductsDetailedInformationSteps();
         myCreditSteps = new MyCreditSteps();
         myCreditDetailedInformationSteps = new MyCreditDetailedInformationSteps();

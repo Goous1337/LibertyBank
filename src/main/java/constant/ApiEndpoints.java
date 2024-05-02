@@ -31,6 +31,7 @@ public final class ApiEndpoints {
     public static final String INVALID_DEPOSIT_PRODUCTS = "deposits/api/v0/deposit-product";
     public static final String CREDIT_BACKGROUND = "credits/api/v1/credit-product/form";
     public static final String DEPOSIT_PRODUCTS_OFFER = "deposits/api/v1/deposit-product/";
+
     public static final String CREDIT_PRODUCTS = "credits/api/v1/credit-product";
     public static final String CREDIT_PRODUCTS_INFO = "credits/api/v1/credit-product/3";
     public static final String INVALID_CREDIT_PRODUCTS = "credits/api/v1/credit-product/.";
@@ -65,8 +66,10 @@ public final class ApiEndpoints {
     public static final String CUSTOMER_CHANGE_PASSWORD = "customer/api/v1/security/password/changepassword";
     public static final String CUSTOMER_VERIFICATION_BY_CODE = "customer/api/v1/security/session/verification";
     public static final String ABS_CLIENT_SERVICE_PERSONAL_DATE = "api/v1/client-service/clients/personal-date";
+
     public static final String CLIENT_ACCOUNTS_LIST = "api/v1/info-service/atm";
     public static final String INVALID_CLIENT_ACCOUNTS_LIST = "api/v1/info-service/atm/";
+
     public static final String RETRIEVING_USER_INFO = "customer/api/v1/auth/information";
     public static final String PUSH_NOTIFICATION_2_0 = "customer/api/v1/auth/user/settings/notifications/push";
     public static final String INVALID_PUSH_NOTIFICATION_2_0 = "customer/api/v1/^auth/user/settings/notifications/push";
@@ -80,8 +83,10 @@ public final class ApiEndpoints {
     public static final String INVALID_CUSTOMER_2_0_NOTIFICATION_EMAIL = "customer/api/v1/***auth/user/settings/notifications/email";
     public static final String INCORRECT_CUSTOMER_2_0_NOTIFICATION_SMS =
             "customer/api/v1/auth/user/settings/notifications/sm";
+
     public static final String QUESTION_ANSWER_2_0 = "customer/api/v1/auth/user/settings/controls";
     public static final String QUESTION_ANSWER_INVALID_URL_2_0 = "customer/api/v1/auth/user/settings/control";
+
     public static final String ACCOUNTS_LIST = "account-service/api/v1/accounts";
     public static final String CHANGE_PASSWORD_2_0 = "customer/api/v1/security/password";
     public static final String INVALID_CHANGE_PASSWORD_2_0 = "customer/api/v1/security/pas";
@@ -93,5 +98,6 @@ public final class ApiEndpoints {
     public static final String APPLICATION_INSURANCE = "insurance-service/api/v1/insurance/applications";
     public static final String LIST_OF_INSURANCE_POLICES = "insurance-service/api/v1/policies/";
     public static final String CARD_PRODUCT_BENEFITS = "card-service/api/v1/card-product-benefits/";
+    public static final String POLICY_INSURANCE = "insurance-service/api/v1/policies";
     public static final String LIST_OF_INSURANCE = "insurance-service/api/v1/insurance/groups-products/";
 }
