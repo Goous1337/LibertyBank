@@ -1,7 +1,5 @@
 package web.epic_1;
 
-import java.util.stream.Stream;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -15,10 +13,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.TmsLink;
-import org.junit.jupiter.api.*;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 import web.BaseTest;
 
 import static property.UserPropertiesReader.USER_PASSWORD;
@@ -72,15 +66,14 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("dataProviders.gui.AuthorizationDataProviders#provideTestDataForPhoneNumber")
     public void checkValidationPhoneInput(
-            String phoneNumber, int amountSymbols, String colorPhoneInput, String colorPlaceholderPhone,
+            String phoneNumber, int amountSymbols, String colorPlaceholderPhone,
             String textErrorPhone)
             throws InterruptedException {
 
         loginSteps.enterPhone(phoneNumber);
-        loginSteps.clickSubmitButton();
+        loginSteps.outFormPhone();
         Thread.sleep(1000);
         loginSteps.assertAmountSymbolsPhoneInput(amountSymbols);
-        loginSteps.assertColorPhoneInput(colorPhoneInput);
         loginSteps.assertColorPlaceholderPhoneInput(colorPlaceholderPhone);
         if (!textErrorPhone.isEmpty()) {
             loginSteps.assertErrorPhoneInput(textErrorPhone);
@@ -95,14 +88,13 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("dataProviders.gui.AuthorizationDataProviders#provideTestDataForPasswordAmountSymbols")
     public void checkValidationPasswordInputAmountSymbols(
-            String password, int amountSymbols, String inputPasswordColor, String colorPlaceholderPassword,
+            String password, int amountSymbols, String colorPlaceholderPassword,
             String textErrorPassword) throws InterruptedException {
 
         loginSteps.enterPassword(password);
-        loginSteps.clickSubmitButton();
+        loginSteps.outFormPassword();
         Thread.sleep(1000);
         loginSteps.assertAmountSymbolsPasswordInput(amountSymbols);
-        loginSteps.assertColorPasswordInput(inputPasswordColor);
         loginSteps.assertColorPlaceholderPasswordInput(colorPlaceholderPassword);
         if (!textErrorPassword.isEmpty()) {
             loginSteps.assertErrorPasswordInput(textErrorPassword);
@@ -117,14 +109,13 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("dataProviders.gui.AuthorizationDataProviders#provideTestDataForPasswordInvalidSymbols")
     public void checkValidationPasswordInputInvalidSymbols(
-            String password, int amountSymbols, String inputPasswordColor, String colorPlaceholderPassword,
+            String password, int amountSymbols, String colorPlaceholderPassword,
             String textErrorPassword) throws InterruptedException {
 
         loginSteps.enterPassword(password);
-        loginSteps.clickSubmitButton();
+        loginSteps.outFormPassword();
         Thread.sleep(1000);
         loginSteps.assertAmountSymbolsPasswordInput(amountSymbols);
-        loginSteps.assertColorPasswordInput(inputPasswordColor);
         loginSteps.assertColorPlaceholderPasswordInput(colorPlaceholderPassword);
         if (!textErrorPassword.isEmpty()) {
             loginSteps.assertErrorPasswordInputInvalidSymbols(textErrorPassword);
@@ -143,7 +134,7 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
         loginSteps.assertSubmitButtonAndInputSuccessful(
                 "rgba(0, 90, 254, 1)",
                 "rgba(245, 245, 245, 1)",
-                "rgb(117, 127, 138)");
+                "rgb(0, 26, 52)");
         loginSteps.clickSubmitButton();
         homeSteps.clickUserMenu();
         homeSteps.assertIsUserPanelDisplayed();

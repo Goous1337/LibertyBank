@@ -32,6 +32,11 @@ public class LoginSteps {
         loginPage.enterPassword(password);
     }
 
+    @Step("Выйти из поля номер телефона")
+    public void outFormPhone() {
+        loginPage.outFormPhone();
+    }
+
     @Step("Выйти из поля пароль")
     public void outFormPassword() {
         loginPage.outFormPassword();

@@ -1,7 +1,10 @@
 package web.pages;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.Objects;
 
 import static web.helpers.Waiters.waitElement;
 import static web.helpers.Waiters.waitElementWithColor;
@@ -53,6 +56,10 @@ public class LoginPage extends BasePage {
         passwordInput.sendKeys(password);
     }
 
+    public void outFormPhone() {
+        phoneInput.sendKeys(Keys.TAB);
+    }
+
     public void outFormPassword() {
         passwordInput.sendKeys(Keys.TAB);
     }
@@ -97,5 +104,25 @@ public class LoginPage extends BasePage {
 
     public boolean checkErrorHint(String text) {
         return Objects.equals(errorHint.getText(), text);
+    }
+
+    public String checkErrorPhoneHint() {
+        return errorPhoneHint.getText();
+    }
+
+    public String checkErrorPasswordHint() {
+        return errorPasswordHint.getText();
+    }
+
+    public String checkErrorPhoneAndPasswordHint() {
+        return errorHint.getText();
+    }
+
+    public String getTextFromPhoneInput() {
+        return phoneInput.getAttribute("value");
+    }
+
+    public String getTextFromPasswordInput() {
+        return passwordInput.getAttribute("value");
     }
 }
