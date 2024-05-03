@@ -27,6 +27,7 @@ public class CustomerService_2_0_DataBaseRequest {
         LOG.info(String.format("Получен код верификации: %s , по мобильному телефону: %s", verificationCode, mobilePhone));
         return verificationCode;
     }
+
     public static String getCustomerLastVerificationCodeById(String id) {
         String sql = "SELECT last_verification_code FROM user_profile WHERE customer_id =?::uuid";
         String verificationCode = getDBConnection(CUSTOMER_SERVICE_DB_2_0).queryForObject(sql, String.class, id);
