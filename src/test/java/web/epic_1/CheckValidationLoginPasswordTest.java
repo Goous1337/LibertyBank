@@ -66,7 +66,7 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("dataProviders.gui.AuthorizationDataProviders#provideTestDataForPhoneNumber")
     public void checkValidationPhoneInput(
-            String phoneNumber, int amountSymbols, String colorPlaceholderPhone,
+            String phoneNumber, int amountSymbols, String colorPhoneInput, String colorPlaceholderPhone,
             String textErrorPhone)
             throws InterruptedException {
 
@@ -74,6 +74,7 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
         loginSteps.outFormPhone();
         Thread.sleep(1000);
         loginSteps.assertAmountSymbolsPhoneInput(amountSymbols);
+        loginSteps.assertColorPhoneInput(colorPhoneInput);
         loginSteps.assertColorPlaceholderPhoneInput(colorPlaceholderPhone);
         if (!textErrorPhone.isEmpty()) {
             loginSteps.assertErrorPhoneInput(textErrorPhone);
@@ -88,13 +89,14 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("dataProviders.gui.AuthorizationDataProviders#provideTestDataForPasswordAmountSymbols")
     public void checkValidationPasswordInputAmountSymbols(
-            String password, int amountSymbols, String colorPlaceholderPassword,
+            String password, int amountSymbols, String inputPasswordColor, String colorPlaceholderPassword,
             String textErrorPassword) throws InterruptedException {
 
         loginSteps.enterPassword(password);
         loginSteps.outFormPassword();
         Thread.sleep(1000);
         loginSteps.assertAmountSymbolsPasswordInput(amountSymbols);
+        loginSteps.assertColorPasswordInput(inputPasswordColor);
         loginSteps.assertColorPlaceholderPasswordInput(colorPlaceholderPassword);
         if (!textErrorPassword.isEmpty()) {
             loginSteps.assertErrorPasswordInput(textErrorPassword);
@@ -109,13 +111,14 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("dataProviders.gui.AuthorizationDataProviders#provideTestDataForPasswordInvalidSymbols")
     public void checkValidationPasswordInputInvalidSymbols(
-            String password, int amountSymbols, String colorPlaceholderPassword,
+            String password, int amountSymbols, String inputPasswordColor, String colorPlaceholderPassword,
             String textErrorPassword) throws InterruptedException {
 
         loginSteps.enterPassword(password);
         loginSteps.outFormPassword();
         Thread.sleep(1000);
         loginSteps.assertAmountSymbolsPasswordInput(amountSymbols);
+        loginSteps.assertColorPasswordInput(inputPasswordColor);
         loginSteps.assertColorPlaceholderPasswordInput(colorPlaceholderPassword);
         if (!textErrorPassword.isEmpty()) {
             loginSteps.assertErrorPasswordInputInvalidSymbols(textErrorPassword);

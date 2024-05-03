@@ -85,6 +85,7 @@ public class LoginPage extends BasePage {
     }
 
     public String getPasswordInputBorderColor() {
+
         return borderForPasswordInput.getCssValue("border-color");
     }
 
