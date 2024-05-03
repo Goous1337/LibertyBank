@@ -9,7 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInfo;
 import preconditions.UserAuthorization;
 import service.*;
-
 import java.util.ArrayList;
 import java.util.List;
 

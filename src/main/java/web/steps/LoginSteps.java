@@ -10,6 +10,7 @@ import static web.constans.AccountServiceConstants.INVALID_COLOR;
 import static web.constans.AccountServiceConstants.INVALID_TEXT_IN_ELEMENT;
 
 public class LoginSteps {
+
     protected LoginPage loginPage;
 
     SoftAssertions softAssertions = new SoftAssertions();
@@ -27,9 +28,19 @@ public class LoginSteps {
         loginPage.enterPhone(phoneNumber);
     }
 
+    @Step("Нажать на поле логин")
+    public void clickInputPhone() {
+        loginPage.clickInputPhone();
+    }
+
     @Step("Ввести валидный пароль")
     public void enterPassword(String password) {
         loginPage.enterPassword(password);
+    }
+
+    @Step("Нажать на поле пароль")
+    public void clickInputPassword() {
+        loginPage.clickInputPassword();
     }
 
     @Step("Выйти из поля номер телефона")

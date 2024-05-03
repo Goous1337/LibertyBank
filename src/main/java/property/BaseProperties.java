@@ -19,4 +19,5 @@ public final class BaseProperties {
     public static String ACCOUNT_SERVICE = getPropertyValue("account_service");
     public static String CARD_SERVICE = getPropertyValue("card_service");
     public static String INSURANCE_SERVICE = getPropertyValue("insurance_service");
+    public static String INSURANCE_POLICY_SERVICE = getPropertyValue("insurance_service_policy");
 }
