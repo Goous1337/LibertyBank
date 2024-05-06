@@ -3,6 +3,7 @@ package service;
 import api.core.RequestParam;
 import io.restassured.response.Response;
 import pojo.insuranceService.CreateVehicleApplicationInsuranceRequest;
+import pojo.insuranceService.OfflineInsuranceApplication;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import static api.core.RequestParam.getRP;
 import static api.core.RequestParamType.HEADER;
 import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
 import static constant.ApiEndpoints.APPLICATION_INSURANCE;
+import static constant.ApiEndpoints.APPLICATION_INSURANCE_OFFLINE;
 import static constant.ApiEndpoints.POLICY_INSURANCE;
 import static constant.InsuranceServiceConstants.ACCEPT_VALUE;
 import static constant.InsuranceServiceConstants.CONTENT_TYPE_VALUE;
@@ -37,5 +39,12 @@ public class InsuranceService {
 
     public String getResponsePolicyErrorMessage(Response response) {
         return response.body().jsonPath().get("message");
+    }
+
+    public Response checkMakeNewApplicationInsuranceOffline(String clientId, OfflineInsuranceApplication offlineInsuranceApplication) {
+        List<RequestParam> params = List.of(getRP(HEADER, "accept", ACCEPT_VALUE),
+                getRP(HEADER, "clientId", clientId),
+                getRP(HEADER, CONTENT_TYPE, CONTENT_TYPE_VALUE));
+        return sendSimpleRequest(POST, APPLICATION_INSURANCE_OFFLINE, params, offlineInsuranceApplication);
     }
 }
