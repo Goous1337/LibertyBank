@@ -38,10 +38,7 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//p[contains(text(), 'Неверный пароль или номер телефона')]")
     private WebElement errorHint;
 
-    @FindBy(xpath = "//p[contains(text(), 'Номер телефона должен содержать 11 цифр')]")
-    private WebElement errorPhoneHint;
-
-    @FindBy(xpath = "//p[contains(text(), 'Пароль должен содержать от 6 до 20 символов')]")
+    @FindBy(xpath = "//p[@class='_inputErrorMessage_1opdg_1']")
     private WebElement errorPasswordHint;
 
     @FindBy(xpath = "//label[text()='Номер телефона']")
@@ -123,16 +120,8 @@ public class LoginPage extends BasePage {
         return Objects.equals(errorHint.getText(), text);
     }
 
-    public String checkErrorPhoneHint() {
-        return errorPhoneHint.getText();
-    }
-
-    public String checkErrorPasswordHint() {
+    public String checkErrorMessage() {
         return errorPasswordHint.getText();
-    }
-
-    public String checkErrorPhoneAndPasswordHint() {
-        return errorHint.getText();
     }
 
     public String getTextFromPhoneInput() {

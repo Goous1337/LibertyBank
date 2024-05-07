@@ -127,24 +127,10 @@ public class LoginSteps {
                 .isEqualTo(colorPlaceholderPassword);
     }
 
-    @Step("Проверка текста сообщения об ошибке поля \"Номер телефона\"")
-    public void assertErrorPhoneInput(String textErrorPhone) {
-        softAssertions.assertThat(loginPage.checkErrorPhoneHint())
-                .as("Проверка сообщения об ошибке поля \"Номер телфона\"")
-                .isEqualTo(textErrorPhone);
-    }
-
     @Step("Проверка текста сообщения об ошибке поля \"Пароль\" при недостаточном кол-ве символов")
-    public void assertErrorPasswordInput(String textErrorPassword) {
-        softAssertions.assertThat(loginPage.checkErrorPasswordHint())
+    public void assertErrorMessage(String textErrorPassword) {
+        softAssertions.assertThat(loginPage.checkErrorMessage())
                 .as("Проверка сообщения об ошибке поля \"Пароль\" при недостаточном кол-ве символов")
-                .isEqualTo(textErrorPassword);
-    }
-
-    @Step("Проверка текста сообщения об ошибке поля \"Пароль\" при невалидных значениях")
-    public void assertErrorPasswordInputInvalidSymbols(String textErrorPassword) {
-        softAssertions.assertThat(loginPage.checkErrorPhoneAndPasswordHint())
-                .as("Проверка сообщения об ошибке поля \"Пароль\" при невалидных значениях")
                 .isEqualTo(textErrorPassword);
     }
 
