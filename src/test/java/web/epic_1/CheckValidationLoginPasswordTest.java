@@ -70,17 +70,19 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
     @MethodSource("dataProviders.gui.AuthorizationDataProviders#provideTestDataForPhoneNumber")
     public void checkValidationPhoneInput(
             String phoneNumber, int amountSymbols, String colorPhoneInput, String colorPlaceholderPhone,
-            String textErrorMessage)
+            String textErrorMessage, boolean isVisible)
             throws InterruptedException {
 
-        loginSteps.enterPhone(phoneNumber);
-        loginSteps.outFormPhone();
+        loginSteps.enterPhone(phoneNumber)
+                .outFormPhone();
         Thread.sleep(1000);
-        loginSteps.assertAmountSymbolsPhoneInput(amountSymbols);
-        loginSteps.assertColorPhoneInput(colorPhoneInput);
-        loginSteps.assertColorPlaceholderPhoneInput(colorPlaceholderPhone);
+        loginSteps.assertAmountSymbolsPhoneInput(amountSymbols)
+                .assertColorPhoneInput(colorPhoneInput)
+                .assertColorPlaceholderPhoneInput(colorPlaceholderPhone);
         if (!textErrorMessage.isEmpty()) {
-            loginSteps.assertErrorMessage(textErrorMessage);
+            loginSteps.assertErrorPhoneHint(textErrorMessage);
+        } else {
+            loginSteps.assertErrorPhoneHintIsDisplayed(isVisible);
         }
         loginSteps.assertAllChecks();
     }
@@ -93,16 +95,18 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
     @MethodSource("dataProviders.gui.AuthorizationDataProviders#provideTestDataForPasswordAmountSymbols")
     public void checkValidationPasswordInputAmountSymbols(
             String password, int amountSymbols, String inputPasswordColor, String colorPlaceholderPassword,
-            String textErrorMessage) throws InterruptedException {
+            String textErrorMessage, boolean isVisible) throws InterruptedException {
 
-        loginSteps.enterPassword(password);
-        loginSteps.outFormPassword();
+        loginSteps.enterPassword(password)
+                .outFormPassword();
         Thread.sleep(1000);
-        loginSteps.assertAmountSymbolsPasswordInput(amountSymbols);
-        loginSteps.assertColorPasswordInput(inputPasswordColor);
-        loginSteps.assertColorPlaceholderPasswordInput(colorPlaceholderPassword);
+        loginSteps.assertAmountSymbolsPasswordInput(amountSymbols)
+                .assertColorPasswordInput(inputPasswordColor)
+                .assertColorPlaceholderPasswordInput(colorPlaceholderPassword);
         if (!textErrorMessage.isEmpty()) {
-            loginSteps.assertErrorMessage(textErrorMessage);
+            loginSteps.assertErrorPasswordHint(textErrorMessage);
+        } else {
+            loginSteps.assertErrorPasswordHintIsDisplayed(isVisible);
         }
         loginSteps.assertAllChecks();
     }
@@ -117,14 +121,14 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
             String password, int amountSymbols, String inputPasswordColor, String colorPlaceholderPassword,
             String textErrorMessage) throws InterruptedException {
 
-        loginSteps.enterPassword(password);
-        loginSteps.outFormPassword();
+        loginSteps.enterPassword(password)
+                .outFormPassword();
         Thread.sleep(1000);
-        loginSteps.assertAmountSymbolsPasswordInput(amountSymbols);
-        loginSteps.assertColorPasswordInput(inputPasswordColor);
-        loginSteps.assertColorPlaceholderPasswordInput(colorPlaceholderPassword);
+        loginSteps.assertAmountSymbolsPasswordInput(amountSymbols)
+                .assertColorPasswordInput(inputPasswordColor)
+                .assertColorPlaceholderPasswordInput(colorPlaceholderPassword);
         if (!textErrorMessage.isEmpty()) {
-            loginSteps.assertErrorMessage(textErrorMessage);
+            loginSteps.assertErrorPasswordHint(textErrorMessage);
         }
         loginSteps.assertAllChecks();
     }

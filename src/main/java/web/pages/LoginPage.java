@@ -3,6 +3,7 @@ package web.pages;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import web.helpers.Waiters;
 
 import java.util.Objects;
 
@@ -38,8 +39,11 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//p[contains(text(), 'Неверный пароль или номер телефона')]")
     private WebElement errorHint;
 
-    @FindBy(xpath = "//p[@class='_inputErrorMessage_1opdg_1']")
+    @FindBy(xpath = "//div[contains(@class, 'password-container')]/descendant::p")
     private WebElement errorPasswordHint;
+
+    @FindBy(xpath = "//div[contains(@class, 'phone-container')]/descendant::p")
+    private WebElement errorPhoneHint;
 
     @FindBy(xpath = "//label[text()='Номер телефона']")
     private WebElement placeholderPhone;
@@ -120,8 +124,20 @@ public class LoginPage extends BasePage {
         return Objects.equals(errorHint.getText(), text);
     }
 
-    public String checkErrorMessage() {
+    public String checkErrorPasswordHint() {
         return errorPasswordHint.getText();
+    }
+
+    public String checkErrorPhoneHint() {
+        return errorPhoneHint.getText();
+    }
+
+    public boolean isErrorPasswordHintDisplayed() {
+        return Waiters.waitIsElementDisplayed(errorPasswordHint);
+    }
+
+    public boolean isErrorPhoneHintDisplayed() {
+        return Waiters.waitIsElementDisplayed(errorPhoneHint);
     }
 
     public String getTextFromPhoneInput() {
