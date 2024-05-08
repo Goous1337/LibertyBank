@@ -19,7 +19,7 @@ public class ResetPasswordSteps {
         resetPasswordPage.enterPhone(phoneNumber);
     }
 
-    @Step("Ввщд и Подверждение валидного пароля")
+    @Step("Ввод и Подверждение валидного пароля")
     public void enterNewPassword(String password) {
         resetPasswordPage.enterNewPassword(password);
     }
