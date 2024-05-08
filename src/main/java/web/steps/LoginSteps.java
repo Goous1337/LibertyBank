@@ -157,11 +157,10 @@ public class LoginSteps {
     }
 
     @Step
-    public LoginSteps assertErrorPasswordHintIsDisplayed(boolean isVisible) {
+    public void assertErrorPasswordHintIsDisplayed(boolean isVisible) {
         softAssertions.assertThat(loginPage.isErrorPasswordHintDisplayed())
                 .as("Проверка наличия подсказки под полем \"Пароль\"")
                 .isEqualTo(isVisible);
-        return this;
     }
 
     @Step

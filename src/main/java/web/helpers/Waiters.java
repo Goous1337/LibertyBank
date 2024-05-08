@@ -23,8 +23,10 @@ public class Waiters {
                 .until(ExpectedConditions.visibilityOf(element));
     }
 
-    public static boolean waitIsElementDisplayed(WebElement element) {
-        return !new WebDriverWait(getDriver(), Duration.ofSeconds(10))
+    public static void waitIsElementNotDisplayed(WebElement element) {
+        new WebDriverWait(getDriver(), Duration.ofSeconds(10))
+                .ignoring(NoSuchElementException.class)
+                .ignoring(StaleElementReferenceException.class)
                 .until(ExpectedConditions.invisibilityOf(element));
     }
 

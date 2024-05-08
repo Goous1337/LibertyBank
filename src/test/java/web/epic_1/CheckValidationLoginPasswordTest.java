@@ -97,8 +97,7 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
             String password, int amountSymbols, String inputPasswordColor, String colorPlaceholderPassword,
             String textErrorMessage, boolean isVisible) throws InterruptedException {
 
-        loginSteps.enterPassword(password)
-                .outFormPassword();
+        loginSteps.enterPassword(password).outFormPassword();
         Thread.sleep(1000);
         loginSteps.assertAmountSymbolsPasswordInput(amountSymbols)
                 .assertColorPasswordInput(inputPasswordColor)
