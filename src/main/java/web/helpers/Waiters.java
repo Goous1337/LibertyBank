@@ -24,7 +24,7 @@ public class Waiters {
     }
 
     public static void waitIsElementNotDisplayed(WebElement element) {
-        new WebDriverWait(getDriver(), Duration.ofSeconds(10))
+        new WebDriverWait(getDriver(), Duration.ofSeconds(5))
                 .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
                 .until(ExpectedConditions.invisibilityOf(element));

@@ -70,7 +70,7 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
     @MethodSource("dataProviders.gui.AuthorizationDataProviders#provideTestDataForPhoneNumber")
     public void checkValidationPhoneInput(
             String phoneNumber, int amountSymbols, String colorPhoneInput, String colorPlaceholderPhone,
-            String textErrorMessage, boolean isVisible)
+            String textErrorMessage, boolean isNotVisible)
             throws InterruptedException {
 
         loginSteps.enterPhone(phoneNumber)
@@ -82,7 +82,7 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
         if (!textErrorMessage.isEmpty()) {
             loginSteps.assertErrorPhoneHint(textErrorMessage);
         } else {
-            loginSteps.assertErrorPhoneHintIsDisplayed(isVisible);
+            loginSteps.assertErrorPhoneHintIsNotDisplayed(isNotVisible);
         }
         loginSteps.assertAllChecks();
     }
@@ -95,7 +95,7 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
     @MethodSource("dataProviders.gui.AuthorizationDataProviders#provideTestDataForPasswordAmountSymbols")
     public void checkValidationPasswordInputAmountSymbols(
             String password, int amountSymbols, String inputPasswordColor, String colorPlaceholderPassword,
-            String textErrorMessage, boolean isVisible) throws InterruptedException {
+            String textErrorMessage, boolean isNotVisible) throws InterruptedException {
 
         loginSteps.enterPassword(password).outFormPassword();
         Thread.sleep(1000);
@@ -105,7 +105,7 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
         if (!textErrorMessage.isEmpty()) {
             loginSteps.assertErrorPasswordHint(textErrorMessage);
         } else {
-            loginSteps.assertErrorPasswordHintIsDisplayed(isVisible);
+            loginSteps.assertErrorPasswordHintIsNotDisplayed(isNotVisible);
         }
         loginSteps.assertAllChecks();
     }

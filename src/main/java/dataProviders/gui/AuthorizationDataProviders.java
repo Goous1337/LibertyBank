@@ -6,26 +6,26 @@ public class AuthorizationDataProviders {
 
     public static Stream<Object[]> provideTestDataForPhoneNumber() {
         return Stream.of(
-                new Object[]{"", 0, "rgb(77, 95, 113)", "rgba(77, 95, 113, 1)", "", false},
+                new Object[]{"", 0, "rgb(77, 95, 113)", "rgba(77, 95, 113, 1)", "", true},
                 new Object[]{"7912123452", 16, "rgb(245, 60, 20)", "rgba(245, 60, 20, 1)",
-                        "Номер телефона должен содержать 11 цифр", true},
-                new Object[]{"791212345333", 17, "rgb(77, 95, 113)", "rgba(77, 95, 113, 1)", "", false},
+                        "Номер телефона должен содержать 11 цифр", false},
+                new Object[]{"791212345333", 17, "rgb(77, 95, 113)", "rgba(77, 95, 113, 1)", "", true},
                 new Object[]{"aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ", 0,
-                        "rgb(77, 95, 113)", "rgba(77, 95, 113, 1)", "", false},
+                        "rgb(77, 95, 113)", "rgba(77, 95, 113, 1)", "", true},
                 new Object[]{"!'(%)*$+,#-./:\";<=>?@[]^_`{|}~[]", 0, "rgb(77, 95, 113)", "rgba(77, 95, 113, 1)",
-                        "", false},
-                new Object[]{" 7 9 1 2 1 2 3 4 5 6 7 ", 17, "rgb(77, 95, 113)", "rgba(77, 95, 113, 1)", "", false}
+                        "", true},
+                new Object[]{" 7 9 1 2 1 2 3 4 5 6 7 ", 17, "rgb(77, 95, 113)", "rgba(77, 95, 113, 1)", "", true}
         );
     }
 
     public static Stream<Object[]> provideTestDataForPasswordAmountSymbols() {
         return Stream.of(
                 new Object[]{"", 0, "rgb(77, 95, 113)", "rgba(77, 95, 113, 1)",
-                        "", false},
+                        "", true},
                 new Object[]{"1Aa2@", 5, "rgb(245, 60, 20)", "rgba(245, 60, 20, 1)",
-                        "Пароль должен содержать от 6 до 20 символов", true},
+                        "Пароль должен содержать от 6 до 20 символов", false},
                 new Object[]{"1234567890AaAaAaAa@#", 20, "rgb(77, 95, 113)",
-                        "rgba(77, 95, 113, 1)", "", false}
+                        "rgba(77, 95, 113, 1)", "", true}
         );
     }
 

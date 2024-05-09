@@ -1,7 +1,6 @@
 package web.pages;
 
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import web.helpers.Waiters;
@@ -136,18 +135,18 @@ public class LoginPage extends BasePage {
     public boolean isErrorPasswordHintDisplayed() {
         try {
             Waiters.waitIsElementNotDisplayed(errorPasswordHint);
-            return false;
-        } catch (TimeoutException e) {
             return true;
+        } catch (RuntimeException e) {
+            return false;
         }
     }
 
     public boolean isErrorPhoneHintDisplayed() {
         try {
             Waiters.waitIsElementNotDisplayed(errorPhoneHint);
-            return false;
-        } catch (TimeoutException e) {
-            return  true;
+            return true;
+        } catch (RuntimeException e) {
+            return  false;
         }
     }
 
