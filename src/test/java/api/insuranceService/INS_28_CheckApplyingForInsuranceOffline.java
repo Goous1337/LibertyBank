@@ -1,6 +1,7 @@
 package api.insuranceService;
 
 import api.BaseTest;
+import dataBase.requests.InsuranceServiceDataBaseRequest;
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
@@ -12,8 +13,6 @@ import org.junit.jupiter.api.Test;
 import pojo.insuranceService.OfflineInsuranceApplication;
 
 import static constant.InsuranceServiceConstants.CLIENT_ID;
-import static constant.LibertyServiceName.INSURANCE_SERVICE_DB;
-import static dataBase.DataBaseConnector.getDBConnection;
 import static org.apache.hc.core5.http.HttpStatus.SC_CREATED;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -36,13 +35,14 @@ public class INS_28_CheckApplyingForInsuranceOffline extends BaseTest {
         OfflineInsuranceApplication offlineInsuranceApplication = new OfflineInsuranceApplication("1",
                 "Иван", "Иванов", "Иванович", 9009998877L, "2024-05-27", "12:00",
                 "РФ, г. Москва, ул. 1-й Армии, д. 35, кв. 124", "");
-        Response response = insuranceService.checkMakeNewApplicationInsuranceOffline(CLIENT_ID, offlineInsuranceApplication);
-        String applicationId = response.jsonPath().get("applicationId").toString();
-        String sql = "SELECT id FROM applications_basic WHERE id = '" + applicationId + "'";
-        String rowBD = getDBConnection(INSURANCE_SERVICE_DB).queryForObject(sql, String.class);
+        Response response = insuranceService.makeNewApplicationInsuranceOffline(CLIENT_ID, offlineInsuranceApplication);
+
+        String applicationId = response.jsonPath().getString("applicationId");
+
         assertAll(
                 () -> assertEquals(SC_CREATED, response.statusCode(), "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals(applicationId, rowBD, "Заявка не создана в базе данных"),
+                () -> assertEquals(insuranceService.getResponseIdNewApplicationInsuranceOffline(response),
+                        InsuranceServiceDataBaseRequest.getApplicationId(applicationId), "Заявка не создана в базе данных"),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }

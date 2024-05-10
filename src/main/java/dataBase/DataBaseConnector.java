@@ -6,10 +6,16 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static constant.DataBaseConstants.*;
+import static constant.DataBaseConstants.DB_PASSWORD;
+import static constant.DataBaseConstants.DB_URL_INSURANCE_SERVICE;
+import static constant.DataBaseConstants.DB_USER;
+import static constant.DataBaseConstants.POSTGRESQL_DB_DRIVER;
 import static property.PropertiesReader.getPropertyValue;
 
 @Data
@@ -38,4 +44,13 @@ public class DataBaseConnector {
         return getPropertyValue("db_url") + serviceName + "?characterEncoding=utf8";
     }
 
+    public static Connection getDBConnectionFromClassConnection() throws SQLException {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setUsername(getPropertyValue(DB_USER));
+        dataSource.setPassword(getPropertyValue(DB_PASSWORD));
+        dataSource.setUrl(getPropertyValue(DB_URL_INSURANCE_SERVICE));
+        Connection connection = DriverManager.getConnection(dataSource.getUrl(),
+                dataSource.getUsername(), dataSource.getPassword());
+        return connection;
+    }
 }

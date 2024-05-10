@@ -41,10 +41,14 @@ public class InsuranceService {
         return response.body().jsonPath().get("message");
     }
 
-    public Response checkMakeNewApplicationInsuranceOffline(String clientId, OfflineInsuranceApplication offlineInsuranceApplication) {
+    public Response makeNewApplicationInsuranceOffline(String clientId, OfflineInsuranceApplication offlineInsuranceApplication) {
         List<RequestParam> params = List.of(getRP(HEADER, "accept", ACCEPT_VALUE),
                 getRP(HEADER, "clientId", clientId),
                 getRP(HEADER, CONTENT_TYPE, CONTENT_TYPE_VALUE));
         return sendSimpleRequest(POST, APPLICATION_INSURANCE_OFFLINE, params, offlineInsuranceApplication);
+    }
+
+    public String getResponseIdNewApplicationInsuranceOffline(Response response) {
+        return response.jsonPath().get("applicationId").toString();
     }
 }
