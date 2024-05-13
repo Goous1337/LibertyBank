@@ -126,7 +126,7 @@ public class LoginSteps {
                 .as("Проверка цвета поля \"Пароль\"")
                 .isEqualTo(colorPasswordInput);
         softAssertions.assertThat(loginPage.getColorPlaceholderPassword())
-                .as("Проверка цвета плэйсхолдера поля \"Номер телефона\"")
+                .as("Проверка цвета плэйсхолдера поля \"Пароль\"")
                 .isEqualTo(colorPlaceholderPassword);
         if (!textErrorPassword.isEmpty()) {
             softAssertions.assertThat(loginPage.getErrorPasswordHintText())

@@ -63,11 +63,11 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
     }
 
     @DisplayName("Проверка валидации полей формы авторизации при использовании невалидных данных")
-    @Description("Проверить валидацию поля \"Номер телефона\"")
+    @Description("Проверить валидацию полей \"Номер телефона\" и \"Пароль\"")
     @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Negative")})
     @TmsLink("LIB-2429")
     @ParameterizedTest
-    @MethodSource("dataProviders.gui.AuthorizationDataProviders#provideTestDataForPhoneNumber")
+    @MethodSource("dataProviders.gui.AuthorizationDataProviders#provideTestDataForPhoneNumberAndPassword")
     public void checkValidationPhoneInput(
             String phoneNumber, String password,
             int amountSymbolsPhone, int amountSymbolsPassword,

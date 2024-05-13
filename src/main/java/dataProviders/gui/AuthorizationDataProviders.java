@@ -4,7 +4,7 @@ import java.util.stream.Stream;
 
 public class AuthorizationDataProviders {
 
-    public static Stream<Object[]> provideTestDataForPhoneNumber() {
+    public static Stream<Object[]> provideTestDataForPhoneNumberAndPassword() {
         return Stream.of(
                 new Object[]{"", "",
                         0, 0,
