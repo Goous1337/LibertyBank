@@ -69,67 +69,23 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("dataProviders.gui.AuthorizationDataProviders#provideTestDataForPhoneNumber")
     public void checkValidationPhoneInput(
-            String phoneNumber, int amountSymbols, String colorPhoneInput, String colorPlaceholderPhone,
-            String textErrorMessage, boolean isNotVisible)
+            String phoneNumber, String password,
+            int amountSymbolsPhone, int amountSymbolsPassword,
+            String colorPhoneInput, String colorPasswordInput,
+            String colorPlaceholderPhone, String colorPlaceholderPassword,
+            String textErrorMessagePhone, String textErrorMessagePassword,
+            boolean isErrorPhoneHintNotVisible, boolean isErrorPasswordHintNotVisible)
             throws InterruptedException {
 
         loginSteps.enterPhone(phoneNumber)
-                .outFormPhone();
-        Thread.sleep(1000);
-        loginSteps.assertAmountSymbolsPhoneInput(amountSymbols)
-                .assertColorPhoneInput(colorPhoneInput)
-                .assertColorPlaceholderPhoneInput(colorPlaceholderPhone);
-        if (!textErrorMessage.isEmpty()) {
-            loginSteps.assertErrorPhoneHint(textErrorMessage);
-        } else {
-            loginSteps.assertErrorPhoneHintIsNotDisplayed(isNotVisible);
-        }
-        loginSteps.assertAllChecks();
-    }
-
-    @DisplayName("Проверка валидации полей формы авторизации при использовании невалидных данных")
-    @Description("Проверить валидацию поля \"Пароль\" при недостаточном кол-ве символов, шаги 7-9")
-    @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Negative")})
-    @TmsLink("LIB-2429")
-    @ParameterizedTest
-    @MethodSource("dataProviders.gui.AuthorizationDataProviders#provideTestDataForPasswordAmountSymbols")
-    public void checkValidationPasswordInputAmountSymbols(
-            String password, int amountSymbols, String inputPasswordColor, String colorPlaceholderPassword,
-            String textErrorMessage, boolean isNotVisible) throws InterruptedException {
-
-        loginSteps.enterPassword(password).outFormPassword();
-        Thread.sleep(1000);
-        loginSteps.assertAmountSymbolsPasswordInput(amountSymbols)
-                .assertColorPasswordInput(inputPasswordColor)
-                .assertColorPlaceholderPasswordInput(colorPlaceholderPassword);
-        if (!textErrorMessage.isEmpty()) {
-            loginSteps.assertErrorPasswordHint(textErrorMessage);
-        } else {
-            loginSteps.assertErrorPasswordHintIsNotDisplayed(isNotVisible);
-        }
-        loginSteps.assertAllChecks();
-    }
-
-    @DisplayName("Проверка валидации полей формы авторизации при использовании невалидных данных")
-    @Description("Проверить валидацию поля \"Пароль\" при невалидных значениях, шаги 10-18")
-    @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Negative")})
-    @TmsLink("LIB-2429")
-    @ParameterizedTest
-    @MethodSource("dataProviders.gui.AuthorizationDataProviders#provideTestDataForPasswordInvalidSymbols")
-    public void checkValidationPasswordInputInvalidSymbols(
-            String password, int amountSymbols, String inputPasswordColor, String colorPlaceholderPassword,
-            String textErrorMessage) throws InterruptedException {
-
-        loginSteps.enterPassword(password)
-                .outFormPassword();
-        Thread.sleep(1000);
-        loginSteps.assertAmountSymbolsPasswordInput(amountSymbols)
-                .assertColorPasswordInput(inputPasswordColor)
-                .assertColorPlaceholderPasswordInput(colorPlaceholderPassword);
-        if (!textErrorMessage.isEmpty()) {
-            loginSteps.assertErrorPasswordHint(textErrorMessage);
-        }
-        loginSteps.assertAllChecks();
+                .outFormPhone()
+                .assertPhoneInput(amountSymbolsPhone, colorPhoneInput, colorPlaceholderPhone,
+                                    textErrorMessagePhone, isErrorPhoneHintNotVisible)
+                .enterPassword(password)
+                .outFormPassword()
+                .assertPasswordInput(amountSymbolsPassword, colorPasswordInput, colorPlaceholderPassword,
+                        textErrorMessagePassword, isErrorPasswordHintNotVisible)
+                .assertAllChecks();
     }
 
     @DisplayName("US-1.2.1 Авторизация по номеру телефона (первичный вход)")

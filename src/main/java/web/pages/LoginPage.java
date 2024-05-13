@@ -124,15 +124,15 @@ public class LoginPage extends BasePage {
         return Objects.equals(errorHint.getText(), text);
     }
 
-    public String checkErrorPasswordHint() {
+    public String getErrorPasswordHintText() {
         return errorPasswordHint.getText();
     }
 
-    public String checkErrorPhoneHint() {
+    public String getErrorPhoneHintText() {
         return errorPhoneHint.getText();
     }
 
-    public boolean isErrorPasswordHintDisplayed() {
+    public boolean isErrorPasswordHintIsDisplayed() {
         try {
             Waiters.waitIsElementNotDisplayed(errorPasswordHint);
             return true;
@@ -141,7 +141,7 @@ public class LoginPage extends BasePage {
         }
     }
 
-    public boolean isErrorPhoneHintDisplayed() {
+    public boolean isErrorPhoneHintIsDisplayed() {
         try {
             Waiters.waitIsElementNotDisplayed(errorPhoneHint);
             return true;
