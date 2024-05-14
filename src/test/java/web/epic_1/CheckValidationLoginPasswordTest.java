@@ -1,5 +1,10 @@
 package web.epic_1;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
+import org.junit.jupiter.api.Test;
 import dataBase.requests.CustomerService_2_0_DataBaseRequest;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -8,7 +13,12 @@ import io.restassured.RestAssured;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.TmsLink;
 import pojo.customerService_2_0.ChangeUserAccountPasswordByPhone;
 import preconditions.UserAuthorization;
 import service.CustomerService_2_0;
@@ -30,9 +40,8 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
     @BeforeEach
     public void setUpTest() {
         open("");
+        loginSteps.clearAssertions();
     }
-
-
 
     @DisplayName("Основной сценарий: проверка валидации полей формы авторизации")
     @Description("Данный тест-кейс проверяет валидацию полей \"Номер телефона\", \"Пароль\" при вводе валидных данных")
@@ -41,9 +50,10 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
     @ParameterizedTest
     @ValueSource(strings = {"A!123a", "!\"#$%&'()*+,-./:;Zz0", "<=>?@[]^_`{|}~8qA"})
     public void checkValidationLoginPasswordTest(String password) {
+        loginSteps.clickInputPhone();
         loginSteps.enterPhone(USER_PHONE);
+        loginSteps.clickInputPassword();
         loginSteps.enterPassword(password);
-        loginSteps.outFormPassword();
         loginSteps.assertSubmitButtonAndInputSuccessful(
                 "rgba(0, 90, 254, 1)",
                 "rgba(245, 245, 245, 1)",
@@ -57,7 +67,9 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
     @ParameterizedTest
     @CsvSource({"71111111111, Login-1", "79228134511, Login-107543"})
     public void checkAuthUnregisteredUserTest(String phone, String password) {
+        loginSteps.clickInputPhone();
         loginSteps.enterPhone(phone);
+        loginSteps.clickInputPassword();
         loginSteps.enterPassword(password);
         loginSteps.clickSubmitButton();
         loginSteps.assertSubmitButtonAndInputInvalid(
@@ -66,14 +78,41 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
                 "rgb(245, 60, 20)");
     }
 
-    @Disabled
+    @DisplayName("Проверка валидации полей формы авторизации при использовании невалидных данных")
+    @Description("Проверить валидацию полей \"Номер телефона\" и \"Пароль\"")
+    @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Negative")})
+    @TmsLink("LIB-2429")
+    @ParameterizedTest
+    @MethodSource("dataProviders.gui.AuthorizationDataProviders#provideTestDataForPhoneNumberAndPassword")
+    public void checkValidationPhoneInput(
+            String phoneNumber, String password,
+            int amountSymbolsPhone, int amountSymbolsPassword,
+            String colorPhoneInput, String colorPasswordInput,
+            String colorPlaceholderPhone, String colorPlaceholderPassword,
+            String textErrorMessagePhone, String textErrorMessagePassword,
+            boolean isErrorPhoneHintNotVisible, boolean isErrorPasswordHintNotVisible)
+            throws InterruptedException {
+
+        loginSteps.enterPhone(phoneNumber)
+                .outFormPhone()
+                .assertPhoneInput(amountSymbolsPhone, colorPhoneInput, colorPlaceholderPhone,
+                                    textErrorMessagePhone, isErrorPhoneHintNotVisible)
+                .enterPassword(password)
+                .outFormPassword()
+                .assertPasswordInput(amountSymbolsPassword, colorPasswordInput, colorPlaceholderPassword,
+                        textErrorMessagePassword, isErrorPasswordHintNotVisible)
+                .assertAllChecks();
+    }
+
     @DisplayName("US-1.2.1 Авторизация по номеру телефона (первичный вход)")
     @Description("Авторизоваться в личном кабинете с валидными значениями телефона и пароля")
     @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Positive")})
     @TmsLink("LIB-2432")
     @Test
     public void checkValidationAuthTest() {
+        loginSteps.clickInputPhone();
         loginSteps.enterPhone(USER_PHONE);
+        loginSteps.clickInputPassword();
         loginSteps.enterPassword(USER_PASSWORD);
         loginSteps.assertSubmitButtonAndInputSuccessful(
                 "rgba(0, 90, 254, 1)",
