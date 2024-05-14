@@ -1,12 +1,18 @@
 package web.epic_1;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
+
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.TmsLink;
-import org.junit.jupiter.api.*;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 import web.BaseTest;
 
 import static property.UserPropertiesReader.USER_PASSWORD;
@@ -18,6 +24,7 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
     @BeforeEach
     public void setUpTest() {
         open("");
+        loginSteps.clearAssertions();
     }
 
     @DisplayName("Основной сценарий: проверка валидации полей формы авторизации")
@@ -55,7 +62,32 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
                 "rgb(245, 60, 20)");
     }
 
-    @Disabled
+    @DisplayName("Проверка валидации полей формы авторизации при использовании невалидных данных")
+    @Description("Проверить валидацию полей \"Номер телефона\" и \"Пароль\"")
+    @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Negative")})
+    @TmsLink("LIB-2429")
+    @ParameterizedTest
+    @MethodSource("dataProviders.gui.AuthorizationDataProviders#provideTestDataForPhoneNumberAndPassword")
+    public void checkValidationPhoneInput(
+            String phoneNumber, String password,
+            int amountSymbolsPhone, int amountSymbolsPassword,
+            String colorPhoneInput, String colorPasswordInput,
+            String colorPlaceholderPhone, String colorPlaceholderPassword,
+            String textErrorMessagePhone, String textErrorMessagePassword,
+            boolean isErrorPhoneHintNotVisible, boolean isErrorPasswordHintNotVisible)
+            throws InterruptedException {
+
+        loginSteps.enterPhone(phoneNumber)
+                .outFormPhone()
+                .assertPhoneInput(amountSymbolsPhone, colorPhoneInput, colorPlaceholderPhone,
+                                    textErrorMessagePhone, isErrorPhoneHintNotVisible)
+                .enterPassword(password)
+                .outFormPassword()
+                .assertPasswordInput(amountSymbolsPassword, colorPasswordInput, colorPlaceholderPassword,
+                        textErrorMessagePassword, isErrorPasswordHintNotVisible)
+                .assertAllChecks();
+    }
+
     @DisplayName("US-1.2.1 Авторизация по номеру телефона (первичный вход)")
     @Description("Авторизоваться в личном кабинете с валидными значениями телефона и пароля")
     @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Positive")})
@@ -69,7 +101,7 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
         loginSteps.assertSubmitButtonAndInputSuccessful(
                 "rgba(0, 90, 254, 1)",
                 "rgba(245, 245, 245, 1)",
-                "rgb(117, 127, 138)");
+                "rgb(0, 26, 52)");
         loginSteps.clickSubmitButton();
         homeSteps.clickUserMenu();
         homeSteps.assertIsUserPanelDisplayed();
