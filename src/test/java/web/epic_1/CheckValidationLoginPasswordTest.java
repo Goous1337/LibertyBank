@@ -16,9 +16,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import io.qameta.allure.Description;
-import io.qameta.allure.Epic;
-import io.qameta.allure.TmsLink;
 import pojo.customerService_2_0.ChangeUserAccountPasswordByPhone;
 import preconditions.UserAuthorization;
 import service.CustomerService_2_0;
