@@ -1,7 +1,6 @@
 package web.pages;
 
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import web.helpers.Waiters;
