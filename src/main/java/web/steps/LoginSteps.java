@@ -109,7 +109,7 @@ public class LoginSteps {
                                     "при недостаточном кол-ве символов")
                     .isEqualTo(textErrorPhone);
         } else {
-            softAssertions.assertThat(loginPage.isErrorPhoneHintIsDisplayed())
+            softAssertions.assertThat(loginPage.isErrorPhoneHintNotDisplayed())
                     .as("Проверка отсутствия подсказки под полем \"Номер телефона\"")
                     .isEqualTo(isNotVisible);
         }
@@ -133,7 +133,7 @@ public class LoginSteps {
                     .as("Проверка сообщения об ошибке поля \"Пароль\" при недостаточном кол-ве символов")
                     .isEqualTo(textErrorPassword);
         } else {
-            softAssertions.assertThat(loginPage.isErrorPasswordHintIsDisplayed())
+            softAssertions.assertThat(loginPage.isErrorPasswordHintNotDisplayed())
                     .as("Проверка отсутствия подсказки под полем \"Пароль\"")
                     .isEqualTo(isNotVisible);
         }
