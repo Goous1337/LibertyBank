@@ -8,6 +8,14 @@ public class InsuranceServiceConstants {
 
     public static final String POLICY_VEHICLE_ID = "b28ca4de-09f3-11ee-be56-0242ac120002";
 
+    public static final String POLICY_BUILDING_ID = "9bebe375-cb2c-456a-b9d5-1f8f4c87778f";
+
+    public static final String POLICY_TRAVEL_ID = "a6894a2b-f604-429a-b9b6-4e76d55c26ff";
+
+    public static final String POLICY_HEALTH_ID = "56003f12-df1f-4f97-8e87-72c291ab8093";
+
+    public static final String POLICY_ACCIDENT_ID = "63ecf71b-e5b0-4cc8-bb6b-a23266e353ef";
+
     public static final String FAKE_INSURANCE_POLICY_ID = "231ec5ec-1ca9-4e0d-b812-5ad4ab63534b";
 
     public static final String CONTENT_TYPE_VALUE = "application/json";
@@ -37,6 +45,7 @@ public class InsuranceServiceConstants {
     public static final String TYPE_OF_INSURANCE_TRAVELING = "3";
 
     public static final String TYPE_OF_INSURANCE_PROPERTY = "4";
+
     public static final String VEHICLE_KASKO_INSURANCE_SERVICE_PRODUCT_NAME = "Автострахование КАСКО";
 
     public static final String MEDICINE_VIP_INSURANCE_SERVICE_PRODUCT_NAME = "Добровольное медицинское страхование VIP";
