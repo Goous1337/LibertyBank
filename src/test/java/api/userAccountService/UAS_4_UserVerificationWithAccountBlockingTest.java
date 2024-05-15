@@ -22,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.URL_USER_ACCOUNT_SERVICE;
 
+@Tags({@Tag("API"), @Tag("2.0"), @Tag("Smoke")})
 @DisplayName("UAS-4 Верификация пользователя с учетом блокировки учетной записи")
 public class UAS_4_UserVerificationWithAccountBlockingTest extends BaseTest {
 
@@ -31,7 +32,6 @@ public class UAS_4_UserVerificationWithAccountBlockingTest extends BaseTest {
 
     @DisplayName("Верификация пользователя с валидными данными")
     @Description("Позитивная проверка поведения системы при верификации пользователя с валидными данными.")
-    @Tags({@Tag("smoke"), @Tag("API")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-279")
     @Test
 
@@ -49,7 +49,6 @@ public class UAS_4_UserVerificationWithAccountBlockingTest extends BaseTest {
 
     @DisplayName("Верификация пользователя, когда параметр 'verificationCode' не заполнен")
     @Description("Проверка поведения системы, если обязательный параметр 'verificationCode' оставить незаполненным.")
-    @Tags({@Tag("smoke"), @Tag("API")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-292")
     @ParameterizedTest
     @EmptySource
@@ -73,7 +72,6 @@ public class UAS_4_UserVerificationWithAccountBlockingTest extends BaseTest {
     @DisplayName("Верификация пользователя, когда параметр 'verificationCode' не соответствует сгенерированному коду")
     @Description("Проверка поведения системы, если код, который ввел пользователь в поле 'verificationCode', " +
             "не соответствует коду, который был сгенерирован системой.")
-    @Tags({@Tag("smoke"), @Tag("API")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-294")
     @Test
 
@@ -92,7 +90,6 @@ public class UAS_4_UserVerificationWithAccountBlockingTest extends BaseTest {
     @DisplayName("Верификация пользователя, когда параметр 'mobilePhone' не заполнен")
     @Description("Проверка поведения системы, если обязательный параметр 'mobilePhone' оставить незаполненным, " +
             "либо значение пустые кавычки.")
-    @Tags({@Tag("smoke"), @Tag("API")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-296")
     @Issue("https://jira.astondevs.ru/browse/LIB-1325")
     @ParameterizedTest
@@ -117,7 +114,6 @@ public class UAS_4_UserVerificationWithAccountBlockingTest extends BaseTest {
 
     @DisplayName("Проверка блокировки пользователя при введении не валидных параметров более 3 раз")
     @Description("Проверка блокировки системы после того, как пользователь ввел не валидный код более 3 раз.")
-    @Tags({@Tag("smoke"), @Tag("API")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-297")
     @Test
 
@@ -138,7 +134,6 @@ public class UAS_4_UserVerificationWithAccountBlockingTest extends BaseTest {
 
     @DisplayName("Верификация пользователя, когда в параметре 'mobilePhone' указано не валидное значение")
     @Description("Проверка, что при введении не валидных данных в поле 'mobilePhone', верификация не проходит и система выдает 400 ошибку")
-    @Tags({@Tag("smoke"), @Tag("API")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-304,https://jira.astondevs.ru/browse/LIB-310")
     @Issue("https://jira.astondevs.ru/browse/LIB-1326")
     @ParameterizedTest(name = "mobilePhone: {0}")
@@ -167,7 +162,6 @@ public class UAS_4_UserVerificationWithAccountBlockingTest extends BaseTest {
 
     @DisplayName("Верификация пользователя, когда метод не POST")
     @Description("Проверка, что при указании метода PATCH вместо POST, система выдает сообщение с 405 ошибкой")
-    @Tags({@Tag("smoke"), @Tag("API")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-305")
     @Issue("https://jira.astondevs.ru/browse/LIB-1327")
     @Test
@@ -187,7 +181,6 @@ public class UAS_4_UserVerificationWithAccountBlockingTest extends BaseTest {
     @DisplayName("Проверка верификации пользователя при введении валидного кода, после блокировки")
     @Description("Проверка верификации пользователя при введении валидного кода, " +
             "после того как пользователь ввел 3 раза невалидный код и заблокировался.")
-    @Tags({@Tag("smoke"), @Tag("API")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-301")
     @Test
 
@@ -208,7 +201,6 @@ public class UAS_4_UserVerificationWithAccountBlockingTest extends BaseTest {
 
     @DisplayName("Проверка верификации пользователя при введении валидного кода, после 1 попытки ввода невалидного кода")
     @Description("Позитивная проверка верификации пользователя при введении валидного кода, после 1 попытки введения невалидного кода.")
-    @Tags({@Tag("smoke"), @Tag("API")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-302")
     @Test
 
@@ -227,7 +219,6 @@ public class UAS_4_UserVerificationWithAccountBlockingTest extends BaseTest {
 
     @DisplayName("Верификация пользователя с невалидным 'verificationCode'")
     @Description("Тест направлен на проверку валидации значений кода верификации, отправляемых в BODY запроса.")
-    @Tags({@Tag("smoke"), @Tag("API")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-303")
     @ParameterizedTest(name = "verificationCode: {0}")
     @ValueSource(
@@ -248,7 +239,6 @@ public class UAS_4_UserVerificationWithAccountBlockingTest extends BaseTest {
 
     @DisplayName("Верификация пользователя с невалидным 'verificationCode'")
     @Description("Тест направлен на проверку валидации значений кода верификации, отправляемых в BODY запроса.")
-    @Tags({@Tag("smoke"), @Tag("API")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-303")
     @ParameterizedTest(name = "verificationCode: {0}")
     @ValueSource(
@@ -271,7 +261,6 @@ public class UAS_4_UserVerificationWithAccountBlockingTest extends BaseTest {
 
     @DisplayName("Верификация пользователя с невалидным 'verificationCode'")
     @Description("Тест направлен на проверку валидации значений кода верификации, отправляемых в BODY запроса.")
-    @Tags({@Tag("smoke"), @Tag("API")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB-303")
     @ParameterizedTest(name = "verificationCode: {0}")
     @ValueSource(

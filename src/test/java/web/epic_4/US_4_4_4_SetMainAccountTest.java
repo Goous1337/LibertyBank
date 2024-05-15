@@ -8,7 +8,7 @@ import web.BaseTest;
 
 import static web.constans.UrlConfig.ACCOUNTS_URL;
 
-@Tag("Web")
+@Tags({@Tag("Web"), @Tag("MVP")})
 @Epic("4 - Счета")
 @Feature("US-4.4.4 Сделать счет основным")
 @DisplayName("US-4.4.4 Сделать счет основным")

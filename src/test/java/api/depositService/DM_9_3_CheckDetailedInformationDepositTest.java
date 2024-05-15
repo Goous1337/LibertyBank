@@ -19,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.DEPOSIT_SERVICE;
 
+@Tags({@Tag("API"), @Tag("MVP")})
 @DisplayName("DM-9.3 Получение подробной информации о депозитном предложении")
 public class DM_9_3_CheckDetailedInformationDepositTest extends BaseTest {
     {
@@ -27,7 +28,7 @@ public class DM_9_3_CheckDetailedInformationDepositTest extends BaseTest {
 
     @DisplayName("Получение подробной информации о депозитном предложении")
     @Description("Данный тест-кейс направлен на проверку корректного получения подробной информации о выбранном депозитном предложении.")
-    @Tags({@Tag("API"), @Tag("Positive"), @Tag("backend")})
+    @Tag("Positive")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-1099")
     @ParameterizedTest(name = "productId: {0}")
     @CsvSource({
@@ -49,7 +50,7 @@ public class DM_9_3_CheckDetailedInformationDepositTest extends BaseTest {
 
     @DisplayName("Получение подробной информации о депозитном предложении при невалидных значениях")
     @Description("Данный тест-кейс направлен на проверку корректного получения подробной информации о выбранном депозитном предложении.")
-    @Tags({@Tag("API"), @Tag("Negative"), @Tag("backend")})
+    @Tag("Negative")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-282")
     @ParameterizedTest(name = "productId: {0}")
     @CsvSource({

@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.ACCOUNT_SERVICE;
 
+@Tags({@Tag("API"), @Tag("MVP")})
 @DisplayName("AS-2 Изменить статус счета")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class AS_2_ChangeAccountStatusTest extends BaseTest {
@@ -27,7 +28,6 @@ public class AS_2_ChangeAccountStatusTest extends BaseTest {
 
     @Test
     @Order(1)
-    @Tag("API")
     @TmsLink("LIB2-2673")
     @DisplayName("Изменение статуса счета на 'BLOCKED'")
     @Description("Тест направлен на проверку возможности изменения статуса счета на 'BLOCKED'")
@@ -43,7 +43,6 @@ public class AS_2_ChangeAccountStatusTest extends BaseTest {
 
     @Test
     @Order(2)
-    @Tag("API")
     @TmsLink("LIB2-2674")
     @DisplayName("Изменение статуса счета на 'ACTIVE'")
     @Description("Тест направлен на проверку возможности изменения статуса счета на 'ACTIVE'")
@@ -59,7 +58,6 @@ public class AS_2_ChangeAccountStatusTest extends BaseTest {
 
     @Test
     @Order(3)
-    @Tag("API")
     @TmsLink("LIB2-2672")
     @DisplayName("Изменение статуса счета на 'CLOSED'")
     @Description("Тест направлен на проверку возможности изменения статуса счета на 'CLOSED'")

@@ -7,6 +7,7 @@ import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 import pojo.cardService.ReissueBadRequest;
 import pojo.cardService.ReissueNotFoundResponse;
@@ -24,6 +25,7 @@ import static service.CardService.getReissueRequestNotFound;
 import static specs.RequestBody.*;
 import static specs.Specs.*;
 
+@Tags({@Tag("API"), @Tag("3.0")})
 @DisplayName("CS-7 Перевыпуск карты")
 public class CS_7_ReissueCardTest extends BaseTest {
     public static String JSON_SCHEMA = "schemas/cardService/successfulReissue.json";
@@ -36,7 +38,6 @@ public class CS_7_ReissueCardTest extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-1044")
     @DisplayName("Перевыпуск карты")
     @Description("Тест направлен на проверку возможности перевыпуска карты с аналогичными параметрами, что и предыдущая")
@@ -61,7 +62,6 @@ public class CS_7_ReissueCardTest extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-1526")
     @DisplayName("Невалидное поле в теле запроса")
     @Description("Тест направлен на проверку возможности перевыпуска карты с невалидным полем в теле запроса")
@@ -77,7 +77,6 @@ public class CS_7_ReissueCardTest extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-1530")
     @DisplayName("Перевыпуск карты с полем, не допускающим значение NULL")
     @Description("Тест направлен на проверку возможности перевыпуска карты  с полем, не допускающим значение NULL")
@@ -93,7 +92,6 @@ public class CS_7_ReissueCardTest extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-3206")
     @DisplayName("Невалидное значение cardId")
     @Description("Тест направлен на проверку возможности перевыпуска карты с неверным значением в поле cardId ")

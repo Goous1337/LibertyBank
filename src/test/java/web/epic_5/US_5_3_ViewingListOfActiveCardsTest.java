@@ -3,15 +3,12 @@ package web.epic_5;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.TmsLink;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import web.BaseTest;
 
 import static web.constans.UrlConfig.CARDS_URL;
 
-@Tag("Web")
+@Tags({@Tag("Web"), @Tag("MVP")})
 @Epic("5 - Карты")
 @Feature("US-5.3 Просмотр списка активных карт")
 @DisplayName("US-5.3 Просмотр списка активных карт")
@@ -24,7 +21,6 @@ public class US_5_3_ViewingListOfActiveCardsTest extends BaseTest {
     }
 
     @Test
-    @Tag("Web")
     @TmsLink("LIB2-991")
     @DisplayName("Просмотр списка активных карт пользователя")
     public void viewActiveCards() {
@@ -37,7 +33,6 @@ public class US_5_3_ViewingListOfActiveCardsTest extends BaseTest {
     }
 
     @Test
-    @Tag("Web")
     @TmsLink("LIB2-999")
     @DisplayName("Фильтрация списка активных карт пользователя по валютам")
     public void filterActiveCardsByCurrencies() {
@@ -51,7 +46,6 @@ public class US_5_3_ViewingListOfActiveCardsTest extends BaseTest {
     }
 
     @Test
-    @Tag("Web")
     @TmsLink("LIB2-1000")
     @DisplayName("Отображение сообщения в случае, если у пользователя отсутствуют карточные продукты")
     public void messageIsDisplayedWhenCardProductsAreMissing() {

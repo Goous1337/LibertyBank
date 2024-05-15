@@ -10,7 +10,7 @@ import static web.constans.AccountServiceConstants.BLOCKED_ACCOUNT_STATUS;
 import static web.constans.AccountServiceConstants.STATUS_ERROR_MESSAGE;
 import static web.constans.UrlConfig.ACCOUNTS_URL;
 
-@Tag("Web")
+@Tags({@Tag("Web"), @Tag("MVP")})
 @Epic("4 - Счета")
 @Feature("US-4.4.2 Блокировка и разблокировка счета (клиентом)")
 @DisplayName("US-4.4.2 Блокировка и разблокировка счета (клиентом)")

@@ -9,6 +9,7 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import static constant.AccountServiceConstants.STATUS_ACTIVE;
@@ -17,6 +18,7 @@ import static org.apache.hc.core5.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.ACCOUNT_SERVICE;
 
+@Tags({@Tag("API"), @Tag("MVP")})
 @DisplayName("AS-9 Изменение пользовательского названия счета")
 public class AS_9_ChangeUserAccountNameTest extends BaseTest {
 
@@ -31,7 +33,6 @@ public class AS_9_ChangeUserAccountNameTest extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-2679")
     @DisplayName("Изменение названия счета")
     @Description("Тест направлен на проверку возможности переименования счета")
@@ -46,7 +47,6 @@ public class AS_9_ChangeUserAccountNameTest extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-2680")
     @DisplayName("Изменить название счета, более 30 символов")
     @Description("Тест-кейс направлен на проверку невозможности переименования счета при вводе более 30 символов")
@@ -61,7 +61,6 @@ public class AS_9_ChangeUserAccountNameTest extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-2681")
     @DisplayName("Изменить название счета, менее 1 символа или только пробел")
     @Description("Тест-кейс направлен на проверку невозможности переименования счета при вводе менее 1 символа или только пробела")
@@ -76,7 +75,6 @@ public class AS_9_ChangeUserAccountNameTest extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-2682")
     @DisplayName("Изменить название счета, недопустимые символы")
     @Description("Тест-кейс направлен на проверку невозможности переименования счета при вводе недопустимых символов")
