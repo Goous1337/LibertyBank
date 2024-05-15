@@ -70,13 +70,14 @@ public class LoginSteps {
     }
 
     @Step("Проверка кнопки и поля ввода на правильных значениях")
-    public void assertSubmitButtonAndInputSuccessful(
+    public LoginSteps assertSubmitButtonAndInputSuccessful(
             String bgButtonColor, String textButtonColor, String inputColor) {
         assertAll(
                 () -> assertTrue(loginPage.checkButtonCondition(bgButtonColor, textButtonColor, true),
                         INVALID_COLOR),
                 () -> assertTrue(loginPage.isValidInput(inputColor), INVALID_COLOR)
         );
+        return this;
     }
 
     @Step("Проверка кнопки и поля ввода при неправильных значениях")

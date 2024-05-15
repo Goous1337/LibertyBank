@@ -57,7 +57,7 @@ public class LoginPage extends BasePage {
         phoneInput.sendKeys(phoneNumber);
     }
 
-    public void enterPassword(String password) {
+      public void enterPassword(String password) {
         waitElement(borderForPasswordInput);
         borderForPasswordInput.click();
         passwordInput.sendKeys(password);

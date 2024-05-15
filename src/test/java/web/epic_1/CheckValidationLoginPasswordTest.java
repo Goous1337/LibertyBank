@@ -5,22 +5,35 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
+import dataBase.requests.CustomerService_2_0_DataBaseRequest;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.TmsLink;
+import io.restassured.RestAssured;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import io.qameta.allure.Description;
-import io.qameta.allure.Epic;
-import io.qameta.allure.TmsLink;
+import pojo.customerService_2_0.ChangeUserAccountPasswordByPhone;
+import preconditions.UserAuthorization;
+import service.CustomerService_2_0;
 import web.BaseTest;
 
+import java.security.NoSuchAlgorithmException;
+
+import static api.utils.PasswordEncoder.encryptToSHA256ToBase64;
+import static constant.CustomerService_2_0_Constants.CUSTOMER_MOBILE_PHONE_TYPE;
+import static property.BaseProperties.CUSTOMER_SERVICE_2_0;
 import static property.UserPropertiesReader.USER_PASSWORD;
 import static property.UserPropertiesReader.USER_PHONE;
 
 @Epic("Epic -1 Регистрация/Авторизация/Безопасность")
 @DisplayName("US-1.2 Авторизация")
 public class CheckValidationLoginPasswordTest extends BaseTest {
+    private String newPassword = USER_PASSWORD;
+
     @BeforeEach
     public void setUpTest() {
         open("");
@@ -105,5 +118,46 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
         loginSteps.clickSubmitButton();
         homeSteps.clickUserMenu();
         homeSteps.assertIsUserPanelDisplayed();
+    }
+
+    @DisplayName("US-1.2.5 Восстановление пароля")
+    @Description("Проверка восстановления пароля по номеру телефона через веб-сайт")
+    @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Positive")})
+    @TmsLink("LIB-2494")
+    @Test
+        public void forgotPassword() {
+        newPassword = USER_PASSWORD + '1';
+        resetPasswordSteps.clickForgotPassword()
+                .enterPhone(USER_PHONE)
+                .clickSubmitButton();
+        String verificationCodeRequest = CustomerService_2_0_DataBaseRequest
+                                        .getLastVerificationCodeByMobilePhone(USER_PHONE);
+        resetPasswordSteps.enterVerificationCode(verificationCodeRequest)
+                .clickSubmitButton();
+        resetPasswordSteps.enterNewPassword(newPassword)
+                .clickSubmitButton();
+        loginSteps.enterPhone(USER_PHONE)
+                .enterPassword(newPassword)
+                .assertSubmitButtonAndInputSuccessful(
+                "rgba(0, 90, 254, 1)",
+                "rgba(245, 245, 245, 1)",
+                "rgb(0, 26, 52)")
+                .clickSubmitButton();
+        homeSteps.clickUserMenu()
+                .assertIsUserPanelDisplayed();
+    }
+
+    @AfterEach
+    public void tearDownTest() throws NoSuchAlgorithmException {
+        RestAssured.baseURI = CUSTOMER_SERVICE_2_0;
+        if (!newPassword.equals(USER_PASSWORD)) {
+            String token = new UserAuthorization()
+                    .getRefreshToken(USER_PHONE, encryptToSHA256ToBase64(newPassword), CUSTOMER_MOBILE_PHONE_TYPE);
+
+            new CustomerService_2_0().checkListAbilityChangePasswordInPersonalAccount
+                    (new ChangeUserAccountPasswordByPhone(encryptToSHA256ToBase64(newPassword),
+                            encryptToSHA256ToBase64(USER_PASSWORD)), token);
+            newPassword = USER_PASSWORD;
+        }
     }
 }
