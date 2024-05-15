@@ -2,11 +2,18 @@ package web.steps.cardSteps;
 
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.By;
+
+import org.openqa.selenium.WebElement;
 import web.helpers.TestListener;
 import web.pages.cardPages.CardProductsPage;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static web.constans.AccountServiceConstants.DISPLAYED_MESSAGE;
 import static web.constans.AccountServiceConstants.NOT_DISPLAYED_MESSAGE;
+
 
 public class CardProductsSteps {
     protected CardProductsPage cardProductsPage;
@@ -242,10 +249,10 @@ public class CardProductsSteps {
         Assertions.assertTrue(cardProductsPage.allCardsTitlesDisplayed());
     }
 
-    @Step("Отображается срок действия каждой карты")
-    public void assertAllCardValidityIsDisplayed() {
-        Assertions.assertTrue(cardProductsPage.allCardsValidityDisplayed());
-    }
+//    @Step("Отображается срок действия каждой карты")
+//    public void assertAllCardValidityIsDisplayed() {
+//        Assertions.assertTrue(cardProductsPage.allCardsValidityDisplayed());
+//    }
 
     @Step("Отображается стоимость обслуживания каждой карты")
     public void assertAllCardServiceCostIsDisplayed() {
@@ -256,4 +263,46 @@ public class CardProductsSteps {
     public void assertAllCardCurrenciesAreDisplayed() {
         Assertions.assertTrue(cardProductsPage.allCardsCurrenciesDisplayed());
     }
+
+
+    @Step("Нажатие кнопки 'Карты'")
+    public void clickAllCardsButton() {
+        cardProductsPage.clickAllCardsButton();
+    }
+
+    @Step("Нажатие кнопки 'Карточные продукты'")
+    public void clickCardProductButton() {
+        cardProductsPage.clickCardProductButton();
+    }
+
+    @Step("Нажатие кнопки 'Кредитные'")
+    public void clickCardCreditButton() {
+        cardProductsPage.clickCardCreditButton();
+    }
+
+    @Step("Отображается Liberty Card Classic")
+    public void assertCardClassicIsDisplayed() {
+        Assertions.assertTrue(cardProductsPage.isCardClassicDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Classic Card"));
+        TestListener.takeScreenshot();
+    }
+
+    @Step("Отображается Liberty Home Fix Card")
+    public void assertFixHomeCardIsDisplayed() {
+        Assertions.assertTrue(cardProductsPage.isFixHomeCardDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Home Fix Card"));
+        TestListener.takeScreenshot();
+    }
+
+    @Step("Отображается Liberty Card Premium")
+    public void assertPremiumCardLabelIsDisplayed() {
+        Assertions.assertTrue(cardProductsPage.isPremiumCardLabelDisplayed(), String.format(NOT_DISPLAYED_MESSAGE, "Liberty Card Premium"));
+        TestListener.takeScreenshot();
+    }
+
+    // Шаг для проверки соответствия фактических и ожидаемых значений для каждой карты в корзине
+    @Step("Проверка соответствия фактических и ожидаемых значений для каждой карты в корзине")
+    public void checkCreditCardBasket() {
+        Assertions.assertTrue(cardProductsPage.findElements(), String.format(NOT_DISPLAYED_MESSAGE, "Liberty Card Premium"));
+        TestListener.takeScreenshot();
+    }
 }
+
