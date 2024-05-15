@@ -127,24 +127,24 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
     @Test
         public void forgotPassword() {
         newPassword = USER_PASSWORD + '1';
-        resetPasswordSteps.clickForgotPassword();
-        resetPasswordSteps.enterPhone(USER_PHONE);
-        resetPasswordSteps.clickSubmitButton();
+        resetPasswordSteps.clickForgotPassword()
+                .enterPhone(USER_PHONE)
+                .clickSubmitButton();
         String verificationCodeRequest = CustomerService_2_0_DataBaseRequest
                                         .getLastVerificationCodeByMobilePhone(USER_PHONE);
-        resetPasswordSteps.enterVerificationCode(verificationCodeRequest);
-        resetPasswordSteps.clickSubmitButton();
-        resetPasswordSteps.enterNewPassword(newPassword);
-        resetPasswordSteps.clickSubmitButton();
-        loginSteps.enterPhone(USER_PHONE);
-        loginSteps.enterPassword(newPassword);
-        loginSteps.assertSubmitButtonAndInputSuccessful(
+        resetPasswordSteps.enterVerificationCode(verificationCodeRequest)
+                .clickSubmitButton();
+        resetPasswordSteps.enterNewPassword(newPassword)
+                .clickSubmitButton();
+        loginSteps.enterPhone(USER_PHONE)
+                .enterPassword(newPassword)
+                .assertSubmitButtonAndInputSuccessful(
                 "rgba(0, 90, 254, 1)",
                 "rgba(245, 245, 245, 1)",
-                "rgb(0, 26, 52)");
-        loginSteps.clickSubmitButton();
-        homeSteps.clickUserMenu();
-        homeSteps.assertIsUserPanelDisplayed();
+                "rgb(0, 26, 52)")
+                .clickSubmitButton();
+        homeSteps.clickUserMenu()
+                .assertIsUserPanelDisplayed();
     }
 
     @AfterEach
