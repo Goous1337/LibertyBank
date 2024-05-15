@@ -6,6 +6,7 @@ import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.*;
 import web.BaseTest;
 
+@Tags({@Tag("Web"), @Tag("MVP")})
 @Epic("2 - Личный кабинет/Основное меню")
 @DisplayName("US-2.2.2 [web] Личные данные")
 public class US_2_2_2_UpdateEmailInAccountTest extends BaseTest {
@@ -25,7 +26,6 @@ public class US_2_2_2_UpdateEmailInAccountTest extends BaseTest {
 
     @DisplayName("Основной сценарий. Успешное обновление email пользователя в личном кабинете.")
     @Description("Данный тест-кейс проверяет возможность изменения email пользователя в личном кабинете")
-    @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Positive")})
     @TmsLink("LIB-2436")
     @Test
     public void successUpdateEmail() {

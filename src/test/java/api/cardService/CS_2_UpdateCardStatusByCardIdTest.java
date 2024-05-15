@@ -7,10 +7,7 @@ import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -20,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CARD_SERVICE;
 
+@Tags({@Tag("API"), @Tag("MVP")})
 @DisplayName("CS-2 Изменение статуса карты")
 public class CS_2_UpdateCardStatusByCardIdTest extends BaseTest {
 
@@ -42,7 +40,6 @@ public class CS_2_UpdateCardStatusByCardIdTest extends BaseTest {
 
     @ParameterizedTest
     @ValueSource(strings = {STATUS_BLOCKED, STATUS_CLOSED, STATUS_ACTIVE})
-    @Tag("API")
     @TmsLink("LIB2-877")
     @DisplayName("Изменение статуса карты на 'Заблокированный', 'Закрытый', 'Активный'")
     @Description("Тест направлен на проверку возможности изменения статуса карты на 'Заблокированный', 'Закрытый', 'Активный'")
@@ -55,7 +52,6 @@ public class CS_2_UpdateCardStatusByCardIdTest extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-877")
     @DisplayName("Изменение лимитов карты")
     @Description("Тест направлен на проверку возможности изменения лимитов карты")

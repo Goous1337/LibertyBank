@@ -29,6 +29,7 @@ import static property.BaseProperties.CUSTOMER_SERVICE_2_0;
 import static property.UserPropertiesReader.USER_PASSWORD;
 import static property.UserPropertiesReader.USER_PHONE;
 
+@Tags({@Tag("Web"), @Tag("MVP")})
 @Epic("Epic -1 Регистрация/Авторизация/Безопасность")
 @DisplayName("US-1.2 Авторизация")
 public class CheckValidationLoginPasswordTest extends BaseTest {
@@ -42,7 +43,7 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
 
     @DisplayName("Основной сценарий: проверка валидации полей формы авторизации")
     @Description("Данный тест-кейс проверяет валидацию полей \"Номер телефона\", \"Пароль\" при вводе валидных данных")
-    @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Positive")})
+    @Tags({@Tag("Smoke"), @Tag("Positive")})
     @TmsLink("LIB-2554")
     @ParameterizedTest
     @ValueSource(strings = {"A!123a", "!\"#$%&'()*+,-./:;Zz0", "<=>?@[]^_`{|}~8qA"})
@@ -59,7 +60,7 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
 
     @DisplayName("Проверка авторизации незарегистрированного пользователя по номеру телефона")
     @Description("Проверка соответствия введенного номера телефона и пароля при прохождении авторизации")
-    @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Negative")})
+    @Tags({@Tag("Smoke"), @Tag("Negative")})
     @TmsLink("LIB-2435")
     @ParameterizedTest
     @CsvSource({"71111111111, Login-1", "79228134511, Login-107543"})
@@ -77,7 +78,7 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
 
     @DisplayName("Проверка валидации полей формы авторизации при использовании невалидных данных")
     @Description("Проверить валидацию полей \"Номер телефона\" и \"Пароль\"")
-    @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Negative")})
+    @Tags({@Tag("Smoke"), @Tag("Negative")})
     @TmsLink("LIB-2429")
     @ParameterizedTest
     @MethodSource("dataProviders.gui.AuthorizationDataProviders#provideTestDataForPhoneNumberAndPassword")
@@ -93,7 +94,7 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
         loginSteps.enterPhone(phoneNumber)
                 .outFormPhone()
                 .assertPhoneInput(amountSymbolsPhone, colorPhoneInput, colorPlaceholderPhone,
-                                    textErrorMessagePhone, isErrorPhoneHintNotVisible)
+                        textErrorMessagePhone, isErrorPhoneHintNotVisible)
                 .enterPassword(password)
                 .outFormPassword()
                 .assertPasswordInput(amountSymbolsPassword, colorPasswordInput, colorPlaceholderPassword,
@@ -103,7 +104,7 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
 
     @DisplayName("US-1.2.1 Авторизация по номеру телефона (первичный вход)")
     @Description("Авторизоваться в личном кабинете с валидными значениями телефона и пароля")
-    @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Positive")})
+    @Tags({@Tag("Smoke"), @Tag("Positive")})
     @TmsLink("LIB-2432")
     @Test
     public void checkValidationAuthTest() {
@@ -122,16 +123,16 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
 
     @DisplayName("US-1.2.5 Восстановление пароля")
     @Description("Проверка восстановления пароля по номеру телефона через веб-сайт")
-    @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Positive")})
+    @Tags({@Tag("Smoke"), @Tag("Positive")})
     @TmsLink("LIB-2494")
     @Test
-        public void forgotPassword() {
+    public void forgotPassword() {
         newPassword = USER_PASSWORD + '1';
         resetPasswordSteps.clickForgotPassword()
                 .enterPhone(USER_PHONE)
                 .clickSubmitButton();
         String verificationCodeRequest = CustomerService_2_0_DataBaseRequest
-                                        .getLastVerificationCodeByMobilePhone(USER_PHONE);
+                .getLastVerificationCodeByMobilePhone(USER_PHONE);
         resetPasswordSteps.enterVerificationCode(verificationCodeRequest)
                 .clickSubmitButton();
         resetPasswordSteps.enterNewPassword(newPassword)
@@ -139,9 +140,9 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
         loginSteps.enterPhone(USER_PHONE)
                 .enterPassword(newPassword)
                 .assertSubmitButtonAndInputSuccessful(
-                "rgba(0, 90, 254, 1)",
-                "rgba(245, 245, 245, 1)",
-                "rgb(0, 26, 52)")
+                        "rgba(0, 90, 254, 1)",
+                        "rgba(245, 245, 245, 1)",
+                        "rgb(0, 26, 52)")
                 .clickSubmitButton();
         homeSteps.clickUserMenu()
                 .assertIsUserPanelDisplayed();

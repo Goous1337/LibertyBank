@@ -5,10 +5,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.List;
 import java.util.Map;
@@ -19,6 +16,7 @@ import static org.apache.hc.core5.http.HttpStatus.SC_UNAUTHORIZED;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.DEPOSIT_SERVICE;
 
+@Tags({@Tag("API"), @Tag("MVP")})
 @DisplayName("DM 9.4 Просмотр действующих депозитных продуктов пользователя")
 public class DM_9_4_CheckCurrentDepositProductsUserTestShortInfo extends BaseTest {
 
@@ -30,7 +28,6 @@ public class DM_9_4_CheckCurrentDepositProductsUserTestShortInfo extends BaseTes
     @DisplayName("Просмотр перечня действующих депозитных продуктов пользователя")
     @Description("Данный тест-кейс направлен на получение списка действующих депозитных продуктов пользователя " +
             "в виде коллекции, состоящей из Депозитных продуктов авторизованным пользователем")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-540")
     @Test
 
@@ -59,7 +56,6 @@ public class DM_9_4_CheckCurrentDepositProductsUserTestShortInfo extends BaseTes
 
     @DisplayName("Просмотр информации по депозитам клиента при неуспешной валидации токена")
     @Description("Данный тест-кейс направлен на получение STATUS CODE 401  при неуспешной валидации токена")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-542")
     @Test
 

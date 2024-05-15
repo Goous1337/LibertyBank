@@ -4,10 +4,7 @@ import api.BaseTest;
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import pojo.cardService.RegisterBadRequest;
 import pojo.cardService.RegisterDebitResponse;
 
@@ -22,6 +19,7 @@ import static specs.RequestBody.*;
 import static specs.Specs.response201;
 import static specs.Specs.response400;
 
+@Tags({@Tag("API"), @Tag("MVP")})
 @DisplayName("CS-5 Регистрация в системе дебетовой карты")
 public class CS_5_RegistrationDebitCard extends BaseTest {
 
@@ -30,7 +28,6 @@ public class CS_5_RegistrationDebitCard extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-1042")
     @DisplayName("Регистрация в системе дебетовой карты")
     @Description("Тест направлен на проверку возможности регистрации в системе дебетовой карты")
@@ -54,7 +51,6 @@ public class CS_5_RegistrationDebitCard extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-1504")
     @DisplayName("Карта с невалидными атрибутами")
     @Description("Тест направлен на проверку возможности регистрации дебетовой карты с невалидными атрибутами")
@@ -67,7 +63,6 @@ public class CS_5_RegistrationDebitCard extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-1517")
     @DisplayName("Регистрация карты с полем не допускающим значение NULL")
     @Description("Тест направлен на проверку возможности регистрации дебетовой карты с полем не допускающим значение NULL ")

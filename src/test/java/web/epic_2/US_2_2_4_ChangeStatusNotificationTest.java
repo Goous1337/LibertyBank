@@ -11,6 +11,7 @@ import static web.constans.AccountServiceConstants.DISPLAYED_MESSAGE;
 import static web.constans.AccountServiceConstants.NOT_EQUALS_MESSAGE;
 import static web.constans.UrlConfig.CHANGE_NOTIFICATION_URL;
 
+@Tags({@Tag("Web"), @Tag("2.0")})
 @Epic("2 - Личный кабинет/Основное меню")
 @DisplayName("US-2.2.4 [web] Уведомления")
 public class US_2_2_4_ChangeStatusNotificationTest extends BaseTest {
@@ -24,7 +25,6 @@ public class US_2_2_4_ChangeStatusNotificationTest extends BaseTest {
     @Description("В данном тест-кейсе проводится проверка возможности изменения настроек получения пользователем" +
             " SMS-оповещения в личном кабинете")
     @TmsLink("LIB-2495")
-    @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Positive")})
     @Test
     public void changeStatusSMSNotification() {
         boolean beforeChanging = changeNotificationStatusSteps.isSelectedSMSNotificationCheckBox();
@@ -38,7 +38,6 @@ public class US_2_2_4_ChangeStatusNotificationTest extends BaseTest {
     @Description("В данном тест-кейсе проводится проверка возможности изменения настроек получения пользователем" +
             " Email-оповещения в личном кабинете")
     @TmsLink("LIB-2492")
-    @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Positive")})
     @Test
     public void changeStatusEmailNotification() {
         boolean beforeChanging = changeNotificationStatusSteps.isSelectedEmailNotificationCheckBox();
@@ -52,7 +51,6 @@ public class US_2_2_4_ChangeStatusNotificationTest extends BaseTest {
     @Description("В данном тест-кейсе проводится проверка возможности изменения настроек получения пользователем" +
             " Push-оповещения в личном кабинете")
     @TmsLink("LIB-2496")
-    @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Positive")})
     @Test
     public void changeStatusPushNotification() {
         boolean beforeChanging = changeNotificationStatusSteps.isSelectedPushNotificationCheckBox();

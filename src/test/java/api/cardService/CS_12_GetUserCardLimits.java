@@ -8,6 +8,7 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import static api.cardService.CS_2_UpdateCardStatusByCardIdTest.CARD_ID;
@@ -17,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CARD_SERVICE;
 
+@Tags({@Tag("API"), @Tag("2.0")})
 @DisplayName("CS-12 Вывод пользовательских лимитов")
 public class CS_12_GetUserCardLimits extends BaseTest {
 
@@ -29,7 +31,6 @@ public class CS_12_GetUserCardLimits extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-3128")
     @DisplayName("Просмотр пользовательских лимитов для активной карты")
     @Description("Тест направлен на проверку возможности просмотра пользовательских лимитов для существующего cardId")
@@ -42,7 +43,6 @@ public class CS_12_GetUserCardLimits extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-3130")
     @DisplayName("Просмотр пользовательских лимитов для несуществующей карты")
     @Description("Тест направлен на проверку возможности просмотра пользовательских лимитов для несуществующего cardId")
@@ -55,7 +55,6 @@ public class CS_12_GetUserCardLimits extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-3132")
     @DisplayName("Просмотр пользовательских лимитов при неправильной конфигурации запроса")
     @Description("Тест направлен на проверку возможности просмотра пользовательских лимитов при неправильной конфигурации запроса")

@@ -19,6 +19,7 @@ import static org.apache.hc.core5.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.DEPOSIT_SERVICE;
 
+@Tags({@Tag("API"), @Tag("3.0")})
 @DisplayName("DM-9.11 Отправка чека на электронную почту")
 public class DM_9_11_CheckSendingEmailAfterDepositWithdrawalTest extends BaseTest {
 
@@ -43,7 +44,7 @@ public class DM_9_11_CheckSendingEmailAfterDepositWithdrawalTest extends BaseTes
     @DisplayName("Отправка чека на электронную почту отзыва депозита")
     @Description("Данный тест-кейс направлен на проверку корректного отправления чека на электронную почту после отзыва " +
             "депозита или отказа от пролонгации депозита.")
-    @Tags({@Tag("API"), @Tag("Smoke"), @Tag("Positive")})
+    @Tags({@Tag("Smoke"), @Tag("Positive")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-1106")
     @Test
     public void checkSendingEmailAfterDepositWithdrawal() {
@@ -53,7 +54,7 @@ public class DM_9_11_CheckSendingEmailAfterDepositWithdrawalTest extends BaseTes
     @DisplayName("Отправка чека на невалидную электронную почту после отзыва депозита")
     @Description("Данный тест-кейс направлен на проверку  отображения ошибки в случае отправления чека на невалидную " +
             "электронную почту после отзыва депозита или отказа от пролонгации депозита.")
-    @Tags({@Tag("API"), @Tag("Smoke"), @Tag("Positive")})
+    @Tags({@Tag("Smoke"), @Tag("Positive")})
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-1107")
     @ParameterizedTest()
     @EmptySource

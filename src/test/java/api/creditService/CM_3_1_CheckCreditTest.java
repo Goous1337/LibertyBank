@@ -9,6 +9,7 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import static org.apache.http.HttpStatus.SC_OK;
@@ -17,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CREDIT_SERVICE;
 
+@Tags({@Tag("API"), @Tag("MVP")})
 public class CM_3_1_CheckCreditTest extends BaseTest {
     {
         RestAssured.baseURI = CREDIT_SERVICE;
@@ -24,7 +26,6 @@ public class CM_3_1_CheckCreditTest extends BaseTest {
 
     @DisplayName("Получение информации по действующему кредиту пользователя")
     @Description("Данный тест-кейс направлен на проверку CM 3.1 по US 3.1 на получение краткой информации по действующим кредитам авторизованного пользователя")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-84")
     @Test
     public void successfulGetUserCreditInfo() {
@@ -40,7 +41,6 @@ public class CM_3_1_CheckCreditTest extends BaseTest {
 
     @DisplayName("Получение информации по действующему кредиту при неуспешной валидации токена")
     @Description("Данный тест-кейс направлен на получение STATUS CODE 401 при неуспешной валидации токена для получения краткой информации о кредитах авторизованного пользователя по CM 3.1 и US 3.1")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-86")
     @Test
     public void unsuccessfulGetUserCreditInfoNoToken() {

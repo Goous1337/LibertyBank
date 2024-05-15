@@ -6,7 +6,7 @@ import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.*;
 import web.BaseTest;
 
-@Tag("Web")
+@Tags({@Tag("Web"), @Tag("MVP")})
 @Epic("3 - Кредиты")
 @Feature("US-3.1 Просмотр действующих кредитных продуктов пользователя в личном кабинете")
 public class US_3_1_CheckCreditSubsectionsTest extends BaseTest {
@@ -17,7 +17,6 @@ public class US_3_1_CheckCreditSubsectionsTest extends BaseTest {
     }
 
     @Test
-    @Tags({@Tag("Web"), @Tag("Positive")})
     @DisplayName("Отображение соответствующих подразделов в разделе Кредиты")
     @TmsLink("LIB3-65")
     public void checkButtonForCreditPage() {
@@ -29,7 +28,6 @@ public class US_3_1_CheckCreditSubsectionsTest extends BaseTest {
     }
 
     @Test
-    @Tags({@Tag("Web"), @Tag("Positive")})
     @DisplayName("Отображение действующих кредитов пользователя в подразделе Мои кредиты")
     @TmsLink("LIB3-67")
     public void checkBasicInfoMyCredit() {
@@ -42,7 +40,6 @@ public class US_3_1_CheckCreditSubsectionsTest extends BaseTest {
     }
 
     @Test
-    @Tags({@Tag("Web"), @Tag("Positive")})
     @DisplayName("Осуществление перехода на страницу с действующими кредитами банка из раздела 'Кредиты'")
     @TmsLink("LIB3-806")
     public void checkUrlCreditProduct() {
@@ -52,7 +49,6 @@ public class US_3_1_CheckCreditSubsectionsTest extends BaseTest {
     }
 
     @Test
-    @Tags({@Tag("Web"), @Tag("Positive")})
     @DisplayName("Осуществление перехода на страницу с поданными кредитными заявками из раздела 'Кредиты'")
     @TmsLink("LIB3-807")
     public void checkUrlSubmittedCreditRequest() {
@@ -62,7 +58,6 @@ public class US_3_1_CheckCreditSubsectionsTest extends BaseTest {
     }
 
     @Test
-    @Tags({@Tag("Web"), @Tag("Positive")})
     @DisplayName("Осуществление перехода на страницу просмотра подробной информации о кредитном продукте банка по кнопке 'Показать больше'")
     @TmsLink("LIB3-808")
     public void checkShowMoreButtonInMyCreditPage() {

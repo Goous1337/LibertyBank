@@ -23,6 +23,7 @@ import static org.asynchttpclient.util.HttpConstants.Methods.GET;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.INFO_SERVICE;
 
+@Tags({@Tag("API"), @Tag("2.0")})
 @DisplayName("IS-5 Получение списка городов, где находятся отделения")
 public class IS_5_CheckDefaultCityListTest extends BaseTest {
 
@@ -32,7 +33,7 @@ public class IS_5_CheckDefaultCityListTest extends BaseTest {
 
     @DisplayName("Основной сценарий. Получение информации о списке дефолтных городов.")
     @Description("В данном тест-кейсе проводится проверка возможности получения информации о списке городов из БД")
-    @Tags({@Tag("smoke"), @Tag("API")})
+    @Tag("Smoke")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-1135")
     @Test
 

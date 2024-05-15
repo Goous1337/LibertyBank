@@ -4,6 +4,7 @@ import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.*;
 import web.BaseTest;
 
+@Tags({@Tag("Web"), @Tag("MVP")})
 public class US_3_6_ChechMoreCreditProductInformationTest extends BaseTest {
     @BeforeEach
     public void setUpTest() {
@@ -11,7 +12,6 @@ public class US_3_6_ChechMoreCreditProductInformationTest extends BaseTest {
     }
 
     @Test
-    @Tags({@Tag("Web"), @Tag("Positive")})
     @DisplayName("Просмотр подробной информации о кредитном продукте Liberty Наличными")
     @TmsLink("LIB3-181")
     public void checkBasicInfoAboutLibertyCash() {
@@ -22,7 +22,6 @@ public class US_3_6_ChechMoreCreditProductInformationTest extends BaseTest {
     }
 
     @Test
-    @Tags({@Tag("Web"), @Tag("Positive")})
     @DisplayName("Просмотр подробной информации о кредитном продукте Liberty Срочный")
     @TmsLink("LIB3-181")
     public void checkBasicInfoAboutLibertyExpress() {
@@ -33,7 +32,6 @@ public class US_3_6_ChechMoreCreditProductInformationTest extends BaseTest {
     }
 
     @Test
-    @Tags({@Tag("Web"), @Tag("Positive")})
     @DisplayName("Просмотр подробной информации о кредитном продукте Liberty Money")
     @TmsLink("LIB3-181")
     public void checkBasicInfoAboutLibertyMoney() {
@@ -44,7 +42,6 @@ public class US_3_6_ChechMoreCreditProductInformationTest extends BaseTest {
     }
 
     @Test
-    @Tags({@Tag("Web"), @Tag("Positive")})
     @DisplayName("Просмотр подробной информации о кредитном продукте Liberty Easy")
     @TmsLink("LIB3-181")
     public void checkBasicInfoAboutLibertyEasy() {
@@ -55,7 +52,6 @@ public class US_3_6_ChechMoreCreditProductInformationTest extends BaseTest {
     }
 
     @Test
-    @Tags({@Tag("Web"), @Tag("Positive")})
     @DisplayName("Просмотр подробной информации о кредитном продукте Liberty Car")
     @TmsLink("LIB3-181")
     public void checkBasicInfoAboutLibertyCar() {
@@ -66,7 +62,6 @@ public class US_3_6_ChechMoreCreditProductInformationTest extends BaseTest {
     }
 
     @Test
-    @Tags({@Tag("Web"), @Tag("Positive")})
     @DisplayName("Просмотр подробной информации о кредитном продукте Моя квартира")
     @TmsLink("LIB3-181")
     public void checkBasicInfoAboutLibertyMyFlat() {

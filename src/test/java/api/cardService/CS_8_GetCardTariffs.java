@@ -7,10 +7,7 @@ import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import pojo.cardService.cardTariffs.CardTariffs;
 
 import static api.utils.JsonParser.parseJson;
@@ -21,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CARD_SERVICE;
 
+@Tags({@Tag("API"), @Tag("MVP")})
 public class CS_8_GetCardTariffs extends BaseTest {
     private static final String JSON = "/jsons/cardJsons/cardTariffsGoldEur.json";
     private static final String JSON_SCHEMA_FOR_ERROR = "schemas/cardService/getCardTariffsWithInvalidCardId.json";
@@ -31,7 +29,6 @@ public class CS_8_GetCardTariffs extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-3169")
     @DisplayName("Просмотр тарифов по карте пользователя")
     @Description("Тест направлен на проверку возможности просмотра тарифов по карте пользователя")
@@ -43,7 +40,6 @@ public class CS_8_GetCardTariffs extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-3169")
     @DisplayName("Просмотр тарифов по карте пользователя с невалидным id карты")
     @Description("Тест направлен на проверку возможности просмотра тарифов по карте пользователя с невалидным id карты")
