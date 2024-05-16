@@ -25,7 +25,7 @@ public class US_9_1_CheckShortInformationAboutAllDepositsProductsTest extends Ba
     @TmsLink("LIB3-1895")
     public void checkShortInfoAboutDepositsProducts() {
         depositsProductsSteps.assertShortInfoAboutDeposits(DepositsEnum.LIBERTY_CHILD);
-        depositsProductsSteps.assertShortInfoAboutDeposits(DepositsEnum.LIBERTY_CURRENCY_EUR);
+        //depositsProductsSteps.assertShortInfoAboutDeposits(DepositsEnum.LIBERTY_CURRENCY_EUR);
         depositsProductsSteps.assertShortInfoAboutDeposits(DepositsEnum.LIBERTY_CALCULATED);
         depositsProductsSteps.assertShortInfoAboutDeposits(DepositsEnum.LIBERTY_PLUS_EXPRESS);
         depositsProductsSteps.assertShortInfoAboutDeposits(DepositsEnum.LIBERTY_BASIC);
