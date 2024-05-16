@@ -2,6 +2,8 @@ package api.depositService;
 
 import api.BaseTest;
 import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -19,7 +21,10 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.DEPOSIT_SERVICE;
 
-@DisplayName("DM 9.1 Просмотр информации по депозитным продуктам банка")
+@Tag("API")
+@Epic("9 - Депозиты")
+@Feature("DM-9.1 Просмотр краткой информации по всем депозитным продуктам банка ")
+@DisplayName("DM-9.1 Просмотр краткой информации по всем депозитным продуктам банка ")
 public class DM_9_1_CheckInformationOnBankDepositProductsTestShortInfo extends BaseTest {
 
     {

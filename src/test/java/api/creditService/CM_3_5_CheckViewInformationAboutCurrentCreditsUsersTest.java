@@ -19,10 +19,10 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CREDIT_SERVICE;
 
-@Tag("Web")
+@Tag("API")
 @Epic("3 - Кредиты")
-@Feature("US-3.2 Просмотр информации о кредитных продуктах банка")
-@DisplayName("US-3.2 Просмотр информации о кредитных продуктах банка")
+@Feature("CM-3.5 Просмотр подробной информации о действующих кредитах пользователя")
+@DisplayName("CM-3.5 Просмотр подробной информации о действующих кредитах пользователя")
 public class CM_3_5_CheckViewInformationAboutCurrentCreditsUsersTest extends BaseTest {
     {
         RestAssured.baseURI = CREDIT_SERVICE;

@@ -12,7 +12,7 @@ public class CreditInfoPage extends BasePage {
     /*Кнопки подразделов 'Кредиты'*/
     @FindBy(xpath = "//a/p[text()='Мои кредиты']")
     private WebElement myCreditButton;
-    @FindBy(xpath = "//a/p[text()='Кредитные продукты банка']")
+    @FindBy(xpath = "//a/p[text()='Кредитные продукты']")
     private WebElement creditProductsBankButton;
     @FindBy(xpath = "//a/p[text()='Поданные заявки']")
     private WebElement submittedCreditАpplicationsButton;

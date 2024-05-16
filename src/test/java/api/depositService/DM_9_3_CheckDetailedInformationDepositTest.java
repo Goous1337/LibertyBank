@@ -2,6 +2,8 @@ package api.depositService;
 
 import api.BaseTest;
 import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
@@ -19,7 +21,10 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.DEPOSIT_SERVICE;
 
-@DisplayName("DM-9.3 Получение подробной информации о депозитном предложении")
+@Tag("API")
+@Epic("9 - Депозиты")
+@Feature("DM-9.3 Просмотр подробной информации о депозитном предложении")
+@DisplayName("DM-9.3 Просмотр подробной информации о депозитном предложении")
 public class DM_9_3_CheckDetailedInformationDepositTest extends BaseTest {
     {
         RestAssured.baseURI = DEPOSIT_SERVICE;

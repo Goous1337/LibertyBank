@@ -2,6 +2,8 @@ package api.depositService;
 
 import api.BaseTest;
 import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -19,7 +21,10 @@ import static org.apache.hc.core5.http.HttpStatus.SC_UNAUTHORIZED;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.DEPOSIT_SERVICE;
 
-@DisplayName("DM 9.4 Просмотр действующих депозитных продуктов пользователя")
+@Tag("API")
+@Epic("9 - Депозиты")
+@Feature("DM-9.4 Просмотр перечня действующих депозитных продуктов пользователя")
+@DisplayName("DM-9.4 Просмотр перечня действующих депозитных продуктов пользователя")
 public class DM_9_4_CheckCurrentDepositProductsUserTestShortInfo extends BaseTest {
 
     {
