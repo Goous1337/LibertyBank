@@ -1,4 +1,6 @@
-package web.constans;
+package web.constans.credit;
+
+import web.constans.UrlConfig;
 
 public class CreditServiceConstants {
 
