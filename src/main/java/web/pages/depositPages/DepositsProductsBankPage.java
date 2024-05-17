@@ -41,31 +41,20 @@ public class DepositsProductsBankPage extends BasePage {
     // Liberty+ Детский
     @FindBy(xpath = "//h3[contains(text(), 'Liberty+ Детский')]")
     private WebElement nameOfLibertyChild;
-    @FindBy(xpath = "//h3[contains(text(), 'Liberty+ Детский')]/ancestor::li//h3[@data-testid = 'maxInterestRate']")
+    @FindBy(xpath = "//h3[contains(text(), 'Liberty+ Детский')]/ancestor::li//h3[@data-testid = 'interestRate']")
     private WebElement maxInterestRateOfLibertyChild;
-    @FindBy(xpath = "//h3[contains(text(), 'Liberty+ Детский')]/ancestor::li//p[@data-testid = 'depositDetails']")
+    @FindBy(xpath = "//h3[contains(text(), 'Liberty+ Детский')]/following-sibling::p[@data-testid = 'productDetails']")
     private WebElement productDetailOfLibertyChild;
     @FindBy(xpath = "//h3[contains(text(), 'Liberty+ Детский')]/ancestor::li//h3[@data-testid = 'maxDurationMonth']")
     private WebElement maxDurationMonthOfLibertyChild;
     @FindBy(xpath = "//h3[contains(text(), 'Liberty+ Детский')]/ancestor::li//h3[@data-testid = 'amountMin']")
     private WebElement amountMinOfLibertyChild;
-    //Liberty+ Валютный EUR
-    @FindBy(xpath = "//h3[contains(text(), 'Liberty+ Валютный EUR')]")
-    private WebElement nameOfLibertyCurrency;
-    @FindBy(xpath = "//h3[contains(text(), 'Liberty+ Валютный EUR')]/ancestor::li//h3[@data-testid = 'maxInterestRate']")
-    private WebElement maxInterestRateOfLibertyCurrency;
-    @FindBy(xpath = "//h3[contains(text(), 'Liberty+ Валютный EUR')]/ancestor::li//p[@data-testid = 'depositDetails']")
-    private WebElement productDetailOfLibertyCurrency;
-    @FindBy(xpath = "//h3[contains(text(), 'Liberty+ Валютный EUR')]/ancestor::li//h3[@data-testid = 'maxDurationMonth']")
-    private WebElement maxDurationMonthOfLibertyCurrency;
-    @FindBy(xpath = "//h3[contains(text(), 'Liberty+ Валютный EUR')]/ancestor::li//h3[@data-testid = 'amountMin']")
-    private WebElement amountMinOfLibertyCurrency;
     //Liberty+ Расчетный
     @FindBy(xpath = "//h3[contains(text(), 'Liberty+ Расчетный')]")
     private WebElement nameOfLibertyCalculated;
-    @FindBy(xpath = "//h3[contains(text(), 'Liberty+ Расчетный')]/ancestor::li//h3[@data-testid = 'maxInterestRate']")
+    @FindBy(xpath = "//h3[contains(text(), 'Liberty+ Расчетный')]/ancestor::li//h3[@data-testid = 'interestRate']")
     private WebElement maxInterestRateOfLibertyCalculated;
-    @FindBy(xpath = "//h3[contains(text(), 'Liberty+ Расчетный')]/ancestor::li//p[@data-testid = 'depositDetails']")
+    @FindBy(xpath = "//h3[contains(text(), 'Liberty+ Расчетный')]/following-sibling::p[@data-testid = 'productDetails']")
     private WebElement productDetailOfLibertyCalculated;
     @FindBy(xpath = "//h3[contains(text(), 'Liberty+ Расчетный')]/ancestor::li//h3[@data-testid = 'maxDurationMonth']")
     private WebElement maxDurationMonthOfLibertyCalculated;
@@ -74,9 +63,9 @@ public class DepositsProductsBankPage extends BasePage {
     //Liberty + Срочный
     @FindBy(xpath = "//h3[contains(text(), 'Liberty+ Срочный')]")
     private WebElement nameOfLibertyExpress;
-    @FindBy(xpath = "//h3[contains(text(), 'Liberty+ Срочный')]/ancestor::li//h3[@data-testid = 'maxInterestRate']")
+    @FindBy(xpath = "//h3[contains(text(), 'Liberty+ Срочный')]/ancestor::li//h3[@data-testid = 'interestRate']")
     private WebElement maxInterestRateOfLibertyExpress;
-    @FindBy(xpath = "//h3[contains(text(), 'Liberty+ Срочный')]/ancestor::li//p[@data-testid = 'depositDetails']")
+    @FindBy(xpath = "//h3[contains(text(), 'Liberty+ Срочный')]/following-sibling::p[@data-testid = 'productDetails']")
     private WebElement productDetailOfLibertyExpress;
     @FindBy(xpath = "//h3[contains(text(), 'Liberty+ Срочный')]/ancestor::li//h3[@data-testid = 'maxDurationMonth']")
     private WebElement maxDurationMonthOfLibertyExpress;
@@ -85,9 +74,9 @@ public class DepositsProductsBankPage extends BasePage {
     //Liberty Базовый
     @FindBy(xpath = "//h3[contains(text(), 'Liberty Базовый')]")
     private WebElement nameOfLibertyBasic;
-    @FindBy(xpath = "//h3[contains(text(), 'Liberty Базовый')]/ancestor::li//h3[@data-testid = 'maxInterestRate']")
+    @FindBy(xpath = "//h3[contains(text(), 'Liberty Базовый')]/ancestor::li//h3[@data-testid = 'interestRate']")
     private WebElement maxInterestRateOfLibertyBasic;
-    @FindBy(xpath = "//h3[contains(text(), 'Liberty Базовый')]/ancestor::li//p[@data-testid = 'depositDetails']")
+    @FindBy(xpath = "//h3[contains(text(), 'Liberty Базовый')]/following-sibling::p[@data-testid = 'productDetails']")
     private WebElement productDetailOfLibertyBasic;
     @FindBy(xpath = "//h3[contains(text(), 'Liberty Базовый')]/ancestor::li//h3[@data-testid = 'maxDurationMonth']")
     private WebElement maxDurationMonthOfLibertyBasic;
@@ -96,9 +85,9 @@ public class DepositsProductsBankPage extends BasePage {
     //Liberty Premium
     @FindBy(xpath = "//h3[contains(text(), 'Liberty Premium')]")
     private WebElement nameOfLibertyPremium;
-    @FindBy(xpath = "//h3[contains(text(), 'Liberty Premium')]/ancestor::li//h3[@data-testid = 'maxInterestRate']")
+    @FindBy(xpath = "//h3[contains(text(), 'Liberty Premium')]/ancestor::li//h3[@data-testid = 'interestRate']")
     private WebElement maxInterestRateOfLibertyPremium;
-    @FindBy(xpath = "//h3[contains(text(), 'Liberty Premium')]/ancestor::li//p[@data-testid = 'depositDetails']")
+    @FindBy(xpath = "//h3[contains(text(), 'Liberty Premium')]/following-sibling::p[@data-testid = 'productDetails']")
     private WebElement productDetailOfLibertyPremium;
     @FindBy(xpath = "//h3[contains(text(), 'Liberty Premium')]/ancestor::li//h3[@data-testid = 'maxDurationMonth']")
     private WebElement maxDurationMonthOfLibertyPremium;
@@ -107,31 +96,31 @@ public class DepositsProductsBankPage extends BasePage {
     //Liberty Стандартный Срочный
     @FindBy(xpath = "//h3[contains(text(), 'Liberty Стандарт Срочный')]")
     private WebElement nameOfLibertyStandardExpress;
-    @FindBy(xpath = "//h3[contains(text(), 'Liberty Стандарт Срочный')]/ancestor::li//h3[@data-testid = 'maxInterestRate']")
+    @FindBy(xpath = "//h3[contains(text(), 'Liberty Стандарт Срочный')]/ancestor::li//h3[@data-testid = 'interestRate']")
     private WebElement maxInterestRateOfLibertyStandardExpress;
-    @FindBy(xpath = "//h3[contains(text(), 'Liberty Стандарт Срочный')]/ancestor::li//p[@data-testid = 'depositDetails']")
+    @FindBy(xpath = "//h3[contains(text(), 'Liberty Стандарт Срочный')]/following-sibling::p[@data-testid = 'productDetails']")
     private WebElement productDetailOfLibertyStandardExpress;
     @FindBy(xpath = "//h3[contains(text(), 'Liberty Стандарт Срочный')]/ancestor::li//h3[@data-testid = 'maxDurationMonth']")
     private WebElement maxDurationMonthOfLibertyStandardExpress;
     @FindBy(xpath = "//h3[contains(text(), 'Liberty Стандарт Срочный')]/ancestor::li//h3[@data-testid = 'amountMin']")
     private WebElement amountMinOfLibertyStandardExpress;
     //Liberty+ Валютный USD
-    @FindBy(xpath = "//h3[contains(text(), 'Liberty+ Валютный USD')]")
-    private WebElement nameOfLibertyPlusCurrencyUSD;
-    @FindBy(xpath = "//h3[contains(text(), 'Liberty+ Валютный USD')]/ancestor::li//h3[@data-testid = 'maxInterestRate']")
-    private WebElement maxInterestRateOfLibertyPlusCurrencyUSD;
-    @FindBy(xpath = "//h3[contains(text(), 'Liberty+ Валютный USD')]/ancestor::li//p[@data-testid = 'depositDetails']")
-    private WebElement productDetailOfLibertyPlusCurrencyUSD;
-    @FindBy(xpath = "//h3[contains(text(), 'Liberty+ Валютный USD')]/ancestor::li//h3[@data-testid = 'maxDurationMonth']")
-    private WebElement maxDurationMonthOfLibertyPlusCurrencyUSD;
-    @FindBy(xpath = "//h3[contains(text(), 'Liberty+ Валютный USD')]/ancestor::li//h3[@data-testid = 'amountMin']")
-    private WebElement amountMinOfLibertyPlusCurrencyUSD;
+//    @FindBy(xpath = "//h3[contains(text(), 'Liberty+ Валютный')]")
+//    private WebElement nameOfLibertyPlusCurrencyUSD;
+//    @FindBy(xpath = "//h3[contains(text(), 'Liberty+ Валютный')]/ancestor::li//h3[@data-testid = 'interestRate']")
+//    private WebElement maxInterestRateOfLibertyPlusCurrencyUSD;
+//    @FindBy(xpath = "//h3[contains(text(), 'Liberty+ Валютный')]/following-sibling::p[@data-testid = 'productDetails']")
+//    private WebElement productDetailOfLibertyPlusCurrencyUSD;
+//    @FindBy(xpath = "//h3[contains(text(), 'Liberty+ Валютный')]/ancestor::li//h3[@data-testid = 'maxDurationMonth']")
+//    private WebElement maxDurationMonthOfLibertyPlusCurrencyUSD;
+//    @FindBy(xpath = "//h3[contains(text(), 'Liberty+ Валютный')]/ancestor::li//h3[@data-testid = 'amountMin']")
+//    private WebElement amountMinOfLibertyPlusCurrencyUSD;
     //Liberty Стандарт
     @FindBy(xpath = "//h3[contains(text(), 'Liberty Стандарт')]")
     private WebElement nameOfLibertyStandard;
-    @FindBy(xpath = "//h3[contains(text(), 'Liberty Стандарт')]/ancestor::li//h3[@data-testid = 'maxInterestRate']")
+    @FindBy(xpath = "//h3[contains(text(), 'Liberty Стандарт')]/ancestor::li//h3[@data-testid = 'interestRate']")
     private WebElement maxInterestRateOfLibertyStandard;
-    @FindBy(xpath = "//h3[contains(text(), 'Liberty Стандарт')]/ancestor::li//p[@data-testid = 'depositDetails']")
+    @FindBy(xpath = "//h3[contains(text(), 'Liberty Стандарт')]/following-sibling::p[@data-testid = 'productDetails']")
     private WebElement productDetailOfLibertyStandard;
     @FindBy(xpath = "//h3[contains(text(), 'Liberty Стандарт')]/ancestor::li//h3[@data-testid = 'maxDurationMonth']")
     private WebElement maxDurationMonthOfLibertyStandard;
@@ -158,14 +147,14 @@ public class DepositsProductsBankPage extends BasePage {
                         productDetailOfLibertyChild.getText(),
                         convertToInteger(maxDurationMonthOfLibertyChild.getText()),
                         convertToDouble(amountMinOfLibertyChild.getText())));
-        enumMap.put(
-                DepositsEnum.LIBERTY_CURRENCY_EUR,
-                new DepositProductShortInfo(
-                        nameOfLibertyCurrency.getText(),
-                        convertToDouble(maxInterestRateOfLibertyCurrency.getText()),
-                        productDetailOfLibertyCurrency.getText(),
-                        convertToInteger(maxDurationMonthOfLibertyCurrency.getText()),
-                        convertToDouble(amountMinOfLibertyCurrency.getText())));
+//        enumMap.put(
+//                DepositsEnum.LIBERTY_CURRENCY_EUR,
+//                new DepositProductShortInfo(
+//                        nameOfLibertyCurrency.getText(),
+//                        convertToDouble(maxInterestRateOfLibertyCurrency.getText()),
+//                        productDetailOfLibertyCurrency.getText(),
+//                        convertToInteger(maxDurationMonthOfLibertyCurrency.getText()),
+//                        convertToDouble(amountMinOfLibertyCurrency.getText())));
         enumMap.put(
                 DepositsEnum.LIBERTY_CALCULATED,
                 new DepositProductShortInfo(
@@ -206,14 +195,14 @@ public class DepositsProductsBankPage extends BasePage {
                         productDetailOfLibertyStandardExpress.getText(),
                         convertToInteger(maxDurationMonthOfLibertyStandardExpress.getText()),
                         convertToDouble(amountMinOfLibertyStandardExpress.getText())));
-        enumMap.put(
-                DepositsEnum.LIBERTY_PLUS_CURRENCY_USD,
-                new DepositProductShortInfo(
-                        nameOfLibertyPlusCurrencyUSD.getText(),
-                        convertToDouble(maxInterestRateOfLibertyPlusCurrencyUSD.getText()),
-                        productDetailOfLibertyPlusCurrencyUSD.getText(),
-                        convertToInteger(maxDurationMonthOfLibertyPlusCurrencyUSD.getText()),
-                        convertToDouble(amountMinOfLibertyPlusCurrencyUSD.getText())));
+//        enumMap.put(
+//                DepositsEnum.LIBERTY_PLUS_CURRENCY_USD,
+//                new DepositProductShortInfo(
+//                        nameOfLibertyPlusCurrencyUSD.getText(),
+//                        convertToDouble(maxInterestRateOfLibertyPlusCurrencyUSD.getText()),
+//                        productDetailOfLibertyPlusCurrencyUSD.getText(),
+//                        convertToInteger(maxDurationMonthOfLibertyPlusCurrencyUSD.getText()),
+//                        convertToDouble(amountMinOfLibertyPlusCurrencyUSD.getText())));
         enumMap.put(
                 DepositsEnum.LIBERTY_STANDARD,
                 new DepositProductShortInfo(

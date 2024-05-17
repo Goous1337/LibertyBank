@@ -16,7 +16,6 @@ import java.util.stream.Stream;
 @Feature("US-3.3 Оформление заявки на кредит")
 @DisplayName("US-3.3 Оформление заявки на кредит")
 public class US_3_3_ProcessingCreditTest extends BaseTest {
-
     private static Stream<Object> testDataLibertyMoney() {
         return Stream.of(Arguments.of("3000", "12", "1234567890", "1000", "1000"),
                 Arguments.of("3001", "13", "1234567890", "1000", "1000"),
@@ -85,7 +84,6 @@ public class US_3_3_ProcessingCreditTest extends BaseTest {
                 Arguments.of("3200000", "178", "1234567890", "4000", "!@#$%$")
         );
     }
-
 
     @BeforeAll
     public void setUpTest() {
@@ -259,7 +257,6 @@ public class US_3_3_ProcessingCreditTest extends BaseTest {
         );
         creditApplicationSteps.enterValidateAmountCreditInput(sumCredit);
         creditApplicationSteps.enterPeriodMonthsCreditInput(termCredit);
-
         creditApplicationSteps.enterIdentificationNumberCreditInput(employerIdentificationNumber);
         creditApplicationSteps.enterMonthlyExpenditureCreditInput(totalDebtLoad);
         creditApplicationSteps.enterMonthlyIncomeCreditInput(averageMonthlyIncome);

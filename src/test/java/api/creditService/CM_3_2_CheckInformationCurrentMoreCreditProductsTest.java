@@ -2,6 +2,8 @@ package api.creditService;
 
 import api.BaseTest;
 import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
@@ -13,10 +15,11 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CREDIT_SERVICE;
 
-@Tags({@Tag("API"), @Tag("2.0")})
-@DisplayName("Получение информации о кредитных продуктах банка")
+@Tag("API")
+@Epic("3 - Кредиты")
+@Feature("CM-3.2 Просмотр информации о кредитных продуктах банка")
+@DisplayName("CM-3.2 Просмотр информации о кредитных продуктах банка")
 public class CM_3_2_CheckInformationCurrentMoreCreditProductsTest extends BaseTest {
-
     {
         RestAssured.baseURI = CREDIT_SERVICE;
     }
