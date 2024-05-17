@@ -74,7 +74,7 @@ public class CreditApplicationReportPage extends BasePage {
         return getTextElement(valueTypeCreditReport);
     }
 
-    public String getValuePaymentСalculationSchemeCreditReport() {
+    public String getValuePaymentSchemeCreditReport() {
         return getTextElement(valuePaymentСalculationSchemeCreditReport);
     }
 
@@ -93,15 +93,19 @@ public class CreditApplicationReportPage extends BasePage {
         valuesCreditReport.put(CreditReportValueEnum.CREDIT_REPORT_TERM_CONSTANT.getValueCreditReport(), getValueTermCreditReport());
         valuesCreditReport.put(CreditReportValueEnum.CREDIT_REPORT_METHOD_OF_OBTAINING_CONSTANT.getValueCreditReport(), getValueMethodOfObtainingCreditReport());
         valuesCreditReport.put(CreditReportValueEnum.CREDIT_REPORT_TYPE_CONSTANT.getValueCreditReport(), getValueTypeCreditReport());
-        valuesCreditReport.put(CreditReportValueEnum.CREDIT_REPORT_PAYMENT_СALCULATION_SCHEME_CONSTANT.getValueCreditReport(), getValuePaymentСalculationSchemeCreditReport());
+        valuesCreditReport.put(CreditReportValueEnum.CREDIT_REPORT_PAYMENT_СALCULATION_SCHEME_CONSTANT.getValueCreditReport(), getValuePaymentSchemeCreditReport());
         valuesCreditReport.put(CreditReportValueEnum.CREDIT_REPORT_LOAN_RATE_TYPE_CONSTANT.getValueCreditReport(), getValueLoanRateTypeCreditReport());
         return valuesCreditReport;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         CreditApplicationReportPage that = (CreditApplicationReportPage) o;
         return Objects.equals(valuesCreditReport, that.valuesCreditReport) &&
                 Objects.equals(valueNameCreditReport, that.valueNameCreditReport) &&

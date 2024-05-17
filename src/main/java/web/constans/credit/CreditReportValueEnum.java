@@ -18,8 +18,8 @@ public enum CreditReportValueEnum {
     @Getter
     private String valueCreditReport;
 
-    private CreditReportValueEnum(String valueCreditReport){
-        this.valueCreditReport=valueCreditReport;
+    private CreditReportValueEnum(String valueCreditReport) {
+        this.valueCreditReport = valueCreditReport;
     }
 
     @Override
