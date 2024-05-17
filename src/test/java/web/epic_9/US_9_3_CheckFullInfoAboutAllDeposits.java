@@ -7,7 +7,7 @@ import org.junit.jupiter.api.*;
 import web.BaseTest;
 import web.enums.DepositsEnum;
 
-@Tag("Web")
+@Tags({@Tag("Web"), @Tag("MVP"), @Tag("Positive")})
 @Epic("9 - Депозиты")
 @Feature("US-9.3 Просмотр подробной информации о депозитном предложении ")
 @DisplayName("US-9.3 Просмотр подробной информации о депозитном предложении ")
@@ -20,7 +20,6 @@ public class US_9_3_CheckFullInfoAboutAllDeposits extends BaseTest {
     }
 
     @Test
-    @Tags({@Tag("Web"), @Tag("Positive")})
     @DisplayName("US 9.3 Просмотр подробной информации о депозитном предложении Liberty+ Детский")
     @TmsLink("LIB3-1899")
     public void checkFullInfoAboutLibertyChild() {
@@ -29,7 +28,6 @@ public class US_9_3_CheckFullInfoAboutAllDeposits extends BaseTest {
     }
 
     @Test
-    @Tags({@Tag("Web"), @Tag("Positive")})
     @DisplayName("US 9.3 Просмотр подробной информации о депозитном предложении Liberty+ Рассчетный")
     @TmsLink("LIB3-1899")
     public void checkFullInfoAboutLibertyCalculated() {
@@ -38,7 +36,6 @@ public class US_9_3_CheckFullInfoAboutAllDeposits extends BaseTest {
     }
 
     @Test
-    @Tags({@Tag("Web"), @Tag("Positive")})
     @DisplayName("US 9.3 Просмотр подробной информации о депозитном предложении Liberty+ Валютный USD")
     @TmsLink("LIB3-1899")
     public void checkFullInfoAboutLibertyCurrencyUsd() {
@@ -47,7 +44,6 @@ public class US_9_3_CheckFullInfoAboutAllDeposits extends BaseTest {
     }
 
     @Test
-    @Tags({@Tag("Web"), @Tag("Positive")})
     @DisplayName("US 9.3 Просмотр подробной информации о депозитном предложении Liberty+ Срочный")
     @TmsLink("LIB3-1899")
     public void checkFullInfoAboutLibertyExpress() {
@@ -56,7 +52,6 @@ public class US_9_3_CheckFullInfoAboutAllDeposits extends BaseTest {
     }
 
     @Test
-    @Tags({@Tag("Web"), @Tag("Positive")})
     @DisplayName("US 9.3 Просмотр подробной информации о депозитном предложении Liberty Базовый")
     @TmsLink("LIB3-1899")
     public void checkFullInfoAboutLibertyBase() {
@@ -65,7 +60,6 @@ public class US_9_3_CheckFullInfoAboutAllDeposits extends BaseTest {
     }
 
     @Test
-    @Tags({@Tag("Web"), @Tag("Positive")})
     @DisplayName("US 9.3 Просмотр подробной информации о депозитном предложении Liberty Premium")
     @TmsLink("LIB3-1899")
     public void checkFullInfoAboutLibertyPremium() {
@@ -74,7 +68,6 @@ public class US_9_3_CheckFullInfoAboutAllDeposits extends BaseTest {
     }
 
     @Test
-    @Tags({@Tag("Web"), @Tag("Positive")})
     @DisplayName("US 9.3 Просмотр подробной информации о депозитном предложении Liberty Стандарт Срочный")
     @TmsLink("LIB3-1899")
     public void checkFullInfoAboutLibertyStandardExpress() {
@@ -83,7 +76,6 @@ public class US_9_3_CheckFullInfoAboutAllDeposits extends BaseTest {
     }
 
     @Test
-    @Tags({@Tag("Web"), @Tag("Positive")})
     @DisplayName("US 9.3 Просмотр подробной информации о депозитном предложении Liberty Стандарт")
     @TmsLink("LIB3-1899")
     public void checkFullInfoAboutLibertyStandard() {

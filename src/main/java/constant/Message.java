@@ -4,5 +4,7 @@ public class Message {
 
     public final static String RESPONSE_CODE_NOT_EXPECTED = "Код ответа не соответствует ожидаемому";
     public final static String ERROR_MESSAGE_NOT_EXPECTED = "Сообщение об ошибке не соответствует ожидаемому";
-    public final static String THERE_NOT_ERROR_MESSAGE = "Сообщение об ошибке отсутсвует";
+    public final static String THERE_NOT_ERROR_MESSAGE = "Сообщение об ошибке отсутствует";
+    public final static String NOT_FOUND_ERROR_MESSAGE = "Not Found";
+    public final static String NOT_VALID_VALUE_INSURANCE_PRODUCT_ID_ERROR_MESSAGE = "Недопустимое значение ID категории продуктов";
 }

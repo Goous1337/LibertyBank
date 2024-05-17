@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "policies": {
+      "type": "array",
+      "items":[
+      {
+        "type": "object",
+        "properties": {
+          "policyId": {
+            "type": "string"
+          },
+          "startDate": {
+            "type": "string"
+          },
+          "policyName": {
+            "type": "string"
+          },
+          "expirationDate": {
+            "type": "string"
+          },
+          "agreementNumber": {
+            "type": "string"
+          },
+          "policyStatus": {
+            "type": "string"
+          },
+          "currencyNumericCode": {
+            "type": "integer"
+          },
+          "duration": {
+            "type": "null"
+          },
+          "insuredSum": {
+            "type": "null"
+          }
+        },
+        "required": [
+          "policyId",
+          "startDate",
+          "policyName",
+          "expirationDate",
+          "agreementNumber",
+          "policyStatus",
+          "currencyNumericCode",
+          "duration",
+          "insuredSum"
+        ]
+      }
+        ]
+    }
+  },
+  "required": [
+    "policies"
+  ]
+}

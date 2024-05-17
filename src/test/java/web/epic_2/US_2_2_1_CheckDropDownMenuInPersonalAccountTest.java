@@ -6,6 +6,7 @@ import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.*;
 import web.BaseTest;
 
+@Tags({@Tag("Web"), @Tag("MVP")})
 @Epic("2 - Личный кабинет/Основное меню")
 @DisplayName("US-2.2.1 [web] Выпадающее меню")
 public class US_2_2_1_CheckDropDownMenuInPersonalAccountTest extends BaseTest {
@@ -18,7 +19,6 @@ public class US_2_2_1_CheckDropDownMenuInPersonalAccountTest extends BaseTest {
     @Description("""
             Данный тест-кейс проверяет работу выпадающего меню в личном кабинете
             """)
-    @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("US-2")})
     @TmsLink("LIB-2430")
     @Test
     public void checkDropDownMenuText() {

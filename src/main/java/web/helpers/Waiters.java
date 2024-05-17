@@ -2,6 +2,7 @@ package web.helpers;
 
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -21,6 +22,13 @@ public class Waiters {
                 .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
                 .until(ExpectedConditions.visibilityOf(element));
+    }
+
+    public static void waitIsElementNotDisplayed(WebElement element) {
+        new WebDriverWait(getDriver(), Duration.ofSeconds(5))
+                .ignoring(NoSuchElementException.class)
+                .ignoring(StaleElementReferenceException.class)
+                .until(ExpectedConditions.invisibilityOf(element));
     }
 
     public static WebElement waitElementWithOwnTime(WebElement element, int time) {
@@ -45,5 +53,14 @@ public class Waiters {
                 .ignoring(StaleElementReferenceException.class)
                 .until(driver -> element.getCssValue("background-color").
                         equals(color));
+    }
+
+    public static boolean isElementNotDisplayed(WebElement element) {
+        try {
+            Waiters.waitIsElementNotDisplayed(element);
+            return true;
+        } catch (TimeoutException e) {
+            return  false;
+        }
     }
 }

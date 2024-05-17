@@ -8,6 +8,7 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import static org.apache.hc.core5.http.HttpStatus.*;
@@ -15,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.ACCOUNT_SERVICE;
 
+@Tags({@Tag("API"), @Tag("MVP")})
 @DisplayName("AS-6 Проверка наличия счетов по customerId")
 public class AS_6_CheckIfUserHasAccountsTest extends BaseTest {
 
@@ -24,7 +26,6 @@ public class AS_6_CheckIfUserHasAccountsTest extends BaseTest {
 
     @DisplayName("Проверка наличия счетов, невалидный customerId")
     @Description("Данный тест-кейс направлен на проверку AS-6 по US 4.3 Просмотр списка счетов")
-    @Tag("API")
     @TmsLink("LIB2-1018")
     @Test
     public void getAccountsByInvalidCustomerIdTest() {
@@ -40,7 +41,6 @@ public class AS_6_CheckIfUserHasAccountsTest extends BaseTest {
 
     @DisplayName("Проверка наличия счетов, валидный customerId, нет счетов")
     @Description("Данный тест-кейс направлен на проверку AS-6 по US 4.3 Просмотр списка счетов")
-    @Tag("API")
     @TmsLink("LIB2-1017")
     @Test
     public void getAccountsByValidCustomerIdWithNoAccountsTest() {
@@ -56,7 +56,6 @@ public class AS_6_CheckIfUserHasAccountsTest extends BaseTest {
 
     @DisplayName("Проверка наличия счетов, валидный customerId, есть счета")
     @Description("Данный тест-кейс направлен на проверку AS-6 по US 4.3 Просмотр списка счетов")
-    @Tag("API")
     @TmsLink("LIB2-1016")
     @Test
     public void getAccountsByValidCustomerIdWithAccountsTest() {

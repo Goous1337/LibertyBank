@@ -30,7 +30,7 @@ public class CM_3_6_CheckObtainingInformationOnBanksLoanProductTest extends Base
     @DisplayName("Получение подробной информации по кредитному продукту банка")
     @Description("Данный тест-кейс направлен на проверку CM-3.6 по US 3.6 на получение подробной информации по" +
             " кредитному продукту банка")
-    @Tags({@Tag("API"), @Tag("Smoke")})
+    @Tag("Smoke")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-416")
     @Test
     public void checkObtainingInformationOnBanksLoanProduct() {
@@ -59,7 +59,7 @@ public class CM_3_6_CheckObtainingInformationOnBanksLoanProductTest extends Base
             " таблице нет записей по указанным критериям")
     @Description("Данный тест-кейс направлен на получение STATUS CODE  404 В случае, если в результирующей таблице" +
             " нет записей по указанным критериям по CM-3.6 и US 3.6")
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tag("Negative")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-419")
     @Test
     public void checkObtainingInformationOnBanksLoanProductNoRecordsInResultingTable() {

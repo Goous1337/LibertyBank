@@ -20,6 +20,7 @@ import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.URL_USER_ACCOUNT_SERVICE;
 
+@Tags({@Tag("API"), @Tag("2.0")})
 @DisplayName("UAS-3 Сохранение кода верификации")
 public class UAS_3_SavingVerificationCodeTest extends BaseTest {
 
@@ -29,7 +30,7 @@ public class UAS_3_SavingVerificationCodeTest extends BaseTest {
 
     @DisplayName("Успешное сохранение кода верификации")
     @Description("Проверка успешного сохранения кода верификации в БД")
-    @Tags({@Tag("smoke"), @Tag("API")})
+    @Tag("Smoke")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-243")
     @Test
 
@@ -49,7 +50,6 @@ public class UAS_3_SavingVerificationCodeTest extends BaseTest {
 
     @DisplayName("Неуспешное сохранение кода в БД")
     @Description("Проверка возникновения ошибки при сохранении кода верификации в БД")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-244")
     @ParameterizedTest(name = "phoneNumber: {0}")
     @ValueSource(
@@ -70,7 +70,6 @@ public class UAS_3_SavingVerificationCodeTest extends BaseTest {
     @DisplayName("Повторный запрос кода, если время блокировки не истекло")
     @Description("Пользователь делает повторный запрос SMS-кода верификации, когда время блокировки еще не истекло " +
             "(не позднее 30 секунд)")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-245")
     @Test
 
@@ -85,7 +84,6 @@ public class UAS_3_SavingVerificationCodeTest extends BaseTest {
 
     @DisplayName("Отправка номера телефона, где пустое тело запроса")
     @Description("Отправка невалидного значения мобильного телефона, где вместо значения передаётся пустое тело")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-246")
     @ParameterizedTest
     @NullAndEmptySource
@@ -98,7 +96,6 @@ public class UAS_3_SavingVerificationCodeTest extends BaseTest {
 
     @DisplayName("Отправка номера невалидной длины")
     @Description("Тест на определение валидации телефонного номера по его длине")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-253")
     @ParameterizedTest(name = "phoneNumber: {0}")
     @ValueSource(
@@ -113,7 +110,6 @@ public class UAS_3_SavingVerificationCodeTest extends BaseTest {
 
     @DisplayName("Отправка телефона в форматированном виде")
     @Description("Проверка ввода номера телефона в форматированном виде")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-256")
     @ParameterizedTest(name = "phoneNumber: {0}")
     @ValueSource(
@@ -128,7 +124,6 @@ public class UAS_3_SavingVerificationCodeTest extends BaseTest {
 
     @DisplayName("Отправка телефона, который существует в БД")
     @Description("Здесь мы проверяем корректность обработки UPDATE запроса в БД")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-290")
     @Test
 
@@ -150,7 +145,6 @@ public class UAS_3_SavingVerificationCodeTest extends BaseTest {
 
     @DisplayName("Проверка кода верификации, если отправить невалидный метод")
     @Description("Проверка поведения программы, если отправить невалидный метод (отличающийся от PATСН)")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-312")
     @Issue("https://jira.astondevs.ru/browse/LIB-1195")
     @ParameterizedTest(name = "httpMethod: {0}, phoneNumber: {1}")
@@ -170,7 +164,6 @@ public class UAS_3_SavingVerificationCodeTest extends BaseTest {
     @DisplayName("Отправка номера телефона, которого нет в БД")
     @Description("Проверка корректности обработки INSERT-запроса в БД. Зарегистрированный пользователь еще ни разу " +
             "не отправлял запрос на получение кода верификации.")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-313")
     @Test
 
@@ -191,7 +184,6 @@ public class UAS_3_SavingVerificationCodeTest extends BaseTest {
 
     @DisplayName("Проверка отправки невалидного номера телефона")
     @Description("Пользователь пробует отправить невалидный номер телефона (валидный номер телефона, 11 цифр без «+»)")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-314")
     @ParameterizedTest(name = "phoneNumber: {0}")
     @ValueSource(

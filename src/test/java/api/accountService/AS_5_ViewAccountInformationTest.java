@@ -9,6 +9,7 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import static constant.AccountServiceConstants.INVALID_ACCOUNT_ID;
@@ -19,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.ACCOUNT_SERVICE;
 
+@Tags({@Tag("API"), @Tag("MVP")})
 @DisplayName("AS-5 Просмотр информации о счете")
 public class AS_5_ViewAccountInformationTest extends BaseTest {
 
@@ -30,7 +32,6 @@ public class AS_5_ViewAccountInformationTest extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-1012")
     @DisplayName("Просмотр информации о счете, пользователь имеет открытые счета")
     @Description("Тест направлен на проверку возможности просмотра подробной информации о счете")
@@ -44,7 +45,6 @@ public class AS_5_ViewAccountInformationTest extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-1013")
     @DisplayName("Просмотр информации о счете, пользователь не имеет открытых счетов")
     @Description("Тест направлен на проверку невозможности просмотра подробной информации о счете, если пользователь не имеет открытых счетов")
