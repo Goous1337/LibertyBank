@@ -23,7 +23,6 @@ import static property.BaseProperties.DEPOSIT_SERVICE;
 @Feature("DM-9.4 Просмотр перечня действующих депозитных продуктов пользователя")
 @DisplayName("DM-9.4 Просмотр перечня действующих депозитных продуктов пользователя")
 public class DM_9_4_CheckCurrentDepositProductsUserTestShortInfo extends BaseTest {
-
     {
         RestAssured.baseURI = DEPOSIT_SERVICE;
     }
@@ -34,9 +33,7 @@ public class DM_9_4_CheckCurrentDepositProductsUserTestShortInfo extends BaseTes
             "в виде коллекции, состоящей из Депозитных продуктов авторизованным пользователем")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-540")
     @Test
-
     public void checkInformationBankDepositProducts() {
-
         Response response = depositService.checkListCurrentDepositProductsUsers();
         assertAll(
                 () -> assertEquals(SC_OK,
@@ -62,7 +59,6 @@ public class DM_9_4_CheckCurrentDepositProductsUserTestShortInfo extends BaseTes
     @Description("Данный тест-кейс направлен на получение STATUS CODE 401  при неуспешной валидации токена")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-542")
     @Test
-
     public void unsuccessfulInformationBankDepositProducts() {
         Response response = depositService.checkListCurrentDepositProductUserEmptyToken();
         assertAll(

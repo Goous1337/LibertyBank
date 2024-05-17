@@ -20,7 +20,6 @@ import static property.BaseProperties.CREDIT_SERVICE;
 @Feature("CM-3.2 Просмотр информации о кредитных продуктах банка")
 @DisplayName("CM-3.2 Просмотр информации о кредитных продуктах банка")
 public class CM_3_2_CheckInformationCurrentMoreCreditProductsTest extends BaseTest {
-
     {
         RestAssured.baseURI = CREDIT_SERVICE;
     }

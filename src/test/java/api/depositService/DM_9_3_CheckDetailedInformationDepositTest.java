@@ -35,12 +35,7 @@ public class DM_9_3_CheckDetailedInformationDepositTest extends BaseTest {
     @Tag("Positive")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-1099")
     @ParameterizedTest(name = "productId: {0}")
-    @CsvSource({
-            "1",
-            "2",
-            "3"
-    })
-
+    @CsvSource({"1", "2", "3"})
     public void checkDetailedInformationAboutDepositOffer(Integer productId) {
         Response response = depositService.checkDetailedInformationAboutDeposit(productId);
         String jsonSchemaPath = "schemas/depositService/successfulGetDepositInfo.json";
@@ -57,12 +52,7 @@ public class DM_9_3_CheckDetailedInformationDepositTest extends BaseTest {
     @Tag("Negative")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-282")
     @ParameterizedTest(name = "productId: {0}")
-    @CsvSource({
-            "100",
-            "50",
-            "33"
-    })
-
+    @CsvSource({"100", "50", "33"})
     public void unsuccessfulDetailedInformationAboutDepositOffer(Integer productId) {
         Response response = depositService.checkDetailedInformationAboutDeposit(productId);
         assertAll(

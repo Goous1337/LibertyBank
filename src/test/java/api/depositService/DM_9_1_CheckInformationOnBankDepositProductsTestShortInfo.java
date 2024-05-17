@@ -23,7 +23,6 @@ import static property.BaseProperties.DEPOSIT_SERVICE;
 @Feature("DM-9.1 Просмотр краткой информации по всем депозитным продуктам банка ")
 @DisplayName("DM-9.1 Просмотр краткой информации по всем депозитным продуктам банка ")
 public class DM_9_1_CheckInformationOnBankDepositProductsTestShortInfo extends BaseTest {
-
     {
         RestAssured.baseURI = DEPOSIT_SERVICE;
     }
@@ -33,15 +32,12 @@ public class DM_9_1_CheckInformationOnBankDepositProductsTestShortInfo extends B
             "состоящей из Депозитных продуктов авторизованным пользователем")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-292")
     @Test
-
     public void checkInformationBankDepositProducts() {
-
         Response response = depositService.checkListCurrentDepositProducts();
         assertAll(
                 () -> assertEquals(SC_OK,
                         response.statusCode(),
                         RESPONSE_CODE_NOT_EXPECTED),
-
                 () -> {
                     List<Map<String, Object>> items = response.jsonPath().getList("$");
                     for (Map<String, Object> item : items) {
@@ -56,7 +52,6 @@ public class DM_9_1_CheckInformationOnBankDepositProductsTestShortInfo extends B
     @Description("Данный тест-кейс направлен на получение STATUS CODE 401  при неуспешной валидации токена")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-295")
     @Test
-
     public void unsuccessfulInformationBankDepositProducts() {
         Response response = depositService.checkListCurrentDepositProductEmptyToken();
         assertAll(
@@ -73,7 +68,6 @@ public class DM_9_1_CheckInformationOnBankDepositProductsTestShortInfo extends B
     @Description("Данный тест-кейс направлен на получение информации об отсутствии действующих депозитных продуктов банка авторизованным пользователем ")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-296")
     @Test
-
     public void checkAbsenceInformationBankDepositProducts() {
         Response response = depositService.checkListCurrentDepositProducts();
         assertAll(
@@ -90,7 +84,6 @@ public class DM_9_1_CheckInformationOnBankDepositProductsTestShortInfo extends B
     @Description("Данный тест-кейс направлен на получение 500 INTERNAL SERVER ERROR при проверке действующих депозитных продуктов банка авторизованным пользователем при неуспешном")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-300")
     @Test
-
     public void checkAbsenceInternetConnectionsInformationBankDepositProducts() {
         Response response = depositService.checkListCurrentDepositProducts();
 
@@ -108,7 +101,6 @@ public class DM_9_1_CheckInformationOnBankDepositProductsTestShortInfo extends B
             "продуктах банка и получение STATUS CODE  404 авторизованным пользователем в личном кабинете при неверной конфигурации запроса")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-316")
     @Test
-
     public void checkInformationBankDepositProductsInvalidEndpoint() {
         Response response = depositService.checkListCurrentDepositProductsInvalidEndpoint();
         assertAll(

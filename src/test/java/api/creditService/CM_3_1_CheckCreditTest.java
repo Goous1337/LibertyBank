@@ -1,6 +1,5 @@
 package api.creditService;
 
-
 import api.BaseTest;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -11,7 +10,6 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import static org.apache.http.HttpStatus.SC_OK;
