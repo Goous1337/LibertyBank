@@ -9,7 +9,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import web.BaseTest;
-
 import static web.constans.UrlConfig.CARD_PRODUCTS_URL;
 
 @Tag("Web")
@@ -69,4 +68,5 @@ public class US_5_1_ALL_CardProductsInfoTest extends BaseTest {
         cardProductsSteps.assertClassicCardIsNotDisplayed();
         cardProductsSteps.assertChildCardIsNotDisplayed();
     }
+
 }

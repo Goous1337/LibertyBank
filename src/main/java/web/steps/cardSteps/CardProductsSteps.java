@@ -2,18 +2,11 @@ package web.steps.cardSteps;
 
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.By;
-
-import org.openqa.selenium.WebElement;
 import web.helpers.TestListener;
 import web.pages.cardPages.CardProductsPage;
 
-import java.util.Arrays;
-import java.util.List;
-
 import static web.constans.AccountServiceConstants.DISPLAYED_MESSAGE;
 import static web.constans.AccountServiceConstants.NOT_DISPLAYED_MESSAGE;
-
 
 public class CardProductsSteps {
     protected CardProductsPage cardProductsPage;
@@ -249,11 +242,6 @@ public class CardProductsSteps {
         Assertions.assertTrue(cardProductsPage.allCardsTitlesDisplayed());
     }
 
-//    @Step("Отображается срок действия каждой карты")
-//    public void assertAllCardValidityIsDisplayed() {
-//        Assertions.assertTrue(cardProductsPage.allCardsValidityDisplayed());
-//    }
-
     @Step("Отображается стоимость обслуживания каждой карты")
     public void assertAllCardServiceCostIsDisplayed() {
         Assertions.assertTrue(cardProductsPage.allCardsServiceCostDisplayed());
@@ -263,7 +251,6 @@ public class CardProductsSteps {
     public void assertAllCardCurrenciesAreDisplayed() {
         Assertions.assertTrue(cardProductsPage.allCardsCurrenciesDisplayed());
     }
-
 
     @Step("Нажатие кнопки 'Карты'")
     public void clickAllCardsButton() {
@@ -304,5 +291,5 @@ public class CardProductsSteps {
         Assertions.assertTrue(cardProductsPage.findElements(), String.format(NOT_DISPLAYED_MESSAGE, "Liberty Card Premium"));
         TestListener.takeScreenshot();
     }
-}
 
+}

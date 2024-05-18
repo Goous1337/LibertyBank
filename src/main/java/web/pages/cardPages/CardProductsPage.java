@@ -5,6 +5,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import web.pages.BasePage;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -75,8 +76,6 @@ public class CardProductsPage extends BasePage {
     private WebElement travelCardOrderButton;
     @FindBy(xpath = "//a[contains(@href, 'Travel')][2]")
     private WebElement travelCardInfoButton;
-
-
     @FindBy(xpath = "//h2[text()='Liberty Сard Classic']")
     private WebElement cardClassic;
     @FindBy(xpath = "//h2[text()='Liberty Card Classic']/parent::div/following-sibling::div/a/button[text()='Оформить карту']")
@@ -95,7 +94,6 @@ public class CardProductsPage extends BasePage {
     private WebElement premiumCardOrderButton;
     @FindBy(xpath = "//h2[text()='Liberty Card Premium']/parent::div/following-sibling::div/a/button[text()='Показать больше']")
     private WebElement premiumCardInfoButton;
-
     @FindBy(xpath = "//h2[@data-testid='card-product-title']")
     private WebElement creditNameSelector;
     @FindBy(xpath = "//div[@data-testid='card-cost-per-month']")
@@ -117,15 +115,13 @@ public class CardProductsPage extends BasePage {
     List<String> expectedCurrencies = Arrays.asList("RUB", "RUB", "RUB");
 
     private List<WebElement> findElements(By xpath) {
-
         return null;
     }
 
-        // Находим все элементы с помощью заданных селекторов
+    // Находим все элементы с помощью заданных селекторов
     public List<WebElement> findCreditNameElements() {
         return findElements(By.xpath("//h2[@data-testid='card-product-title']"));
     }
-
 
     public List<WebElement> findPercentElements() {
         return findElements(By.xpath("//div[@data-testid='card-cost-per-month']"));
@@ -139,46 +135,39 @@ public class CardProductsPage extends BasePage {
         return findElements(By.xpath("//div[@data-testid='card-currency']"));
     }
 
-
-
     public boolean findElements() {
-    // Проверка соответствия фактических и ожидаемых значений для каждой карты
+        // Проверка соответствия фактических и ожидаемых значений для каждой карты
         for (WebElement creditNameElement : creditNameElements) {
-        String actualCreditName = creditNameElement.getText();
-        int index = creditNameElements.indexOf(creditNameElement); // Индекс текущего элемента в списке
-
-        String actualPercent = percentElements.get(index).getText();
-        String actualLimit = limitElements.get(index).getText();
-        String actualCurrency = currencyElements.get(index).getText();
-
-        // Проверка названия карты
-        if (actualCreditName.equals(expectedCreditNames.get(index))) {
-            System.out.println("Название кредита " + actualCreditName + " соответствует ожидаемому");
-        } else {
-            System.out.println("Название кредита " + actualCreditName + " не соответствует ожидаемому");
+            String actualCreditName = creditNameElement.getText();
+            int index = creditNameElements.indexOf(creditNameElement); // Индекс текущего элемента в списке
+            String actualPercent = percentElements.get(index).getText();
+            String actualLimit = limitElements.get(index).getText();
+            String actualCurrency = currencyElements.get(index).getText();
+            // Проверка названия карты
+            if (actualCreditName.equals(expectedCreditNames.get(index))) {
+                System.out.println("Название кредита " + actualCreditName + " соответствует ожидаемому");
+            } else {
+                System.out.println("Название кредита " + actualCreditName + " не соответствует ожидаемому");
+            }
+            // Проверка процентной ставки
+            if (actualPercent.equals(expectedPercents.get(index))) {
+                System.out.println("Процент " + actualPercent + " соответствует ожидаемому");
+            } else {
+                System.out.println("Процент " + actualPercent + " не соответствует ожидаемому");
+            }
+            // Проверка лимита
+            if (actualLimit.equals(expectedLimits.get(index))) {
+                System.out.println("Лимит " + actualLimit + " соответствует ожидаемому");
+            } else {
+                System.out.println("Лимит " + actualLimit + " не соответствует ожидаемому");
+            }
+            // Проверка валюты
+            if (actualCurrency.equals(expectedCurrencies.get(index))) {
+                System.out.println("Валюта " + actualCurrency + " соответствует ожидаемой");
+            } else {
+                System.out.println("Валюта " + actualCurrency + " не соответствует ожидаемой");
+            }
         }
-
-        // Проверка процентной ставки
-        if (actualPercent.equals(expectedPercents.get(index))) {
-            System.out.println("Процент " + actualPercent + " соответствует ожидаемому");
-        } else {
-            System.out.println("Процент " + actualPercent + " не соответствует ожидаемому");
-        }
-
-        // Проверка лимита
-        if (actualLimit.equals(expectedLimits.get(index))) {
-            System.out.println("Лимит " + actualLimit + " соответствует ожидаемому");
-        } else {
-            System.out.println("Лимит " + actualLimit + " не соответствует ожидаемому");
-        }
-
-        // Проверка валюты
-        if (actualCurrency.equals(expectedCurrencies.get(index))) {
-            System.out.println("Валюта " + actualCurrency + " соответствует ожидаемой");
-        } else {
-            System.out.println("Валюта " + actualCurrency + " не соответствует ожидаемой");
-        }
-    }
         return false;
     }
 
@@ -193,7 +182,6 @@ public class CardProductsPage extends BasePage {
     public void clickCardCreditButton() {
         cardCreditButton.click();
     }
-
 
     public void classicCardOrderButtonClick() {
         classicCardOrderButton.click();
@@ -418,4 +406,5 @@ public class CardProductsPage extends BasePage {
             return false;
         }
     }
-   }
+
+}
