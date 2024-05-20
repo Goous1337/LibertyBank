@@ -10,7 +10,7 @@ import java.util.List;
 public class CardProductInfoPage extends BasePage {
     @FindBy(xpath = "//h2[@data-testid]")
     private WebElement cardTitle;
-    @FindBy(xpath = "//*[contains(@data-testid, 'image-card')]")
+    @FindBy(xpath = "//img[contains(@data-testid, 'image-card')]")
     private WebElement cardImage;
     @FindBy(xpath = "//span[contains(text(), 'Срок')]/preceding-sibling::span")
     private WebElement cardValidity;

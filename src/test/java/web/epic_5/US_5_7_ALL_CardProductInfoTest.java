@@ -41,8 +41,8 @@ public class US_5_7_ALL_CardProductInfoTest extends BaseTest {
     })
     public void cardProductsInfoTest(String name, String validity, String cost, String currency) {
         open(CARD_PRODUCTS_URL + "/" + name);
-        cardProductInfoSteps.assertIsCardImageDisplayed();
-        //cardProductInfoSteps.assertCardTitleEquals(name);
+        //cardProductInfoSteps.assertIsCardImageDisplayed();
+        cardProductInfoSteps.assertCardTitleEquals(name);
         cardProductInfoSteps.assertCardValidityEquals(validity);
         cardProductInfoSteps.assertCardServiceCostEquals(cost);
         cardProductInfoSteps.assertCardCurrencyEquals(currency);
