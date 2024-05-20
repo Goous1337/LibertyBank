@@ -61,6 +61,7 @@ public class BaseTest {
     protected FilterCardsSteps filterCardsSteps;
     protected MyDepositsProductsSteps myDepositsProductsSteps;
     protected DepositsProductsFullInfoStep depositsProductsFullInfoStep;
+    protected  ChangePinSteps changePinSteps;
 
     public BaseTest() {
         refreshPages();
@@ -124,6 +125,7 @@ public class BaseTest {
         filterCardsSteps = new FilterCardsSteps();
         depositsProductsSteps = new DepositsProductsSteps();
         myDepositsProductsSteps = new MyDepositsProductsSteps();
+        changePinSteps = new ChangePinSteps();
     }
 
 }
