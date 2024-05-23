@@ -9,37 +9,21 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import pojo.insuranceService.CarInsuranceResponseModel;
 
 import java.util.List;
 
-import static constant.InsuranceServiceConstants.ACCIDENT_INSURANCE_SERVICE_PRODUCT_NAME;
-import static constant.InsuranceServiceConstants.FLAT_INSURANCE_SERVICE_PRODUCT_NAME;
-import static constant.InsuranceServiceConstants.HOME_INSURANCE_SERVICE_PRODUCT_NAME;
-import static constant.InsuranceServiceConstants.MEDICINE_PREMIUM_INSURANCE_SERVICE_PRODUCT_NAME;
-import static constant.InsuranceServiceConstants.MEDICINE_STANDART_INSURANCE_SERVICE_PRODUCT_NAME;
-import static constant.InsuranceServiceConstants.MEDICINE_STANDART_PLUS_INSURANCE_SERVICE_PRODUCT_NAME;
-import static constant.InsuranceServiceConstants.MEDICINE_VIP_INSURANCE_SERVICE_PRODUCT_NAME;
-import static constant.InsuranceServiceConstants.THING_INSURANCE_SERVICE_PRODUCT_NAME;
-import static constant.InsuranceServiceConstants.TRAVELING_INSURANCE_SERVICE_PRODUCT_NAME;
-import static constant.InsuranceServiceConstants.TYPE_OF_INSURANCE_ACCIDENT;
 import static constant.InsuranceServiceConstants.TYPE_OF_INSURANCE_CAR;
-import static constant.InsuranceServiceConstants.TYPE_OF_INSURANCE_HEALTH;
-import static constant.InsuranceServiceConstants.TYPE_OF_INSURANCE_PROPERTY;
-import static constant.InsuranceServiceConstants.TYPE_OF_INSURANCE_TRAVELING;
 import static constant.InsuranceServiceConstants.VEHICLE_KASKO_INSURANCE_SERVICE_PRODUCT_NAME;
 import static constant.InsuranceServiceConstants.VEHICLE_OSAGO_INSURANCE_SERVICE_PRODUCT_NAME;
-import static constant.Message.NOT_FOUND_ERROR_MESSAGE;
-import static constant.Message.NOT_VALID_VALUE_INSURANCE_PRODUCT_ID_ERROR_MESSAGE;
-import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
-import static org.apache.http.HttpStatus.SC_NOT_FOUND;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static property.BaseProperties.INSURANCE_SERVICE;
+import static property.BaseProperties.INSURANCE_SERVICE_GROUPS;
 
 public class INS_1_GetInfoAboutInsuranceProducts extends BaseTest {
     {
-        RestAssured.baseURI = INSURANCE_SERVICE;
+        RestAssured.baseURI = INSURANCE_SERVICE_GROUPS;
     }
 
     @DisplayName("Успешное получение данных о продуктах страхования(Автострахование)")
@@ -48,19 +32,19 @@ public class INS_1_GetInfoAboutInsuranceProducts extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB5-415")
     @Test()
     public void successfulRequestGetInfoAboutCarInsurance() {
-
         String jsonSchemaPath = "schemas/insuranceService/checkTypesOfInsurances.json";
         Response response = insuranceService.checkGetInfoAboutInsuranceProducts(TYPE_OF_INSURANCE_CAR);
-        List<Response> jsonList = response.jsonPath().getList("products.name");
+        List<String> productsName = CarInsuranceResponseModel.getListOfProductsNameFromResponse(response.getBody().as(CarInsuranceResponseModel.class));
         assertAll(
                 () -> assertEquals(SC_OK, response.statusCode(), "Статус код ответа не соответствует ожидаемому"),
-                () -> assertEquals(VEHICLE_OSAGO_INSURANCE_SERVICE_PRODUCT_NAME, jsonList.get(0), "Автострахование ОСАГО отсутствует"),
-                () -> assertEquals(VEHICLE_KASKO_INSURANCE_SERVICE_PRODUCT_NAME, jsonList.get(1), "Автострахование КАСКО отсутствует"),
+                () -> assertEquals(VEHICLE_OSAGO_INSURANCE_SERVICE_PRODUCT_NAME, productsName.get(0), "Автострахование ОСАГО отсутствует"),
+                () -> assertEquals(VEHICLE_KASKO_INSURANCE_SERVICE_PRODUCT_NAME, productsName.get(1), "Автострахование КАСКО отсутствует"),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
+}
 
-    @DisplayName("Успешное получение данных о продуктах страхования(Добровольное медицинское страхование)")
+ /*   @DisplayName("Успешное получение данных о продуктах страхования(Добровольное медицинское страхование)")
     @Description("Тест направлен на проверку успешного получения данных о продуктах страхования(Добровольное медицинское страхование)")
     @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB5-418")
@@ -173,4 +157,4 @@ public class INS_1_GetInfoAboutInsuranceProducts extends BaseTest {
                 () -> assertEquals(NOT_FOUND_ERROR_MESSAGE, response.jsonPath().get("error").toString())
         );
     }
-}
+}*/

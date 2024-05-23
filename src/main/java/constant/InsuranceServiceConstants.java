@@ -55,4 +55,8 @@ public class InsuranceServiceConstants {
 
     public static final String HOME_INSURANCE_SERVICE_PRODUCT_NAME = "Страхование дома";
 
+    public static final String BAER_TOKEN = "Bearer e7cecd9513ce64401c8a54485d9926ef00f9478488b73dc4e518eb0f8765db07c4bb" +
+            "8cbbb8c7039a74c45f1dd1b7a6f3e5cf1acc2df1811d6f077222a1d3f058650f1e75a54bd9d4970dae9939173c2ffdc778ea78699af" +
+            "d0f13e9b78b8dbf2b7adcf8ac19e181a851f25b224921ee8132776a0a6a5c8394f2f275291dea5118";
+
 }
