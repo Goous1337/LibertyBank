@@ -73,7 +73,7 @@ public class LoginSteps {
     public LoginSteps assertSubmitButtonAndInputSuccessful(
             String bgButtonColor, String textButtonColor, String inputColor) {
         assertAll(
-                () -> assertTrue(loginPage.checkButtonCondition(bgButtonColor, textButtonColor, true),
+                () -> assertTrue(loginPage.checkButtonCondition(bgButtonColor, textButtonColor, false),
                         INVALID_COLOR),
                 () -> assertTrue(loginPage.isValidInput(inputColor), INVALID_COLOR)
         );
@@ -84,7 +84,7 @@ public class LoginSteps {
     public void assertSubmitButtonAndInputInvalid(
             String bgButtonColor, String textButtonColor, String inputColor) {
         assertAll(
-                () -> assertTrue(loginPage.checkButtonCondition(bgButtonColor, textButtonColor, false),
+                () -> assertTrue(loginPage.checkButtonCondition(bgButtonColor, textButtonColor, true),
                         INVALID_COLOR),
                 () -> assertTrue(loginPage.isValidInput(inputColor), INVALID_COLOR),
                 () -> assertTrue(loginPage.checkErrorHint("Неверный пароль или номер телефона"),
