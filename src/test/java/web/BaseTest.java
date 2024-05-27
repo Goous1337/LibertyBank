@@ -87,12 +87,6 @@ public class BaseTest {
         DriverManager.resetDriver();
     }
 
-    @AfterAll
-    public void tearDown() {
-        TestListener.takeScreenshot();
-        DriverManager.resetDriver();
-    }
-
     private void refreshPages() {
         accountSteps = new AccountSteps();
         accountInfoSteps = new AccountInfoSteps();
