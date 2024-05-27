@@ -91,6 +91,7 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
             boolean isErrorPhoneHintNotVisible, boolean isErrorPasswordHintNotVisible)
             throws InterruptedException {
 
+
         loginSteps.enterPhone(phoneNumber)
                 .outFormPhone()
                 .assertPhoneInput(amountSymbolsPhone, colorPhoneInput, colorPlaceholderPhone,

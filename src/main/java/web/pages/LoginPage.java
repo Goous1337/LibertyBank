@@ -1,11 +1,12 @@
 package web.pages;
 
+import java.util.Objects;
+
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import web.helpers.Waiters;
 
-import java.util.Objects;
+import web.helpers.Waiters;
 
 import static web.helpers.Waiters.waitElement;
 import static web.helpers.Waiters.waitElementWithColor;
