@@ -19,7 +19,7 @@ public class Waiters {
 
     public static WebElement waitElement(WebElement element) {
         return new WebDriverWait(getDriver(), Duration.ofSeconds(TIME_TO_WAIT))
-                .ignoring(NoSuchElementException.class)
+                //.ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
                 .until(ExpectedConditions.visibilityOf(element));
     }

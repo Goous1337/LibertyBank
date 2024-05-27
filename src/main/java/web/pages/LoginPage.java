@@ -97,11 +97,11 @@ public class LoginPage extends BasePage {
     }
 
     public String getPhoneInputBorderColor() {
-        return borderForPhoneInput.getCssValue("border-color");
+        return borderForPhoneInput.getCssValue("outline-color");
     }
 
     public String getPasswordInputBorderColor() {
-        return borderForPasswordInput.getCssValue("border-color");
+        return borderForPasswordInput.getCssValue("outline-color");
     }
 
     public String getColorPlaceholderPhone() {
@@ -129,12 +129,12 @@ public class LoginPage extends BasePage {
         return errorPhoneHint.getText();
     }
 
-    public boolean isErrorPasswordHintNotDisplayed() {
-        return Waiters.isElementNotDisplayed(errorPasswordHint);
-    }
-
     public boolean isErrorPhoneHintNotDisplayed() {
         return Waiters.isElementNotDisplayed(errorPhoneHint);
+    }
+
+    public boolean isErrorPasswordHintNotDisplayed() {
+        return Waiters.isElementNotDisplayed(errorPasswordHint);
     }
 
     public String getTextFromPhoneInput() {
