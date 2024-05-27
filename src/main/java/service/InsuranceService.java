@@ -41,14 +41,13 @@ public class InsuranceService {
         return response.body().jsonPath().getMap("policyInfo").get("productName").toString();
     }
 
-    public Integer getResponseCountPopularInsuranceProducts(Response response){
-       return response.body().jsonPath().getList("products").size();
+    public Integer getResponseCountPopularInsuranceProducts(Response response) {
+        return response.body().jsonPath().getList("products").size();
     }
 
     public String getResponsePolicyErrorMessage(Response response, String nameErrorField) {
         return response.body().jsonPath().get(nameErrorField);
     }
-
 
     public Response checkGetInfoAboutInsuranceProducts(String typeOfInsurance) {
         List<RequestParam> params = List.of(getRP(HEADER, "accept", ACCEPT_VALUE),

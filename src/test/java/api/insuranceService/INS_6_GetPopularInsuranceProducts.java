@@ -11,7 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static constant.InsuranceServiceConstants.*;
+import static constant.InsuranceServiceConstants.COUNT_POPULAR_INSURANCE_PRODUCTS;
 import static constant.Message.METHOD_NOT_ALLOWED;
 import static org.apache.hc.core5.http.HttpStatus.SC_METHOD_NOT_ALLOWED;
 import static org.apache.hc.core5.http.HttpStatus.SC_OK;
