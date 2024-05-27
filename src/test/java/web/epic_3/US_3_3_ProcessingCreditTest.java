@@ -106,7 +106,7 @@ public class US_3_3_ProcessingCreditTest extends BaseTest {
     public void checkPositiveBorderLibertyMoneyInputTest(String sumCredit, String termCredit, String employerIdentificationNumber, String totalDebtLoad, String averageMonthlyIncome) {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickCreditProductButton();
-        сreditProductsSteps.clickShowMoreLibertyMoneyButton();
+        creditProductsSteps.clickShowMoreLibertyMoneyButton();
         creditProductDetailedInformationSteps.clickShowMoreButton();
         creditApplicationSteps.assertSubmitButtonInvalid(
                 "rgba(216, 223, 234, 1)",
@@ -130,7 +130,7 @@ public class US_3_3_ProcessingCreditTest extends BaseTest {
     public void checkPositiveBorderLibertyExpressInputTest(String sumCredit, String termCredit, String employerIdentificationNumber, String totalDebtLoad, String averageMonthlyIncome) {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickCreditProductButton();
-        сreditProductsSteps.clickShowMoreLibertyExpressButton();
+        creditProductsSteps.clickShowMoreLibertyExpressButton();
         creditProductDetailedInformationSteps.clickShowMoreButton();
         creditApplicationSteps.assertSubmitButtonInvalid(
                 "rgba(216, 223, 234, 1)",
@@ -154,7 +154,7 @@ public class US_3_3_ProcessingCreditTest extends BaseTest {
     public void checkPositiveBorderLibertyCashInputTest(String sumCredit, String termCredit, String employerIdentificationNumber, String totalDebtLoad, String averageMonthlyIncome) {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickCreditProductButton();
-        сreditProductsSteps.clickShowMoreLibertyCashButton();
+        creditProductsSteps.clickShowMoreLibertyCashButton();
         creditProductDetailedInformationSteps.clickShowMoreButton();
         creditApplicationSteps.assertSubmitButtonInvalid(
                 "rgba(216, 223, 234, 1)",
@@ -178,7 +178,7 @@ public class US_3_3_ProcessingCreditTest extends BaseTest {
     public void checkPositiveBorderLibertyEasyInputTest(String sumCredit, String termCredit, String employerIdentificationNumber, String totalDebtLoad, String averageMonthlyIncome) {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickCreditProductButton();
-        сreditProductsSteps.clickShowMoreLibertyEasyButton();
+        creditProductsSteps.clickShowMoreLibertyEasyButton();
         creditProductDetailedInformationSteps.clickShowMoreButton();
         creditApplicationSteps.assertSubmitButtonInvalid(
                 "rgba(216, 223, 234, 1)",
@@ -202,7 +202,7 @@ public class US_3_3_ProcessingCreditTest extends BaseTest {
     public void checkPositiveBorderLibertyCarInputTest(String sumCredit, String termCredit, String employerIdentificationNumber, String totalDebtLoad, String averageMonthlyIncome) {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickCreditProductButton();
-        сreditProductsSteps.clickShowMoreLibertyCarButton();
+        creditProductsSteps.clickShowMoreLibertyCarButton();
         creditProductDetailedInformationSteps.clickShowMoreButton();
         creditApplicationSteps.assertSubmitButtonInvalid(
                 "rgba(216, 223, 234, 1)",
@@ -226,7 +226,7 @@ public class US_3_3_ProcessingCreditTest extends BaseTest {
     public void checkPositiveBorderLibertyMyFlatInputTest(String sumCredit, String termCredit, String employerIdentificationNumber, String totalDebtLoad, String averageMonthlyIncome) {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickCreditProductButton();
-        сreditProductsSteps.clickShowMoreLibertyMyFlatButton();
+        creditProductsSteps.clickShowMoreLibertyMyFlatButton();
         creditProductDetailedInformationSteps.clickShowMoreButton();
         creditApplicationSteps.assertSubmitButtonInvalid(
                 "rgba(216, 223, 234, 1)",
@@ -251,7 +251,7 @@ public class US_3_3_ProcessingCreditTest extends BaseTest {
     public void checkIncorrectDataInputAmountAndPeriodCreditTest(String sumCredit, String termCredit, String employerIdentificationNumber, String totalDebtLoad, String averageMonthlyIncome) {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickCreditProductButton();
-        сreditProductsSteps.clickShowMoreLibertyMyFlatButton();
+        creditProductsSteps.clickShowMoreLibertyMyFlatButton();
         creditProductDetailedInformationSteps.clickShowMoreButton();
         creditApplicationSteps.assertSubmitButtonInvalid(
                 "rgba(216, 223, 234, 1)",
@@ -277,7 +277,7 @@ public class US_3_3_ProcessingCreditTest extends BaseTest {
     public void checkIncorrectDataInputCreditTest(String sumCredit, String termCredit, String employerIdentificationNumber, String totalDebtLoad, String averageMonthlyIncome) {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickCreditProductButton();
-        сreditProductsSteps.clickShowMoreLibertyMyFlatButton();
+        creditProductsSteps.clickShowMoreLibertyMyFlatButton();
         creditProductDetailedInformationSteps.clickShowMoreButton();
         creditApplicationSteps.enterValidateAmountCreditInput(sumCredit);
         creditApplicationSteps.enterPeriodMonthsCreditInput(termCredit);
@@ -293,5 +293,4 @@ public class US_3_3_ProcessingCreditTest extends BaseTest {
                 "rgba(77, 95, 113, 1)"
         );
     }
-
 }

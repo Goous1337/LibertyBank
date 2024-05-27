@@ -17,7 +17,7 @@ public class US_3_6_ChechMoreCreditProductInformationTest extends BaseTest {
     public void checkBasicInfoAboutLibertyCash() {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickCreditProductButton();
-        сreditProductsSteps.clickShowMoreLibertyCashButton();
+        creditProductsSteps.clickShowMoreLibertyCashButton();
         creditProductDetailedInformationSteps.assertMoreInfoAboutCreditProducts();
     }
 
@@ -28,7 +28,7 @@ public class US_3_6_ChechMoreCreditProductInformationTest extends BaseTest {
     public void checkBasicInfoAboutLibertyExpress() {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickCreditProductButton();
-        сreditProductsSteps.clickShowMoreLibertyExpressButton();
+        creditProductsSteps.clickShowMoreLibertyExpressButton();
         creditProductDetailedInformationSteps.assertMoreInfoAboutCreditProducts();
     }
 
@@ -39,7 +39,7 @@ public class US_3_6_ChechMoreCreditProductInformationTest extends BaseTest {
     public void checkBasicInfoAboutLibertyMoney() {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickCreditProductButton();
-        сreditProductsSteps.clickShowMoreLibertyMoneyButton();
+        creditProductsSteps.clickShowMoreLibertyMoneyButton();
         creditProductDetailedInformationSteps.assertMoreInfoAboutCreditProducts();
     }
 
@@ -50,7 +50,7 @@ public class US_3_6_ChechMoreCreditProductInformationTest extends BaseTest {
     public void checkBasicInfoAboutLibertyEasy() {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickCreditProductButton();
-        сreditProductsSteps.clickShowMoreLibertyEasyButton();
+        creditProductsSteps.clickShowMoreLibertyEasyButton();
         creditProductDetailedInformationSteps.assertMoreInfoAboutCreditProducts();
     }
 
@@ -61,7 +61,7 @@ public class US_3_6_ChechMoreCreditProductInformationTest extends BaseTest {
     public void checkBasicInfoAboutLibertyCar() {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickCreditProductButton();
-        сreditProductsSteps.clickShowMoreLibertyCarButton();
+        creditProductsSteps.clickShowMoreLibertyCarButton();
         creditProductDetailedInformationSteps.assertMoreInfoAboutCreditProducts();
     }
 
@@ -72,7 +72,7 @@ public class US_3_6_ChechMoreCreditProductInformationTest extends BaseTest {
     public void checkBasicInfoAboutLibertyMyFlat() {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickCreditProductButton();
-        сreditProductsSteps.clickShowMoreLibertyMyFlatButton();
+        creditProductsSteps.clickShowMoreLibertyMyFlatButton();
         creditProductDetailedInformationSteps.assertMoreInfoAboutCreditProducts();
     }
 

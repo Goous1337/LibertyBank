@@ -4,7 +4,8 @@ import api.model.webAndApi.CreditProductService;
 import api.model.webAndApi.credit.MoreCreditDetails;
 import api.model.webAndApi.credit.MoreCreditProduct;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -34,7 +35,7 @@ public class BaseTest {
     protected DepositsProductsSteps depositsProductsSteps;
     protected CreditInfoSteps creditInfoSteps;
     protected CreditProductsDetailedInformationSteps creditProductDetailedInformationSteps;
-    protected СreditProductsSteps сreditProductsSteps;
+    protected СreditProductsSteps creditProductsSteps;
     protected CreditApplicationSteps creditApplicationSteps;
     protected MyCreditSteps myCreditSteps;
     protected MyCreditDetailedInformationSteps myCreditDetailedInformationSteps;
@@ -61,10 +62,6 @@ public class BaseTest {
     protected MyDepositsProductsSteps myDepositsProductsSteps;
     protected DepositsProductsFullInfoStep depositsProductsFullInfoStep;
 
-    public BaseTest() {
-        refreshPages();
-    }
-
     protected void open(String pageUrl) {
         DriverManager.getDriver()
                 .get(BASE_URL + pageUrl);
@@ -79,9 +76,15 @@ public class BaseTest {
         loginSteps.tapSubmitButtonToMain();
     }
 
-    @BeforeAll
+    @BeforeEach
     public void driverInitialization() {
         DriverManager.getDriver();
+        refreshPages();
+    }
+
+    @AfterEach
+    public void clearCache() {
+        DriverManager.resetDriver();
     }
 
     @AfterAll
@@ -103,7 +106,7 @@ public class BaseTest {
         dropDownAccountMenuSteps = new DropDownAccountMenuSteps();
         changeNotificationStatusSteps = new ChangeNotificationStatusSteps();
         creditInfoSteps = new CreditInfoSteps();
-        сreditProductsSteps = new СreditProductsSteps();
+        creditProductsSteps = new СreditProductsSteps();
         creditApplicationSteps = new CreditApplicationSteps();
         creditProductDetailedInformationSteps = new CreditProductsDetailedInformationSteps();
         myCreditSteps = new MyCreditSteps();
