@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static constant.InsuranceServiceConstants.*;
+import static constant.Message.*;
 import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -137,7 +138,7 @@ public class INS_9_GetInfoInsurancePolicy extends BaseTest {
         Response response = insuranceService.getPolicyInfo(FAKE_INSURANCE_POLICY_ID);
         assertAll(
                 () -> assertEquals(SC_NOT_FOUND, response.statusCode(), "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals(FAKE_POLICY_ID_ERROR_MESSAGE, insuranceService.getResponsePolicyErrorMessage(response)),
+                () -> assertEquals(NOT_FOUND_POLICY_ID_ERROR_MESSAGE, insuranceService.getResponsePolicyErrorMessage(response, "message")),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
@@ -150,10 +151,9 @@ public class INS_9_GetInfoInsurancePolicy extends BaseTest {
     public void getInsurancePolicyWithInvalidPolicyId() {
         String jsonSchemaPath = "schemas/insuranceService/invalidPolicyIdGetInsurancePolicy.json";
         Response response = insuranceService.getPolicyInfo("invalidId");
-        System.out.println(insuranceService.getResponsePolicyErrorMessage(response));
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.statusCode(), "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals(INVALID_POLICY_ID_ERROR_MESSAGE, insuranceService.getResponsePolicyErrorMessage(response)),
+                () -> assertEquals(INVALID_POLICY_ID_ERROR_MESSAGE, insuranceService.getResponsePolicyErrorMessage(response, "message")),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }

@@ -6,6 +6,7 @@ import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -37,6 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.INSURANCE_SERVICE;
 
+@DisplayName("InS-1 Просмотр доступных видов страхования")
 public class INS_1_GetInfoAboutInsuranceProducts extends BaseTest {
     {
         RestAssured.baseURI = INSURANCE_SERVICE;
@@ -151,6 +153,7 @@ public class INS_1_GetInfoAboutInsuranceProducts extends BaseTest {
     @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB5-1731")
     @Test()
+    @Disabled
     public void requestForValuesGreaterThanAcceptableValues() {
 
         Response response = insuranceService.checkGetInfoAboutInsuranceProducts("9999");

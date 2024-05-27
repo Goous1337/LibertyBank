@@ -6,7 +6,7 @@ public class InsuranceServiceConstants {
 
     public static final String POLICY_THING_ID = "7223a5c7-ac5d-46c1-bcd7-063908674755";
 
-    public static final String POLICY_VEHICLE_ID = "b28ca4de-09f3-11ee-be56-0242ac120002";
+    public static final String POLICY_VEHICLE_ID = "e8cd1758-ff9f-11ed-be56-0242ac120002";
 
     public static final String POLICY_BUILDING_ID = "9bebe375-cb2c-456a-b9d5-1f8f4c87778f";
 
@@ -28,10 +28,6 @@ public class InsuranceServiceConstants {
 
     public static final String VEHICLE_OSAGO_INSURANCE_SERVICE_PRODUCT_NAME = "Автострахование ОСАГО";
 
-    public static final String INVALID_POLICY_ID_ERROR_MESSAGE = "Некорректный ID полиса";
-
-    public static final String FAKE_POLICY_ID_ERROR_MESSAGE = "Полис не найден";
-
     public static final String CLIENT_ID_WITH_POLICES = "4bdcabf8-ff9e-11ed-be56-0242ac120002";
 
     public static final String CLIENT_ID_NOT_EXIST = "6aa0d17a-74d0-45fd-8de8-7bd8a4d54f3f";
@@ -45,6 +41,8 @@ public class InsuranceServiceConstants {
     public static final String TYPE_OF_INSURANCE_TRAVELING = "3";
 
     public static final String TYPE_OF_INSURANCE_PROPERTY = "4";
+
+    public static final Integer COUNT_POPULAR_INSURANCE_PRODUCTS = 5;
 
     public static final String VEHICLE_KASKO_INSURANCE_SERVICE_PRODUCT_NAME = "Автострахование КАСКО";
 
