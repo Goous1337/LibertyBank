@@ -68,7 +68,7 @@ public class AS_4_SetMainStatusOnAccountTest extends BaseTest {
     public void setMainStatusOnBlockedAccount() {
         String accountId = AccountServiceDataBaseRequest.getAccountId(STATUS_BLOCKED);
         Response response = accountService.setMainAccountStatus(accountId, IS_MAIN);
-        String jsonSchemaPath = "schemas/accountService/errorNotFound.json";
+        String jsonSchemaPath = "schemas/accountService/badRequestBlockedCardIsMain.json";
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST,
                         response.statusCode(),
