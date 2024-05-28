@@ -55,7 +55,7 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
         loginSteps.assertSubmitButtonAndInputSuccessful(
                 "rgba(0, 90, 254, 1)",
                 "rgba(245, 245, 245, 1)",
-                "rgb(77, 95, 113)");
+                "rgba(117, 127, 138, 1)");
     }
 
     @DisplayName("Проверка авторизации незарегистрированного пользователя по номеру телефона")
@@ -73,7 +73,7 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
         loginSteps.assertSubmitButtonAndInputInvalid(
                 "rgba(216, 223, 234, 1)",
                 "rgba(77, 95, 113, 1)",
-                "rgb(245, 60, 20)");
+                "rgba(245, 60, 20, 1)");
     }
 
     @DisplayName("Проверка валидации полей формы авторизации при использовании невалидных данных")
@@ -88,8 +88,7 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
             String colorPhoneInput, String colorPasswordInput,
             String colorPlaceholderPhone, String colorPlaceholderPassword,
             String textErrorMessagePhone, String textErrorMessagePassword,
-            boolean isErrorPhoneHintNotVisible, boolean isErrorPasswordHintNotVisible)
-            throws InterruptedException {
+            boolean isErrorPhoneHintNotVisible, boolean isErrorPasswordHintNotVisible) {
 
 
         loginSteps.enterPhone(phoneNumber)
@@ -116,7 +115,7 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
         loginSteps.assertSubmitButtonAndInputSuccessful(
                 "rgba(0, 90, 254, 1)",
                 "rgba(245, 245, 245, 1)",
-                "rgb(0, 26, 52)");
+                "rgba(117, 127, 138, 1)");
         loginSteps.clickSubmitButton();
         homeSteps.clickUserMenu();
         homeSteps.assertIsUserPanelDisplayed();
@@ -143,7 +142,7 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
                 .assertSubmitButtonAndInputSuccessful(
                         "rgba(0, 90, 254, 1)",
                         "rgba(245, 245, 245, 1)",
-                        "rgb(0, 26, 52)")
+                        "rgba(117, 127, 138, 1)")
                 .clickSubmitButton();
         homeSteps.clickUserMenu()
                 .assertIsUserPanelDisplayed();
