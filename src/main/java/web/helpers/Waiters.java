@@ -56,7 +56,6 @@ public class Waiters {
     public static boolean isElementNotDisplayed(WebElement element) {
         try {
             setDriverImplicitlyWait(0);
-            Waiters.waitIsElementNotDisplayed(element);
             waitIsElementNotDisplayed(element);
             return true;
         } catch (TimeoutException e) {

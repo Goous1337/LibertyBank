@@ -29,7 +29,7 @@ public class US_3_10_CheckValueCreditReportTest extends BaseTest {
     public void checkPositiveBorderLibertyCarInputTest(String sumCredit, String termCredit, String employerIdentificationNumber, String totalDebtLoad, String averageMonthlyIncome) {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickCreditProductButton();
-        сreditProductsSteps.clickShowMoreLibertyCarButton();
+        creditProductsSteps.clickShowMoreLibertyCarButton();
         creditProductDetailedInformationSteps.clickShowMoreButton();
         creditApplicationSteps.enterValidateAmountCreditInput(sumCredit);
         creditApplicationSteps.enterPeriodMonthsCreditInput(termCredit);
@@ -46,7 +46,7 @@ public class US_3_10_CheckValueCreditReportTest extends BaseTest {
     public void checkPositiveBorderLibertyMyFlatInputTest(String sumCredit, String termCredit, String employerIdentificationNumber, String totalDebtLoad, String averageMonthlyIncome) {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickCreditProductButton();
-        сreditProductsSteps.clickShowMoreLibertyMyFlatButton();
+        creditProductsSteps.clickShowMoreLibertyMyFlatButton();
         creditProductDetailedInformationSteps.clickShowMoreButton();
         creditApplicationSteps.enterValidateAmountCreditInput(sumCredit);
         creditApplicationSteps.enterPeriodMonthsCreditInput(termCredit);
