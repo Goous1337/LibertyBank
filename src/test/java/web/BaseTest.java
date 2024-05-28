@@ -10,14 +10,7 @@ import api.model.webAndApi.credit.MoreCreditDetails;
 import api.model.webAndApi.credit.MoreCreditProduct;
 import web.drivers.DriverManager;
 import web.helpers.TestListener;
-import web.steps.ChangeNotificationStatusSteps;
-import web.steps.ChangePasswordSteps;
-import web.steps.DropDownAccountMenuSteps;
-import web.steps.HomeSteps;
-import web.steps.LoginSteps;
-import web.steps.PersonalDataSteps;
-import web.steps.SecuritySteps;
-import web.steps.UpdateEmailSteps;
+import web.steps.*;
 import web.steps.accountSteps.AccountInfoSteps;
 import web.steps.accountSteps.AccountSteps;
 import web.steps.accountSteps.CreateAccountSteps;
@@ -79,7 +72,7 @@ public class BaseTest {
     protected FilterCardsSteps filterCardsSteps;
     protected MyDepositsProductsSteps myDepositsProductsSteps;
     protected DepositsProductsFullInfoStep depositsProductsFullInfoStep;
-    protected  ChangePinSteps changePinSteps;
+    protected ChangePinSteps changePinSteps;
 
     protected void open(String pageUrl) {
         DriverManager.getDriver()
