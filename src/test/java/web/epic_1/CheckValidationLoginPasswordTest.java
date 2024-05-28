@@ -90,6 +90,7 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
             String textErrorMessagePhone, String textErrorMessagePassword,
             boolean isErrorPhoneHintNotVisible, boolean isErrorPasswordHintNotVisible) {
 
+
         loginSteps.enterPhone(phoneNumber)
                 .outFormPhone()
                 .assertPhoneInput(amountSymbolsPhone, colorPhoneInput, colorPlaceholderPhone,

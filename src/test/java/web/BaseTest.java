@@ -1,19 +1,40 @@
 package web;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.extension.ExtendWith;
+
 import api.model.webAndApi.CreditProductService;
 import api.model.webAndApi.credit.MoreCreditDetails;
 import api.model.webAndApi.credit.MoreCreditProduct;
-import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.extension.ExtendWith;
-
 import web.drivers.DriverManager;
 import web.helpers.TestListener;
-import web.steps.*;
+import web.steps.ChangeNotificationStatusSteps;
+import web.steps.ChangePasswordSteps;
+import web.steps.DropDownAccountMenuSteps;
+import web.steps.HomeSteps;
+import web.steps.LoginSteps;
+import web.steps.PersonalDataSteps;
+import web.steps.SecuritySteps;
+import web.steps.UpdateEmailSteps;
 import web.steps.accountSteps.AccountInfoSteps;
 import web.steps.accountSteps.AccountSteps;
 import web.steps.accountSteps.CreateAccountSteps;
 import web.steps.accountSteps.RenameAccountSteps;
-import web.steps.cardSteps.*;
+import web.steps.cardSteps.CardInfoSteps;
+import web.steps.cardSteps.CardProductInfoSteps;
+import web.steps.cardSteps.CardProductsSteps;
+import web.steps.cardSteps.CardSteps;
+import web.steps.cardSteps.CloseCardSteps;
+import web.steps.cardSteps.ConfirmationSteps;
+import web.steps.cardSteps.FilterCardsSteps;
+import web.steps.creditSteps.CreditApplicationSteps;
+import web.steps.creditSteps.CreditInfoSteps;
+import web.steps.creditSteps.CreditProductsDetailedInformationSteps;
+import web.steps.creditSteps.MyCreditDetailedInformationSteps;
+import web.steps.creditSteps.MyCreditSteps;
+import web.steps.creditSteps.СreditProductsSteps;
 import web.steps.depositsSteps.DepositsProductsFullInfoStep;
 import web.steps.creditSteps.*;
 import web.steps.depositsSteps.DepositsProductsSteps;
@@ -32,7 +53,7 @@ public class BaseTest {
     protected DepositsProductsSteps depositsProductsSteps;
     protected CreditInfoSteps creditInfoSteps;
     protected CreditProductsDetailedInformationSteps creditProductDetailedInformationSteps;
-    protected СreditProductsSteps сreditProductsSteps;
+    protected СreditProductsSteps creditProductsSteps;
     protected CreditApplicationSteps creditApplicationSteps;
     protected MyCreditSteps myCreditSteps;
     protected MyCreditDetailedInformationSteps myCreditDetailedInformationSteps;
@@ -100,7 +121,7 @@ public class BaseTest {
         dropDownAccountMenuSteps = new DropDownAccountMenuSteps();
         changeNotificationStatusSteps = new ChangeNotificationStatusSteps();
         creditInfoSteps = new CreditInfoSteps();
-        сreditProductsSteps = new СreditProductsSteps();
+        creditProductsSteps = new СreditProductsSteps();
         creditApplicationSteps = new CreditApplicationSteps();
         creditProductDetailedInformationSteps = new CreditProductsDetailedInformationSteps();
         myCreditSteps = new MyCreditSteps();

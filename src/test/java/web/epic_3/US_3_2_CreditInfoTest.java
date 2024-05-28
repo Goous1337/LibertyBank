@@ -23,11 +23,11 @@ public class US_3_2_CreditInfoTest extends BaseTest {
     @DisplayName("US 3-2 Просмотр краткой информации о кредитных продуктах банках")
     @TmsLink("LIB3-181")
     public void checkShortInfoAboutCreditProducts() {
-        сreditProductsSteps.assertShortInfoAboutCreditProducts(CreditsEnum.LIBERTY_CASH);
-        сreditProductsSteps.assertShortInfoAboutCreditProducts(CreditsEnum.LIBERTY_EXPRESS);
-        сreditProductsSteps.assertShortInfoAboutCreditProducts(CreditsEnum.LIBERTY_CAR);
-        сreditProductsSteps.assertShortInfoAboutCreditProducts(CreditsEnum.LIBERTY_MONEY);
-        сreditProductsSteps.assertShortInfoAboutCreditProducts(CreditsEnum.LIBERTY_MY_FLAT);
-        сreditProductsSteps.assertShortInfoAboutCreditProducts(CreditsEnum.LIBERTY_EASY);
+        creditProductsSteps.assertShortInfoAboutCreditProducts(CreditsEnum.LIBERTY_CASH);
+        creditProductsSteps.assertShortInfoAboutCreditProducts(CreditsEnum.LIBERTY_EXPRESS);
+        creditProductsSteps.assertShortInfoAboutCreditProducts(CreditsEnum.LIBERTY_CAR);
+        creditProductsSteps.assertShortInfoAboutCreditProducts(CreditsEnum.LIBERTY_MONEY);
+        creditProductsSteps.assertShortInfoAboutCreditProducts(CreditsEnum.LIBERTY_MY_FLAT);
+        creditProductsSteps.assertShortInfoAboutCreditProducts(CreditsEnum.LIBERTY_EASY);
     }
 }

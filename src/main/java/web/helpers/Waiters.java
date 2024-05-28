@@ -1,5 +1,7 @@
 package web.helpers;
 
+import java.time.Duration;
+
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
@@ -7,27 +9,23 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeSelected;
 import static org.openqa.selenium.support.ui.ExpectedConditions.not;
 import static web.drivers.DriverManager.getDriver;
 
 public class Waiters {
 
-    public static final long TIME_TO_WAIT = 15L;
+    public static final int TIME_TO_WAIT = 15;
 
     public static WebElement waitElement(WebElement element) {
         return new WebDriverWait(getDriver(), Duration.ofSeconds(TIME_TO_WAIT))
-                //.ignoring(NoSuchElementException.class)
+                .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
                 .until(ExpectedConditions.visibilityOf(element));
     }
 
     public static void waitIsElementNotDisplayed(WebElement element) {
         new WebDriverWait(getDriver(), Duration.ofSeconds(5))
-                .ignoring(NoSuchElementException.class)
-                .ignoring(StaleElementReferenceException.class)
                 .until(ExpectedConditions.invisibilityOf(element));
     }
 
@@ -57,10 +55,17 @@ public class Waiters {
 
     public static boolean isElementNotDisplayed(WebElement element) {
         try {
+            setDriverImplicitlyWait(0);
+            Waiters.waitIsElementNotDisplayed(element);
             waitIsElementNotDisplayed(element);
             return true;
         } catch (TimeoutException e) {
-            return  false;
+            setDriverImplicitlyWait(TIME_TO_WAIT);
+            return false;
         }
+    }
+
+    public static void setDriverImplicitlyWait(int seconds) {
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(seconds));
     }
 }
