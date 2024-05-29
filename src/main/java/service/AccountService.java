@@ -73,4 +73,14 @@ public class AccountService {
     public Response getInformationAboutAvailableBalance(String accountId) {
         return sendRequestWithoutParams(GET, ACCOUNTS_LIST + "/" + accountId + "/balance");
     }
+
+    public Response getAccountsListTest() {
+        return sendSimpleRequest(GET, ACCOUNTS_LIST,
+                getRP(HEADER, HEADER_CUSTOMER_ID, VALID_CUSTOMER_ID));
+    }
+
+    public Response getAccountsListByCustomerIdWithNoAccounts1() {
+        return sendSimpleRequest(GET, ACCOUNTS_LIST,
+                getRP(HEADER, HEADER_CUSTOMER_ID, CUSTOMER_WITH_NO_ACCOUNTS));
+    }
 }
