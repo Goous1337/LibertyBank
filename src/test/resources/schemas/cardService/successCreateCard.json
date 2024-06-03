@@ -2,19 +2,15 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "properties": {
-    "status": {
+    "applicationNumber": {
       "type": "integer"
     },
-    "message": {
-      "type": "string"
-    },
-    "timeStamp": {
+    "createdDate": {
       "type": "string"
     }
   },
   "required": [
-    "status",
-    "message",
-    "timeStamp"
+    "applicationNumber",
+    "createdDate"
   ]
 }
