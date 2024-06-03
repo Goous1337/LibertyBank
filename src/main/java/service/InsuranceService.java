@@ -36,6 +36,13 @@ public class InsuranceService {
         return sendRequestWithoutParams(GET, POLICY_INSURANCE + "/" + insuranceID);
     }
 
+    public Response getAllUserPoliciesByClientId(String clientId) {
+        List<RequestParam> params = List.of(getRP(HEADER, "accept", ACCEPT_VALUE),
+                getRP(HEADER, "clientId", clientId),
+                getRP(HEADER, CONTENT_TYPE, CONTENT_TYPE_VALUE));
+        return sendSimpleRequest(GET, POLICY_INSURANCE + "/", params);
+    }
+
     public String getResponsePolicyName(Response response) {
         return response.body().jsonPath().getMap("policyInfo").get("productName").toString();
     }

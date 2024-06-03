@@ -37,6 +37,7 @@ public class InsuranceServiceConstants {
     public static final String TYPE_OF_INSURANCE_TRAVELING = "3";
 
     public static final String TYPE_OF_INSURANCE_PROPERTY = "4";
+
     public static final String VEHICLE_KASKO_INSURANCE_SERVICE_PRODUCT_NAME = "Автострахование КАСКО";
 
     public static final String MEDICINE_VIP_INSURANCE_SERVICE_PRODUCT_NAME = "Добровольное медицинское страхование VIP";

@@ -12,22 +12,31 @@ public class ChangePasswordPage extends BasePage {
     private WebElement submitPasswordChangeBtn;
     @FindBy(xpath = "//h3[contains(text(),'Изменить пароль')]")
     private WebElement changePasswordPage;
+    @FindBy (xpath = "//input[@name='oldPassword']/..")
+    private WebElement oldPasswordInputClick;
     @FindBy(xpath = "//input[@name='oldPassword']")
     private WebElement oldPasswordInput;
+    @FindBy(xpath = "//input[@name='password']/..")
+    private WebElement newPasswordInputClick;
     @FindBy(xpath = "//input[@name='password']")
     private WebElement newPasswordInput;
+    @FindBy(xpath = "//input[@name='confirmPassword']/..")
+    private WebElement confirmPasswordInputClick;
     @FindBy(xpath = "//input[@name='confirmPassword']")
     private WebElement confirmPasswordInput;
 
     public void setKeysToOldPasswordInput(String oldPassword) {
+        oldPasswordInputClick.click();
         oldPasswordInput.sendKeys(oldPassword);
     }
 
     public void setKeysToNewPasswordInput(String newPassword) {
+        newPasswordInputClick.click();
         newPasswordInput.sendKeys(newPassword);
     }
 
     public void setKeysToConfirmPasswordInput(String confirmPassword) {
+        confirmPasswordInputClick.click();
         confirmPasswordInput.sendKeys(confirmPassword);
     }
 

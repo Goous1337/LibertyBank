@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "properties": {
-    "status": {
+    "code": {
       "type": "integer"
     },
     "message": {
@@ -13,7 +13,7 @@
     }
   },
   "required": [
-    "status",
+    "code",
     "message",
     "timeStamp"
   ]
