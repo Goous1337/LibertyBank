@@ -10,4 +10,5 @@ public class Message {
     public static final String INVALID_POLICY_ID_ERROR_MESSAGE = "Некорректный ID полиса";
     public static final String NOT_FOUND_POLICY_ID_ERROR_MESSAGE = "Полис не найден";
     public static final String METHOD_NOT_ALLOWED = "Method Not Allowed";
+    public static final String BAD_REQUEST_MESSAGE = "Bad Request";
 }

@@ -10,11 +10,27 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static constant.InsuranceServiceConstants.*;
-import static constant.Message.*;
-import static org.apache.hc.core5.http.HttpStatus.*;
+import static constant.Message.BAD_REQUEST_MESSAGE;
+import static org.apache.hc.core5.http.HttpStatus.SC_BAD_REQUEST;
+import static org.apache.hc.core5.http.HttpStatus.SC_NOT_FOUND;
+import static org.apache.hc.core5.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static constant.InsuranceServiceConstants.ACCIDENT_INSURANCE_SERVICE_PRODUCT_NAME;
+import static constant.InsuranceServiceConstants.FAKE_INSURANCE_POLICY_ID;
+import static constant.InsuranceServiceConstants.HOME_INSURANCE_SERVICE_PRODUCT_NAME;
+import static constant.InsuranceServiceConstants.MEDICINE_STANDART_INSURANCE_SERVICE_PRODUCT_NAME;
+import static constant.InsuranceServiceConstants.POLICY_ACCIDENT_ID;
+import static constant.InsuranceServiceConstants.POLICY_BUILDING_ID;
+import static constant.InsuranceServiceConstants.POLICY_HEALTH_ID;
+import static constant.InsuranceServiceConstants.POLICY_THING_ID;
+import static constant.InsuranceServiceConstants.POLICY_TRAVEL_ID;
+import static constant.InsuranceServiceConstants.POLICY_VEHICLE_ID;
+import static constant.InsuranceServiceConstants.THING_INSURANCE_SERVICE_PRODUCT_NAME;
+import static constant.InsuranceServiceConstants.TRAVELING_INSURANCE_SERVICE_PRODUCT_NAME;
+import static constant.InsuranceServiceConstants.VEHICLE_OSAGO_INSURANCE_SERVICE_PRODUCT_NAME;
+import static constant.Message.INVALID_POLICY_ID_ERROR_MESSAGE;
+import static constant.Message.NOT_FOUND_POLICY_ID_ERROR_MESSAGE;
 import static property.BaseProperties.INSURANCE_POLICY_SERVICE;
 
 @DisplayName("InS-9 Получение подробной информации о конкретном страховом полисе")
@@ -34,7 +50,8 @@ public class INS_9_GetInfoInsurancePolicy extends BaseTest {
         Response response = insuranceService.getPolicyInfo(POLICY_THING_ID);
         assertAll(
                 () -> assertEquals(SC_OK, response.statusCode(), "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals(THING_INSURANCE_SERVICE_PRODUCT_NAME, insuranceService.getResponsePolicyName(response)),
+                () -> assertEquals(THING_INSURANCE_SERVICE_PRODUCT_NAME, insuranceService.getResponsePolicyName(response),
+                           "Название полиса не соответствует ожидаемому"),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
@@ -49,7 +66,8 @@ public class INS_9_GetInfoInsurancePolicy extends BaseTest {
         Response response = insuranceService.getPolicyInfo(POLICY_VEHICLE_ID);
         assertAll(
                 () -> assertEquals(SC_OK, response.statusCode(), "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals(VEHICLE_OSAGO_INSURANCE_SERVICE_PRODUCT_NAME, insuranceService.getResponsePolicyName(response)),
+                () -> assertEquals(VEHICLE_OSAGO_INSURANCE_SERVICE_PRODUCT_NAME, insuranceService.getResponsePolicyName(response),
+                           "Название полиса не соответствует ожидаемому"),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
@@ -64,7 +82,8 @@ public class INS_9_GetInfoInsurancePolicy extends BaseTest {
         Response response = insuranceService.getPolicyInfo(POLICY_BUILDING_ID);
         assertAll(
                 () -> assertEquals(SC_OK, response.statusCode(), "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals(HOME_INSURANCE_SERVICE_PRODUCT_NAME, insuranceService.getResponsePolicyName(response)),
+                () -> assertEquals(HOME_INSURANCE_SERVICE_PRODUCT_NAME, insuranceService.getResponsePolicyName(response),
+                           "Название полиса не соответствует ожидаемому"),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
@@ -79,7 +98,8 @@ public class INS_9_GetInfoInsurancePolicy extends BaseTest {
         Response response = insuranceService.getPolicyInfo(POLICY_TRAVEL_ID);
         assertAll(
                 () -> assertEquals(SC_OK, response.statusCode(), "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals(TRAVELING_INSURANCE_SERVICE_PRODUCT_NAME, insuranceService.getResponsePolicyName(response)),
+                () -> assertEquals(TRAVELING_INSURANCE_SERVICE_PRODUCT_NAME, insuranceService.getResponsePolicyName(response),
+                           "Название полиса не соответствует ожидаемому"),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
@@ -94,7 +114,8 @@ public class INS_9_GetInfoInsurancePolicy extends BaseTest {
         Response response = insuranceService.getPolicyInfo(POLICY_HEALTH_ID);
         assertAll(
                 () -> assertEquals(SC_OK, response.statusCode(), "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals(MEDICINE_STANDART_INSURANCE_SERVICE_PRODUCT_NAME, insuranceService.getResponsePolicyName(response)),
+                () -> assertEquals(MEDICINE_STANDART_INSURANCE_SERVICE_PRODUCT_NAME, insuranceService.getResponsePolicyName(response),
+                           "Название полиса не соответствует ожидаемому"),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
@@ -109,7 +130,8 @@ public class INS_9_GetInfoInsurancePolicy extends BaseTest {
         Response response = insuranceService.getPolicyInfo(POLICY_ACCIDENT_ID);
         assertAll(
                 () -> assertEquals(SC_OK, response.statusCode(), "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals(ACCIDENT_INSURANCE_SERVICE_PRODUCT_NAME, insuranceService.getResponsePolicyName(response)),
+                () -> assertEquals(ACCIDENT_INSURANCE_SERVICE_PRODUCT_NAME, insuranceService.getResponsePolicyName(response),
+                           "Название полиса не соответствует ожидаемому"),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
@@ -124,6 +146,8 @@ public class INS_9_GetInfoInsurancePolicy extends BaseTest {
         Response response = insuranceService.getPolicyInfo("");
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.statusCode(), "Код ответа не соответствует ожидаемому"),
+                () -> assertEquals(BAD_REQUEST_MESSAGE, insuranceService.getResponsePolicyErrorMessage(response, "error"),
+                           "Сообщение об ошибке не соответствует ожидаемому"),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
@@ -138,7 +162,8 @@ public class INS_9_GetInfoInsurancePolicy extends BaseTest {
         Response response = insuranceService.getPolicyInfo(FAKE_INSURANCE_POLICY_ID);
         assertAll(
                 () -> assertEquals(SC_NOT_FOUND, response.statusCode(), "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals(NOT_FOUND_POLICY_ID_ERROR_MESSAGE, insuranceService.getResponsePolicyErrorMessage(response, "message")),
+                () -> assertEquals(NOT_FOUND_POLICY_ID_ERROR_MESSAGE, insuranceService.getResponsePolicyErrorMessage(response, "message"),
+                           "Сообщение об ошибке не соответствует ожидаемому"),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
@@ -153,7 +178,8 @@ public class INS_9_GetInfoInsurancePolicy extends BaseTest {
         Response response = insuranceService.getPolicyInfo("invalidId");
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.statusCode(), "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals(INVALID_POLICY_ID_ERROR_MESSAGE, insuranceService.getResponsePolicyErrorMessage(response, "message")),
+                () -> assertEquals(INVALID_POLICY_ID_ERROR_MESSAGE, insuranceService.getResponsePolicyErrorMessage(response, "message"),
+                           "Сообщение об ошибке не соответствует ожидаемому"),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }

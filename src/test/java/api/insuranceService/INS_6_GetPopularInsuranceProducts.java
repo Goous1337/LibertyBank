@@ -28,7 +28,7 @@ public class INS_6_GetPopularInsuranceProducts extends BaseTest {
     }
 
     @DisplayName("Получение данных популярных продуктов банка")
-    @Description("Тест направлен на проверку получения информации о популярных продуктах банка")
+    @Description("Тест направлен на проверку получения информации о популярных продуктах банка, которые формируются динамически по выборке SQL")
     @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB5-476")
     @Test()
@@ -37,14 +37,15 @@ public class INS_6_GetPopularInsuranceProducts extends BaseTest {
         Response response = insuranceService.getPopularInsuranceProducts(Method.GET);
         assertAll(
                 () -> assertEquals(SC_OK, response.statusCode(), "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals(COUNT_POPULAR_INSURANCE_PRODUCTS, insuranceService.getResponseCountPopularInsuranceProducts(response)),
+                () -> assertEquals(COUNT_POPULAR_INSURANCE_PRODUCTS, insuranceService.getResponseCountPopularInsuranceProducts(response),
+                            "Количество продуктов не соответствует ожидаемому"),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 
 
-    @DisplayName("Получение данных популярных продуктов банка")
-    @Description("Тест направлен на проверку получения информации о популярных продуктах банка")
+    @DisplayName("Получение данных популярных продуктов банка через метод POST")
+    @Description("Тест направлен на проверку невозможности получения информации о популярных продуктах банка через метод POST")
     @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB5-476")
     @Test()
@@ -53,7 +54,8 @@ public class INS_6_GetPopularInsuranceProducts extends BaseTest {
         Response response = insuranceService.getPopularInsuranceProducts(Method.POST);
         assertAll(
                 () -> assertEquals(SC_METHOD_NOT_ALLOWED, response.statusCode(), "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals(METHOD_NOT_ALLOWED, insuranceService.getResponsePolicyErrorMessage(response, "error")),
+                () -> assertEquals(METHOD_NOT_ALLOWED, insuranceService.getResponsePolicyErrorMessage(response, "error"),
+                            "Сообщение об ошибке не соответствует ожидаемому"),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
