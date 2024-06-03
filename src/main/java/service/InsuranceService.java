@@ -18,7 +18,6 @@ import static constant.ApiEndpoints.GROUPS_OF_POLICES;
 import static constant.ApiEndpoints.LIST_OF_INSURANCE_POLICES;
 import static constant.ApiEndpoints.POLICY_INSURANCE;
 import static constant.InsuranceServiceConstants.ACCEPT_VALUE;
-import static constant.InsuranceServiceConstants.BAER_TOKEN;
 import static constant.InsuranceServiceConstants.CONTENT_TYPE_VALUE;
 import static io.restassured.http.Method.GET;
 import static io.restassured.http.Method.POST;
@@ -46,8 +45,12 @@ public class InsuranceService {
     }
 
     public Response checkGetInfoAboutInsuranceProducts(String typeOfInsurance) {
+        String token = System.getenv("BAER_TOKEN");
+        if (token == null) {
+            throw new RuntimeException("BAER_TOKEN environment variable is not set");
+        }
         List<RequestParam> params = List.of(getRP(HEADER, "accept", ACCEPT_VALUE),
-                getRP(HEADER, AUTHORIZATION, BAER_TOKEN),
+                getRP(HEADER, AUTHORIZATION, token),
                 getRP(HEADER, CONTENT_TYPE, CONTENT_TYPE_VALUE));
         return sendSimpleRequest(GET, GROUPS_OF_POLICES + typeOfInsurance + DEEP_OF_GROUPS, params);
     }
