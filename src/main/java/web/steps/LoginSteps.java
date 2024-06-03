@@ -73,7 +73,7 @@ public class LoginSteps {
     public LoginSteps assertSubmitButtonAndInputSuccessful(
             String bgButtonColor, String textButtonColor, String inputColor) {
         assertAll(
-                () -> assertTrue(loginPage.checkButtonCondition(bgButtonColor, textButtonColor, true),
+                () -> assertTrue(loginPage.checkButtonCondition(bgButtonColor, textButtonColor, false),
                         INVALID_COLOR),
                 () -> assertTrue(loginPage.isValidInput(inputColor), INVALID_COLOR)
         );
@@ -84,7 +84,7 @@ public class LoginSteps {
     public void assertSubmitButtonAndInputInvalid(
             String bgButtonColor, String textButtonColor, String inputColor) {
         assertAll(
-                () -> assertTrue(loginPage.checkButtonCondition(bgButtonColor, textButtonColor, false),
+                () -> assertTrue(loginPage.checkButtonCondition(bgButtonColor, textButtonColor, true),
                         INVALID_COLOR),
                 () -> assertTrue(loginPage.isValidInput(inputColor), INVALID_COLOR),
                 () -> assertTrue(loginPage.checkErrorHint("Неверный пароль или номер телефона"),
@@ -106,8 +106,7 @@ public class LoginSteps {
                 .isEqualTo(colorPlaceholderPhone);
         if (!textErrorPhone.isEmpty()) {
             softAssertions.assertThat(loginPage.getErrorPhoneHintText())
-                    .as("Проверка сообщения об ошибке поля \"Номер телефона\" " +
-                                    "при недостаточном кол-ве символов")
+                    .as("Проверка текста сообщения об ошибке поля \"Номер телефона\"")
                     .isEqualTo(textErrorPhone);
         } else {
             softAssertions.assertThat(loginPage.isErrorPhoneHintNotDisplayed())
@@ -131,7 +130,7 @@ public class LoginSteps {
                 .isEqualTo(colorPlaceholderPassword);
         if (!textErrorPassword.isEmpty()) {
             softAssertions.assertThat(loginPage.getErrorPasswordHintText())
-                    .as("Проверка сообщения об ошибке поля \"Пароль\" при недостаточном кол-ве символов")
+                    .as("Проверка текста сообщения об ошибке поля \"Пароль\"")
                     .isEqualTo(textErrorPassword);
         } else {
             softAssertions.assertThat(loginPage.isErrorPasswordHintNotDisplayed())

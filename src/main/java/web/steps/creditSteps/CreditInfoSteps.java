@@ -6,7 +6,7 @@ import web.helpers.TestListener;
 import web.pages.creditPages.CreditInfoPage;
 import web.pages.creditPages.MyCreditsPage;
 
-import static web.constans.CreditServiceConstants.*;
+import static web.constans.credit.CreditServiceConstants.*;
 
 public class CreditInfoSteps {
 

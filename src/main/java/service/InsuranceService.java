@@ -13,7 +13,10 @@ import static api.core.RequestParam.getRP;
 import static api.core.RequestParamType.HEADER;
 import static com.google.common.net.HttpHeaders.AUTHORIZATION;
 import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
-import static constant.ApiEndpoints.*;
+import static constant.ApiEndpoints.APPLICATION_INSURANCE;
+import static constant.ApiEndpoints.POLICY_INSURANCE;
+import static constant.ApiEndpoints.LIST_OF_INSURANCE;
+import static constant.ApiEndpoints.LIST_OF_INSURANCE_POLICES;
 import static constant.InsuranceServiceConstants.ACCEPT_VALUE;
 import static constant.InsuranceServiceConstants.CONTENT_TYPE_VALUE;
 import static io.restassured.http.Method.GET;
@@ -35,6 +38,13 @@ public class InsuranceService {
 
     public Response getPopularInsuranceProducts(Method method) {
         return sendRequestWithoutParams(method, POPULAR_INSURANCE_PRODUCTS);
+    }
+
+    public Response getAllUserPoliciesByClientId(String clientId) {
+        List<RequestParam> params = List.of(getRP(HEADER, "accept", ACCEPT_VALUE),
+                getRP(HEADER, "clientId", clientId),
+                getRP(HEADER, CONTENT_TYPE, CONTENT_TYPE_VALUE));
+        return sendSimpleRequest(GET, POLICY_INSURANCE + "/", params);
     }
 
     public String getResponsePolicyName(Response response) {

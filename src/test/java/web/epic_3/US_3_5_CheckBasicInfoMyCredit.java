@@ -9,6 +9,7 @@ import web.BaseTest;
 @Tags({@Tag("Web"), @Tag("MVP")})
 @Epic("3 - Кредиты")
 @Feature("US-3.5 Просмотр подробной информации о действующих кредитах пользователя")
+@DisplayName("US-3.5 Просмотр подробной информации о действующих кредитах пользователя")
 public class US_3_5_CheckBasicInfoMyCredit extends BaseTest {
 
     @BeforeEach

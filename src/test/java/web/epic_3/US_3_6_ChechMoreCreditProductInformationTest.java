@@ -1,10 +1,15 @@
 package web.epic_3;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.*;
 import web.BaseTest;
 
-@Tags({@Tag("Web"), @Tag("MVP")})
+@Tag("Web")
+@Epic("3 - Кредиты")
+@Feature("US-3.6 Просмотр подробной информации о кредитном продукте банка")
+@DisplayName("US-3.6 Просмотр подробной информации о кредитном продукте банка")
 public class US_3_6_ChechMoreCreditProductInformationTest extends BaseTest {
     @BeforeEach
     public void setUpTest() {
@@ -17,7 +22,7 @@ public class US_3_6_ChechMoreCreditProductInformationTest extends BaseTest {
     public void checkBasicInfoAboutLibertyCash() {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickCreditProductButton();
-        сreditProductsSteps.clickShowMoreLibertyCashButton();
+        creditProductsSteps.clickShowMoreLibertyCashButton();
         creditProductDetailedInformationSteps.assertMoreInfoAboutCreditProducts();
     }
 
@@ -27,7 +32,7 @@ public class US_3_6_ChechMoreCreditProductInformationTest extends BaseTest {
     public void checkBasicInfoAboutLibertyExpress() {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickCreditProductButton();
-        сreditProductsSteps.clickShowMoreLibertyExpressButton();
+        creditProductsSteps.clickShowMoreLibertyExpressButton();
         creditProductDetailedInformationSteps.assertMoreInfoAboutCreditProducts();
     }
 
@@ -37,7 +42,7 @@ public class US_3_6_ChechMoreCreditProductInformationTest extends BaseTest {
     public void checkBasicInfoAboutLibertyMoney() {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickCreditProductButton();
-        сreditProductsSteps.clickShowMoreLibertyMoneyButton();
+        creditProductsSteps.clickShowMoreLibertyMoneyButton();
         creditProductDetailedInformationSteps.assertMoreInfoAboutCreditProducts();
     }
 
@@ -47,7 +52,7 @@ public class US_3_6_ChechMoreCreditProductInformationTest extends BaseTest {
     public void checkBasicInfoAboutLibertyEasy() {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickCreditProductButton();
-        сreditProductsSteps.clickShowMoreLibertyEasyButton();
+        creditProductsSteps.clickShowMoreLibertyEasyButton();
         creditProductDetailedInformationSteps.assertMoreInfoAboutCreditProducts();
     }
 
@@ -57,7 +62,7 @@ public class US_3_6_ChechMoreCreditProductInformationTest extends BaseTest {
     public void checkBasicInfoAboutLibertyCar() {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickCreditProductButton();
-        сreditProductsSteps.clickShowMoreLibertyCarButton();
+        creditProductsSteps.clickShowMoreLibertyCarButton();
         creditProductDetailedInformationSteps.assertMoreInfoAboutCreditProducts();
     }
 
@@ -67,7 +72,7 @@ public class US_3_6_ChechMoreCreditProductInformationTest extends BaseTest {
     public void checkBasicInfoAboutLibertyMyFlat() {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickCreditProductButton();
-        сreditProductsSteps.clickShowMoreLibertyMyFlatButton();
+        creditProductsSteps.clickShowMoreLibertyMyFlatButton();
         creditProductDetailedInformationSteps.assertMoreInfoAboutCreditProducts();
     }
 

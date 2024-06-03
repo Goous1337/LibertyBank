@@ -1,14 +1,14 @@
 package web.pages;
 
+import java.util.Objects;
+
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
 import web.helpers.Waiters;
 
-import java.util.Objects;
-
-import static web.helpers.Waiters.waitElement;
-import static web.helpers.Waiters.waitElementWithColor;
+import static web.helpers.Waiters.*;
 
 public class LoginPage extends BasePage {
 
@@ -57,7 +57,7 @@ public class LoginPage extends BasePage {
         phoneInput.sendKeys(phoneNumber);
     }
 
-      public void enterPassword(String password) {
+    public void enterPassword(String password) {
         waitElement(borderForPasswordInput);
         borderForPasswordInput.click();
         passwordInput.sendKeys(password);
@@ -90,20 +90,19 @@ public class LoginPage extends BasePage {
         waitElement(submitButton).click();
     }
 
-    public boolean checkButtonCondition(String bgColor, String textColor, boolean isEnabled) {
+    public boolean checkButtonCondition(String bgColor, String textColor, boolean isDisabled) {
         waitElementWithColor(submitButton, bgColor);
-        return submitButton.isEnabled() == isEnabled
+        return Boolean.parseBoolean(submitButton.getAttribute("aria-disabled")) == isDisabled
                 && submitButton.getCssValue("background-color").equals(bgColor)
                 && submitButton.getCssValue("color").equals(textColor);
     }
 
     public String getPhoneInputBorderColor() {
-        return borderForPhoneInput.getCssValue("border-color");
+        return borderForPhoneInput.getCssValue("outline-color");
     }
 
     public String getPasswordInputBorderColor() {
-
-        return borderForPasswordInput.getCssValue("border-color");
+        return borderForPasswordInput.getCssValue("outline-color");
     }
 
     public String getColorPlaceholderPhone() {
@@ -115,8 +114,7 @@ public class LoginPage extends BasePage {
     }
 
     public boolean isValidInput(String color) {
-        System.out.println(borderForPasswordInput.getCssValue("border-color"));
-        return borderForPasswordInput.getCssValue("border-color").
+        return borderForPasswordInput.getCssValue("outline-color").
                 equals(color);
     }
 
@@ -132,12 +130,12 @@ public class LoginPage extends BasePage {
         return errorPhoneHint.getText();
     }
 
-    public boolean isErrorPasswordHintNotDisplayed() {
-        return Waiters.isElementNotDisplayed(errorPasswordHint);
-    }
-
     public boolean isErrorPhoneHintNotDisplayed() {
         return Waiters.isElementNotDisplayed(errorPhoneHint);
+    }
+
+    public boolean isErrorPasswordHintNotDisplayed() {
+        return Waiters.isElementNotDisplayed(errorPasswordHint);
     }
 
     public String getTextFromPhoneInput() {

@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 public class ReissueBadRequest {
-    String timestamp;
-    String error;
+    String timeStamp;
+    String message;
     Integer status;
 
 }

@@ -41,7 +41,7 @@ public class CS_3_CheckActiveCardsTest extends BaseTest {
 
     @Test
     @TmsLink("LIB2-40")
-    @DisplayName("Проерка ответа при отсутствии активных карт")
+    @DisplayName("Проверка ответа при отсутствии активных карт")
     @Description("Тест направлен на проверку ответа при отсутствии активных карт")
     public void checkActiveCardsWithNoActiveCards() {
         Response response = cardService.getActiveCardsInfoUserHaveNoCards();

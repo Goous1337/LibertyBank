@@ -3,6 +3,8 @@ package api.depositService;
 import api.BaseTest;
 import dataBase.requests.DepositServiceDataBaseRequest;
 import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
@@ -23,6 +25,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.DEPOSIT_SERVICE;
 
 @Tags({@Tag("API"), @Tag("2.0")})
+@Epic("9 - Депозиты")
+@Feature("DM-9.2 Оформление нового депозита")
 @DisplayName("DM-9.2 Оформление нового депозита")
 public class DM_9_2_MakeNewDepositTest extends BaseTest {
     {
