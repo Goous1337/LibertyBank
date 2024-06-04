@@ -153,7 +153,6 @@ public class INS_1_GetInfoAboutInsuranceProducts extends BaseTest {
     @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB5-1731")
     @Test()
-    @Disabled
     public void requestForValuesGreaterThanAcceptableValues() {
 
         Response response = insuranceService.checkGetInfoAboutInsuranceProducts("9999");
