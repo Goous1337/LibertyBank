@@ -1,6 +1,7 @@
 package service;
 
 import api.core.RequestParam;
+import io.restassured.http.Method;
 import io.restassured.response.Response;
 import pojo.insuranceService.CreateVehicleApplicationInsuranceRequest;
 
@@ -16,6 +17,7 @@ import static constant.ApiEndpoints.APPLICATION_INSURANCE;
 import static constant.ApiEndpoints.DEEP_OF_GROUPS;
 import static constant.ApiEndpoints.GROUPS_OF_POLICES;
 import static constant.ApiEndpoints.LIST_OF_INSURANCE_POLICES;
+import static constant.ApiEndpoints.POPULAR_INSURANCE_PRODUCTS;
 import static constant.ApiEndpoints.POLICY_INSURANCE;
 import static constant.InsuranceServiceConstants.ACCEPT_VALUE;
 import static constant.InsuranceServiceConstants.CONTENT_TYPE_VALUE;
@@ -36,6 +38,10 @@ public class InsuranceService {
         return sendRequestWithoutParams(GET, POLICY_INSURANCE + "/" + insuranceID);
     }
 
+    public Response getPopularInsuranceProducts(Method method) {
+        return sendRequestWithoutParams(method, POPULAR_INSURANCE_PRODUCTS);
+    }
+
     public Response getAllUserPoliciesByClientId(String clientId) {
         List<RequestParam> params = List.of(getRP(HEADER, "accept", ACCEPT_VALUE),
                 getRP(HEADER, "clientId", clientId),
@@ -47,8 +53,12 @@ public class InsuranceService {
         return response.body().jsonPath().getMap("policyInfo").get("productName").toString();
     }
 
-    public String getResponsePolicyErrorMessage(Response response) {
-        return response.body().jsonPath().get("message");
+    public Integer getResponseCountPopularInsuranceProducts(Response response) {
+        return response.body().jsonPath().getList("products").size();
+    }
+
+    public String getResponsePolicyErrorMessage(Response response, String nameErrorField) {
+        return response.body().jsonPath().get(nameErrorField);
     }
 
     public Response checkGetInfoAboutInsuranceProducts(String typeOfInsurance) {

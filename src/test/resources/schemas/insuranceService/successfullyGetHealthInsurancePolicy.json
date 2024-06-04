@@ -67,73 +67,40 @@
     "concretePolicyDetailsDto": {
       "type": "object",
       "properties": {
-        "vinCode": {
+        "packageName": {
           "type": "string"
         },
-        "numberPlate": {
+        "coverageLimit": {
           "type": "string"
         },
-        "brand": {
-          "type": "string"
-        },
-        "model": {
-          "type": "string"
-        },
-        "vehicleType": {
-          "type": "string"
-        },
-        "vehicleDocumentType": {
-          "type": "string"
-        },
-        "documentNumber": {
-          "type": "string"
-        },
-        "carOwner": {
-          "type": "string"
-        },
-        "price": {
+        "requestsLimit": {
           "type": "integer"
         },
-        "drivers": {
-          "type": "array",
-          "items": [
-            {
-              "type": "object",
-              "properties": {
-                "driverName": {
-                  "type": "string"
-                },
-                "driverSurname": {
-                  "type": "string"
-                },
-                "driverPatronymic": {
-                  "type": "string"
-                },
-                "licenseId": {
-                  "type": "string"
-                }
-              },
-              "required": [
-                "driverName",
-                "driverSurname",
-                "driverPatronymic",
-                "licenseId"
-              ]
-            }
-          ]
+        "outpatientService": {
+          "type": "boolean"
+        },
+        "homeHelp": {
+          "type": "boolean"
+        },
+        "emergencyCare": {
+          "type": "boolean"
+        },
+        "emergencyHospital": {
+          "type": "boolean"
+        },
+        "stomatology": {
+          "type": "boolean"
         }
       },
       "required": [
-        "vinCode",
-        "numberPlate",
-        "brand",
-        "model",
-        "vehicleType",
-        "vehicleDocumentType",
-        "documentNumber",
-        "carOwner",
-        "price",
-        "drivers"
+        "packageName",
+        "coverageLimit",
+        "requestsLimit",
+        "outpatientService",
+        "homeHelp",
+        "emergencyCare",
+        "emergencyHospital",
+        "stomatology"
       ]
     }
   },

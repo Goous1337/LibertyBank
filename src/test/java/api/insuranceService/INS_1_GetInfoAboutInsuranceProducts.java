@@ -39,6 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.INSURANCE_SERVICE_GROUPS;
 
+@DisplayName("InS-1 Просмотр доступных видов страхования")
 public class INS_1_GetInfoAboutInsuranceProducts extends BaseTest {
     private Response response;
     private final String JSON_SCHEMA_PATH = "schemas/insuranceService/checkTypesOfInsurances.json";

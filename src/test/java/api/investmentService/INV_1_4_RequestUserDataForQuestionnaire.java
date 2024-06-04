@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 import pojo.investmentService.QuestionnaireFormResponse;
-import pojo.investmentService.QuestionnarieFormNotFound;
+import pojo.investmentService.CustomerIdNotFoundResponse;
 
 import static api.utils.JsonParser.parseJson;
 import static constant.InvestmentConstants.*;
@@ -44,9 +44,9 @@ public class INV_1_4_RequestUserDataForQuestionnaire {
     @DisplayName("Запросить данные пользователя для анкеты, не найден customerId")
     @Description("Данный тест-кейс проверяет работу запроса данных пользователя для анкеты, при запросе данных с невалидным customerId")
     public void getUserDataForQuestionnaireInvalidCustomerId() {
-        QuestionnarieFormNotFound actualData = getQuestionnaireRequest(ACCESS_TOKEN_INVALID_CUSTOMER_ID)
-                .as(QuestionnarieFormNotFound.class);
-        QuestionnarieFormNotFound expectedData = parseJson(QuestionnarieFormNotFound.class, JSON_NOT_FOUND);
+        CustomerIdNotFoundResponse actualData = getQuestionnaireRequest(ACCESS_TOKEN_INVALID_CUSTOMER_ID)
+                .as(CustomerIdNotFoundResponse.class);
+        CustomerIdNotFoundResponse expectedData = parseJson(CustomerIdNotFoundResponse.class, JSON_NOT_FOUND);
         assertAll(
                 () -> assertEquals(actualData.getUri(), expectedData.getUri(), "Эндпоинт не соответствует ожидаемому"),
                 () -> assertEquals(actualData.getType(), expectedData.getType(), "Тип ответа не соответствует ожидаемому"),

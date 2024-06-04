@@ -67,73 +67,28 @@
     "concretePolicyDetailsDto": {
       "type": "object",
       "properties": {
-        "vinCode": {
+        "address": {
           "type": "string"
         },
-        "numberPlate": {
+        "type": {
           "type": "string"
         },
-        "brand": {
-          "type": "string"
-        },
-        "model": {
-          "type": "string"
-        },
-        "vehicleType": {
-          "type": "string"
-        },
-        "vehicleDocumentType": {
-          "type": "string"
-        },
-        "documentNumber": {
-          "type": "string"
-        },
-        "carOwner": {
-          "type": "string"
-        },
-        "price": {
+        "yearBuilt": {
           "type": "integer"
         },
-        "drivers": {
-          "type": "array",
-          "items": [
-            {
-              "type": "object",
-              "properties": {
-                "driverName": {
-                  "type": "string"
-                },
-                "driverSurname": {
-                  "type": "string"
-                },
-                "driverPatronymic": {
-                  "type": "string"
-                },
-                "licenseId": {
-                  "type": "string"
-                }
-              },
-              "required": [
-                "driverName",
-                "driverSurname",
-                "driverPatronymic",
-                "licenseId"
-              ]
-            }
-          ]
+        "estimatedValue": {
+          "type": "integer"
+        },
+        "squareFootage": {
+          "type": "number"
         }
       },
       "required": [
-        "vinCode",
-        "numberPlate",
-        "brand",
-        "model",
-        "vehicleType",
-        "vehicleDocumentType",
-        "documentNumber",
-        "carOwner",
-        "price",
-        "drivers"
+        "address",
+        "type",
+        "yearBuilt",
+        "estimatedValue",
+        "squareFootage"
       ]
     }
   },

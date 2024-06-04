@@ -23,6 +23,7 @@ public final class BaseProperties {
     public static String INSURANCE_SERVICE = getPropertyValue("insurance_service");
     public static String INSURANCE_SERVICE_GROUPS = getPropertyValue("insurance_service_groups_of_polices");
     public static String INSURANCE_POLICY_SERVICE = getPropertyValue("insurance_service_policy");
+    public static String INSURANCE_POPULAR_INSURANCE_PRODUCTS = getPropertyValue("popular_insurance_products");
     public static String INSURANCE_SERVICE_LIST_OF_INSURANCE_POLICES = getPropertyValue("insurance_service_polices");
     public static String INVESTMENT_SERVICE = getPropertyValue("investment_service");
     public static String INSURANCE_SERVICE_LIST_POLICES = getPropertyValue("insurance_service_policy");
