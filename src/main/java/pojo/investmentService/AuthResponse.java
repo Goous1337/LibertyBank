@@ -1,4 +1,4 @@
-package pojo.cardService;
+package pojo.investmentService;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,11 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegisterBadRequest {
-
-    String timeStamp;
-    String error;
-    Integer status;
-    String message;
+public class AuthResponse {
+    public String customerId;
+    public int customerStatusId;
+    public boolean test;
 }
-

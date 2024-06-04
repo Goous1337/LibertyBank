@@ -2,19 +2,23 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "properties": {
+    "timestamp": {
+      "type": "string"
+    },
     "status": {
       "type": "integer"
     },
-    "message": {
+    "error": {
       "type": "string"
     },
-    "timeStamp": {
+    "path": {
       "type": "string"
     }
   },
   "required": [
+    "timestamp",
     "status",
-    "message",
-    "timeStamp"
+    "error",
+    "path"
   ]
 }

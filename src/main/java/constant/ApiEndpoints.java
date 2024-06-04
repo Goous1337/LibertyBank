@@ -99,5 +99,8 @@ public final class ApiEndpoints {
     public static final String LIST_OF_INSURANCE_POLICES = "insurance-service/api/v1/policies/";
     public static final String CARD_PRODUCT_BENEFITS = "card-service/api/v1/card-product-benefits/";
     public static final String POLICY_INSURANCE = "insurance-service/api/v1/policies";
+    public static final String POPULAR_INSURANCE_PRODUCTS = "insurance-service/api/v1/policies/popular-products";
     public static final String LIST_OF_INSURANCE = "insurance-service/api/v1/insurance/groups-products/";
+    public static final String QUESTIONNAIRE_FORM = "investment/api/v1/customers/questionnaire-form";
+    public static final String INVESTMENT_AUTH = "investment/api/v1/auth";
 }
