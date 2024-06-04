@@ -37,6 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.INSURANCE_SERVICE;
 
+@DisplayName("InS-1 Просмотр доступных видов страхования")
 public class INS_1_GetInfoAboutInsuranceProducts extends BaseTest {
     {
         RestAssured.baseURI = INSURANCE_SERVICE;
