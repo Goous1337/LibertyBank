@@ -1,6 +1,7 @@
 package api.insuranceService;
 
 import api.BaseTest;
+import api.utils.JsonWorker;
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
@@ -9,9 +10,6 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import pojo.insuranceService.InsuranceProductsOfBankResponseModel;
-
-import java.util.List;
 
 import static constant.InsuranceServiceConstants.ACCIDENT_INSURANCE_SERVICE_PRODUCT_NAME;
 import static constant.InsuranceServiceConstants.FLAT_INSURANCE_SERVICE_PRODUCT_NAME;
@@ -42,6 +40,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.INSURANCE_SERVICE_GROUPS;
 
 public class INS_1_GetInfoAboutInsuranceProducts extends BaseTest {
+    private Response response;
+    private final String JSON_SCHEMA_PATH = "schemas/insuranceService/checkTypesOfInsurances.json";
+
     {
         RestAssured.baseURI = INSURANCE_SERVICE_GROUPS;
     }
@@ -53,17 +54,16 @@ public class INS_1_GetInfoAboutInsuranceProducts extends BaseTest {
     @Test()
     public void successfulRequestGetInfoAboutCarInsurance() {
 
-        String jsonSchemaPath = "schemas/insuranceService/checkTypesOfInsurances.json";
-        Response response = insuranceService.checkGetInfoAboutInsuranceProducts(TYPE_OF_INSURANCE_CAR);
-        List<String> productsName = InsuranceProductsOfBankResponseModel.getListOfProductsNameFromResponse(response.getBody().
-                as(InsuranceProductsOfBankResponseModel.class));
+        response = insuranceService.checkGetInfoAboutInsuranceProducts(TYPE_OF_INSURANCE_CAR);
         assertAll(
                 () -> assertEquals(SC_OK, response.statusCode(), "Статус код ответа не соответствует ожидаемому"),
-                () -> assertEquals(VEHICLE_OSAGO_INSURANCE_SERVICE_PRODUCT_NAME, productsName.get(0),
+                () -> assertEquals(VEHICLE_OSAGO_INSURANCE_SERVICE_PRODUCT_NAME,
+                        JsonWorker.getListOfResponseWithInsurancesProducts(response).get(0),
                         "Автострахование ОСАГО отсутствует"),
-                () -> assertEquals(VEHICLE_KASKO_INSURANCE_SERVICE_PRODUCT_NAME, productsName.get(1),
+                () -> assertEquals(VEHICLE_KASKO_INSURANCE_SERVICE_PRODUCT_NAME,
+                        JsonWorker.getListOfResponseWithInsurancesProducts(response).get(1),
                         "Автострахование КАСКО отсутствует"),
-                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(JSON_SCHEMA_PATH))
         );
     }
 
@@ -75,21 +75,22 @@ public class INS_1_GetInfoAboutInsuranceProducts extends BaseTest {
     @Test()
     public void successfulRequestGetInfoAboutHealthInsurance() {
 
-        String jsonSchemaPath = "schemas/insuranceService/checkTypesOfInsurances.json";
-        Response response = insuranceService.checkGetInfoAboutInsuranceProducts(TYPE_OF_INSURANCE_HEALTH);
-        List<String> productsName = InsuranceProductsOfBankResponseModel.getListOfProductsNameFromResponse(response.getBody().
-                as(InsuranceProductsOfBankResponseModel.class));
+        response = insuranceService.checkGetInfoAboutInsuranceProducts(TYPE_OF_INSURANCE_HEALTH);
         assertAll(
                 () -> assertEquals(SC_OK, response.statusCode(), "Статус код ответа не соответствует ожидаемому"),
-                () -> assertEquals(MEDICINE_VIP_INSURANCE_SERVICE_PRODUCT_NAME, productsName.get(3),
-                        "Медецинское страхование VIP отсутствует"),
-                () -> assertEquals(MEDICINE_STANDART_INSURANCE_SERVICE_PRODUCT_NAME, productsName.get(0),
+                () -> assertEquals(MEDICINE_STANDART_INSURANCE_SERVICE_PRODUCT_NAME,
+                        JsonWorker.getListOfResponseWithInsurancesProducts(response).get(0),
                         "Медецинское страхование Standart отсутствует"),
-                () -> assertEquals(MEDICINE_STANDART_PLUS_INSURANCE_SERVICE_PRODUCT_NAME, productsName.get(1),
+                () -> assertEquals(MEDICINE_STANDART_PLUS_INSURANCE_SERVICE_PRODUCT_NAME,
+                        JsonWorker.getListOfResponseWithInsurancesProducts(response).get(1),
                         "Медецинское страхование Standart+ отсутствует"),
-                () -> assertEquals(MEDICINE_PREMIUM_INSURANCE_SERVICE_PRODUCT_NAME, productsName.get(2),
+                () -> assertEquals(MEDICINE_PREMIUM_INSURANCE_SERVICE_PRODUCT_NAME,
+                        JsonWorker.getListOfResponseWithInsurancesProducts(response).get(2),
                         "Медецинское страхование Premium отсутствует"),
-                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+                () -> assertEquals(MEDICINE_VIP_INSURANCE_SERVICE_PRODUCT_NAME,
+                        JsonWorker.getListOfResponseWithInsurancesProducts(response).get(3),
+                        "Медецинское страхование VIP отсутствует"),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(JSON_SCHEMA_PATH))
         );
     }
 
@@ -100,15 +101,13 @@ public class INS_1_GetInfoAboutInsuranceProducts extends BaseTest {
     @Test()
     public void successfulRequestGetInfoAboutTravelInsurance() {
 
-        String jsonSchemaPath = "schemas/insuranceService/checkTypesOfInsurances.json";
-        Response response = insuranceService.checkGetInfoAboutInsuranceProducts(TYPE_OF_INSURANCE_TRAVELING);
-        List<String> productsName = InsuranceProductsOfBankResponseModel.getListOfProductsNameFromResponse(response.getBody().
-                as(InsuranceProductsOfBankResponseModel.class));
+        response = insuranceService.checkGetInfoAboutInsuranceProducts(TYPE_OF_INSURANCE_TRAVELING);
         assertAll(
                 () -> assertEquals(SC_OK, response.statusCode(), "Статус код ответа не соответствует ожидаемому"),
-                () -> assertEquals(TRAVELING_INSURANCE_SERVICE_PRODUCT_NAME, productsName.get(0),
+                () -> assertEquals(TRAVELING_INSURANCE_SERVICE_PRODUCT_NAME,
+                        JsonWorker.getListOfResponseWithInsurancesProducts(response).get(0),
                         "Страхование выезжающих за границу отсутствует"),
-                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(JSON_SCHEMA_PATH))
         );
     }
 
@@ -119,19 +118,19 @@ public class INS_1_GetInfoAboutInsuranceProducts extends BaseTest {
     @Test()
     public void successfulRequestGetInfoAboutPropertyInsurance() {
 
-        String jsonSchemaPath = "schemas/insuranceService/checkTypesOfInsurances.json";
-        Response response = insuranceService.checkGetInfoAboutInsuranceProducts(TYPE_OF_INSURANCE_PROPERTY);
-        List<String> productsName = InsuranceProductsOfBankResponseModel.getListOfProductsNameFromResponse(response.getBody().
-                as(InsuranceProductsOfBankResponseModel.class));
+        response = insuranceService.checkGetInfoAboutInsuranceProducts(TYPE_OF_INSURANCE_PROPERTY);
         assertAll(
                 () -> assertEquals(SC_OK, response.statusCode(), "Статус код ответа не соответствует ожидаемому"),
-                () -> assertEquals(HOME_INSURANCE_SERVICE_PRODUCT_NAME, productsName.get(0),
+                () -> assertEquals(HOME_INSURANCE_SERVICE_PRODUCT_NAME,
+                        JsonWorker.getListOfResponseWithInsurancesProducts(response).get(0),
                         "Страхование дома отсутствует"),
-                () -> assertEquals(THING_INSURANCE_SERVICE_PRODUCT_NAME, productsName.get(1),
+                () -> assertEquals(THING_INSURANCE_SERVICE_PRODUCT_NAME,
+                        JsonWorker.getListOfResponseWithInsurancesProducts(response).get(1),
                         "Страхование домашнего имущества отсутствует"),
-                () -> assertEquals(FLAT_INSURANCE_SERVICE_PRODUCT_NAME, productsName.get(2),
+                () -> assertEquals(FLAT_INSURANCE_SERVICE_PRODUCT_NAME,
+                        JsonWorker.getListOfResponseWithInsurancesProducts(response).get(2),
                         "Страхование квартиры отсутствует"),
-                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(JSON_SCHEMA_PATH))
         );
     }
 
@@ -142,15 +141,13 @@ public class INS_1_GetInfoAboutInsuranceProducts extends BaseTest {
     @Test()
     public void successfulRequestGetInfoAboutAccidentInsurance() {
 
-        String jsonSchemaPath = "schemas/insuranceService/checkTypesOfInsurances.json";
-        Response response = insuranceService.checkGetInfoAboutInsuranceProducts(TYPE_OF_INSURANCE_ACCIDENT);
-        List<String> productsName = InsuranceProductsOfBankResponseModel.getListOfProductsNameFromResponse(response.getBody().
-                as(InsuranceProductsOfBankResponseModel.class));
+        response = insuranceService.checkGetInfoAboutInsuranceProducts(TYPE_OF_INSURANCE_ACCIDENT);
         assertAll(
                 () -> assertEquals(SC_OK, response.statusCode(), "Статус код ответа не соответствует ожидаемому"),
-                () -> assertEquals(ACCIDENT_INSURANCE_SERVICE_PRODUCT_NAME, productsName.get(0),
+                () -> assertEquals(ACCIDENT_INSURANCE_SERVICE_PRODUCT_NAME,
+                        JsonWorker.getListOfResponseWithInsurancesProducts(response).get(0),
                         "Страхование от несчастных случаев отсутствует"),
-                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(JSON_SCHEMA_PATH))
         );
     }
 
@@ -161,13 +158,13 @@ public class INS_1_GetInfoAboutInsuranceProducts extends BaseTest {
     @Test()
     public void requestForInvalidValues() {
 
-        Response response = insuranceService.checkGetInfoAboutInsuranceProducts("1.5");
+        response = insuranceService.checkGetInfoAboutInsuranceProducts("1.5");
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.statusCode(), "Статус код ответа не соответствует ожидаемому"),
                 () -> assertEquals(FILTER_SHOULD_CONTAIN_JUST_NUMBERS, response.jsonPath().get("error.message").toString(),
-                        "Несоответствуют наименования ошибки"),
+                        "Наименование ошибки несоответствует ожидаемому"),
                 () -> assertEquals(BAD_REQUEST_ERROR, response.jsonPath().get("error.name").toString(),
-                        "Несоответствуют описания ошибки")
+                        "Описание ошибки несоответствует ожидаемому")
         );
     }
 
@@ -178,13 +175,13 @@ public class INS_1_GetInfoAboutInsuranceProducts extends BaseTest {
     @Test()
     public void requestForValuesGreaterThanAcceptableValues() {
 
-        Response response = insuranceService.checkGetInfoAboutInsuranceProducts("9999");
+        response = insuranceService.checkGetInfoAboutInsuranceProducts("9999");
         assertAll(
                 () -> assertEquals(SC_NOT_FOUND, response.statusCode(), "Статус код ответа не соответствует ожидаемому"),
                 () -> assertEquals(NOT_FOUND_ERROR, response.jsonPath().get("error.name").toString(),
-                        "Несоответствуют наименования ошибки"),
+                        "Наименование ошибки несоответствует ожидаемому"),
                 () -> assertEquals(CANT_FIND_PRODUCT_GROUP, response.jsonPath().get("error.message").toString(),
-                        "Несоответствуют описания ошибки")
+                        "Описание ошибки несоответствует ожидаемому")
         );
     }
 
@@ -195,13 +192,13 @@ public class INS_1_GetInfoAboutInsuranceProducts extends BaseTest {
     @Test()
     public void requestEmptyValue() {
 
-        Response response = insuranceService.checkGetInfoAboutInsuranceProducts("");
+        response = insuranceService.checkGetInfoAboutInsuranceProducts("");
         assertAll(
                 () -> assertEquals(SC_NOT_FOUND, response.statusCode(), "Статус код ответа не соответствует ожидаемому"),
                 () -> assertEquals(NOT_FOUND_ERROR, response.jsonPath().get("error.name").toString(),
-                        "Несоответствуют наименования ошибки"),
+                        "Наименование ошибки несоответствует ожидаемому"),
                 () -> assertEquals(FILTER_CANT_BE_EMPTY, response.jsonPath().get("error.message").toString(),
-                        "Несоответствуют описания ошибки")
+                        "Описание ошибки несоответствует ожидаемому")
         );
     }
 }
