@@ -87,6 +87,7 @@ public class INS_28_CheckApplyingForInsuranceOffline extends BaseTest {
                 () -> assertEquals(NOT_FOUND, response.jsonPath().get("error"), "Тело ответа не соответсвует ожидаемому")
         );
     }
+
     @AfterAll
     public static void closeDB() {
         DataBaseConnector.closeDataBase();

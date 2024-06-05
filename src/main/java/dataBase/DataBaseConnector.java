@@ -64,7 +64,7 @@ public class DataBaseConnector {
         dataSource.setUsername(getPropertyValue(DB_USER));
         dataSource.setPassword(getPropertyValue(DB_PASSWORD));
         dataSource.setUrl(getUrlConnectDataBase(DB_INSURANCE_SERVICE));
-        Connection connection = DriverManager.getConnection(dataSource.getUrl(),
+        connection = DriverManager.getConnection(dataSource.getUrl(),
                 dataSource.getUsername(), dataSource.getPassword());
         return connection;
     }

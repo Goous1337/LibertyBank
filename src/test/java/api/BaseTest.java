@@ -1,16 +1,12 @@
 package api;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.TestInfo;
-
 import api.core.RequestParam;
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import lombok.Data;
 import lombok.extern.log4j.Log4j2;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.TestInfo;
 import preconditions.UserAuthorization;
 import service.AbsClientService;
 import service.AbsInfoService;
@@ -22,11 +18,11 @@ import service.CustomerService_2_0;
 import service.DepositService;
 import service.InfoService;
 import service.InsuranceService;
+import service.InvestmentService;
 import service.UserAccountService;
 
 import java.util.ArrayList;
 import java.util.List;
-import service.*;
 
 /**
  * Базовый тестовый класс
