@@ -1,6 +1,7 @@
 package pojo.insuranceService;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
@@ -15,4 +16,5 @@ public class OfflineInsuranceApplication {
     private String time;
     private String address;
     private String officeNumber;
+    private String type;
 }

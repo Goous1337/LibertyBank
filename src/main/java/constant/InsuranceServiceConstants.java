@@ -23,5 +23,6 @@ public class InsuranceServiceConstants {
     public static final String INVALID_POLICY_ID_ERROR_MESSAGE = "Некорректный ID полиса";
 
     public static final String FAKE_POLICY_ID_ERROR_MESSAGE = "Полис не найден";
-
+    public static final String BAD_REQUEST = "Bad Request";
+    public static final String NOT_FOUND = "Not Found";
 }

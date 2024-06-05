@@ -48,6 +48,18 @@ public class InsuranceService {
         return sendSimpleRequest(POST, APPLICATION_INSURANCE_OFFLINE, params, offlineInsuranceApplication);
     }
 
+    public Response makeNewApplicationInsuranceOfflineWithoutAuthorization(OfflineInsuranceApplication offlineInsuranceApplication) {
+        List<RequestParam> params = List.of(getRP(HEADER, "accept", ACCEPT_VALUE),
+                getRP(HEADER, CONTENT_TYPE, CONTENT_TYPE_VALUE));
+        return sendSimpleRequest(POST, APPLICATION_INSURANCE_OFFLINE, params, offlineInsuranceApplication);
+    }
+    public Response makeNewApplicationInsuranceOfflineWithIncorrectEndpoint(String clientId, OfflineInsuranceApplication offlineInsuranceApplication) {
+        List<RequestParam> params = List.of(getRP(HEADER, "accept", ACCEPT_VALUE),
+                getRP(HEADER, "clientId", clientId),
+                getRP(HEADER, CONTENT_TYPE, CONTENT_TYPE_VALUE));
+        return sendSimpleRequest(POST, APPLICATION_INSURANCE_OFFLINE+"1", params, offlineInsuranceApplication);
+    }
+
     public String getResponseIdNewApplicationInsuranceOffline(Response response) {
         return response.jsonPath().get("applicationId").toString();
     }
