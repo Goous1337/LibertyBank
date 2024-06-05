@@ -10,7 +10,15 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static org.apache.hc.core5.http.HttpStatus.*;
+import static constant.InsuranceServiceConstants.CLIENT_ID;
+import static constant.InsuranceServiceConstants.CLIENT_ID_NOT_EXIST;
+import static constant.InsuranceServiceConstants.CLIENT_ID_WITHOUT_POLICIES;
+import static constant.Message.BAD_REQUEST_MESSAGE;
+import static constant.Message.NOT_FOUND_CLIENT;
+import static constant.Message.NOT_FOUND_ISSUED_POLICIES;
+import static org.apache.hc.core5.http.HttpStatus.SC_CLIENT_ERROR;
+import static org.apache.hc.core5.http.HttpStatus.SC_NOT_FOUND;
+import static org.apache.hc.core5.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.INSURANCE_SERVICE_LIST_POLICES;
@@ -22,14 +30,14 @@ public class INS_26_GetListIssuedInsurancePolicies extends BaseTest {
         RestAssured.baseURI = INSURANCE_SERVICE_LIST_POLICES;
     }
 
-    @DisplayName("Получение списка оформленных страховых полисов используя Id из БД")
-    @Description("Тест направлен на проверку получение списка оформленных страховых полисов используя Id из БД")
+    @DisplayName("Получение списка оформленных страховых полисов используя client Id из БД")
+    @Description("Тест направлен на проверку получение списка оформленных страховых полисов используя client Id из БД")
     @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB5-1904")
     @Test()
     public void getListInsurancePoliciesIdFromDatabase() {
         String jsonSchemaPath = "schemas/insuranceService/checkGetListIssuedInsurancePolicies.json";
-        Response response = insuranceService.getAllUserPoliciesByClientId("c132bbd4-885d-4924-bd96-468484a5e53b");
+        Response response = insuranceService.getAllUserPoliciesByClientId(CLIENT_ID);
         assertAll(() -> assertEquals(SC_OK, response.statusCode(), "Код ответа не соответствует ожидаемому"),
                   () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath)));
     }
@@ -43,18 +51,22 @@ public class INS_26_GetListIssuedInsurancePolicies extends BaseTest {
         String jsonSchemaPath = "schemas/insuranceService/checkGetListInsurancePoliciesClientIdEmpty.json";
         Response response = insuranceService.getAllUserPoliciesByClientId(" ");
         assertAll(() -> assertEquals(SC_CLIENT_ERROR, response.statusCode(), "Код ответа не соответствует ожидаемому"),
+                  () -> assertEquals(BAD_REQUEST_MESSAGE, insuranceService.getResponsePolicyErrorMessage(response,"error"),
+                          "Сообщение об ошибке не соответствует ожидаемому"),
                   () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath)));
     }
 
     @DisplayName("Получение списка оформленных страховых полисов при не существующий в базе clientId")
     @Description("Тест направлен на проверку получение списка оформленных страховых полисов при не существующий в базе clientId")
     @Tag("API")
-    @TmsLink("https://jira.astondevs.ru/browse/LIB5-1908")
+    @TmsLink("https://jira.astondevs.ru/browse/LIB5-1910")
     @Test()
     public void getListInsurancePoliciesClientIdNotExist() {
         String jsonSchemaPath = "schemas/insuranceService/checkGetListInsurancePoliciesClientIdNotExist.json";
-        Response response = insuranceService.getAllUserPoliciesByClientId("6aa0d17a-74d0-45fd-8de8-7bd8a4d54f3f");
+        Response response = insuranceService.getAllUserPoliciesByClientId(CLIENT_ID_NOT_EXIST);
         assertAll(() -> assertEquals(SC_CLIENT_ERROR, response.statusCode(), "Код ответа не соответствует ожидаемому"),
+                  () -> assertEquals(NOT_FOUND_CLIENT, insuranceService.getResponsePolicyErrorMessage(response,"message"),
+                          "Сообщение об ошибке не соответствует ожидаемому"),
                   () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath)));
     }
 
@@ -65,8 +77,10 @@ public class INS_26_GetListIssuedInsurancePolicies extends BaseTest {
     @Test()
     public void getListInsurancePoliciesUserDoesHave() {
         String jsonSchemaPath = "schemas/insuranceService/checkGetListInsurancePoliciesUserDoesHave.json";
-        Response response = insuranceService.getAllUserPoliciesByClientId("e8b5bcb5-96a2-46d9-b6df-33be35ab697a");
+        Response response = insuranceService.getAllUserPoliciesByClientId(CLIENT_ID_WITHOUT_POLICIES);
         assertAll(() -> assertEquals(SC_NOT_FOUND, response.statusCode(), "Код ответа не соответствует ожидаемому"),
+                  () -> assertEquals(NOT_FOUND_ISSUED_POLICIES, insuranceService.getResponsePolicyErrorMessage(response,"message"),
+                          "Сообщение об ошибке не соответствует ожидаемому"),
                   () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath)));
     }
 }
