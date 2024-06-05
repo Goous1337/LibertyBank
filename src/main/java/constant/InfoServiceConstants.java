@@ -5,5 +5,4 @@ public class InfoServiceConstants {
     public static final String PARAMETER_PAGENUMB = "page";
     public static final String PARAMETER_PAGELIMIT = "size";
     public static final String PARAMETER_CUSTOMERID = "customerId";
-
 }

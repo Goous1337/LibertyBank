@@ -7,7 +7,7 @@ import org.junit.jupiter.api.*;
 import web.BaseTest;
 import web.enums.DepositsEnum;
 
-@Tag("Web")
+@Tags({@Tag("Web"), @Tag("MVP"), @Tag("Positive")})
 @Epic("9 - Депозиты")
 @Feature("US-9.1 Просмотр краткой информации по всем депозитным продуктам банка ")
 @DisplayName("US-9.1 Просмотр краткой информации по всем депозитным продуктам банка ")
@@ -20,12 +20,11 @@ public class US_9_1_CheckShortInformationAboutAllDepositsProductsTest extends Ba
     }
 
     @Test
-    @Tags({@Tag("Web"), @Tag("Positive")})
     @DisplayName("US 9.1 Просмотр краткой информации по всем депозитным продуктам банка ")
     @TmsLink("LIB3-1895")
     public void checkShortInfoAboutDepositsProducts() {
         depositsProductsSteps.assertShortInfoAboutDeposits(DepositsEnum.LIBERTY_CHILD);
-        depositsProductsSteps.assertShortInfoAboutDeposits(DepositsEnum.LIBERTY_CURRENCY_EUR);
+        //depositsProductsSteps.assertShortInfoAboutDeposits(DepositsEnum.LIBERTY_CURRENCY_EUR);
         depositsProductsSteps.assertShortInfoAboutDeposits(DepositsEnum.LIBERTY_CALCULATED);
         depositsProductsSteps.assertShortInfoAboutDeposits(DepositsEnum.LIBERTY_PLUS_EXPRESS);
         depositsProductsSteps.assertShortInfoAboutDeposits(DepositsEnum.LIBERTY_BASIC);

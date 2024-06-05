@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CREDIT_SERVICE;
 
+@Tags({@Tag("API"), @Tag("3.0")})
 @DisplayName("СМ 3.8 Просмотр количества поданных кредитных заявок")
 public class CM_3_8_CheckNumberOfLoanApplicationsSubmittedTest extends BaseTest {
     {
@@ -25,7 +26,7 @@ public class CM_3_8_CheckNumberOfLoanApplicationsSubmittedTest extends BaseTest 
     @DisplayName("Просмотр количества поданных кредитных заявок")
     @Description("Данный тест-кейс направлен на проверку СМ 3.8 по US 3.8 на получение количества заявок," +
             " находящихся в одном из двух статусов: a) В обработке; б) Одобрена.")
-    @Tags({@Tag("smoke"), @Tag("API")})
+    @Tag("Smoke")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-533")
     @Test
     public void checkNumberOfLoanApplicationsSubmitted() {
@@ -40,7 +41,7 @@ public class CM_3_8_CheckNumberOfLoanApplicationsSubmittedTest extends BaseTest 
     @DisplayName("Получение количества поданных кредитных заявок при неуспешной валидации токена")
     @Description("Данный тест-кейс направлен на получение STATUS CODE 401 UNAUTHORIZED при неуспешной валидации" +
             " токена для получения поданных кредитных заявок СМ-3.8 и US-3.8")
-    @Tags({@Tag("negative"), @Tag("API")})
+    @Tag("Negative")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-536")
     @Test
     public void checkNumberOfLoanApplicationsSubmittedInvalidToken() {
@@ -57,7 +58,7 @@ public class CM_3_8_CheckNumberOfLoanApplicationsSubmittedTest extends BaseTest 
     @Description("Данный тест-кейс направлен на получение STATUS CODE 404 NOT FOUND в случае, если" +
             " в результирующей таблице нет записей по указанным критериям для получения количества" +
             " поданных кредитных заявок по СМ-3.8 и US-3.8")
-    @Tags({@Tag("negative"), @Tag("API")})
+    @Tag("Negative")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-537")
     @Test
     public void checkNumberOfLoanApplicationsSubmittedNoRecordsInTheTable() {

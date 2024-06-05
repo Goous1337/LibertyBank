@@ -20,7 +20,7 @@ public class CreditApplicationPage extends BasePage {
     private WebElement inputIdentificationNumberCredit;
     @FindBy(xpath = "//input[@data-testid='input-text-monthlyExpenditure']")
     private WebElement inputMonthlyExpenditureCredit;
-    @FindBy(xpath = "//input[@data-testid=' input-text-monthlyIncome']")
+    @FindBy(xpath = "//input[@data-testid='input-text-monthlyIncome']")
     private WebElement inputMonthlyIncomeCredit;
     @FindBy(xpath = "//p[contains(text(), 'Введённая')]")
     private WebElement textValidateAmountCredit;

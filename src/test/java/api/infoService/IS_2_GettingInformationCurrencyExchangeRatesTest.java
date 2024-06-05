@@ -23,6 +23,7 @@ import static org.asynchttpclient.util.HttpConstants.Methods.GET;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.INFO_SERVICE;
 
+@Tags({@Tag("API"), @Tag("MVP")})
 @DisplayName("IS-2 Получение информации о курсах валют в отделениях")
 public class IS_2_GettingInformationCurrencyExchangeRatesTest extends BaseTest {
 
@@ -33,7 +34,7 @@ public class IS_2_GettingInformationCurrencyExchangeRatesTest extends BaseTest {
     @DisplayName("Основной сценарий. Получение информации обо всех подразделениях банка в городе.")
     @Description("В данном тест-кейсе проводится проверка возможности получения информации о подразделениях банка в " +
             "конкретном городе из БД")
-    @Tags({@Tag("smoke"), @Tag("API")})
+    @Tag("Smoke")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-1155")
     @Test
 
@@ -71,7 +72,7 @@ public class IS_2_GettingInformationCurrencyExchangeRatesTest extends BaseTest {
     @DisplayName("Основной сценарий. Получение информации о всех курсах валют отделений выбранного города.")
     @Description("В данном тест-кейсе проводится проверка возможности получение информации о курсах валют в отделениях" +
             " конкретного города из списка.")
-    @Tags({@Tag("smoke"), @Tag("API")})
+    @Tag("Smoke")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-1236")
     @ParameterizedTest(name = "ID города: {0}")
     @ValueSource(
@@ -113,7 +114,7 @@ public class IS_2_GettingInformationCurrencyExchangeRatesTest extends BaseTest {
             "количество элементов на странице.")
     @Description("В данном тест-кейсе проводится проверка возможности получения страниц с информацией о курсах валют" +
             " отделений с определенным количеством элементов на странице.")
-    @Tags({@Tag("smoke"), @Tag("API")})
+    @Tag("Smoke")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-1237")
     @ParameterizedTest(name = "Номер страницы: {0}, количество элементов на странице: {1}, размер порции: {2}")
     @CsvSource({
@@ -155,7 +156,6 @@ public class IS_2_GettingInformationCurrencyExchangeRatesTest extends BaseTest {
     @DisplayName("Проверка работы сервиса информации о курсах валют в отделениях при невалидном URL.")
     @Description("В данном тест-кейсе проводится проверка возможности получения информации о курсах валют в отделениях" +
             " из БД, если использован невалидный URL")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-1239")
     @Test
 
@@ -171,7 +171,6 @@ public class IS_2_GettingInformationCurrencyExchangeRatesTest extends BaseTest {
     @DisplayName("Проверка получения информации о курсах валют в отделениях если запрос не GET/ HEAD / OPTIONS.")
     @Description("В данном тест-кейсе проводится проверка возможности получения информации информации о курсах валют " +
             "в отделениях из БД, если использован невалидный метод запроса.")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-1241")
     @ParameterizedTest(name = "Method: {0}")
     @ValueSource(
@@ -190,7 +189,6 @@ public class IS_2_GettingInformationCurrencyExchangeRatesTest extends BaseTest {
     @DisplayName("Проверка работы сервиса информации о курсах валют в отделениях при использовании невалидных входных параметров.")
     @Description("В данном тест-кейсе проводится проверка возможности получения страниц с информацией о курсах валют " +
             "отделений с определенным количеством элементов на странице, при использовании невалидных входных параметров.")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-1240")
     @Issue("https://jira.astondevs.ru/browse/LIB-1440")
     @ParameterizedTest(name = "Номер страницы: {0}, количество элементов на странице: {1}, размер порции: {2}")

@@ -8,6 +8,7 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 import pojo.insuranceService.*;
 
@@ -22,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.INSURANCE_SERVICE;
 
+@Tags({@Tag("API"), @Tag("2.0")})
 @DisplayName("InS-2 Подача заявки на договор страхования")
 public class INS_2_CheckNewApplicationRequest extends BaseTest {
 
@@ -31,7 +33,6 @@ public class INS_2_CheckNewApplicationRequest extends BaseTest {
 
     @DisplayName("Заявка подана при всех заполненных полях валидными данными")
     @Description("Тест направлен на проверку подачи заявки при всех заполненных полях валидными данными согласно требованию")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB5-834")
     @Test()
     public void successfulRequestWithoutLicenseIssuingDate() {
@@ -51,7 +52,6 @@ public class INS_2_CheckNewApplicationRequest extends BaseTest {
 
     @DisplayName("Заявка не может быть подана если в данных об автомобиле значение mileage не валидное")
     @Description("Тест направлен на проверку невозможность подачи заявки при невалидном значении поля автомобиля mileage")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB5-898")
     @Test()
     public void unsuccessfulRequestInvalidMileage() {
@@ -71,7 +71,6 @@ public class INS_2_CheckNewApplicationRequest extends BaseTest {
 
     @DisplayName("Заявка не может быть подана если в данных об автомобиле значение mileage пустое")
     @Description("Тест направлен на проверку невозможность подачи заявки при невалидном значении поля автомобиля mileage")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB5-897")
     @Test()
     public void unsuccessfulRequestWithoutMileage() {
@@ -91,7 +90,6 @@ public class INS_2_CheckNewApplicationRequest extends BaseTest {
 
     @DisplayName("Заявка не может быть подана если в данных об автомобиле значение поля power пустое")
     @Description("Тест направлен на проверку невозможность подачи заявки при отсутствии значения обязательного поля автомобиля power")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB5-896")
     @Test()
     public void unsuccessfulRequestWithoutPower() {
@@ -111,7 +109,6 @@ public class INS_2_CheckNewApplicationRequest extends BaseTest {
 
     @DisplayName("Заявка не может быть подана если в данных об автомобиле значение поля price невалидное")
     @Description("Тест направлен на проверку невозможность подачи заявки при невалидном значении поля автомобиля price")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB5-893")
     @Test()
     public void unsuccessfulRequestInvalidPrice() {
@@ -131,7 +128,6 @@ public class INS_2_CheckNewApplicationRequest extends BaseTest {
 
     @DisplayName("Заявка не может быть подана если в данных об автомобиле значение поля price пустое")
     @Description("Тест направлен на проверку невозможность подачи заявки при отстутствии значении поля автомобиля price")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB5-890")
     @Test()
     public void unsuccessfulRequestWithoutPrice() {
@@ -151,7 +147,6 @@ public class INS_2_CheckNewApplicationRequest extends BaseTest {
 
     @DisplayName("Заявка не может быть подана если в данных об автомобиле значение поля numberPlate пустое")
     @Description("Тест направлен на проверку невозможность подачи заявки при отсутствии значении поля автомобиля numberPlate")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB5-888")
     @Test()
     public void unsuccessfulRequestWithoutNumberPlate() {
@@ -171,7 +166,6 @@ public class INS_2_CheckNewApplicationRequest extends BaseTest {
 
     @DisplayName("Заявка не может быть подана если в данных об автомобиле значение поля brand пустое")
     @Description("Тест направлен на проверку невозможность подачи заявки при отстутсвии значении поля автомобиля brand")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB5-884")
     @Test()
     public void unsuccessfulRequestWithoutBrand() {
@@ -191,7 +185,6 @@ public class INS_2_CheckNewApplicationRequest extends BaseTest {
 
     @DisplayName("Заявка не может быть подана если в данных об автомобиле значение поля model пустое")
     @Description("Тест направлен на проверку невозможность подачи заявки отсутствует значение поля автомобиля model")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB5-881")
     @Test()
     public void unsuccessfulRequestWithoutModel() {

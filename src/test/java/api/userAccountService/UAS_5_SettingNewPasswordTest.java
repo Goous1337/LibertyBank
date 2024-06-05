@@ -16,6 +16,7 @@ import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.URL_USER_ACCOUNT_SERVICE;
 
+@Tags({@Tag("API"), @Tag("MVP")})
 @DisplayName("UAS-5 Установление нового пароля")
 public class UAS_5_SettingNewPasswordTest extends BaseTest {
 
@@ -25,7 +26,7 @@ public class UAS_5_SettingNewPasswordTest extends BaseTest {
 
     @DisplayName("Установление нового пароля")
     @Description("Проверка успешного установления нового пароля пользователю")
-    @Tags({@Tag("smoke"), @Tag("API")})
+    @Tag("Smoke")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-1535")
     @Test
 
@@ -49,7 +50,6 @@ public class UAS_5_SettingNewPasswordTest extends BaseTest {
 
     @DisplayName("Валидация метода запроса установления пароля")
     @Description("Тест направлен на проверку возможности отправить запроса методом отличным от PATCH.")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-1536")
     @ParameterizedTest(name = "invalidHttpMethod: {0}")
     @CsvSource({
@@ -79,7 +79,6 @@ public class UAS_5_SettingNewPasswordTest extends BaseTest {
 
     @DisplayName("Обязательность ключей в теле запроса при установлении нового пароля")
     @Description("Тест направлен на проверку обязательности ключей в теле запроса без sessionToken с валидным newPassword.")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-1537")
     @Test
 
@@ -99,7 +98,6 @@ public class UAS_5_SettingNewPasswordTest extends BaseTest {
 
     @DisplayName("Обязательность ключей в теле запроса при установлении нового пароля")
     @Description("Тест направлен на проверку обязательности ключей в теле запроса c sessionToken без newPassword.")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-1537")
     @Test
 
@@ -120,7 +118,6 @@ public class UAS_5_SettingNewPasswordTest extends BaseTest {
 
     @DisplayName("Обязательность ключей в теле запроса при установлении нового пароля")
     @Description("Тест направлен на проверку обязательности ключей в теле запроса c пустыми значениями.")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-1537")
     @ParameterizedTest(name = "sessionToke: {0}, password: {1}")
     @CsvSource({
@@ -138,7 +135,6 @@ public class UAS_5_SettingNewPasswordTest extends BaseTest {
 
     @DisplayName("Обязательность ключей в теле запроса при установлении нового пароля")
     @Description("Тест направлен на проверку обязательности ключей в теле запроса без тела.")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-1537")
     @Test
 
@@ -155,7 +151,6 @@ public class UAS_5_SettingNewPasswordTest extends BaseTest {
     @Disabled("Bug https://jira.astondevs.ru/browse/LIB-1565")
     @DisplayName("Добавление нового пароля, если пароль у пользователя уже есть")
     @Description("Тест проверяет возможность добавить пароль, если у пользователя пароль уже существует и записан в БД")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-1538")
     @Test
 
@@ -178,7 +173,6 @@ public class UAS_5_SettingNewPasswordTest extends BaseTest {
     @Disabled("BUG https://jira.astondevs.ru/browse/LIB-1574")
     @DisplayName("Валидация URL при установлении нового пароля")
     @Description("Тест проверяет обработку запроса с невалидным URL")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-1540")
     @Test
 
@@ -201,7 +195,6 @@ public class UAS_5_SettingNewPasswordTest extends BaseTest {
 
     @DisplayName("Валидация токена при установлении нового пароля")
     @Description("Тест проверяет валидацию sessionToken c одним изменненым символом.")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-1541")
     @Test
 
@@ -224,7 +217,6 @@ public class UAS_5_SettingNewPasswordTest extends BaseTest {
     @Disabled("BUG https://jira.astondevs.ru/browse/LIB-1573")
     @DisplayName("Валидация токена при установлении нового пароля")
     @Description("Тест проверяет валидацию sessionToken c пустым значениес.")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-1541")
     @Test
 
@@ -244,7 +236,6 @@ public class UAS_5_SettingNewPasswordTest extends BaseTest {
     @Disabled("Bug https://jira.astondevs.ru/browse/LIB-1572")
     @DisplayName("Установление нового пароля")
     @Description("Проверка успешного установления нового пароля пользователю")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-1535")
     @ParameterizedTest(name = "password: {0}")
     @ValueSource(

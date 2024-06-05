@@ -7,7 +7,7 @@ import org.junit.jupiter.api.*;
 import web.BaseTest;
 import web.enums.CreditsEnum;
 
-@Tag("Web")
+@Tags({@Tag("Web"), @Tag("MVP")})
 @Epic("3 - Кредиты")
 @Feature("US-3.2 Просмотр информации о кредитных продуктах банка")
 @DisplayName("US-3.2 Просмотр информации о кредитных продуктах банка")
@@ -20,15 +20,14 @@ public class US_3_2_CreditInfoTest extends BaseTest {
     }
 
     @Test
-    @Tags({@Tag("Web"), @Tag("Positive")})
     @DisplayName("US 3-2 Просмотр краткой информации о кредитных продуктах банках")
     @TmsLink("LIB3-181")
     public void checkShortInfoAboutCreditProducts() {
-        сreditProductsSteps.assertShortInfoAboutCreditProducts(CreditsEnum.LIBERTY_CASH);
-        сreditProductsSteps.assertShortInfoAboutCreditProducts(CreditsEnum.LIBERTY_EXPRESS);
-        сreditProductsSteps.assertShortInfoAboutCreditProducts(CreditsEnum.LIBERTY_CAR);
-        сreditProductsSteps.assertShortInfoAboutCreditProducts(CreditsEnum.LIBERTY_MONEY);
-        сreditProductsSteps.assertShortInfoAboutCreditProducts(CreditsEnum.LIBERTY_MY_FLAT);
-        сreditProductsSteps.assertShortInfoAboutCreditProducts(CreditsEnum.LIBERTY_EASY);
+        creditProductsSteps.assertShortInfoAboutCreditProducts(CreditsEnum.LIBERTY_CASH);
+        creditProductsSteps.assertShortInfoAboutCreditProducts(CreditsEnum.LIBERTY_EXPRESS);
+        creditProductsSteps.assertShortInfoAboutCreditProducts(CreditsEnum.LIBERTY_CAR);
+        creditProductsSteps.assertShortInfoAboutCreditProducts(CreditsEnum.LIBERTY_MONEY);
+        creditProductsSteps.assertShortInfoAboutCreditProducts(CreditsEnum.LIBERTY_MY_FLAT);
+        creditProductsSteps.assertShortInfoAboutCreditProducts(CreditsEnum.LIBERTY_EASY);
     }
 }

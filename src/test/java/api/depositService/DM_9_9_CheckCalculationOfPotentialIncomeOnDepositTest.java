@@ -17,6 +17,7 @@ import static org.apache.hc.core5.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.DEPOSIT_SERVICE;
 
+@Tags({@Tag("API"), @Tag("3.0")})
 @DisplayName("DM-9.9 Расчет потенциального дохода по депозиту на определенный срок.")
 public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseTest {
     {
@@ -29,7 +30,7 @@ public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseT
     @DisplayName("Проверка позитивных сценариев граничных значений")
     @Description("Данный тест-кейс направлен на проверку позитивных сценариев граничных значений" +
             " в расчете потенциального дохода по депозиту на определенный срок")
-    @Tags({@Tag("API"), @Tag("Smoke")})
+    @Tag("Smoke")
     @TmsLink("LIB3-744")
     @ParameterizedTest(name = "initialSum: {1}")
     @ValueSource(floats = {99999, 100000, 1000, 1001})
@@ -48,7 +49,7 @@ public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseT
     @DisplayName("Проверка негативных сценариев граничных значений")
     @Description("Данный тест-кейс направлен на проверку негативных сценариев граничных значений" +
             " в расчете потенциального дохода по депозиту на определенный срок")
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tag("Negative")
     @TmsLink("LIB3-818")
     @ParameterizedTest(name = "initialSum: {1}")
     @ValueSource(floats = {-1, 1000001, 2999})
@@ -65,7 +66,7 @@ public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseT
     @DisplayName("Расчет потенциального дохода по депозиту на определенный срок без капитализации")
     @Description("Данный тест-кейс направлен на расчет потенциального дохода по депозиту на определенный" +
             " срок без капитализации")
-    @Tags({@Tag("API"), @Tag("Smoke")})
+    @Tag("Smoke")
     @TmsLink("LIB3-735")
     @Test
     public void checkCalculationIncomeFromDepositForCertainPeriodCapitalizationFalse() {
@@ -87,7 +88,7 @@ public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseT
     @DisplayName("Расчет потенциального дохода по депозиту на определенный срок без параметра isCapitalisation")
     @Description("Данный тест-кейс направлен на расчет потенциального дохода по депозиту на определенный" +
             " срок без параметра isCapitalisation")
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tag("Negative")
     @TmsLink("LIB3-739")
     @Test
     public void checkCalculationIncomeFromDepositForCertainPeriodWithoutCapitalization() {
@@ -102,7 +103,7 @@ public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseT
     @DisplayName("Расчет потенциального дохода по депозиту на определенный срок без параметра depositProductId")
     @Description("Данный тест-кейс направлен на расчет потенциального дохода по депозиту на определенный срок" +
             " без параметра depositProductId")
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tag("Negative")
     @TmsLink("LIB3-736")
     @Test
     public void checkCalculatingOfPotentialIncomeOnDepositWithoutId() {
@@ -117,7 +118,7 @@ public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseT
     @DisplayName("Расчет потенциального дохода по депозиту на определенный срок без параметра initialSum")
     @Description("Данный тест-кейс направлен на расчет потенциального дохода по депозиту на определенный срок" +
             " без параметра initialSum")
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tag("Negative")
     @TmsLink("LIB3-737")
     @Test
     public void checkCalculatingOfPotentialIncomeOnDepositWithoutInitialSum() {
@@ -132,7 +133,7 @@ public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseT
     @DisplayName("Расчет потенциального дохода по депозиту на определенный срок без параметра termTime")
     @Description("Данный тест-кейс направлен на расчет потенциального дохода по депозиту на определенный срок" +
             " без параметра termTime")
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tag("Negative")
     @TmsLink("LIB3-738")
     @Test
     public void checkCalculatingOfPotentialIncomeOnDepositWithoutTermTime() {
@@ -147,7 +148,7 @@ public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseT
     @DisplayName("Расчет потенциального дохода по депозиту на определенный срок c капитализацией")
     @Description("Данный тест-кейс направлен на расчет потенциального дохода по депозиту на определенный" +
             "срок с капитализацией")
-    @Tags({@Tag("API"), @Tag("Smoke")})
+    @Tag("Smoke")
     @TmsLink("LIB3-734")
     @Test
     public void checkCalculationIncomeFromDepositForCertainPeriodCapitalizationTrue() {

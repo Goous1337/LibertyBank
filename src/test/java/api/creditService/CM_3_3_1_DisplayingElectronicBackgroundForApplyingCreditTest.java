@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CREDIT_SERVICE;
 
+@Tags({@Tag("API"), @Tag("2.0")})
 @DisplayName("CM 3.3.1 Отображение электронной формы для оформления заявки на кредит")
 public class CM_3_3_1_DisplayingElectronicBackgroundForApplyingCreditTest extends BaseTest {
     {
@@ -23,7 +24,6 @@ public class CM_3_3_1_DisplayingElectronicBackgroundForApplyingCreditTest extend
 
     @DisplayName("Отображение электронной формы для оформления заявки на кредит")
     @Description("Данный тест-кейс направлен на проверку отображения электронной формы для оформления заявки на кредит")
-    @Tags({@Tag("API")})
     @TmsLink("https://jira.astondevs.ru/secure/StructureBoard.jspa?s=13#")
     @Test
     public void checkDisplayingElectronicBackgroundForApplyingCreditValidToken() {
@@ -40,7 +40,7 @@ public class CM_3_3_1_DisplayingElectronicBackgroundForApplyingCreditTest extend
     @Disabled("https://jira.astondevs.ru/browse/LIB3-1132")
     @DisplayName("Отображение электронной формы для оформления заявки на кредит при неуспешной валидации токена")
     @Description("Данный тест-кейс направлен на проверку отображения электронной формы для оформления заявки на кредит при неуспешной валидации токена")
-    @Tags({@Tag("Negative"), @Tag("API")})
+    @Tag("Negative")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-851")
     @Test
     public void checkDisplayingElectronicBackgroundForApplyingCreditInvalidToken() {
@@ -56,7 +56,7 @@ public class CM_3_3_1_DisplayingElectronicBackgroundForApplyingCreditTest extend
 
     @DisplayName("Отображение электронной формы для оформления заявки на кредит в случае, если в результирующей таблице нет записей по указанным критериям")
     @Description("Данный тест-кейс направлен на проверку отображения ошибки в ответе сервера в случае, если в результирующей таблице нет записи по указанным критериям")
-    @Tags({@Tag("Negative"), @Tag("API")})
+    @Tag("Negative")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-852")
     @Test
     public void checkDisplayingElectronicBackgroundForApplyingCreditValidTokenWithoutParameters() {

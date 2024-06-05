@@ -13,6 +13,8 @@ public final class BaseProperties {
     public static String DEPOSIT_SERVICE = getPropertyValue("deposit_service");
     public static String DEPOSIT_SERVICE_NEW = getPropertyValue("deposit_service_new");
     public static String ACCESS_TOKEN_CUSTOMER_SERVICE = getPropertyValue("access_token_credit_service");
+    public static String ACCESS_TOKEN_INSURANCE_SERVICE = getPropertyValue("access_token_insurance_service");
+    public static String ACCESS_TOKEN_INVESTMENT_SERVICE = getPropertyValue("access_token_investment_service");
     public static String INVALID_TOKEN_CREDIT_SERVICE = "JSO1q6y8muhBjpLlviMOUOIc";
     public static String ABS_INFO_SERVICE = getPropertyValue("abs_info_service");
     public static String ABS_CLIENT_SERVICE = getPropertyValue("abs_client_service");
@@ -20,4 +22,8 @@ public final class BaseProperties {
     public static String CARD_SERVICE = getPropertyValue("card_service");
     public static String INSURANCE_SERVICE = getPropertyValue("insurance_service");
     public static String INSURANCE_POLICY_SERVICE = getPropertyValue("insurance_service_policy");
+    public static String INSURANCE_POPULAR_INSURANCE_PRODUCTS = getPropertyValue("popular_insurance_products");
+    public static String INSURANCE_SERVICE_LIST_OF_INSURANCE_POLICES = getPropertyValue("insurance_service_polices");
+    public static String INVESTMENT_SERVICE = getPropertyValue("investment_service");
+    public static String INSURANCE_SERVICE_LIST_POLICES = getPropertyValue("insurance_service_policy");
 }

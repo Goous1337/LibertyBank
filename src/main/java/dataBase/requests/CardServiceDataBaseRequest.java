@@ -24,4 +24,12 @@ public class CardServiceDataBaseRequest {
         LOG.info(String.format("Получен productTypeId карты: %s", productTypeId));
         return productTypeId;
     }
+
+    public static String getPINByFirstTwelveNumbers(String firstTwelveNumbers) {
+        LOG.info("Значение firstTwelveNumbers: " + firstTwelveNumbers);
+        String sql = "SELECT pincode FROM card_secure_data WHERE first_twelve_numbers = '" + firstTwelveNumbers + "'";
+        String oldPin = getDBConnection(CARD_SERVICE_DB).queryForObject(sql, String.class);
+        LOG.info(String.format("Получен PIN-code карты: %s", oldPin));
+        return oldPin;
+    }
 }

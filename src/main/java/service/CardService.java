@@ -3,7 +3,7 @@ package service;
 import constant.CardProducts;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import pojo.cardService.RegistrDebitBody;
+import pojo.cardService.RegistryDebitBody;
 import pojo.cardService.ReissueRequestBody;
 import pojo.cardService.UpdateCardLimitsRequest;
 import pojo.cardService.UpdateCardStatusRequest;
@@ -95,7 +95,7 @@ public class CardService {
                 .post(ACTIVE_CARDS + "/" + INVALID_CARD_ID);
     }
 
-    public static Response getRegistrDebCard(RegistrDebitBody body) {
+    public static Response createRegistryDebCard(RegistryDebitBody body) {
         return RestAssured.given(requestSpec)
                 .body(body)
                 .when()

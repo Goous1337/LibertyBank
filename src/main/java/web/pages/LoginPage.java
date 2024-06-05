@@ -1,9 +1,12 @@
 package web.pages;
 
+import java.util.Objects;
+
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.Objects;
+import web.helpers.Waiters;
 
 import static web.helpers.Waiters.*;
 
@@ -36,6 +39,18 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//p[contains(text(), 'Неверный пароль или номер телефона')]")
     private WebElement errorHint;
 
+    @FindBy(xpath = "//div[contains(@class, 'password-container')]/descendant::p")
+    private WebElement errorPasswordHint;
+
+    @FindBy(xpath = "//div[contains(@class, 'phone-container')]/descendant::p")
+    private WebElement errorPhoneHint;
+
+    @FindBy(xpath = "//label[text()='Номер телефона']")
+    private WebElement placeholderPhone;
+
+    @FindBy(xpath = "//label[text()='Пароль']")
+    private WebElement placeholderPassword;
+
     public void enterPhone(String phoneNumber) {
         waitElement(borderForPhoneInput);
         borderForPhoneInput.click();
@@ -58,6 +73,14 @@ public class LoginPage extends BasePage {
         passwordInputClick.click();
     }
 
+    public void outFormPhone() {
+        phoneInput.sendKeys(Keys.TAB);
+    }
+
+    public void outFormPassword() {
+        passwordInput.sendKeys(Keys.TAB);
+    }
+
     public void submitToMainPage() {
         clickSubmitButton();
         waitElement(mainView);
@@ -67,20 +90,59 @@ public class LoginPage extends BasePage {
         waitElement(submitButton).click();
     }
 
-    public boolean checkButtonCondition(String bgColor, String textColor, boolean isEnabled) {
+    public boolean checkButtonCondition(String bgColor, String textColor, boolean isDisabled) {
         waitElementWithColor(submitButton, bgColor);
-        return submitButton.isEnabled() == isEnabled
+        return Boolean.parseBoolean(submitButton.getAttribute("aria-disabled")) == isDisabled
                 && submitButton.getCssValue("background-color").equals(bgColor)
                 && submitButton.getCssValue("color").equals(textColor);
     }
 
+    public String getPhoneInputBorderColor() {
+        return borderForPhoneInput.getCssValue("outline-color");
+    }
+
+    public String getPasswordInputBorderColor() {
+        return borderForPasswordInput.getCssValue("outline-color");
+    }
+
+    public String getColorPlaceholderPhone() {
+        return placeholderPhone.getCssValue("color");
+    }
+
+    public String getColorPlaceholderPassword() {
+        return placeholderPassword.getCssValue("color");
+    }
+
     public boolean isValidInput(String color) {
-        System.out.println(borderForPasswordInput.getCssValue("border-color"));
-        return borderForPasswordInput.getCssValue("border-color").
+        return borderForPasswordInput.getCssValue("outline-color").
                 equals(color);
     }
 
     public boolean checkErrorHint(String text) {
         return Objects.equals(errorHint.getText(), text);
+    }
+
+    public String getErrorPasswordHintText() {
+        return errorPasswordHint.getText();
+    }
+
+    public String getErrorPhoneHintText() {
+        return errorPhoneHint.getText();
+    }
+
+    public boolean isErrorPhoneHintNotDisplayed() {
+        return Waiters.isElementNotDisplayed(errorPhoneHint);
+    }
+
+    public boolean isErrorPasswordHintNotDisplayed() {
+        return Waiters.isElementNotDisplayed(errorPasswordHint);
+    }
+
+    public String getTextFromPhoneInput() {
+        return phoneInput.getAttribute("value");
+    }
+
+    public String getTextFromPasswordInput() {
+        return passwordInput.getAttribute("value");
     }
 }

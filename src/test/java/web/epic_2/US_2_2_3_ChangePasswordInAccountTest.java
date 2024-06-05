@@ -18,6 +18,7 @@ import static property.BaseProperties.CUSTOMER_SERVICE_2_0;
 import static property.UserPropertiesReader.USER_PASSWORD;
 import static property.UserPropertiesReader.USER_PHONE;
 
+@Tags({@Tag("Web"), @Tag("MVP")})
 @Epic("2 - Личный кабинет/Основное меню")
 @DisplayName("US-2.2.3 [web] Безопасность")
 public class US_2_2_3_ChangePasswordInAccountTest extends BaseTest {
@@ -34,7 +35,6 @@ public class US_2_2_3_ChangePasswordInAccountTest extends BaseTest {
 
     @DisplayName("Основной сценарий. Изменение пароля в личном кабинете пользователя")
     @Description("Проверка успешного изменения пароля пользователя в личном кабинете")
-    @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Positive")})
     @TmsLink("LIB-2600")
     @Test
     public void changePasswordInAccountTest() {
@@ -52,7 +52,6 @@ public class US_2_2_3_ChangePasswordInAccountTest extends BaseTest {
             Проверка возможности пользователем отменить смену пароля на странице "Изменение пароля".
             При нажатии на кнопку "Отмена"происходит возврат на предыдущую страницу.
             """)
-    @Tags({@Tag("Web"), @Tag("Smoke")})
     @TmsLink("LIB-2622")
     @Test
     public void logoutFromAccount() {

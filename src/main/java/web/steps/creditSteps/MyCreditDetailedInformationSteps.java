@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Assertions;
 import web.helpers.TestListener;
 import web.pages.creditPages.MyCreditDetailedInformationPage;
 
-import static web.constans.CreditServiceConstants.NOT_DISPLAYED_CREDIT_WEB_ELEMENT_MESSAGE;
+import static web.constans.credit.CreditServiceConstants.NOT_DISPLAYED_CREDIT_WEB_ELEMENT_MESSAGE;
 
 public class MyCreditDetailedInformationSteps {
     protected MyCreditDetailedInformationPage myCreditDetailedInformationPage;

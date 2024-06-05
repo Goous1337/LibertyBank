@@ -7,6 +7,7 @@ import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import web.BaseTest;
@@ -15,7 +16,7 @@ import static constant.CardInfoConstants.*;
 import static constant.CardServiceConstants.*;
 import static web.constans.UrlConfig.CARD_PRODUCTS_URL;
 
-@Tag("Web")
+@Tags({@Tag("Web"), @Tag("MVP")})
 @Epic("5 - Карты")
 @Feature("US-5.7.ALL Просмотр подробной информации по карточному продукту")
 @DisplayName("US-5.7.ALL Просмотр подробной информации по карточному продукту")
@@ -26,7 +27,6 @@ public class US_5_7_ALL_CardProductInfoTest extends BaseTest {
     }
 
     @ParameterizedTest
-    @Tag("Web")
     @TmsLink("LIB2-2945")
     @DisplayName("Проверка отображения необходимой информации о карте")
     @Description("Должны корректно отображаться имя, срок действия, стоимость обслуживания и валюта карты")
@@ -41,8 +41,8 @@ public class US_5_7_ALL_CardProductInfoTest extends BaseTest {
     })
     public void cardProductsInfoTest(String name, String validity, String cost, String currency) {
         open(CARD_PRODUCTS_URL + "/" + name);
-        cardProductInfoSteps.assertIsCardImageDisplayed();
-        //cardProductInfoSteps.assertCardTitleEquals(name);
+        //cardProductInfoSteps.assertIsCardImageDisplayed();
+        cardProductInfoSteps.assertCardTitleEquals(name);
         cardProductInfoSteps.assertCardValidityEquals(validity);
         cardProductInfoSteps.assertCardServiceCostEquals(cost);
         cardProductInfoSteps.assertCardCurrencyEquals(currency);
