@@ -38,8 +38,7 @@ public class INS_26_GetListIssuedInsurancePolicies extends BaseTest {
     public void getListInsurancePoliciesIdFromDatabase() {
         String jsonSchemaPath = "schemas/insuranceService/checkGetListIssuedInsurancePolicies.json";
         Response response = insuranceService.getAllUserPoliciesByClientId(CLIENT_ID);
-        assertAll(() -> assertEquals(SC_OK, response.statusCode(), "Код ответа не соответствует ожидаемому"),
-                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath)));
+        assertAll(() -> assertEquals(SC_OK, response.statusCode(), "Код ответа не соответствует ожидаемому"), () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath)));
     }
 
     @DisplayName("Получение списка оформленных страховых полисов при пустом clientId")
@@ -50,10 +49,7 @@ public class INS_26_GetListIssuedInsurancePolicies extends BaseTest {
     public void getListInsurancePoliciesClientIdEmpty() {
         String jsonSchemaPath = "schemas/insuranceService/checkGetListInsurancePoliciesClientIdEmpty.json";
         Response response = insuranceService.getAllUserPoliciesByClientId(" ");
-        assertAll(() -> assertEquals(SC_CLIENT_ERROR, response.statusCode(), "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals(BAD_REQUEST_MESSAGE, insuranceService.getResponsePolicyErrorMessage(response,"error"),
-                          "Сообщение об ошибке не соответствует ожидаемому"),
-                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath)));
+        assertAll(() -> assertEquals(SC_CLIENT_ERROR, response.statusCode(), "Код ответа не соответствует ожидаемому"), () -> assertEquals(BAD_REQUEST_MESSAGE, insuranceService.getResponsePolicyErrorMessage(response, "error"), "Сообщение об ошибке не соответствует ожидаемому"), () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath)));
     }
 
     @DisplayName("Получение списка оформленных страховых полисов при не существующий в базе clientId")
@@ -64,10 +60,7 @@ public class INS_26_GetListIssuedInsurancePolicies extends BaseTest {
     public void getListInsurancePoliciesClientIdNotExist() {
         String jsonSchemaPath = "schemas/insuranceService/checkGetListInsurancePoliciesClientIdNotExist.json";
         Response response = insuranceService.getAllUserPoliciesByClientId(CLIENT_ID_NOT_EXIST);
-        assertAll(() -> assertEquals(SC_CLIENT_ERROR, response.statusCode(), "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals(NOT_FOUND_CLIENT, insuranceService.getResponsePolicyErrorMessage(response,"message"),
-                          "Сообщение об ошибке не соответствует ожидаемому"),
-                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath)));
+        assertAll(() -> assertEquals(SC_CLIENT_ERROR, response.statusCode(), "Код ответа не соответствует ожидаемому"), () -> assertEquals(NOT_FOUND_CLIENT, insuranceService.getResponsePolicyErrorMessage(response, "message"), "Сообщение об ошибке не соответствует ожидаемому"), () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath)));
     }
 
     @DisplayName("Получения списка оформленных полисов пользователя, не имеющего оформленных полисов")
@@ -78,9 +71,6 @@ public class INS_26_GetListIssuedInsurancePolicies extends BaseTest {
     public void getListInsurancePoliciesUserDoesHave() {
         String jsonSchemaPath = "schemas/insuranceService/checkGetListInsurancePoliciesUserDoesHave.json";
         Response response = insuranceService.getAllUserPoliciesByClientId(CLIENT_ID_WITHOUT_POLICIES);
-        assertAll(() -> assertEquals(SC_NOT_FOUND, response.statusCode(), "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals(NOT_FOUND_ISSUED_POLICIES, insuranceService.getResponsePolicyErrorMessage(response,"message"),
-                          "Сообщение об ошибке не соответствует ожидаемому"),
-                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath)));
+        assertAll(() -> assertEquals(SC_NOT_FOUND, response.statusCode(), "Код ответа не соответствует ожидаемому"), () -> assertEquals(NOT_FOUND_ISSUED_POLICIES, insuranceService.getResponsePolicyErrorMessage(response, "message"), "Сообщение об ошибке не соответствует ожидаемому"), () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath)));
     }
 }
