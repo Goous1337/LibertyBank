@@ -79,7 +79,7 @@ public class InsuranceService {
         return sendSimpleRequest(GET, LIST_OF_INSURANCE_POLICES, params);
     }
 
-    public Response postRevokeInsurancePolicy(RevokeInsurancePolicyRequest revokeInsurancePolicyRequest){
+    public Response postRevokeInsurancePolicy(RevokeInsurancePolicyRequest revokeInsurancePolicyRequest) {
         List<RequestParam> params = List.of(getRP(HEADER, "accept", ACCEPT_VALUE),
                 getRP(HEADER, CONTENT_TYPE, CONTENT_TYPE_VALUE));
         return sendSimpleRequest(POST, REVOKE_INSURANCE_POLICY, params, revokeInsurancePolicyRequest);

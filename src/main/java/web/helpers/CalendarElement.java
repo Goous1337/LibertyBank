@@ -30,8 +30,12 @@ public class CalendarElement {
         String labelMonth = labelText.substring(0, spaceIndex);
         int currentMonth = parseMonth(labelMonth);
         while (currentMonth != month) {
-            if (currentMonth > month) waitElement(previousMonth).click();
-            if (currentMonth < month) waitElement(nextMonth).click();
+            if (currentMonth > month) {
+                waitElement(previousMonth).click();
+            }
+            if (currentMonth < month) {
+                waitElement(nextMonth).click();
+            }
             labelText = waitElement(navigationLabel).getText();
             spaceIndex = labelText.indexOf(" ");
             labelMonth = labelText.substring(0, spaceIndex);
@@ -45,8 +49,12 @@ public class CalendarElement {
         String labelYear = labelText.substring(spaceIndex + 1, spaceIndex + 5);
         int currentYear = Integer.parseInt(labelYear);
         while (currentYear != year) {
-            if (currentYear > year) waitElement(previousYear).click();
-            if (currentYear < year) waitElement(nextYear).click();
+            if (currentYear > year) {
+                waitElement(previousYear).click();
+            }
+            if (currentYear < year) {
+                waitElement(nextYear).click();
+            }
             labelText = waitElement(navigationLabel).getText();
             spaceIndex = labelText.indexOf(" ");
             labelYear = labelText.substring(spaceIndex + 1, spaceIndex + 5);
