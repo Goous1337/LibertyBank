@@ -55,15 +55,11 @@ public class DataBaseConnector {
         return getPropertyValue("db_url") + serviceName + "?characterEncoding=utf8";
     }
 
-    private static String getUrlConnectDataBase(String serviceName) {
-        return getPropertyValue("db_url") + getPropertyValue(serviceName);
-    }
-
     public static Connection getDataBaseConnection() throws SQLException {
         dataSource = new DriverManagerDataSource();
         dataSource.setUsername(getPropertyValue(DB_USER));
         dataSource.setPassword(getPropertyValue(DB_PASSWORD));
-        dataSource.setUrl(getUrlConnectDataBase(DB_INSURANCE_SERVICE));
+        dataSource.setUrl(getConnectionUrl(DB_INSURANCE_SERVICE));
         connection = DriverManager.getConnection(dataSource.getUrl(),
                 dataSource.getUsername(), dataSource.getPassword());
         return connection;
@@ -78,16 +74,5 @@ public class DataBaseConnector {
 
     public Connection getConnectionDB() {
         return connection;
-    }
-
-    public static void closeDataBase() {
-        try {
-            connection.close();
-            connection = null;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            instance.remove();
-        }
     }
 }

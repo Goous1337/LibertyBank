@@ -1,15 +1,13 @@
 package api.insuranceService;
 
 import api.BaseTest;
-import api.Retry;
-import dataBase.DataBaseConnector;
+import api.utils.Retry;
 import dataBase.requests.InsuranceServiceDataBaseRequest;
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -86,10 +84,5 @@ public class INS_28_CheckApplyingForInsuranceOffline extends BaseTest {
                 () -> assertEquals(SC_NOT_FOUND, response.statusCode(), "Код ответа не соответствует ожидаемому"),
                 () -> assertEquals(NOT_FOUND, response.jsonPath().get("error"), "Тело ответа не соответсвует ожидаемому")
         );
-    }
-
-    @AfterAll
-    public static void closeDB() {
-        DataBaseConnector.closeDataBase();
     }
 }
