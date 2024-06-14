@@ -58,7 +58,7 @@ public class CreditProductService {
                 .header("Authorization", ACCESS_TOKEN_CUSTOMER_SERVICE)
                 .baseUri(BASE_URL_API)
                 .when()
-                .get("credits/api/v1/credit/current?id=1")
+                .get("credits/api/v1/credit/current?id=7")
                 .as(MyCreditMoreInformation.class);
         myCreditMoreInformationList.add(myCreditMoreInformation);
 

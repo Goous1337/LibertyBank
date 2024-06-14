@@ -22,7 +22,37 @@ public class Converter {
         value = String.valueOf(value).replace(DepositsConstants.USD, "").trim();
         value = String.valueOf(value).replace(DepositsConstants.CAPS_RUB, "").trim();
         value = String.valueOf(value).replace(DepositsConstants.CAPS_USD, "").trim();
+
         return Double.parseDouble(value);
+    }
+
+    public static Double convertValueToDouble(String value) {
+        value = String.valueOf(value).replace(DepositsConstants.DELIMITER, DepositsConstants.POINT).trim();
+        value = String.valueOf(value).replace(DepositsConstants.PROCENT, "").trim();
+        value = String.valueOf(value).replace(DepositsConstants.SPACE, "").trim();
+        value = String.valueOf(value).replace(DepositsConstants.RUB, "").trim();
+        value = String.valueOf(value).replace(DepositsConstants.EUR, "").trim();
+        value = String.valueOf(value).replace(DepositsConstants.USD, "").trim();
+        value = String.valueOf(value).replace(DepositsConstants.CAPS_RUB, "").trim();
+        value = String.valueOf(value).replace(DepositsConstants.CAPS_USD, "").trim();
+
+        return Double.parseDouble(value);
+    }
+
+    public static Double convertCurrencyValueToDouble(String value) {
+        value = String.valueOf(value).replace(DepositsConstants.DELIMITER, DepositsConstants.POINT).trim();
+        value = String.valueOf(value).replace(DepositsConstants.PROCENT, "").trim();
+        value = String.valueOf(value).replace(DepositsConstants.SPACE, "").trim();
+        value = String.valueOf(value).replace(DepositsConstants.RUB, "").trim();
+        value = String.valueOf(value).replace(DepositsConstants.EUR, "").trim();
+        value = String.valueOf(value).replace(DepositsConstants.USD, "").trim();
+        value = String.valueOf(value).replace(DepositsConstants.CAPS_RUB, "").trim();
+        value = String.valueOf(value).replace(DepositsConstants.CAPS_USD, "").trim();
+
+        String[] parts = value.split("\\\\");
+        String number = parts[0];
+
+        return Double.parseDouble(number);
     }
 
     public static int convertToInteger(String value) {
@@ -41,10 +71,12 @@ public class Converter {
         str = String.valueOf(str).replace("₽", "").trim();
         str = String.valueOf(str).replace("$", "").trim();
         str = String.valueOf(str).replace("%", "").trim();
-        str = String.valueOf(str).replace("мeсяцев", "").trim();
+        str = String.valueOf(str).replace("месяцев", "").trim();
         str = String.valueOf(str).replace("от", "").trim();
         str = String.valueOf(str).replace("до", "").trim();
         str = String.valueOf(str).replace(" ", "").trim();
+        str = String.valueOf(str).replace(",", "").trim();
+
         return Integer.parseInt(str);
     }
 

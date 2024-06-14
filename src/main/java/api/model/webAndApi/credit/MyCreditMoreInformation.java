@@ -11,12 +11,12 @@ import java.text.SimpleDateFormat;
 @Setter
 public class MyCreditMoreInformation {
     private String name;
-    private Integer creditLimit;
+    private Double creditAmount;
     private String currencyCode;
     private Integer periodMonths;
-    private Integer interestRate;
-    private Integer generalDebt;
-    private Integer currMainCreditPayment;
+    private Double interestRate;
+    private Double generalDebt;
+    private Double currPeriodTransaction;
     private Integer percentCreditPayment;
     private Date paymentDate;
     private Integer outstandingPrincipal;
@@ -27,9 +27,9 @@ public class MyCreditMoreInformation {
     public MyCreditMoreInformation() {
     }
 
-    public MyCreditMoreInformation(String name, Integer creditLimit, Integer periodMonths, Integer interestRate, Integer generalDebt, Date paymentDate, String creditAccountNumber) {
+    public MyCreditMoreInformation(String name, Double creditAmount, Integer periodMonths, Double interestRate, Double generalDebt, Date paymentDate, String creditAccountNumber) {
         this.name = name;
-        this.creditLimit = creditLimit;
+        this.creditAmount = creditAmount;
         this.periodMonths = periodMonths;
         this.interestRate = interestRate;
         this.generalDebt = generalDebt;
@@ -56,7 +56,7 @@ public class MyCreditMoreInformation {
         }
         MyCreditMoreInformation myCreditMoreInformation = (MyCreditMoreInformation) obj;
         return getName().equals(myCreditMoreInformation.getName()) &&
-                getCreditLimit().equals(myCreditMoreInformation.getCreditLimit()) &&
+                getCreditAmount().equals(myCreditMoreInformation.getCreditAmount()) &&
                 getPeriodMonths().equals(myCreditMoreInformation.getPeriodMonths()) &&
                 getInterestRate().equals(myCreditMoreInformation.getInterestRate()) &&
                 getGeneralDebt().equals(myCreditMoreInformation.getGeneralDebt()) &&

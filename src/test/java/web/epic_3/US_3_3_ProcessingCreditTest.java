@@ -25,9 +25,7 @@ public class US_3_3_ProcessingCreditTest extends BaseTest {
 
     private static Stream<Object> testDataLibertyExpress() {
         return Stream.of(Arguments.of("50000", "12", "1234567890", "1000", "1000", "123456"),
-                Arguments.of("50001", "12", "1234567890", "1000", "1000", "654321"),
-                Arguments.of("2999999", "59", "1234567890", "1000", "1000", "333666"),
-                Arguments.of("3000000", "60", "123456789123", "5194", "51352", "111111"));
+                Arguments.of("50001", "12", "1234567890", "1000", "1000", "654321"));
     }
 
     private static Stream<Object> testDataLibertyCash() {

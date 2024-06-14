@@ -143,7 +143,7 @@ public class CreditProdutsPage extends BasePage {
                         nameShortCreditMoneyProductPageText.getText(),
                         convertToDouble(interestRateLibertyMoney.getText()),
                         detailsLibertyMoney.getText(),
-                        convertToDouble(amountMinLibertyMoney.getText()),
+                        convertCurrencyValueToDouble(amountMinLibertyMoney.getText()),
                         convertToInteger(maxDurationMonthLibertyMoney.getText())));
         enumMapObject.put(
                 CreditsEnum.LIBERTY_EASY,
