@@ -31,6 +31,7 @@ import web.steps.creditSteps.СreditProductsSteps;
 import web.steps.depositsSteps.DepositsProductsFullInfoStep;
 import web.steps.depositsSteps.DepositsProductsSteps;
 import web.steps.depositsSteps.MyDepositsProductsSteps;
+import web.steps.insuranceSteps.InsuranceApplicationPropertyContentsSteps;
 
 import static property.UserPropertiesReader.USER_PASSWORD;
 import static property.UserPropertiesReader.USER_PHONE;
@@ -73,6 +74,7 @@ public class BaseTest {
     protected MyDepositsProductsSteps myDepositsProductsSteps;
     protected DepositsProductsFullInfoStep depositsProductsFullInfoStep;
     protected ChangePinSteps changePinSteps;
+    protected InsuranceApplicationPropertyContentsSteps insuranceApplicationPropertyContentsSteps;
 
     protected void open(String pageUrl) {
         DriverManager.getDriver()
@@ -133,6 +135,7 @@ public class BaseTest {
         depositsProductsSteps = new DepositsProductsSteps();
         myDepositsProductsSteps = new MyDepositsProductsSteps();
         changePinSteps = new ChangePinSteps();
+        insuranceApplicationPropertyContentsSteps = new InsuranceApplicationPropertyContentsSteps();
     }
 
 }
