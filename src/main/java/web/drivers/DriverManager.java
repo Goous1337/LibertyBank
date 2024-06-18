@@ -11,7 +11,9 @@ import property.WebPropertiesReader;
 
 import java.time.Duration;
 
-import static web.constans.DriverConfig.*;
+import static web.constans.DriverConfig.CHROME;
+import static web.constans.DriverConfig.FIREFOX;
+import static web.constans.DriverConfig.SAFARI;
 import static web.helpers.Waiters.TIME_TO_WAIT;
 
 public class DriverManager {
@@ -61,4 +63,3 @@ public class DriverManager {
         }
     }
 }
-
