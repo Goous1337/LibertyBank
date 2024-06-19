@@ -4,7 +4,7 @@ import api.core.RequestParam;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
 import pojo.insuranceService.CreateVehicleApplicationInsuranceRequest;
-import pojo.insuranceService.RevokeInsurancePolicyRequest;
+//import pojo.insuranceService.RevokeInsurancePolicyRequest;
 
 import java.util.List;
 
@@ -14,8 +14,12 @@ import static api.core.RequestParam.getRP;
 import static api.core.RequestParamType.HEADER;
 import static com.google.common.net.HttpHeaders.AUTHORIZATION;
 import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
-import static constant.ApiEndpoints.*;
+import static constant.ApiEndpoints.APPLICATION_INSURANCE;
+import static constant.ApiEndpoints.LIST_OF_INSURANCE;
+import static constant.ApiEndpoints.LIST_OF_INSURANCE_POLICES;
+import static constant.ApiEndpoints.POLICY_INSURANCE;
 import static constant.ApiEndpoints.POPULAR_INSURANCE_PRODUCTS;
+
 import static constant.InsuranceServiceConstants.ACCEPT_VALUE;
 import static constant.InsuranceServiceConstants.CONTENT_TYPE_VALUE;
 import static io.restassured.http.Method.GET;
@@ -24,7 +28,8 @@ import static property.BaseProperties.ACCESS_TOKEN_INSURANCE_SERVICE;
 
 public class InsuranceService {
 
-    public Response checkMakeNewVehicleApplicationRequest(String clientId, CreateVehicleApplicationInsuranceRequest createVehicleApplicationInsuranceRequest) {
+    public Response checkMakeNewVehicleApplicationRequest(String clientId, CreateVehicleApplicationInsuranceRequest
+            createVehicleApplicationInsuranceRequest) {
         List<RequestParam> params = List.of(getRP(HEADER, "accept", ACCEPT_VALUE),
                 getRP(HEADER, "clientId", clientId),
                 getRP(HEADER, CONTENT_TYPE, CONTENT_TYPE_VALUE));
@@ -77,11 +82,5 @@ public class InsuranceService {
                 getRP(HEADER, AUTHORIZATION, ACCESS_TOKEN_INSURANCE_SERVICE),
                 getRP(HEADER, CONTENT_TYPE, CONTENT_TYPE_VALUE));
         return sendSimpleRequest(GET, LIST_OF_INSURANCE_POLICES, params);
-    }
-
-    public Response postRevokeInsurancePolicy(RevokeInsurancePolicyRequest revokeInsurancePolicyRequest) {
-        List<RequestParam> params = List.of(getRP(HEADER, "accept", ACCEPT_VALUE),
-                getRP(HEADER, CONTENT_TYPE, CONTENT_TYPE_VALUE));
-        return sendSimpleRequest(POST, REVOKE_INSURANCE_POLICY, params, revokeInsurancePolicyRequest);
     }
 }

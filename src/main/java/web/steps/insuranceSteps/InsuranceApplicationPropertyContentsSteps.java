@@ -4,7 +4,34 @@ import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
 import web.pages.insurancePages.InsuranceApplicationPropertyContentsPage;
 
-import static web.constans.InsuranceServiceConstants.*;
+import static web.constans.InsuranceServiceConstants.APARTMENT;
+import static web.constans.InsuranceServiceConstants.AUGUST;
+import static web.constans.InsuranceServiceConstants.CITY;
+import static web.constans.InsuranceServiceConstants.CONSTRUCTION_TYPE_BRICK;
+import static web.constans.InsuranceServiceConstants.DOCUMENT_DEPARTMENT;
+import static web.constans.InsuranceServiceConstants.DOCUMENT_NUMBER;
+import static web.constans.InsuranceServiceConstants.DOCUMENT_TYPE_PASSPORT;
+import static web.constans.InsuranceServiceConstants.DOCUMENT_TYPE_REFUGE;
+import static web.constans.InsuranceServiceConstants.DOCUMENT_TYPE_RESIDENCE;
+import static web.constans.InsuranceServiceConstants.EMAIL;
+import static web.constans.InsuranceServiceConstants.ENTRANCE;
+import static web.constans.InsuranceServiceConstants.FLOOR;
+import static web.constans.InsuranceServiceConstants.FORTH_DAY_OF_MONTH;
+import static web.constans.InsuranceServiceConstants.HOUSE;
+import static web.constans.InsuranceServiceConstants.INSURANCE_DURATION_INVALID;
+import static web.constans.InsuranceServiceConstants.INSURANCE_DURATION_MAXIMUM;
+import static web.constans.InsuranceServiceConstants.INSURANCE_DURATION_MINIMUM;
+import static web.constans.InsuranceServiceConstants.INVALID_NAME;
+import static web.constans.InsuranceServiceConstants.PHONE_NUMBER;
+import static web.constans.InsuranceServiceConstants.START_OF_CENTURY;
+import static web.constans.InsuranceServiceConstants.STREET;
+import static web.constans.InsuranceServiceConstants.THING_COST;
+import static web.constans.InsuranceServiceConstants.THING_NAME;
+import static web.constans.InsuranceServiceConstants.THING_TYPE_FURNITURE;
+import static web.constans.InsuranceServiceConstants.TWENTY_EIGHTEEN;
+import static web.constans.InsuranceServiceConstants.TWENTY_EIGHTH_DAY_OF_MONTH;
+import static web.constans.InsuranceServiceConstants.VALID_NAME;
+
 
 public class InsuranceApplicationPropertyContentsSteps {
     protected InsuranceApplicationPropertyContentsPage insuranceApplicationPage;

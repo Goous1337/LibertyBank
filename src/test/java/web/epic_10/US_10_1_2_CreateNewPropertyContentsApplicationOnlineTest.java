@@ -7,7 +7,8 @@ import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.*;
 import web.BaseTest;
 
-import static web.constans.UrlConfig.ONLINE_PRORERTY_CONTENT_APPLICATION_URL;
+import static web.constans.UrlConfig.ONLINE_PROPERTY_CONTENT_APPLICATION_URL;
+
 
 
 @Tags({@Tag("Web"), @Tag("MVP")})
@@ -18,7 +19,7 @@ public class US_10_1_2_CreateNewPropertyContentsApplicationOnlineTest extends Ba
     @BeforeEach
     public void setUpTest() {
         authorization();
-        open(ONLINE_PRORERTY_CONTENT_APPLICATION_URL);
+        open(ONLINE_PROPERTY_CONTENT_APPLICATION_URL);
     }
 
     @DisplayName("Подача заявки на страхование домашнего имущества: ввод валидных данных")
