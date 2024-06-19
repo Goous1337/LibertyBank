@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeSelected;
 import static org.openqa.selenium.support.ui.ExpectedConditions.not;
@@ -21,6 +22,12 @@ public class Waiters {
                 .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
                 .until(ExpectedConditions.visibilityOf(element));
+    }
+    public static List<WebElement> waitElement(List<WebElement> element) {
+        return new WebDriverWait(getDriver(), Duration.ofSeconds(TIME_TO_WAIT))
+                .ignoring(NoSuchElementException.class)
+                .ignoring(StaleElementReferenceException.class)
+                .until(ExpectedConditions.visibilityOfAllElements(element));
     }
 
     public static WebElement waitElementWithOwnTime(WebElement element, int time) {

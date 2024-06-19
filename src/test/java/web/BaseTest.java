@@ -16,6 +16,7 @@ import web.steps.accountSteps.AccountSteps;
 import web.steps.accountSteps.CreateAccountSteps;
 import web.steps.accountSteps.RenameAccountSteps;
 import web.steps.cardSteps.*;
+import web.steps.depositsSteps.DepositsApplicationSteps;
 import web.steps.depositsSteps.DepositsProductsFullInfoStep;
 import web.steps.creditSteps.*;
 import web.steps.depositsSteps.DepositsProductsSteps;
@@ -60,6 +61,7 @@ public class BaseTest {
     protected FilterCardsSteps filterCardsSteps;
     protected MyDepositsProductsSteps myDepositsProductsSteps;
     protected DepositsProductsFullInfoStep depositsProductsFullInfoStep;
+    protected DepositsApplicationSteps depositsApplicationSteps;
 
     public BaseTest() {
         refreshPages();
@@ -122,6 +124,6 @@ public class BaseTest {
         filterCardsSteps = new FilterCardsSteps();
         depositsProductsSteps = new DepositsProductsSteps();
         myDepositsProductsSteps = new MyDepositsProductsSteps();
+        depositsApplicationSteps = new DepositsApplicationSteps();
     }
-
 }
