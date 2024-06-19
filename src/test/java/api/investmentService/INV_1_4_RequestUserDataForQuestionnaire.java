@@ -1,12 +1,10 @@
 package api.investmentService;
 
+import api.BaseTest;
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Tags;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import pojo.investmentService.QuestionnaireFormResponse;
 import pojo.investmentService.CustomerIdNotFoundResponse;
 
@@ -20,7 +18,7 @@ import static service.InvestmentService.getQuestionnaireRequest;
 
 @Tags({@Tag("API"), @Tag("2.0")})
 @DisplayName("INV-1.4 Запросить данные пользователя для анкеты")
-public class INV_1_4_RequestUserDataForQuestionnaire {
+public class INV_1_4_RequestUserDataForQuestionnaire extends BaseTest {
     private static final String JSON = "/jsons/investmentJsons/questionnaireFormData.json";
     private static final String JSON_NOT_FOUND = "/jsons/investmentJsons/questionnarieFormInvalidCustomerId.json";
 
@@ -28,6 +26,7 @@ public class INV_1_4_RequestUserDataForQuestionnaire {
         RestAssured.baseURI = INVESTMENT_SERVICE;
     }
 
+    @Disabled("LIB6-1157")
     @Test
     @TmsLink("LIB6-858")
     @DisplayName("Запросить данные пользователя для анкеты")
