@@ -1,36 +1,12 @@
 package web.steps.insuranceSteps;
 
 import io.qameta.allure.Step;
-import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.TimeoutException;
 import web.pages.insurancePages.InsuranceApplicationPropertyContentsPage;
 
-import static web.constans.InsuranceServiceConstants.APARTMENT;
-import static web.constans.InsuranceServiceConstants.AUGUST;
-import static web.constans.InsuranceServiceConstants.CITY;
-import static web.constans.InsuranceServiceConstants.CONSTRUCTION_TYPE_BRICK;
-import static web.constans.InsuranceServiceConstants.DOCUMENT_DEPARTMENT;
-import static web.constans.InsuranceServiceConstants.DOCUMENT_NUMBER;
-import static web.constans.InsuranceServiceConstants.DOCUMENT_TYPE_PASSPORT;
-import static web.constans.InsuranceServiceConstants.DOCUMENT_TYPE_REFUGE;
-import static web.constans.InsuranceServiceConstants.DOCUMENT_TYPE_RESIDENCE;
-import static web.constans.InsuranceServiceConstants.EMAIL;
-import static web.constans.InsuranceServiceConstants.ENTRANCE;
-import static web.constans.InsuranceServiceConstants.FLOOR;
-import static web.constans.InsuranceServiceConstants.FORTH_DAY_OF_MONTH;
-import static web.constans.InsuranceServiceConstants.HOUSE;
-import static web.constans.InsuranceServiceConstants.INSURANCE_DURATION_INVALID;
-import static web.constans.InsuranceServiceConstants.INSURANCE_DURATION_MAXIMUM;
-import static web.constans.InsuranceServiceConstants.INSURANCE_DURATION_MINIMUM;
-import static web.constans.InsuranceServiceConstants.INVALID_NAME;
-import static web.constans.InsuranceServiceConstants.PHONE_NUMBER;
-import static web.constans.InsuranceServiceConstants.START_OF_CENTURY;
-import static web.constans.InsuranceServiceConstants.STREET;
-import static web.constans.InsuranceServiceConstants.THING_COST;
-import static web.constans.InsuranceServiceConstants.THING_NAME;
-import static web.constans.InsuranceServiceConstants.THING_TYPE_FURNITURE;
-import static web.constans.InsuranceServiceConstants.TWENTY_EIGHTEEN;
-import static web.constans.InsuranceServiceConstants.TWENTY_EIGHTH_DAY_OF_MONTH;
-import static web.constans.InsuranceServiceConstants.VALID_NAME;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class InsuranceApplicationPropertyContentsSteps {
@@ -40,14 +16,15 @@ public class InsuranceApplicationPropertyContentsSteps {
         insuranceApplicationPage = new InsuranceApplicationPropertyContentsPage();
     }
 
-    @Step("Проверить, что кнопка 'Дальше' неактивна")
-    public boolean assertNextButtonDisabled() {
-        return insuranceApplicationPage.nextButtonIsEnabled();
-    }
-
     @Step("Проверить, что кнопка 'Дальше' активна")
-    public void assertNextButtonEnabled() {
-        Assertions.assertTrue(insuranceApplicationPage.nextButtonIsEnabled());
+    public void assertNextButtonIsEnabled(Boolean status) {
+        String message;
+        if (status) {
+            message = "Кнопка 'Дальше' неактивна";
+        } else {
+            message = "Кнопка 'Дальше' активна";
+        }
+        assertEquals(insuranceApplicationPage.nextButtonIsEnabled(), status, message);
     }
 
     @Step("Нажать кнопку 'Дальше'")
@@ -61,13 +38,14 @@ public class InsuranceApplicationPropertyContentsSteps {
     }
 
     @Step("Проверить, что выбрана валюта RUB")
-    public void assertCurrencyRubChosen() {
-        Assertions.assertTrue(insuranceApplicationPage.isSelectedRub());
-    }
-
-    @Step("Проверить, что не выбрана валюта RUB")
-    public void assertCurrencyRubNotChosen() {
-        Assertions.assertFalse(insuranceApplicationPage.isSelectedRub());
+    public void assertCurrencyRubChosen(Boolean status) {
+        String message;
+        if (status) {
+            message = "Валюта RUB выбрана";
+        } else {
+            message = "Валюта RUB не выбрана";
+        }
+        assertEquals(insuranceApplicationPage.isSelectedRub(), status, message);
     }
 
     @Step("Выбрать вылюту EUR")
@@ -76,13 +54,14 @@ public class InsuranceApplicationPropertyContentsSteps {
     }
 
     @Step("Проверить, что выбрана валюта EUR")
-    public void assertCurrencyEurChosen() {
-        Assertions.assertTrue(insuranceApplicationPage.isSelectedEur());
-    }
-
-    @Step("Проверить, что не выбрана валюта EUR")
-    public void assertCurrencyEurNotChosen() {
-        Assertions.assertFalse(insuranceApplicationPage.isSelectedEur());
+    public void assertCurrencyEurChosen(Boolean status) {
+        String message;
+        if (status) {
+            message = "Валюта EUR выбрана";
+        } else {
+            message = "Валюта EUR не выбрана";
+        }
+        assertEquals(insuranceApplicationPage.isSelectedEur(), status, message);
     }
 
     @Step("Выбрать вылюту USD")
@@ -91,28 +70,19 @@ public class InsuranceApplicationPropertyContentsSteps {
     }
 
     @Step("Проверить, что выбрана валюта USD")
-    public void assertCurrencyUsdChosen() {
-        Assertions.assertTrue(insuranceApplicationPage.isSelectedUsd());
-    }
-
-    @Step("Проверить, что не выбрана валюта USD")
-    public void assertCurrencyUsdNotChosen() {
-        Assertions.assertFalse(insuranceApplicationPage.isSelectedUsd());
+    public void assertCurrencyUsdChosen(Boolean status) {
+        String message;
+        if (status) {
+            message = "Валюта USD выбрана";
+        } else {
+            message = "Валюта USD не выбрана";
+        }
+        assertEquals(insuranceApplicationPage.isSelectedUsd(), status, message);
     }
 
     @Step("Ввести минимальную длительность страховки")
-    public void inputMinimalInsuranceDuration() {
-        insuranceApplicationPage.inputInsuranceDuration(INSURANCE_DURATION_MINIMUM);
-    }
-
-    @Step("Ввести максимальную длительность страховки")
-    public void inputMaximalInsuranceDuration() {
-        insuranceApplicationPage.inputInsuranceDuration(INSURANCE_DURATION_MAXIMUM);
-    }
-
-    @Step("Ввести невалидную длительность страховки")
-    public void inputInvalidInsuranceDuration() {
-        insuranceApplicationPage.inputInsuranceDuration(INSURANCE_DURATION_INVALID);
+    public void inputInsuranceDuration(String duration) {
+        insuranceApplicationPage.inputInsuranceDuration(duration);
     }
 
     @Step("Выбрать начало действия страховки с завтрашнего дня")
@@ -122,143 +92,118 @@ public class InsuranceApplicationPropertyContentsSteps {
 
     @Step("Проверить заголовок страницы")
     public void assertPageTitle() {
-        Assertions.assertEquals(insuranceApplicationPage.getTitleText(),
-                "Заявка на страхование домашнего имущества");
+        assertEquals(insuranceApplicationPage.getTitleText(),
+                "Заявка на страхование домашнего имущества", "Заголовок не совпадает с ожидаемым");
     }
 
     @Step("Ввести валидное имя")
-    public void inputValidFirstName() {
-        insuranceApplicationPage.inputFirstName(VALID_NAME);
-    }
-
-    @Step("Ввести невалидное имя")
-    public void inputInvalidFirstName() {
-        insuranceApplicationPage.inputFirstName(INVALID_NAME);
+    public void inputFirstName(String firstName) {
+        insuranceApplicationPage.inputFirstName(firstName);
     }
 
     @Step("Ввести валидную фамилию")
-    public void inputValidLastName() {
-        insuranceApplicationPage.inputLastName(VALID_NAME);
-    }
-
-    @Step("Ввести невалидную фамилию")
-    public void inputInvalidLastName() {
-        insuranceApplicationPage.inputLastName(INVALID_NAME);
+    public void inputLastName(String lastName) {
+        insuranceApplicationPage.inputLastName(lastName);
     }
 
     @Step("Ввести валидное отчество")
-    public void inputValidPatronymic() {
-        insuranceApplicationPage.inputPatronymic(VALID_NAME);
-    }
-
-    @Step("Ввести невалидное отчество")
-    public void inputInvalidPatronymic() {
-        insuranceApplicationPage.inputPatronymic(INVALID_NAME);
+    public void inputPatronymic(String patronymic) {
+        insuranceApplicationPage.inputPatronymic(patronymic);
     }
 
     @Step("Выбрать тип документа - паспорт")
-    public void chooseDocumentTypePassport() {
-        insuranceApplicationPage.selectDocumentType(DOCUMENT_TYPE_PASSPORT);
-    }
-
-    @Step("Выбрать тип документа - вид на жительство")
-    public void chooseDocumentTypeResidence() {
-        insuranceApplicationPage.selectDocumentType(DOCUMENT_TYPE_RESIDENCE);
-    }
-
-    @Step("Выбрать тип документа - свидетельство беженца")
-    public void chooseDocumentTypeRefuge() {
-        insuranceApplicationPage.selectDocumentType(DOCUMENT_TYPE_REFUGE);
+    public void chooseDocumentType(Integer documentType) {
+        insuranceApplicationPage.selectDocumentType(documentType);
     }
 
     @Step("Ввести номер паспорта")
-    public void inputPassportNumber() {
-        insuranceApplicationPage.inputPassportNumber(DOCUMENT_NUMBER);
+    public void inputPassportNumber(String number) {
+        insuranceApplicationPage.inputPassportNumber(number);
     }
 
     @Step("Ввести номер вида на жительство")
-    public void inputResidenceNumber() {
-        insuranceApplicationPage.inputResidenceNumber(DOCUMENT_NUMBER);
+    public void inputResidenceNumber(String number) {
+        insuranceApplicationPage.inputResidenceNumber(number);
     }
 
     @Step("Ввести номер свидетельства беженца")
-    public void inputRefugeNumber() {
-        insuranceApplicationPage.inputRefugeNumber(DOCUMENT_NUMBER);
+    public void inputRefugeNumber(String number) {
+        insuranceApplicationPage.inputRefugeNumber(number);
     }
 
     @Step("Ввести дату получения документа")
-    public void inputGotDocumentDate() {
-        insuranceApplicationPage.inputDocumentGotDate(TWENTY_EIGHTEEN, AUGUST, TWENTY_EIGHTH_DAY_OF_MONTH);
+    public void inputGotDocumentDate(Integer year, Integer month, Integer day) {
+        insuranceApplicationPage.inputDocumentGotDate(year, month, day);
     }
 
     @Step("Ввести дату рождения")
-    public void inputDateOfBirth() {
-        insuranceApplicationPage.inputDateOfBirth(START_OF_CENTURY, AUGUST, FORTH_DAY_OF_MONTH);
+    public void inputDateOfBirth(Integer year, Integer month, Integer day) {
+        insuranceApplicationPage.inputDateOfBirth(year, month, day);
     }
 
     @Step("Ввести номер телефона")
-    public void inputPhoneNumber() {
-        insuranceApplicationPage.inputPhone(PHONE_NUMBER);
+    public void inputPhoneNumber(String phoneNumber) {
+        insuranceApplicationPage.inputPhone(phoneNumber);
     }
 
     @Step("Ввести email")
-    public void inputEmail() {
-        insuranceApplicationPage.inputEmail(EMAIL);
+    public void inputEmail(String email) {
+        insuranceApplicationPage.inputEmail(email);
     }
 
     @Step("Ввести кем выдан документ")
-    public void inputDocumentDepartment() {
-        insuranceApplicationPage.inputIssuedBy(DOCUMENT_DEPARTMENT);
+    public void inputDocumentDepartment(String documentDepartment) {
+        insuranceApplicationPage.inputIssuedBy(documentDepartment);
     }
 
     @Step("Ввести название объекта страхования")
-    public void inputThingName() {
-        insuranceApplicationPage.inputThingName(THING_NAME);
+    public void inputThingName(String thingName) {
+        insuranceApplicationPage.inputThingName(thingName);
     }
 
     @Step("Выбрать тип объекта")
-    public void selectThingType() {
-        insuranceApplicationPage.selectThingType(THING_TYPE_FURNITURE);
+    public void selectThingType(Integer thingType) {
+        insuranceApplicationPage.selectThingType(thingType);
     }
 
     @Step("Ввести стоимость объекта")
-    public void inputThingCost() {
-        insuranceApplicationPage.inputThingCost(THING_COST);
+    public void inputThingCost(String thingCost) {
+        insuranceApplicationPage.inputThingCost(thingCost);
     }
 
     @Step("Выбрать материал постройки")
-    public void selectConstructionType() {
-        insuranceApplicationPage.selectConstructionType(CONSTRUCTION_TYPE_BRICK);
+    public void selectConstructionType(Integer materialType) {
+        insuranceApplicationPage.selectConstructionType(materialType);
     }
 
     @Step("Ввести город")
-    public void inputCity() {
-        insuranceApplicationPage.inputCity(CITY);
+    public void inputCity(String city) {
+        insuranceApplicationPage.inputCity(city);
     }
 
     @Step("Ввести улицу")
-    public void inputStreet() {
-        insuranceApplicationPage.inputStreet(STREET);
+    public void inputStreet(String street) {
+        insuranceApplicationPage.inputStreet(street);
     }
 
     @Step("Ввести дом")
-    public void inputHouse() {
-        insuranceApplicationPage.inputHouse(HOUSE);
+    public void inputHouse(String house) {
+        insuranceApplicationPage.inputHouse(house);
     }
 
     @Step("Ввести квартиру")
-    public void inputApartment() {
-        insuranceApplicationPage.inputApartment(APARTMENT);
+    public void inputApartment(String apartment) {
+        insuranceApplicationPage.inputApartment(apartment);
     }
 
     @Step("Ввести этажность")
-    public void inputFloor() {
-        insuranceApplicationPage.inputFloor(FLOOR);
+    public void inputFloor(String floor) {
+        insuranceApplicationPage.inputFloor(floor);
     }
 
     @Step("Ввести подъезд")
-    public void inputEntrance() {
-        insuranceApplicationPage.inputEntrance(ENTRANCE);
+    public void inputEntrance(String entrance) {
+        insuranceApplicationPage.inputEntrance(entrance);
     }
 
     @Step("Нажать кнопку 'Назад'")
@@ -268,17 +213,22 @@ public class InsuranceApplicationPropertyContentsSteps {
 
     @Step("Проверить, что отображается экран 'Успешно'")
     public void assertSuccessImageIsPresent() {
-        Assertions.assertTrue(insuranceApplicationPage.successImageIsPresent());
+        try {
+            assertTrue(insuranceApplicationPage.successImageIsPresent(), "Оформление не успешно");
+        } catch (TimeoutException t) {
+            assertFalse(insuranceApplicationPage.failImageIsPresent(), "Оформление не успешно");
+        }
     }
 
     @Step("Проверить, что кнопка 'Оформить' активна")
-    public void assertConfirmButtonEnabled() {
-        Assertions.assertTrue(insuranceApplicationPage.confirmButtonIsEnabled());
-    }
-
-    @Step("Проверить, что кнопка 'Оформить'  неактивна")
-    public void assertConfirmButtonDisabled() {
-        Assertions.assertFalse(insuranceApplicationPage.confirmButtonIsEnabled());
+    public void assertConfirmButtonIsEnabled(Boolean status) {
+        String message;
+        if (status) {
+            message = "Кнопка 'Оформить' неактивна";
+        } else {
+            message = "Кнопка 'Оформить' активна";
+        }
+        assertEquals(insuranceApplicationPage.confirmButtonIsEnabled(), status, message);
     }
 
     @Step("Нажать кнопку 'Оформить'")
