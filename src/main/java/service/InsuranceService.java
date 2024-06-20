@@ -5,6 +5,7 @@ import io.restassured.http.Method;
 import io.restassured.response.Response;
 import pojo.insuranceService.CreateVehicleApplicationInsuranceRequest;
 //import pojo.insuranceService.RevokeInsurancePolicyRequest;
+import pojo.insuranceService.OfflineInsuranceApplication;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import static api.core.RequestParamType.HEADER;
 import static com.google.common.net.HttpHeaders.AUTHORIZATION;
 import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
 import static constant.ApiEndpoints.APPLICATION_INSURANCE;
+import static constant.ApiEndpoints.APPLICATION_INSURANCE_OFFLINE;
 import static constant.ApiEndpoints.LIST_OF_INSURANCE;
 import static constant.ApiEndpoints.LIST_OF_INSURANCE_POLICES;
 import static constant.ApiEndpoints.POLICY_INSURANCE;
@@ -82,5 +84,29 @@ public class InsuranceService {
                 getRP(HEADER, AUTHORIZATION, ACCESS_TOKEN_INSURANCE_SERVICE),
                 getRP(HEADER, CONTENT_TYPE, CONTENT_TYPE_VALUE));
         return sendSimpleRequest(GET, LIST_OF_INSURANCE_POLICES, params);
+    }
+
+    public Response makeNewApplicationInsuranceOffline(String clientId, OfflineInsuranceApplication offlineInsuranceApplication) {
+        List<RequestParam> params = List.of(getRP(HEADER, "accept", ACCEPT_VALUE),
+                getRP(HEADER, "clientId", clientId),
+                getRP(HEADER, CONTENT_TYPE, CONTENT_TYPE_VALUE));
+        return sendSimpleRequest(POST, APPLICATION_INSURANCE_OFFLINE, params, offlineInsuranceApplication);
+    }
+
+    public Response makeNewApplicationInsuranceOfflineWithoutAuthorization(OfflineInsuranceApplication offlineInsuranceApplication) {
+        List<RequestParam> params = List.of(getRP(HEADER, "accept", ACCEPT_VALUE),
+                getRP(HEADER, CONTENT_TYPE, CONTENT_TYPE_VALUE));
+        return sendSimpleRequest(POST, APPLICATION_INSURANCE_OFFLINE, params, offlineInsuranceApplication);
+    }
+
+    public Response makeNewApplicationInsuranceOfflineWithIncorrectEndpoint(String clientId, OfflineInsuranceApplication offlineInsuranceApplication) {
+        List<RequestParam> params = List.of(getRP(HEADER, "accept", ACCEPT_VALUE),
+                getRP(HEADER, "clientId", clientId),
+                getRP(HEADER, CONTENT_TYPE, CONTENT_TYPE_VALUE));
+        return sendSimpleRequest(POST, APPLICATION_INSURANCE_OFFLINE + "1", params, offlineInsuranceApplication);
+    }
+
+    public String getResponseIdNewApplicationInsuranceOffline(Response response) {
+        return response.jsonPath().get("applicationId").toString();
     }
 }

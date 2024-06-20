@@ -103,4 +103,5 @@ public final class ApiEndpoints {
     public static final String LIST_OF_INSURANCE = "insurance-service/api/v1/insurance/groups-products/";
     public static final String QUESTIONNAIRE_FORM = "investment/api/v1/customers/questionnaire-form";
     public static final String INVESTMENT_AUTH = "investment/api/v1/auth";
+    public static final String APPLICATION_INSURANCE_OFFLINE = "insurance-service/api/v1/insurance/call-slot";
 }

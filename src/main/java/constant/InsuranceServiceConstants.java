@@ -66,4 +66,7 @@ public class InsuranceServiceConstants {
     public static final Integer RECRUITED_IN_MILITARY_REVOCATION_REASON_ID = 2;
     public static final Integer DEATH_REVOCATION_REASON_ID = 4;
 
+    public static final String FAKE_POLICY_ID_ERROR_MESSAGE = "Полис не найден";
+    public static final String BAD_REQUEST = "Bad Request";
+    public static final String NOT_FOUND = "Not Found";
 }
