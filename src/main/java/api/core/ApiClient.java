@@ -21,7 +21,7 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.config.HttpClientConfig.httpClientConfig;
 import static org.apache.http.params.CoreConnectionPNames.CONNECTION_TIMEOUT;
 import static org.apache.http.params.CoreConnectionPNames.SO_TIMEOUT;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ApiClient {
 
@@ -31,6 +31,13 @@ public class ApiClient {
                 new ResponseLoggingFilter(LogDetail.BODY),
                 new ResponseLoggingFilter(LogDetail.STATUS)
         ));
+    }
+
+    public static Response sendSimpleRequest(Method method, String address, List<RequestParam> paramsTable, int statusCode) {
+        RequestSender request = createRequest(paramsTable);
+        Response response = request.request(method, address);
+        assertEquals(statusCode, response.statusCode(), "Код ответа не соответствует ожидаемому");
+        return request.request(method, address);
     }
 
     public static Response sendSimpleRequest(Method method, String address, List<RequestParam> paramsTable) {
