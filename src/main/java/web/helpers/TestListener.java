@@ -30,6 +30,6 @@ public class TestListener implements TestWatcher {
 
     @Override
     public void testFailed(ExtensionContext context, Throwable cause) {
-
+        takeScreenshot();
     }
 }

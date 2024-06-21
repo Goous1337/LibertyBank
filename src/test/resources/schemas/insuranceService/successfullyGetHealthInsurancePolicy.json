@@ -1,0 +1,112 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "policyInfo": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "integer"
+        },
+        "productName": {
+          "type": "string"
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "expirationDate": {
+          "type": "string"
+        },
+        "duration": {
+          "type": "integer"
+        },
+        "agreementNumber": {
+          "type": "string"
+        },
+        "policyStatus": {
+          "type": "string"
+        },
+        "currencyNumericCode": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "productId",
+        "productName",
+        "startDate",
+        "expirationDate",
+        "duration",
+        "agreementNumber",
+        "policyStatus",
+        "currencyNumericCode"
+      ]
+    },
+    "insurerInfo": {
+      "type": "object",
+      "properties": {
+        "insurerName": {
+          "type": "string"
+        },
+        "insurerSurname": {
+          "type": "string"
+        },
+        "insurerPatronymic": {
+          "type": "string"
+        },
+        "insurerBirthdate": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "insurerName",
+        "insurerSurname",
+        "insurerPatronymic",
+        "insurerBirthdate"
+      ]
+    },
+    "concretePolicyDetailsDto": {
+      "type": "object",
+      "properties": {
+        "packageName": {
+          "type": "string"
+        },
+        "coverageLimit": {
+          "type": "string"
+        },
+        "requestsLimit": {
+          "type": "integer"
+        },
+        "outpatientService": {
+          "type": "boolean"
+        },
+        "homeHelp": {
+          "type": "boolean"
+        },
+        "emergencyCare": {
+          "type": "boolean"
+        },
+        "emergencyHospital": {
+          "type": "boolean"
+        },
+        "stomatology": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "packageName",
+        "coverageLimit",
+        "requestsLimit",
+        "outpatientService",
+        "homeHelp",
+        "emergencyCare",
+        "emergencyHospital",
+        "stomatology"
+      ]
+    }
+  },
+  "required": [
+    "policyInfo",
+    "insurerInfo",
+    "concretePolicyDetailsDto"
+  ]
+}

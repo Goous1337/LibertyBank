@@ -6,8 +6,10 @@ import web.pages.BasePage;
 
 public class RenameAccountPage extends BasePage {
 
-    @FindBy(name = "name")
+    @FindBy(xpath = "//*[text()='Новое название счета']")
     private WebElement newAccountNameTextField;
+    @FindBy(name = "name")
+    private WebElement newAccountNameTextFieldDown;
 
     @FindBy(xpath = "//button[contains(text(), 'Отмена')]")
     private WebElement cancelButton;
@@ -32,7 +34,7 @@ public class RenameAccountPage extends BasePage {
     }
 
     public void sendKeysNewAccountNameTextField(String value) {
-        newAccountNameTextField.sendKeys(value);
+        newAccountNameTextFieldDown.sendKeys(value);
     }
 
     public void clickCancelButton() {

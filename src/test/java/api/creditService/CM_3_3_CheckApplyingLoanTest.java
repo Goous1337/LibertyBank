@@ -24,6 +24,7 @@ import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.CREDIT_SERVICE;
 
+@Tags({@Tag("API"), @Tag("2.0")})
 @DisplayName("СМ 3.3 Оформление заявки на кредит")
 public class CM_3_3_CheckApplyingLoanTest extends BaseTest {
     {
@@ -45,7 +46,7 @@ public class CM_3_3_CheckApplyingLoanTest extends BaseTest {
             Данный тест-кейс направлен на проверку CM 3.3 по US 3.3 на оформление
             заявки на кредит авторизованным пользователем.
             """)
-    @Tags({@Tag("API"), @Tag("CM"), @Tag("Smoke")})
+    @Tags({@Tag("CM"), @Tag("Smoke")})
     @TmsLink("LIB3-606")
     @ParameterizedTest
     @MethodSource("testData")
@@ -80,7 +81,7 @@ public class CM_3_3_CheckApplyingLoanTest extends BaseTest {
             Данный тест-кейс направлен на проверку CM 3.3 по US 3.3 на оформление заявки
             на кредит авторизованным пользователем в случае неуспешной валидации токена.
             """)
-    @Tags({@Tag("API"), @Tag("CM"), @Tag("Negative")})
+    @Tags({@Tag("CM"), @Tag("Negative")})
     @TmsLink("LIB3-611")
     @ParameterizedTest
     @MethodSource("testData")
@@ -101,7 +102,7 @@ public class CM_3_3_CheckApplyingLoanTest extends BaseTest {
             Данный тест-кейс направлен на проверку CM 3.3 по US 3.3 на оформление заявки на кредит
             авторизованным пользователем в случае, если в результирующей таблице нет записей по указанным критериям.
             """)
-    @Tags({@Tag("API"), @Tag("CM"), @Tag("Negative")})
+    @Tags({@Tag("CM"), @Tag("Negative")})
     @TmsLink("LIB3-614")
     @ParameterizedTest
     @MethodSource("testData")
@@ -123,7 +124,7 @@ public class CM_3_3_CheckApplyingLoanTest extends BaseTest {
             Данный тест-кейс направлен на проверку CM 3.3 по US 3.3 на оформление заявки
             на кредит авторизованным пользователем в случае некорректной конфигурации запроса.
             """)
-    @Tags({@Tag("API"), @Tag("Negative"), @Tag("CM")})
+    @Tags({@Tag("Negative"), @Tag("CM")})
     @TmsLink("LIB3-612")
     @ParameterizedTest
     @MethodSource("testData")

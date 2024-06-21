@@ -3,7 +3,7 @@ package constant;
 public class CreditServiceConstants {
     public static final String CREDIT_ID = "3";
     public static final int PERIOD_MONTH_MIN = 12;
-    public static final int PERIOD_MONTH_MAX = 36;
+    public static final int PERIOD_MONTH_MAX = 60;
     public static final int GRACE_PERIOD_MONTH = 0;
     public static final int CREDIT_MIN_SUM = 3000;
     public static final int CREDIT_MAX_SUM = 100000;
@@ -12,6 +12,5 @@ public class CreditServiceConstants {
     public static final String CREDIT_CODE = "USD";
     public static final String CREDIT_NAME = "Liberty Money";
     public static final String EMPTY_TOKEN = "";
-
     public static final int COUNT_CREDITS_PRODUCT = 6;
 }

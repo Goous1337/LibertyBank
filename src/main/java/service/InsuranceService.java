@@ -1,8 +1,10 @@
 package service;
 
 import api.core.RequestParam;
+import io.restassured.http.Method;
 import io.restassured.response.Response;
 import pojo.insuranceService.CreateVehicleApplicationInsuranceRequest;
+import pojo.insuranceService.OfflineInsuranceApplication;
 
 import java.util.List;
 
@@ -10,13 +12,19 @@ import static api.core.ApiClient.sendRequestWithoutParams;
 import static api.core.ApiClient.sendSimpleRequest;
 import static api.core.RequestParam.getRP;
 import static api.core.RequestParamType.HEADER;
+import static com.google.common.net.HttpHeaders.AUTHORIZATION;
 import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
 import static constant.ApiEndpoints.APPLICATION_INSURANCE;
+import static constant.ApiEndpoints.APPLICATION_INSURANCE_OFFLINE;
+import static constant.ApiEndpoints.LIST_OF_INSURANCE;
+import static constant.ApiEndpoints.LIST_OF_INSURANCE_POLICES;
 import static constant.ApiEndpoints.POLICY_INSURANCE;
+import static constant.ApiEndpoints.POPULAR_INSURANCE_PRODUCTS;
 import static constant.InsuranceServiceConstants.ACCEPT_VALUE;
 import static constant.InsuranceServiceConstants.CONTENT_TYPE_VALUE;
 import static io.restassured.http.Method.GET;
 import static io.restassured.http.Method.POST;
+import static property.BaseProperties.ACCESS_TOKEN_INSURANCE_SERVICE;
 
 public class InsuranceService {
 
@@ -31,11 +39,71 @@ public class InsuranceService {
         return sendRequestWithoutParams(GET, POLICY_INSURANCE + "/" + insuranceID);
     }
 
+    public Response getPopularInsuranceProducts(Method method) {
+        return sendRequestWithoutParams(method, POPULAR_INSURANCE_PRODUCTS);
+    }
+
+    public Response getAllUserPoliciesByClientId(String clientId) {
+        List<RequestParam> params = List.of(getRP(HEADER, "accept", ACCEPT_VALUE),
+                getRP(HEADER, "clientId", clientId),
+                getRP(HEADER, CONTENT_TYPE, CONTENT_TYPE_VALUE));
+        return sendSimpleRequest(GET, POLICY_INSURANCE + "/", params);
+    }
+
     public String getResponsePolicyName(Response response) {
         return response.body().jsonPath().getMap("policyInfo").get("productName").toString();
     }
 
-    public String getResponsePolicyErrorMessage(Response response) {
-        return response.body().jsonPath().get("message");
+    public Integer getResponseCountPopularInsuranceProducts(Response response) {
+        return response.body().jsonPath().getList("products").size();
+    }
+
+    public String getResponsePolicyErrorMessage(Response response, String nameErrorField) {
+        return response.body().jsonPath().get(nameErrorField);
+    }
+
+    public Response checkGetInfoAboutInsuranceProducts(String typeOfInsurance) {
+        List<RequestParam> params = List.of(getRP(HEADER, "accept", ACCEPT_VALUE),
+                getRP(HEADER, CONTENT_TYPE, CONTENT_TYPE_VALUE));
+        return sendSimpleRequest(GET, LIST_OF_INSURANCE + typeOfInsurance, params);
+    }
+
+    public Response checkGetListOfInsurancePolices(String clientId) {
+        List<RequestParam> params = List.of(getRP(HEADER, "accept", ACCEPT_VALUE),
+                getRP(HEADER, "clientId", clientId),
+                getRP(HEADER, AUTHORIZATION, ACCESS_TOKEN_INSURANCE_SERVICE),
+                getRP(HEADER, CONTENT_TYPE, CONTENT_TYPE_VALUE));
+        return sendSimpleRequest(GET, LIST_OF_INSURANCE_POLICES, params);
+    }
+
+    public Response checkGetListOfInsurancePolicesWithoutClientId() {
+        List<RequestParam> params = List.of(getRP(HEADER, "accept", ACCEPT_VALUE),
+                getRP(HEADER, AUTHORIZATION, ACCESS_TOKEN_INSURANCE_SERVICE),
+                getRP(HEADER, CONTENT_TYPE, CONTENT_TYPE_VALUE));
+        return sendSimpleRequest(GET, LIST_OF_INSURANCE_POLICES, params);
+    }
+
+    public Response makeNewApplicationInsuranceOffline(String clientId, OfflineInsuranceApplication offlineInsuranceApplication) {
+        List<RequestParam> params = List.of(getRP(HEADER, "accept", ACCEPT_VALUE),
+                getRP(HEADER, "clientId", clientId),
+                getRP(HEADER, CONTENT_TYPE, CONTENT_TYPE_VALUE));
+        return sendSimpleRequest(POST, APPLICATION_INSURANCE_OFFLINE, params, offlineInsuranceApplication);
+    }
+
+    public Response makeNewApplicationInsuranceOfflineWithoutAuthorization(OfflineInsuranceApplication offlineInsuranceApplication) {
+        List<RequestParam> params = List.of(getRP(HEADER, "accept", ACCEPT_VALUE),
+                getRP(HEADER, CONTENT_TYPE, CONTENT_TYPE_VALUE));
+        return sendSimpleRequest(POST, APPLICATION_INSURANCE_OFFLINE, params, offlineInsuranceApplication);
+    }
+
+    public Response makeNewApplicationInsuranceOfflineWithIncorrectEndpoint(String clientId, OfflineInsuranceApplication offlineInsuranceApplication) {
+        List<RequestParam> params = List.of(getRP(HEADER, "accept", ACCEPT_VALUE),
+                getRP(HEADER, "clientId", clientId),
+                getRP(HEADER, CONTENT_TYPE, CONTENT_TYPE_VALUE));
+        return sendSimpleRequest(POST, APPLICATION_INSURANCE_OFFLINE + "1", params, offlineInsuranceApplication);
+    }
+
+    public String getResponseIdNewApplicationInsuranceOffline(Response response) {
+        return response.jsonPath().get("applicationId").toString();
     }
 }

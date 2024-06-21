@@ -8,7 +8,19 @@ import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInfo;
 import preconditions.UserAuthorization;
-import service.*;
+import service.AbsClientService;
+import service.AbsInfoService;
+import service.AccountService;
+import service.CardService;
+import service.CreditService;
+import service.CustomerService;
+import service.CustomerService_2_0;
+import service.DepositService;
+import service.InfoService;
+import service.InsuranceService;
+import service.InvestmentService;
+import service.UserAccountService;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +43,7 @@ public class BaseTest {
     protected CardService cardService;
     protected InsuranceService insuranceService;
     protected UserAuthorization userAuthorization;
+    protected InvestmentService investmentService;
 
     public BaseTest() {
         params = new ArrayList<>();
@@ -46,6 +59,7 @@ public class BaseTest {
         cardService = new CardService();
         insuranceService = new InsuranceService();
         userAuthorization = new UserAuthorization();
+        investmentService = new InvestmentService();
     }
 
     @BeforeEach

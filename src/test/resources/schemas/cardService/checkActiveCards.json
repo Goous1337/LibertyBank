@@ -30,7 +30,7 @@
           "type": "string"
         },
         "closedAt": {
-          "type": "string"
+          "type": ["null", "string"]
         },
         "level": {
           "type": "string"

@@ -3,6 +3,8 @@ package api.model.webAndApi.deposit;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+
 @Getter
 @Setter
 public class DepositProductShortInfo {
@@ -14,7 +16,9 @@ public class DepositProductShortInfo {
     private Integer maxDurationMonths;
     private Double amountMin;
     private Double amountMax;
-    private String currencyCode;
+    private ArrayList<String> currencyCodes;
+    private String depositPurpose;
+
 
     public DepositProductShortInfo() {
 

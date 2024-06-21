@@ -5,13 +5,13 @@ import org.openqa.selenium.support.FindBy;
 import web.pages.BasePage;
 
 public class MyCreditsPage extends BasePage {
-    @FindBy(xpath = "//h2[@data-testid='currencyBlockText']")
+    @FindBy(xpath = "//li[1]//h2[@data-testid='currentBalance']")
     private WebElement sumCreditText;
-    @FindBy(xpath = "//div/h3")
+    @FindBy(xpath = "//li[1]//p[contains(text(), 'Сумма кредита')]//preceding::h2[2]")
     private WebElement nameCreditText;
-    @FindBy(xpath = "//ul//li[1]/div/p[@data-testid='creditTerm']")
+    @FindBy(xpath = "//li[1]//h2[@data-testid='closeData']")
     private WebElement termCreditText;
-    @FindBy(xpath = "//ul//li[1]//div/a")
+    @FindBy(xpath = "//li[1]//button")
     private WebElement showMoreAboutCreditButton;
 
     /*Подраздел 'Мои кредиты'*/

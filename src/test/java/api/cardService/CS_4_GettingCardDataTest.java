@@ -9,6 +9,7 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import static constant.AccountServiceConstants.STATUS_ACTIVE;
@@ -19,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CARD_SERVICE;
 
+@Tags({@Tag("API"), @Tag("MVP")})
 @DisplayName("CS-4 Получение данных по карте")
 public class CS_4_GettingCardDataTest extends BaseTest {
 
@@ -30,7 +32,6 @@ public class CS_4_GettingCardDataTest extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-1039")
     @DisplayName("Получение данных по карте")
     @Description("Тест направлен на проверку возможности просмотра данных по карте пользователем")
@@ -44,7 +45,6 @@ public class CS_4_GettingCardDataTest extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-1039")
     @DisplayName("Получение данных по карте с невалидным id карты")
     @Description("Тест направлен на проверку отсутствия возможности просмотра данных по карте пользователем, если введён невалидный id карты")

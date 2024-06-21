@@ -10,18 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RegisterDebitResponse {
-    String id;
-    String productType;
-    String account;
-    String customer;
-    String cardSecureData;
-    String cardStatus;
-    String userLimit;
-    String createdAt;
-    String expiredAt;
-    Boolean favourite;
-    Boolean embossed;
-    Boolean permitVirtualPayment;
-    Integer balance;
-    Integer closedAt;
+    Integer applicationNumber;
+    String createdDate;
 }

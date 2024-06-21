@@ -23,6 +23,7 @@ import static org.asynchttpclient.util.HttpConstants.Methods.GET;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.INFO_SERVICE;
 
+@Tags({@Tag("API"), @Tag("MVP")})
 @DisplayName("IS-1 Отправка информации о подразделениях Банка")
 public class IS_1_SendingInformationBankDivisionsTest extends BaseTest {
 
@@ -32,7 +33,7 @@ public class IS_1_SendingInformationBankDivisionsTest extends BaseTest {
 
     @DisplayName("Проверка возможности получения информации о всех подразделениях банка, находящихся в списке")
     @Description("В данном тест-кейсе проводится проверка возможности получения информации о подразделениях банка из БД")
-    @Tags({@Tag("smoke"), @Tag("API")})
+    @Tag("Smoke")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-1147")
     @Test
 
@@ -44,7 +45,7 @@ public class IS_1_SendingInformationBankDivisionsTest extends BaseTest {
     @DisplayName("Получение информации обо всех подразделениях банка в городе")
     @Description("В данном тест-кейсе проводится проверка возможности получения информации о подразделениях банка в " +
             "конкретном городе из БД")
-    @Tags({@Tag("smoke"), @Tag("API")})
+    @Tag("Smoke")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-1155")
     @ParameterizedTest(name = "ID города: {0}")
     @ValueSource(
@@ -80,7 +81,7 @@ public class IS_1_SendingInformationBankDivisionsTest extends BaseTest {
     @DisplayName("Получение страниц с подразделениями банка, с фильтром на количество элементов на странице")
     @Description("В данном тест-кейсе проводится проверка возможности получения страниц с отделениями с определенным " +
             "количеством элементов на странице")
-    @Tags({@Tag("smoke"), @Tag("API")})
+    @Tag("Smoke")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-1157")
     @ParameterizedTest(name = "Номер страницы: {0}, количество элементов на странице: {1}")
     @CsvSource({
@@ -103,7 +104,6 @@ public class IS_1_SendingInformationBankDivisionsTest extends BaseTest {
     @DisplayName("Проверка работы сервиса информации о подразделениях Банка при невалидном URL")
     @Description("В данном тест-кейсе проводится проверка возможности получения информации о списке подразделений " +
             "банка из БД, если использован невалидный URL")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-1158")
     @Issue("https://jira.astondevs.ru/browse/LIB-1336")
     @ParameterizedTest(name = "URI: {0}")
@@ -121,7 +121,6 @@ public class IS_1_SendingInformationBankDivisionsTest extends BaseTest {
             "входных параметров")
     @Description("В данном тест-кейсе проводится проверка возможности получения страниц с отделениями с определенным " +
             "количеством элементов на странице из БД, при использовании невалидных входных параметров")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-1159")
     @Issue("https://jira.astondevs.ru/browse/LIB-1337")
     @ParameterizedTest(name = "Номер страницы: {0}, количество элементов на странице: {1}")
@@ -140,7 +139,6 @@ public class IS_1_SendingInformationBankDivisionsTest extends BaseTest {
     @DisplayName("Проверка получения информации о списке подразделений банка если запрос не GET/ HEAD / OPTIONS")
     @Description("В данном тест-кейсе проводится проверка возможности получения информации о списке городов из БД, " +
             "если использован невалидный метод запроса")
-    @Tag("API")
     @TmsLink("https://jira.astondevs.ru/browse/LIB-1160")
     @ParameterizedTest(name = "Method: {0}")
     @ValueSource(

@@ -11,8 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RegisterBadRequest {
 
-    String timestamp;
+    String timeStamp;
     String error;
     Integer status;
+    String message;
 }
 

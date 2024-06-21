@@ -1,4 +1,4 @@
-package web.constans;
+package web.constans.credit;
 
 public class CreditConstants {
     public static final String LIBERTY_IN_CASH = "Liberty Наличными";

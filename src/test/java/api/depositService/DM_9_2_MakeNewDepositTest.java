@@ -3,6 +3,8 @@ package api.depositService;
 import api.BaseTest;
 import dataBase.requests.DepositServiceDataBaseRequest;
 import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
@@ -22,6 +24,9 @@ import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.DEPOSIT_SERVICE;
 
+@Tags({@Tag("API"), @Tag("2.0")})
+@Epic("9 - Депозиты")
+@Feature("DM-9.2 Оформление нового депозита")
 @DisplayName("DM-9.2 Оформление нового депозита")
 public class DM_9_2_MakeNewDepositTest extends BaseTest {
     {
@@ -42,7 +47,7 @@ public class DM_9_2_MakeNewDepositTest extends BaseTest {
             Данный тест-кейс направлен на проверку DM 9.2 по US 9.2 на оформление нового депозита
             авторизованным пользователем.
             """)
-    @Tags({@Tag("API"), @Tag("smoke")})
+    @Tag("Smoke")
     @TmsLink("LIB3-805")
     @ParameterizedTest()
     @MethodSource({"dataProviderDepositProductId"})
@@ -79,7 +84,6 @@ public class DM_9_2_MakeNewDepositTest extends BaseTest {
             Данный тест-кейс направлен на проверку DM 9.2 по US 9.2 на оформление нового депозита
             авторизованным пользователем в случае некорректной конфигурации запроса.
             """)
-    @Tag("API")
     @TmsLink("LIB3-812")
     @ParameterizedTest
     @MethodSource("dataProviderDepositProductId")
@@ -105,7 +109,6 @@ public class DM_9_2_MakeNewDepositTest extends BaseTest {
             Данный тест-кейс направлен на проверку DM 9.2 по US 9.2 на оформление нового депозита
             авторизованным пользователем в случае неуспешной валидации токена.
             """)
-    @Tag("API")
     @TmsLink("LIB3-811")
     @ParameterizedTest
     @MethodSource("dataProviderDepositProductId")
@@ -128,7 +131,6 @@ public class DM_9_2_MakeNewDepositTest extends BaseTest {
             авторизованным пользователем при введении валидных и невалидных значений в обязательное поле
             'сумма депозита'. Заявка с невалидными значениями не должна заноситься в БД.
             """)
-    @Tag("API")
     @TmsLink("LIB3-814")
     @ParameterizedTest
     @MethodSource("dataProviderDepositProductId")
@@ -153,7 +155,6 @@ public class DM_9_2_MakeNewDepositTest extends BaseTest {
             авторизованным пользователем при введении валидных и невалидных значений в обязательное поле
             'срок депозита'. Заявка с невалидными значениями не должна заноситься в БД.
             """)
-    @Tag("API")
     @TmsLink("LIB3-815")
     @ParameterizedTest
     @MethodSource("dataProviderDepositProductId")

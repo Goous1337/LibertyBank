@@ -1,0 +1,6 @@
+{
+  "uri": "/investment/api/v1/documents/personal/123456",
+  "type": "404 NOT FOUND",
+  "message": "Документ не найден",
+  "timestamp": 1718702501
+}

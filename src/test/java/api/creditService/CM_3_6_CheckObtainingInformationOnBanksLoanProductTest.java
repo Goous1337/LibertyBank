@@ -2,12 +2,13 @@ package api.creditService;
 
 import api.BaseTest;
 import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import static constant.CreditServiceConstants.*;
@@ -16,7 +17,10 @@ import static org.apache.hc.core5.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.CREDIT_SERVICE;
 
-@DisplayName("CM 3.6 Получение подробной информации по кредитному продукту банка")
+@Tag("API")
+@Epic("3 - Кредиты")
+@Feature("CM-3.6 Просмотр подробной информации о кредитном продукте банка")
+@DisplayName("CM-3.6 Просмотр подробной информации о кредитном продукте банка")
 public class CM_3_6_CheckObtainingInformationOnBanksLoanProductTest extends BaseTest {
     {
         RestAssured.baseURI = CREDIT_SERVICE;
@@ -25,7 +29,7 @@ public class CM_3_6_CheckObtainingInformationOnBanksLoanProductTest extends Base
     @DisplayName("Получение подробной информации по кредитному продукту банка")
     @Description("Данный тест-кейс направлен на проверку CM-3.6 по US 3.6 на получение подробной информации по" +
             " кредитному продукту банка")
-    @Tags({@Tag("API"), @Tag("Smoke")})
+    @Tag("Smoke")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-416")
     @Test
     public void checkObtainingInformationOnBanksLoanProduct() {
@@ -54,7 +58,7 @@ public class CM_3_6_CheckObtainingInformationOnBanksLoanProductTest extends Base
             " таблице нет записей по указанным критериям")
     @Description("Данный тест-кейс направлен на получение STATUS CODE  404 В случае, если в результирующей таблице" +
             " нет записей по указанным критериям по CM-3.6 и US 3.6")
-    @Tags({@Tag("API"), @Tag("Negative")})
+    @Tag("Negative")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-419")
     @Test
     public void checkObtainingInformationOnBanksLoanProductNoRecordsInResultingTable() {

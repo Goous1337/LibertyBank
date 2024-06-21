@@ -12,7 +12,7 @@ import java.util.List;
 
 import static constant.CreditServiceConstants.COUNT_CREDITS_PRODUCT;
 import static property.BaseProperties.ACCESS_TOKEN_CUSTOMER_SERVICE;
-import static web.constans.CreditServiceConstants.BASE_URL_API;
+import static web.constans.credit.CreditServiceConstants.BASE_URL_API;
 
 @Getter
 @Setter
