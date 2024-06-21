@@ -28,7 +28,7 @@ public class US_9_2_RegistrationNewDeposit extends BaseTest {
     }
 
     private static Stream<Object> testInvalidDataTermLibertyStandardExpress() {
-        return Stream.of(Arguments.of("500000", "5"),
+        return Stream.of(Arguments.of("500000", "2"),
                 Arguments.of("1000000", "37"));
     }
 
@@ -135,8 +135,8 @@ public class US_9_2_RegistrationNewDeposit extends BaseTest {
     }
 
     private static Stream<Object> testValidDataLibertyBaseExpress() {
-        return Stream.of(Arguments.of("1", "3"),
-                Arguments.of("2", "4"),
+        return Stream.of(Arguments.of("1000", "3"),
+                Arguments.of("1001", "4"),
                 Arguments.of("499999", "35"),
                 Arguments.of("500000", "36"));
     }
@@ -734,7 +734,7 @@ public class US_9_2_RegistrationNewDeposit extends BaseTest {
 
     @ParameterizedTest
     @Tags({@Tag("Web"), @Tag("Negative")})
-    @DisplayName("Проверка не валидных значений в полях 'Сумма депозита' при оформлении заявки на депозит LibertyPremium без пролонгации")
+    @DisplayName("Проверка не валидных значений в полях 'Сумма депозита' при оформлении заявки на депозит Liberty Premium без пролонгации")
     @MethodSource("testInvalidDataSumLibertyPremium")
     public void checkNegativeBorderDepositLibertyPremium(String sumDeposit, String termDeposit) throws InterruptedException {
         depositsProductsSteps.clickDepositButton();
@@ -1071,7 +1071,7 @@ public class US_9_2_RegistrationNewDeposit extends BaseTest {
 
     @ParameterizedTest
     @Tags({@Tag("Web"), @Tag("Negative")})
-    @DisplayName("Проверка ввода спецсимволов в полях 'Сумма депозита' и 'Срок депозита' при оформлении заявки на депозит Liberty Стандарт Расчетный без пролонгации")
+    @DisplayName("Проверка ввода спецсимволов в полях 'Сумма депозита' и 'Срок депозита' при оформлении заявки на депозит Liberty Расчетный без пролонгации")
     @MethodSource("testInvalidDataSpecialSymbolsLibertyStandardExpress")
     public void checkSpecialSymbolsDepositLibertyCalculated(String sumDeposit, String termDeposit) throws InterruptedException {
         depositsProductsSteps.clickDepositButton();
@@ -1252,9 +1252,9 @@ public class US_9_2_RegistrationNewDeposit extends BaseTest {
 
     @ParameterizedTest
     @Tags({@Tag("Web"), @Tag("Positive")})
-    @DisplayName("Проверка допустимых граничных значений полей при оформлении заявки на депозит Liberty+ Валютный без пролонгации")
+    @DisplayName("Проверка допустимых граничных значений полей при оформлении заявки на депозит Liberty+ Валютный в долларах без пролонгации")
     @MethodSource("testValidDataLibertyCurrency")
-    public void checkPositiveBorderDepositLibertyCurrency(String sumDeposit, String termDeposit) {
+    public void checkPositiveBorderDepositLibertyCurrencyUSD(String sumDeposit, String termDeposit) {
         depositsProductsSteps.clickDepositButton();
         depositsProductsSteps.clickDepositsProductsBankButton();
         depositsProductsSteps.clickDepositLibertyCurrencyRegistrationButton();
@@ -1274,9 +1274,9 @@ public class US_9_2_RegistrationNewDeposit extends BaseTest {
 
     @ParameterizedTest
     @Tags({@Tag("Web"), @Tag("Negative")})
-    @DisplayName("Проверка не валидных значений в полях 'Сумма депозита' при оформлении заявки на депозит Liberty+ Валютный без пролонгации")
+    @DisplayName("Проверка не валидных значений в полях 'Сумма депозита' при оформлении заявки на депозит Liberty+ Валютный в долларах без пролонгации")
     @MethodSource("testInvalidDataSumLibertyCurrency")
-    public void checkNegativeBorderDepositLibertyCurrency(String sumDeposit, String termDeposit) throws InterruptedException {
+    public void checkNegativeBorderDepositLibertyCurrencyUSD(String sumDeposit, String termDeposit) throws InterruptedException {
         depositsProductsSteps.clickDepositButton();
         depositsProductsSteps.clickDepositsProductsBankButton();
         depositsProductsSteps.clickDepositLibertyCurrencyRegistrationButton();
@@ -1297,9 +1297,9 @@ public class US_9_2_RegistrationNewDeposit extends BaseTest {
 
     @ParameterizedTest
     @Tags({@Tag("Web"), @Tag("Negative")})
-    @DisplayName("Проверка не валидных значений в полях 'Срок депозита' при оформлении заявки на депозит Liberty+ Валютный без пролонгации")
+    @DisplayName("Проверка не валидных значений в полях 'Срок депозита' при оформлении заявки на депозит Liberty+ Валютный в долларах без пролонгации")
     @MethodSource("testInvalidDataTermLibertyStandardExpress")
-    public void checkNegativeBorderTermDepositLibertyCurrency(String sumDeposit, String termDeposit) throws InterruptedException {
+    public void checkNegativeBorderTermDepositLibertyCurrencyUSD(String sumDeposit, String termDeposit) throws InterruptedException {
         depositsProductsSteps.clickDepositButton();
         depositsProductsSteps.clickDepositsProductsBankButton();
         depositsProductsSteps.clickDepositLibertyCurrencyRegistrationButton();
@@ -1320,9 +1320,9 @@ public class US_9_2_RegistrationNewDeposit extends BaseTest {
 
     @ParameterizedTest
     @Tags({@Tag("Web"), @Tag("Negative")})
-    @DisplayName("Проверка возможности отправки заявки на депозит Liberty+ Валютный с выключенными чекбоксами")
+    @DisplayName("Проверка возможности отправки заявки на депозит Liberty+ Валютный в долларах с выключенными чекбоксами")
     @MethodSource("testValidDataLibertyCurrency")
-    public void checkPositiveBorderDepositLibertyCurrencyWithoutCheckboxes(String sumDeposit, String termDeposit) {
+    public void checkPositiveBorderDepositLibertyCurrencyUSdWithoutCheckboxes(String sumDeposit, String termDeposit) {
         depositsProductsSteps.clickDepositButton();
         depositsProductsSteps.clickDepositsProductsBankButton();
         depositsProductsSteps.clickDepositLibertyCurrencyRegistrationButton();
@@ -1341,9 +1341,9 @@ public class US_9_2_RegistrationNewDeposit extends BaseTest {
 
     @ParameterizedTest
     @Tags({@Tag("Web"), @Tag("Negative")})
-    @DisplayName("Проверка ввода спецсимволов в полях 'Сумма депозита' и 'Срок депозита' при оформлении заявки на депозит Liberty+ Валютный без пролонгации")
+    @DisplayName("Проверка ввода спецсимволов в полях 'Сумма депозита' и 'Срок депозита' при оформлении заявки на депозит Liberty+ Валютный в долларах без пролонгации")
     @MethodSource("testInvalidDataSpecialSymbolsLibertyStandardExpress")
-    public void checkSpecialSymbolsDepositLibertyCurrency(String sumDeposit, String termDeposit) throws InterruptedException {
+    public void checkSpecialSymbolsDepositLibertyCurrencyUSD(String sumDeposit, String termDeposit) throws InterruptedException {
         depositsProductsSteps.clickDepositButton();
         depositsProductsSteps.clickDepositsProductsBankButton();
         depositsProductsSteps.clickDepositLibertyCurrencyRegistrationButton();
@@ -1364,12 +1364,152 @@ public class US_9_2_RegistrationNewDeposit extends BaseTest {
 
     @ParameterizedTest
     @Tags({@Tag("Web"), @Tag("Negative")})
-    @DisplayName("Проверка отправки заявки с пустыми полями 'Сумма депозита' и 'Срок депозита' при оформлении заявки на депозит Liberty+ Валютный без пролонгации")
+    @DisplayName("Проверка отправки заявки с пустыми полями 'Сумма депозита' и 'Срок депозита' при оформлении заявки на депозит Liberty+ Валютный в долларах без пролонгации")
     @MethodSource("testInvalidDataEmptyFields")
-    public void checkEmptyFieldDepositLibertyCurrency(String sumDeposit, String termDeposit) throws InterruptedException {
+    public void checkEmptyFieldDepositLibertyCurrencyUSD(String sumDeposit, String termDeposit) throws InterruptedException {
         depositsProductsSteps.clickDepositButton();
         depositsProductsSteps.clickDepositsProductsBankButton();
         depositsProductsSteps.clickDepositLibertyCurrencyRegistrationButton();
+        depositsApplicationSteps.assertSubmitButtonInvalid(
+                "rgba(216, 223, 234, 1)",
+                "rgba(77, 95, 113, 1)"
+        );
+        depositsApplicationSteps.clickFieldSumOfDeposit();
+        depositsApplicationSteps.clickFieldTermOfDeposit();
+        depositsApplicationSteps.assertErrorMessageEmptyFieldSumTermIsDisplayed(sumDeposit, termDeposit);
+        depositsApplicationSteps.fillCheckboxSendDepositLibertyStandardExpressWithoutLong();
+        depositsApplicationSteps.assertSubmitButtonInvalid(
+                "rgba(216, 223, 234, 1)",
+                "rgba(77, 95, 113, 1)"
+        );
+        depositsApplicationSteps.sendDepositLibertyStandardExpress();
+    }
+    @ParameterizedTest
+    @Tags({@Tag("Web"), @Tag("Positive")})
+    @DisplayName("Проверка допустимых граничных значений полей при оформлении заявки на депозит Liberty+ Валютный в евро без пролонгации")
+    @MethodSource("testValidDataLibertyCurrency")
+    public void checkPositiveBorderDepositLibertyCurrencyEUR(String sumDeposit, String termDeposit) {
+        depositsProductsSteps.clickDepositButton();
+        depositsProductsSteps.clickDepositsProductsBankButton();
+        depositsProductsSteps.clickDepositLibertyCurrencyRegistrationButton();
+        depositsApplicationSteps.clickRadioButtonEur();
+        depositsApplicationSteps.assertSubmitButtonInvalid(
+                "rgba(216, 223, 234, 1)",
+                "rgba(77, 95, 113, 1)"
+        );
+        depositsApplicationSteps.enterValidateAmountDepositInput(sumDeposit);
+        depositsApplicationSteps.fillTermOfDepositField(termDeposit);
+        depositsApplicationSteps.fillCheckboxSendDepositLibertyStandardExpressWithoutLong();
+        depositsApplicationSteps.assertSubmitButtonSuccessful(
+                "rgba(0, 90, 254, 1)",
+                "rgba(245, 245, 245, 1)"
+        );
+        depositsApplicationSteps.sendDepositLibertyStandardExpress();
+    }
+
+    @ParameterizedTest
+    @Tags({@Tag("Web"), @Tag("Negative")})
+    @DisplayName("Проверка не валидных значений в полях 'Сумма депозита' при оформлении заявки на депозит Liberty+ Валютный евро без пролонгации")
+    @MethodSource("testInvalidDataSumLibertyCurrency")
+    public void checkNegativeBorderDepositLibertyCurrencyEUR(String sumDeposit, String termDeposit) throws InterruptedException {
+        depositsProductsSteps.clickDepositButton();
+        depositsProductsSteps.clickDepositsProductsBankButton();
+        depositsProductsSteps.clickDepositLibertyCurrencyRegistrationButton();
+        depositsApplicationSteps.clickRadioButtonEur();
+        depositsApplicationSteps.assertSubmitButtonInvalid(
+                "rgba(216, 223, 234, 1)",
+                "rgba(77, 95, 113, 1)"
+        );
+        depositsApplicationSteps.enterValidateAmountDepositInput(sumDeposit);
+        depositsApplicationSteps.assertErrorMessageSumIsDisplayedLibertyCurrency(Double.valueOf(sumDeposit));
+        depositsApplicationSteps.fillTermOfDepositField(termDeposit);
+        depositsApplicationSteps.fillCheckboxSendDepositLibertyStandardExpressWithoutLong();
+        depositsApplicationSteps.assertSubmitButtonInvalid(
+                "rgba(216, 223, 234, 1)",
+                "rgba(77, 95, 113, 1)"
+        );
+        depositsApplicationSteps.sendDepositLibertyStandardExpress();
+    }
+
+    @ParameterizedTest
+    @Tags({@Tag("Web"), @Tag("Negative")})
+    @DisplayName("Проверка не валидных значений в полях 'Срок депозита' при оформлении заявки на депозит Liberty+ Валютный в евро без пролонгации")
+    @MethodSource("testInvalidDataTermLibertyStandardExpress")
+    public void checkNegativeBorderTermDepositLibertyCurrencyEUR(String sumDeposit, String termDeposit) throws InterruptedException {
+        depositsProductsSteps.clickDepositButton();
+        depositsProductsSteps.clickDepositsProductsBankButton();
+        depositsProductsSteps.clickDepositLibertyCurrencyRegistrationButton();
+        depositsApplicationSteps.clickRadioButtonEur();
+        depositsApplicationSteps.assertSubmitButtonInvalid(
+                "rgba(216, 223, 234, 1)",
+                "rgba(77, 95, 113, 1)"
+        );
+        depositsApplicationSteps.enterValidateAmountDepositInput(sumDeposit);
+        depositsApplicationSteps.fillTermOfDepositField(termDeposit);
+        depositsApplicationSteps.assertErrorMessageTermIsDisplayedLibertyBase(Double.valueOf(termDeposit));
+        depositsApplicationSteps.fillCheckboxSendDepositLibertyStandardExpressWithoutLong();
+        depositsApplicationSteps.assertSubmitButtonInvalid(
+                "rgba(216, 223, 234, 1)",
+                "rgba(77, 95, 113, 1)"
+        );
+        depositsApplicationSteps.sendDepositLibertyStandardExpress();
+    }
+
+    @ParameterizedTest
+    @Tags({@Tag("Web"), @Tag("Negative")})
+    @DisplayName("Проверка возможности отправки заявки на депозит Liberty+ Валютный в евро с выключенными чекбоксами")
+    @MethodSource("testValidDataLibertyCurrency")
+    public void checkPositiveBorderDepositLibertyCurrencyEUrWithoutCheckboxes(String sumDeposit, String termDeposit) {
+        depositsProductsSteps.clickDepositButton();
+        depositsProductsSteps.clickDepositsProductsBankButton();
+        depositsProductsSteps.clickDepositLibertyCurrencyRegistrationButton();
+        depositsApplicationSteps.clickRadioButtonEur();
+        depositsApplicationSteps.assertSubmitButtonInvalid(
+                "rgba(216, 223, 234, 1)",
+                "rgba(77, 95, 113, 1)"
+        );
+        depositsApplicationSteps.enterValidateAmountDepositInput(sumDeposit);
+        depositsApplicationSteps.fillTermOfDepositField(termDeposit);
+        depositsApplicationSteps.assertSubmitButtonInvalid(
+                "rgba(216, 223, 234, 1)",
+                "rgba(77, 95, 113, 1)"
+        );
+        depositsApplicationSteps.sendDepositLibertyStandardExpress();
+    }
+
+    @ParameterizedTest
+    @Tags({@Tag("Web"), @Tag("Negative")})
+    @DisplayName("Проверка ввода спецсимволов в полях 'Сумма депозита' и 'Срок депозита' при оформлении заявки на депозит Liberty+ Валютный в евро без пролонгации")
+    @MethodSource("testInvalidDataSpecialSymbolsLibertyStandardExpress")
+    public void checkSpecialSymbolsDepositLibertyCurrencyEUR(String sumDeposit, String termDeposit) throws InterruptedException {
+        depositsProductsSteps.clickDepositButton();
+        depositsProductsSteps.clickDepositsProductsBankButton();
+        depositsProductsSteps.clickDepositLibertyCurrencyRegistrationButton();
+        depositsApplicationSteps.clickRadioButtonEur();
+        depositsApplicationSteps.assertSubmitButtonInvalid(
+                "rgba(216, 223, 234, 1)",
+                "rgba(77, 95, 113, 1)"
+        );
+        depositsApplicationSteps.enterValidateAmountDepositInput(sumDeposit);
+        depositsApplicationSteps.fillTermOfDepositField(termDeposit);
+        depositsApplicationSteps.assertErrorMessageSymbolSumTermIsDisplayed(sumDeposit, termDeposit);
+        depositsApplicationSteps.fillCheckboxSendDepositLibertyStandardExpressWithoutLong();
+        depositsApplicationSteps.assertSubmitButtonInvalid(
+                "rgba(216, 223, 234, 1)",
+                "rgba(77, 95, 113, 1)"
+        );
+        depositsApplicationSteps.sendDepositLibertyStandardExpress();
+    }
+
+    @ParameterizedTest
+    @Tags({@Tag("Web"), @Tag("Negative")})
+    @DisplayName("Проверка отправки заявки с пустыми полями 'Сумма депозита' и 'Срок депозита' при оформлении заявки на депозит Liberty+ Валютный в евро без пролонгации")
+    @MethodSource("testInvalidDataEmptyFields")
+    public void checkEmptyFieldDepositLibertyCurrencyEUR(String sumDeposit, String termDeposit) throws InterruptedException {
+        depositsProductsSteps.clickDepositButton();
+        depositsProductsSteps.clickDepositsProductsBankButton();
+        depositsProductsSteps.clickDepositLibertyCurrencyRegistrationButton();
+        depositsApplicationSteps.clickRadioButtonEur();
         depositsApplicationSteps.assertSubmitButtonInvalid(
                 "rgba(216, 223, 234, 1)",
                 "rgba(77, 95, 113, 1)"

@@ -34,6 +34,8 @@ public class DepositApplicationPage extends BasePage {
     private WebElement textValidateSymbolMessage;
     @FindBy(xpath = "//p[contains(text(), 'Поле обязательно для заполнения')]")
     private WebElement textValidateEmptyMessage;
+    @FindBy(xpath = "//input[@value='EUR']")
+    private WebElement radioButtonEuro;
 
     public void fillSumOfDepositField(String amountDeposit) {
         waitElement(sumOfDepositField);
@@ -41,6 +43,9 @@ public class DepositApplicationPage extends BasePage {
         actions.click(sumOfDepositField)
                 .sendKeys(amountDeposit)
                 .perform();
+    }
+    public void clickRadioButtonEuro() {
+        radioButtonEuro.click();
     }
     public void clickSumOfDepositField() {
         sumOfDepositField.click();

@@ -21,27 +21,35 @@ public class DepositsApplicationSteps {
     public void clickFieldTermOfDeposit() {
         depositApplicationPage.clickTermOfDepositField();
     }
-
+    @Step("Клик по радиокнопке 'EUR'")
+    public void clickRadioButtonEur() {
+        depositApplicationPage.clickRadioButtonEuro();
+    }
     @Step("Ввод значения в поле ввода 'Сумма депозита'")
     public void enterValidateAmountDepositInput(String amountDeposit) {
         depositApplicationPage.fillSumOfDepositField(amountDeposit);
     }
+
     @Step("Ввод значения в поле ввода 'Срок депозита'")
     public void fillTermOfDepositField(String periodMonths) {
         depositApplicationPage.fillTermOfDepositField(periodMonths);
     }
+
     @Step("Заполнение чекбокса 'Я ознакомлен (а)' на оформление депозита 'Liberty Стандарт Срочный'")
     public void fillCheckboxSendDepositLibertyStandardExpressWithoutLong() {
         depositApplicationPage.clickCheckBoxKnowConditions();
     }
+
     @Step("Проверка стиля кнопки 'Отправить заявку' при правильных значениях")
     public void assertSubmitButtonSuccessful(String bgButtonColor, String textButtonColor) {
         assertTrue(depositApplicationPage.checkButtonCondition(bgButtonColor, textButtonColor, true), INVALID_COLOR);
     }
+
     @Step("Проверка стиля кнопки 'Отправить заявку' при неправильных значениях")
     public void assertSubmitButtonInvalid(String bgButtonColor, String textButtonColor) {
         assertTrue(depositApplicationPage.checkButtonCondition(bgButtonColor, textButtonColor, false), INVALID_COLOR);
     }
+
     @Step("Нажатие кнопки 'Отправить заявку' на оформление депозита 'Liberty Стандарт Срочный'")
     public void sendDepositLibertyStandardExpress() {
         depositApplicationPage.clickSendForm();
@@ -57,6 +65,7 @@ public class DepositsApplicationSteps {
             Assertions.fail("Неизвестный тип ошибки");
         }
     }
+
     @Step("Проверка на отображение уведомления об ошибке в поле 'Срок депозита' депозита 'Liberty Стандарт Срочный'")
     public void assertErrorMessageTermIsDisplayed(Double depositTerm) {
         if (depositApplicationPage.isDepositTermLessThanMinAllowed(depositTerm)) {
