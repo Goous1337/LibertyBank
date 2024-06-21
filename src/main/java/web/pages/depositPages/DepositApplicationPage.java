@@ -44,9 +44,11 @@ public class DepositApplicationPage extends BasePage {
                 .sendKeys(amountDeposit)
                 .perform();
     }
+
     public void clickRadioButtonEuro() {
         radioButtonEuro.click();
     }
+
     public void clickSumOfDepositField() {
         sumOfDepositField.click();
     }
@@ -74,13 +76,14 @@ public class DepositApplicationPage extends BasePage {
                 && sendForm.getCssValue("background-color").equals(bgColor)
                 && sendForm.getCssValue("color").equals(textColor);
     }
+
     public enum ErrorMessage {
         INPUT_DIGITS("Пожалуйста, вводите цифры"),
-        LITTLE_SUM( "Введённая сумма меньше допустимой"),
-        BIG_SUM( "Введённая сумма больше допустимой"),
-        LITTLE_TERM( "Введённый срок меньше допустимого"),
-        BIG_TERM( "Введённый срок больше допустимого"),
-        FILL_NECESSARY( "Поле обязательно для заполнения");
+        LITTLE_SUM("Введённая сумма меньше допустимой"),
+        BIG_SUM("Введённая сумма больше допустимой"),
+        LITTLE_TERM("Введённый срок меньше допустимого"),
+        BIG_TERM("Введённый срок больше допустимого"),
+        FILL_NECESSARY("Поле обязательно для заполнения");
 
         private final String message;
 
@@ -122,6 +125,7 @@ public class DepositApplicationPage extends BasePage {
         waitElement(textValidateMorePeriodMonthDeposit);
         return textValidateMorePeriodMonthDeposit.isDisplayed();
     }
+
     public boolean isDepositTermLessThanMinAllowed(double depositTerm) {
         double minAllowedTerm = 6;
         return depositTerm < minAllowedTerm;
@@ -131,14 +135,17 @@ public class DepositApplicationPage extends BasePage {
         double maxAllowedTerm = 36;
         return depositTerm > maxAllowedTerm;
     }
+
     public Boolean textSymbolAmountTermDepositIsDisplayed(String depositSum, String depositTerm) {
         waitElement(textValidateSymbolMessage);
         return textValidateSymbolMessage.isDisplayed();
     }
+
     public Boolean textFillNecessaryAmountTermDepositIsDisplayed(String depositSum, String depositTerm) {
         waitElement(textValidateEmptyMessage);
         return textValidateEmptyMessage.isDisplayed();
     }
+
     public boolean isDepositSumLessThanMinAllowedLibertyPlusExpress(double depositSum) {
         double minAllowedAmount = 100000;
         return depositSum < minAllowedAmount;
@@ -158,6 +165,7 @@ public class DepositApplicationPage extends BasePage {
         double maxAllowedTerm = 36;
         return depositTerm > maxAllowedTerm;
     }
+
     public boolean isDepositSumLessThanMinAllowedLibertyChild(double depositSum) {
         double minAllowedAmount = 1000;
         return depositSum < minAllowedAmount;
@@ -197,6 +205,7 @@ public class DepositApplicationPage extends BasePage {
         double maxAllowedAmount = 10000000;
         return depositSum > maxAllowedAmount;
     }
+
     public boolean isDepositSumLessThanMinAllowedLibertyCalculated(double depositSum) {
         double minAllowedAmount = 1000;
         return depositSum < minAllowedAmount;
@@ -206,6 +215,7 @@ public class DepositApplicationPage extends BasePage {
         double maxAllowedAmount = 10000000;
         return depositSum > maxAllowedAmount;
     }
+
     public boolean isDepositTermLessThanMinAllowedCalculated(double depositTerm) {
         double minAllowedTerm = 1;
         return depositTerm < minAllowedTerm;
@@ -215,6 +225,7 @@ public class DepositApplicationPage extends BasePage {
         double maxAllowedTerm = 60;
         return depositTerm > maxAllowedTerm;
     }
+
     public boolean isDepositSumLessThanMinAllowedLibertyBaseExpress(double depositSum) {
         double minAllowedAmount = 1;
         return depositSum < minAllowedAmount;
@@ -224,6 +235,7 @@ public class DepositApplicationPage extends BasePage {
         double maxAllowedAmount = 500000;
         return depositSum > maxAllowedAmount;
     }
+
     public boolean isDepositSumLessThanMinAllowedLibertyCurrency(double depositSum) {
         double minAllowedAmount = 3000;
         return depositSum < minAllowedAmount;

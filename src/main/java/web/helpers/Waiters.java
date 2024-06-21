@@ -23,6 +23,7 @@ public class Waiters {
                 .ignoring(StaleElementReferenceException.class)
                 .until(ExpectedConditions.visibilityOf(element));
     }
+
     public static List<WebElement> waitElement(List<WebElement> element) {
         return new WebDriverWait(getDriver(), Duration.ofSeconds(TIME_TO_WAIT))
                 .ignoring(NoSuchElementException.class)

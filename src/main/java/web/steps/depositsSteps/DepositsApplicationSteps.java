@@ -13,18 +13,22 @@ public class DepositsApplicationSteps {
     public DepositsApplicationSteps() {
         depositApplicationPage = new DepositApplicationPage();
     }
+
     @Step("Клик по полю 'Сумма депозита'")
     public void clickFieldSumOfDeposit() {
         depositApplicationPage.clickSumOfDepositField();
     }
+
     @Step("Клик по полю 'Срок депозита'")
     public void clickFieldTermOfDeposit() {
         depositApplicationPage.clickTermOfDepositField();
     }
+
     @Step("Клик по радиокнопке 'EUR'")
     public void clickRadioButtonEur() {
         depositApplicationPage.clickRadioButtonEuro();
     }
+
     @Step("Ввод значения в поле ввода 'Сумма депозита'")
     public void enterValidateAmountDepositInput(String amountDeposit) {
         depositApplicationPage.fillSumOfDepositField(amountDeposit);

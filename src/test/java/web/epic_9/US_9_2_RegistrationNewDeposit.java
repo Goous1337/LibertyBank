@@ -1384,6 +1384,7 @@ public class US_9_2_RegistrationNewDeposit extends BaseTest {
         );
         depositsApplicationSteps.sendDepositLibertyStandardExpress();
     }
+
     @ParameterizedTest
     @Tags({@Tag("Web"), @Tag("Positive")})
     @DisplayName("Проверка допустимых граничных значений полей при оформлении заявки на депозит Liberty+ Валютный в евро без пролонгации")
