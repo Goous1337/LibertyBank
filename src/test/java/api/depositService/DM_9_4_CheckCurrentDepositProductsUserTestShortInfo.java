@@ -9,6 +9,7 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
 
+import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Map;
 
@@ -45,7 +46,7 @@ public class DM_9_4_CheckCurrentDepositProductsUserTestShortInfo extends BaseTes
                         Map<String, Object> item = items.get(i);
                         assertTrue(item.get("id") instanceof String, "Поле items[" + i + "].'id' не соответствует ожидаемому");
                         assertTrue(item.get("name") instanceof String, "Поле items[" + i + "].'name' не соответствует ожидаемому");
-                        assertTrue(item.get("currencyCode") instanceof String, "Поле items[" + i + "].'currencyCode' не соответствует ожидаемому");
+                        assertTrue(item.get("currencyCodes") instanceof Array, "Поле items[" + i + "].'currencyCodes' не соответствует ожидаемому");
                         assertTrue(item.get("currentBalance") instanceof Number, "Поле items[" + i + "].'currentBalance' не соответствует ожидаемому");
                         assertTrue(item.get("closeDate") instanceof String, "Поле items[" + i + "].'closeDate' не соответствует ожидаемому");
                         assertTrue(item.get("interestRate") instanceof Number, "Поле items[" + i + "].'interestRate' не соответствует ожидаемому");
