@@ -33,7 +33,7 @@
               "type": "string"
             },
             "blockedCash": {
-              "type": "number"
+              "type": "null"
             },
             "isMain": {
               "type": "boolean"

@@ -8,6 +8,7 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 import pojo.cardService.CardData;
 
@@ -20,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CARD_SERVICE;
 
+@Tags({@Tag("API"), @Tag("MVP")})
 @DisplayName("CS-10 Просмотр подробной информации по карточному продукту")
 public class CS_10_CheckCardInfoTest extends BaseTest {
     public static String JSON_SCHEMA_VALID_NAME = "schemas/cardService/checkCardInfo.json";
@@ -31,7 +33,6 @@ public class CS_10_CheckCardInfoTest extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-2773")
     @DisplayName("Просмотр подробной информации по карточному продукту")
     @Description("Тест направлен на проверку возможности просмотра подробной информации по определенной карте")
@@ -48,7 +49,6 @@ public class CS_10_CheckCardInfoTest extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-2773")
     @DisplayName("Проверка ответа при неверном имени карты")
     @Description("Тест направлен на проверку ответа при неверном имени карты")

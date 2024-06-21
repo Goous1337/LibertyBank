@@ -1,8 +1,9 @@
 package constant;
 
 public class CardServiceConstants {
-    public static final String CUSTOMER_ID_WITHOUT_ACTIVE_CARDS = "c1c12bfb-ee07-42ee-9171-b705cebd6309";
-    public static final String CUSTOMER_ID_WITH_ACTIVE_CARDS = "7631686e-a778-4d08-9a03-85ec8b2da39b";
+    public static final String CUSTOMER_ID_WITHOUT_ACTIVE_CARDS = "07eca1d9-715d-486d-9c85-74df3e164907";
+    public static final String CUSTOMER_ID_WITH_ACTIVE_CARDS = "e8b5bcb5-96a2-46d9-b6df-33be35ab697a";
+    public static final String CUSTOMER_ID_FOR_CHANGE_PIN = "80129e92-e26e-4ca8-a158-2752c9db1508";
     public static final String PARAMETER_CUSTOMER_ID = "customerId";
     public static final String CARD_NAME_CLASSIC = "Liberty Card Classic";
     public static final String CARD_NAME_CHILD = "Liberty Card Child";

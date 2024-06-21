@@ -16,4 +16,11 @@ public abstract class BasePage {
     public void scrollToElement(WebElement element) {
         new Actions(DriverManager.getDriver()).scrollToElement(element).perform();
     }
+
+    public String getTextElement(WebElement element) {
+        if (element == null) {
+            throw new IllegalArgumentException("Text WebElement cannot be find");
+        }
+        return element.getText();
+    }
 }

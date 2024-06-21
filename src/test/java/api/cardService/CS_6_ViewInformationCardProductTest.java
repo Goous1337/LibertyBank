@@ -9,6 +9,7 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import static constant.AccountServiceConstants.STATUS_ACTIVE;
@@ -19,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CARD_SERVICE;
 
+@Tags({@Tag("API"), @Tag("MVP")})
 @DisplayName("CS-6 Просмотр подробной информации по карте")
 public class CS_6_ViewInformationCardProductTest extends BaseTest {
     public static final String JSON_SCHEMA_VIEW_INFORMATION = "schemas/cardService/checkInformationCardProduct.json";
@@ -29,7 +31,6 @@ public class CS_6_ViewInformationCardProductTest extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-41")
     @DisplayName("Просмотр подробной информации покарточному продукту")
     @Description("Тест направлен на проверку возможности просмотра подробной информации по карточному продукту")
@@ -43,7 +44,6 @@ public class CS_6_ViewInformationCardProductTest extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-41")
     @DisplayName("Просмотр подробной информации покарточному продукту с невалидным productTypeId")
     @Description("Тест направлен на проверку возможности просмотра подробной информации по карточному продукту с невалидным productTypeId")
@@ -55,7 +55,6 @@ public class CS_6_ViewInformationCardProductTest extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-41")
     @DisplayName("Просмотр подробной информации покарточному продукту с отсутствующим в системе productTypeId")
     @Description("Тест направлен на проверку возможности просмотра подробной информации по карточному продукту с отсутствующим в системе productTypeId")

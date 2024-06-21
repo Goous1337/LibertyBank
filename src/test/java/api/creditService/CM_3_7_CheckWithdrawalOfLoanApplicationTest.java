@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CREDIT_SERVICE;
 
+@Tags({@Tag("API"), @Tag("3.0")})
 @DisplayName("СM 3.7 Отзыв кредитной заявки")
 public class CM_3_7_CheckWithdrawalOfLoanApplicationTest extends BaseTest {
     {
@@ -21,7 +22,7 @@ public class CM_3_7_CheckWithdrawalOfLoanApplicationTest extends BaseTest {
 
     @DisplayName("Отзыв кредитной заявки")
     @Description("Данный тест-кейс направлен на отзыв кредитной заявки")
-    @Tags({@Tag("smoke"), @Tag("API")})
+    @Tag("Smoke")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-764")
     @Test
     public void checkWithdrawalOfLoanApplication() {
@@ -40,7 +41,7 @@ public class CM_3_7_CheckWithdrawalOfLoanApplicationTest extends BaseTest {
     @DisplayName("Отзыв кредитной заявки c несуществующим значением параметра creditOrderId")
     @Description("Данный тест-кейс направлен на отзыв кредитной заявки c несуществующим значением+" +
             " параметра creditOrderId")
-    @Tags({@Tag("Negative"), @Tag("API")})
+    @Tag("Negative")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-767")
     @Test
     public void checkWithdrawalOfLoanApplicationNotExistParamOfId() {
@@ -54,7 +55,7 @@ public class CM_3_7_CheckWithdrawalOfLoanApplicationTest extends BaseTest {
 
     @DisplayName("Отзыв кредитной заявки без токена аутентификации")
     @Description("Данный тест-кейс направлен на отзыв кредитной заявки без токена аутентификации")
-    @Tags({@Tag("Negative"), @Tag("API")})
+    @Tag("Negative")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-769")
     @Test
     public void checkWithdrawalOfLoanApplicationEmptyToken() {
@@ -68,7 +69,7 @@ public class CM_3_7_CheckWithdrawalOfLoanApplicationTest extends BaseTest {
 
     @DisplayName("Отзыв кредитной заявки по отклоненной заявке")
     @Description("Данный тест-кейс направлен на отзыв кредитной заявки по отклоненной заявке")
-    @Tags({@Tag("Negative"), @Tag("API")})
+    @Tag("Negative")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-771")
     @Test
     public void checkWithdrawalOfLoanApplicationOnAnAlreadyWithdrawnApplication() {
@@ -83,7 +84,7 @@ public class CM_3_7_CheckWithdrawalOfLoanApplicationTest extends BaseTest {
     @Disabled("Bug https://jira.astondevs.ru/browse/LIB-1882")
     @DisplayName("Отзыв кредитной заявки по одобренной заявке")
     @Description("Данный тест-кейс направлен на отзыв кредитной заявки по одобренной заявке")
-    @Tags({@Tag("Negative"), @Tag("API")})
+    @Tag("Negative")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-772")
     @Test
     public void checkWithdrawalOfLoanApplicationOnAnAlreadyApprovedApplication() {

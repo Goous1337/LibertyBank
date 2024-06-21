@@ -9,7 +9,7 @@ import web.BaseTest;
 import static web.constans.AccountServiceConstants.DISPLAYED_MESSAGE;
 import static web.constans.UrlConfig.ACCOUNTS_URL;
 
-@Tag("Web")
+@Tags({@Tag("Web"), @Tag("MVP")})
 @Epic("4 - Счета")
 @Feature("US-4.4.1 Закрыть счет")
 @DisplayName("US-4.4.1 Закрыть счет")

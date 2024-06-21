@@ -8,6 +8,7 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import static org.apache.hc.core5.http.HttpStatus.SC_NOT_FOUND;
@@ -16,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CARD_SERVICE;
 
+@Tags({@Tag("API"), @Tag("MVP")})
 @DisplayName("CS-3 Просмотр активных карт")
 public class CS_3_CheckActiveCardsTest extends BaseTest {
     public static String JSON_SCHEMA_WITH_CARDS = "schemas/cardService/checkActiveCards.json";
@@ -26,7 +28,6 @@ public class CS_3_CheckActiveCardsTest extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-40")
     @DisplayName("Просмотр активных карт")
     @Description("Тест направлен на проверку возможности просмотра активных карт")
@@ -39,9 +40,8 @@ public class CS_3_CheckActiveCardsTest extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-40")
-    @DisplayName("Проерка ответа при отсутствии активных карт")
+    @DisplayName("Проверка ответа при отсутствии активных карт")
     @Description("Тест направлен на проверку ответа при отсутствии активных карт")
     public void checkActiveCardsWithNoActiveCards() {
         Response response = cardService.getActiveCardsInfoUserHaveNoCards();

@@ -8,6 +8,7 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -20,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.ACCOUNT_SERVICE;
 
+@Tags({@Tag("API"), @Tag("MVP")})
 @DisplayName("AS-1 Открыть счет")
 public class AS_1_CreateNewAccountTest extends BaseTest {
 
@@ -29,7 +31,6 @@ public class AS_1_CreateNewAccountTest extends BaseTest {
 
     @DisplayName("Открытие нового счета")
     @Description("Данный тест-кейс направлен на проверку AS-1 по US-4.1 на открытие нового счета с разными валидными параметрами запроса")
-    @Tag("API")
     @TmsLink("LIB2-1007")
     @ParameterizedTest
     @CsvSource({
@@ -51,7 +52,6 @@ public class AS_1_CreateNewAccountTest extends BaseTest {
 
     @DisplayName("Открытие нового счета для несуществующего пользователя")
     @Description("Данный тест-кейс направлен на проверку AS-1 по US-4.1 на открытие нового счета для несуществующего пользователя")
-    @Tag("API")
     @TmsLink("LIB2-1009")
     @Test
     public void checkCreateNewAccountForNotRegisteredUser() {
@@ -67,7 +67,6 @@ public class AS_1_CreateNewAccountTest extends BaseTest {
 
     @DisplayName("Открытие нового счета с невалидными данными запроса")
     @Description("Данный тест-кейс направлен на проверку AS-1 по US-4.1 на открытие нового счета с пустым телом запроса и с невалидным телом запроса")
-    @Tag("API")
     @TmsLink("LIB2-1008")
     @ParameterizedTest
     @CsvSource({

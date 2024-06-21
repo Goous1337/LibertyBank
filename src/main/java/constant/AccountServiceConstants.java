@@ -21,4 +21,8 @@ public class AccountServiceConstants {
     public static final String STATUS_CLOSED = "CLOSED";
     public static final String STATUS_BLOCKED = "BLOCKED";
     public static final Boolean IS_MAIN = true;
+    public static final String ACCOUNT_ID_DEBIT = "00000000-0000-0000-0000-000000000359";
+    public static final String PAYMENT_SYSTEM = "MIR";
+    public static final String DELIVERY_TYPE = "BRANCH";
+    public static final String OFFICE_NUMBER = "3fa85f64-5717-4562-b3fc-2c963f66afa6";
 }

@@ -6,7 +6,7 @@ import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.*;
 import web.BaseTest;
 
-@Tag("Web")
+@Tags({@Tag("Web"), @Tag("MVP")})
 @Epic("9 - Депозиты")
 @Feature("US-9.4 Просмотр пользователем своих действующих депозитов")
 @DisplayName("US-9.4 Просмотр пользователем своих действующих депозитов")
@@ -21,7 +21,7 @@ public class US_9_4_CheckMyDeposits extends BaseTest {
     }
 
     @Test
-    @Tags({@Tag("Web"), @Tag("Positive")})
+    @Tag("Positive")
     @DisplayName("US 9.4 Просмотр пользователем своих действующих депозитов")
     @TmsLink("LIB3-1895")
     public void checkMyDepositProducts() {

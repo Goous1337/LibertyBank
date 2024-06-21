@@ -75,4 +75,24 @@ public class CreditApplicationSteps {
         assertTrue(creditApplicationPage.checkButtonCondition(bgButtonColor, textButtonColor, false), INVALID_COLOR);
     }
 
+    @Step("Продолжение оформления заявки после нажатия на кнопку 'Отправить заявку'")
+    public void sendApplicationForm() {
+        creditApplicationPage.clickSendCredit();
+    }
+
+    @Step("Ввод 6-ти значного кода")
+    public void enterGenerationCode(String code) {
+        creditApplicationPage.sendCode(code);
+    }
+
+    @Step("Продолжить действия после ввода 6-ти значного кода")
+    public void clickNextButton() {
+        creditApplicationPage.clickNextButton();
+    }
+
+    @Step("Проверка появления формы отчета")
+    public void reportIsVisible() {
+        creditApplicationPage.checkVisibleReport();
+    }
+
 }

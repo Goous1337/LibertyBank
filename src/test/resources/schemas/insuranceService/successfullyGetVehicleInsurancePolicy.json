@@ -18,7 +18,7 @@
           "type": "string"
         },
         "duration": {
-          "type": "null"
+          "type": "integer"
         },
         "agreementNumber": {
           "type": "string"
@@ -91,6 +91,9 @@
         "carOwner": {
           "type": "string"
         },
+        "price": {
+          "type": "integer"
+        },
         "drivers": {
           "type": "array",
           "items": [
@@ -129,6 +132,7 @@
         "vehicleDocumentType",
         "documentNumber",
         "carOwner",
+        "price",
         "drivers"
       ]
     }

@@ -9,7 +9,7 @@ import web.BaseTest;
 import static web.constans.CardServiceConstants.CONFIRMATION_CODE;
 import static web.constans.UrlConfig.CARDS_URL;
 
-@Tag("Web")
+@Tags({@Tag("Web"), @Tag("MVP")})
 @Epic("5 - Карты")
 @Feature("US-5.6.6 Сделать карту основной")
 @DisplayName("US-5.6.6 Сделать карту основной")

@@ -5,9 +5,7 @@ import constant.CardProducts;
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import pojo.cardService.cs_11.CardProductBenefits;
 
 import static api.utils.JsonParser.parseJson;
@@ -15,6 +13,7 @@ import static constant.CardProducts.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.CARD_SERVICE;
 
+@Tags({@Tag("API"), @Tag("MVP")})
 @DisplayName("CS-11 Просмотр преимуществ карточных продуктов")
 public class CS_11_ViewBenefitsOfCardProductsTest extends BaseTest {
 
@@ -31,7 +30,6 @@ public class CS_11_ViewBenefitsOfCardProductsTest extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-3225")
     @DisplayName("Просмотр преимуществ карточных продуктов, Liberty Card Gold")
     @Description("Тест направлен на проверку возможности просмотра преимуществ карты Liberty Card Gold")
@@ -40,7 +38,6 @@ public class CS_11_ViewBenefitsOfCardProductsTest extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-3226")
     @DisplayName("Просмотр преимуществ карточных продуктов, Liberty Card Child")
     @Description("Тест направлен на проверку возможности просмотра преимуществ карты Liberty Card Child")
@@ -49,7 +46,6 @@ public class CS_11_ViewBenefitsOfCardProductsTest extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-3227")
     @DisplayName("Просмотр преимуществ карточных продуктов, Liberty Card Platinum")
     @Description("Тест направлен на проверку возможности просмотра преимуществ карты Liberty Card Platinum")
@@ -58,7 +54,6 @@ public class CS_11_ViewBenefitsOfCardProductsTest extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-3228")
     @DisplayName("Просмотр преимуществ карточных продуктов, Liberty Card Virtual")
     @Description("Тест направлен на проверку возможности просмотра преимуществ карты Liberty Card Virtual")
@@ -67,7 +62,6 @@ public class CS_11_ViewBenefitsOfCardProductsTest extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-3229")
     @DisplayName("Просмотр преимуществ карточных продуктов, Liberty Card Classic")
     @Description("Тест направлен на проверку возможности просмотра преимуществ карты Liberty Card Classic")
@@ -76,7 +70,6 @@ public class CS_11_ViewBenefitsOfCardProductsTest extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-3230")
     @DisplayName("Просмотр преимуществ карточных продуктов, Liberty Card Secure")
     @Description("Тест направлен на проверку возможности просмотра преимуществ карты Liberty Card Secure")
@@ -85,7 +78,6 @@ public class CS_11_ViewBenefitsOfCardProductsTest extends BaseTest {
     }
 
     @Test
-    @Tag("API")
     @TmsLink("LIB2-3231")
     @DisplayName("Просмотр преимуществ карточных продуктов, Liberty Card Travel")
     @Description("Тест направлен на проверку возможности просмотра преимуществ карты Liberty Card Travel")
