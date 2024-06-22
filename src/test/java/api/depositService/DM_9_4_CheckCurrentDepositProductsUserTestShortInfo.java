@@ -28,7 +28,6 @@ public class DM_9_4_CheckCurrentDepositProductsUserTestShortInfo extends BaseTes
         RestAssured.baseURI = DEPOSIT_SERVICE;
     }
 
-    @Disabled("Уточнение требований")
     @DisplayName("Просмотр перечня действующих депозитных продуктов пользователя")
     @Description("Данный тест-кейс направлен на получение списка действующих депозитных продуктов пользователя " +
             "в виде коллекции, состоящей из Депозитных продуктов авторизованным пользователем")
@@ -46,11 +45,11 @@ public class DM_9_4_CheckCurrentDepositProductsUserTestShortInfo extends BaseTes
                         Map<String, Object> item = items.get(i);
                         assertTrue(item.get("id") instanceof String, "Поле items[" + i + "].'id' не соответствует ожидаемому");
                         assertTrue(item.get("name") instanceof String, "Поле items[" + i + "].'name' не соответствует ожидаемому");
-                        assertTrue(item.get("currencyCodes") instanceof Array, "Поле items[" + i + "].'currencyCodes' не соответствует ожидаемому");
+                        assertTrue(item.get("currencyCode") instanceof String, "Поле items[" + i + "].'currencyCode' не соответствует ожидаемому");
                         assertTrue(item.get("currentBalance") instanceof Number, "Поле items[" + i + "].'currentBalance' не соответствует ожидаемому");
                         assertTrue(item.get("closeDate") instanceof String, "Поле items[" + i + "].'closeDate' не соответствует ожидаемому");
                         assertTrue(item.get("interestRate") instanceof Number, "Поле items[" + i + "].'interestRate' не соответствует ожидаемому");
-                        assertTrue(item.get("mainDepaccountId") instanceof String, "Поле items[" + i + "].'mainDepaccountId' не соответствует ожидаемому");
+                        assertTrue(item.get("depAccountNumber") instanceof String, "Поле items[" + i + "].'depAccountNumber' не соответствует ожидаемому");
                     }
                 }
         );

@@ -17,7 +17,7 @@ public class DepositServiceDataBaseRequest {
     }
 
     public static Integer getDepositProductId(String currencyCode) {
-        String sql = "SELECT id FROM deposit_product WHERE currency_code = ?::varchar LIMIT 1";
+        String sql = "SELECT dp.id from deposit_currency dp JOIN deposit_currency dc on dc.deposit_product_id = dp.id WHERE dc.currency_code = ?::varchar LIMIT 1";
         LOG.info(String.format("Получен id продукта по currencyCode %s", currencyCode));
         return getDBConnection(DEPOSIT_SERVICE_DB).queryForObject(sql, Integer.class, currencyCode);
     }
