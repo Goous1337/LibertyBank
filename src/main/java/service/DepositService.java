@@ -36,24 +36,24 @@ public class DepositService {
     }
 
     public Response checkListMakeNewDeposit
-            (Integer depositProductId, Float initialAmount, String periodMonths, Boolean autoRenewal) {
+            (Integer depositProductId, Float initialAmount, String periodMonths, String currencyCode, Boolean autoRenewal) {
         return sendSimpleRequest(POST, DEPOSIT_SETTINGS,
                 getRP(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE),
-                new DepositData(depositProductId, initialAmount, periodMonths, autoRenewal));
+                new DepositData(depositProductId, initialAmount, periodMonths, currencyCode, autoRenewal));
     }
 
     public Response checkMakeNewDepositInvalidRequest
-            (Integer depositProductId, Float initialAmount, Boolean autoRenewal) {
+            (Integer depositProductId, Float initialAmount, String currencyCode, Boolean autoRenewal) {
         return sendSimpleRequest(POST, DEPOSIT_SETTINGS,
                 getRP(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE),
-                new DepositData(depositProductId, initialAmount, autoRenewal));
+                new DepositData(depositProductId, initialAmount, currencyCode, autoRenewal));
     }
 
     public Response checkListMakeNewDepositInvalidToken
-            (Integer depositProductId, Float initialAmount, String periodMonths, Boolean autoRenewal) {
+            (Integer depositProductId, Float initialAmount, String periodMonths, String currencyCode, Boolean autoRenewal) {
         return sendSimpleRequest(POST, DEPOSIT_SETTINGS,
                 getRP(HEADER, AUTHORIZATION, INVALID_ACCESS_TOKEN),
-                new DepositData(depositProductId, initialAmount, periodMonths, autoRenewal));
+                new DepositData(depositProductId, initialAmount, periodMonths, currencyCode, autoRenewal));
     }
 
     public Response checkListValidationDepositAmountIncorrectValues

@@ -49,7 +49,7 @@ public class DM_9_2_MakeNewDepositTest extends BaseTest {
             """)
     @Tag("Smoke")
     @TmsLink("LIB3-805")
-    @ParameterizedTest()
+    @ParameterizedTest
     @MethodSource({"dataProviderDepositProductId"})
     public void checkMakeNewDeposit(int depositProductId) {
         DepositServiceDataBaseRequest.clearUserDepositProductsById(DEPOSIT_CUSTOMER_ID, depositProductId);
@@ -61,12 +61,14 @@ public class DM_9_2_MakeNewDepositTest extends BaseTest {
                 (depositProductId, DEPOSIT_MAX_DURATION);
         Float initialAmountMax = DepositServiceDataBaseRequest.getDepositAmountByProductId
                 (depositProductId, DEPOSIT_AMOUNT_MAX);
+        String currencyCode = DepositServiceDataBaseRequest.getDepositCurrencyByProductId
+                (depositProductId, DEPOSIT_CURRENCY_CODE);
         Response responseMin = depositService.checkListMakeNewDeposit
-                (depositProductId, initialAmountMin, periodMonthsMin, false);
+                (depositProductId, initialAmountMin, periodMonthsMin, currencyCode,false);
         Float createdInitialAmountMin = DepositServiceDataBaseRequest.getInitialAmountById(DEPOSIT_CUSTOMER_ID, depositProductId);
         DepositServiceDataBaseRequest.clearUserDepositProductsById(DEPOSIT_CUSTOMER_ID, depositProductId);
         Response responseMax = depositService.checkListMakeNewDeposit
-                (depositProductId, initialAmountMax, periodMonthMax, false);
+                (depositProductId, initialAmountMax, periodMonthMax, currencyCode,false);
         Float createdInitialAmountMax = DepositServiceDataBaseRequest.getInitialAmountById(DEPOSIT_CUSTOMER_ID, depositProductId);
         assertAll(
                 () -> assertEquals(SC_OK, responseMin.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
@@ -92,10 +94,12 @@ public class DM_9_2_MakeNewDepositTest extends BaseTest {
                 (depositProductId, DEPOSIT_AMOUNT_MIN);
         Float initialAmountMax = DepositServiceDataBaseRequest.getDepositAmountByProductId
                 (depositProductId, DEPOSIT_AMOUNT_MAX);
+        String currencyCode = DepositServiceDataBaseRequest.getDepositCurrencyByProductId
+                (depositProductId, DEPOSIT_CURRENCY_CODE);
         Response responseMin = depositService.checkMakeNewDepositInvalidRequest
-                (depositProductId, initialAmountMin, false);
+                (depositProductId, initialAmountMin, currencyCode, false);
         Response responseMax = depositService.checkMakeNewDepositInvalidRequest
-                (depositProductId, initialAmountMax, false);
+                (depositProductId, initialAmountMax, currencyCode,false);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, responseMin.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertEquals(SC_BAD_REQUEST, responseMax.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
@@ -117,8 +121,10 @@ public class DM_9_2_MakeNewDepositTest extends BaseTest {
                 (depositProductId, DEPOSIT_AMOUNT_MAX);
         String periodMonthMax = DepositServiceDataBaseRequest.getDepositDurationByProductId
                 (depositProductId, DEPOSIT_MAX_DURATION);
+        String currencyCode = DepositServiceDataBaseRequest.getDepositCurrencyByProductId
+                (depositProductId, DEPOSIT_CURRENCY_CODE);
         Response response = depositService.checkListMakeNewDepositInvalidToken
-                (depositProductId, initialAmountMax, periodMonthMax, false);
+                (depositProductId, initialAmountMax, periodMonthMax, currencyCode, false);
         assertAll(
                 () -> assertEquals(SC_UNAUTHORIZED, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertNotNull(response.jsonPath().get("errorMessage"))
@@ -160,9 +166,12 @@ public class DM_9_2_MakeNewDepositTest extends BaseTest {
     @MethodSource("dataProviderDepositProductId")
     public void checkValidationDepositPeriodIncorrectValues(int depositProductId) {
         DepositServiceDataBaseRequest.clearUserDepositProductsById(DEPOSIT_CUSTOMER_ID, depositProductId);
-        Float initialAmount = DepositServiceDataBaseRequest.getDepositAmountByProductId(depositProductId, DEPOSIT_AMOUNT_MAX);
+        Float initialAmount = DepositServiceDataBaseRequest.getDepositAmountByProductId
+                (depositProductId, DEPOSIT_AMOUNT_MAX);
+        String currencyCode = DepositServiceDataBaseRequest.getDepositCurrencyByProductId
+                (depositProductId, DEPOSIT_CURRENCY_CODE);
         Response response = depositService.checkListMakeNewDeposit
-                (depositProductId, initialAmount, "двадцать 20", false);
+                (depositProductId, initialAmount, "девяносто 90", currencyCode,false);
         List<String> depositCustomersId = DepositServiceDataBaseRequest.getAllCustomersId(depositProductId);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),

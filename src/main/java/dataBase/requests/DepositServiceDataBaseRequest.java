@@ -33,6 +33,11 @@ public class DepositServiceDataBaseRequest {
         LOG.info(String.format("Получен %s срок вклада по id = %s", duration, productId));
         return getDBConnection(DEPOSIT_SERVICE_DB).queryForObject(sql, String.class, productId);
     }
+    public static String getDepositCurrencyByProductId(int productId, String currency) {
+        String sql = String.format("SELECT currency_code FROM deposit_currency WHERE id = ?", currency);
+        LOG.info(String.format("Получена валюта вклада по id = %s", currency, productId));
+        return getDBConnection(DEPOSIT_SERVICE_DB).queryForObject(sql, String.class, productId);
+    }
 
     public static void clearUserDepositProductsById(String customerId, int productId) {
         String sql = "DELETE FROM deposit WHERE customer_id = ?::uuid AND deposit_product_id =?";
