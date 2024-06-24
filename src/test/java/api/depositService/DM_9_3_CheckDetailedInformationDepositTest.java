@@ -34,7 +34,7 @@ public class DM_9_3_CheckDetailedInformationDepositTest extends BaseTest {
     @Tag("Positive")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-1099")
     @ParameterizedTest(name = "productId: {0}")
-    @CsvSource({"1", "2", "3"})
+    @CsvSource({"6", "2", "3"})
     public void checkDetailedInformationAboutDepositOffer(Integer productId) {
         Response response = depositService.checkDetailedInformationAboutDeposit(productId);
         String jsonSchemaPath = "schemas/depositService/successfulGetDepositInfo.json";

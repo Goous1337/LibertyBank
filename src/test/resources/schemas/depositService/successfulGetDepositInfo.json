@@ -29,8 +29,8 @@
     "maxDurationMonths": {
       "type": "integer"
     },
-    "currencyCode": {
-      "type": "string"
+    "currencyCodes": {
+      "type": "array"
     },
     "isActive": {
       "type": "boolean"
@@ -58,7 +58,7 @@
     "amountMax",
     "minDurationMonths",
     "maxDurationMonths",
-    "currencyCode",
+    "currencyCodes",
     "isActive",
     "isRevocable",
     "productDetails",
