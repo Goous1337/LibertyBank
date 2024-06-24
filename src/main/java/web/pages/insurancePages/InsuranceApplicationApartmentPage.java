@@ -5,12 +5,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import web.drivers.DriverManager;
 import web.helpers.CalendarElement;
 import web.pages.BasePage;
 
 import java.io.File;
+import java.time.Duration;
 import java.util.List;
 
 import static web.helpers.Waiters.waitElement;
@@ -26,16 +28,16 @@ public class InsuranceApplicationApartmentPage extends BasePage {
     private WebElement radioCurrencyUsd;
     @FindBy(xpath = "//*[@id='EUR']")
     private WebElement radioCurrencyEur;
-    @FindBy(xpath = "//*[@class = '_icon_1a54x_1']")
+    @FindBy(xpath = "//*[@name = 'duration']/../..")
     private WebElement durationInputBoarder;
-    @FindBy(xpath = "//*[@class='_selectBlock_1a54x_5']//li[1]")
-    private WebElement durationFirstVariant;
-    @FindBy(xpath = "//input[@id='duration']")
+    @FindBy(xpath = "//input[@name='duration']")
     private WebElement durationInput;
-    @FindBy(xpath = "//*[@data-testid ='icon-calendar']")
+    @FindBy(xpath = "//*[@name ='startDate']/../following-sibling::*")
     private WebElement startingDateCalendarIcon;
     @FindBy(xpath = "//h3[contains(@class, ' _containerTitle_1pww5_25')]")
     private WebElement pageTitle;
+    @FindBy(xpath = "//*[@name ='partsPayment']/following-sibling::label")
+    private WebElement partsPaymentSwitch;
     @FindBy(xpath = "//*[contains(@name, 'lastName')]/../..")
     private WebElement lastNameBorder;
     @FindBy(xpath = "//*[contains(@name, 'lastName')]")
@@ -81,27 +83,10 @@ public class InsuranceApplicationApartmentPage extends BasePage {
     private WebElement emailBorder;
     @FindBy(xpath = "//*[contains(@name, 'email')]")
     private WebElement emailInput;
-    @FindBy(xpath = "//*[contains(@name, 'things.0.name')]/../..")
-    private WebElement thingNameBorder;
-    @FindBy(xpath = "//*[contains(@name, 'things.0.name')]")
-    private WebElement thingNameInput;
-    @FindBy(xpath = "//*[contains(@name, 'things.0.cost')]/../..")
-    private WebElement thingCostBorder;
-    @FindBy(xpath = "//*[contains(@name, 'things.0.cost')]")
-    private WebElement thingCostInput;
-    private List<WebElement> formContainers;
-    @FindBy(xpath = "//*[@class='_selectBlock_1a54x_5']//*[@data-testid = 'icon-arrow-down-grey']")
-    private WebElement thingTypeIcon;
-    private List<WebElement> thingTypeOptions;
-    @FindBy(css = "input[type=file]")
-    private WebElement photoInput;
-    @FindBy(id = "file-submit")
-    private WebElement photoSubmit;
-    @FindBy(xpath = "//button[contains(@class,'_add-item-btn_c17ux_180')]")
-    private WebElement addThingButton;
-    @FindBy(xpath = "//*[@class='_selectBlock_1a54x_5']//*[@data-testid = 'icon-arrow-down-grey']")
-    private WebElement constructionTypeBorder;
-    private List<WebElement> constructionTypes;
+    @FindBy(xpath = "//*[contains(@name, 'region')]/../..")
+    private WebElement stateBorder;
+    @FindBy(xpath = "//*[contains(@name, 'region')]")
+    private WebElement stateInput;
     @FindBy(xpath = "//*[contains(@name, 'city')]/../..")
     private WebElement cityBorder;
     @FindBy(xpath = "//*[contains(@name, 'city')]")
@@ -111,25 +96,57 @@ public class InsuranceApplicationApartmentPage extends BasePage {
     @FindBy(xpath = "//*[contains(@name, 'street')]")
     private WebElement streetInput;
     @FindBy(xpath = "//*[contains(@name, 'house')]/../..")
-    private WebElement houseBorder;
+    private WebElement buildingBorder;
     @FindBy(xpath = "//*[contains(@name, 'house')]")
-    private WebElement houseInput;
-    @FindBy(xpath = "//*[contains(@name, 'apartment')]/../..")
-    private WebElement apartmentBorder;
-    @FindBy(xpath = "//*[contains(@name, 'apartment')]")
-    private WebElement apartmentInput;
-    @FindBy(xpath = "//*[contains(@name, 'floor')]/../..")
-    private WebElement floorBorder;
-    @FindBy(xpath = "//*[contains(@name, 'floor')]")
-    private WebElement floorInput;
+    private WebElement buildingInput;
     @FindBy(xpath = "//*[contains(@name, 'entrance')]/../..")
     private WebElement entranceBorder;
     @FindBy(xpath = "//*[contains(@name, 'entrance')]")
     private WebElement entranceInput;
-    @FindBy(xpath = "//*[@id='Да']")
-    private WebElement isSecuritySystemYes;
-    @FindBy(xpath = "//*[id='Нет']")
-    private WebElement isSecuritySystemNo;
+    @FindBy(xpath = "//*[contains(@name, 'apartament')]/../..")
+    private WebElement apartmentBorder;
+    @FindBy(xpath = "//*[contains(@name, 'apartament')]")
+    private WebElement apartmentInput;
+    @FindBy(xpath = "//*[contains(@name, 'yearOfConstruction')]/../..")
+    private WebElement yearOfConstructionBorder;
+    @FindBy(xpath = "//*[contains(@name, 'yearOfConstruction')]")
+    private WebElement yearOfConstructionInput;
+    @FindBy(xpath = "//*[contains(@name, 'buildingArea')]/../..")
+    private WebElement buildingAreaBorder;
+    @FindBy(xpath = "//*[contains(@name, 'buildingArea')]")
+    private WebElement buildingAreaInput;
+    @FindBy(xpath = "//*[contains(@name, 'actualCost')]/../..")
+    private WebElement actualCostBorder;
+    @FindBy(xpath = "//*[contains(@name, 'actualCost')]")
+    private WebElement actualCostInput;
+    @FindBy(xpath = "//*[contains(@name, 'insuranceAmount')]/../..")
+    private WebElement insuranceAmountBorder;
+    @FindBy(xpath = "//*[contains(@name, 'insuranceAmount')]")
+    private WebElement insuranceAmountInput;
+    @FindBy(xpath = "//*[@name = 'regionOfBuilding']/../..")
+    private WebElement regionOfBuildingBorder;
+    @FindBy(xpath = "//*[@name = 'regionOfBuilding']")
+    private WebElement regionOfBuildingInput;
+    @FindBy(xpath = "//*[@name = 'cityOfBuilding']/../..")
+    private WebElement cityOfBuildingBorder;
+    @FindBy(xpath = "//*[@name = 'cityOfBuilding']")
+    private WebElement cityOfBuildingInput;
+    @FindBy(xpath = "//*[@name = 'streetOfBuilding']/../..")
+    private WebElement streetOfBuildingBorder;
+    @FindBy(xpath = "//*[@name = 'streetOfBuilding']")
+    private WebElement streetOfBuildingInput;
+    @FindBy(xpath = "//*[@name = 'houseOfBuilding']/../..")
+    private WebElement houseOfBuildingBorder;
+    @FindBy(xpath = "//*[@name = 'houseOfBuilding']")
+    private WebElement houseOfBuildingInput;
+    @FindBy(xpath = "//input[@name = 'passport']")
+    private WebElement passportFileInput;
+    @FindBy(xpath = "//input[@name = 'marketValueCert']")
+    private WebElement marketValueCertFileInput;
+    @FindBy(xpath = "//input[@name = 'ownerCert']")
+    private WebElement ownerCertFileInput;
+    @FindBy(xpath = "//input[@name = 'livingCert']")
+    private WebElement livingCertFileInput;
     @FindBy(xpath = "//button[contains(@class,'_back-btn_c17ux_167')]")
     private WebElement backButton;
     @FindBy(xpath = "//*[@class='react-calendar _content__total_calendar_1r0ah_1 _calendar_1r0ah_121']")
@@ -203,7 +220,6 @@ public class InsuranceApplicationApartmentPage extends BasePage {
     public void inputInsuranceDuration(String duration) {
         waitElement(durationInputBoarder).click();
         waitElement(durationInput).sendKeys(duration);
-        waitElement(durationFirstVariant).click();
     }
 
     public void selectStartingTomorrow() {
@@ -299,58 +315,27 @@ public class InsuranceApplicationApartmentPage extends BasePage {
         waitElement(emailInput).sendKeys(email);
     }
 
-    public void inputThingName(String thingName) {
-        waitElement(thingNameBorder).click();
-        waitElement(thingNameInput).sendKeys(thingName);
-    }
-
-    public void inputThingCost(String cost) {
-        waitElement(thingCostBorder).click();
-        waitElement(thingCostInput).sendKeys(cost);
-    }
-
-    public void selectThingType(Integer type) {
-        waitElement(thingTypeIcon).click();
-        thingTypeOptions = DriverManager.getDriver().findElements(By
-                .xpath("//*[@class='_selectBlock_1a54x_5']//li"));
-        thingTypeOptions.get(type).click();
-    }
-
-    public void uploadPhoto(File photo) {
-        waitElement(photoInput).sendKeys(photo.getAbsolutePath());
-        waitElement(photoSubmit).click();
-    }
-
-    public Integer amountOfThings() {
-        formContainers = DriverManager.getDriver().findElements(By
-                .xpath("//*[@class='_form__container_c17ux_39']"));
-        return formContainers.size();
-    }
-
-    public void addNewThing() {
-        waitElement(addThingButton).click();
-    }
-
-    public void selectConstructionType(Integer type) {
-        waitElement(constructionTypeBorder).click();
-        constructionTypes = DriverManager.getDriver().findElements(By
-                .xpath("//*[@class = '_selectBlock_1a54x_5']/ul/li"));
-        constructionTypes.get(type).click();
+    public void inputState(String state) {
+        waitElement(stateBorder).click();
+        waitElement(stateInput).sendKeys(state);
+        clickByOffset(0, 8);
     }
 
     public void inputCity(String city) {
         waitElement(cityBorder).click();
         waitElement(cityInput).sendKeys(city);
+        clickByOffset(0, 8);
     }
 
     public void inputStreet(String street) {
         waitElement(streetBorder).click();
         waitElement(streetInput).sendKeys(street);
+        clickByOffset(0, 8);
     }
 
-    public void inputHouse(String house) {
-        waitElement(houseBorder).click();
-        waitElement(houseInput).sendKeys(house);
+    public void inputBuilding(String building) {
+        waitElement(buildingBorder).click();
+        waitElement(buildingInput).sendKeys(building);
     }
 
     public void inputApartment(String apartment) {
@@ -358,15 +343,65 @@ public class InsuranceApplicationApartmentPage extends BasePage {
         waitElement(apartmentInput).sendKeys(apartment);
     }
 
-    public void inputFloor(String floor) {
-        waitElement(floorBorder).click();
-        waitElement(floorInput).sendKeys(Keys.BACK_SPACE);
-        waitElement(floorInput).sendKeys(floor);
-    }
-
     public void inputEntrance(String entrance) {
         waitElement(entranceBorder).click();
         waitElement(entranceInput).sendKeys(entrance);
+    }
+
+    public void inputYearOfConstruction(String year) {
+        waitElement(yearOfConstructionBorder).click();
+        waitElement(yearOfConstructionInput).sendKeys(year);
+    }
+
+    public void inputBuildingArea(String area) {
+        waitElement(buildingAreaBorder).click();
+        waitElement(buildingAreaInput).sendKeys(area);
+    }
+
+    public void inputActualCost(String cost) {
+        waitElement(entranceBorder).click();
+        waitElement(entranceInput).sendKeys(cost);
+    }
+
+    public void inputInsuranceAmount(String amount) {
+        waitElement(insuranceAmountBorder).click();
+        waitElement(insuranceAmountInput).sendKeys(amount);
+    }
+
+    public void inputRegionOfBuilding(String region) {
+        waitElement(regionOfBuildingBorder).click();
+        waitElement(regionOfBuildingInput).sendKeys(region);
+    }
+
+    public void inputCityOfBuilding(String city) {
+        waitElement(cityOfBuildingBorder).click();
+        waitElement(cityOfBuildingInput).sendKeys(city);
+    }
+
+    public void inputStreetOfBuilding(String street) {
+        waitElement(streetOfBuildingBorder).click();
+        waitElement(streetOfBuildingInput).sendKeys(street);
+    }
+
+    public void inputHouseOfBuilding(String house) {
+        waitElement(houseOfBuildingBorder).click();
+        waitElement(houseOfBuildingInput).sendKeys(house);
+    }
+
+    public void fileInputPassport(File file) {
+        waitElement(passportFileInput).sendKeys(file.getAbsolutePath());
+    }
+
+    public void fileInputMarketValue(File file) {
+        waitElement(marketValueCertFileInput).sendKeys(file.getAbsolutePath());
+    }
+
+    public void fileInputOwnerCert(File file) {
+        waitElement(ownerCertFileInput).sendKeys(file.getAbsolutePath());
+    }
+
+    public void fileInputLivingCert(File file) {
+        waitElement(livingCertFileInput).sendKeys(file.getAbsolutePath());
     }
 
     public void pressBackButton() {

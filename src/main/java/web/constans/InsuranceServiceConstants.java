@@ -25,8 +25,8 @@ public class InsuranceServiceConstants {
     public static final int TWENTY_NINTH_DAY_OF_MONTH = 28;
     public static final int THIRTIETH_DAY_OF_MONTH = 29;
     public static final int THIRTY_FIRST_DAY_OF_MONTH = 30;
-    public static final String INSURANCE_DURATION_MINIMUM = "1 месяц";
-    public static final String INSURANCE_DURATION_MAXIMUM = "12 месяцев";
+    public static final String INSURANCE_DURATION_MINIMUM = "1";
+    public static final String INSURANCE_DURATION_MAXIMUM = "12";
     public static final String INSURANCE_DURATION_INVALID = "6 years";
     public static final String VALID_NAME = "Николай";
     public static final String INVALID_NAME = "-Саш0к-";

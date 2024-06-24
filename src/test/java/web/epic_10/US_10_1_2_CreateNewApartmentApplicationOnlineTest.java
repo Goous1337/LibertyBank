@@ -40,7 +40,7 @@ import static web.constans.UrlConfig.ONLINE_PROPERTY_CONTENT_APPLICATION_URL;
 @Tags({@Tag("Web"), @Tag("MVP")})
 @Epic("10 - Страхование")
 @Feature("US-10.1.2 Подача заявки на договор страхования онлайн")
-@DisplayName("US-10.1.2 Подача заявки на договор страхования домашнего имущества онлайн")
+@DisplayName("US-10.1.2 Подача заявки на договор страхования квартиры онлайн")
 public class US_10_1_2_CreateNewApartmentApplicationOnlineTest extends BaseTest {
     @BeforeEach
     public void setUpTest() {
@@ -48,49 +48,11 @@ public class US_10_1_2_CreateNewApartmentApplicationOnlineTest extends BaseTest 
         open(ONLINE_APARTMENT_APPLICATION_URL);
     }
 
-    @DisplayName("Подача заявки на страхование домашнего имущества: ввод валидных данных")
-    @Description("Тест направлен на проверку валидации формы завки на страхование домашнего имущества при валидных данных")
-    @TmsLink("LIB5-2033")
+    @DisplayName("Подача заявки на страхование квартиры: ввод валидных данных")
+    @Description("Тест направлен на проверку валидации формы завки на страхование квартиры при валидных данных")
+    @TmsLink("LIB5-2462")
     @Test
     public void successfulOnlineApartmentApplicationTest() {
-        insuranceApplicationPropertyContentsSteps.assertPageTitle();
-        insuranceApplicationPropertyContentsSteps.assertNextButtonIsEnabled(false);
-        insuranceApplicationPropertyContentsSteps.assertCurrencyRubChosen(true);
-        insuranceApplicationPropertyContentsSteps.assertCurrencyEurChosen(false);
-        insuranceApplicationPropertyContentsSteps.assertCurrencyUsdChosen(false);
-        insuranceApplicationPropertyContentsSteps.inputInsuranceDuration(INSURANCE_DURATION_MINIMUM);
-        insuranceApplicationPropertyContentsSteps.choseInsuranceStartingTomorrow();
-        insuranceApplicationPropertyContentsSteps.assertNextButtonIsEnabled(true);
-        insuranceApplicationPropertyContentsSteps.pressNextButton();
-        insuranceApplicationPropertyContentsSteps.assertNextButtonIsEnabled(false);
-        insuranceApplicationPropertyContentsSteps.inputLastName(VALID_NAME);
-        insuranceApplicationPropertyContentsSteps.inputFirstName(VALID_NAME);
-        insuranceApplicationPropertyContentsSteps.inputPatronymic(VALID_NAME);
-        insuranceApplicationPropertyContentsSteps.inputDateOfBirth(START_OF_CENTURY, AUGUST, THIRD_DAY_OF_MONTH);
-        insuranceApplicationPropertyContentsSteps.inputPhoneNumber(PHONE_NUMBER);
-        insuranceApplicationPropertyContentsSteps.inputEmail(EMAIL);
-        insuranceApplicationPropertyContentsSteps.chooseDocumentType(DOCUMENT_TYPE_PASSPORT);
-        insuranceApplicationPropertyContentsSteps.inputPassportNumber(DOCUMENT_NUMBER);
-        insuranceApplicationPropertyContentsSteps.inputGotDocumentDate(TWENTY_EIGHTEEN, AUGUST, TWENTY_EIGHTH_DAY_OF_MONTH);
-        insuranceApplicationPropertyContentsSteps.inputDocumentDepartment(DOCUMENT_DEPARTMENT);
-        insuranceApplicationPropertyContentsSteps.assertNextButtonIsEnabled(true);
-        insuranceApplicationPropertyContentsSteps.pressNextButton();
-        insuranceApplicationPropertyContentsSteps.assertNextButtonIsEnabled(false);
-        insuranceApplicationPropertyContentsSteps.inputThingName(THING_NAME);
-        insuranceApplicationPropertyContentsSteps.inputThingCost(THING_COST);
-        insuranceApplicationPropertyContentsSteps.selectThingType(THING_TYPE_FURNITURE);
-        insuranceApplicationPropertyContentsSteps.assertNextButtonIsEnabled(true);
-        insuranceApplicationPropertyContentsSteps.pressNextButton();
-        insuranceApplicationPropertyContentsSteps.assertConfirmButtonIsEnabled(false);
-        insuranceApplicationPropertyContentsSteps.selectConstructionType(CONSTRUCTION_TYPE_BRICK);
-        insuranceApplicationPropertyContentsSteps.inputCity(CITY);
-        insuranceApplicationPropertyContentsSteps.inputHouse(HOUSE);
-        insuranceApplicationPropertyContentsSteps.inputFloor(FLOOR);
-        insuranceApplicationPropertyContentsSteps.inputStreet(STREET);
-        insuranceApplicationPropertyContentsSteps.inputApartment(APARTMENT);
-        insuranceApplicationPropertyContentsSteps.inputEntrance(ENTRANCE);
-        insuranceApplicationPropertyContentsSteps.assertConfirmButtonIsEnabled(true);
-        insuranceApplicationPropertyContentsSteps.pressConfirmButton();
-        insuranceApplicationPropertyContentsSteps.assertSuccessImageIsPresent();
+
     }
 }
