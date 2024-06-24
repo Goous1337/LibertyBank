@@ -9,7 +9,6 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
 
-import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Map;
 
