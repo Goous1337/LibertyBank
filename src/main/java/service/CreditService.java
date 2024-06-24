@@ -130,6 +130,7 @@ public class CreditService {
         return sendSimpleRequest(GET, BAD_REQUEST,
                 new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
     }
+
     public Response checkListCurrentCreditProductsInternalServerError() {
         return sendSimpleRequest(POST, CREDIT_INFO,
                 new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
