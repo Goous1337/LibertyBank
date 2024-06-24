@@ -9,6 +9,7 @@ public class DepositConstants {
     public static final String DEPOSIT_PERIOD = "24";
     public static final String DEPOSIT_DETAIL = "Failed to read request";
     public static final String DEPOSIT_TITLE = "Bad Request";
+    public static final String DEPOSIT_ERROR = "errorMessage";
     public static final String DEPOSIT_AMOUNT_MAX = "amount_max";
     public static final String DEPOSIT_AMOUNT_MIN = "amount_min";
     public static final String DEPOSIT_MAX_DURATION = "max_duration_months";

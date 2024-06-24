@@ -39,7 +39,7 @@ public class DM_9_2_MakeNewDepositTest extends BaseTest {
     private static final int DEPOSIT_PRODUCT_ID_RUB = DepositServiceDataBaseRequest.getDepositProductId(CURRENCY_CODE_RUB);
 
     static Stream<Integer> dataProviderDepositProductId() {
-        return Stream.of(DEPOSIT_PRODUCT_ID_RUB, DEPOSIT_PRODUCT_ID_USD);
+        return Stream.of(DEPOSIT_PRODUCT_ID_USD, DEPOSIT_PRODUCT_ID_RUB);
     }
 
     @DisplayName("Оформление нового депозита")
@@ -64,11 +64,11 @@ public class DM_9_2_MakeNewDepositTest extends BaseTest {
         String currencyCode = DepositServiceDataBaseRequest.getDepositCurrencyByProductId
                 (depositProductId, DEPOSIT_CURRENCY_CODE);
         Response responseMin = depositService.checkListMakeNewDeposit
-                (depositProductId, initialAmountMin, periodMonthsMin, currencyCode,false);
+                (depositProductId, initialAmountMin, periodMonthsMin, currencyCode,DEPOSIT_RENEWAL);
         Float createdInitialAmountMin = DepositServiceDataBaseRequest.getInitialAmountById(DEPOSIT_CUSTOMER_ID, depositProductId);
         DepositServiceDataBaseRequest.clearUserDepositProductsById(DEPOSIT_CUSTOMER_ID, depositProductId);
         Response responseMax = depositService.checkListMakeNewDeposit
-                (depositProductId, initialAmountMax, periodMonthMax, currencyCode,false);
+                (depositProductId, initialAmountMax, periodMonthMax, currencyCode,DEPOSIT_RENEWAL);
         Float createdInitialAmountMax = DepositServiceDataBaseRequest.getInitialAmountById(DEPOSIT_CUSTOMER_ID, depositProductId);
         assertAll(
                 () -> assertEquals(SC_OK, responseMin.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
@@ -97,9 +97,9 @@ public class DM_9_2_MakeNewDepositTest extends BaseTest {
         String currencyCode = DepositServiceDataBaseRequest.getDepositCurrencyByProductId
                 (depositProductId, DEPOSIT_CURRENCY_CODE);
         Response responseMin = depositService.checkMakeNewDepositInvalidRequest
-                (depositProductId, initialAmountMin, currencyCode, false);
+                (depositProductId, initialAmountMin, currencyCode, DEPOSIT_RENEWAL);
         Response responseMax = depositService.checkMakeNewDepositInvalidRequest
-                (depositProductId, initialAmountMax, currencyCode,false);
+                (depositProductId, initialAmountMax, currencyCode,DEPOSIT_RENEWAL);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, responseMin.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertEquals(SC_BAD_REQUEST, responseMax.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
@@ -124,7 +124,7 @@ public class DM_9_2_MakeNewDepositTest extends BaseTest {
         String currencyCode = DepositServiceDataBaseRequest.getDepositCurrencyByProductId
                 (depositProductId, DEPOSIT_CURRENCY_CODE);
         Response response = depositService.checkListMakeNewDepositInvalidToken
-                (depositProductId, initialAmountMax, periodMonthMax, currencyCode, false);
+                (depositProductId, initialAmountMax, periodMonthMax, currencyCode, DEPOSIT_RENEWAL);
         assertAll(
                 () -> assertEquals(SC_UNAUTHORIZED, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertNotNull(response.jsonPath().get("errorMessage"))
@@ -145,7 +145,7 @@ public class DM_9_2_MakeNewDepositTest extends BaseTest {
         String periodMonth = DepositServiceDataBaseRequest.getDepositDurationByProductId
                 (depositProductId, DEPOSIT_MAX_DURATION);
         Response response = depositService.checkListValidationDepositAmountIncorrectValues
-                (depositProductId, "десять 10", periodMonth, false);
+                (depositProductId, "десять 10", periodMonth, DEPOSIT_RENEWAL);
         List<String> depositCustomersId = DepositServiceDataBaseRequest.getAllCustomersId(depositProductId);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
@@ -158,12 +158,12 @@ public class DM_9_2_MakeNewDepositTest extends BaseTest {
     @DisplayName("Проверка валидации обязательного поля 'срок депозита'")
     @Description("""
             Данный тест-кейс направлен на проверку DM 9.2 по US 9.2 на оформление нового депозита
-            авторизованным пользователем при введении валидных и невалидных значений в обязательное поле
+            авторизованным пользователем при введении невалидных значений в обязательное поле
             'срок депозита'. Заявка с невалидными значениями не должна заноситься в БД.
             """)
     @TmsLink("LIB3-815")
     @ParameterizedTest
-    @MethodSource("dataProviderDepositProductId")
+    @MethodSource({"dataProviderDepositProductId"})
     public void checkValidationDepositPeriodIncorrectValues(int depositProductId) {
         DepositServiceDataBaseRequest.clearUserDepositProductsById(DEPOSIT_CUSTOMER_ID, depositProductId);
         Float initialAmount = DepositServiceDataBaseRequest.getDepositAmountByProductId
@@ -171,7 +171,7 @@ public class DM_9_2_MakeNewDepositTest extends BaseTest {
         String currencyCode = DepositServiceDataBaseRequest.getDepositCurrencyByProductId
                 (depositProductId, DEPOSIT_CURRENCY_CODE);
         Response response = depositService.checkListMakeNewDeposit
-                (depositProductId, initialAmount, "девяносто 90", currencyCode,false);
+                (depositProductId, initialAmount, "девяносто 90", currencyCode,DEPOSIT_RENEWAL);
         List<String> depositCustomersId = DepositServiceDataBaseRequest.getAllCustomersId(depositProductId);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),

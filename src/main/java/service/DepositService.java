@@ -82,31 +82,31 @@ public class DepositService {
     }
 
     public Response checkListCalculatingOfPotentialIncomeOnDepositWithoutId
-            (Float initialSum, Integer termTime, Boolean isCapitalisation) {
+            (Float initialSum, Integer termTime, Boolean isCapitalisation, String currencyCode) {
         return sendSimpleRequest(POST, DEPOSIT_CALCULATOR,
                 getRP(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE),
-                new DepositDataCalculator(initialSum, termTime, isCapitalisation));
+                new DepositDataCalculator(initialSum, termTime, isCapitalisation, currencyCode));
     }
 
     public Response checkListCalculatingOfPotentialIncomeOnDepositWithoutCapitalisation
-            (Integer depositProductId, Float initialSum, Integer termTime) {
+            (Integer depositProductId, Float initialSum, Integer termTime, String currencyCode) {
         return sendSimpleRequest(POST, DEPOSIT_CALCULATOR,
                 getRP(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE),
-                new DepositDataCalculator(depositProductId, initialSum, termTime));
+                new DepositDataCalculator(depositProductId, initialSum, termTime, currencyCode));
     }
 
     public Response checkListCalculatingOfPotentialIncomeOnDepositWithoutInitialSum
-            (Integer depositProductId, Integer termTime, Boolean isCapitalisation) {
+            (Integer depositProductId, Integer termTime, Boolean isCapitalisation, String currencyCode) {
         return sendSimpleRequest(POST, DEPOSIT_CALCULATOR,
                 getRP(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE),
-                new DepositDataCalculator(depositProductId, termTime, isCapitalisation));
+                new DepositDataCalculator(depositProductId, termTime, isCapitalisation, currencyCode));
     }
 
     public Response checkListCalculatingOfPotentialIncomeOnDepositWithoutTermTime
-            (Integer depositProductId, Float initialSum, Boolean isCapitalisation) {
+            (Integer depositProductId, Float initialSum, Boolean isCapitalisation, String currencyCode) {
         return sendSimpleRequest(POST, DEPOSIT_CALCULATOR,
                 getRP(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE),
-                new DepositDataCalculator(depositProductId, initialSum, isCapitalisation));
+                new DepositDataCalculator(depositProductId, initialSum, isCapitalisation, currencyCode));
     }
 
     public Response checkDetailedInformationAboutDeposit(Integer productId) {
