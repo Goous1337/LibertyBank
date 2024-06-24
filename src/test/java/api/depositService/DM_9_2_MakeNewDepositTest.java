@@ -64,11 +64,11 @@ public class DM_9_2_MakeNewDepositTest extends BaseTest {
         String currencyCode = DepositServiceDataBaseRequest.getDepositCurrencyByProductId
                 (depositProductId, DEPOSIT_CURRENCY_CODE);
         Response responseMin = depositService.checkListMakeNewDeposit
-                (depositProductId, initialAmountMin, periodMonthsMin, currencyCode,DEPOSIT_RENEWAL);
+                (depositProductId, initialAmountMin, periodMonthsMin, currencyCode, DEPOSIT_RENEWAL);
         Float createdInitialAmountMin = DepositServiceDataBaseRequest.getInitialAmountById(DEPOSIT_CUSTOMER_ID, depositProductId);
         DepositServiceDataBaseRequest.clearUserDepositProductsById(DEPOSIT_CUSTOMER_ID, depositProductId);
         Response responseMax = depositService.checkListMakeNewDeposit
-                (depositProductId, initialAmountMax, periodMonthMax, currencyCode,DEPOSIT_RENEWAL);
+                (depositProductId, initialAmountMax, periodMonthMax, currencyCode, DEPOSIT_RENEWAL);
         Float createdInitialAmountMax = DepositServiceDataBaseRequest.getInitialAmountById(DEPOSIT_CUSTOMER_ID, depositProductId);
         assertAll(
                 () -> assertEquals(SC_OK, responseMin.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
@@ -99,7 +99,7 @@ public class DM_9_2_MakeNewDepositTest extends BaseTest {
         Response responseMin = depositService.checkMakeNewDepositInvalidRequest
                 (depositProductId, initialAmountMin, currencyCode, DEPOSIT_RENEWAL);
         Response responseMax = depositService.checkMakeNewDepositInvalidRequest
-                (depositProductId, initialAmountMax, currencyCode,DEPOSIT_RENEWAL);
+                (depositProductId, initialAmountMax, currencyCode, DEPOSIT_RENEWAL);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, responseMin.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
                 () -> assertEquals(SC_BAD_REQUEST, responseMax.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
@@ -171,7 +171,7 @@ public class DM_9_2_MakeNewDepositTest extends BaseTest {
         String currencyCode = DepositServiceDataBaseRequest.getDepositCurrencyByProductId
                 (depositProductId, DEPOSIT_CURRENCY_CODE);
         Response response = depositService.checkListMakeNewDeposit
-                (depositProductId, initialAmount, "девяносто 90", currencyCode,DEPOSIT_RENEWAL);
+                (depositProductId, initialAmount, "девяносто 90", currencyCode, DEPOSIT_RENEWAL);
         List<String> depositCustomersId = DepositServiceDataBaseRequest.getAllCustomersId(depositProductId);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
