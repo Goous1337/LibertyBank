@@ -2,31 +2,19 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "properties": {
-    "type": {
-      "type": "string"
-    },
-    "title": {
-      "type": "string"
+    "timestamp": {
+      "type": "integer"
     },
     "status": {
       "type": "integer"
     },
-    "detail": {
+    "error": {
       "type": "string"
-    },
-    "instance": {
-      "type": "string"
-    },
-    "properties": {
-      "type": "null"
     }
   },
   "required": [
-    "type",
-    "title",
+    "timestamp",
     "status",
-    "detail",
-    "instance",
-    "properties"
+    "error"
   ]
 }
