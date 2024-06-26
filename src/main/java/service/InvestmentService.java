@@ -12,6 +12,8 @@ import static api.core.RequestParamType.HEADER;
 import static com.google.common.net.HttpHeaders.AUTHORIZATION;
 import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
 import static constant.ApiEndpoints.*;
+import static constant.ApiEndpoints.INVESTMENT_AUTH;
+import static constant.ApiEndpoints.QUESTIONNAIRE_FORM;
 import static constant.CustomerService_2_0_Constants.BEARER_TOKEN;
 import static constant.InvestmentConstants.PDF_CONTENT_TYPE;
 import static io.restassured.http.Method.GET;

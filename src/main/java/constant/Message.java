@@ -11,4 +11,9 @@ public class Message {
     public static final String NOT_FOUND_POLICY_ID_ERROR_MESSAGE = "Полис не найден";
     public static final String METHOD_NOT_ALLOWED = "Method Not Allowed";
     public static final String BAD_REQUEST_MESSAGE = "Bad Request";
+    public final static String FILTER_SHOULD_CONTAIN_JUST_NUMBERS = "Filter should contain just numbers";
+    public final static String BAD_REQUEST_ERROR = "BadRequestError";
+    public final static String NOT_FOUND_ERROR = "NotFoundError";
+    public final static String CANT_FIND_PRODUCT_GROUP = "Can't find product group with provided id";
+    public final static String FILTER_CANT_BE_EMPTY = "Filter can't be empty";
 }
