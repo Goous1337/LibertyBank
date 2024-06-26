@@ -4,7 +4,6 @@ import api.core.RequestParam;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
 import pojo.insuranceService.CreateVehicleApplicationInsuranceRequest;
-//import pojo.insuranceService.RevokeInsurancePolicyRequest;
 import pojo.insuranceService.OfflineInsuranceApplication;
 
 import java.util.List;
@@ -21,7 +20,6 @@ import static constant.ApiEndpoints.LIST_OF_INSURANCE;
 import static constant.ApiEndpoints.LIST_OF_INSURANCE_POLICES;
 import static constant.ApiEndpoints.POLICY_INSURANCE;
 import static constant.ApiEndpoints.POPULAR_INSURANCE_PRODUCTS;
-
 import static constant.InsuranceServiceConstants.ACCEPT_VALUE;
 import static constant.InsuranceServiceConstants.CONTENT_TYPE_VALUE;
 import static io.restassured.http.Method.GET;
