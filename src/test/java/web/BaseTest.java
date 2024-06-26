@@ -15,6 +15,8 @@ import web.steps.accountSteps.AccountInfoSteps;
 import web.steps.accountSteps.AccountSteps;
 import web.steps.accountSteps.CreateAccountSteps;
 import web.steps.accountSteps.RenameAccountSteps;
+import web.steps.cardSteps.*;
+import web.steps.depositsSteps.DepositsApplicationSteps;
 import web.steps.cardSteps.CardInfoSteps;
 import web.steps.cardSteps.CardProductInfoSteps;
 import web.steps.cardSteps.CardProductsSteps;
@@ -74,9 +76,16 @@ public class BaseTest {
     protected FilterCardsSteps filterCardsSteps;
     protected MyDepositsProductsSteps myDepositsProductsSteps;
     protected DepositsProductsFullInfoStep depositsProductsFullInfoStep;
+    protected DepositsApplicationSteps depositsApplicationSteps;
+
+    public BaseTest() {
+        refreshPages();
+    }
+
     protected ChangePinSteps changePinSteps;
     protected InsuranceApplicationPropertyContentsSteps insuranceApplicationPropertyContentsSteps;
     protected InsuranceApplicationApartmentSteps insuranceApplicationApartmentSteps;
+
 
     protected void open(String pageUrl) {
         DriverManager.getDriver()
@@ -136,9 +145,9 @@ public class BaseTest {
         filterCardsSteps = new FilterCardsSteps();
         depositsProductsSteps = new DepositsProductsSteps();
         myDepositsProductsSteps = new MyDepositsProductsSteps();
+        depositsApplicationSteps = new DepositsApplicationSteps();
         changePinSteps = new ChangePinSteps();
         insuranceApplicationPropertyContentsSteps = new InsuranceApplicationPropertyContentsSteps();
         insuranceApplicationApartmentSteps = new InsuranceApplicationApartmentSteps();
     }
-
 }

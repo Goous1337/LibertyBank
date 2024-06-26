@@ -23,7 +23,7 @@ import static service.InvestmentService.saveQuestionnaireRequest;
 @Tags({@Tag("API"), @Tag("2.0")})
 @DisplayName("INV-1.5 Сохранить данные пользователя из анкеты")
 public class INV_1_5_SaveUserDataForQuestionnaire extends BaseTest {
-    private static final String JSON_NOT_FOUND = "/jsons/investmentJsons/questionnarieFormInvalidCustomerId.json";
+    private static final String JSON_NOT_FOUND = "/jsons/investmentJsons/invalidCustomerId.json";
 
     {
         RestAssured.baseURI = INVESTMENT_SERVICE;
@@ -43,9 +43,9 @@ public class INV_1_5_SaveUserDataForQuestionnaire extends BaseTest {
     @DisplayName("Сохранить данные пользователя из анкеты, не найден customerId")
     @Description("Данный тест-кейс проверяет сохранение данных пользователя из анкеты, при запросе данных с невалидным customerId")
     public void saveUserDataForQuestionnaireInvalidCustomerId() {
-        QuestionnarieFormNotFound actualData = saveQuestionnaireRequest(ACCESS_TOKEN_INVALID_CUSTOMER_ID)
-                .as(QuestionnarieFormNotFound.class);
-        QuestionnarieFormNotFound expectedData = parseJson(QuestionnarieFormNotFound.class, JSON_NOT_FOUND);
+        ErrorResponse actualData = saveQuestionnaireRequest(ACCESS_TOKEN_INVALID_CUSTOMER_ID)
+                .as(ErrorResponse.class);
+        ErrorResponse expectedData = parseJson(ErrorResponse.class, JSON_NOT_FOUND);
         assertAll(
                 () -> assertEquals(actualData.getUri(), expectedData.getUri(), "Эндпоинт не соответствует ожидаемому"),
                 () -> assertEquals(actualData.getType(), expectedData.getType(), "Тип ответа не соответствует ожидаемому"),
