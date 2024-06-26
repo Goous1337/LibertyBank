@@ -33,7 +33,6 @@ import web.steps.creditSteps.СreditProductsSteps;
 import web.steps.depositsSteps.DepositsProductsFullInfoStep;
 import web.steps.depositsSteps.DepositsProductsSteps;
 import web.steps.depositsSteps.MyDepositsProductsSteps;
-import web.steps.insuranceSteps.InsuranceApplicationApartmentSteps;
 import web.steps.insuranceSteps.InsuranceApplicationPropertyContentsSteps;
 
 import static property.UserPropertiesReader.USER_PASSWORD;
@@ -84,7 +83,7 @@ public class BaseTest {
 
     protected ChangePinSteps changePinSteps;
     protected InsuranceApplicationPropertyContentsSteps insuranceApplicationPropertyContentsSteps;
-    protected InsuranceApplicationApartmentSteps insuranceApplicationApartmentSteps;
+
 
 
     protected void open(String pageUrl) {
@@ -148,6 +147,5 @@ public class BaseTest {
         depositsApplicationSteps = new DepositsApplicationSteps();
         changePinSteps = new ChangePinSteps();
         insuranceApplicationPropertyContentsSteps = new InsuranceApplicationPropertyContentsSteps();
-        insuranceApplicationApartmentSteps = new InsuranceApplicationApartmentSteps();
     }
 }
