@@ -3,12 +3,12 @@
   "type": "object",
   "properties": {
     "depositProductId": {
-      "type": "integer"
+      "type": "number"
     },
     "initialAmount": {
       "type": "number"
     },
-    "periodMonths": {
+    "depositTerm": {
       "type": "string"
     },
     "autoRenewal": {
@@ -18,7 +18,7 @@
   "required": [
     "depositProductId",
     "initialAmount",
-    "periodMonths",
+    "depositTerm",
     "autoRenewal"
   ]
 }

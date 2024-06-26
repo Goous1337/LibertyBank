@@ -26,19 +26,19 @@ public final class ApiEndpoints {
     public static final String BANK_EXCHANGE_RATES = "exchange_rates";
     public static final String INVALID_BANK_EXCHANGE_RATES = "exchange_ratesss";
     public static final String NOTIFICATION_SETTINGS = "/auth/user/settings/notifications";
-    public static final String DEPOSIT_PRODUCTS = "deposits/api/v1/deposit-product";
-    public static final String DEPOSIT_PRODUCTS_USER = "deposits/api/v1/deposit";
-    public static final String INVALID_DEPOSIT_PRODUCTS = "deposits/api/v0/deposit-product";
+    public static final String DEPOSIT_PRODUCTS = "deposit/api/v1/products";
+    public static final String DEPOSIT_PRODUCTS_USER = "deposit/api/v1/deposits";
+    public static final String INVALID_DEPOSIT_PRODUCTS = "deposit/api/v0/products";
     public static final String CREDIT_BACKGROUND = "credits/api/v1/credit-product/form";
-    public static final String DEPOSIT_PRODUCTS_OFFER = "deposits/api/v1/deposit-product/";
+    public static final String DEPOSIT_PRODUCTS_OFFER = "deposit/api/v1/products/";
 
     public static final String CREDIT_PRODUCTS = "credits/api/v1/credit-product";
     public static final String CREDIT_PRODUCTS_INFO = "credits/api/v1/credit-product/3";
     public static final String INVALID_CREDIT_PRODUCTS = "credits/api/v1/credit-product/.";
     public static final String INVALID_CREDIT_PRODUCT = "credits/api/v1/credit-product/7";
-    public static final String DEPOSIT_SETTINGS = "deposits/api/v1/deposit/new";
-    public static final String DEPOSIT_CALCULATOR = "deposits/api/v1/deposit-product/profit-calculating";
-    public static final String DEPOSIT_SEND_EMAIL = "deposits/api/v1/deposit/check";
+    public static final String DEPOSIT_SETTINGS = "deposit/api/v1/deposits";
+    public static final String DEPOSIT_CALCULATOR = "deposit/api/v1/products/profit-calculating";
+    public static final String DEPOSIT_SEND_EMAIL = "deposit/api/v1/deposits/check";
     public static final String CREDIT_BODY = "credits/api/v1/credit-order/new";
     public static final String CREDIT_ORDER_STATUS = "credits/api/v1/credit-order/status";
     public static final String INVALID_CREDIT_ORDER_TABLE = "credits/api/v1/credit-order/bank";
@@ -103,6 +103,8 @@ public final class ApiEndpoints {
     public static final String LIST_OF_INSURANCE = "insurance-service/api/v1/insurance/groups-products/";
     public static final String QUESTIONNAIRE_FORM = "investment/api/v1/customers/questionnaire-form";
     public static final String INVESTMENT_AUTH = "investment/api/v1/auth";
+    public static final String INVESTMENT_PERSONAL_DOCS = "investment/api/v1/documents/personal";
+    public static final String INVESTMENT_COMMON_DOCS = "investment/api/v1/documents/common";
     public static final String APPLICATION_INSURANCE_OFFLINE = "insurance-service/api/v1/insurance/call-slot";
 
     public static final String GROUPS_OF_POLICES = "api/product-groups?filters[group_id]=";

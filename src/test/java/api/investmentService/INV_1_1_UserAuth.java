@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import pojo.investmentService.AuthResponse;
-import pojo.investmentService.CustomerIdNotFoundResponse;
+import pojo.investmentService.ErrorResponse;
 
 import java.util.stream.Stream;
 
@@ -48,9 +48,9 @@ public class INV_1_1_UserAuth {
     @DisplayName("Авторизация пользователя, невалидный customerId")
     @Description("Данный тест-кейс проверяет авторизацию пользователя с невалидным CustomerId")
     public void postAuthDataInvalidCustomerId() {
-        CustomerIdNotFoundResponse actualData = postAuthRequest(ACCESS_TOKEN_INVALID_CUSTOMER_ID)
-                .as(CustomerIdNotFoundResponse.class);
-        CustomerIdNotFoundResponse expectedData = parseJson(CustomerIdNotFoundResponse.class, JSON_NOT_FOUND);
+        ErrorResponse actualData = postAuthRequest(ACCESS_TOKEN_INVALID_CUSTOMER_ID)
+                .as(ErrorResponse.class);
+        ErrorResponse expectedData = parseJson(ErrorResponse.class, JSON_NOT_FOUND);
         assertAll(
                 () -> assertEquals(actualData.getUri(), expectedData.getUri(), "Эндпоинт не соответствует ожидаемому"),
                 () -> assertEquals(actualData.getType(), expectedData.getType(), "Тип ответа не соответствует ожидаемому"),
@@ -63,9 +63,9 @@ public class INV_1_1_UserAuth {
     @DisplayName("Авторизация пользователя, ошибка авторизации")
     @Description("Данный тест-кейс проверяет авторизацию пользователя с невалидным Token")
     public void postAuthDataUnauthorized() {
-        CustomerIdNotFoundResponse actualData = postAuthRequest(EMPTY_ACCESS_TOKEN)
-                .as(CustomerIdNotFoundResponse.class);
-        CustomerIdNotFoundResponse expectedData = parseJson(CustomerIdNotFoundResponse.class, JSON_UNAUTHORIZED);
+        ErrorResponse actualData = postAuthRequest(EMPTY_ACCESS_TOKEN)
+                .as(ErrorResponse.class);
+        ErrorResponse expectedData = parseJson(ErrorResponse.class, JSON_UNAUTHORIZED);
         assertAll(
                 () -> assertEquals(actualData.getUri(), expectedData.getUri(), "Эндпоинт не соответствует ожидаемому"),
                 () -> assertEquals(actualData.getType(), expectedData.getType(), "Тип ответа не соответствует ожидаемому"),
@@ -79,9 +79,9 @@ public class INV_1_1_UserAuth {
     @DisplayName("Авторизация пользователя, невалидный JWT токен")
     @Description("Данный тест-кейс проверяет авторизацию пользователя с невалидным Token")
     public void postAuthDataInvalidToken(String token) {
-        CustomerIdNotFoundResponse actualData = postAuthRequest(token)
-                .as(CustomerIdNotFoundResponse.class);
-        CustomerIdNotFoundResponse expectedData = parseJson(CustomerIdNotFoundResponse.class, JSON_INVALID_TOKEN);
+        ErrorResponse actualData = postAuthRequest(token)
+                .as(ErrorResponse.class);
+        ErrorResponse expectedData = parseJson(ErrorResponse.class, JSON_INVALID_TOKEN);
         assertAll(
                 () -> assertEquals(actualData.getUri(), expectedData.getUri(), "Эндпоинт не соответствует ожидаемому"),
                 () -> assertEquals(actualData.getType(), expectedData.getType(), "Тип ответа не соответствует ожидаемому"),

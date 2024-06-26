@@ -5,8 +5,8 @@ import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.*;
+import pojo.investmentService.ErrorResponse;
 import pojo.investmentService.QuestionnaireFormResponse;
-import pojo.investmentService.CustomerIdNotFoundResponse;
 
 import static api.utils.JsonParser.parseJson;
 import static constant.InvestmentConstants.*;
@@ -20,7 +20,7 @@ import static service.InvestmentService.getQuestionnaireRequest;
 @DisplayName("INV-1.4 Запросить данные пользователя для анкеты")
 public class INV_1_4_RequestUserDataForQuestionnaire extends BaseTest {
     private static final String JSON = "/jsons/investmentJsons/questionnaireFormData.json";
-    private static final String JSON_NOT_FOUND = "/jsons/investmentJsons/questionnarieFormInvalidCustomerId.json";
+    private static final String JSON_NOT_FOUND = "/jsons/investmentJsons/invalidCustomerId.json";
 
     {
         RestAssured.baseURI = INVESTMENT_SERVICE;
@@ -43,9 +43,9 @@ public class INV_1_4_RequestUserDataForQuestionnaire extends BaseTest {
     @DisplayName("Запросить данные пользователя для анкеты, не найден customerId")
     @Description("Данный тест-кейс проверяет работу запроса данных пользователя для анкеты, при запросе данных с невалидным customerId")
     public void getUserDataForQuestionnaireInvalidCustomerId() {
-        CustomerIdNotFoundResponse actualData = getQuestionnaireRequest(ACCESS_TOKEN_INVALID_CUSTOMER_ID)
-                .as(CustomerIdNotFoundResponse.class);
-        CustomerIdNotFoundResponse expectedData = parseJson(CustomerIdNotFoundResponse.class, JSON_NOT_FOUND);
+        ErrorResponse actualData = getQuestionnaireRequest(ACCESS_TOKEN_INVALID_CUSTOMER_ID)
+                .as(ErrorResponse.class);
+        ErrorResponse expectedData = parseJson(ErrorResponse.class, JSON_NOT_FOUND);
         assertAll(
                 () -> assertEquals(actualData.getUri(), expectedData.getUri(), "Эндпоинт не соответствует ожидаемому"),
                 () -> assertEquals(actualData.getType(), expectedData.getType(), "Тип ответа не соответствует ожидаемому"),

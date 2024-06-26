@@ -25,9 +25,7 @@ public class US_13_7_CheckShortInformationAboutCreditCardTest extends BaseTest {
     @TmsLink("LIB3-2366")
     public void checkShortInfoAboutCreditCards() {
         cardProductsSteps.assertCardClassicIsDisplayed();
-//      cardProductsSteps.assertFixHomeCardIsDisplayed();
         cardProductsSteps.assertPremiumCardLabelIsDisplayed();
-        //cardProductsSteps.checkCreditCardBasket();
-    }
+           }
 
 }
