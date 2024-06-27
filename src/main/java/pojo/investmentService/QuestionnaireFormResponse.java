@@ -27,4 +27,9 @@ public class QuestionnaireFormResponse {
     public String inn;
     public String mobilePhone;
     public String email;
+    private Boolean residence;
+    private Boolean abroadTax;
+    private Boolean beneficialOwner;
+    private Boolean representative;
+    private Boolean beneficiary;
 }
