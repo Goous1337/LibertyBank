@@ -2,17 +2,14 @@ package web.pages.insurancePages;
 
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import web.drivers.DriverManager;
 import web.helpers.CalendarElement;
 import web.pages.BasePage;
 
 import java.io.File;
-import java.time.Duration;
 import java.util.List;
 
 import static web.helpers.Waiters.waitElement;
@@ -139,14 +136,6 @@ public class InsuranceApplicationApartmentPage extends BasePage {
     private WebElement houseOfBuildingBorder;
     @FindBy(xpath = "//*[@name = 'houseOfBuilding']")
     private WebElement houseOfBuildingInput;
-    @FindBy(xpath = "//input[@name = 'passport']")
-    private WebElement passportFileInput;
-    @FindBy(xpath = "//input[@name = 'marketValueCert']")
-    private WebElement marketValueCertFileInput;
-    @FindBy(xpath = "//input[@name = 'ownerCert']")
-    private WebElement ownerCertFileInput;
-    @FindBy(xpath = "//input[@name = 'livingCert']")
-    private WebElement livingCertFileInput;
     @FindBy(xpath = "//button[contains(@class,'_back-btn_c17ux_167')]")
     private WebElement backButton;
     @FindBy(xpath = "//*[@class='react-calendar _content__total_calendar_1r0ah_1 _calendar_1r0ah_121']")
@@ -315,17 +304,20 @@ public class InsuranceApplicationApartmentPage extends BasePage {
         waitElement(emailInput).sendKeys(email);
     }
 
-    public void scrollDown(){scrollToElement(nextButton);}
+    public void scrollDown() {
+        scrollToElement(nextButton);
+    }
+
     public void inputState(String state) {
-        inputIntoSuggestionField(stateBorder, state,4,40);
+        inputIntoSuggestionField(stateBorder, state, 4, 40);
     }
 
     public void inputCity(String city) {
-        inputIntoSuggestionField(cityBorder, city,4,40);
+        inputIntoSuggestionField(cityBorder, city, 4, 40);
     }
 
     public void inputStreet(String street) {
-        inputIntoSuggestionField(streetBorder, street,4,40);
+        inputIntoSuggestionField(streetBorder, street, 4, 40);
     }
 
     public void inputBuilding(String building) {
@@ -381,22 +373,6 @@ public class InsuranceApplicationApartmentPage extends BasePage {
     public void inputHouseOfBuilding(String house) {
         waitElement(houseOfBuildingBorder).click();
         waitElement(houseOfBuildingInput).sendKeys(house);
-    }
-
-    public void fileInputPassport(File file) {
-        waitElement(passportFileInput).sendKeys(file.getAbsolutePath());
-    }
-
-    public void fileInputMarketValue(File file) {
-        waitElement(marketValueCertFileInput).sendKeys(file.getAbsolutePath());
-    }
-
-    public void fileInputOwnerCert(File file) {
-        waitElement(ownerCertFileInput).sendKeys(file.getAbsolutePath());
-    }
-
-    public void fileInputLivingCert(File file) {
-        waitElement(livingCertFileInput).sendKeys(file.getAbsolutePath());
     }
 
     public void pressBackButton() {

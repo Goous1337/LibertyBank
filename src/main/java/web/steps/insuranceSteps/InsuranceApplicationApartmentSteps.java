@@ -228,26 +228,6 @@ public class InsuranceApplicationApartmentSteps {
         insuranceApplicationPage.inputHouseOfBuilding(house);
     }
 
-    @Step("Загрузить скан паспорта")
-    public void uploadPassport(File passport) {
-        insuranceApplicationPage.fileInputPassport(passport);
-    }
-
-    @Step("Загрузить скан документа о рыночной стоимости")
-    public void uploadMarketValue(File marketValue) {
-        insuranceApplicationPage.fileInputMarketValue(marketValue);
-    }
-
-    @Step("Загрузить скан подтверждающий право собственности")
-    public void uploadOwnerCertificate(File ownerCert) {
-        insuranceApplicationPage.fileInputOwnerCert(ownerCert);
-    }
-
-    @Step("Загрузить скан сертификата жилого помещения")
-    public void uploadLivingCertificate(File livingCert) {
-        insuranceApplicationPage.fileInputLivingCert(livingCert);
-    }
-
     @Step("Нажать кнопку 'Назад'")
     public void pressBackButton() {
         insuranceApplicationPage.pressBackButton();
@@ -279,5 +259,7 @@ public class InsuranceApplicationApartmentSteps {
     }
 
     @Step("Проскролить форму вниз")
-    public void scrollDown(){ insuranceApplicationPage.scrollDown();}
+    public void scrollDown() {
+        insuranceApplicationPage.scrollDown();
+    }
 }

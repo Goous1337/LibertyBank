@@ -16,15 +16,12 @@ import static web.constans.InsuranceServiceConstants.APARTMENT_AREA;
 import static web.constans.InsuranceServiceConstants.APARTMENT_COST;
 import static web.constans.InsuranceServiceConstants.APARTMENT_INSURANCE_AMOUNT;
 import static web.constans.InsuranceServiceConstants.APRIL;
-import static web.constans.InsuranceServiceConstants.AUGUST;
 import static web.constans.InsuranceServiceConstants.CITY;
-import static web.constans.InsuranceServiceConstants.CONSTRUCTION_TYPE_BRICK;
 import static web.constans.InsuranceServiceConstants.DOCUMENT_DEPARTMENT;
 import static web.constans.InsuranceServiceConstants.DOCUMENT_NUMBER;
 import static web.constans.InsuranceServiceConstants.DOCUMENT_TYPE_PASSPORT;
 import static web.constans.InsuranceServiceConstants.EMAIL;
 import static web.constans.InsuranceServiceConstants.ENTRANCE;
-import static web.constans.InsuranceServiceConstants.FLOOR;
 import static web.constans.InsuranceServiceConstants.FORTH_DAY_OF_MONTH;
 import static web.constans.InsuranceServiceConstants.HOUSE;
 import static web.constans.InsuranceServiceConstants.INSURANCE_DURATION_MINIMUM;
@@ -33,17 +30,11 @@ import static web.constans.InsuranceServiceConstants.PHONE_NUMBER;
 import static web.constans.InsuranceServiceConstants.START_OF_CENTURY;
 import static web.constans.InsuranceServiceConstants.STATE;
 import static web.constans.InsuranceServiceConstants.STREET;
-import static web.constans.InsuranceServiceConstants.THING_COST;
-import static web.constans.InsuranceServiceConstants.THING_NAME;
-import static web.constans.InsuranceServiceConstants.THING_TYPE_FURNITURE;
-import static web.constans.InsuranceServiceConstants.THIRD_DAY_OF_MONTH;
 import static web.constans.InsuranceServiceConstants.THIRTY_FIRST_DAY_OF_MONTH;
 import static web.constans.InsuranceServiceConstants.TWENTY_EIGHTEEN;
-import static web.constans.InsuranceServiceConstants.TWENTY_EIGHTH_DAY_OF_MONTH;
 import static web.constans.InsuranceServiceConstants.VALID_NAME;
 import static web.constans.InsuranceServiceConstants.YEAR_OF_CONSTRUCTION;
 import static web.constans.UrlConfig.ONLINE_APARTMENT_APPLICATION_URL;
-import static web.constans.UrlConfig.ONLINE_PROPERTY_CONTENT_APPLICATION_URL;
 
 
 @Tags({@Tag("Web"), @Tag("MVP")})
@@ -76,7 +67,7 @@ public class US_10_1_2_CreateNewApartmentApplicationOnlineTest extends BaseTest 
         insuranceApplicationApartmentSteps.inputEmail(EMAIL);
         insuranceApplicationApartmentSteps.chooseDocumentType(DOCUMENT_TYPE_PASSPORT);
         insuranceApplicationApartmentSteps.inputPassportNumber(DOCUMENT_NUMBER);
-        insuranceApplicationApartmentSteps.inputGotDocumentDate(TWENTY_EIGHTEEN,JULY,THIRTY_FIRST_DAY_OF_MONTH);
+        insuranceApplicationApartmentSteps.inputGotDocumentDate(TWENTY_EIGHTEEN, JULY, THIRTY_FIRST_DAY_OF_MONTH);
         insuranceApplicationApartmentSteps.inputDocumentDepartment(DOCUMENT_DEPARTMENT);
         insuranceApplicationApartmentSteps.scrollDown();
         insuranceApplicationApartmentSteps.inputState(STATE);
