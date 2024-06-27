@@ -26,7 +26,7 @@ public abstract class BasePage {
         return element.getText();
     }
 
-    public void inputIntoSuggestionField(WebElement element,String keys,Integer x, Integer y) {
+    public void inputIntoSuggestionField(WebElement element, String keys, Integer x, Integer y) {
         new Actions(DriverManager.getDriver())
                 .click(element)
                 .sendKeys(keys)
