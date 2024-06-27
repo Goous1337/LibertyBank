@@ -6,6 +6,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import web.drivers.DriverManager;
 
+import java.time.Duration;
+
 public abstract class BasePage {
 
     public BasePage() {
@@ -22,5 +24,15 @@ public abstract class BasePage {
             throw new IllegalArgumentException("Text WebElement cannot be find");
         }
         return element.getText();
+    }
+
+    public void inputIntoSuggestionField(WebElement element,String keys,Integer x, Integer y) {
+        new Actions(DriverManager.getDriver())
+                .click(element)
+                .sendKeys(keys)
+                .pause(Duration.ofSeconds(5))
+                .moveByOffset(x, y)
+                .click()
+                .perform();
     }
 }
