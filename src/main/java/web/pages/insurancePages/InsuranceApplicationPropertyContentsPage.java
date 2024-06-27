@@ -6,10 +6,8 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import web.drivers.DriverManager;
-import web.helpers.CalendarElement;
 import web.pages.BasePage;
 
-import java.io.File;
 import java.util.List;
 
 import static web.helpers.Waiters.waitElement;
@@ -35,51 +33,9 @@ public class InsuranceApplicationPropertyContentsPage extends BasePage {
     private WebElement startingDateCalendarIcon;
     @FindBy(xpath = "//h3[contains(@class, ' _containerTitle_1pww5_25')]")
     private WebElement pageTitle;
-    @FindBy(xpath = "//*[contains(@name, 'lastName')]/../..")
-    private WebElement lastNameBorder;
-    @FindBy(xpath = "//*[contains(@name, 'lastName')]")
-    private WebElement lastNameInput;
-    @FindBy(xpath = "//*[contains(@name, 'firstName')]/../..")
-    private WebElement firstNameBorder;
-    @FindBy(xpath = "//*[contains(@name, 'firstName')]")
-    private WebElement firstNameInput;
-    @FindBy(xpath = "//*[contains(@name, 'patronymic')]/../..")
-    private WebElement patronymicBorder;
-    @FindBy(xpath = "//*[contains(@name, 'patronymic')]")
-    private WebElement patronymicInput;
-    @FindBy(xpath = "//*[@class='_selectBlock_1a54x_5']//*[@data-testid = 'icon-arrow-down-grey']")
-    private WebElement documentTypeBorder;
-    private List<WebElement> documentTypes;
-    @FindBy(xpath = "//*[contains(@name, 'documentType')]/following::ul")
-    private WebElement documentTypeList;
-    @FindBy(xpath = "//*[contains(@name, 'passportNumber')]/../..")
-    private WebElement passportBorder;
-    @FindBy(xpath = "//*[contains(@name, 'passportNumber')]")
-    private WebElement passportInput;
-    @FindBy(xpath = "//*[contains(@name, 'refugeeCertificateNumber')]/../..")
-    private WebElement refugeBorder;
-    @FindBy(xpath = "//*[contains(@name, 'refugeeCertificateNumber')]")
-    private WebElement refugeInput;
-    @FindBy(xpath = "//*[contains(@name, 'residentCardNumber')]/../..")
-    private WebElement residenceBorder;
-    @FindBy(xpath = "//*[contains(@name, 'residentCardNumber')]")
-    private WebElement residenceInput;
-    @FindBy(xpath = "//label[contains(text(),'Дата выдачи')]/../following-sibling::*")
-    private WebElement documentGotCalendarIcon;
-    @FindBy(xpath = "//*[@name='dateOfBirth']/../following-sibling::*")
-    private WebElement dateOfBirthIcon;
-    @FindBy(xpath = "//*[contains(@name, 'issuedBy')]/../..")
-    private WebElement issuedByBorder;
-    @FindBy(xpath = "//*[contains(@name, 'issuedBy')]")
-    private WebElement issuedByInput;
-    @FindBy(xpath = "//*[contains(@name, 'phoneNumber')]/../..")
-    private WebElement phoneNumberBorder;
-    @FindBy(xpath = "//*[contains(@name, 'phoneNumber')]")
-    private WebElement phoneNumberInput;
-    @FindBy(xpath = "//*[contains(@name, 'email')]/../..")
-    private WebElement emailBorder;
-    @FindBy(xpath = "//*[contains(@name, 'email')]")
-    private WebElement emailInput;
+    private List<WebElement> cityTypes;
+    @FindBy(xpath = "//*[contains(@name, 'city')]/../../following::ul")
+    private WebElement cityTypeList;
     @FindBy(xpath = "//*[contains(@name, 'things.0.name')]/../..")
     private WebElement thingNameBorder;
     @FindBy(xpath = "//*[contains(@name, 'things.0.name')]")
@@ -88,20 +44,13 @@ public class InsuranceApplicationPropertyContentsPage extends BasePage {
     private WebElement thingCostBorder;
     @FindBy(xpath = "//*[contains(@name, 'things.0.cost')]")
     private WebElement thingCostInput;
-    private List<WebElement> formContainers;
     @FindBy(xpath = "//*[@class='_selectBlock_1a54x_5']//*[@data-testid = 'icon-arrow-down-grey']")
     private WebElement thingTypeIcon;
     private List<WebElement> thingTypeOptions;
-    @FindBy(css = "input[type=file]")
-    private WebElement photoInput;
-    @FindBy(id = "file-submit")
-    private WebElement photoSubmit;
-    @FindBy(xpath = "//button[contains(@class,'_add-item-btn_c17ux_180')]")
-    private WebElement addThingButton;
-    @FindBy(xpath = "//*[@class='_selectBlock_1a54x_5']//*[@data-testid = 'icon-arrow-down-grey']")
+    @FindBy(xpath = "//*[@class='_selectBlock_1a54x_5']//*[@data-testid = 'icon-arrow-down-grey'][1]")
     private WebElement constructionTypeBorder;
     private List<WebElement> constructionTypes;
-    @FindBy(xpath = "//*[contains(@name, 'city')]/../..")
+    @FindBy(xpath = "//*[contains(@name, 'city')]/../following::*")
     private WebElement cityBorder;
     @FindBy(xpath = "//*[contains(@name, 'city')]")
     private WebElement cityInput;
@@ -109,9 +58,9 @@ public class InsuranceApplicationPropertyContentsPage extends BasePage {
     private WebElement streetBorder;
     @FindBy(xpath = "//*[contains(@name, 'street')]")
     private WebElement streetInput;
-    @FindBy(xpath = "//*[contains(@name, 'house')]/../..")
+    @FindBy(xpath = "//*[contains(@name, 'building')]/../..")
     private WebElement houseBorder;
-    @FindBy(xpath = "//*[contains(@name, 'house')]")
+    @FindBy(xpath = "//*[contains(@name, 'building')]")
     private WebElement houseInput;
     @FindBy(xpath = "//*[contains(@name, 'apartment')]/../..")
     private WebElement apartmentBorder;
@@ -223,81 +172,6 @@ public class InsuranceApplicationPropertyContentsPage extends BasePage {
         return pageTitle.getText();
     }
 
-    public void inputLastName(String lastName) {
-        waitElement(lastNameBorder).click();
-        waitElement(lastNameInput).sendKeys(lastName);
-    }
-
-    public void inputFirstName(String firstName) {
-        waitElement(firstNameBorder).click();
-        waitElement(firstNameInput).sendKeys(firstName);
-    }
-
-    public void inputPatronymic(String patronymic) {
-        waitElement(patronymicBorder).click();
-        waitElement(patronymicInput).sendKeys(patronymic);
-    }
-
-    public void selectDocumentType(Integer type) {
-        waitElement(documentTypeBorder).click();
-        waitElement(documentTypeList).isDisplayed();
-        documentTypes = DriverManager.getDriver().findElements(By
-                .xpath("//*[contains(@name, 'documentType')]/following::ul/li"));
-        documentTypes.get(type).click();
-    }
-
-    public void inputPassportNumber(String number) {
-        waitElement(passportBorder).click();
-        waitElement(passportInput).sendKeys(number);
-    }
-
-    public void inputResidenceNumber(String number) {
-        waitElement(residenceBorder).click();
-        waitElement(residenceInput).sendKeys(number);
-    }
-
-    public void inputRefugeNumber(String number) {
-        waitElement(refugeBorder).click();
-        waitElement(refugeInput).sendKeys(number);
-    }
-
-    public void inputDocumentGotDate(Integer year, Integer month, Integer day) {
-        waitElement(documentGotCalendarIcon).click();
-        waitElement(calendarForm);
-        CalendarElement calendarElement = new CalendarElement();
-        calendarElement.switchMonth(navigationLabel, nextMonth, previousMonth, month);
-        calendarElement.switchYear(navigationLabel, nextYear, previousYear, year);
-        dayButton = DriverManager.getDriver().findElements(By
-                .xpath("//*[@class='react-calendar__month-view__days']/button"));
-        dayButton.get(day).click();
-    }
-
-    public void inputDateOfBirth(Integer year, Integer month, Integer day) {
-        waitElement(dateOfBirthIcon).click();
-        waitElement(calendarForm);
-        CalendarElement calendarElement = new CalendarElement();
-        calendarElement.switchMonth(navigationLabel, nextMonth, previousMonth, month);
-        calendarElement.switchYear(navigationLabel, nextYear, previousYear, year);
-        dayButton = DriverManager.getDriver().findElements(By
-                .xpath("//*[@class='react-calendar__month-view__days']/button"));
-        dayButton.get(day).click();
-    }
-
-    public void inputIssuedBy(String org) {
-        waitElement(issuedByBorder).click();
-        waitElement(issuedByInput).sendKeys(org);
-    }
-
-    public void inputPhone(String phoneNumber) {
-        waitElement(phoneNumberBorder).click();
-        waitElement(phoneNumberInput).sendKeys(phoneNumber);
-    }
-
-    public void inputEmail(String email) {
-        waitElement(emailBorder).click();
-        waitElement(emailInput).sendKeys(email);
-    }
-
     public void inputThingName(String thingName) {
         waitElement(thingNameBorder).click();
         waitElement(thingNameInput).sendKeys(thingName);
@@ -315,21 +189,6 @@ public class InsuranceApplicationPropertyContentsPage extends BasePage {
         thingTypeOptions.get(type).click();
     }
 
-    public void uploadPhoto(File photo) {
-        waitElement(photoInput).sendKeys(photo.getAbsolutePath());
-        waitElement(photoSubmit).click();
-    }
-
-    public Integer amountOfThings() {
-        formContainers = DriverManager.getDriver().findElements(By
-                .xpath("//*[@class='_form__container_c17ux_39']"));
-        return formContainers.size();
-    }
-
-    public void addNewThing() {
-        waitElement(addThingButton).click();
-    }
-
     public void selectConstructionType(Integer type) {
         waitElement(constructionTypeBorder).click();
         constructionTypes = DriverManager.getDriver().findElements(By
@@ -337,9 +196,12 @@ public class InsuranceApplicationPropertyContentsPage extends BasePage {
         constructionTypes.get(type).click();
     }
 
-    public void inputCity(String city) {
+    public void inputCity(Integer city) {
         waitElement(cityBorder).click();
-        waitElement(cityInput).sendKeys(city);
+        waitElement(cityTypeList).isDisplayed();
+        cityTypes = DriverManager.getDriver().findElements(By
+                .xpath("//*[contains(@name, 'city')]/../../following::ul/li"));
+        cityTypes.get(city).click();
     }
 
     public void inputStreet(String street) {

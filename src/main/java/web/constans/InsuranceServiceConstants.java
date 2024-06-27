@@ -42,6 +42,7 @@ public class InsuranceServiceConstants {
     public static final String APARTMENT_COST = "3000000";
     public static final Integer THING_TYPE_FURNITURE = 0;
     public static final Integer CONSTRUCTION_TYPE_BRICK = 2;
+    public static final Integer MOSCOW = 0;
     public static final String CITY = "Москва";
     public static final String STREET = "Красная";
     public static final String HOUSE = "7";

@@ -96,66 +96,6 @@ public class InsuranceApplicationPropertyContentsSteps {
                 "Заявка на страхование домашнего имущества", "Заголовок не совпадает с ожидаемым");
     }
 
-    @Step("Ввести валидное имя")
-    public void inputFirstName(String firstName) {
-        insuranceApplicationPage.inputFirstName(firstName);
-    }
-
-    @Step("Ввести валидную фамилию")
-    public void inputLastName(String lastName) {
-        insuranceApplicationPage.inputLastName(lastName);
-    }
-
-    @Step("Ввести валидное отчество")
-    public void inputPatronymic(String patronymic) {
-        insuranceApplicationPage.inputPatronymic(patronymic);
-    }
-
-    @Step("Выбрать тип документа - паспорт")
-    public void chooseDocumentType(Integer documentType) {
-        insuranceApplicationPage.selectDocumentType(documentType);
-    }
-
-    @Step("Ввести номер паспорта")
-    public void inputPassportNumber(String number) {
-        insuranceApplicationPage.inputPassportNumber(number);
-    }
-
-    @Step("Ввести номер вида на жительство")
-    public void inputResidenceNumber(String number) {
-        insuranceApplicationPage.inputResidenceNumber(number);
-    }
-
-    @Step("Ввести номер свидетельства беженца")
-    public void inputRefugeNumber(String number) {
-        insuranceApplicationPage.inputRefugeNumber(number);
-    }
-
-    @Step("Ввести дату получения документа")
-    public void inputGotDocumentDate(Integer year, Integer month, Integer day) {
-        insuranceApplicationPage.inputDocumentGotDate(year, month, day);
-    }
-
-    @Step("Ввести дату рождения")
-    public void inputDateOfBirth(Integer year, Integer month, Integer day) {
-        insuranceApplicationPage.inputDateOfBirth(year, month, day);
-    }
-
-    @Step("Ввести номер телефона")
-    public void inputPhoneNumber(String phoneNumber) {
-        insuranceApplicationPage.inputPhone(phoneNumber);
-    }
-
-    @Step("Ввести email")
-    public void inputEmail(String email) {
-        insuranceApplicationPage.inputEmail(email);
-    }
-
-    @Step("Ввести кем выдан документ")
-    public void inputDocumentDepartment(String documentDepartment) {
-        insuranceApplicationPage.inputIssuedBy(documentDepartment);
-    }
-
     @Step("Ввести название объекта страхования")
     public void inputThingName(String thingName) {
         insuranceApplicationPage.inputThingName(thingName);
@@ -177,7 +117,7 @@ public class InsuranceApplicationPropertyContentsSteps {
     }
 
     @Step("Ввести город")
-    public void inputCity(String city) {
+    public void inputCity(Integer city) {
         insuranceApplicationPage.inputCity(city);
     }
 
