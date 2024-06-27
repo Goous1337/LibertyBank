@@ -26,8 +26,11 @@ public abstract class BasePage {
         return element.getText();
     }
 
-    public void clickByOffset(Integer x, Integer y) {
-        new Actions(DriverManager.getDriver()).pause(Duration.ofSeconds(5))
+    public void inputIntoSuggestionField(WebElement element,String keys,Integer x, Integer y) {
+        new Actions(DriverManager.getDriver())
+                .click(element)
+                .sendKeys(keys)
+                .pause(Duration.ofSeconds(5))
                 .moveByOffset(x, y)
                 .click()
                 .perform();

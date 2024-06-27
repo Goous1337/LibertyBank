@@ -315,22 +315,17 @@ public class InsuranceApplicationApartmentPage extends BasePage {
         waitElement(emailInput).sendKeys(email);
     }
 
+    public void scrollDown(){scrollToElement(nextButton);}
     public void inputState(String state) {
-        waitElement(stateBorder).click();
-        waitElement(stateInput).sendKeys(state);
-        clickByOffset(0, 8);
+        inputIntoSuggestionField(stateBorder, state,4,40);
     }
 
     public void inputCity(String city) {
-        waitElement(cityBorder).click();
-        waitElement(cityInput).sendKeys(city);
-        clickByOffset(0, 8);
+        inputIntoSuggestionField(cityBorder, city,4,40);
     }
 
     public void inputStreet(String street) {
-        waitElement(streetBorder).click();
-        waitElement(streetInput).sendKeys(street);
-        clickByOffset(0, 8);
+        inputIntoSuggestionField(streetBorder, street,4,40);
     }
 
     public void inputBuilding(String building) {
@@ -359,8 +354,8 @@ public class InsuranceApplicationApartmentPage extends BasePage {
     }
 
     public void inputActualCost(String cost) {
-        waitElement(entranceBorder).click();
-        waitElement(entranceInput).sendKeys(cost);
+        waitElement(actualCostBorder).click();
+        waitElement(actualCostInput).sendKeys(cost);
     }
 
     public void inputInsuranceAmount(String amount) {

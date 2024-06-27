@@ -39,6 +39,7 @@ public class InsuranceServiceConstants {
     public static final String DOCUMENT_DEPARTMENT = "ОУФМС в Октябрьском рне г. Москва";
     public static final String THING_NAME = "Шкаф";
     public static final String THING_COST = "25000";
+    public static final String APARTMENT_COST = "3000000";
     public static final Integer THING_TYPE_FURNITURE = 0;
     public static final Integer CONSTRUCTION_TYPE_BRICK = 2;
     public static final String CITY = "Москва";
@@ -47,5 +48,9 @@ public class InsuranceServiceConstants {
     public static final String FLOOR = "9";
     public static final String APARTMENT = "6";
     public static final String ENTRANCE = "1";
+    public static final String STATE = "Москва";
+    public static final String YEAR_OF_CONSTRUCTION = "2007";
+    public static final String APARTMENT_AREA = "40";
+    public static final String APARTMENT_INSURANCE_AMOUNT = "50000";
 
 }

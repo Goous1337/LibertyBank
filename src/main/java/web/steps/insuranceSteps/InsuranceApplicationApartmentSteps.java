@@ -277,4 +277,7 @@ public class InsuranceApplicationApartmentSteps {
     public void pressConfirmButton() {
         insuranceApplicationPage.pressConfirmButton();
     }
+
+    @Step("Проскролить форму вниз")
+    public void scrollDown(){ insuranceApplicationPage.scrollDown();}
 }
