@@ -9,7 +9,6 @@ import web.drivers.DriverManager;
 import web.helpers.CalendarElement;
 import web.pages.BasePage;
 
-import java.io.File;
 import java.util.List;
 
 import static web.helpers.Waiters.waitElement;
