@@ -1,6 +1,6 @@
-package web.enums;
+package web.constans.deposit.depositEnums;
 
-public enum DepositsEnum {
+public enum DepositsNameEnum {
     LIBERTY_BASIC,
     LIBERTY_BASIC_EXPRESS,
     LIBERTY_STANDARD,

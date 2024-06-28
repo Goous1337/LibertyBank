@@ -2,6 +2,7 @@ package web.pages.creditPages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import web.helpers.Waiters;
 import web.pages.BasePage;
 
 public class MyCreditsPage extends BasePage {
@@ -32,6 +33,7 @@ public class MyCreditsPage extends BasePage {
     }
 
     public void clickShowMoreMyCreditButton() {
+        Waiters.waitElement(showMoreAboutCreditButton);
         showMoreAboutCreditButton.click();
     }
 }

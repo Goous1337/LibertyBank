@@ -3,6 +3,8 @@ package api.model.webAndApi.credit;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class CreditProduct {
@@ -10,7 +12,7 @@ public class CreditProduct {
     private Integer id;
     private String name;
     private Double interestRate;
-    private String currencyCode;
+    private List<String> currencyCodeList;
     private String details;
     private Integer minPeriodMonths;
     private Integer maxPeriodMonths;

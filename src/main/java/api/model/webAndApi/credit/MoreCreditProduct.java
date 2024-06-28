@@ -10,9 +10,9 @@ import java.util.List;
 public class MoreCreditProduct {
     private Integer id;
     private String name;
-    private Integer minSum;
-    private Integer maxSum;
-    private String currencyCode;
+    private Double minSum;
+    private Double maxSum;
+    private List<String> currencyCodeList;
     private Double interestRate;
     private Boolean needGuarantees;
     private Boolean deliveryInCash;
@@ -29,14 +29,14 @@ public class MoreCreditProduct {
     public MoreCreditProduct() {
     }
 
-    public MoreCreditProduct(String name, Double interestRate, Integer minSum, Integer maxSum) {
+    public MoreCreditProduct(String name, Double interestRate, Double minSum, Double maxSum) {
         this.name = name;
         this.interestRate = interestRate;
         this.minSum = minSum;
         this.maxSum = maxSum;
     }
 
-    public MoreCreditProduct(String name, Double interestRate, Integer minSum, Integer maxSum, List<MoreCreditDetails> creditDetails) {
+    public MoreCreditProduct(String name, Double interestRate, Double minSum, Double maxSum, List<MoreCreditDetails> creditDetails) {
         this.name = name;
         this.interestRate = interestRate;
         this.minSum = minSum;
@@ -44,7 +44,7 @@ public class MoreCreditProduct {
         this.creditDetails = creditDetails;
     }
 
-    public MoreCreditProduct(Double interestRate, Integer minSum, Integer maxSum, List<MoreCreditDetails> creditDetails) {
+    public MoreCreditProduct(Double interestRate, Double minSum, Double maxSum, List<MoreCreditDetails> creditDetails) {
         this.interestRate = interestRate;
         this.minSum = minSum;
         this.maxSum = maxSum;

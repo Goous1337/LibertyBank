@@ -2,10 +2,11 @@ package web.epic_3;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
+import io.qameta.allure.TmsLink;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -13,46 +14,76 @@ import web.BaseTest;
 
 import java.util.stream.Stream;
 
-@Tag("Web")
+@Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Positive")})
 @Epic("3 - Кредиты")
 @Feature("US-3.10 Получение отчета для пользователя после оформления заявки на кредит")
 @DisplayName("US-3.10 Получение отчета для пользователя после оформления заявки на кредит")
 public class US_3_10_CheckValueCreditReportTest extends BaseTest {
+
     private static Stream<Object> testDataLibertyMoney() {
-        return Stream.of(Arguments.of("3000", "12", "1234567890", "1000", "1000"));
+        return Stream.of(Arguments.of("500050", "47", "1234567890", "1000", "1000", "123456"));
     }
 
-    @Test
-    @Tags({@Tag("Web"), @Tag("Positive")})
-    @DisplayName("Проверка допустимых граничных значений полей при оформлении заявки на кредит Liberty Car")
-    @MethodSource("testDataLibertyMoney")
-    public void checkPositiveBorderLibertyCarInputTest(String sumCredit, String termCredit, String employerIdentificationNumber, String totalDebtLoad, String averageMonthlyIncome) {
-        creditInfoSteps.clickCreditButton();
-        creditInfoSteps.clickCreditProductButton();
-        creditProductsSteps.clickShowMoreLibertyCarButton();
-        creditProductDetailedInformationSteps.clickShowMoreButton();
-        creditApplicationSteps.enterValidateAmountCreditInput(sumCredit);
-        creditApplicationSteps.enterPeriodMonthsCreditInput(termCredit);
-        creditApplicationSteps.enterIdentificationNumberCreditInput(employerIdentificationNumber);
-        creditApplicationSteps.enterMonthlyExpenditureCreditInput(totalDebtLoad);
-        creditApplicationSteps.enterMonthlyIncomeCreditInput(averageMonthlyIncome);
-
+    @BeforeEach
+    public void setUpTest() {
+        authorization();
     }
 
     @ParameterizedTest
     @Tags({@Tag("Web"), @Tag("Positive")})
-    @DisplayName("Проверка допустимых граничных значений полей при оформлении заявки на кредит Моя квартира")
+    @DisplayName("Получение отчета после оформления кредита Liberty Car")
+    @TmsLink("LIB3-535")
     @MethodSource("testDataLibertyMoney")
-    public void checkPositiveBorderLibertyMyFlatInputTest(String sumCredit, String termCredit, String employerIdentificationNumber, String totalDebtLoad, String averageMonthlyIncome) {
+    public void checkPositiveBorderLibertyCarInputTest(String sumCredit, String termCredit, String employerIdentificationNumber, String totalDebtLoad, String averageMonthlyIncome, String autogenerCode) {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickCreditProductButton();
-        creditProductsSteps.clickShowMoreLibertyMyFlatButton();
+        creditProductsSteps.clickShowMoreLibertyCarButton();
+
+        creditApplicationReportSteps.getValuesCreditProduct();
         creditProductDetailedInformationSteps.clickShowMoreButton();
+
         creditApplicationSteps.enterValidateAmountCreditInput(sumCredit);
         creditApplicationSteps.enterPeriodMonthsCreditInput(termCredit);
         creditApplicationSteps.enterIdentificationNumberCreditInput(employerIdentificationNumber);
         creditApplicationSteps.enterMonthlyExpenditureCreditInput(totalDebtLoad);
         creditApplicationSteps.enterMonthlyIncomeCreditInput(averageMonthlyIncome);
+
+        creditApplicationReportSteps.getValuesCreditApplicationStep(sumCredit, termCredit);
+
+
+        creditApplicationSteps.sendApplicationForm();
+        creditMobileCodeVerificationSteps.enterGenerationCode(autogenerCode);
+        creditMobileCodeVerificationSteps.clickNextButton();
+        creditApplicationReportSteps.reportIsVisible();
+        creditApplicationReportSteps.getDefaultValuesStep();
+
+        creditApplicationReportSteps.assertCreditReports();
+
+
+    }
+
+    @ParameterizedTest
+    @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Positive")})
+    @DisplayName("Проверка допустимых граничных значений полей при оформлении заявки на кредит Моя квартира")
+    @TmsLink("LIB3-535")
+    @MethodSource("testDataLibertyMoney")
+    public void checkPositiveBorderLibertyMyFlatInputTest(String sumCredit, String termCredit, String employerIdentificationNumber, String totalDebtLoad, String averageMonthlyIncome, String autogenerCode) {
+        creditInfoSteps.clickCreditButton();
+        creditInfoSteps.clickCreditProductButton();
+        creditProductsSteps.clickShowMoreLibertyMyFlatButton();
+        creditProductDetailedInformationSteps.clickShowMoreButton();
+
+        creditApplicationSteps.enterValidateAmountCreditInput(sumCredit);
+        creditApplicationSteps.enterPeriodMonthsCreditInput(termCredit);
+        creditApplicationSteps.enterIdentificationNumberCreditInput(employerIdentificationNumber);
+        creditApplicationSteps.enterMonthlyExpenditureCreditInput(totalDebtLoad);
+        creditApplicationSteps.enterMonthlyIncomeCreditInput(averageMonthlyIncome);
+
+        creditApplicationSteps.sendApplicationForm();
+        creditMobileCodeVerificationSteps.enterGenerationCode(autogenerCode);
+        creditMobileCodeVerificationSteps.clickNextButton();
+
+        creditApplicationReportSteps.reportIsVisible();
 
     }
 }
