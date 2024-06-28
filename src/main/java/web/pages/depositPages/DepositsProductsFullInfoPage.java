@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import web.drivers.DriverManager;
-import web.enums.DepositsEnum;
+import web.constans.deposit.depositEnums.DepositsNameEnum;
 import web.pages.BasePage;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ import static web.helpers.Converter.*;
 public class DepositsProductsFullInfoPage extends BasePage {
     private DepositProductService depositProductService;
     private List<DepositProductDetails> depositProductDetailsList;
-    private EnumMap<DepositsEnum, DepositProductFullInfo> enumMap;
+    private EnumMap<DepositsNameEnum, DepositProductFullInfo> enumMap;
 
     public DepositsProductsFullInfoPage() {
         depositProductService = new DepositProductService();
@@ -105,8 +105,8 @@ public class DepositsProductsFullInfoPage extends BasePage {
         showMoreButtonLibertyStandard.click();
     }
 
-    public EnumMap<DepositsEnum, DepositProductFullInfo> putEnumAndXpathToMap(DepositsEnum str) {
-        enumMap = new EnumMap<>(DepositsEnum.class);
+    public EnumMap<DepositsNameEnum, DepositProductFullInfo> putEnumAndXpathToMap(DepositsNameEnum str) {
+        enumMap = new EnumMap<>(DepositsNameEnum.class);
         depositProductDetailsList = new ArrayList<DepositProductDetails>();
         descriptionsToString = new ArrayList<String>();
         headers = DriverManager.getDriver().findElements(By.xpath("//*[name() = 'svg']/following-sibling::span[1]"));
@@ -127,8 +127,8 @@ public class DepositsProductsFullInfoPage extends BasePage {
         return enumMap;
     }
 
-    public DepositProductFullInfo getObjectFromWeb(DepositsEnum str) {
-        for (Map.Entry<DepositsEnum, DepositProductFullInfo> pair : putEnumAndXpathToMap(str).entrySet()) {
+    public DepositProductFullInfo getObjectFromWeb(DepositsNameEnum str) {
+        for (Map.Entry<DepositsNameEnum, DepositProductFullInfo> pair : putEnumAndXpathToMap(str).entrySet()) {
             if (str.equals(pair.getKey())) {
                 nameFromWeb = pair.getValue().getName();
                 detailsFromWeb = pair.getValue().getProductDetails();
@@ -148,12 +148,12 @@ public class DepositsProductsFullInfoPage extends BasePage {
                 detailsInNationalCurrencyFromWeb);
     }
 
-    public DepositProductFullInfo getObjectFromBack(DepositsEnum str) {
+    public DepositProductFullInfo getObjectFromBack(DepositsNameEnum str) {
         depositProductService.getDepositProductFullInfo();
         List<DepositProductFullInfo> depositProductFullInfoList = depositProductService.getDepositProductFullInfoList();
         putEnumAndXpathToMap(str);
         for (DepositProductFullInfo depositProductFullInfo : depositProductFullInfoList) {
-            for (Map.Entry<DepositsEnum, DepositProductFullInfo> pair : putEnumAndXpathToMap(str).entrySet()) {
+            for (Map.Entry<DepositsNameEnum, DepositProductFullInfo> pair : putEnumAndXpathToMap(str).entrySet()) {
                 if (str.equals(pair.getKey()) && depositProductFullInfo.getName().equals(pair.getValue().getName())) {
                     nameFromBack = depositProductFullInfo.getName();
                 }

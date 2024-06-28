@@ -2,7 +2,7 @@ package api.model.webAndApi.credit;
 
 import lombok.Getter;
 import lombok.Setter;
-import web.constans.DepositsConstants;
+import web.constans.deposit.DepositsConstants;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;

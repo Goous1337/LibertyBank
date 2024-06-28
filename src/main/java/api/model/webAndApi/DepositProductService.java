@@ -6,7 +6,7 @@ import api.model.webAndApi.deposit.MyDepositProduct;
 import io.restassured.RestAssured;
 import lombok.Getter;
 import lombok.Setter;
-import web.constans.DepositsConstants;
+import web.constans.deposit.DepositsConstants;
 
 import java.util.ArrayList;
 import java.util.List;

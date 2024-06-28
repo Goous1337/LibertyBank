@@ -42,26 +42,32 @@ public class CreditApplicationPage extends BasePage {
     private WebElement checkBoxCreditObligationsCredit;
     @FindBy(xpath = "//button[text()='Отправить заявку']")
     private WebElement buttonSendCredit;
-    @FindBy(xpath = "//*[@data-testid = 'inputBase-1']")
-    private WebElement firstInputForCode;
-    @FindBy(xpath = "//*[@data-testid = 'inputBase-2']")
-    private WebElement secondInputForCode;
-    @FindBy(xpath = "//*[@data-testid = 'inputBase-3']")
-    private WebElement thirdInputForCode;
-    @FindBy(xpath = "//*[@data-testid = 'inputBase-4']")
-    private WebElement forthInputForCode;
-    @FindBy(xpath = "//*[@data-testid = 'inputBase-5']")
-    private WebElement fivesInputForCode;
-    @FindBy(xpath = "//*[@data-testid = 'inputBase-6']")
-    private WebElement sixInputForCode;
-    @FindBy(xpath = "//button[contains(text(), 'Далее')]")
-    private WebElement nextButton;
-    @FindBy(xpath = "//h2[contains(text(), 'Отчет о заявке')]")
-    private WebElement report;
+
+    @FindBy(xpath = "//input[@value='USD']")
+    private WebElement usdRadioButton;
+    @FindBy(xpath = "//input[@value='EUR']")
+    private WebElement eurRadioButton;
+    @FindBy(xpath = "//input[@data-testid='input-text-amount']/../../following-sibling::span[contains(text(), 'USD') or contains(text(), 'RUB') or contains(text(), 'EUR')]")
+    private WebElement textCurrencyCredit;
 
     public void clickSendCredit() {
         waitElement(buttonSendCredit);
         buttonSendCredit.click();
+    }
+
+    public void clickEurRadioButton() {
+        waitElement(eurRadioButton);
+        eurRadioButton.click();
+    }
+
+    public void clickUsdRadioButton() {
+        waitElement(usdRadioButton);
+        usdRadioButton.click();
+    }
+
+    public String getCurrencyCreditText() {
+        waitElement(textCurrencyCredit);
+        return textCurrencyCredit.getText();
     }
 
     public boolean checkButtonCondition(String bgColor, String textColor, boolean isEnabled) {
@@ -143,28 +149,6 @@ public class CreditApplicationPage extends BasePage {
     public void enterMonthlyIncomeCredit(String monthlyIncome) {
         waitElement(inputMonthlyIncomeCredit);
         inputMonthlyIncomeCredit.sendKeys(monthlyIncome);
-    }
-
-    public void sendCode(String code) {
-        waitElement(firstInputForCode);
-        char[] chars = code.toCharArray();
-        firstInputForCode.sendKeys(String.valueOf(chars[0]));
-        secondInputForCode.sendKeys(String.valueOf(chars[1]));
-        thirdInputForCode.sendKeys(String.valueOf(chars[2]));
-        forthInputForCode.sendKeys(String.valueOf(chars[3]));
-        fivesInputForCode.sendKeys(String.valueOf(chars[4]));
-        sixInputForCode.sendKeys(String.valueOf(chars[5]));
-
-    }
-
-    public void clickNextButton() {
-        waitElement(nextButton);
-        nextButton.click();
-    }
-
-    public void checkVisibleReport() {
-        waitElement(report);
-        report.isDisplayed();
     }
 
 }

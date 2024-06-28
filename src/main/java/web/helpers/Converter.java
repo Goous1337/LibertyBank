@@ -1,6 +1,6 @@
 package web.helpers;
 
-import web.constans.DepositsConstants;
+import web.constans.deposit.DepositsConstants;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

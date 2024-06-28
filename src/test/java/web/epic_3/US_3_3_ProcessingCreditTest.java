@@ -147,9 +147,9 @@ public class US_3_3_ProcessingCreditTest extends BaseTest {
                 "rgba(245, 245, 245, 1)"
         );
         creditApplicationSteps.sendApplicationForm();
-        creditApplicationSteps.enterGenerationCode(autogenerCode);
-        creditApplicationSteps.clickNextButton();
-        creditApplicationSteps.reportIsVisible();
+        creditMobileCodeVerificationSteps.enterGenerationCode(autogenerCode);
+        creditMobileCodeVerificationSteps.clickNextButton();
+        creditApplicationReportSteps.reportIsVisible();
     }
 
     @ParameterizedTest

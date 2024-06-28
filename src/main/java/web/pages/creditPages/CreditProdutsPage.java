@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import web.enums.CreditsEnum;
+import web.constans.credit.creditEnums.CreditNameEnum;
 import web.pages.BasePage;
 
 import java.util.EnumMap;
@@ -22,7 +22,7 @@ public class CreditProdutsPage extends BasePage {
     public CreditProductService creditProductService;
     private String nameOfCreditProductFromBackEnd;
     private Double interestRateFromBackEnd;
-    private EnumMap<CreditsEnum, CreditProduct> enumMapObject;
+    private EnumMap<CreditNameEnum, CreditProduct> enumMapObject;
     private String nameFromWeb;
     private Double getInterestRateFromWeb;
     private String detailsFromWeb;
@@ -120,17 +120,17 @@ public class CreditProdutsPage extends BasePage {
     @FindBy(xpath = "//li[2]/div[3]/button[contains(text(), 'Подать заявку')]")
     private WebElement buttonGetApplicationLibertyExpress;
 
-    public EnumMap<CreditsEnum, CreditProduct> putEnumAndXpathToMap() {
-        enumMapObject = new EnumMap<>(CreditsEnum.class);
+    public EnumMap<CreditNameEnum, CreditProduct> putEnumAndXpathToMap() {
+        enumMapObject = new EnumMap<>(CreditNameEnum.class);
         enumMapObject.put(
-                CreditsEnum.LIBERTY_CASH,
+                CreditNameEnum.LIBERTY_CASH,
                 new CreditProduct(
                         nameShortCreditCashProductPageText.getText(),
                         convertToDouble(interestRateLibertyCash.getText()),
                         detailsLibertyCash.getText(),
                         convertToDouble(amountMinLibertyCash.getText()),
                         convertToInteger(maxDurationMonthLibertyCash.getText())));
-        enumMapObject.put(CreditsEnum.LIBERTY_EXPRESS,
+        enumMapObject.put(CreditNameEnum.LIBERTY_EXPRESS,
                 new CreditProduct(
                         nameShortCreditExpressProductPageText.getText(),
                         convertToDouble(interestRateLibertyExpress.getText()),
@@ -138,7 +138,7 @@ public class CreditProdutsPage extends BasePage {
                         convertToDouble(amountMinLibertyExpress.getText()),
                         convertToInteger(maxDurationMonthLibertyExpress.getText())));
         enumMapObject.put(
-                CreditsEnum.LIBERTY_MONEY,
+                CreditNameEnum.LIBERTY_MONEY,
                 new CreditProduct(
                         nameShortCreditMoneyProductPageText.getText(),
                         convertToDouble(interestRateLibertyMoney.getText()),
@@ -146,7 +146,7 @@ public class CreditProdutsPage extends BasePage {
                         convertCurrencyValueToDouble(amountMinLibertyMoney.getText()),
                         convertToInteger(maxDurationMonthLibertyMoney.getText())));
         enumMapObject.put(
-                CreditsEnum.LIBERTY_EASY,
+                CreditNameEnum.LIBERTY_EASY,
                 new CreditProduct(
                         nameShortCreditEasyProductPageText.getText(),
                         convertToDouble(interestRateLibertyEasy.getText()),
@@ -154,7 +154,7 @@ public class CreditProdutsPage extends BasePage {
                         convertToDouble(amountMinLibertyEasy.getText()),
                         convertToInteger(maxDurationMonthLibertyEasy.getText())));
         enumMapObject.put(
-                CreditsEnum.LIBERTY_CAR,
+                CreditNameEnum.LIBERTY_CAR,
                 new CreditProduct(
                         nameShortCreditCarProductPageText.getText(),
                         convertToDouble(interestRateLibertyCar.getText()),
@@ -162,7 +162,7 @@ public class CreditProdutsPage extends BasePage {
                         convertToDouble(amountMinLibertyCar.getText()),
                         convertToInteger(maxDurationMonthLibertyCar.getText())));
         enumMapObject.put(
-                CreditsEnum.LIBERTY_MY_FLAT,
+                CreditNameEnum.LIBERTY_MY_FLAT,
                 new CreditProduct(
                         nameShortCreditMyFlatProductPageText.getText(),
                         convertToDouble(interestRateLibertyMyFlat.getText()),
@@ -173,25 +173,24 @@ public class CreditProdutsPage extends BasePage {
     }
 
     public CreditProduct getObjectFromWeb(Enum e) {
-        for (Map.Entry<CreditsEnum, CreditProduct> pair : putEnumAndXpathToMap().entrySet()) {
+        for (Map.Entry<CreditNameEnum, CreditProduct> pair : putEnumAndXpathToMap().entrySet()) {
             if (e.equals(pair.getKey())) {
                 nameFromWeb = pair.getValue().getName();
                 getInterestRateFromWeb = pair.getValue().getInterestRate();
                 detailsFromWeb = pair.getValue().getDetails();
                 minSumFromWeb = pair.getValue().getMinSum();
                 maxDurationMonthFromWeb = pair.getValue().getMaxPeriodMonths();
-
             }
         }
         return new CreditProduct(nameFromWeb, getInterestRateFromWeb, detailsFromWeb, minSumFromWeb, maxDurationMonthFromWeb);
     }
 
-    public CreditProduct getObjectFromBackEnd(Enum getNameFromXpath) {
+    public CreditProduct    getObjectFromBackEnd(Enum getNameFromXpath) {
         creditProductService.getProductsCredit();
         List<CreditProduct> list = creditProductService.getCreditProductsList();
         putEnumAndXpathToMap();
         for (CreditProduct creditProduct : list) {
-            for (Map.Entry<CreditsEnum, CreditProduct> pair : putEnumAndXpathToMap().entrySet()) {
+            for (Map.Entry<CreditNameEnum, CreditProduct> pair : putEnumAndXpathToMap().entrySet()) {
                 if (getNameFromXpath.equals(pair.getKey()) && creditProduct.getName().equals(pair.getValue().getName())) {
                     nameOfCreditProductFromBackEnd = creditProduct.getName();
                 }
