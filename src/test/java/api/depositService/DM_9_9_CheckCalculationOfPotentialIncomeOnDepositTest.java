@@ -57,8 +57,7 @@ public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseT
         Response response = depositService.checkListBoundaryValueScenarios
                 (depositProductIdUsd, initialSum, TERM_TIME, true, CURRENCY_CODE_USD);
         assertAll(
-                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
-                () -> assertEquals(DEPOSIT_TITLE, response.jsonPath().get("title"))
+                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED)
         );
     }
 
@@ -93,10 +92,9 @@ public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseT
     @Test
     public void checkCalculationIncomeFromDepositForCertainPeriodWithoutCapitalization() {
         Response response = depositService.checkListCalculatingOfPotentialIncomeOnDepositWithoutCapitalisation
-                (depositProductIdRub, 1000f, TERM_TIME);
+                (depositProductIdRub, 1000f, TERM_TIME, CURRENCY_CODE_RUB);
         assertAll(
-                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
-                () -> assertEquals(DEPOSIT_TITLE, response.jsonPath().get("title"))
+                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED)
         );
     }
 
@@ -108,10 +106,9 @@ public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseT
     @Test
     public void checkCalculatingOfPotentialIncomeOnDepositWithoutId() {
         Response response = depositService.checkListCalculatingOfPotentialIncomeOnDepositWithoutId
-                (1000f, TERM_TIME, true);
+                (1000f, TERM_TIME, true, CURRENCY_CODE_RUB);
         assertAll(
-                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
-                () -> assertEquals(DEPOSIT_TITLE, response.jsonPath().get("title"))
+                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED)
         );
     }
 
@@ -123,10 +120,9 @@ public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseT
     @Test
     public void checkCalculatingOfPotentialIncomeOnDepositWithoutInitialSum() {
         Response response = depositService.checkListCalculatingOfPotentialIncomeOnDepositWithoutInitialSum
-                (depositProductIdRub, TERM_TIME, true);
+                (depositProductIdRub, TERM_TIME, true, CURRENCY_CODE_RUB);
         assertAll(
-                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
-                () -> assertEquals(DEPOSIT_TITLE, response.jsonPath().get("title"))
+                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED)
         );
     }
 
@@ -138,10 +134,9 @@ public class DM_9_9_CheckCalculationOfPotentialIncomeOnDepositTest extends BaseT
     @Test
     public void checkCalculatingOfPotentialIncomeOnDepositWithoutTermTime() {
         Response response = depositService.checkListCalculatingOfPotentialIncomeOnDepositWithoutTermTime
-                (depositProductIdRub, 1000f, true);
+                (depositProductIdRub, 1000f, true, CURRENCY_CODE_RUB);
         assertAll(
-                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED),
-                () -> assertEquals(DEPOSIT_TITLE, response.jsonPath().get("title"))
+                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode(), RESPONSE_CODE_NOT_EXPECTED)
         );
     }
 

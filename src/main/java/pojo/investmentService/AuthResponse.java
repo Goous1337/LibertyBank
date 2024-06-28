@@ -10,7 +10,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthResponse {
-    public String customerId;
-    public int customerStatusId;
-    public boolean test;
+    public boolean userHaveActiveBrokerAccount;
 }
