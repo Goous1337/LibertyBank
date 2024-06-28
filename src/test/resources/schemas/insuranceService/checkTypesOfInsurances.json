@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "properties": {
-    "products": {
+    "data": {
       "type": "array",
       "items": [
         {
@@ -11,19 +11,163 @@
             "id": {
               "type": "integer"
             },
-            "name": {
-              "type": "string"
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "group_id": {
+                  "type": "integer"
+                },
+                "createdAt": {
+                  "type": "string"
+                },
+                "updatedAt": {
+                  "type": "string"
+                },
+                "publishedAt": {
+                  "type": "string"
+                },
+                "Products_name": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "attributes": {
+                              "type": "object",
+                              "properties": {
+                                "id_product": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "createdAt": {
+                                  "type": "string"
+                                },
+                                "updatedAt": {
+                                  "type": "string"
+                                },
+                                "publishedAt": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "id_product",
+                                "name",
+                                "createdAt",
+                                "updatedAt",
+                                "publishedAt"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "attributes"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "attributes": {
+                              "type": "object",
+                              "properties": {
+                                "id_product": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "createdAt": {
+                                  "type": "string"
+                                },
+                                "updatedAt": {
+                                  "type": "string"
+                                },
+                                "publishedAt": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "id_product",
+                                "name",
+                                "createdAt",
+                                "updatedAt",
+                                "publishedAt"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "attributes"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              },
+              "required": [
+                "group_id",
+                "createdAt",
+                "updatedAt",
+                "publishedAt",
+                "Products_name"
+              ]
             }
           },
           "required": [
             "id",
-            "name"
+            "attributes"
           ]
         }
+      ]
+    },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "pagination": {
+          "type": "object",
+          "properties": {
+            "page": {
+              "type": "integer"
+            },
+            "pageSize": {
+              "type": "integer"
+            },
+            "pageCount": {
+              "type": "integer"
+            },
+            "total": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "page",
+            "pageSize",
+            "pageCount",
+            "total"
+          ]
+        }
+      },
+      "required": [
+        "pagination"
       ]
     }
   },
   "required": [
-    "products"
+    "data",
+    "meta"
   ]
 }
