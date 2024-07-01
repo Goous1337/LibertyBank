@@ -42,6 +42,8 @@ public class MyDepositsProductsPage extends BasePage {
     private WebElement depositsButton;
     @FindBy(xpath = "//a[@href='/deposits/my-deposits']")
     private WebElement myDepositProductsBankButton;
+    @FindBy(xpath = "//li[1]//button")
+    private WebElement showMoreAboutMyDepositButton;
 
     public void clickDepositsButton() {
         depositsButton.click();
@@ -50,6 +52,10 @@ public class MyDepositsProductsPage extends BasePage {
     public void clickMyDepositsButton() {
         myDepositProductsBankButton.click();
     }
+    public void clickShowMoreAboutMyDepositButton(){
+        showMoreAboutMyDepositButton.click();
+    }
+
 
     public List<MyDepositProduct> mapInitialization() {
         myDepositProductList = new ArrayList<MyDepositProduct>();
