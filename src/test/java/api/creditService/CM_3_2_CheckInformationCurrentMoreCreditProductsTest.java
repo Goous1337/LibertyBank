@@ -45,7 +45,7 @@ public class CM_3_2_CheckInformationCurrentMoreCreditProductsTest extends BaseTe
         );
     }
 
-        @DisplayName("Получение краткой информации о кредитных продуктах банка с невалидным токеном")
+    @DisplayName("Получение краткой информации о кредитных продуктах банка с невалидным токеном")
     @Description("Данный тест-кейс направлен на получение STATUS CODE 401 при неуспешной валидации токена для " +
             "получения краткой информации о кредитных продуктах банка по CM 3.2 и US 3.2")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-267")

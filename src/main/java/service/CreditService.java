@@ -28,16 +28,19 @@ public class CreditService {
                 new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
         return sendSimpleRequest(Method.GET, CREDIT_BACKGROUND, param);
     }
+
     public static Response checkGetRequestDisplayingElectronicBackgroundForValid(Integer productId) {
         List<RequestParam> param = List.of(new RequestParam(PARAMETER, PARAMETER_PRODUCT_ID, productId.toString()),
                 new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
         return sendSimpleRequest(Method.GET, CREDIT_BACKGROUND + "=" + productId, param);
     }
+
     public static Response checkViewInfoCurrentCreditsUsers(String id) {
         List<RequestParam> param = List.of(
                 new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
         return sendSimpleRequest(GET, CREDIT_INFORMATION + id, param);
     }
+
     public static Response checkViewInfoCurrentCreditUsers(String id) {
         List<RequestParam> param = List.of(
                 new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
@@ -109,6 +112,7 @@ public class CreditService {
         return sendSimpleRequest(DELETE, CREDIT_WITHDRAWAL + idValue + "?status" + "=" + idStatus,
                 new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
     }
+
     public Response checkListWithdrawalOfLoanApprovedApplication(String idStatus) {
         return sendSimpleRequest(DELETE, CREDIT_WITHDRAWAL + "1" + "?status" + "=" + idStatus,
                 new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
@@ -123,10 +127,12 @@ public class CreditService {
         return sendSimpleRequest(DELETE, CREDIT_WITHDRAWAL + idValue + "?status" + "=" + idStatus,
                 new RequestParam(HEADER, AUTHORIZATION, EMPTY_TOKEN));
     }
+
     public Response checkListWithdrawalOfLoanApplicationErrorServer(Integer idValue, String idStatus) {
         return sendSimpleRequest(POST, CREDIT_WITHDRAWAL + idValue + "?status" + "=" + idStatus,
                 new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
     }
+
     public Response checkListObtainingInformationOnBanksLoanProduct() {
         return sendSimpleRequest(GET, CREDIT_PRODUCTS_INFO,
                 new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
@@ -155,6 +161,7 @@ public class CreditService {
         return sendSimpleRequest(POST, CREDIT_INFO,
                 new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
     }
+
     public Response checkListCurrentCreditProductsInternalErrorServer() {
         return sendSimpleRequest(POST, CREDIT_ORDER_STATUS,
                 new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
