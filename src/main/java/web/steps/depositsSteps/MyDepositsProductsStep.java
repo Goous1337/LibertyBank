@@ -4,11 +4,11 @@ import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
 import web.pages.depositPages.MyDepositsProductsPage;
 
-public class MyDepositsProductsSteps {
+public class MyDepositsProductsStep {
 
     private MyDepositsProductsPage myDepositsProductsPage;
 
-    public MyDepositsProductsSteps() {
+    public MyDepositsProductsStep() {
         myDepositsProductsPage = new MyDepositsProductsPage();
     }
 
