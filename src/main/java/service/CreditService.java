@@ -29,10 +29,22 @@ public class CreditService {
         return sendSimpleRequest(Method.GET, CREDIT_BACKGROUND, param);
     }
 
-    public static Response checkViewInfoCurrentCreditsUsers(String id) {
-        List<RequestParam> param = List.of(new RequestParam(PARAMETER, PARAMETER_ID, id),
+    public static Response checkGetRequestDisplayingElectronicBackgroundForValid(Integer productId) {
+        List<RequestParam> param = List.of(new RequestParam(PARAMETER, PARAMETER_PRODUCT_ID, productId.toString()),
                 new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
-        return sendSimpleRequest(GET, CREDIT_INFORMATION, param);
+        return sendSimpleRequest(Method.GET, CREDIT_BACKGROUND + "=" + productId, param);
+    }
+
+    public static Response checkViewInfoCurrentCreditsUsers(String id) {
+        List<RequestParam> param = List.of(
+                new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
+        return sendSimpleRequest(GET, CREDIT_INFORMATION + id, param);
+    }
+
+    public static Response checkViewInfoCurrentCreditUsers(String id) {
+        List<RequestParam> param = List.of(
+                new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
+        return sendSimpleRequest(POST, CREDIT_INFORMATION + id, param);
     }
 
     public static Response checkGetRequestDisplayingElectronicBackgroundInvalidToken() {
@@ -58,18 +70,26 @@ public class CreditService {
 
     public Response checkListApplyingLoan
             (Integer productId, Integer amount, Integer periodMonths,
-             Integer monthlyIncome, Integer monthlyExpenditure, String employerIdentificationNumber) {
+             Integer monthlyIncome, Integer monthlyExpenditure, String employerIdentificationNumber, String currencyCode) {
         return sendSimpleRequest
                 (POST, CREDIT_BODY, getRP(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE),
-                        new CreateApplyingLoanRequest(productId, amount, periodMonths, monthlyIncome, monthlyExpenditure, employerIdentificationNumber));
+                        new CreateApplyingLoanRequest(productId, amount, periodMonths, monthlyIncome, monthlyExpenditure, employerIdentificationNumber, currencyCode));
+    }
+
+    public Response checkListApplyingLoanServerError
+            (Integer productId, Integer amount, Integer periodMonths,
+             Integer monthlyIncome, Integer monthlyExpenditure, String employerIdentificationNumber, String currencyCode) {
+        return sendSimpleRequest
+                (PUT, CREDIT_BODY, getRP(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE),
+                        new CreateApplyingLoanRequest(productId, amount, periodMonths, monthlyIncome, monthlyExpenditure, employerIdentificationNumber, currencyCode));
     }
 
     public Response checkListApplyingLoanInvalidToken
             (Integer productId, Integer amount, Integer periodMonths,
-             Integer monthlyIncome, Integer monthlyExpenditure, String employerIdentificationNumber) {
+             Integer monthlyIncome, Integer monthlyExpenditure, String employerIdentificationNumber, String currencyCode) {
         return sendSimpleRequest
                 (POST, CREDIT_BODY, getRP(HEADER, AUTHORIZATION, INVALID_ACCESS_TOKEN), new CreateApplyingLoanRequest(productId, amount, periodMonths,
-                        monthlyIncome, monthlyExpenditure, employerIdentificationNumber));
+                        monthlyIncome, monthlyExpenditure, employerIdentificationNumber, currencyCode));
     }
 
     public Response checkListNumberOfLoanApplicationsSubmitted() {
@@ -87,13 +107,14 @@ public class CreditService {
                 new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
     }
 
-    public Response checkListCurrentCreditProductsIncorrectRequestConfiguration() {
-        return sendSimpleRequest(GET, INVALID_CREDIT_PRODUCTS,
+
+    public Response checkListWithdrawalOfLoanApplication(Integer idValue, String idStatus) {
+        return sendSimpleRequest(DELETE, CREDIT_WITHDRAWAL + idValue + "?status" + "=" + idStatus,
                 new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
     }
 
-    public Response checkListWithdrawalOfLoanApplication(Integer idValue) {
-        return sendSimpleRequest(DELETE, CREDIT_WITHDRAWAL + idValue,
+    public Response checkListWithdrawalOfLoanApprovedApplication(String idStatus) {
+        return sendSimpleRequest(DELETE, CREDIT_WITHDRAWAL + "1" + "?status" + "=" + idStatus,
                 new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
     }
 
@@ -102,9 +123,14 @@ public class CreditService {
                 new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
     }
 
-    public Response checkListWithdrawalOfLoanApplicationEmptyToken() {
-        return sendSimpleRequest(DELETE, NOT_EXIST_CREDIT_WITHDRAWAL,
+    public Response checkListWithdrawalOfLoanApplicationEmptyToken(Integer idValue, String idStatus) {
+        return sendSimpleRequest(DELETE, CREDIT_WITHDRAWAL + idValue + "?status" + "=" + idStatus,
                 new RequestParam(HEADER, AUTHORIZATION, EMPTY_TOKEN));
+    }
+
+    public Response checkListWithdrawalOfLoanApplicationErrorServer(Integer idValue, String idStatus) {
+        return sendSimpleRequest(POST, CREDIT_WITHDRAWAL + idValue + "?status" + "=" + idStatus,
+                new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
     }
 
     public Response checkListObtainingInformationOnBanksLoanProduct() {
@@ -133,6 +159,11 @@ public class CreditService {
 
     public Response checkListCurrentCreditProductsInternalServerError() {
         return sendSimpleRequest(POST, CREDIT_INFO,
+                new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
+    }
+
+    public Response checkListCurrentCreditProductsInternalErrorServer() {
+        return sendSimpleRequest(POST, CREDIT_ORDER_STATUS,
                 new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
     }
 }
