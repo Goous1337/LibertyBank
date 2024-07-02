@@ -12,8 +12,7 @@ import web.pages.BasePage;
 import java.util.ArrayList;
 import java.util.List;
 
-import static web.helpers.Converter.convertStringToInteger;
-import static web.helpers.Converter.convertToDouble;
+import static web.helpers.Converter.*;
 import static web.helpers.Waiters.waitElement;
 
 @Getter
@@ -22,13 +21,13 @@ public class CreditProductDetailedInformationPage extends BasePage {
     public CreditProductService creditProductService;
     private String nameOfCreditProductFromBackEnd;
     private Double interestRateFromBackEnd;
-    private Integer minSumFromBackEnd;
-    private Integer maxSumFromBackEnd;
+    private Double minSumFromBackEnd;
+    private Double maxSumFromBackEnd;
     private String headerDetailFromBackEnd;
     private String nameofCreditProductFromWeb;
     private Double interestRateCreditProductFromWeb;
-    private Integer minSumFromWeb;
-    private Integer maxSumFromWeb;
+    private Double minSumFromWeb;
+    private Double maxSumFromWeb;
     private String headerDetailFromWeb;
     private List<MoreCreditProduct> listXpath;
     private List<MoreCreditProduct> listFromBackEnd;
@@ -111,8 +110,8 @@ public class CreditProductDetailedInformationPage extends BasePage {
         listXpath.add(new MoreCreditProduct(
                 nameCreditProductPageText.getText(),
                 convertToDouble(interestRateCreditProductText.getText()),
-                convertStringToInteger(minSumCredit.getText()),
-                convertStringToInteger(maxSumCredit.getText()),
+                convertCurrencyValueToDouble(minSumCredit.getText()),
+                convertCurrencyValueToDouble(maxSumCredit.getText()),
                 addMoreCreditProductDetailsXpathToList()
         ));
         return listXpath;

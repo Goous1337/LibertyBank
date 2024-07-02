@@ -9,14 +9,14 @@ import java.util.List;
 import static api.core.ApiClient.sendSimpleRequest;
 import static api.core.RequestParam.getRP;
 import static api.core.RequestParamType.HEADER;
+import static api.core.RequestParamType.QUERY_PARAMETER;
 import static com.google.common.net.HttpHeaders.AUTHORIZATION;
 import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
 import static constant.ApiEndpoints.*;
 import static constant.CustomerService_2_0_Constants.BEARER_TOKEN;
+import static constant.InvestmentConstants.ARTICLE_TYPE;
 import static constant.InvestmentConstants.PDF_CONTENT_TYPE;
-import static io.restassured.http.Method.GET;
-import static io.restassured.http.Method.PATCH;
-import static io.restassured.http.Method.POST;
+import static io.restassured.http.Method.*;
 
 public class InvestmentService {
     public static Response getQuestionnaireRequest(String jwtToken) {
@@ -51,5 +51,11 @@ public class InvestmentService {
         List<RequestParam> params = List.of(getRP(HEADER, CONTENT_TYPE, PDF_CONTENT_TYPE),
                 getRP(HEADER, AUTHORIZATION, BEARER_TOKEN + jwtToken));
         return sendSimpleRequest(GET, INVESTMENT_PERSONAL_DOCS + "/" + docName, params, statusCode);
+    }
+
+    public static Response getListArticlesType(String jwtToken, String articlesType, int statusCode) {
+        List<RequestParam> params = List.of(getRP(HEADER, AUTHORIZATION, BEARER_TOKEN + jwtToken),
+                getRP(QUERY_PARAMETER, ARTICLE_TYPE, articlesType));
+        return sendSimpleRequest(GET, LIST_OF_ARTICLES, params, statusCode);
     }
 }

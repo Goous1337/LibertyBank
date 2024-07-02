@@ -1,4 +1,4 @@
-package web.constans;
+package web.constans.deposit;
 
 public class DepositsConstants {
     public static final String BASE_URL_DEPOSIT_API = "http://172.17.1.52:30074/";

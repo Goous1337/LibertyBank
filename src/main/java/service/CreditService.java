@@ -159,6 +159,4 @@ public class CreditService {
         return sendSimpleRequest(POST, CREDIT_ORDER_STATUS,
                 new RequestParam(HEADER, AUTHORIZATION, ACCESS_TOKEN_CUSTOMER_SERVICE));
     }
-
-
 }

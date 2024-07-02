@@ -4,7 +4,7 @@ import api.model.webAndApi.DepositProductService;
 import api.model.webAndApi.deposit.DepositProductShortInfo;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import web.enums.DepositsEnum;
+import web.constans.deposit.depositEnums.DepositsNameEnum;
 import web.helpers.Converter;
 import web.pages.BasePage;
 
@@ -17,7 +17,7 @@ import static web.helpers.Converter.convertToInteger;
 
 public class DepositsProductsBankPage extends BasePage {
     private DepositProductService depositProductService;
-    private EnumMap<DepositsEnum, DepositProductShortInfo> enumMap;
+    private EnumMap<DepositsNameEnum, DepositProductShortInfo> enumMap;
     private Converter converter;
     private String nameFromWeb;
     private String nameFromBackEnd;
@@ -137,10 +137,10 @@ public class DepositsProductsBankPage extends BasePage {
         depositProductsBankButton.click();
     }
 
-    public EnumMap<DepositsEnum, DepositProductShortInfo> putEnumAndXpathToMap() {
-        enumMap = new EnumMap<>(DepositsEnum.class);
+    public EnumMap<DepositsNameEnum, DepositProductShortInfo> putEnumAndXpathToMap() {
+        enumMap = new EnumMap<>(DepositsNameEnum.class);
         enumMap.put(
-                DepositsEnum.LIBERTY_CHILD,
+                DepositsNameEnum.LIBERTY_CHILD,
                 new DepositProductShortInfo(
                         nameOfLibertyChild.getText(),
                         convertToDouble(maxInterestRateOfLibertyChild.getText()),
@@ -156,7 +156,7 @@ public class DepositsProductsBankPage extends BasePage {
 //                        convertToInteger(maxDurationMonthOfLibertyCurrency.getText()),
 //                        convertToDouble(amountMinOfLibertyCurrency.getText())));
         enumMap.put(
-                DepositsEnum.LIBERTY_CALCULATED,
+                DepositsNameEnum.LIBERTY_CALCULATED,
                 new DepositProductShortInfo(
                         nameOfLibertyCalculated.getText(),
                         convertToDouble(maxInterestRateOfLibertyCalculated.getText()),
@@ -164,7 +164,7 @@ public class DepositsProductsBankPage extends BasePage {
                         convertToInteger(maxDurationMonthOfLibertyCalculated.getText()),
                         convertToDouble(amountMinOfLibertyCalculated.getText())));
         enumMap.put(
-                DepositsEnum.LIBERTY_PLUS_EXPRESS,
+                DepositsNameEnum.LIBERTY_PLUS_EXPRESS,
                 new DepositProductShortInfo(
                         nameOfLibertyExpress.getText(),
                         convertToDouble(maxInterestRateOfLibertyExpress.getText()),
@@ -172,7 +172,7 @@ public class DepositsProductsBankPage extends BasePage {
                         convertToInteger(maxDurationMonthOfLibertyExpress.getText()),
                         convertToDouble(amountMinOfLibertyExpress.getText())));
         enumMap.put(
-                DepositsEnum.LIBERTY_BASIC,
+                DepositsNameEnum.LIBERTY_BASIC,
                 new DepositProductShortInfo(
                         nameOfLibertyBasic.getText(),
                         convertToDouble(maxInterestRateOfLibertyBasic.getText()),
@@ -180,7 +180,7 @@ public class DepositsProductsBankPage extends BasePage {
                         convertToInteger(maxDurationMonthOfLibertyBasic.getText()),
                         convertToDouble(amountMinOfLibertyBasic.getText())));
         enumMap.put(
-                DepositsEnum.LIBERTY_PREMIUM,
+                DepositsNameEnum.LIBERTY_PREMIUM,
                 new DepositProductShortInfo(
                         nameOfLibertyPremium.getText(),
                         convertToDouble(maxInterestRateOfLibertyPremium.getText()),
@@ -188,7 +188,7 @@ public class DepositsProductsBankPage extends BasePage {
                         convertToInteger(maxDurationMonthOfLibertyPremium.getText()),
                         convertToDouble(amountMinOfLibertyPremium.getText())));
         enumMap.put(
-                DepositsEnum.LIBERTY_STANDARD_EXPRESS,
+                DepositsNameEnum.LIBERTY_STANDARD_EXPRESS,
                 new DepositProductShortInfo(
                         nameOfLibertyStandardExpress.getText(),
                         convertToDouble(maxInterestRateOfLibertyStandardExpress.getText()),
@@ -204,7 +204,7 @@ public class DepositsProductsBankPage extends BasePage {
 //                        convertToInteger(maxDurationMonthOfLibertyPlusCurrencyUSD.getText()),
 //                        convertToDouble(amountMinOfLibertyPlusCurrencyUSD.getText())));
         enumMap.put(
-                DepositsEnum.LIBERTY_STANDARD,
+                DepositsNameEnum.LIBERTY_STANDARD,
                 new DepositProductShortInfo(
                         nameOfLibertyStandard.getText(),
                         convertToDouble(maxInterestRateOfLibertyStandard.getText()),
@@ -216,7 +216,7 @@ public class DepositsProductsBankPage extends BasePage {
     }
 
     public DepositProductShortInfo getObjectFromWeb(Enum e) {
-        for (Map.Entry<DepositsEnum, DepositProductShortInfo> pair : putEnumAndXpathToMap().entrySet()) {
+        for (Map.Entry<DepositsNameEnum, DepositProductShortInfo> pair : putEnumAndXpathToMap().entrySet()) {
             if (e.equals(pair.getKey())) {
                 nameFromWeb = pair.getValue().getName();
                 maxInterestRateFromWeb = pair.getValue().getMaxInterestRate();
@@ -239,7 +239,7 @@ public class DepositsProductsBankPage extends BasePage {
         List<DepositProductShortInfo> depositProductShortInfoList = depositProductService.getDepositProductShortInfoList();
         putEnumAndXpathToMap();
         for (DepositProductShortInfo depositProductShortInfo : depositProductShortInfoList) {
-            for (Map.Entry<DepositsEnum, DepositProductShortInfo> pair : putEnumAndXpathToMap().entrySet()) {
+            for (Map.Entry<DepositsNameEnum, DepositProductShortInfo> pair : putEnumAndXpathToMap().entrySet()) {
                 if (e.equals(pair.getKey()) && depositProductShortInfo.getName().equals(pair.getValue().getName())) {
                     nameFromBackEnd = depositProductShortInfo.getName();
                 }
