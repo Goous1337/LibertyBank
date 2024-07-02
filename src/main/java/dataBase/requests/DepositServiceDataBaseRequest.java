@@ -17,7 +17,7 @@ public class DepositServiceDataBaseRequest {
     }
 
     public static Integer getDepositProductId(String currencyCode) {
-        String sql = "SELECT id FROM deposit_product WHERE currency_code = ?::varchar LIMIT 1";
+        String sql = "SELECT dp.id from deposit_product dp JOIN deposit_currency dc ON dc.deposit_product_id = dp.id WHERE dc.currency_code = ?::varchar LIMIT 1";
         LOG.info(String.format("Получен id продукта по currencyCode %s", currencyCode));
         return getDBConnection(DEPOSIT_SERVICE_DB).queryForObject(sql, Integer.class, currencyCode);
     }
@@ -31,6 +31,12 @@ public class DepositServiceDataBaseRequest {
     public static String getDepositDurationByProductId(int productId, String duration) {
         String sql = String.format("SELECT %s FROM deposit_product WHERE id = ?", duration);
         LOG.info(String.format("Получен %s срок вклада по id = %s", duration, productId));
+        return getDBConnection(DEPOSIT_SERVICE_DB).queryForObject(sql, String.class, productId);
+    }
+
+    public static String getDepositCurrencyByProductId(int productId, String currency) {
+        String sql = String.format("SELECT currency_code FROM deposit_currency WHERE id = ?", currency);
+        LOG.info(String.format("Получена валюта вклада по id = %s", currency, productId));
         return getDBConnection(DEPOSIT_SERVICE_DB).queryForObject(sql, String.class, productId);
     }
 

@@ -43,6 +43,24 @@ public final class ApiEndpoints {
     public static final String INVALID_CREDIT_ORDER_TABLE = "/credit/api/v1/orders/status/order";
     public static final String CREDIT_WITHDRAWAL = "credit/api/v1/orders/";
     public static final String NOT_EXIST_CREDIT_WITHDRAWAL = "credit/api/v1/order/1234";
+    public static final String DEPOSIT_PRODUCTS = "deposit/api/v1/products";
+    public static final String DEPOSIT_PRODUCTS_USER = "deposit/api/v1/deposits";
+    public static final String INVALID_DEPOSIT_PRODUCTS = "deposit/api/v0/products";
+    public static final String CREDIT_BACKGROUND = "credits/api/v1/credit-product/form";
+    public static final String DEPOSIT_PRODUCTS_OFFER = "deposits/api/v1/deposit-product/";
+    public static final String DEPOSIT_PRODUCTS_OFFER = "deposit/api/v1/products/";
+    public static final String CREDIT_PRODUCTS = "credits/api/v1/credit-product";
+    public static final String CREDIT_PRODUCTS_INFO = "credits/api/v1/credit-product/3";
+    public static final String INVALID_CREDIT_PRODUCTS = "credits/api/v1/credit-product/.";
+    public static final String INVALID_CREDIT_PRODUCT = "credits/api/v1/credit-product/7";
+    public static final String DEPOSIT_SETTINGS = "deposit/api/v1/deposits";
+    public static final String DEPOSIT_CALCULATOR = "deposit/api/v1/products/profit-calculating";
+    public static final String DEPOSIT_SEND_EMAIL = "deposit/api/v1/deposits/check";
+    public static final String CREDIT_BODY = "credits/api/v1/credit-order/new";
+    public static final String CREDIT_ORDER_STATUS = "credits/api/v1/credit-order/status";
+    public static final String INVALID_CREDIT_ORDER_TABLE = "credits/api/v1/credit-order/bank";
+    public static final String CREDIT_WITHDRAWAL = "credits/api/v1/credit-order/";
+    public static final String NOT_EXIST_CREDIT_WITHDRAWAL = "credits/api/v1/credit-order/10000";
     public static final String CREDIT_INFO = "credit/api/v1/credits";
     public static final String BAD_REQUEST = "credit/api/v1/credits/cred";
     public static final String CREDIT_INFORMATION = "credit/api/v1/credits/";
@@ -101,4 +119,8 @@ public final class ApiEndpoints {
     public static final String INVESTMENT_PERSONAL_DOCS = "investment/api/v1/documents/personal";
     public static final String INVESTMENT_COMMON_DOCS = "investment/api/v1/documents/common";
     public static final String APPLICATION_INSURANCE_OFFLINE = "insurance-service/api/v1/insurance/call-slot";
+    public static final String GROUPS_OF_POLICES = "api/product-groups?filters[group_id]=";
+    public static final String DEEP_OF_GROUPS = "&populate=deep,2";
+    public static final String LIST_OF_ARTICLES = "investment/api/v1/lk/articles";
+    public static final String LIST_OF_ARTICLES_ID = "/investment/api/v1/lk/articles/%s";
 }

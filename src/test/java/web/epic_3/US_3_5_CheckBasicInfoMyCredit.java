@@ -20,7 +20,7 @@ public class US_3_5_CheckBasicInfoMyCredit extends BaseTest {
     @Test
     @DisplayName("Просмотр отображения веб элементов в подробной информации о действующих кредитах пользователя")
     @TmsLink("LIB3-928")
-    public void checkBasicInformationAboutMyCredit() {
+    public void checkBasicInformationAboutMyCredit() throws InterruptedException {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickMyCreditButton();
         myCreditSteps.clickShowMoreAboutMyCreditButton();

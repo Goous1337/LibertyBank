@@ -41,7 +41,7 @@ public class DM_9_1_CheckInformationOnBankDepositProductsTestShortInfo extends B
                 () -> {
                     List<Map<String, Object>> items = response.jsonPath().getList("$");
                     for (Map<String, Object> item : items) {
-                        assertEquals(item.keySet().toString(), "[id, name, maxInterestRate, productDetails, maxDurationMonths, amountMin, currencyCode]",
+                        assertEquals(item.keySet().toString(), "[id, name, maxInterestRate, productDetails, minDurationMonths, maxDurationMonths, amountMin, amountMax, currencyCodes, depositPurpose]",
                                 "Поля в ответе не соответствует ожидаемому");
                     }
                 }

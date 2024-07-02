@@ -24,15 +24,11 @@ import web.steps.cardSteps.CardSteps;
 import web.steps.cardSteps.CloseCardSteps;
 import web.steps.cardSteps.ConfirmationSteps;
 import web.steps.cardSteps.FilterCardsSteps;
-import web.steps.creditSteps.CreditApplicationSteps;
-import web.steps.creditSteps.CreditInfoSteps;
-import web.steps.creditSteps.CreditProductsDetailedInformationSteps;
-import web.steps.creditSteps.MyCreditDetailedInformationSteps;
-import web.steps.creditSteps.MyCreditSteps;
-import web.steps.creditSteps.СreditProductsSteps;
+import web.steps.creditSteps.*;
 import web.steps.depositsSteps.DepositsProductsFullInfoStep;
 import web.steps.depositsSteps.DepositsProductsSteps;
 import web.steps.depositsSteps.MyDepositsProductsSteps;
+import web.steps.insuranceSteps.InsuranceApplicationPropertyContentsSteps;
 
 import static property.UserPropertiesReader.USER_PASSWORD;
 import static property.UserPropertiesReader.USER_PHONE;
@@ -49,6 +45,8 @@ public class BaseTest {
     protected CreditProductsDetailedInformationSteps creditProductDetailedInformationSteps;
     protected СreditProductsSteps creditProductsSteps;
     protected CreditApplicationSteps creditApplicationSteps;
+    protected CreditApplicationReportSteps creditApplicationReportSteps;
+    protected CreditMobileCodeVerificationSteps creditMobileCodeVerificationSteps;
     protected MyCreditSteps myCreditSteps;
     protected MyCreditDetailedInformationSteps myCreditDetailedInformationSteps;
     protected CreateAccountSteps createAccountSteps;
@@ -81,6 +79,8 @@ public class BaseTest {
     }
 
     protected ChangePinSteps changePinSteps;
+    protected InsuranceApplicationPropertyContentsSteps insuranceApplicationPropertyContentsSteps;
+
 
 
     protected void open(String pageUrl) {
@@ -130,6 +130,8 @@ public class BaseTest {
         moreCreditProduct = new MoreCreditProduct();
         moreCreditDetails = new MoreCreditDetails();
         creditProductService = new CreditProductService();
+        creditApplicationReportSteps = new CreditApplicationReportSteps();
+        creditMobileCodeVerificationSteps = new CreditMobileCodeVerificationSteps();
         updateEmailSteps = new UpdateEmailSteps();
         personalDataSteps = new PersonalDataSteps();
         cardProductsSteps = new CardProductsSteps();
@@ -143,5 +145,6 @@ public class BaseTest {
         myDepositsProductsSteps = new MyDepositsProductsSteps();
         depositsApplicationSteps = new DepositsApplicationSteps();
         changePinSteps = new ChangePinSteps();
+        insuranceApplicationPropertyContentsSteps = new InsuranceApplicationPropertyContentsSteps();
     }
 }

@@ -61,6 +61,10 @@ public class InsuranceServiceConstants {
     public static final String FLAT_INSURANCE_SERVICE_PRODUCT_NAME = "Страхование квартиры";
 
     public static final String HOME_INSURANCE_SERVICE_PRODUCT_NAME = "Страхование дома";
+    public static final Integer SOLD_CAR_REVOCATION_REASON_ID = 0;
+    public static final Integer LOST_CAR_IN_ACCIDENT_REVOCATION_REASON_ID = 1;
+    public static final Integer RECRUITED_IN_MILITARY_REVOCATION_REASON_ID = 2;
+    public static final Integer DEATH_REVOCATION_REASON_ID = 4;
 
     public static final String FAKE_POLICY_ID_ERROR_MESSAGE = "Полис не найден";
     public static final String BAD_REQUEST = "Bad Request";
