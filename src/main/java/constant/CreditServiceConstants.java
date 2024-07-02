@@ -1,6 +1,5 @@
 package constant;
 
-import java.lang.reflect.Array;
 import java.util.List;
 
 public class CreditServiceConstants {
