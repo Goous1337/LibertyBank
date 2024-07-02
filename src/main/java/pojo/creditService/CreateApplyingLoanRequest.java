@@ -14,4 +14,5 @@ public class CreateApplyingLoanRequest {
     private Integer monthlyIncome;
     private Integer monthlyExpenditure;
     private String employerIdentificationNumber;
+    private String currencyCode;
 }

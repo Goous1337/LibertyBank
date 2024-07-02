@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "properties": {
     "id": {
@@ -9,19 +9,24 @@
       "type": "string"
     },
     "minSum": {
-      "type": "number"
+      "type": "integer"
     },
     "maxSum": {
-      "type": "number"
+      "type": "integer"
     },
-    "currencyCode": {
-      "type": "string"
+    "currencyCodeList": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string"
+        }
+      ]
     },
     "minPeriodMonths": {
-      "type": "number"
+      "type": "integer"
     },
     "maxPeriodMonths": {
-      "type": "number"
+      "type": "integer"
     }
   },
   "required": [
@@ -29,7 +34,7 @@
     "name",
     "minSum",
     "maxSum",
-    "currencyCode",
+    "currencyCodeList",
     "minPeriodMonths",
     "maxPeriodMonths"
   ]
