@@ -74,6 +74,8 @@ public class BaseTest {
     protected DepositsProductsFullInfoStep depositsProductsFullInfoStep;
     protected ChangePinSteps changePinSteps;
 
+    protected ApplicationInfoSteps applicationInfoSteps;
+
     protected void open(String pageUrl) {
         DriverManager.getDriver()
                 .get(BASE_URL + pageUrl);
@@ -133,6 +135,7 @@ public class BaseTest {
         depositsProductsSteps = new DepositsProductsSteps();
         myDepositsProductsSteps = new MyDepositsProductsSteps();
         changePinSteps = new ChangePinSteps();
+        applicationInfoSteps = new ApplicationInfoSteps();
     }
 
 }
