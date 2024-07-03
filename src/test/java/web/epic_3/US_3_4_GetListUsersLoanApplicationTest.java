@@ -5,7 +5,7 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.*;
 import web.BaseTest;
-import web.pages.creditPages.CreditInfoPage;
+
 
 @Tags({@Tag("WEB"), @Tag("MVP")})
 @Epic("3 - Кредиты")
@@ -22,7 +22,7 @@ public class US_3_4_GetListUsersLoanApplicationTest extends BaseTest {
     @Test
     @DisplayName("Отображение информации о кредитной заявке пользователя")
     @TmsLink("LIB3-2668")
-    public void checkBasicInfoLoanApplications(){
+    public void checkBasicInfoLoanApplications() {
         creditInfoSteps.clickSubmittedCreditRequestButton();
         applicationInfoSteps.assertAmountOfCreditApplications();
         applicationInfoSteps.assertNameCreditProduct();
@@ -37,7 +37,7 @@ public class US_3_4_GetListUsersLoanApplicationTest extends BaseTest {
     @Disabled
     @DisplayName("Отображение сообщения об отсутствии заявок на кредит")
     @TmsLink("LIB3-2668")
-    public void checkMessageIaDisplayed(){
+    public void checkMessageIaDisplayed() {
         creditInfoSteps.clickSubmittedCreditRequestButton();
         applicationInfoSteps.assertMessageNoApplications();
     }
