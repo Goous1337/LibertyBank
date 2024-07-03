@@ -8,7 +8,7 @@ public enum CreditNameEnum {
     LIBERTY_MONEY("Liberty Money"),
     LIBERTY_EASY("Liberty Easy"),
     LIBERTY_CAR("Liberty Car"),
-    LIBERTY_MY_FLAT("Моя квартира");
+    LIBERTY_MY_FLAT("Моя Квартира");
 
     @Getter
     private final String valueCreditName;
