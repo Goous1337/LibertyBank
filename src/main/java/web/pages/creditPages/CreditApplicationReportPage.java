@@ -182,7 +182,6 @@ public class CreditApplicationReportPage extends BasePage {
         return valuesExpectedCreditReport;
     }
 
-
     public Map<String, String> putToMapCreditMethodOfObtaining() {
         searchMethodOfObtainingCreditToMap(valuesExpectedCreditReport);
         return valuesExpectedCreditReport;
@@ -209,7 +208,7 @@ public class CreditApplicationReportPage extends BasePage {
     }
 
     public String convertXpatxMapToString() {
-        return convertWithIteration(valuesXpathCreditReport).replace(":", "");
+        return convertWithIteration(valuesXpathCreditReport).replace("", "");
     }
 
     private String convertWithIteration(Map<String, String> map) {
