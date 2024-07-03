@@ -1,4 +1,4 @@
-package web.constans.credit;
+package web.constans.credit.creditEnums;
 
 import lombok.Getter;
 

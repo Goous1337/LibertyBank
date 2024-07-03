@@ -62,10 +62,40 @@ public class CM_3_8_CheckNumberOfLoanApplicationsSubmittedTest extends BaseTest 
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-537")
     @Test
     public void checkNumberOfLoanApplicationsSubmittedNoRecordsInTheTable() {
-        String jsonSchemaPath = "schemas/errorMessage.json";
+        String jsonSchemaPath = "schemas/creditService/CM_3_1/notSuccessfulGetUserCreditInfo.json";
         Response response = creditService.checkListNumberOfLoanApplicationsSubmittedNoRecordsInTheTable();
         assertAll(
                 () -> assertEquals(SC_NOT_FOUND, response.getStatusCode()),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+        );
+    }
+
+    @DisplayName("Просмотр количества поданных кредитных заявок")
+    @Description("Данный тест-кейс направлен на проверку СМ 3.8 по US 3.8 на получение количества заявок," +
+            " при неправильной конфигурации запроса")
+    @Tag("Smoke")
+    @TmsLink("https://jira.astondevs.ru/browse/LIB3-534")
+    @Test
+    public void checkNumberOfLoanApplicationsSubmittedInvalid() {
+        String jsonSchemaPath = "schemas/errorMessage.json";
+        Response response = creditService.checkListCurrentCreditProductsIncorrectRequest();
+        assertAll(
+                () -> assertEquals(SC_BAD_REQUEST, response.getStatusCode()),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+        );
+    }
+
+    @DisplayName("Просмотр количества поданных кредитных заявок")
+    @Description("Данный тест-кейс направлен на проверку СМ 3.8 по US 3.8 на получение количества заявок," +
+            " в случае ошибки сервера")
+    @Tag("Smoke")
+    @TmsLink("https://jira.astondevs.ru/browse/LIB3-538")
+    @Test
+    public void checkNumberOfLoanApplicationsSubmittedServerError() {
+        String jsonSchemaPath = "schemas/errorMessage.json";
+        Response response = creditService.checkListCurrentCreditProductsInternalErrorServer();
+        assertAll(
+                () -> assertEquals(SC_SERVER_ERROR, response.getStatusCode()),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }

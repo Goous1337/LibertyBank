@@ -5,7 +5,7 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.TmsLink;
 import org.junit.jupiter.api.*;
 import web.BaseTest;
-import web.enums.DepositsEnum;
+import web.constans.deposit.depositEnums.DepositsNameEnum;
 
 @Tags({@Tag("Web"), @Tag("MVP"), @Tag("Positive")})
 @Epic("9 - Депозиты")
@@ -24,7 +24,7 @@ public class US_9_3_CheckFullInfoAboutAllDeposits extends BaseTest {
     @TmsLink("LIB3-1899")
     public void checkFullInfoAboutLibertyChild() {
         depositsProductsFullInfoStep.clickShowMoreButton();
-        depositsProductsFullInfoStep.assertFullInfoAboutDepositsProduct(DepositsEnum.LIBERTY_CHILD);
+        depositsProductsFullInfoStep.assertFullInfoAboutDepositsProduct(DepositsNameEnum.LIBERTY_CHILD);
     }
 
     @Test
@@ -32,7 +32,7 @@ public class US_9_3_CheckFullInfoAboutAllDeposits extends BaseTest {
     @TmsLink("LIB3-1899")
     public void checkFullInfoAboutLibertyCalculated() {
         depositsProductsFullInfoStep.clickShowMoreButtonLibertyCalculated();
-        depositsProductsFullInfoStep.assertFullInfoAboutDepositsProduct(DepositsEnum.LIBERTY_CALCULATED);
+        depositsProductsFullInfoStep.assertFullInfoAboutDepositsProduct(DepositsNameEnum.LIBERTY_CALCULATED);
     }
 
     @Test
@@ -40,7 +40,7 @@ public class US_9_3_CheckFullInfoAboutAllDeposits extends BaseTest {
     @TmsLink("LIB3-1899")
     public void checkFullInfoAboutLibertyCurrencyUsd() {
         depositsProductsFullInfoStep.clickShowMoreButtonLibertyCurrencyUsd();
-        depositsProductsFullInfoStep.assertFullInfoAboutDepositsProduct(DepositsEnum.LIBERTY_PLUS_CURRENCY_USD);
+        depositsProductsFullInfoStep.assertFullInfoAboutDepositsProduct(DepositsNameEnum.LIBERTY_PLUS_CURRENCY_USD);
     }
 
     @Test
@@ -48,7 +48,7 @@ public class US_9_3_CheckFullInfoAboutAllDeposits extends BaseTest {
     @TmsLink("LIB3-1899")
     public void checkFullInfoAboutLibertyExpress() {
         depositsProductsFullInfoStep.clickShowMoreButtonLibertyExpress();
-        depositsProductsFullInfoStep.assertFullInfoAboutDepositsProduct(DepositsEnum.LIBERTY_PLUS_EXPRESS);
+        depositsProductsFullInfoStep.assertFullInfoAboutDepositsProduct(DepositsNameEnum.LIBERTY_PLUS_EXPRESS);
     }
 
     @Test
@@ -56,7 +56,7 @@ public class US_9_3_CheckFullInfoAboutAllDeposits extends BaseTest {
     @TmsLink("LIB3-1899")
     public void checkFullInfoAboutLibertyBase() {
         depositsProductsFullInfoStep.clickShowMoreButtonLibertyBase();
-        depositsProductsFullInfoStep.assertFullInfoAboutDepositsProduct(DepositsEnum.LIBERTY_BASIC);
+        depositsProductsFullInfoStep.assertFullInfoAboutDepositsProduct(DepositsNameEnum.LIBERTY_BASIC);
     }
 
     @Test
@@ -64,7 +64,7 @@ public class US_9_3_CheckFullInfoAboutAllDeposits extends BaseTest {
     @TmsLink("LIB3-1899")
     public void checkFullInfoAboutLibertyPremium() {
         depositsProductsFullInfoStep.clickShowMoreButtonLibertyPremium();
-        depositsProductsFullInfoStep.assertFullInfoAboutDepositsProduct(DepositsEnum.LIBERTY_PREMIUM);
+        depositsProductsFullInfoStep.assertFullInfoAboutDepositsProduct(DepositsNameEnum.LIBERTY_PREMIUM);
     }
 
     @Test
@@ -72,7 +72,7 @@ public class US_9_3_CheckFullInfoAboutAllDeposits extends BaseTest {
     @TmsLink("LIB3-1899")
     public void checkFullInfoAboutLibertyStandardExpress() {
         depositsProductsFullInfoStep.clickShowMoreButtonLibertyStandardExpress();
-        depositsProductsFullInfoStep.assertFullInfoAboutDepositsProduct(DepositsEnum.LIBERTY_STANDARD_EXPRESS);
+        depositsProductsFullInfoStep.assertFullInfoAboutDepositsProduct(DepositsNameEnum.LIBERTY_STANDARD_EXPRESS);
     }
 
     @Test
@@ -80,6 +80,6 @@ public class US_9_3_CheckFullInfoAboutAllDeposits extends BaseTest {
     @TmsLink("LIB3-1899")
     public void checkFullInfoAboutLibertyStandard() {
         depositsProductsFullInfoStep.clickShowMoreButtonLibertyStandard();
-        depositsProductsFullInfoStep.assertFullInfoAboutDepositsProduct(DepositsEnum.LIBERTY_STANDARD);
+        depositsProductsFullInfoStep.assertFullInfoAboutDepositsProduct(DepositsNameEnum.LIBERTY_STANDARD);
     }
 }

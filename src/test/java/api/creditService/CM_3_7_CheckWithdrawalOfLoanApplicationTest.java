@@ -20,6 +20,9 @@ public class CM_3_7_CheckWithdrawalOfLoanApplicationTest extends BaseTest {
         RestAssured.baseURI = CREDIT_SERVICE;
     }
 
+    Integer idValue;
+    String idStatus;
+
     @DisplayName("Отзыв кредитной заявки")
     @Description("Данный тест-кейс направлен на отзыв кредитной заявки")
     @Tag("Smoke")
@@ -28,10 +31,10 @@ public class CM_3_7_CheckWithdrawalOfLoanApplicationTest extends BaseTest {
     public void checkWithdrawalOfLoanApplication() {
         String jsonSchemaPath = "schemas/creditService/CM_3_7/checkWithdrawalOfLoanApplication.json";
         Response responseReg = creditService.checkListApplyingLoan
-                (3, 25000, 20, 60000, 30000, "8698345212");
-        Integer idValue = responseReg.jsonPath().get("id");
-
-        Response responseWithdrawal = creditService.checkListWithdrawalOfLoanApplication(idValue);
+                (3, 25000, 20, 60000, 30000, "8698345212", "RUB");
+        idValue = responseReg.jsonPath().get("id");
+        idStatus = responseReg.jsonPath().get("status");
+        Response responseWithdrawal = creditService.checkListWithdrawalOfLoanApplication(idValue, idStatus);
         assertAll(
                 () -> assertEquals(SC_OK, responseWithdrawal.getStatusCode()),
                 () -> responseWithdrawal.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
@@ -45,7 +48,7 @@ public class CM_3_7_CheckWithdrawalOfLoanApplicationTest extends BaseTest {
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-767")
     @Test
     public void checkWithdrawalOfLoanApplicationNotExistParamOfId() {
-        String jsonSchemaPath = "schemas/errorMessage.json";
+        String jsonSchemaPath = "schemas/creditService/CM_3_7/notSuccessSchem.json";
         Response response = creditService.checkListWithdrawalOfLoanApplicationNotExistParamOfId();
         assertAll(
                 () -> assertEquals(SC_NOT_FOUND, response.getStatusCode()),
@@ -60,39 +63,53 @@ public class CM_3_7_CheckWithdrawalOfLoanApplicationTest extends BaseTest {
     @Test
     public void checkWithdrawalOfLoanApplicationEmptyToken() {
         String jsonSchemaPath = "schemas/errorMessage.json";
-        Response response = creditService.checkListWithdrawalOfLoanApplicationEmptyToken();
+        Response responseReg = creditService.checkListApplyingLoan
+                (3, 25000, 20, 60000, 30000, "8698345212", "RUB");
+        idValue = responseReg.jsonPath().get("id");
+        idStatus = responseReg.jsonPath().get("status");
+        Response responseWithdrawal = creditService.checkListWithdrawalOfLoanApplicationEmptyToken(idValue, idStatus);
         assertAll(
-                () -> assertEquals(SC_UNAUTHORIZED, response.getStatusCode()),
-                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+                () -> assertEquals(SC_UNAUTHORIZED, responseWithdrawal.getStatusCode()),
+                () -> responseWithdrawal.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 
-    @DisplayName("Отзыв кредитной заявки по отклоненной заявке")
-    @Description("Данный тест-кейс направлен на отзыв кредитной заявки по отклоненной заявке")
-    @Tag("Negative")
-    @TmsLink("https://jira.astondevs.ru/browse/LIB3-771")
-    @Test
-    public void checkWithdrawalOfLoanApplicationOnAnAlreadyWithdrawnApplication() {
-        String jsonSchemaPath = "schemas/errorMessage.json";
-        Response response = creditService.checkListWithdrawalOfLoanApplication(1);
-        assertAll(
-                () -> assertEquals(SC_CONFLICT, response.getStatusCode()),
-                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
-        );
-    }
-
-    @Disabled("Bug https://jira.astondevs.ru/browse/LIB-1882")
     @DisplayName("Отзыв кредитной заявки по одобренной заявке")
     @Description("Данный тест-кейс направлен на отзыв кредитной заявки по одобренной заявке")
     @Tag("Negative")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-772")
     @Test
-    public void checkWithdrawalOfLoanApplicationOnAnAlreadyApprovedApplication() {
+    public void checkListWithdrawalOfLoanApplication() {
         String jsonSchemaPath = "schemas/errorMessage.json";
-        Response response = creditService.checkListWithdrawalOfLoanApplication(9);
+        Response responseReg = creditService.checkListWithdrawalOfLoanApprovedApplication("APPROVED");
+        idStatus = responseReg.jsonPath().get("status");
+        Response response = creditService.checkListWithdrawalOfLoanApprovedApplication(idStatus);
         assertAll(
-                () -> assertEquals(SC_CONFLICT, response.getStatusCode()),
-                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+                () -> assertEquals(SC_CONFLICT, responseReg.getStatusCode()),
+                () -> responseReg.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
+    }
+
+    @DisplayName("Отзыв кредитной заявки")
+    @Description("Данный тест-кейс направлен на отзыв кредитной заявки при ошибке сервера")
+    @Tag("Smoke")
+    @TmsLink("https://jira.astondevs.ru/browse/LIB3-2721")
+    @Test
+    public void checkWithdrawalOfLoanApplicationErrorServer() {
+        String jsonSchemaPath = "schemas/errorMessage.json";
+        Response responseReg = creditService.checkListApplyingLoan
+                (3, 25000, 20, 60000, 30000, "8698345212", "RUB");
+        idValue = responseReg.jsonPath().get("id");
+        idStatus = responseReg.jsonPath().get("status");
+        Response responseWithdrawal = creditService.checkListWithdrawalOfLoanApplicationErrorServer(idValue, idStatus);
+        assertAll(
+                () -> assertEquals(SC_SERVER_ERROR, responseWithdrawal.getStatusCode()),
+                () -> responseWithdrawal.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+        );
+    }
+
+    @AfterEach
+    public void clearDataBase() {
+        Response response = creditService.checkListWithdrawalOfLoanApplication(idValue, idStatus);
     }
 }

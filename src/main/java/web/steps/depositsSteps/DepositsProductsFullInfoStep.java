@@ -2,7 +2,7 @@ package web.steps.depositsSteps;
 
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
-import web.enums.DepositsEnum;
+import web.constans.deposit.depositEnums.DepositsNameEnum;
 import web.pages.depositPages.DepositsProductsFullInfoPage;
 
 public class DepositsProductsFullInfoStep {
@@ -54,7 +54,7 @@ public class DepositsProductsFullInfoStep {
     }
 
     @Step("Сравнение данных полной информации о депозиты с БД и UI")
-    public void assertFullInfoAboutDepositsProduct(DepositsEnum str) {
+    public void assertFullInfoAboutDepositsProduct(DepositsNameEnum str) {
         Assertions.assertEquals(depositsProductsFullInfoPage.getObjectFromBack(str), depositsProductsFullInfoPage.getObjectFromWeb(str), "text");
     }
 }

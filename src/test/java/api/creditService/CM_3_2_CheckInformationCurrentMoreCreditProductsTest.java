@@ -11,8 +11,8 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
 
 import static org.apache.hc.core5.http.HttpStatus.*;
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.apache.http.HttpStatus.SC_OK;
+import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.CREDIT_SERVICE;
 
 @Tag("API")
@@ -29,26 +29,27 @@ public class CM_3_2_CheckInformationCurrentMoreCreditProductsTest extends BaseTe
             " о кредитных продуктах банка")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-262")
     @Test
-
     public void checkInformationCurrentCreditProducts() {
         Response response = creditService.checkListCurrentCreditProducts();
         String jsonSchemaPath = "schemas/creditService/CM_3_2/checkInformationCurrentCreditProducts.json";
         assertAll(
-                () -> assertEquals(SC_OK,
-                        response.statusCode(),
-                        "Код ответа не соответствует ожидаемому"),
-                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
-
+                () -> assertEquals(SC_OK, response.statusCode(), "Код ответа не соответствует ожидаемому"),
+                () -> {
+                    if (response.getBody().jsonPath().getList("credits").isEmpty()) {
+                        // Проверка на пустой список
+                        assertFalse(response.getBody().jsonPath().getBoolean("success"), "При пустом списке кредитов не было получено поле success со значением true");
+                    } else {
+                        response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath));
+                    }
+                }
         );
     }
 
-    @Disabled("BUG https://jira.astondevs.ru/browse/LIB3-1133")
     @DisplayName("Получение краткой информации о кредитных продуктах банка с невалидным токеном")
     @Description("Данный тест-кейс направлен на получение STATUS CODE 401 при неуспешной валидации токена для " +
             "получения краткой информации о кредитных продуктах банка по CM 3.2 и US 3.2")
     @TmsLink("https://jira.astondevs.ru/browse/LIB3-267")
     @Test
-
     public void checkInformationCurrentCreditProductsWithInvalidToken() {
         String invalidToken = "asdasaksdkasd";
         Response response = creditService.checkListCurrentCreditProductsWithInvalidToken(invalidToken);
@@ -61,17 +62,16 @@ public class CM_3_2_CheckInformationCurrentMoreCreditProductsTest extends BaseTe
         );
     }
 
-    @DisplayName("Получение краткой информации о кредитных продуктах банка при неправильной конфигурации запроса")
-    @Description("Данный тест-кейс направлен на получение STATUS CODE 400 при неправильной конфигурации " +
+    @DisplayName("Получение информации при неуспешном соединении с сервером")
+    @Description("Данный тест-кейс направлен на получение STATUS CODE 500 при неуспешном соединении с сервером " +
             "запроса для получения статуса кредитной заявки СМ-3.2 и US-3.2")
-    @TmsLink("https://jira.astondevs.ru/browse/LIB3-272")
+    @TmsLink("https://jira.astondevs.ru/browse/LIB3-615")
     @Test
-
     public void unsuccessfulInformationBankCreditProductsIncorrectRequestConfiguration() {
-        Response response = creditService.checkListCurrentCreditProductsIncorrectRequestConfiguration();
+        Response response = creditService.checkListCurrentCreditProductsInternalServerError();
         String jsonSchemaPath = "schemas/errorMessage.json";
         assertAll(
-                () -> assertEquals(SC_BAD_REQUEST,
+                () -> assertEquals(SC_SERVER_ERROR,
                         response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))

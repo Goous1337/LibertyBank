@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties(value = {"timestamp"})
-public class CustomerIdNotFoundResponse {
+@JsonIgnoreProperties(value = { "timestamp" })
+public class ErrorResponse {
     public String uri;
     public String type;
     public String message;

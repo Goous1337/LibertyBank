@@ -53,6 +53,7 @@ public class CreditInfoSteps {
         Assertions.assertEquals(CREDIT_SUBMITTED_REQUEST_PAGE_URL, creditInfoPage.getActualTitleCredit(), String.format(NOT_EQUALS_URL_MESSAGE, CREDIT_SUBMITTED_REQUEST_PAGE_URL, creditInfoPage.getActualTitleCredit()));
     }
 
+    //Переделать логику для сравнения URL-ов
     @Step("Проверка url подробной информации о моем кредите")
     public void assertUrlFirstMyCredit() {
         Assertions.assertEquals(MY_FIRST_CREDIT_PAGE_URL, creditInfoPage.getActualTitleCredit(), String.format(NOT_EQUALS_URL_MESSAGE, MY_FIRST_CREDIT_PAGE_URL, creditInfoPage.getActualTitleCredit()));
