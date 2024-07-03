@@ -83,6 +83,8 @@ public class BaseTest {
 
 
 
+    protected ApplicationInfoSteps applicationInfoSteps;
+
     protected void open(String pageUrl) {
         DriverManager.getDriver()
                 .get(BASE_URL + pageUrl);
@@ -145,6 +147,8 @@ public class BaseTest {
         myDepositsProductsSteps = new MyDepositsProductsSteps();
         depositsApplicationSteps = new DepositsApplicationSteps();
         changePinSteps = new ChangePinSteps();
+        applicationInfoSteps = new ApplicationInfoSteps();
         insuranceApplicationPropertyContentsSteps = new InsuranceApplicationPropertyContentsSteps();
+
     }
 }
