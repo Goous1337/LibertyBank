@@ -24,6 +24,10 @@ public class US_3_10_CheckValueCreditReportTest extends BaseTest {
         return Stream.of(Arguments.of("500050", "47", "1234567890", "1000", "1000", "123456"));
     }
 
+    private static Stream<Object> testDataLibertyMyFlat() {
+        return Stream.of(Arguments.of("1000000", "120", "1234567890", "15000", "39000", "123456"));
+    }
+
     @BeforeEach
     public void setUpTest() {
         authorization();
@@ -38,52 +42,44 @@ public class US_3_10_CheckValueCreditReportTest extends BaseTest {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickCreditProductButton();
         creditProductsSteps.clickShowMoreLibertyCarButton();
-
         creditApplicationReportSteps.getValuesCreditProduct();
         creditProductDetailedInformationSteps.clickShowMoreButton();
-
         creditApplicationSteps.enterValidateAmountCreditInput(sumCredit);
         creditApplicationSteps.enterPeriodMonthsCreditInput(termCredit);
         creditApplicationSteps.enterIdentificationNumberCreditInput(employerIdentificationNumber);
         creditApplicationSteps.enterMonthlyExpenditureCreditInput(totalDebtLoad);
         creditApplicationSteps.enterMonthlyIncomeCreditInput(averageMonthlyIncome);
-
         creditApplicationReportSteps.getValuesCreditApplicationStep(sumCredit, termCredit);
-
-
         creditApplicationSteps.sendApplicationForm();
         creditMobileCodeVerificationSteps.enterGenerationCode(autogenerCode);
         creditMobileCodeVerificationSteps.clickNextButton();
         creditApplicationReportSteps.reportIsVisible();
         creditApplicationReportSteps.getDefaultValuesStep();
-
         creditApplicationReportSteps.assertCreditReports();
-
-
     }
 
     @ParameterizedTest
     @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Positive")})
     @DisplayName("Проверка допустимых граничных значений полей при оформлении заявки на кредит Моя квартира")
     @TmsLink("LIB3-535")
-    @MethodSource("testDataLibertyMoney")
+    @MethodSource("testDataLibertyMyFlat")
     public void checkPositiveBorderLibertyMyFlatInputTest(String sumCredit, String termCredit, String employerIdentificationNumber, String totalDebtLoad, String averageMonthlyIncome, String autogenerCode) {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickCreditProductButton();
         creditProductsSteps.clickShowMoreLibertyMyFlatButton();
+        creditApplicationReportSteps.getValuesCreditProduct();
         creditProductDetailedInformationSteps.clickShowMoreButton();
-
         creditApplicationSteps.enterValidateAmountCreditInput(sumCredit);
         creditApplicationSteps.enterPeriodMonthsCreditInput(termCredit);
         creditApplicationSteps.enterIdentificationNumberCreditInput(employerIdentificationNumber);
         creditApplicationSteps.enterMonthlyExpenditureCreditInput(totalDebtLoad);
         creditApplicationSteps.enterMonthlyIncomeCreditInput(averageMonthlyIncome);
-
+        creditApplicationReportSteps.getValuesCreditApplicationStep(sumCredit, termCredit);
         creditApplicationSteps.sendApplicationForm();
         creditMobileCodeVerificationSteps.enterGenerationCode(autogenerCode);
         creditMobileCodeVerificationSteps.clickNextButton();
-
         creditApplicationReportSteps.reportIsVisible();
-
+        creditApplicationReportSteps.getDefaultValuesStep();
+        creditApplicationReportSteps.assertCreditReports();
     }
 }
