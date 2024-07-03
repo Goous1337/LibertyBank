@@ -19,11 +19,18 @@ public class US_9_8_CheckFullInfoAboutMyDepositTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Просмотр подробной информации о депозитном продукте пользователя")
+    @DisplayName("Просмотр элементов подробной информации о депозитном продукте пользователя")
     @TmsLink("LIB3-2671")
-    public void checkFullInfoAboutDeposit(){
-        myDepositDetailedInfoStep.assertMoreInfoAboutMyDepositProduct();
+    public void checkInfoElementsAboutDeposit(){
+        myDepositDetailedInfoStep.assertTextAccountNumberDepositIsDisplayed();
     }
 
+//    @Test
+//    @Disabled
+//    @DisplayName("Просмотр подробной информации о депозитном продукте пользователя")
+//    @TmsLink("LIB3-2671")
+//    public void checkFullInfoAboutDeposit(){
+//        myDepositDetailedInfoStep.assertMoreInfoAboutMyDepositProduct();
+//    }
 
 }

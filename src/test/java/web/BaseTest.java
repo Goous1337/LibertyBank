@@ -100,10 +100,10 @@ public class BaseTest {
         refreshPages();
     }
 
-    @AfterEach
-    public void clearCache() {
-        DriverManager.resetDriver();
-    }
+//    @AfterEach
+//    public void clearCache() {
+//        DriverManager.resetDriver();
+//    }
 
     private void refreshPages() {
         accountSteps = new AccountSteps();
