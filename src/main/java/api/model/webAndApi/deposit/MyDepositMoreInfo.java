@@ -19,9 +19,22 @@ public class MyDepositMoreInfo {
     private Double currentBalance;
     private Double interestRate;
     private String currencyCode;
-    private String 	depaccountNumber;
+    private String 	depAccountNumber;
     private Boolean autoRenewal;
     private Boolean isRevocable;
     private Boolean isActive;
 
+    public MyDepositMoreInfo(String name, String depAccountNumber, Date openDate, Date closeDate, Integer periodMonths, Double interestRate) {
+        this.name = name;
+        this.depAccountNumber = depAccountNumber;
+        this.openDate = openDate;
+        this.closeDate = closeDate;
+        this.periodMonths = periodMonths;
+        this.interestRate = interestRate;
+    }
+
+    public String getStringDate(Date date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DepositsConstants.DATE_FORMAT);
+        return dateFormat.format(date);
+    }
 }

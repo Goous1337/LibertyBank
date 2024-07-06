@@ -1,22 +1,25 @@
 package web.pages.depositPages;
 
 import api.model.webAndApi.DepositProductService;
-import api.model.webAndApi.credit.MyCreditMoreInformation;
 import api.model.webAndApi.deposit.MyDepositMoreInfo;
-import io.qameta.allure.Step;
-import org.openqa.selenium.WebDriver;
+import lombok.Getter;
+import lombok.Setter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import web.pages.BasePage;
-
+import java.util.ArrayList;
 import java.util.List;
+import static web.helpers.Converter.*;
 
+@Getter
+@Setter
 public class MyDepositsDetailedInfoPage extends BasePage {
-//    public DepositProductService depositProductService;
+    public DepositProductService depositProductService;
     private String nameBackEnd;
     private String depAccountNumberBackEnd;
     private java.sql.Date openDateBackEnd;
     private java.sql.Date closeDateBackEnd;
+    private Integer periodMonthsBackEnd;
     private Double interestRateBackEnd;
     private Double initialAmountBackEnd;
     private String currencyCodeBackEnd;
@@ -24,14 +27,15 @@ public class MyDepositsDetailedInfoPage extends BasePage {
     private String depAccountNumberWeb;
     private java.sql.Date openDateWeb;
     private java.sql.Date closeDateWeb;
+    private Integer periodMonthsWeb;
     private Double interestRateWeb;
     private Double initialAmountWeb;
     private String currencyCodeWeb;
     private List<MyDepositMoreInfo> listXpath;
     private List<MyDepositMoreInfo> listFromBackEnd;
-//    public MyDepositsDetailedInfoPage(){
-//        depositProductService = new DepositProductService();
-//    }
+    public MyDepositsDetailedInfoPage(){
+        depositProductService = new DepositProductService();
+    }
     @FindBy(xpath = "//h2")
     private WebElement depositProductNameText;
     @FindBy(xpath = "//div/h3[@data-testid='depAccountNumber']")
@@ -50,7 +54,7 @@ public class MyDepositsDetailedInfoPage extends BasePage {
     private WebElement periodMonthsDepositText;
     @FindBy(xpath = "//div/p[contains(text(), 'Ставка')]/following-sibling::p")
     private WebElement interestRateText;
-    @FindBy(xpath = "//*[@id='copy-card']")
+    @FindBy(xpath = "//h3[@data-testid='depAccountNumber']/following-sibling::button")
     private WebElement copyDepositAccountNumberButton;
     @FindBy(xpath = "//*[text()='Скопировано']")
     private WebElement outputCopiedText;
@@ -66,16 +70,75 @@ public class MyDepositsDetailedInfoPage extends BasePage {
     private WebElement paymentScheduleButton;
     @FindBy(xpath = "//div[@data-testid='dots-button']/div/button[text()='Информация о пополнении депозита']")
     private WebElement paymentInfoButton;
-    @FindBy(xpath = "//div[@data-testid='dots-button']/div/button[text()='Отказ от пролонгации депозита']")
-    private WebElement extendRefusalButton;
+    @FindBy(xpath = "//div[@data-testid='dots-button']/div/button[text()='Пролонгация депозита']")
+    private WebElement extendDepositButton;
 
-//    public MyDepositMoreInfo getMyDepositProductObjectFromBackEnd() {
-//        depositProductService.getMoreInfoAboutMyDeposit();
-//        return new MyDepositMoreInfo();
-//    }
+    public List<MyDepositMoreInfo>addMyDepositDetailedInfoXpathToList(){
+        listXpath = new ArrayList<>();
+        listXpath.add(new MyDepositMoreInfo(
+                depositProductNameText.getText(),
+                convertStringToString(depAccountNumberText.getText()),
+                parseDate(openDateDepositText.getText()),
+                parseDate(closeDateDepositText.getText()),
+                convertStringToInteger(periodMonthsDepositText.getText()),
+                convertValueToDouble(interestRateText.getText())
+        ));
+        return listXpath;
+    }
+
+    public MyDepositMoreInfo getMyDepositProductObjectFromBackEnd() {
+        depositProductService.getMoreInfoAboutMyDeposit();
+        listXpath = addMyDepositDetailedInfoXpathToList();
+        listFromBackEnd = depositProductService.getMyDepositMoreInfoList();
+        for (MyDepositMoreInfo myDepositMoreInfoBackEnd : listFromBackEnd) {
+            for (MyDepositMoreInfo myDepositMoreInfoWeb : listXpath) {
+                if (myDepositMoreInfoBackEnd.getName().equals(myDepositMoreInfoWeb.getName())) {
+                    nameBackEnd = myDepositMoreInfoBackEnd.getName();
+                }
+                if (myDepositMoreInfoBackEnd.getDepAccountNumber().equals(myDepositMoreInfoWeb.getDepAccountNumber())) {
+                    depAccountNumberBackEnd = myDepositMoreInfoBackEnd.getDepAccountNumber();
+                }
+                if (myDepositMoreInfoBackEnd.getOpenDate().equals(myDepositMoreInfoWeb.getOpenDate())) {
+                    openDateBackEnd = myDepositMoreInfoBackEnd.getOpenDate();
+                }
+                if (myDepositMoreInfoBackEnd.getCloseDate().equals(myDepositMoreInfoWeb.getCloseDate())) {
+                    closeDateBackEnd = myDepositMoreInfoBackEnd.getCloseDate();
+                }
+                if (myDepositMoreInfoBackEnd.getPeriodMonths().equals(myDepositMoreInfoWeb.getPeriodMonths())) {
+                    periodMonthsBackEnd = myDepositMoreInfoBackEnd.getPeriodMonths();
+                }
+                if (myDepositMoreInfoBackEnd.getInterestRate().equals(myDepositMoreInfoWeb.getInterestRate())) {
+                    interestRateBackEnd = myDepositMoreInfoBackEnd.getInterestRate();
+                }
+            }
+        }
+        return new MyDepositMoreInfo(
+                nameBackEnd,
+                depAccountNumberBackEnd,
+                openDateBackEnd,
+                closeDateBackEnd,
+                periodMonthsBackEnd,
+                interestRateBackEnd
+        );
+    }
 
     public MyDepositMoreInfo getMyDepositProductObjectFromWeb() {
-    return new MyDepositMoreInfo();
+        for (MyDepositMoreInfo myDepositMoreInfo : addMyDepositDetailedInfoXpathToList()){
+            nameWeb = myDepositMoreInfo.getName();
+            depAccountNumberWeb = myDepositMoreInfo.getDepAccountNumber();
+            openDateWeb = myDepositMoreInfo.getOpenDate();
+            closeDateWeb = myDepositMoreInfo.getCloseDate();
+            periodMonthsWeb = myDepositMoreInfo.getPeriodMonths();
+            interestRateWeb = myDepositMoreInfo.getInterestRate();
+        }
+         return new MyDepositMoreInfo(
+                nameWeb,
+                depAccountNumberWeb,
+                openDateWeb,
+                closeDateWeb,
+                periodMonthsWeb,
+                interestRateWeb
+        );
     }
 
     public boolean depositProductNameTextDisplayed() {
@@ -140,5 +203,11 @@ public class MyDepositsDetailedInfoPage extends BasePage {
 
     public boolean paymentScheduleButtonDisplayed() {
         return paymentScheduleButton.isDisplayed();
+    }
+    public boolean paymentInfoButtonDisplayed() {
+        return paymentInfoButton.isDisplayed();
+    }
+    public boolean extendDepositButtonDisplayed() {
+        return extendDepositButton.isDisplayed();
     }
 }

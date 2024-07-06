@@ -100,10 +100,10 @@ public class BaseTest {
         refreshPages();
     }
 
-//    @AfterEach
-//    public void clearCache() {
-//        DriverManager.resetDriver();
-//    }
+    @AfterEach
+    public void clearCache() {
+        DriverManager.resetDriver();
+    }
 
     private void refreshPages() {
         accountSteps = new AccountSteps();
@@ -141,6 +141,7 @@ public class BaseTest {
         depositsProductsSteps = new DepositsProductsSteps();
         myDepositsProductsStep = new MyDepositsProductsStep();
         depositsApplicationSteps = new DepositsApplicationSteps();
+        myDepositDetailedInfoStep = new MyDepositsDetailedInfoStep();
         changePinSteps = new ChangePinSteps();
         insuranceApplicationPropertyContentsSteps = new InsuranceApplicationPropertyContentsSteps();
     }

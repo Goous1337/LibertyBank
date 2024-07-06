@@ -18,12 +18,19 @@ import static web.constans.credit.CreditServiceConstants.BASE_URL_API;
 @Getter
 @Setter
 public class DepositProductService {
+    @Getter
     private MyDepositProduct myDepositProduct;
+    @Getter
     private MyDepositMoreInfo myDepositMoreInfo;
+    @Getter
     private DepositProductFullInfo depositProductFullInfo;
+    @Getter
     private List<DepositProductShortInfo> depositProductShortInfoList;
+    @Getter
     private List<MyDepositProduct> myDepositProductsList;
+    @Getter
     private List<MyDepositMoreInfo> myDepositMoreInfoList;
+    @Getter
     private List<DepositProductFullInfo> depositProductFullInfoList;
 
     public void getDepositsFromPage() {

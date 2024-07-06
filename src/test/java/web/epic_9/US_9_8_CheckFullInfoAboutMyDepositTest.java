@@ -19,18 +19,45 @@ public class US_9_8_CheckFullInfoAboutMyDepositTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Просмотр элементов подробной информации о депозитном продукте пользователя")
+    @DisplayName("Просмотр отображения элементов подробной информации о депозитном продукте пользователя")
     @TmsLink("LIB3-2671")
     public void checkInfoElementsAboutDeposit(){
+        myDepositDetailedInfoStep.assertTextNameTitleDepositIsDisplayed();
         myDepositDetailedInfoStep.assertTextAccountNumberDepositIsDisplayed();
+        myDepositDetailedInfoStep.assertTextStatusDepositIsDisplayed();
+        myDepositDetailedInfoStep.assertTextOpenDateDepositDisplayed();
+        myDepositDetailedInfoStep.assertTextCloseDateDepositDisplayed();
+        myDepositDetailedInfoStep.assertTextInitialDepositAmountDisplayed();
+        myDepositDetailedInfoStep.assertTextFinalDepositAmountDisplayed();
+        myDepositDetailedInfoStep.assertTextPeriodMonthsDepositDisplayed();
+        myDepositDetailedInfoStep.assertTextInterestRateTextDisplayed();
     }
 
-//    @Test
-//    @Disabled
-//    @DisplayName("Просмотр подробной информации о депозитном продукте пользователя")
-//    @TmsLink("LIB3-2671")
-//    public void checkFullInfoAboutDeposit(){
-//        myDepositDetailedInfoStep.assertMoreInfoAboutMyDepositProduct();
-//    }
+    @Test
+    @DisplayName("Проверка возможности скопировать 'Номер счета депозитного продукта'")
+    @TmsLink("LIB3-2671")
+    public void checkCopyDepAccountNumberText() {
+        myDepositDetailedInfoStep.clickCopyDepAccountNumberButton();
+        myDepositDetailedInfoStep.assertTextOutputCopiedIsDisplayed();
+    }
+
+    @Test
+    @DisplayName("Просмотр опций при нажатии на Action bar('Многоточие')")
+    @TmsLink("LIB3-2671")
+    public void checkInformationDotsButton() {
+        myDepositDetailedInfoStep.clickDotsButton();
+        myDepositDetailedInfoStep.assertButtonRequisitesIsDisplayed();
+        myDepositDetailedInfoStep.assertPaymentScheduleButtonDisplayed();
+        myDepositDetailedInfoStep.assertPaymentInfoButtonDisplayed();
+        myDepositDetailedInfoStep.assertExtendDepositButtonDisplayed();
+    }
+
+    @Test
+    @Disabled
+    @DisplayName("Просмотр подробной информации о депозитном продукте пользователя (сравнение UI c API)")
+    @TmsLink("LIB3-2671")
+    public void checkFullInfoAboutDeposit(){
+        myDepositDetailedInfoStep.assertMoreInfoAboutMyDepositProduct();
+    }
 
 }
