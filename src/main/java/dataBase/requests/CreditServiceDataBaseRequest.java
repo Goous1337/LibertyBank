@@ -9,10 +9,10 @@ import static dataBase.DataBaseConnector.getDBConnection;
 public class CreditServiceDataBaseRequest {
     private static final Logger LOG = LogManager.getLogger("DBRequest");
 
-    public static Integer getFirstCreditProductId() {
-        String sql = "SELECT id FROM credit_product LIMIT 1";
+    public static Integer getThirdCreditProductId() {
+        String sql = "SELECT id FROM credit_product LIMIT 1 OFFSET 2";
         Integer productId = getDBConnection(CREDIT_SERVICE).queryForObject(sql, Integer.class);
-        LOG.info(String.format("Получен первый id в credit_product: %s", productId));
+        LOG.info(String.format("Получен третий id в credit_product: %s", productId));
         return productId;
     }
 

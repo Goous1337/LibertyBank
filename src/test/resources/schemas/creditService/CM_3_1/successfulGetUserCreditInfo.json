@@ -1,36 +1,37 @@
 {
-  "$schema": "https://json-schema.org/draft/2019-09/schema",
-  "$id": "http://libertybank.com/schemas/3_1_schema.json",
-  "type": "object",
-  "title": "GetFuncCreditInfo",
-  "required": [
-
-  ],
-  "properties": {
-    "id": {
-      "type": "string",
-      "not": {"type":  "null"}
-    },
-    "name": {
-      "type": "string",
-      "not": {"type":  "null"}
-    },
-    "interestRate": {
-      "type": "number",
-      "not": {"type":  "null"}
-    },
-    "creditAmount": {
-      "type": "number",
-      "not": {"type":  "null"}
-    },
-    "currencyCode": {
-      "type": "string",
-      "default": "RUB"
-    },
-    "terminationDate": {
-      "type": "string",
-      "format": "date",
-      "not": {"type":  "null"}
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "array",
+  "items": [
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "interestRate": {
+          "type": "integer"
+        },
+        "creditAmount": {
+          "type": "integer"
+        },
+        "currencyCode": {
+          "type": "string"
+        },
+        "terminationDate": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "interestRate",
+        "creditAmount",
+        "currencyCode",
+        "terminationDate"
+      ]
     }
-  }
+  ]
 }

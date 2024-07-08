@@ -6,14 +6,15 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import service.CreditService;
 
 import static constant.CreditServiceConstants.*;
-import static org.apache.hc.core5.http.HttpStatus.SC_NOT_FOUND;
-import static org.apache.hc.core5.http.HttpStatus.SC_OK;
+import static org.apache.hc.core5.http.HttpStatus.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static property.BaseProperties.CREDIT_SERVICE;
 
@@ -40,7 +41,7 @@ public class CM_3_6_CheckObtainingInformationOnBanksLoanProductTest extends Base
                 () -> assertEquals(CREDIT_NAME, response.jsonPath().get("name")),
                 () -> assertEquals(CREDIT_MIN_SUM, (Integer) response.jsonPath().get("minSum")),
                 () -> assertEquals(CREDIT_MAX_SUM, (Integer) response.jsonPath().get("maxSum")),
-                () -> assertEquals(CREDIT_CODE, response.jsonPath().get("currencyCode")),
+                () -> assertEquals(CREDIT_CODE, response.jsonPath().get("currencyCodeList")),
                 () -> assertEquals(CREDIT_RATE, (Float) response.jsonPath().get("interestRate")),
                 () -> assertTrue(response.jsonPath().getBoolean("needGuarantees")),
                 () -> assertFalse(response.jsonPath().getBoolean("deliveryInCash")),
@@ -66,6 +67,22 @@ public class CM_3_6_CheckObtainingInformationOnBanksLoanProductTest extends Base
         assertAll(
                 () -> assertEquals(SC_NOT_FOUND, response.getStatusCode()),
                 () -> assertNotNull(response.jsonPath().get("errorMessage"))
+        );
+    }
+
+    @DisplayName("Получение подробной информации по кредитному продукту банка в случае ошибки Сервера")
+    @Description("Данный тест-кейс направлен на проверку СМ 3.5 по US 3.5 на получение подробной информации" +
+            " о действующих кредитах пользователя при ошибке сервера")
+    @Tag("Negative")
+    @TmsLink("https://jira.astondevs.ru/browse/LIB3-420")
+    @Test
+    public void checkUserInformationIncludeRealCreditProductsWithServerError() {
+        String jsonSchemaPath = "schemas/errorMessage.json";
+        Response response = CreditService.checkViewInfoCurrentCreditUsers("13");
+        assertAll(
+                () -> assertEquals(SC_SERVER_ERROR, response.statusCode(),
+                        "Код ответа не соответствует ожидаемому"),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 }
