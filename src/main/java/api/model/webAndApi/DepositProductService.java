@@ -71,13 +71,14 @@ public class DepositProductService {
     }
 
 
-    public void getMoreInfoAboutMyDeposit() {
+    public void getMoreInfoAboutMyDeposit(int depositId) {
+        String url = String.format("deposit/api/v1/deposits/info?depositId=%d", depositId);
         myDepositMoreInfoList = new ArrayList<MyDepositMoreInfo>();
         myDepositMoreInfo = RestAssured.given()
                 .header("Authorization", ACCESS_TOKEN_DEPOSIT_SERVICE)
                 .baseUri(BASE_URL_API)
                 .when()
-                .get("deposit/api/v1/deposits/info?depositId=1559")
+                .get(url)
                 .as(MyDepositMoreInfo.class);
         myDepositMoreInfoList.add(myDepositMoreInfo);
     }

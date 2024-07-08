@@ -113,7 +113,7 @@ public class MyDepositsDetailedInfoPage extends BasePage {
     }
 
     public MyDepositMoreInfo getMyDepositProductObjectFromBackEnd() {
-        depositProductService.getMoreInfoAboutMyDeposit();
+        depositProductService.getMoreInfoAboutMyDeposit(1559);
         listXpath = addMyDepositDetailedInfoXpathToList();
         listFromBackEnd = depositProductService.getMyDepositMoreInfoList();
         for (MyDepositMoreInfo myDepositMoreInfoBackEnd : listFromBackEnd) {
