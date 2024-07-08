@@ -2,6 +2,7 @@ package api.model.webAndApi;
 
 import api.model.webAndApi.deposit.DepositProductFullInfo;
 import api.model.webAndApi.deposit.DepositProductShortInfo;
+import api.model.webAndApi.deposit.MyDepositMoreInfo;
 import api.model.webAndApi.deposit.MyDepositProduct;
 import io.restassured.RestAssured;
 import lombok.Getter;
@@ -11,13 +12,25 @@ import web.constans.deposit.DepositsConstants;
 import java.util.ArrayList;
 import java.util.List;
 
+import static property.BaseProperties.*;
+import static web.constans.credit.CreditServiceConstants.BASE_URL_API;
+
 @Getter
 @Setter
 public class DepositProductService {
+    @Getter
     private MyDepositProduct myDepositProduct;
+    @Getter
+    private MyDepositMoreInfo myDepositMoreInfo;
+    @Getter
     private DepositProductFullInfo depositProductFullInfo;
+    @Getter
     private List<DepositProductShortInfo> depositProductShortInfoList;
+    @Getter
     private List<MyDepositProduct> myDepositProductsList;
+    @Getter
+    private List<MyDepositMoreInfo> myDepositMoreInfoList;
+    @Getter
     private List<DepositProductFullInfo> depositProductFullInfoList;
 
     public void getDepositsFromPage() {
@@ -25,7 +38,7 @@ public class DepositProductService {
                 .header("Authorization", DepositsConstants.VALID_ACCESS_TOKEN)
                 .baseUri(DepositsConstants.BASE_URL_DEPOSIT_API)
                 .when()
-                .get("/deposits/api/v1/deposit-product")
+                .get("/deposit/api/v1/products")
                 .then()
                 .log()
                 .all()
@@ -37,7 +50,7 @@ public class DepositProductService {
                 .header("Authorization", DepositsConstants.VALID_ACCESS_TOKEN)
                 .baseUri(DepositsConstants.BASE_URL_DEPOSIT_API)
                 .when()
-                .get("/deposits/api/v1/deposit")
+                .get("/deposit/api/v1/deposits")
                 .then()
                 .log()
                 .all()
@@ -51,9 +64,22 @@ public class DepositProductService {
                     .header("Authorization", DepositsConstants.VALID_ACCESS_TOKEN)
                     .baseUri(DepositsConstants.BASE_URL_DEPOSIT_API)
                     .when()
-                    .get("/deposits/api/v1/deposit-product/" + i)
+                    .get("/deposit/api/v1/products/" + i)
                     .as(DepositProductFullInfo.class);
             depositProductFullInfoList.add(depositProductFullInfo);
         }
+    }
+
+
+    public void getMoreInfoAboutMyDeposit(int depositId) {
+        String url = String.format("deposit/api/v1/deposits/info?depositId=%d", depositId);
+        myDepositMoreInfoList = new ArrayList<MyDepositMoreInfo>();
+        myDepositMoreInfo = RestAssured.given()
+                .header("Authorization", ACCESS_TOKEN_DEPOSIT_SERVICE)
+                .baseUri(BASE_URL_API)
+                .when()
+                .get(url)
+                .as(MyDepositMoreInfo.class);
+        myDepositMoreInfoList.add(myDepositMoreInfo);
     }
 }

@@ -4,11 +4,11 @@ import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
 import web.pages.depositPages.MyDepositsProductsPage;
 
-public class MyDepositsProductsSteps {
+public class MyDepositsProductsStep {
 
     private MyDepositsProductsPage myDepositsProductsPage;
 
-    public MyDepositsProductsSteps() {
+    public MyDepositsProductsStep() {
         myDepositsProductsPage = new MyDepositsProductsPage();
     }
 
@@ -24,6 +24,12 @@ public class MyDepositsProductsSteps {
     @Step
     public void assertObjects() {
         Assertions.assertEquals(myDepositsProductsPage.objectFromBack(), myDepositsProductsPage.objectFromWeb(), "text");
+    }
+
+    @Step("Нажатие кнопки 'Показать больше' действующего депозита у авторизированного пользователя")
+    public void clickShowMoreAboutMyDepositButton() {
+        myDepositsProductsPage.clickShowMoreAboutMyDepositButton();
+
     }
 
 }

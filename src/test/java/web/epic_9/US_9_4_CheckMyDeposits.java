@@ -15,8 +15,8 @@ public class US_9_4_CheckMyDeposits extends BaseTest {
     @BeforeEach
     public void setUpTest() {
         authorization();
-        myDepositsProductsSteps.clickDepositButton();
-        myDepositsProductsSteps.myDepositButton();
+        myDepositsProductsStep.clickDepositButton();
+        myDepositsProductsStep.myDepositButton();
 
     }
 
@@ -25,6 +25,6 @@ public class US_9_4_CheckMyDeposits extends BaseTest {
     @DisplayName("US 9.4 Просмотр пользователем своих действующих депозитов")
     @TmsLink("LIB3-1895")
     public void checkMyDepositProducts() {
-        myDepositsProductsSteps.assertObjects();
+        myDepositsProductsStep.assertObjects();
     }
 }

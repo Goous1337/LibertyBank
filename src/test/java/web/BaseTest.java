@@ -15,8 +15,7 @@ import web.steps.accountSteps.AccountInfoSteps;
 import web.steps.accountSteps.AccountSteps;
 import web.steps.accountSteps.CreateAccountSteps;
 import web.steps.accountSteps.RenameAccountSteps;
-import web.steps.cardSteps.*;
-import web.steps.depositsSteps.DepositsApplicationSteps;
+import web.steps.depositsSteps.*;
 import web.steps.cardSteps.CardInfoSteps;
 import web.steps.cardSteps.CardProductInfoSteps;
 import web.steps.cardSteps.CardProductsSteps;
@@ -25,9 +24,6 @@ import web.steps.cardSteps.CloseCardSteps;
 import web.steps.cardSteps.ConfirmationSteps;
 import web.steps.cardSteps.FilterCardsSteps;
 import web.steps.creditSteps.*;
-import web.steps.depositsSteps.DepositsProductsFullInfoStep;
-import web.steps.depositsSteps.DepositsProductsSteps;
-import web.steps.depositsSteps.MyDepositsProductsSteps;
 import web.steps.insuranceSteps.InsuranceApplicationPropertyContentsSteps;
 
 import static property.UserPropertiesReader.USER_PASSWORD;
@@ -70,9 +66,10 @@ public class BaseTest {
     protected CardProductInfoSteps cardProductInfoSteps;
     protected CloseCardSteps closeCardSteps;
     protected FilterCardsSteps filterCardsSteps;
-    protected MyDepositsProductsSteps myDepositsProductsSteps;
+    protected MyDepositsProductsStep myDepositsProductsStep;
     protected DepositsProductsFullInfoStep depositsProductsFullInfoStep;
     protected DepositsApplicationSteps depositsApplicationSteps;
+    protected MyDepositsDetailedInfoStep myDepositDetailedInfoStep;
 
     public BaseTest() {
         refreshPages();
@@ -144,8 +141,9 @@ public class BaseTest {
         closeCardSteps = new CloseCardSteps();
         filterCardsSteps = new FilterCardsSteps();
         depositsProductsSteps = new DepositsProductsSteps();
-        myDepositsProductsSteps = new MyDepositsProductsSteps();
+        myDepositsProductsStep = new MyDepositsProductsStep();
         depositsApplicationSteps = new DepositsApplicationSteps();
+        myDepositDetailedInfoStep = new MyDepositsDetailedInfoStep();
         changePinSteps = new ChangePinSteps();
         applicationInfoSteps = new ApplicationInfoSteps();
         insuranceApplicationPropertyContentsSteps = new InsuranceApplicationPropertyContentsSteps();

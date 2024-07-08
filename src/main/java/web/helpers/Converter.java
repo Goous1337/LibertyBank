@@ -63,6 +63,7 @@ public class Converter {
     public static String convertStringToString(String value) {
         value = String.valueOf(value).replace("№", "");
         value = String.valueOf(value).replace("счёта:", "");
+        value = String.valueOf(value).replace("счета:", "");
         value = String.valueOf(value).replace(" ", "");
         return value;
     }
@@ -72,6 +73,7 @@ public class Converter {
         str = String.valueOf(str).replace("$", "").trim();
         str = String.valueOf(str).replace("%", "").trim();
         str = String.valueOf(str).replace("месяцев", "").trim();
+        str = String.valueOf(str).replace("мес.", "").trim();
         str = String.valueOf(str).replace("от", "").trim();
         str = String.valueOf(str).replace("до", "").trim();
         str = String.valueOf(str).replace(" ", "").trim();
