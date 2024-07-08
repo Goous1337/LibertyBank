@@ -33,9 +33,9 @@ public class InsuranceApplicationPropertyContentsPage extends BasePage {
     private WebElement startingDateCalendarIcon;
     @FindBy(xpath = "//h3[contains(@class, ' _containerTitle_1pww5_25')]")
     private WebElement pageTitle;
-    private List<WebElement> cityTypes;
+    private List<WebElement> cityNames;
     @FindBy(xpath = "//*[contains(@name, 'city')]/../../following::ul")
-    private WebElement cityTypeList;
+    private WebElement cityNameList;
     @FindBy(xpath = "//*[contains(@name, 'things.0.name')]/../..")
     private WebElement thingNameBorder;
     @FindBy(xpath = "//*[contains(@name, 'things.0.name')]")
@@ -198,10 +198,10 @@ public class InsuranceApplicationPropertyContentsPage extends BasePage {
 
     public void inputCity(Integer city) {
         waitElement(cityBorder).click();
-        waitElement(cityTypeList).isDisplayed();
-        cityTypes = DriverManager.getDriver().findElements(By
+        waitElement(cityNameList).isDisplayed();
+        cityNames = DriverManager.getDriver().findElements(By
                 .xpath("//*[contains(@name, 'city')]/../../following::ul/li"));
-        cityTypes.get(city).click();
+        cityNames.get(city).click();
     }
 
     public void inputStreet(String street) {

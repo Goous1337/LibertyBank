@@ -8,6 +8,11 @@ import web.drivers.DriverManager;
 
 import java.time.Duration;
 
+import static web.constans.credit.BaseConstants.BASE_DURATION;
+import static web.constans.credit.BaseConstants.SUGGESTION_FIELD_OFFSET_X;
+import static web.constans.credit.BaseConstants.SUGGESTION_FIELD_OFFSET_Y;
+import static web.helpers.Waiters.waitElement;
+
 public abstract class BasePage {
 
     public BasePage() {
@@ -26,13 +31,18 @@ public abstract class BasePage {
         return element.getText();
     }
 
-    public void inputIntoSuggestionField(WebElement element, String keys, Integer x, Integer y) {
+    public void inputIntoSuggestionField(WebElement element, String keys) {
         new Actions(DriverManager.getDriver())
                 .click(element)
                 .sendKeys(keys)
-                .pause(Duration.ofSeconds(5))
-                .moveByOffset(x, y)
+                .pause(Duration.ofSeconds(BASE_DURATION))
+                .moveByOffset(SUGGESTION_FIELD_OFFSET_X, SUGGESTION_FIELD_OFFSET_Y)
                 .click()
                 .perform();
+    }
+
+    public void inputIntoBasicField(WebElement elementBorder, WebElement elementInput, String data) {
+        waitElement(elementBorder).click();
+        waitElement(elementInput).sendKeys(data);
     }
 }

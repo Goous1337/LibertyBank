@@ -2,6 +2,7 @@ package web.steps.insuranceSteps;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.TimeoutException;
+import web.constans.InsuranceServiceConstants;
 import web.pages.insurancePages.InsuranceApplicationApartmentPage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -82,7 +83,8 @@ public class InsuranceApplicationApartmentSteps {
 
     @Step("Ввести длительность страховки")
     public void inputInsuranceDuration(String duration) {
-        insuranceApplicationPage.inputInsuranceDuration(duration);
+        insuranceApplicationPage.inputField(InsuranceServiceConstants.ApartmentApplicationField.INSURANCE_DURATION,
+                duration);
     }
 
     @Step("Выбрать начало действия страховки с завтрашнего дня")
@@ -90,25 +92,20 @@ public class InsuranceApplicationApartmentSteps {
         insuranceApplicationPage.selectStartingTomorrow();
     }
 
-    @Step("Проверить заголовок страницы")
-    public void assertPageTitle() {
-        assertEquals(insuranceApplicationPage.getTitleText(),
-                "Заявка на страхование домашнего имущества", "Заголовок не совпадает с ожидаемым");
-    }
-
     @Step("Ввести имя")
     public void inputFirstName(String firstName) {
-        insuranceApplicationPage.inputFirstName(firstName);
+        insuranceApplicationPage.inputField(InsuranceServiceConstants.ApartmentApplicationField.FIRST_NAME, firstName);
     }
 
     @Step("Ввести фамилию")
     public void inputLastName(String lastName) {
-        insuranceApplicationPage.inputLastName(lastName);
+        insuranceApplicationPage.inputField(InsuranceServiceConstants.ApartmentApplicationField.LAST_NAME, lastName);
     }
 
     @Step("Ввести отчество")
     public void inputPatronymic(String patronymic) {
-        insuranceApplicationPage.inputPatronymic(patronymic);
+        insuranceApplicationPage.inputField(InsuranceServiceConstants.ApartmentApplicationField.PATRONYMIC,
+                patronymic);
     }
 
     @Step("Выбрать тип документа")
@@ -118,17 +115,19 @@ public class InsuranceApplicationApartmentSteps {
 
     @Step("Ввести номер паспорта")
     public void inputPassportNumber(String number) {
-        insuranceApplicationPage.inputPassportNumber(number);
+        insuranceApplicationPage.inputField(InsuranceServiceConstants.ApartmentApplicationField.PASSPORT_NUMBER,
+                number);
     }
 
     @Step("Ввести номер вида на жительство")
     public void inputResidenceNumber(String number) {
-        insuranceApplicationPage.inputResidenceNumber(number);
+        insuranceApplicationPage.inputField(InsuranceServiceConstants.ApartmentApplicationField.RESIDENCE_NUMBER,
+                number);
     }
 
     @Step("Ввести номер свидетельства беженца")
     public void inputRefugeNumber(String number) {
-        insuranceApplicationPage.inputRefugeNumber(number);
+        insuranceApplicationPage.inputField(InsuranceServiceConstants.ApartmentApplicationField.REFUGE_NUMBER, number);
     }
 
     @Step("Ввести дату получения документа")
@@ -143,87 +142,92 @@ public class InsuranceApplicationApartmentSteps {
 
     @Step("Ввести номер телефона")
     public void inputPhoneNumber(String phoneNumber) {
-        insuranceApplicationPage.inputPhone(phoneNumber);
+        insuranceApplicationPage.inputField(InsuranceServiceConstants.ApartmentApplicationField.PHONE, phoneNumber);
     }
 
     @Step("Ввести email")
     public void inputEmail(String email) {
-        insuranceApplicationPage.inputEmail(email);
+        insuranceApplicationPage.inputField(InsuranceServiceConstants.ApartmentApplicationField.EMAIL, email);
     }
 
     @Step("Ввести кем выдан документ")
     public void inputDocumentDepartment(String documentDepartment) {
-        insuranceApplicationPage.inputIssuedBy(documentDepartment);
+        insuranceApplicationPage.inputField(InsuranceServiceConstants.ApartmentApplicationField.ISSUED_BY,
+                documentDepartment);
     }
 
     @Step("Ввести область")
     public void inputState(String state) {
-        insuranceApplicationPage.inputState(state);
+        insuranceApplicationPage.inputField(InsuranceServiceConstants.ApartmentApplicationField.REGION, state);
     }
 
     @Step("Ввести город")
     public void inputCity(String city) {
-        insuranceApplicationPage.inputCity(city);
+        insuranceApplicationPage.inputField(InsuranceServiceConstants.ApartmentApplicationField.CITY, city);
     }
 
     @Step("Ввести улицу")
     public void inputStreet(String street) {
-        insuranceApplicationPage.inputStreet(street);
+        insuranceApplicationPage.inputField(InsuranceServiceConstants.ApartmentApplicationField.STREET, street);
     }
 
     @Step("Ввести дом")
     public void inputHouse(String house) {
-        insuranceApplicationPage.inputBuilding(house);
+        insuranceApplicationPage.inputField(InsuranceServiceConstants.ApartmentApplicationField.BUILDING, house);
     }
 
     @Step("Ввести квартиру")
     public void inputApartment(String apartment) {
-        insuranceApplicationPage.inputApartment(apartment);
+        insuranceApplicationPage.inputField(InsuranceServiceConstants.ApartmentApplicationField.APARTMENT, apartment);
     }
 
     @Step("Ввести подъезд")
     public void inputEntrance(String entrance) {
-        insuranceApplicationPage.inputEntrance(entrance);
+        insuranceApplicationPage.inputField(InsuranceServiceConstants.ApartmentApplicationField.ENTRANCE, entrance);
     }
 
     @Step("Ввести год постройки")
     public void inputYearOfConstruction(String year) {
-        insuranceApplicationPage.inputYearOfConstruction(year);
+        insuranceApplicationPage.inputField(InsuranceServiceConstants.ApartmentApplicationField.CONSTRUCTION_YEAR,
+                year);
     }
 
     @Step("Ввести площадь квартиры")
     public void inputBuildingArea(String area) {
-        insuranceApplicationPage.inputBuildingArea(area);
+        insuranceApplicationPage.inputField(InsuranceServiceConstants.ApartmentApplicationField.BUILDING_SPACE, area);
     }
 
     @Step("Ввести актуальную стоимость квартиры")
     public void inputBuildingCost(String cost) {
-        insuranceApplicationPage.inputActualCost(cost);
+        insuranceApplicationPage.inputField(InsuranceServiceConstants.ApartmentApplicationField.ACTUAL_COST, cost);
     }
 
     @Step("Ввести страховую сумму")
     public void inputInsuranceAmount(String amount) {
-        insuranceApplicationPage.inputInsuranceAmount(amount);
+        insuranceApplicationPage.inputField(InsuranceServiceConstants.ApartmentApplicationField.INSURANCE_AMOUNT,
+                amount);
     }
 
     @Step("Ввести область/регион строения")
     public void inputBuildingRegion(String region) {
-        insuranceApplicationPage.inputRegionOfBuilding(region);
+        insuranceApplicationPage.inputField(InsuranceServiceConstants.ApartmentApplicationField.BUILDING_REGION,
+                region);
     }
 
     @Step("Ввести город строения")
     public void inputBuildingCity(String city) {
-        insuranceApplicationPage.inputCityOfBuilding(city);
+        insuranceApplicationPage.inputField(InsuranceServiceConstants.ApartmentApplicationField.BUILDING_CITY, city);
     }
 
     @Step("Ввести улицу строения")
     public void inputBuildingStreet(String street) {
-        insuranceApplicationPage.inputStreetOfBuilding(street);
+        insuranceApplicationPage.inputField(InsuranceServiceConstants.ApartmentApplicationField.BUILDING_STREET,
+                street);
     }
 
     @Step("Ввести здание строения")
     public void inputBuildingHouse(String house) {
-        insuranceApplicationPage.inputHouseOfBuilding(house);
+        insuranceApplicationPage.inputField(InsuranceServiceConstants.ApartmentApplicationField.BUILDING_HOUSE, house);
     }
 
     @Step("Нажать кнопку 'Назад'")

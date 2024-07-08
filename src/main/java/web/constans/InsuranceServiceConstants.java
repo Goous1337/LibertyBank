@@ -26,7 +26,8 @@ public class InsuranceServiceConstants {
     public static final int THIRTIETH_DAY_OF_MONTH = 29;
     public static final int THIRTY_FIRST_DAY_OF_MONTH = 30;
     public static final String INSURANCE_DURATION_MINIMUM = "1";
-    public static final String INSURANCE_DURATION_MAXIMUM = "12";
+    public static final String INSURANCE_DURATION_TWELFTH = "12";
+    public static final String INSURANCE_DURATION_MAXIMUM = "60";
     public static final String INSURANCE_DURATION_INVALID = "6 years";
     public static final String VALID_NAME = "Николай";
     public static final String INVALID_NAME = "-Саш0к-";
@@ -53,5 +54,32 @@ public class InsuranceServiceConstants {
     public static final String YEAR_OF_CONSTRUCTION = "2007";
     public static final String APARTMENT_AREA = "40";
     public static final String APARTMENT_INSURANCE_AMOUNT = "50000";
+
+    public enum ApartmentApplicationField {
+        INSURANCE_DURATION,
+        LAST_NAME,
+        FIRST_NAME,
+        PATRONYMIC,
+        PASSPORT_NUMBER,
+        RESIDENCE_NUMBER,
+        REFUGE_NUMBER,
+        ISSUED_BY,
+        PHONE,
+        EMAIL,
+        REGION,
+        CITY,
+        STREET,
+        BUILDING,
+        APARTMENT,
+        ENTRANCE,
+        CONSTRUCTION_YEAR,
+        BUILDING_SPACE,
+        ACTUAL_COST,
+        INSURANCE_AMOUNT,
+        BUILDING_REGION,
+        BUILDING_CITY,
+        BUILDING_STREET,
+        BUILDING_HOUSE
+    }
 
 }

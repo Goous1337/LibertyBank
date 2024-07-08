@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import web.constans.InsuranceServiceConstants;
 import web.drivers.DriverManager;
 import web.helpers.CalendarElement;
 import web.pages.BasePage;
@@ -81,16 +82,10 @@ public class InsuranceApplicationApartmentPage extends BasePage {
     private WebElement emailInput;
     @FindBy(xpath = "//*[contains(@name, 'region')]/../..")
     private WebElement stateBorder;
-    @FindBy(xpath = "//*[contains(@name, 'region')]")
-    private WebElement stateInput;
     @FindBy(xpath = "//*[contains(@name, 'city')]/../..")
     private WebElement cityBorder;
-    @FindBy(xpath = "//*[contains(@name, 'city')]")
-    private WebElement cityInput;
     @FindBy(xpath = "//*[contains(@name, 'street')]/../..")
     private WebElement streetBorder;
-    @FindBy(xpath = "//*[contains(@name, 'street')]")
-    private WebElement streetInput;
     @FindBy(xpath = "//*[contains(@name, 'house')]/../..")
     private WebElement buildingBorder;
     @FindBy(xpath = "//*[contains(@name, 'house')]")
@@ -205,11 +200,6 @@ public class InsuranceApplicationApartmentPage extends BasePage {
         return waitElement(radioCurrencyUsd).isSelected();
     }
 
-    public void inputInsuranceDuration(String duration) {
-        waitElement(durationInputBoarder).click();
-        waitElement(durationInput).sendKeys(duration);
-    }
-
     public void selectStartingTomorrow() {
         waitElement(startingDateCalendarIcon).click();
         waitElement(calendarForm);
@@ -224,46 +214,12 @@ public class InsuranceApplicationApartmentPage extends BasePage {
 
     }
 
-    public String getTitleText() {
-        return pageTitle.getText();
-    }
-
-    public void inputLastName(String lastName) {
-        waitElement(lastNameBorder).click();
-        waitElement(lastNameInput).sendKeys(lastName);
-    }
-
-    public void inputFirstName(String firstName) {
-        waitElement(firstNameBorder).click();
-        waitElement(firstNameInput).sendKeys(firstName);
-    }
-
-    public void inputPatronymic(String patronymic) {
-        waitElement(patronymicBorder).click();
-        waitElement(patronymicInput).sendKeys(patronymic);
-    }
-
     public void selectDocumentType(Integer type) {
         waitElement(documentTypeBorder).click();
         waitElement(documentTypeList).isDisplayed();
         documentTypes = DriverManager.getDriver().findElements(By
                 .xpath("//*[contains(@name, 'documentType')]/following::ul/li"));
         documentTypes.get(type).click();
-    }
-
-    public void inputPassportNumber(String number) {
-        waitElement(passportBorder).click();
-        waitElement(passportInput).sendKeys(number);
-    }
-
-    public void inputResidenceNumber(String number) {
-        waitElement(residenceBorder).click();
-        waitElement(residenceInput).sendKeys(number);
-    }
-
-    public void inputRefugeNumber(String number) {
-        waitElement(refugeBorder).click();
-        waitElement(refugeInput).sendKeys(number);
     }
 
     public void inputDocumentGotDate(Integer year, Integer month, Integer day) {
@@ -288,93 +244,64 @@ public class InsuranceApplicationApartmentPage extends BasePage {
         dayButton.get(day).click();
     }
 
-    public void inputIssuedBy(String org) {
-        waitElement(issuedByBorder).click();
-        waitElement(issuedByInput).sendKeys(org);
-    }
-
-    public void inputPhone(String phoneNumber) {
-        waitElement(phoneNumberBorder).click();
-        waitElement(phoneNumberInput).sendKeys(phoneNumber);
-    }
-
-    public void inputEmail(String email) {
-        waitElement(emailBorder).click();
-        waitElement(emailInput).sendKeys(email);
-    }
-
     public void scrollDown() {
         scrollToElement(nextButton);
     }
 
-    public void inputState(String state) {
-        inputIntoSuggestionField(stateBorder, state, 4, 40);
-    }
-
-    public void inputCity(String city) {
-        inputIntoSuggestionField(cityBorder, city, 4, 40);
-    }
-
-    public void inputStreet(String street) {
-        inputIntoSuggestionField(streetBorder, street, 4, 40);
-    }
-
-    public void inputBuilding(String building) {
-        waitElement(buildingBorder).click();
-        waitElement(buildingInput).sendKeys(building);
-    }
-
-    public void inputApartment(String apartment) {
-        waitElement(apartmentBorder).click();
-        waitElement(apartmentInput).sendKeys(apartment);
-    }
-
-    public void inputEntrance(String entrance) {
-        waitElement(entranceBorder).click();
-        waitElement(entranceInput).sendKeys(entrance);
-    }
-
-    public void inputYearOfConstruction(String year) {
-        waitElement(yearOfConstructionBorder).click();
-        waitElement(yearOfConstructionInput).sendKeys(year);
-    }
-
-    public void inputBuildingArea(String area) {
-        waitElement(buildingAreaBorder).click();
-        waitElement(buildingAreaInput).sendKeys(area);
-    }
-
-    public void inputActualCost(String cost) {
-        waitElement(actualCostBorder).click();
-        waitElement(actualCostInput).sendKeys(cost);
-    }
-
-    public void inputInsuranceAmount(String amount) {
-        waitElement(insuranceAmountBorder).click();
-        waitElement(insuranceAmountInput).sendKeys(amount);
-    }
-
-    public void inputRegionOfBuilding(String region) {
-        waitElement(regionOfBuildingBorder).click();
-        waitElement(regionOfBuildingInput).sendKeys(region);
-    }
-
-    public void inputCityOfBuilding(String city) {
-        waitElement(cityOfBuildingBorder).click();
-        waitElement(cityOfBuildingInput).sendKeys(city);
-    }
-
-    public void inputStreetOfBuilding(String street) {
-        waitElement(streetOfBuildingBorder).click();
-        waitElement(streetOfBuildingInput).sendKeys(street);
-    }
-
-    public void inputHouseOfBuilding(String house) {
-        waitElement(houseOfBuildingBorder).click();
-        waitElement(houseOfBuildingInput).sendKeys(house);
-    }
-
     public void pressBackButton() {
         waitElement(backButton).click();
+    }
+
+    public void inputField(InsuranceServiceConstants.ApartmentApplicationField field, String data){
+        switch (field){
+            case INSURANCE_DURATION : inputIntoBasicField(durationInputBoarder,durationInput,data);
+            break;
+            case LAST_NAME : inputIntoBasicField(lastNameBorder, lastNameInput, data);
+            break;
+            case FIRST_NAME: inputIntoBasicField(firstNameBorder,firstNameInput,data);
+            break;
+            case PATRONYMIC: inputIntoBasicField(patronymicBorder,patronymicInput,data);
+            break;
+            case PASSPORT_NUMBER: inputIntoBasicField(passportBorder,passportInput,data);
+            break;
+            case RESIDENCE_NUMBER: inputIntoBasicField(residenceBorder,residenceInput,data);
+            break;
+            case REFUGE_NUMBER: inputIntoBasicField(refugeBorder,refugeInput,data);
+            break;
+            case ISSUED_BY: inputIntoBasicField(issuedByBorder,issuedByInput,data);
+            break;
+            case PHONE: inputIntoBasicField(phoneNumberBorder,phoneNumberInput,data);
+            break;
+            case EMAIL: inputIntoBasicField(emailBorder,emailInput,data);
+            break;
+            case REGION: inputIntoSuggestionField(stateBorder, data);
+            break;
+            case CITY: inputIntoSuggestionField(cityBorder, data);
+            break;
+            case STREET: inputIntoSuggestionField(streetBorder, data);
+            break;
+            case BUILDING: inputIntoBasicField(buildingBorder,buildingInput,data);
+            break;
+            case APARTMENT: inputIntoBasicField(apartmentBorder, apartmentInput, data);
+            break;
+            case ENTRANCE: inputIntoBasicField(entranceBorder, entranceInput, data);
+            break;
+            case CONSTRUCTION_YEAR: inputIntoBasicField(yearOfConstructionBorder, yearOfConstructionInput, data);
+            break;
+            case ACTUAL_COST: inputIntoBasicField(actualCostBorder, actualCostInput, data);
+            break;
+            case INSURANCE_AMOUNT: inputIntoBasicField(insuranceAmountBorder, insuranceAmountInput, data);
+            break;
+            case BUILDING_SPACE: inputIntoBasicField(buildingAreaBorder,buildingAreaInput,data);
+            break;
+            case BUILDING_REGION: inputIntoBasicField(regionOfBuildingBorder, regionOfBuildingInput, data);
+            break;
+            case BUILDING_CITY: inputIntoBasicField(cityOfBuildingBorder, cityOfBuildingInput, data);
+            break;
+            case BUILDING_STREET: inputIntoBasicField(streetOfBuildingBorder, streetOfBuildingInput, data);
+            break;
+            case BUILDING_HOUSE: inputIntoBasicField(houseOfBuildingBorder,houseOfBuildingInput, data);
+            break;
+        }
     }
 }
