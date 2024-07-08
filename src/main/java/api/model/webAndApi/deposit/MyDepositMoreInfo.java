@@ -24,6 +24,9 @@ public class MyDepositMoreInfo {
     private Boolean isRevocable;
     private Boolean isActive;
 
+    public MyDepositMoreInfo() {
+    }
+
     public MyDepositMoreInfo(String name, String depAccountNumber, Date openDate, Date closeDate, Integer periodMonths, Double interestRate) {
         this.name = name;
         this.depAccountNumber = depAccountNumber;
@@ -36,5 +39,22 @@ public class MyDepositMoreInfo {
     public String getStringDate(Date date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat(DepositsConstants.DATE_FORMAT);
         return dateFormat.format(date);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof MyDepositMoreInfo)) {
+            return false;
+        }
+        MyDepositMoreInfo myDepositMoreInfo = (MyDepositMoreInfo) obj;
+        return getName().equals(myDepositMoreInfo.getName()) &&
+                getDepAccountNumber().equals(myDepositMoreInfo.getDepAccountNumber()) &&
+                getOpenDate().equals(myDepositMoreInfo.getOpenDate()) &&
+                getCloseDate().equals(myDepositMoreInfo.getCloseDate()) &&
+                getPeriodMonths().equals(myDepositMoreInfo.getPeriodMonths()) &&
+                getInterestRate().equals(myDepositMoreInfo.getInterestRate());
     }
 }

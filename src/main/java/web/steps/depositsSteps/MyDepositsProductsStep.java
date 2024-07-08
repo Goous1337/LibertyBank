@@ -25,6 +25,7 @@ public class MyDepositsProductsStep {
     public void assertObjects() {
         Assertions.assertEquals(myDepositsProductsPage.objectFromBack(), myDepositsProductsPage.objectFromWeb(), "text");
     }
+
     @Step("Нажатие кнопки 'Показать больше' действующего депозита у авторизированного пользователя")
     public void clickShowMoreAboutMyDepositButton() {
         myDepositsProductsPage.clickShowMoreAboutMyDepositButton();

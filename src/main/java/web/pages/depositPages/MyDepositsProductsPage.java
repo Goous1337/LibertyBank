@@ -52,7 +52,8 @@ public class MyDepositsProductsPage extends BasePage {
     public void clickMyDepositsButton() {
         myDepositProductsBankButton.click();
     }
-    public void clickShowMoreAboutMyDepositButton(){
+
+    public void clickShowMoreAboutMyDepositButton() {
         showMoreAboutMyDepositButton.click();
     }
 

@@ -1,4 +1,5 @@
 package web.epic_9;
+
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.TmsLink;
@@ -21,7 +22,7 @@ public class US_9_8_CheckFullInfoAboutMyDepositTest extends BaseTest {
     @Test
     @DisplayName("Просмотр отображения элементов подробной информации о депозитном продукте пользователя")
     @TmsLink("LIB3-2671")
-    public void checkInfoElementsAboutDeposit(){
+    public void checkInfoElementsAboutDeposit() {
         myDepositDetailedInfoStep.assertTextNameTitleDepositIsDisplayed();
         myDepositDetailedInfoStep.assertTextAccountNumberDepositIsDisplayed();
         myDepositDetailedInfoStep.assertTextStatusDepositIsDisplayed();
@@ -53,10 +54,9 @@ public class US_9_8_CheckFullInfoAboutMyDepositTest extends BaseTest {
     }
 
     @Test
-    @Disabled
     @DisplayName("Просмотр подробной информации о депозитном продукте пользователя (сравнение UI c API)")
     @TmsLink("LIB3-2671")
-    public void checkFullInfoAboutDeposit(){
+    public void checkFullInfoAboutDeposit() {
         myDepositDetailedInfoStep.assertMoreInfoAboutMyDepositProduct();
     }
 

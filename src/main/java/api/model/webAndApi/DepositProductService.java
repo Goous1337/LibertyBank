@@ -12,7 +12,7 @@ import web.constans.deposit.DepositsConstants;
 import java.util.ArrayList;
 import java.util.List;
 
-import static property.BaseProperties.ACCESS_TOKEN_CUSTOMER_SERVICE;
+import static property.BaseProperties.*;
 import static web.constans.credit.CreditServiceConstants.BASE_URL_API;
 
 @Getter
@@ -70,10 +70,11 @@ public class DepositProductService {
         }
     }
 
+
     public void getMoreInfoAboutMyDeposit() {
         myDepositMoreInfoList = new ArrayList<MyDepositMoreInfo>();
         myDepositMoreInfo = RestAssured.given()
-                .header("Authorization", ACCESS_TOKEN_CUSTOMER_SERVICE)
+                .header("Authorization", ACCESS_TOKEN_DEPOSIT_SERVICE)
                 .baseUri(BASE_URL_API)
                 .when()
                 .get("deposit/api/v1/deposits/info?depositId=1559")
