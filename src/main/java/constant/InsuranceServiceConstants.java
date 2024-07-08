@@ -2,7 +2,7 @@ package constant;
 
 public class InsuranceServiceConstants {
 
-    public static final String CLIENT_ID = "c132bbd4-885d-4924-bd96-468484a5e53b";
+    public static final String CLIENT_ID = "f781452f-cb94-466d-8b48-7f39a6484f45";
 
     public static final String POLICY_THING_ID = "7223a5c7-ac5d-46c1-bcd7-063908674755";
 

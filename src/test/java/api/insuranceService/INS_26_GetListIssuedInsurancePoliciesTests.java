@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.INSURANCE_SERVICE_LIST_POLICES;
 
 @DisplayName("InS-26 Получение списка оформленных страховых полисов")
-public class INS_26_GetListIssuedInsurancePolicies extends BaseTest {
+public class INS_26_GetListIssuedInsurancePoliciesTests extends BaseTest {
 
     {
         RestAssured.baseURI = INSURANCE_SERVICE_LIST_POLICES;
