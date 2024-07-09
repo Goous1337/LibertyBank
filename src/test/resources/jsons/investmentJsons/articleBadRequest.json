@@ -1,0 +1,6 @@
+{
+  "uri": "/investment/api/v1/articles/-_.~",
+  "type": "400 BAD REQUEST",
+  "message": "Неверный тип аргумента. Укажите правильный тип параметра",
+  "timestamp": 1719418756
+}

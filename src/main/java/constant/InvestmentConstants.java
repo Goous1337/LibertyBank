@@ -15,7 +15,10 @@ public class InvestmentConstants {
     public static final String RISK_DECLARATIONS = "DOCX_FILE_RISK_DECLARATIONS";
     public static final String PDF_CONTENT_TYPE = "application/pdf";
     public static final String ARTICLE_TYPE = "articleType";
-    public static final String ARTICLE_ID = "65e82fb2a5706d3a4d258018";
+    public static final String VALID_ARTICLE_ID = "65e82fb2a5706d3a4d258018";
     public static final String NEWS = "NEWS";
     public static final String ANALYTICS = "ANALYTICS";
+    public static final String TIMESTAMP = "timestamp";
+    public static final String LIMIT = "limit";
+    public static final String TAG = "tag";
 }

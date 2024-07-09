@@ -104,5 +104,6 @@ public final class ApiEndpoints {
     public static final String GROUPS_OF_POLICES = "api/product-groups?filters[group_id]=";
     public static final String DEEP_OF_GROUPS = "&populate=deep,2";
     public static final String LIST_OF_ARTICLES = "investment/api/v1/lk/articles";
-    public static final String LIST_OF_ARTICLES_ID = "/investment/api/v1/lk/articles/%s";
+    public static final String LIST_OF_ARTICLES_ID = "/investment/api/v1/lk/articles/";
+    public static final String LIST_OF_ARTICLES_FEED = "/investment/api/v1/lk/articles/feed";
 }
