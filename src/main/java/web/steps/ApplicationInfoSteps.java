@@ -56,7 +56,7 @@ public class ApplicationInfoSteps {
     }
 
     @Step("Сравнение данных заявки на кредит UI и API")
-    public void assertDataOfApplication(){
-        Assertions.assertEquals(applicationsPage.getCreditApplicationsWeb(), applicationsPage.getCreditApplicationsBackend(),"Актуальный результат не соответствует ожидаемому");
+    public void assertDataOfApplication() {
+        Assertions.assertEquals(applicationsPage.getCreditApplicationsBackend(), applicationsPage.getCreditApplicationsWeb(), "Актуальный результат не соответствует ожидаемому");
     }
 }

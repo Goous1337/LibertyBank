@@ -4,9 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import web.constans.deposit.DepositsConstants;
 
+import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter
@@ -20,9 +19,6 @@ public class CreditApplications {
     private String status;
     private Date creationDate;
 
-
-    private List<CreditApplications> applications;
-
     public CreditApplications() {
     }
 
@@ -31,27 +27,25 @@ public class CreditApplications {
         this.amount = amount;
         this.periodMonths = periodMonths;
         this.interestRate = interestRate;
-       // this.currencyCode = currencyCode;
         this.status = status;
         this.creationDate = creationDate;
     }
 
     public String getStringDate(Date date) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat(DepositsConstants.DATE_FORMAT_APP);
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DepositsConstants.DATE_FORMAT);
         return dateFormat.format(date);
     }
 
-    public java.sql.Date getCreationDateApp() {
-        return (java.sql.Date) creationDate;
+    public java.sql.Date getCreationDate() {
+        return creationDate;
     }
-
 
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof CreditApplications)) {
+        if (!(obj instanceof MyCreditMoreInformation)) {
             return false;
         }
         CreditApplications creditApplications = (CreditApplications) obj;
@@ -59,8 +53,7 @@ public class CreditApplications {
                 getPeriodMonths().equals(creditApplications.getPeriodMonths()) &&
                 getInterestRate().equals(creditApplications.getInterestRate()) &&
                 getAmount().equals(creditApplications.getAmount()) &&
-             //   getCurrencyCode().equals(creditApplications.getCurrencyCode()) &&
-                getStatus().equals(creditApplications.getStatus())&&
+                getStatus().equals(creditApplications.getStatus()) &&
                 getCreationDate().equals(creditApplications.getCreationDate());
     }
 }

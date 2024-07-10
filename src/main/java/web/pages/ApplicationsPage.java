@@ -1,6 +1,6 @@
 package web.pages;
 
-import api.model.webAndApi.ApplicationsService;
+import api.model.webAndApi.CreditProductService;
 import api.model.webAndApi.credit.CreditApplications;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,13 +8,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import web.constans.credit.creditEnums.CreditStatusEnum;
-import web.constans.deposit.DepositsConstants;
-import web.helpers.Converter;
 import web.helpers.Waiters;
 
-import java.text.SimpleDateFormat;
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static web.helpers.Converter.*;
@@ -24,7 +21,7 @@ import static web.helpers.Converter.*;
 public class ApplicationsPage extends BasePage {
 
     private WebDriver driver;
-    public ApplicationsService applicationsService;
+    public CreditProductService creditProductService;
     private List<CreditApplications> listXpathApp;
     private List<CreditApplications> listApplicationsFromBackend;
     private String nameApplicationFromWeb;
@@ -34,14 +31,14 @@ public class ApplicationsPage extends BasePage {
     private Double percentOfCreditFromWeb;
     private Date dateOfCreateApplicationFromWeb;
     private String nameApplicationFromBackend;
-    private String  statusApplicationFromBackEnd;
+    private String statusApplicationFromBackEnd;
     private Double sumOfCreditFromBackEnd;
     private Integer dateOfCreditFromBackEnd;
     private Double percentOfCreditFromBackEnd;
     private Date dateOfCreateApplicationFromBackEnd;
 
-    public ApplicationsPage(){
-        applicationsService = new ApplicationsService();
+    public ApplicationsPage() {
+        creditProductService = new CreditProductService();
     }
 
     @FindBy(xpath = "//div[@class = '_container_h0vf9_1']/child::*[1]")
@@ -52,7 +49,7 @@ public class ApplicationsPage extends BasePage {
     @FindBy(xpath = "//span[@class='_count_1lpgb_15']")
     private WebElement amountOfCreditApplications;
 
-  //  @FindBy(css = "$$([data-testid='icon-user-image)")
+    //  @FindBy(css = "$$([data-testid='icon-user-image)")
 
 
     @FindBy(xpath = "//div[@class = '_container_h0vf9_1']/child::*[1]//h2[@class='_text_h2_xv9cv_5 _name_1df24_62']")
@@ -110,9 +107,7 @@ public class ApplicationsPage extends BasePage {
         return dateOfCreateApplication.isDisplayed();
     }
 
-
-
-    public List<CreditApplications> addCreditApplications(){
+    public List<CreditApplications> addCreditApplications() {
         listXpathApp = new ArrayList<>();
         listXpathApp.add(new CreditApplications(
                 nameCreditProduct.getText(),
@@ -124,33 +119,37 @@ public class ApplicationsPage extends BasePage {
         return listXpathApp;
     }
 
-    private static String checkCreditStatusApplication(WebElement statusOfCreditApplication){
+    private static String checkCreditStatusApplication(WebElement statusOfCreditApplication) {
         String status;
         if (CreditStatusEnum.CREDIT_STATUS_PENDING.toString().equals(statusOfCreditApplication.getText())) {
-           return status = "PENDING";
+            return status = "PENDING";
         } else {
             return statusOfCreditApplication.getText();
         }
     }
 
-    public CreditApplications getCreditApplicationsWeb(){
-            for (CreditApplications creditApplicationsWeb : addCreditApplications()) {
-                nameApplicationFromWeb = creditApplicationsWeb.getName();
-                sumOfCreditFromWeb = creditApplicationsWeb.getAmount();
-                dateOfCreditFromWeb = creditApplicationsWeb.getPeriodMonths();
-                statusApplicationFromWeb = creditApplicationsWeb.getStatus();
-                percentOfCreditFromWeb = creditApplicationsWeb.getInterestRate();
-                dateOfCreateApplicationFromWeb = (java.sql.Date) creditApplicationsWeb.getCreationDate();
-            }
-            return new CreditApplications(nameApplicationFromWeb, sumOfCreditFromWeb, dateOfCreditFromWeb, percentOfCreditFromWeb, statusApplicationFromWeb, dateOfCreateApplicationFromWeb);
+    public CreditApplications getCreditApplicationsWeb() {
+        for (CreditApplications creditApplicationsWeb : addCreditApplications()) {
+            nameApplicationFromWeb = creditApplicationsWeb.getName();
+            sumOfCreditFromWeb = creditApplicationsWeb.getAmount();
+            dateOfCreditFromWeb = creditApplicationsWeb.getPeriodMonths();
+            statusApplicationFromWeb = creditApplicationsWeb.getStatus();
+            percentOfCreditFromWeb = creditApplicationsWeb.getInterestRate();
+            dateOfCreateApplicationFromWeb = creditApplicationsWeb.getCreationDate();
+        }
+        return new CreditApplications(
+                nameApplicationFromWeb,
+                sumOfCreditFromWeb,
+                dateOfCreditFromWeb,
+                percentOfCreditFromWeb,
+                statusApplicationFromWeb,
+                dateOfCreateApplicationFromWeb);
     }
 
-
-
     public CreditApplications getCreditApplicationsBackend() {
-        applicationsService.getCreditApplications();
+        CreditProductService.getCreditApplications();
         listXpathApp = addCreditApplications();
-        listApplicationsFromBackend = applicationsService.getCreditApplicationsList();
+        listApplicationsFromBackend = CreditProductService.getCreditApplicationsList();
         for (CreditApplications creditApplicationsBackEnd : listApplicationsFromBackend) {
             for (CreditApplications creditApplicationsWeb : listXpathApp) {
                 if (creditApplicationsBackEnd.getName().equals(creditApplicationsWeb.getName())) {
@@ -165,20 +164,22 @@ public class ApplicationsPage extends BasePage {
                 if (creditApplicationsBackEnd.getPeriodMonths().equals(creditApplicationsWeb.getPeriodMonths())) {
                     dateOfCreditFromBackEnd = creditApplicationsBackEnd.getPeriodMonths();
                 }
+                if (creditApplicationsBackEnd.getCreationDate().equals(creditApplicationsWeb.getCreationDate())) {
+                    dateOfCreateApplicationFromBackEnd = parseDate(creditApplicationsBackEnd.getStringDate(creditApplicationsBackEnd.getCreationDate()));
+                }
                 if (creditApplicationsBackEnd.getInterestRate().equals(creditApplicationsWeb.getInterestRate())) {
                     percentOfCreditFromBackEnd = creditApplicationsBackEnd.getInterestRate();
                 }
-                /*if (creditApplicationsBackEnd.getCreationDate().equals(creditApplicationsWeb.getCreationDateApp())) {
-                    dateOfCreateApplicationFromBackEnd = creditApplicationsBackEnd.getCreationDate();
-                }*/
 
-              //  paymentDateFromWeb = parseDate(myCreditMoreInformationBackEnd.getStringDate(myCreditMoreInformationBackEnd.getPaymentDate()));
-                dateOfCreateApplicationFromBackEnd = Converter.parseDate(creditApplicationsBackEnd.getStringDate(creditApplicationsBackEnd.getCreationDate()));
             }
         }
-        return new CreditApplications(nameApplicationFromBackend, sumOfCreditFromBackEnd, dateOfCreditFromBackEnd, percentOfCreditFromBackEnd, statusApplicationFromBackEnd, dateOfCreateApplicationFromBackEnd);
+        return new CreditApplications(
+                nameApplicationFromBackend,
+                sumOfCreditFromBackEnd,
+                dateOfCreditFromBackEnd,
+                percentOfCreditFromBackEnd,
+                statusApplicationFromBackEnd,
+                dateOfCreateApplicationFromBackEnd);
     }
 
 }
-
-
