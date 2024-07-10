@@ -9,6 +9,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import web.BaseTest;
 
 import static web.constans.InsuranceServiceConstants.APARTMENT;
@@ -35,6 +37,7 @@ import static web.constans.InsuranceServiceConstants.TWENTY_EIGHTEEN;
 import static web.constans.InsuranceServiceConstants.VALID_NAME;
 import static web.constans.InsuranceServiceConstants.YEAR_OF_CONSTRUCTION;
 import static web.constans.UrlConfig.ONLINE_APARTMENT_APPLICATION_URL;
+import static web.enums.InsuranceEnum.Currencies;
 
 
 @Tags({@Tag("Web"), @Tag("MVP")})
@@ -50,12 +53,13 @@ public class US_10_1_2_CreateNewApartmentApplicationOnlineTest extends BaseTest 
 
     @DisplayName("Подача заявки на страхование квартиры: ввод валидных данных")
     @Description("Тест направлен на проверку валидации формы завки на страхование квартиры при валидных данных")
-    @TmsLink("LIB5-2462")
+    @TmsLink("LIB5-3747")
     @Test
     public void successfulOnlineApartmentApplicationTest() {
         insuranceApplicationApartmentSteps.assertNextButtonIsEnabled(false);
         insuranceApplicationApartmentSteps.inputInsuranceDuration(INSURANCE_DURATION_MINIMUM);
         insuranceApplicationApartmentSteps.choseInsuranceStartingTomorrow();
+        insuranceApplicationApartmentSteps.pressPayPartsToggle();
         insuranceApplicationApartmentSteps.assertNextButtonIsEnabled(true);
         insuranceApplicationApartmentSteps.pressNextButton();
         insuranceApplicationApartmentSteps.assertNextButtonIsEnabled(false);
@@ -88,5 +92,20 @@ public class US_10_1_2_CreateNewApartmentApplicationOnlineTest extends BaseTest 
         insuranceApplicationApartmentSteps.inputBuildingStreet(STREET);
         insuranceApplicationApartmentSteps.inputBuildingHouse(HOUSE);
         insuranceApplicationApartmentSteps.assertConfirmButtonIsEnabled(true);
+        insuranceApplicationApartmentSteps.pressConfirmButton();
+        insuranceApplicationApartmentSteps.assertSuccessImageIsPresent();
+    }
+
+    @DisplayName("Проверка валидации 1 этап формы: ввод валидных данных")
+    @Description("Тест направлен на проверку валидации 1 этапа формы завки на страхование квартиры при валидных данных")
+    @TmsLink("LIB5-2462")
+    @ParameterizedTest
+    @MethodSource("dataProviders.InsuranceFormDataProvider#formValidationFirstStepValidData")
+    public void formValidationFirstStepValidDataTest(Currencies currency, String duration) {
+        insuranceApplicationApartmentSteps.chooseCurrency(currency);
+        insuranceApplicationApartmentSteps.inputInsuranceDuration(duration);
+        insuranceApplicationApartmentSteps.choseInsuranceStartingTomorrow();
+        insuranceApplicationApartmentSteps.pressPayPartsToggle();
+        insuranceApplicationApartmentSteps.assertNextButtonIsEnabled(true);
     }
 }

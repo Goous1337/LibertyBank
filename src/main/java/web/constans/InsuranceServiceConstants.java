@@ -55,31 +55,4 @@ public class InsuranceServiceConstants {
     public static final String APARTMENT_AREA = "40";
     public static final String APARTMENT_INSURANCE_AMOUNT = "50000";
 
-    public enum ApartmentApplicationField {
-        INSURANCE_DURATION,
-        LAST_NAME,
-        FIRST_NAME,
-        PATRONYMIC,
-        PASSPORT_NUMBER,
-        RESIDENCE_NUMBER,
-        REFUGE_NUMBER,
-        ISSUED_BY,
-        PHONE,
-        EMAIL,
-        REGION,
-        CITY,
-        STREET,
-        BUILDING,
-        APARTMENT,
-        ENTRANCE,
-        CONSTRUCTION_YEAR,
-        BUILDING_SPACE,
-        ACTUAL_COST,
-        INSURANCE_AMOUNT,
-        BUILDING_REGION,
-        BUILDING_CITY,
-        BUILDING_STREET,
-        BUILDING_HOUSE
-    }
-
 }
