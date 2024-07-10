@@ -13,6 +13,19 @@ public class Converter {
 
     }
 
+    public static Integer convertPeriodOfApplication(String value) {
+       // String value = "2 года (32 месяца)";
+        value = String.valueOf(value).replace("2 года", "");
+        value = String.valueOf(value).replace("1 год", "");
+        value = String.valueOf(value).replace("3 года", "");
+        value = String.valueOf(value).replace("(", "");
+        value = String.valueOf(value).replace(")", "");
+        value = String.valueOf(value).replace("месяца", "");
+        value = String.valueOf(value).replace(" ", "");
+        return Integer.parseInt(value);
+        }
+
+
     public static Double convertToDouble(String value) {
         value = String.valueOf(value).replace(DepositsConstants.DELIMITER, DepositsConstants.POINT).trim();
         value = String.valueOf(value).replace(DepositsConstants.PROCENT, "").trim();

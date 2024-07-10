@@ -55,4 +55,8 @@ public class ApplicationInfoSteps {
         Assertions.assertTrue(applicationsPage.isNoApplications(), String.format(NOT_DISPLAYED_CREDIT_WEB_ELEMENT_MESSAGE, "Сообщение об отсутствии заявок"));
     }
 
+    @Step("Сравнение данных заявки на кредит UI и API")
+    public void assertDataOfApplication(){
+        Assertions.assertEquals(applicationsPage.getCreditApplicationsWeb(), applicationsPage.getCreditApplicationsBackend(),"Актуальный результат не соответствует ожидаемому");
+    }
 }

@@ -21,7 +21,7 @@ public class US_3_4_GetListUsersLoanApplicationTest extends BaseTest {
 
     @Test
     @DisplayName("Отображение информации о кредитной заявке пользователя")
-    @TmsLink("LIB3-2668")
+    @TmsLink("LIB3")
     public void checkBasicInfoLoanApplications() {
         creditInfoSteps.clickSubmittedCreditRequestButton();
         applicationInfoSteps.assertAmountOfCreditApplications();
@@ -36,9 +36,17 @@ public class US_3_4_GetListUsersLoanApplicationTest extends BaseTest {
     @Test
     @Disabled
     @DisplayName("Отображение сообщения об отсутствии заявок на кредит")
-    @TmsLink("LIB3-2668")
+    @TmsLink("LIB3")
     public void checkMessageIaDisplayed() {
         creditInfoSteps.clickSubmittedCreditRequestButton();
         applicationInfoSteps.assertMessageNoApplications();
+    }
+
+    @Test
+    @DisplayName("Сравнение данных заявки")
+    @TmsLink("LIB3")
+    public void checkDataWebAndBackEnd() {
+        creditInfoSteps.clickSubmittedCreditRequestButton();
+        applicationInfoSteps.assertDataOfApplication();
     }
 }
