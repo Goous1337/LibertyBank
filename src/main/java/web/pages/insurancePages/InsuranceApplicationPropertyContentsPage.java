@@ -1,11 +1,11 @@
 package web.pages.insurancePages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import web.drivers.DriverManager;
-import web.enums.InsuranceEnum.ContentsApplicationField;
 import web.pages.BasePage;
 
 import java.util.List;
@@ -84,7 +84,7 @@ public class InsuranceApplicationPropertyContentsPage extends BasePage {
     private WebElement calendarForm;
     @FindBy(xpath = "//*[@class='_fail-buttons_1gvr6_26']")
     private WebElement failImage;
-    @FindBy(xpath = "//img[@src = '/assets/send-application-success-a7c06c8a.png']")
+    @FindBy(xpath = "//*[contains(text(),'Заявка успешно отправлена!')]")
     private WebElement successImage;
     @FindBy(xpath = "//*[@class='react-calendar__navigation__arrow react-calendar__navigation__next-button']")
     private WebElement nextMonth;
@@ -148,6 +148,12 @@ public class InsuranceApplicationPropertyContentsPage extends BasePage {
         return waitElement(radioCurrencyUsd).isSelected();
     }
 
+    public void inputInsuranceDuration(String duration) {
+        waitElement(durationInputBoarder).click();
+        waitElement(durationInput).sendKeys(duration);
+        waitElement(durationFirstVariant).click();
+    }
+
     public void selectStartingTomorrow() {
         waitElement(startingDateCalendarIcon).click();
         waitElement(calendarForm);
@@ -159,10 +165,21 @@ public class InsuranceApplicationPropertyContentsPage extends BasePage {
                     .xpath("//*[@class='react-calendar__month-view__days']/button"));
             dayButton.get(0).click();
         }
+
     }
 
     public String getTitleText() {
         return pageTitle.getText();
+    }
+
+    public void inputThingName(String thingName) {
+        waitElement(thingNameBorder).click();
+        waitElement(thingNameInput).sendKeys(thingName);
+    }
+
+    public void inputThingCost(String cost) {
+        waitElement(thingCostBorder).click();
+        waitElement(thingCostInput).sendKeys(cost);
     }
 
     public void selectThingType(Integer type) {
@@ -187,42 +204,30 @@ public class InsuranceApplicationPropertyContentsPage extends BasePage {
         cityNames.get(city).click();
     }
 
-    public void inputField(ContentsApplicationField field, String data) {
-        switch (field) {
-            case INSURANCE_DURATION:
-                waitElement(durationInputBoarder).click();
-                waitElement(durationInput).sendKeys(data);
-                waitElement(durationFirstVariant).click();
-                break;
-            case THING_NAME:
-                waitElement(thingNameBorder).click();
-                waitElement(thingNameInput).sendKeys(data);
-                break;
-            case THING_COST:
-                waitElement(thingCostBorder).click();
-                waitElement(thingCostInput).sendKeys(data);
-                break;
-            case STREET:
-                waitElement(streetBorder).click();
-                waitElement(streetInput).sendKeys(data);
-                break;
-            case BUILDING:
-                waitElement(houseBorder).click();
-                waitElement(houseInput).sendKeys(data);
-                break;
-            case FLOOR:
-                waitElement(floorBorder).click();
-                waitElement(floorInput).sendKeys(data);
-                break;
-            case APARTMENT:
-                waitElement(apartmentBorder).click();
-                waitElement(apartmentInput).sendKeys(data);
-                break;
-            case ENTRANCE:
-                waitElement(entranceBorder).click();
-                waitElement(entranceInput).sendKeys(data);
-                break;
-        }
+    public void inputStreet(String street) {
+        waitElement(streetBorder).click();
+        waitElement(streetInput).sendKeys(street);
+    }
+
+    public void inputHouse(String house) {
+        waitElement(houseBorder).click();
+        waitElement(houseInput).sendKeys(house);
+    }
+
+    public void inputApartment(String apartment) {
+        waitElement(apartmentBorder).click();
+        waitElement(apartmentInput).sendKeys(apartment);
+    }
+
+    public void inputFloor(String floor) {
+        waitElement(floorBorder).click();
+        waitElement(floorInput).sendKeys(Keys.BACK_SPACE);
+        waitElement(floorInput).sendKeys(floor);
+    }
+
+    public void inputEntrance(String entrance) {
+        waitElement(entranceBorder).click();
+        waitElement(entranceInput).sendKeys(entrance);
     }
 
     public void pressBackButton() {

@@ -1,4 +1,4 @@
-package web.constans;
+package web.constans.insurance;
 
 public class InsuranceServiceConstants {
     public static final int START_OF_CENTURY = 2000;

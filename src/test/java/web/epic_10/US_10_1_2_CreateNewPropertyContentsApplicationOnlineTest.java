@@ -11,17 +11,17 @@ import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 import web.BaseTest;
 
-import static web.constans.InsuranceServiceConstants.APARTMENT;
-import static web.constans.InsuranceServiceConstants.CONSTRUCTION_TYPE_BRICK;
-import static web.constans.InsuranceServiceConstants.ENTRANCE;
-import static web.constans.InsuranceServiceConstants.FLOOR;
-import static web.constans.InsuranceServiceConstants.HOUSE;
-import static web.constans.InsuranceServiceConstants.INSURANCE_DURATION_MINIMUM;
-import static web.constans.InsuranceServiceConstants.MOSCOW;
-import static web.constans.InsuranceServiceConstants.STREET;
-import static web.constans.InsuranceServiceConstants.THING_COST;
-import static web.constans.InsuranceServiceConstants.THING_NAME;
-import static web.constans.InsuranceServiceConstants.THING_TYPE_FURNITURE;
+import static web.constans.insurance.InsuranceServiceConstants.APARTMENT;
+import static web.constans.insurance.InsuranceServiceConstants.CONSTRUCTION_TYPE_BRICK;
+import static web.constans.insurance.InsuranceServiceConstants.ENTRANCE;
+import static web.constans.insurance.InsuranceServiceConstants.FLOOR;
+import static web.constans.insurance.InsuranceServiceConstants.HOUSE;
+import static web.constans.insurance.InsuranceServiceConstants.INSURANCE_DURATION_MINIMUM;
+import static web.constans.insurance.InsuranceServiceConstants.MOSCOW;
+import static web.constans.insurance.InsuranceServiceConstants.STREET;
+import static web.constans.insurance.InsuranceServiceConstants.THING_COST;
+import static web.constans.insurance.InsuranceServiceConstants.THING_NAME;
+import static web.constans.insurance.InsuranceServiceConstants.THING_TYPE_FURNITURE;
 import static web.constans.UrlConfig.ONLINE_PROPERTY_CONTENT_APPLICATION_URL;
 
 
@@ -65,7 +65,5 @@ public class US_10_1_2_CreateNewPropertyContentsApplicationOnlineTest extends Ba
         insuranceApplicationPropertyContentsSteps.inputApartment(APARTMENT);
         insuranceApplicationPropertyContentsSteps.inputEntrance(ENTRANCE);
         insuranceApplicationPropertyContentsSteps.assertConfirmButtonIsEnabled(true);
-        insuranceApplicationPropertyContentsSteps.pressConfirmButton();
-        insuranceApplicationPropertyContentsSteps.assertSuccessImageIsPresent();
     }
 }

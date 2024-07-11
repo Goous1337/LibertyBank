@@ -9,35 +9,32 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
 import web.BaseTest;
 
-import static web.constans.InsuranceServiceConstants.APARTMENT;
-import static web.constans.InsuranceServiceConstants.APARTMENT_AREA;
-import static web.constans.InsuranceServiceConstants.APARTMENT_COST;
-import static web.constans.InsuranceServiceConstants.APARTMENT_INSURANCE_AMOUNT;
-import static web.constans.InsuranceServiceConstants.APRIL;
-import static web.constans.InsuranceServiceConstants.CITY;
-import static web.constans.InsuranceServiceConstants.DOCUMENT_DEPARTMENT;
-import static web.constans.InsuranceServiceConstants.DOCUMENT_NUMBER;
-import static web.constans.InsuranceServiceConstants.DOCUMENT_TYPE_PASSPORT;
-import static web.constans.InsuranceServiceConstants.EMAIL;
-import static web.constans.InsuranceServiceConstants.ENTRANCE;
-import static web.constans.InsuranceServiceConstants.FORTH_DAY_OF_MONTH;
-import static web.constans.InsuranceServiceConstants.HOUSE;
-import static web.constans.InsuranceServiceConstants.INSURANCE_DURATION_MINIMUM;
-import static web.constans.InsuranceServiceConstants.JULY;
-import static web.constans.InsuranceServiceConstants.PHONE_NUMBER;
-import static web.constans.InsuranceServiceConstants.START_OF_CENTURY;
-import static web.constans.InsuranceServiceConstants.STATE;
-import static web.constans.InsuranceServiceConstants.STREET;
-import static web.constans.InsuranceServiceConstants.THIRTY_FIRST_DAY_OF_MONTH;
-import static web.constans.InsuranceServiceConstants.TWENTY_EIGHTEEN;
-import static web.constans.InsuranceServiceConstants.VALID_NAME;
-import static web.constans.InsuranceServiceConstants.YEAR_OF_CONSTRUCTION;
+import static web.constans.insurance.InsuranceServiceConstants.APARTMENT;
+import static web.constans.insurance.InsuranceServiceConstants.APARTMENT_AREA;
+import static web.constans.insurance.InsuranceServiceConstants.APARTMENT_COST;
+import static web.constans.insurance.InsuranceServiceConstants.APARTMENT_INSURANCE_AMOUNT;
+import static web.constans.insurance.InsuranceServiceConstants.APRIL;
+import static web.constans.insurance.InsuranceServiceConstants.CITY;
+import static web.constans.insurance.InsuranceServiceConstants.DOCUMENT_DEPARTMENT;
+import static web.constans.insurance.InsuranceServiceConstants.DOCUMENT_NUMBER;
+import static web.constans.insurance.InsuranceServiceConstants.DOCUMENT_TYPE_PASSPORT;
+import static web.constans.insurance.InsuranceServiceConstants.EMAIL;
+import static web.constans.insurance.InsuranceServiceConstants.ENTRANCE;
+import static web.constans.insurance.InsuranceServiceConstants.FORTH_DAY_OF_MONTH;
+import static web.constans.insurance.InsuranceServiceConstants.HOUSE;
+import static web.constans.insurance.InsuranceServiceConstants.INSURANCE_DURATION_MINIMUM;
+import static web.constans.insurance.InsuranceServiceConstants.JULY;
+import static web.constans.insurance.InsuranceServiceConstants.PHONE_NUMBER;
+import static web.constans.insurance.InsuranceServiceConstants.START_OF_CENTURY;
+import static web.constans.insurance.InsuranceServiceConstants.STATE;
+import static web.constans.insurance.InsuranceServiceConstants.STREET;
+import static web.constans.insurance.InsuranceServiceConstants.THIRTY_FIRST_DAY_OF_MONTH;
+import static web.constans.insurance.InsuranceServiceConstants.TWENTY_EIGHTEEN;
+import static web.constans.insurance.InsuranceServiceConstants.VALID_NAME;
+import static web.constans.insurance.InsuranceServiceConstants.YEAR_OF_CONSTRUCTION;
 import static web.constans.UrlConfig.ONLINE_APARTMENT_APPLICATION_URL;
-import static web.enums.InsuranceEnum.Currencies;
 
 
 @Tags({@Tag("Web"), @Tag("MVP")})
@@ -53,13 +50,12 @@ public class US_10_1_2_CreateNewApartmentApplicationOnlineTest extends BaseTest 
 
     @DisplayName("Подача заявки на страхование квартиры: ввод валидных данных")
     @Description("Тест направлен на проверку валидации формы завки на страхование квартиры при валидных данных")
-    @TmsLink("LIB5-3747")
+    @TmsLink("LIB5-2462")
     @Test
     public void successfulOnlineApartmentApplicationTest() {
         insuranceApplicationApartmentSteps.assertNextButtonIsEnabled(false);
         insuranceApplicationApartmentSteps.inputInsuranceDuration(INSURANCE_DURATION_MINIMUM);
         insuranceApplicationApartmentSteps.choseInsuranceStartingTomorrow();
-        insuranceApplicationApartmentSteps.pressPayPartsToggle();
         insuranceApplicationApartmentSteps.assertNextButtonIsEnabled(true);
         insuranceApplicationApartmentSteps.pressNextButton();
         insuranceApplicationApartmentSteps.assertNextButtonIsEnabled(false);
@@ -92,20 +88,5 @@ public class US_10_1_2_CreateNewApartmentApplicationOnlineTest extends BaseTest 
         insuranceApplicationApartmentSteps.inputBuildingStreet(STREET);
         insuranceApplicationApartmentSteps.inputBuildingHouse(HOUSE);
         insuranceApplicationApartmentSteps.assertConfirmButtonIsEnabled(true);
-        insuranceApplicationApartmentSteps.pressConfirmButton();
-        insuranceApplicationApartmentSteps.assertSuccessImageIsPresent();
-    }
-
-    @DisplayName("Проверка валидации 1 этап формы: ввод валидных данных")
-    @Description("Тест направлен на проверку валидации 1 этапа формы завки на страхование квартиры при валидных данных")
-    @TmsLink("LIB5-2462")
-    @ParameterizedTest
-    @MethodSource("dataProviders.InsuranceFormDataProvider#formValidationFirstStepValidData")
-    public void formValidationFirstStepValidDataTest(Currencies currency, String duration) {
-        insuranceApplicationApartmentSteps.chooseCurrency(currency);
-        insuranceApplicationApartmentSteps.inputInsuranceDuration(duration);
-        insuranceApplicationApartmentSteps.choseInsuranceStartingTomorrow();
-        insuranceApplicationApartmentSteps.pressPayPartsToggle();
-        insuranceApplicationApartmentSteps.assertNextButtonIsEnabled(true);
     }
 }

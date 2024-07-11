@@ -2,7 +2,6 @@ package web.steps.insuranceSteps;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.TimeoutException;
-import web.enums.InsuranceEnum.ContentsApplicationField;
 import web.pages.insurancePages.InsuranceApplicationPropertyContentsPage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,7 +18,12 @@ public class InsuranceApplicationPropertyContentsSteps {
 
     @Step("Проверить, что кнопка 'Дальше' активна")
     public void assertNextButtonIsEnabled(Boolean status) {
-        String message = status ? "Кнопка 'Дальше' неактивна" : "Кнопка 'Дальше' активна";
+        String message;
+        if (status) {
+            message = "Кнопка 'Дальше' неактивна";
+        } else {
+            message = "Кнопка 'Дальше' активна";
+        }
         assertEquals(insuranceApplicationPage.nextButtonIsEnabled(), status, message);
     }
 
@@ -35,7 +39,12 @@ public class InsuranceApplicationPropertyContentsSteps {
 
     @Step("Проверить, что выбрана валюта RUB")
     public void assertCurrencyRubChosen(Boolean status) {
-        String message = status ? "Валюта RUB выбрана" : "Валюта RUB не выбрана";
+        String message;
+        if (status) {
+            message = "Валюта RUB выбрана";
+        } else {
+            message = "Валюта RUB не выбрана";
+        }
         assertEquals(insuranceApplicationPage.isSelectedRub(), status, message);
     }
 
@@ -46,7 +55,12 @@ public class InsuranceApplicationPropertyContentsSteps {
 
     @Step("Проверить, что выбрана валюта EUR")
     public void assertCurrencyEurChosen(Boolean status) {
-        String message = status ? "Валюта EUR выбрана" : "Валюта EUR не выбрана";
+        String message;
+        if (status) {
+            message = "Валюта EUR выбрана";
+        } else {
+            message = "Валюта EUR не выбрана";
+        }
         assertEquals(insuranceApplicationPage.isSelectedEur(), status, message);
     }
 
@@ -57,13 +71,18 @@ public class InsuranceApplicationPropertyContentsSteps {
 
     @Step("Проверить, что выбрана валюта USD")
     public void assertCurrencyUsdChosen(Boolean status) {
-        String message = status ? "Валюта USD выбрана" : "Валюта USD не выбрана";
+        String message;
+        if (status) {
+            message = "Валюта USD выбрана";
+        } else {
+            message = "Валюта USD не выбрана";
+        }
         assertEquals(insuranceApplicationPage.isSelectedUsd(), status, message);
     }
 
     @Step("Ввести минимальную длительность страховки")
     public void inputInsuranceDuration(String duration) {
-        insuranceApplicationPage.inputField(ContentsApplicationField.INSURANCE_DURATION, duration);
+        insuranceApplicationPage.inputInsuranceDuration(duration);
     }
 
     @Step("Выбрать начало действия страховки с завтрашнего дня")
@@ -79,7 +98,7 @@ public class InsuranceApplicationPropertyContentsSteps {
 
     @Step("Ввести название объекта страхования")
     public void inputThingName(String thingName) {
-        insuranceApplicationPage.inputField(ContentsApplicationField.THING_NAME, thingName);
+        insuranceApplicationPage.inputThingName(thingName);
     }
 
     @Step("Выбрать тип объекта")
@@ -89,7 +108,7 @@ public class InsuranceApplicationPropertyContentsSteps {
 
     @Step("Ввести стоимость объекта")
     public void inputThingCost(String thingCost) {
-        insuranceApplicationPage.inputField(ContentsApplicationField.THING_COST, thingCost);
+        insuranceApplicationPage.inputThingCost(thingCost);
     }
 
     @Step("Выбрать материал постройки")
@@ -104,27 +123,27 @@ public class InsuranceApplicationPropertyContentsSteps {
 
     @Step("Ввести улицу")
     public void inputStreet(String street) {
-        insuranceApplicationPage.inputField(ContentsApplicationField.STREET, street);
+        insuranceApplicationPage.inputStreet(street);
     }
 
     @Step("Ввести дом")
     public void inputHouse(String house) {
-        insuranceApplicationPage.inputField(ContentsApplicationField.BUILDING, house);
+        insuranceApplicationPage.inputHouse(house);
     }
 
     @Step("Ввести квартиру")
     public void inputApartment(String apartment) {
-        insuranceApplicationPage.inputField(ContentsApplicationField.APARTMENT, apartment);
+        insuranceApplicationPage.inputApartment(apartment);
     }
 
     @Step("Ввести этажность")
     public void inputFloor(String floor) {
-        insuranceApplicationPage.inputField(ContentsApplicationField.FLOOR, floor);
+        insuranceApplicationPage.inputFloor(floor);
     }
 
     @Step("Ввести подъезд")
     public void inputEntrance(String entrance) {
-        insuranceApplicationPage.inputField(ContentsApplicationField.ENTRANCE, entrance);
+        insuranceApplicationPage.inputEntrance(entrance);
     }
 
     @Step("Нажать кнопку 'Назад'")
@@ -143,7 +162,12 @@ public class InsuranceApplicationPropertyContentsSteps {
 
     @Step("Проверить, что кнопка 'Оформить' активна")
     public void assertConfirmButtonIsEnabled(Boolean status) {
-        String message = status ? "Кнопка 'Оформить' неактивна" : "Кнопка 'Оформить' активна";
+        String message;
+        if (status) {
+            message = "Кнопка 'Оформить' неактивна";
+        } else {
+            message = "Кнопка 'Оформить' активна";
+        }
         assertEquals(insuranceApplicationPage.confirmButtonIsEnabled(), status, message);
     }
 
