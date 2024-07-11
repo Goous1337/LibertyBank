@@ -1,6 +1,7 @@
 package web.steps.creditSteps;
 
 import io.qameta.allure.Step;
+import web.pages.creditPages.CreditMobileCodeVerificationPage;
 
 public class CreditMobileCodeVerificationSteps {
     protected CreditMobileCodeVerificationPage creditMobileCodeVerificationPage;

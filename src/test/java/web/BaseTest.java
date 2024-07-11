@@ -15,8 +15,7 @@ import web.steps.accountSteps.AccountInfoSteps;
 import web.steps.accountSteps.AccountSteps;
 import web.steps.accountSteps.CreateAccountSteps;
 import web.steps.accountSteps.RenameAccountSteps;
-import web.steps.cardSteps.*;
-import web.steps.depositsSteps.DepositsApplicationSteps;
+import web.steps.depositsSteps.*;
 import web.steps.cardSteps.CardInfoSteps;
 import web.steps.cardSteps.CardProductInfoSteps;
 import web.steps.cardSteps.CardProductsSteps;
@@ -34,6 +33,7 @@ import web.steps.depositsSteps.DepositsProductsFullInfoStep;
 import web.steps.depositsSteps.DepositsProductsSteps;
 import web.steps.depositsSteps.MyDepositsProductsSteps;
 import web.steps.insuranceSteps.InsuranceApplicationApartmentSteps;
+import web.steps.creditSteps.*;
 import web.steps.insuranceSteps.InsuranceApplicationPropertyContentsSteps;
 
 import static property.UserPropertiesReader.USER_PASSWORD;
@@ -51,6 +51,8 @@ public class BaseTest {
     protected CreditProductsDetailedInformationSteps creditProductDetailedInformationSteps;
     protected СreditProductsSteps creditProductsSteps;
     protected CreditApplicationSteps creditApplicationSteps;
+    protected CreditApplicationReportSteps creditApplicationReportSteps;
+    protected CreditMobileCodeVerificationSteps creditMobileCodeVerificationSteps;
     protected MyCreditSteps myCreditSteps;
     protected MyCreditDetailedInformationSteps myCreditDetailedInformationSteps;
     protected CreateAccountSteps createAccountSteps;
@@ -74,9 +76,10 @@ public class BaseTest {
     protected CardProductInfoSteps cardProductInfoSteps;
     protected CloseCardSteps closeCardSteps;
     protected FilterCardsSteps filterCardsSteps;
-    protected MyDepositsProductsSteps myDepositsProductsSteps;
+    protected MyDepositsProductsStep myDepositsProductsStep;
     protected DepositsProductsFullInfoStep depositsProductsFullInfoStep;
     protected DepositsApplicationSteps depositsApplicationSteps;
+    protected MyDepositsDetailedInfoStep myDepositDetailedInfoStep;
 
     public BaseTest() {
         refreshPages();
@@ -87,6 +90,8 @@ public class BaseTest {
     protected InsuranceApplicationApartmentSteps insuranceApplicationApartmentSteps;
 
 
+
+    protected ApplicationInfoSteps applicationInfoSteps;
 
     protected void open(String pageUrl) {
         DriverManager.getDriver()
@@ -135,6 +140,8 @@ public class BaseTest {
         moreCreditProduct = new MoreCreditProduct();
         moreCreditDetails = new MoreCreditDetails();
         creditProductService = new CreditProductService();
+        creditApplicationReportSteps = new CreditApplicationReportSteps();
+        creditMobileCodeVerificationSteps = new CreditMobileCodeVerificationSteps();
         updateEmailSteps = new UpdateEmailSteps();
         personalDataSteps = new PersonalDataSteps();
         cardProductsSteps = new CardProductsSteps();
@@ -145,10 +152,13 @@ public class BaseTest {
         closeCardSteps = new CloseCardSteps();
         filterCardsSteps = new FilterCardsSteps();
         depositsProductsSteps = new DepositsProductsSteps();
-        myDepositsProductsSteps = new MyDepositsProductsSteps();
+        myDepositsProductsStep = new MyDepositsProductsStep();
         depositsApplicationSteps = new DepositsApplicationSteps();
+        myDepositDetailedInfoStep = new MyDepositsDetailedInfoStep();
         changePinSteps = new ChangePinSteps();
+        applicationInfoSteps = new ApplicationInfoSteps();
         insuranceApplicationPropertyContentsSteps = new InsuranceApplicationPropertyContentsSteps();
+
         insuranceApplicationApartmentSteps = new InsuranceApplicationApartmentSteps();
     }
 }

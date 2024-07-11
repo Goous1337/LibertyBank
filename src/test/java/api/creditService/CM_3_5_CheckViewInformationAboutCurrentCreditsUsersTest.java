@@ -35,7 +35,7 @@ public class CM_3_5_CheckViewInformationAboutCurrentCreditsUsersTest extends Bas
     @Test
     public void checkUserInformationIncludeRealCreditProducts() {
         String jsonSchemaPath = "schemas/creditService/CM_3_5/checkUserInformationIncludeRealCreditProducts.json";
-        Response response = CreditService.checkViewInfoCurrentCreditsUsers("1");
+        Response response = CreditService.checkViewInfoCurrentCreditsUsers("13");
         assertAll(
                 () -> assertEquals(SC_OK, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
@@ -43,17 +43,17 @@ public class CM_3_5_CheckViewInformationAboutCurrentCreditsUsersTest extends Bas
         );
     }
 
-    @DisplayName("Просмотр подробной информации о действующих кредитах пользователя при неправильной конфигурации запроса")
+    @DisplayName("Просмотр подробной информации о действующих кредитах пользователя при ошибке сервера")
     @Description("Данный тест-кейс направлен на проверку СМ 3.5 по US 3.5 на просмотр подробной информации" +
-            " о действующих кредитах пользователя при неправильной конфигурации запроса")
+            " о действующих кредитах пользователя при ошибке сервера")
     @Tag("Negative")
-    @TmsLink("https://jira.astondevs.ru/browse/LIB3-922")
+    @TmsLink("https://jira.astondevs.ru/browse/LIB3-923")
     @Test
-    public void checkUserInformationIncludeRealCreditProductsWithIncorrectRequest() {
+    public void checkUserInformationIncludeRealCreditProductsWithServerError() {
         String jsonSchemaPath = "schemas/errorMessage.json";
-        Response response = CreditService.checkViewInfoCurrentCreditsUsers("/");
+        Response response = CreditService.checkViewInfoCurrentCreditUsers("13");
         assertAll(
-                () -> assertEquals(SC_BAD_REQUEST, response.statusCode(),
+                () -> assertEquals(SC_SERVER_ERROR, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
@@ -83,7 +83,7 @@ public class CM_3_5_CheckViewInformationAboutCurrentCreditsUsersTest extends Bas
     @Test
     public void checkDisplayingElectronicBackgroundForApplyingCreditInvalidToken() {
         String jsonSchemaPath = "schemas/errorMessage.json";
-        Response response = CreditService.checkViewInfoCurrentCreditsUsersInvalidToken("1");
+        Response response = creditService.checkCreditInfoNoToken();
         assertAll(
                 () -> assertEquals(SC_UNAUTHORIZED, response.statusCode(),
                         "Код ответа не соответствует ожидаемому"),

@@ -3,6 +3,7 @@ package web.pages.creditPages;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import web.drivers.DriverManager;
+import web.helpers.Waiters;
 import web.pages.BasePage;
 
 public class CreditInfoPage extends BasePage {
@@ -23,6 +24,7 @@ public class CreditInfoPage extends BasePage {
 
     public void clickCreditButton() {
         creditButton.click();
+        Waiters.waitElement(myCreditButton);
     }
 
     /*Раздел кредиты*/
