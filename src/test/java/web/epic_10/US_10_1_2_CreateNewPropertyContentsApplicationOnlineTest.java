@@ -65,5 +65,7 @@ public class US_10_1_2_CreateNewPropertyContentsApplicationOnlineTest extends Ba
         insuranceApplicationPropertyContentsSteps.inputApartment(APARTMENT);
         insuranceApplicationPropertyContentsSteps.inputEntrance(ENTRANCE);
         insuranceApplicationPropertyContentsSteps.assertConfirmButtonIsEnabled(true);
+        insuranceApplicationPropertyContentsSteps.pressConfirmButton();
+        insuranceApplicationPropertyContentsSteps.assertSuccessImageIsPresent();
     }
 }

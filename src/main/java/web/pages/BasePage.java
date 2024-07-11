@@ -8,9 +8,9 @@ import web.drivers.DriverManager;
 
 import java.time.Duration;
 
-import static web.constans.credit.BaseConstants.BASE_DURATION;
-import static web.constans.credit.BaseConstants.SUGGESTION_FIELD_OFFSET_X;
-import static web.constans.credit.BaseConstants.SUGGESTION_FIELD_OFFSET_Y;
+import static web.constans.BaseConstants.BASE_DURATION;
+import static web.constans.BaseConstants.SUGGESTION_FIELD_OFFSET_X;
+import static web.constans.BaseConstants.SUGGESTION_FIELD_OFFSET_Y;
 import static web.helpers.Waiters.waitElement;
 
 public abstract class BasePage {

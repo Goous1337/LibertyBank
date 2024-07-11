@@ -31,7 +31,6 @@ import web.steps.creditSteps.MyCreditSteps;
 import web.steps.creditSteps.СreditProductsSteps;
 import web.steps.depositsSteps.DepositsProductsFullInfoStep;
 import web.steps.depositsSteps.DepositsProductsSteps;
-import web.steps.depositsSteps.MyDepositsProductsSteps;
 import web.steps.insuranceSteps.InsuranceApplicationApartmentSteps;
 import web.steps.creditSteps.*;
 import web.steps.insuranceSteps.InsuranceApplicationPropertyContentsSteps;
@@ -88,7 +87,6 @@ public class BaseTest {
     protected ChangePinSteps changePinSteps;
     protected InsuranceApplicationPropertyContentsSteps insuranceApplicationPropertyContentsSteps;
     protected InsuranceApplicationApartmentSteps insuranceApplicationApartmentSteps;
-
 
 
     protected ApplicationInfoSteps applicationInfoSteps;

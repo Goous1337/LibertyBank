@@ -2,10 +2,10 @@ package dataProviders;
 
 import java.util.stream.Stream;
 
-import static web.constans.InsuranceServiceConstants.INSURANCE_DURATION_MAXIMUM;
-import static web.constans.InsuranceServiceConstants.INSURANCE_DURATION_MINIMUM;
-import static web.constans.InsuranceServiceConstants.INSURANCE_DURATION_TWELFTH;
-import static web.enums.InsuranceEnum.Currencies;
+import static web.constans.insurance.InsuranceServiceConstants.INSURANCE_DURATION_MAXIMUM;
+import static web.constans.insurance.InsuranceServiceConstants.INSURANCE_DURATION_MINIMUM;
+import static web.constans.insurance.InsuranceServiceConstants.INSURANCE_DURATION_TWELFTH;
+import static web.constans.insurance.InsuranceEnum.Currencies;
 
 public class InsuranceFormDataProvider {
     public static Stream<Object[]> formValidationFirstStepValidData() {
