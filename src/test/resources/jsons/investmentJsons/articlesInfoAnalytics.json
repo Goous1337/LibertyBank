@@ -1,0 +1,65 @@
+{
+  "content": [
+    {
+      "id": "65e9aa104b0cc31d05841d5d",
+      "title": "«Избегал бы акций США». Вечный «медведь» Уолл-стрит дал совет на 2024 год",
+      "articleType": "ANALYTICS",
+      "description": "По мнению Грэнтэма, доходность акций США в 2024 году «будет разочаровывающей». Он рекомендовал искать недооцененные активы на развивающихся рынках",
+      "tagType": "ECONOMICS",
+      "instant": 1709637711229,
+      "image": "http://172.17.1.79:30610/investment-articles/c871c218-87c6-463e-9753-312a232d1d54.png"
+    },
+    {
+      "id": "65e9aae84b0cc31d05841d63",
+      "title": "«Делимобиль» увеличил объем предложения в ходе IPO с ₽3 млрд до ₽4,2 млрд",
+      "articleType": "ANALYTICS",
+      "description": "Сбор заявок на участие в IPO начался 29 января. Ценовой диапазон был установлен в коридоре от ₽245 до ₽265 за бумагу",
+      "tagType": "ECONOMICS",
+      "instant": 1709636712929,
+      "image": "http://172.17.1.79:30610/investment-articles/6753b194-5af8-44e3-8428-7eee307cbf9b.png"
+    },
+    {
+      "id": "65e9aa9b4b0cc31d05841d61",
+      "title": "Акции «Яндекса» упали на 9% на новости о разделении бизнеса",
+      "articleType": "ANALYTICS",
+      "description": "Нидерландская Yandex N.V. уйдет с Мосбиржи, на площадке будут торговаться акции российской МКАО «Яндекс». Миноритариям предложат «различные опции по их бумагам», однако какие именно — не уточняется",
+      "tagType": "ECONOMICS",
+      "instant": 1709636712229,
+      "image": "http://172.17.1.79:30610/investment-articles/236af856-a922-43d2-bbfa-6782a2b772c4.png"
+    },
+    {
+      "id": "65e9aa624b0cc31d05841d5f",
+      "title": "Акции ЛУКОЙЛа умеренно отреагировали на участие в сделке «Яндекса»",
+      "articleType": "ANALYTICS",
+      "description": "Нефтяная компания примет участие в сделке по приобретению доли в МКАО «Яндекс» в составе консорциума инвесторов и получит около 10% акций «Яндекса»",
+      "tagType": "ECONOMICS",
+      "instant": 1709636711229,
+      "image": "http://172.17.1.79:30610/investment-articles/37705388-6bc5-4be7-93db-77c343fe32c0.png"
+    }
+  ],
+  "pageable": {
+    "pageNumber": 0,
+    "pageSize": 5,
+    "sort": {
+      "empty": false,
+      "unsorted": false,
+      "sorted": true
+    },
+    "offset": 0,
+    "unpaged": false,
+    "paged": true
+  },
+  "totalPages": 1,
+  "totalElements": 4,
+  "last": true,
+  "size": 5,
+  "number": 0,
+  "sort": {
+    "empty": false,
+    "unsorted": false,
+    "sorted": true
+  },
+  "numberOfElements": 4,
+  "first": true,
+  "empty": false
+}

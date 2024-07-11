@@ -1,0 +1,5 @@
+{
+  "uri": "/investment/api/v1/lk/articles/feed",
+  "type": "400 BAD REQUEST",
+  "message": "Неверный тип аргумента. Укажите правильный тип параметра"
+}
