@@ -23,6 +23,15 @@ import web.steps.cardSteps.CardSteps;
 import web.steps.cardSteps.CloseCardSteps;
 import web.steps.cardSteps.ConfirmationSteps;
 import web.steps.cardSteps.FilterCardsSteps;
+import web.steps.creditSteps.CreditApplicationSteps;
+import web.steps.creditSteps.CreditInfoSteps;
+import web.steps.creditSteps.CreditProductsDetailedInformationSteps;
+import web.steps.creditSteps.MyCreditDetailedInformationSteps;
+import web.steps.creditSteps.MyCreditSteps;
+import web.steps.creditSteps.СreditProductsSteps;
+import web.steps.depositsSteps.DepositsProductsFullInfoStep;
+import web.steps.depositsSteps.DepositsProductsSteps;
+import web.steps.insuranceSteps.InsuranceApplicationApartmentSteps;
 import web.steps.creditSteps.*;
 import web.steps.insuranceSteps.InsuranceApplicationPropertyContentsSteps;
 
@@ -77,7 +86,7 @@ public class BaseTest {
 
     protected ChangePinSteps changePinSteps;
     protected InsuranceApplicationPropertyContentsSteps insuranceApplicationPropertyContentsSteps;
-
+    protected InsuranceApplicationApartmentSteps insuranceApplicationApartmentSteps;
 
 
     protected ApplicationInfoSteps applicationInfoSteps;
@@ -148,5 +157,6 @@ public class BaseTest {
         applicationInfoSteps = new ApplicationInfoSteps();
         insuranceApplicationPropertyContentsSteps = new InsuranceApplicationPropertyContentsSteps();
 
+        insuranceApplicationApartmentSteps = new InsuranceApplicationApartmentSteps();
     }
 }
