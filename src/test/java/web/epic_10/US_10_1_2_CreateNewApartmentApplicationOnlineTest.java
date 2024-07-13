@@ -98,7 +98,7 @@ public class US_10_1_2_CreateNewApartmentApplicationOnlineTest extends BaseTest 
 
     @DisplayName("Первый этап формы подачи заявки на квартиру : ввод валидных данных")
     @Description("Тест направлен на проверку валидации первого этапа" +
-            " формы завки на страхование квартиры при валидных данных")
+            " формы заявки на страхование квартиры при валидных данных")
     @TmsLink("LIB5-2462")
     @ParameterizedTest
     @MethodSource("dataProviders.InsuranceFormDataProvider#formValidationFirstStepValidData")
