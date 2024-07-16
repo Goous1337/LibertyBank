@@ -9,4 +9,5 @@ public class UserPropertiesReader {
     public static final String USER_DOCUMENT_NUM = PropertiesReader.getPropertyValue("user.docNum", PATH_PROPERTIES);
 
     public static final String USER_PASSWORD = PropertiesReader.getPropertyValue("user.password", PATH_PROPERTIES);
+    public static final String USER_PHONE_WITHOUT_BROKERAGE = PropertiesReader.getPropertyValue("user.phoneNumWithoutBrokerage", PATH_PROPERTIES);
 }
