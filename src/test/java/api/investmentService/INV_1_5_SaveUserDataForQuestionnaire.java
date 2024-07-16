@@ -52,7 +52,6 @@ public class INV_1_5_SaveUserDataForQuestionnaire extends BaseTest {
                 () -> assertEquals(actualData.getMessage(), expectedData.getMessage(), "Сообщение об ошибке не соответствует ожидаемому"));
     }
 
-    @Disabled("LIB6-1229")
     @ParameterizedTest
     @CsvSource({
             "false, true, true, true, true",

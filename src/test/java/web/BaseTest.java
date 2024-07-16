@@ -34,9 +34,9 @@ import web.steps.depositsSteps.DepositsProductsSteps;
 import web.steps.insuranceSteps.InsuranceApplicationApartmentSteps;
 import web.steps.creditSteps.*;
 import web.steps.insuranceSteps.InsuranceApplicationPropertyContentsSteps;
+import web.steps.investmentSteps.InvestmentMainSteps;
 
-import static property.UserPropertiesReader.USER_PASSWORD;
-import static property.UserPropertiesReader.USER_PHONE;
+import static property.UserPropertiesReader.*;
 import static web.constans.UrlConfig.BASE_URL;
 import static web.constans.UrlConfig.LOGIN_URL;
 
@@ -79,6 +79,7 @@ public class BaseTest {
     protected DepositsProductsFullInfoStep depositsProductsFullInfoStep;
     protected DepositsApplicationSteps depositsApplicationSteps;
     protected MyDepositsDetailedInfoStep myDepositDetailedInfoStep;
+    protected InvestmentMainSteps investmentMainSteps;
 
     public BaseTest() {
         refreshPages();
@@ -88,7 +89,6 @@ public class BaseTest {
     protected InsuranceApplicationPropertyContentsSteps insuranceApplicationPropertyContentsSteps;
     protected InsuranceApplicationApartmentSteps insuranceApplicationApartmentSteps;
 
-
     protected ApplicationInfoSteps applicationInfoSteps;
 
     protected void open(String pageUrl) {
@@ -96,13 +96,21 @@ public class BaseTest {
                 .get(BASE_URL + pageUrl);
     }
 
-    protected void authorization() {
+    protected void baseAuthorization(String userPhone, String password) {
         open(LOGIN_URL);
         loginSteps.clickInputPhone();
-        loginSteps.enterPhone(USER_PHONE);
+        loginSteps.enterPhone(userPhone);
         loginSteps.clickInputPassword();
-        loginSteps.enterPassword(USER_PASSWORD);
+        loginSteps.enterPassword(password);
         loginSteps.tapSubmitButtonToMain();
+    }
+
+    protected void authorization() {
+        baseAuthorization(USER_PHONE, USER_PASSWORD);
+    }
+
+    protected void authorizationWithoutBrokerage() {
+        baseAuthorization(USER_PHONE_WITHOUT_BROKERAGE, USER_PASSWORD);
     }
 
     @BeforeEach
@@ -156,7 +164,7 @@ public class BaseTest {
         changePinSteps = new ChangePinSteps();
         applicationInfoSteps = new ApplicationInfoSteps();
         insuranceApplicationPropertyContentsSteps = new InsuranceApplicationPropertyContentsSteps();
-
+        investmentMainSteps = new InvestmentMainSteps();
         insuranceApplicationApartmentSteps = new InsuranceApplicationApartmentSteps();
     }
 }
