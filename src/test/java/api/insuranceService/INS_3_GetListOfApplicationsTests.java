@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import static constant.InsuranceServiceConstants.CLIENT_ID;
 import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
+import static org.apache.http.HttpStatus.SC_NOT_FOUND;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static property.BaseProperties.INSURANCE_SERVICE;
 
 @DisplayName("InsS-3 Получение списка заявок (Актуально)")
-public class INS_3_GetListOfApplications extends BaseTest {
+public class INS_3_GetListOfApplicationsTests extends BaseTest {
 
     {
         RestAssured.baseURI = INSURANCE_SERVICE;
@@ -32,13 +33,15 @@ public class INS_3_GetListOfApplications extends BaseTest {
         String jsonSchemaPath = "schemas/insuranceService/getListOfApplications.json";
         Response response = insuranceService.getListOfInsuranceApplications(CLIENT_ID);
         assertAll(
-                () -> assertEquals(SC_OK, response.statusCode(), "Статус код ответа не соответствует ожидаемому"),
+                () -> assertEquals(SC_OK, response.statusCode(),
+                        "Статус код ответа не соответствует ожидаемому"),
                 () -> assertNotNull(response.jsonPath().get("applicationId").toString()),
                 () -> assertNotNull(response.jsonPath().get("status").toString()),
                 () -> assertNotNull(response.jsonPath().get("productName").toString()),
                 () -> assertNotNull(response.jsonPath().get("submissionDate").toString()),
                 () -> assertNotNull(response.jsonPath().get("productId").toString()),
-                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+                () -> response.then().assertThat().body(JsonSchemaValidator
+                        .matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 
@@ -50,8 +53,10 @@ public class INS_3_GetListOfApplications extends BaseTest {
         String jsonSchemaPath = "schemas/insuranceService/getListOfApplicationsFail.json";
         Response response = insuranceService.getListOfInsuranceApplicationsWithoutAuthorization();
         assertAll(
-                () -> assertEquals(SC_BAD_REQUEST, response.statusCode(), "Статус код ответа не соответсвует ожидаемому"),
-                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+                () -> assertEquals(SC_BAD_REQUEST, response.statusCode(),
+                        "Статус код ответа не соответсвует ожидаемому"),
+                () -> response.then().assertThat().body(JsonSchemaValidator
+                        .matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 
@@ -61,10 +66,12 @@ public class INS_3_GetListOfApplications extends BaseTest {
     @Test()
     public void getListOfApplicationsIncorrectEndpointTest() {
         String jsonSchemaPath = "schemas/insuranceService/getListOfApplicationsFail.json";
-        Response response = insuranceService.getListOfInsuranceApplicationsWithoutAuthorization();
+        Response response = insuranceService.getListOfInsuranceApplicationsIncorrectEndoint(CLIENT_ID);
         assertAll(
-                () -> assertEquals(SC_BAD_REQUEST, response.statusCode(), "Статус код ответа не соответсвует ожидаемому"),
-                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath))
+                () -> assertEquals(SC_NOT_FOUND, response.statusCode(),
+                        "Статус код ответа не соответсвует ожидаемому"),
+                () -> response.then().assertThat().body(JsonSchemaValidator
+                        .matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
     }
 

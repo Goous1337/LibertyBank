@@ -109,5 +109,5 @@ public final class ApiEndpoints {
     public static final String LIST_INSURANCE_APPLICATIONS =
             "insurance-service/api/v1/insurance/applications/submitted";
     public static final String LIST_INSURANCE_APPLICATIONS_INVALID =
-            "insurance-service/api/v1/insurance/applications/submitted";
+            "insurance-service/api/v1/insurance/applications/sub";
 }
