@@ -26,7 +26,6 @@ public class INV_1_4_RequestUserDataForQuestionnaire extends BaseTest {
         RestAssured.baseURI = INVESTMENT_SERVICE;
     }
 
-    @Disabled("LIB6-1157")
     @Test
     @TmsLink("LIB6-858")
     @DisplayName("Запросить данные пользователя для анкеты")
