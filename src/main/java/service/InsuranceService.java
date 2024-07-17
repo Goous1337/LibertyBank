@@ -18,6 +18,8 @@ import static constant.ApiEndpoints.APPLICATION_INSURANCE;
 import static constant.ApiEndpoints.APPLICATION_INSURANCE_OFFLINE;
 import static constant.ApiEndpoints.DEEP_OF_GROUPS;
 import static constant.ApiEndpoints.GROUPS_OF_POLICES;
+import static constant.ApiEndpoints.LIST_INSURANCE_APPLICATIONS;
+import static constant.ApiEndpoints.LIST_INSURANCE_APPLICATIONS_INVALID;
 import static constant.ApiEndpoints.POLICY_INSURANCE;
 import static constant.ApiEndpoints.POPULAR_INSURANCE_PRODUCTS;
 import static constant.InsuranceServiceConstants.ACCEPT_VALUE;
@@ -95,5 +97,25 @@ public class InsuranceService {
 
     public String getResponseIdNewApplicationInsuranceOffline(Response response) {
         return response.jsonPath().get("applicationId").toString();
+    }
+
+    public Response getListOfInsuranceApplications(String clientId) {
+        List<RequestParam> params = List.of(getRP(HEADER, "accept", ACCEPT_VALUE),
+                getRP(HEADER, "clientId", clientId),
+                getRP(HEADER, CONTENT_TYPE, CONTENT_TYPE_VALUE));
+        return sendSimpleRequest(GET, LIST_INSURANCE_APPLICATIONS, params);
+    }
+
+    public Response getListOfInsuranceApplicationsWithoutAuthorization() {
+        List<RequestParam> params = List.of(getRP(HEADER, "accept", ACCEPT_VALUE),
+                getRP(HEADER, CONTENT_TYPE, CONTENT_TYPE_VALUE));
+        return sendSimpleRequest(GET, LIST_INSURANCE_APPLICATIONS, params);
+    }
+
+    public Response getListOfInsuranceApplicationsIncorrectEndoint(String clientId) {
+        List<RequestParam> params = List.of(getRP(HEADER, "accept", ACCEPT_VALUE),
+                getRP(HEADER, "clientId", clientId),
+                getRP(HEADER, CONTENT_TYPE, CONTENT_TYPE_VALUE));
+        return sendSimpleRequest(GET, LIST_INSURANCE_APPLICATIONS_INVALID, params);
     }
 }
