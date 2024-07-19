@@ -59,5 +59,4 @@ public class US_9_8_CheckFullInfoAboutMyDepositTest extends BaseTest {
     public void checkFullInfoAboutDeposit() {
         myDepositDetailedInfoStep.assertMoreInfoAboutMyDepositProduct();
     }
-
 }
