@@ -1,17 +1,17 @@
-package web.steps;
+package web.steps.creditSteps;
 
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
-import web.pages.ApplicationsPage;
+import web.pages.creditPages.CreditApplicationsPage;
 
 
 import static web.constans.credit.CreditServiceConstants.NOT_DISPLAYED_CREDIT_WEB_ELEMENT_MESSAGE;
 
-public class ApplicationInfoSteps {
-    protected ApplicationsPage applicationsPage;
+public class CreditApplicationInfoSteps {
+    protected CreditApplicationsPage  applicationsPage;
 
-    public ApplicationInfoSteps() {
-        applicationsPage = new ApplicationsPage();
+    public CreditApplicationInfoSteps() {
+        applicationsPage = new CreditApplicationsPage();
     }
 
     @Step("Проверка отображения количества поданных кредитных заявок")
@@ -22,7 +22,6 @@ public class ApplicationInfoSteps {
     @Step("Проверка отображения статуса кредитной заявки")
     public void assertStatusOfCreditApplication() {
         Assertions.assertTrue(applicationsPage.isStatusOfCreditApplicationDisplayed(), String.format(NOT_DISPLAYED_CREDIT_WEB_ELEMENT_MESSAGE, "Статус заявки не отображается"));
-        // TestListener.takeScreenshot();
     }
 
     @Step("Проверка отображения название кредитного продукта")
@@ -56,7 +55,7 @@ public class ApplicationInfoSteps {
     }
 
     @Step("Сравнение данных заявки на кредит UI и API")
-    public void assertDataOfApplication(){
-        Assertions.assertEquals(applicationsPage.getCreditApplicationsWeb(), applicationsPage.getCreditApplicationsBackend(),"Актуальный результат не соответствует ожидаемому");
+    public void assertDataOfApplication() {
+        Assertions.assertEquals(applicationsPage.getCreditApplicationsWeb(), applicationsPage.getCreditApplicationsBackend(), "Актуальный результат не соответствует ожидаемому");
     }
 }

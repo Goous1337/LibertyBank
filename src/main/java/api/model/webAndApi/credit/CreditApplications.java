@@ -18,7 +18,7 @@ public class CreditApplications {
     private Double interestRate;
     private String currencyCode;
     private String status;
-    private Date creationDate;
+    private String creationDate;
 
 
     private List<CreditApplications> applications;
@@ -26,7 +26,7 @@ public class CreditApplications {
     public CreditApplications() {
     }
 
-    public CreditApplications(String name, Double amount, Integer periodMonths, Double interestRate, String status, Date creationDate) {
+    public CreditApplications(String name, Double amount, Integer periodMonths, Double interestRate, String status, String creationDate) {
         this.name = name;
         this.amount = amount;
         this.periodMonths = periodMonths;
@@ -37,14 +37,9 @@ public class CreditApplications {
     }
 
     public String getStringDate(Date date) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat(DepositsConstants.DATE_FORMAT_APP);
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DepositsConstants.DATE_FORMAT);
         return dateFormat.format(date);
     }
-
-    public java.sql.Date getCreationDateApp() {
-        return (java.sql.Date) creationDate;
-    }
-
 
     @Override
     public boolean equals(Object obj) {
@@ -60,7 +55,7 @@ public class CreditApplications {
                 getInterestRate().equals(creditApplications.getInterestRate()) &&
                 getAmount().equals(creditApplications.getAmount()) &&
              //   getCurrencyCode().equals(creditApplications.getCurrencyCode()) &&
-                getStatus().equals(creditApplications.getStatus())&&
+                getStatus().equals(creditApplications.getStatus()) &&
                 getCreationDate().equals(creditApplications.getCreationDate());
     }
 }

@@ -43,7 +43,7 @@ public class US_3_4_GetListUsersLoanApplicationTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Сравнение данных заявки")
+    @DisplayName("Сравнение данных заявки Web и API")
     @TmsLink("LIB3")
     public void checkDataWebAndBackEnd() {
         creditInfoSteps.clickSubmittedCreditRequestButton();

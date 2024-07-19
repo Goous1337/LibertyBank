@@ -7,24 +7,27 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Integer.parseInt;
+
 public class Converter {
 
     public Converter() {
-
     }
 
-    public static Integer convertPeriodOfApplication(String value) {
-       // String value = "2 года (32 месяца)";
-        value = String.valueOf(value).replace("2 года", "");
-        value = String.valueOf(value).replace("1 год", "");
-        value = String.valueOf(value).replace("3 года", "");
-        value = String.valueOf(value).replace("(", "");
-        value = String.valueOf(value).replace(")", "");
-        value = String.valueOf(value).replace("месяца", "");
-        value = String.valueOf(value).replace(" ", "");
-        return Integer.parseInt(value);
-        }
-
+    public static Integer changePeriodOfCredit (String value) {
+           String[] words = value.split(" ");
+           if (words.length == 4) {
+               Integer years = parseInt(words[0]) * 12;
+               Integer month = parseInt(words[2]);
+               Integer period = years + month;
+               return period;
+           }
+           if (words.length == 2) {
+               Integer year = parseInt(words[0]) * 12;
+               return year;
+           }
+           return null;
+       }
 
     public static Double convertToDouble(String value) {
         value = String.valueOf(value).replace(DepositsConstants.DELIMITER, DepositsConstants.POINT).trim();
@@ -70,7 +73,7 @@ public class Converter {
 
     public static int convertToInteger(String value) {
         value = String.valueOf(value).replace(DepositsConstants.MONTHS, "").trim();
-        return Integer.parseInt(value);
+        return parseInt(value);
     }
 
     public static String convertStringToString(String value) {
@@ -92,7 +95,7 @@ public class Converter {
         str = String.valueOf(str).replace(" ", "").trim();
         str = String.valueOf(str).replace(",", "").trim();
 
-        return Integer.parseInt(str);
+        return parseInt(str);
     }
 
     public static java.sql.Date parseDate(String value) {
@@ -104,6 +107,18 @@ public class Converter {
             System.err.println(e);
         }
         return result;
+    }
+
+    public static String changeDate(String value) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DepositsConstants.DATE_FORMAT);
+        java.sql.Date result = null;
+        try {
+            result = new java.sql.Date(dateFormat.parse(value).getTime());
+        } catch (ParseException e) {
+            System.err.println(e);
+        }
+        String date = result.toString();
+        return date;
     }
 
     public static List<String> parseToList(String str) {
