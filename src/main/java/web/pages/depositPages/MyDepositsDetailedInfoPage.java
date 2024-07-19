@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static web.helpers.Converter.*;
+import static web.helpers.Waiters.waitElement;
 
 @Getter
 @Setter
@@ -39,7 +40,6 @@ public class MyDepositsDetailedInfoPage extends BasePage {
 
     public MyDepositsDetailedInfoPage() {
         depositProductService = new DepositProductService();
-
     }
 
     @FindBy(xpath = "//h2")
@@ -92,7 +92,6 @@ public class MyDepositsDetailedInfoPage extends BasePage {
         return listXpath;
     }
 
-
     public MyDepositMoreInfo getMyDepositProductObjectFromWeb() {
         for (MyDepositMoreInfo myDepositMoreInfo : addMyDepositDetailedInfoXpathToList()) {
             nameWeb = myDepositMoreInfo.getName();
@@ -113,7 +112,7 @@ public class MyDepositsDetailedInfoPage extends BasePage {
     }
 
     public MyDepositMoreInfo getMyDepositProductObjectFromBackEnd() {
-        depositProductService.getMoreInfoAboutMyDeposit(1559);
+        depositProductService.getMoreInfoAboutMyDeposit(1665);
         listXpath = addMyDepositDetailedInfoXpathToList();
         listFromBackEnd = depositProductService.getMyDepositMoreInfoList();
         for (MyDepositMoreInfo myDepositMoreInfoBackEnd : listFromBackEnd) {
@@ -145,10 +144,8 @@ public class MyDepositsDetailedInfoPage extends BasePage {
         );
     }
 
-
     public boolean depositProductNameTextDisplayed() {
-        return depositProductNameText.isDisplayed();
-    }
+        return waitElement(depositProductNameText).isDisplayed(); }
 
     public boolean depAccountNumberTextDisplayed() {
         return depAccountNumberText.isDisplayed();

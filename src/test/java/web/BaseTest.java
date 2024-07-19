@@ -70,6 +70,7 @@ public class BaseTest {
     protected DepositsProductsFullInfoStep depositsProductsFullInfoStep;
     protected DepositsApplicationSteps depositsApplicationSteps;
     protected MyDepositsDetailedInfoStep myDepositDetailedInfoStep;
+    protected DepositsFilterStep depositsFilterStep;
 
     public BaseTest() {
         refreshPages();
@@ -77,7 +78,6 @@ public class BaseTest {
 
     protected ChangePinSteps changePinSteps;
     protected InsuranceApplicationPropertyContentsSteps insuranceApplicationPropertyContentsSteps;
-
 
 
     protected ApplicationInfoSteps applicationInfoSteps;
@@ -147,6 +147,6 @@ public class BaseTest {
         changePinSteps = new ChangePinSteps();
         applicationInfoSteps = new ApplicationInfoSteps();
         insuranceApplicationPropertyContentsSteps = new InsuranceApplicationPropertyContentsSteps();
-
+        depositsFilterStep = new DepositsFilterStep();
     }
 }
