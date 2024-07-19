@@ -106,4 +106,8 @@ public final class ApiEndpoints {
     public static final String LIST_OF_ARTICLES = "investment/api/v1/lk/articles";
     public static final String LIST_OF_ARTICLES_ID = "/investment/api/v1/lk/articles/";
     public static final String LIST_OF_ARTICLES_FEED = "/investment/api/v1/lk/articles/feed";
+    public static final String LIST_INSURANCE_APPLICATIONS =
+            "insurance-service/api/v1/insurance/applications/submitted";
+    public static final String LIST_INSURANCE_APPLICATIONS_INVALID =
+            "insurance-service/api/v1/insurance/applications/sub";
 }
