@@ -1,4 +1,4 @@
-package web.constans;
+package web.constans.insurance;
 
 public class InsuranceServiceConstants {
     public static final int START_OF_CENTURY = 2000;
@@ -25,8 +25,9 @@ public class InsuranceServiceConstants {
     public static final int TWENTY_NINTH_DAY_OF_MONTH = 28;
     public static final int THIRTIETH_DAY_OF_MONTH = 29;
     public static final int THIRTY_FIRST_DAY_OF_MONTH = 30;
-    public static final String INSURANCE_DURATION_MINIMUM = "1 месяц";
-    public static final String INSURANCE_DURATION_MAXIMUM = "12 месяцев";
+    public static final String INSURANCE_DURATION_MINIMUM = "1";
+    public static final String INSURANCE_DURATION_TWELFTH = "12";
+    public static final String INSURANCE_DURATION_MAXIMUM = "60";
     public static final String INSURANCE_DURATION_INVALID = "6 years";
     public static final String VALID_NAME = "Николай";
     public static final String INVALID_NAME = "-Саш0к-";
@@ -39,13 +40,19 @@ public class InsuranceServiceConstants {
     public static final String DOCUMENT_DEPARTMENT = "ОУФМС в Октябрьском рне г. Москва";
     public static final String THING_NAME = "Шкаф";
     public static final String THING_COST = "25000";
+    public static final String APARTMENT_COST = "3000000";
     public static final Integer THING_TYPE_FURNITURE = 0;
     public static final Integer CONSTRUCTION_TYPE_BRICK = 2;
+    public static final Integer MOSCOW = 0;
     public static final String CITY = "Москва";
     public static final String STREET = "Красная";
     public static final String HOUSE = "7";
     public static final String FLOOR = "9";
     public static final String APARTMENT = "6";
     public static final String ENTRANCE = "1";
+    public static final String STATE = "Москва";
+    public static final String YEAR_OF_CONSTRUCTION = "2007";
+    public static final String APARTMENT_AREA = "40";
+    public static final String APARTMENT_INSURANCE_AMOUNT = "50000";
 
 }

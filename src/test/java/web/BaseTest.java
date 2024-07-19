@@ -23,11 +23,20 @@ import web.steps.cardSteps.CardSteps;
 import web.steps.cardSteps.CloseCardSteps;
 import web.steps.cardSteps.ConfirmationSteps;
 import web.steps.cardSteps.FilterCardsSteps;
+import web.steps.creditSteps.CreditApplicationSteps;
+import web.steps.creditSteps.CreditInfoSteps;
+import web.steps.creditSteps.CreditProductsDetailedInformationSteps;
+import web.steps.creditSteps.MyCreditDetailedInformationSteps;
+import web.steps.creditSteps.MyCreditSteps;
+import web.steps.creditSteps.СreditProductsSteps;
+import web.steps.depositsSteps.DepositsProductsFullInfoStep;
+import web.steps.depositsSteps.DepositsProductsSteps;
+import web.steps.insuranceSteps.InsuranceApplicationApartmentSteps;
 import web.steps.creditSteps.*;
 import web.steps.insuranceSteps.InsuranceApplicationPropertyContentsSteps;
+import web.steps.investmentSteps.InvestmentMainSteps;
 
-import static property.UserPropertiesReader.USER_PASSWORD;
-import static property.UserPropertiesReader.USER_PHONE;
+import static property.UserPropertiesReader.*;
 import static web.constans.UrlConfig.BASE_URL;
 import static web.constans.UrlConfig.LOGIN_URL;
 
@@ -71,6 +80,7 @@ public class BaseTest {
     protected DepositsApplicationSteps depositsApplicationSteps;
     protected MyDepositsDetailedInfoStep myDepositDetailedInfoStep;
     protected DepositsFilterStep depositsFilterStep;
+    protected InvestmentMainSteps investmentMainSteps;
 
     public BaseTest() {
         refreshPages();
@@ -79,6 +89,7 @@ public class BaseTest {
     protected ChangePinSteps changePinSteps;
     protected InsuranceApplicationPropertyContentsSteps insuranceApplicationPropertyContentsSteps;
 
+    protected InsuranceApplicationApartmentSteps insuranceApplicationApartmentSteps;
 
     protected ApplicationInfoSteps applicationInfoSteps;
 
@@ -87,13 +98,21 @@ public class BaseTest {
                 .get(BASE_URL + pageUrl);
     }
 
-    protected void authorization() {
+    protected void baseAuthorization(String userPhone, String password) {
         open(LOGIN_URL);
         loginSteps.clickInputPhone();
-        loginSteps.enterPhone(USER_PHONE);
+        loginSteps.enterPhone(userPhone);
         loginSteps.clickInputPassword();
-        loginSteps.enterPassword(USER_PASSWORD);
+        loginSteps.enterPassword(password);
         loginSteps.tapSubmitButtonToMain();
+    }
+
+    protected void authorization() {
+        baseAuthorization(USER_PHONE, USER_PASSWORD);
+    }
+
+    protected void authorizationWithoutBrokerage() {
+        baseAuthorization(USER_PHONE_WITHOUT_BROKERAGE, USER_PASSWORD);
     }
 
     @BeforeEach
@@ -148,5 +167,7 @@ public class BaseTest {
         applicationInfoSteps = new ApplicationInfoSteps();
         insuranceApplicationPropertyContentsSteps = new InsuranceApplicationPropertyContentsSteps();
         depositsFilterStep = new DepositsFilterStep();
+        investmentMainSteps = new InvestmentMainSteps();
+        insuranceApplicationApartmentSteps = new InsuranceApplicationApartmentSteps();
     }
 }
