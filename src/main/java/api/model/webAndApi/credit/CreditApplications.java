@@ -4,9 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import web.constans.deposit.DepositsConstants;
 
+import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter
@@ -20,9 +19,6 @@ public class CreditApplications {
     private String status;
     private String creationDate;
 
-
-    private List<CreditApplications> applications;
-
     public CreditApplications() {
     }
 
@@ -31,7 +27,6 @@ public class CreditApplications {
         this.amount = amount;
         this.periodMonths = periodMonths;
         this.interestRate = interestRate;
-       // this.currencyCode = currencyCode;
         this.status = status;
         this.creationDate = creationDate;
     }
@@ -41,12 +36,17 @@ public class CreditApplications {
         return dateFormat.format(date);
     }
 
+   // public java.sql.Date getCreationDate() {
+  //      return creationDate;
+   // }
+
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof CreditApplications)) {
+        if (!(obj instanceof MyCreditMoreInformation)) {
             return false;
         }
         CreditApplications creditApplications = (CreditApplications) obj;

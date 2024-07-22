@@ -8,7 +8,7 @@ import web.pages.creditPages.CreditApplicationsPage;
 import static web.constans.credit.CreditServiceConstants.NOT_DISPLAYED_CREDIT_WEB_ELEMENT_MESSAGE;
 
 public class CreditApplicationInfoSteps {
-    protected CreditApplicationsPage  applicationsPage;
+    protected CreditApplicationsPage applicationsPage;
 
     public CreditApplicationInfoSteps() {
         applicationsPage = new CreditApplicationsPage();
@@ -56,6 +56,6 @@ public class CreditApplicationInfoSteps {
 
     @Step("Сравнение данных заявки на кредит UI и API")
     public void assertDataOfApplication() {
-        Assertions.assertEquals(applicationsPage.getCreditApplicationsWeb(), applicationsPage.getCreditApplicationsBackend(), "Актуальный результат не соответствует ожидаемому");
+        Assertions.assertEquals(applicationsPage.getCreditApplicationsBackend(), applicationsPage.getCreditApplicationsWeb(), "Актуальный результат не соответствует ожидаемому");
     }
 }

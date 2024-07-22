@@ -1,6 +1,7 @@
 package web.pages.creditPages;
 
 import api.model.webAndApi.ApplicationsService;
+import api.model.webAndApi.CreditProductService;
 import api.model.webAndApi.credit.CreditApplications;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +13,6 @@ import web.helpers.Waiters;
 import web.pages.BasePage;
 
 import java.util.ArrayList;
-
 import java.util.List;
 
 import static web.helpers.Converter.*;
@@ -20,9 +20,10 @@ import static web.helpers.Converter.*;
 @Getter
 @Setter
 public class CreditApplicationsPage extends BasePage {
+    private ApplicationsService applicationsService;
 
     private WebDriver driver;
-    public ApplicationsService applicationsService;
+    public CreditProductService creditProductService;
     private List<CreditApplications> listXpathApp;
     private List<CreditApplications> listApplicationsFromBackend;
     private String nameApplicationFromWeb;
@@ -32,7 +33,7 @@ public class CreditApplicationsPage extends BasePage {
     private Double percentOfCreditFromWeb;
     private String dateOfCreateApplicationFromWeb;
     private String nameApplicationFromBackend;
-    private String  statusApplicationFromBackEnd;
+    private String statusApplicationFromBackEnd;
     private Double sumOfCreditFromBackEnd;
     private Integer dateOfCreditFromBackEnd;
     private Double percentOfCreditFromBackEnd;
@@ -50,7 +51,7 @@ public class CreditApplicationsPage extends BasePage {
     @FindBy(xpath = "//span[@class='_count_1lpgb_15']")
     private WebElement amountOfCreditApplications;
 
-  //  @FindBy(css = "$$([data-testid='icon-user-image)")
+    //  @FindBy(css = "$$([data-testid='icon-user-image)")
 
 
     @FindBy(xpath = "//div[@class = '_container_h0vf9_1']/child::*[1]//h2[@class='_text_h2_xv9cv_5 _name_1df24_62']")
@@ -62,7 +63,7 @@ public class CreditApplicationsPage extends BasePage {
     @FindBy(xpath = "//div[@class = '_container_h0vf9_1']/child::*[1]//h2[@data-testid='test-data-period']")
     private WebElement periodOfCredit;
 
-    @FindBy(xpath = "//div[@class = '_container_h0vf9_1']/child::*[1]//h2[@data-testid='test-data-interestRate']")
+    @FindBy(xpath = "//div[1]/child::*[1]//h2[@data-testid='test-data-interestRate']")
     private WebElement percentOfCredit;
 
     @FindBy(xpath = "//div[@class = '_container_h0vf9_1']/child::*[1]//h2[@data-testid='test-data-date']")
@@ -108,7 +109,6 @@ public class CreditApplicationsPage extends BasePage {
         return dateOfCreateApplication.isDisplayed();
     }
 
-
     public List<CreditApplications> addCreditApplications() {
         listXpathApp = new ArrayList<>();
         listXpathApp.add(new CreditApplications(
@@ -124,31 +124,34 @@ public class CreditApplicationsPage extends BasePage {
     private static String checkCreditStatusApplication(WebElement statusOfCreditApplication) {
         String status;
         if (CreditStatusEnum.CREDIT_STATUS_PENDING.toString().equals(statusOfCreditApplication.getText())) {
-           return status = "PENDING";
+            return status = "PENDING";
         } else {
             return statusOfCreditApplication.getText();
         }
     }
 
-
     public CreditApplications getCreditApplicationsWeb() {
-            for (CreditApplications creditApplicationsWeb : addCreditApplications()) {
-                nameApplicationFromWeb = creditApplicationsWeb.getName();
-                sumOfCreditFromWeb = creditApplicationsWeb.getAmount();
-                dateOfCreditFromWeb = creditApplicationsWeb.getPeriodMonths();
-                statusApplicationFromWeb = creditApplicationsWeb.getStatus();
-                percentOfCreditFromWeb = creditApplicationsWeb.getInterestRate();
-                dateOfCreateApplicationFromWeb = creditApplicationsWeb.getCreationDate();
-            }
-            return new CreditApplications(nameApplicationFromWeb, sumOfCreditFromWeb, dateOfCreditFromWeb, percentOfCreditFromWeb, statusApplicationFromWeb, dateOfCreateApplicationFromWeb);
+        for (CreditApplications creditApplicationsWeb : addCreditApplications()) {
+            nameApplicationFromWeb = creditApplicationsWeb.getName();
+            sumOfCreditFromWeb = creditApplicationsWeb.getAmount();
+            dateOfCreditFromWeb = creditApplicationsWeb.getPeriodMonths();
+            statusApplicationFromWeb = creditApplicationsWeb.getStatus();
+            percentOfCreditFromWeb = creditApplicationsWeb.getInterestRate();
+            dateOfCreateApplicationFromWeb = creditApplicationsWeb.getCreationDate();
+        }
+        return new CreditApplications(
+                nameApplicationFromWeb,
+                sumOfCreditFromWeb,
+                dateOfCreditFromWeb,
+                percentOfCreditFromWeb,
+                statusApplicationFromWeb,
+                dateOfCreateApplicationFromWeb);
     }
 
-
-
     public CreditApplications getCreditApplicationsBackend() {
-        applicationsService.getCreditApplications();
+        CreditProductService.getCreditApplications();
         listXpathApp = addCreditApplications();
-        listApplicationsFromBackend = applicationsService.getCreditApplicationsList();
+        listApplicationsFromBackend = CreditProductService.getCreditApplicationsList();
         for (CreditApplications creditApplicationsBackEnd : listApplicationsFromBackend) {
             for (CreditApplications creditApplicationsWeb : listXpathApp) {
                 if (creditApplicationsBackEnd.getName().equals(creditApplicationsWeb.getName())) {
@@ -171,8 +174,13 @@ public class CreditApplicationsPage extends BasePage {
                 }
             }
         }
-        return new CreditApplications(nameApplicationFromBackend, sumOfCreditFromBackEnd, dateOfCreditFromBackEnd, percentOfCreditFromBackEnd, statusApplicationFromBackEnd, dateOfCreateApplicationFromBackEnd);
+        return new CreditApplications(
+                nameApplicationFromBackend,
+                sumOfCreditFromBackEnd,
+                dateOfCreditFromBackEnd,
+                percentOfCreditFromBackEnd,
+                statusApplicationFromBackEnd,
+                dateOfCreateApplicationFromBackEnd);
     }
 }
-
 
