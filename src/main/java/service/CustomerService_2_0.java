@@ -139,7 +139,8 @@ public class CustomerService_2_0 {
     }
 
     public Response checkPushNotificationWithHttpMethod(String method, String customerId, String token) {
-        List<RequestParam> params = List.of(getRP(PARAMETER, CustomerServiceConstants.PARAMETER_CUSTOMER_ID, customerId)
+        List<RequestParam> params =
+                List.of(getRP(PARAMETER, CustomerServiceConstants.PARAMETER_CUSTOMER_ID, customerId)
                 , getRP(HEADER, CONTENT_TYPE, APPLICATION_JSON), getRP(HEADER, AUTHORIZATION, BEARER_TOKEN + token),
                 getRP(QUERY_PARAMETER, CustomerServiceConstants.PARAMETER_CUSTOMER_ID, customerId));
         return sendSimpleRequest(Method.valueOf(method), PUSH_NOTIFICATION_2_0, params);

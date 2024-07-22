@@ -132,7 +132,6 @@ public class MyCreditDetailedInformationPage extends BasePage {
                         myCreditMoreInformationWeb.getCreditAccountNumber())) {
                     creditAccountNumberFromWeb = myCreditMoreInformationBackEnd.getCreditAccountNumber();
                 }
-
             }
         }
         return new MyCreditMoreInformation(
