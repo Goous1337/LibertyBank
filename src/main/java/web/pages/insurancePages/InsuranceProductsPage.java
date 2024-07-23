@@ -2,8 +2,9 @@ package web.pages.insurancePages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import web.pages.BasePage;
 
-public class InsuranceProductsPage {
+public class InsuranceProductsPage extends BasePage {
     @FindBy(xpath = "//*[@data-testid = 'icon-med']")
     private WebElement dmsIcon;
     @FindBy(xpath = "//*[@data-testid = 'icon-med']/following-sibling::p")
