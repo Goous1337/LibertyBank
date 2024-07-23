@@ -1,5 +1,6 @@
 package api.model.webAndApi;
 
+import api.model.webAndApi.credit.CreditApplications;
 import api.model.webAndApi.credit.CreditProduct;
 import api.model.webAndApi.credit.MoreCreditProduct;
 import api.model.webAndApi.credit.MyCreditMoreInformation;
@@ -27,6 +28,8 @@ public class CreditProductService {
     private List<MoreCreditProduct> moreCreditProductList;
     @Getter
     private List<CreditProduct> creditProductsList;
+    @Getter
+    private static List<CreditApplications> creditApplicationsList;
 
     public void getMoreProductCredit() {
         moreCreditProductList = new ArrayList<MoreCreditProduct>();
@@ -74,6 +77,18 @@ public class CreditProductService {
                 .log()
                 .all()
                 .extract().body().jsonPath().getList(".", CreditProduct.class);
+    }
+
+    public static void getCreditApplications() {
+        creditApplicationsList = RestAssured.given()
+                .header("Authorization", ACCESS_TOKEN_CUSTOMER_SERVICE)
+                .baseUri(BASE_URL_API)
+                .when()
+                .get("credit/api/v1/orders")
+                .then()
+                .log()
+                .all()
+                .extract().body().jsonPath().getList(".", CreditApplications.class);
     }
 
 }

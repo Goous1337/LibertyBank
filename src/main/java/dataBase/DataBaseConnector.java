@@ -25,6 +25,7 @@ public class DataBaseConnector {
     private static DriverManagerDataSource dataSource;
     private static Map<String, JdbcTemplate> jdbcTemplateMap = new HashMap<>();
 
+
     private DataBaseConnector() throws SQLException {
         try {
             this.connection = DataBaseConnector.getDataBaseConnection();

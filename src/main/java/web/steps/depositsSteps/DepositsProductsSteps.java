@@ -19,6 +19,11 @@ public class DepositsProductsSteps {
         depositsProductsBankPage.clickDepositsButton();
     }
 
+    @Step("Нажатие кнопки 'Депозитные продукты'")
+    public void clickDepositProductsButton() {
+        depositsProductsBankPage.clickDepositsProductsBankButton();
+    }
+
     @Step("Нажатие кнопки 'Депозиты Liberty Bank'")
     public void clickDepositsProductsBankButton() {
         depositsProductsBankPage.clickDepositsProductsBankButton();

@@ -79,6 +79,7 @@ public class BaseTest {
     protected DepositsProductsFullInfoStep depositsProductsFullInfoStep;
     protected DepositsApplicationSteps depositsApplicationSteps;
     protected MyDepositsDetailedInfoStep myDepositDetailedInfoStep;
+    protected DepositsFilterStep depositsFilterStep;
     protected InvestmentMainSteps investmentMainSteps;
 
     public BaseTest() {
@@ -87,9 +88,10 @@ public class BaseTest {
 
     protected ChangePinSteps changePinSteps;
     protected InsuranceApplicationPropertyContentsSteps insuranceApplicationPropertyContentsSteps;
+
     protected InsuranceApplicationApartmentSteps insuranceApplicationApartmentSteps;
 
-    protected ApplicationInfoSteps applicationInfoSteps;
+    protected CreditApplicationInfoSteps applicationInfoSteps;
 
     protected void open(String pageUrl) {
         DriverManager.getDriver()
@@ -162,8 +164,9 @@ public class BaseTest {
         depositsApplicationSteps = new DepositsApplicationSteps();
         myDepositDetailedInfoStep = new MyDepositsDetailedInfoStep();
         changePinSteps = new ChangePinSteps();
-        applicationInfoSteps = new ApplicationInfoSteps();
+        applicationInfoSteps = new CreditApplicationInfoSteps();
         insuranceApplicationPropertyContentsSteps = new InsuranceApplicationPropertyContentsSteps();
+        depositsFilterStep = new DepositsFilterStep();
         investmentMainSteps = new InvestmentMainSteps();
         insuranceApplicationApartmentSteps = new InsuranceApplicationApartmentSteps();
     }
