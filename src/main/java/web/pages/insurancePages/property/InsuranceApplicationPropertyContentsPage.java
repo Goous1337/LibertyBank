@@ -1,4 +1,4 @@
-package web.pages.insurancePages;
+package web.pages.insurancePages.property;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;

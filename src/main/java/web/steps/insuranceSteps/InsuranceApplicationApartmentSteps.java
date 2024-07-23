@@ -3,7 +3,7 @@ package web.steps.insuranceSteps;
 import io.qameta.allure.Step;
 import org.openqa.selenium.TimeoutException;
 import web.constans.insurance.InsuranceEnum.Currencies;
-import web.pages.insurancePages.InsuranceApplicationApartmentPage;
+import web.pages.insurancePages.property.InsuranceApplicationApartmentPage;
 import web.constans.insurance.InsuranceEnum.ApartmentApplicationField;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
