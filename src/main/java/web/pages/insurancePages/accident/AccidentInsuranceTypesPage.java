@@ -4,6 +4,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import web.pages.BasePage;
 
+import static web.helpers.Waiters.waitElement;
+
 public class AccidentInsuranceTypesPage extends BasePage {
     @FindBy(xpath = "//button[@data-testid = 'back_button']")
     private WebElement backButton;
@@ -11,4 +13,16 @@ public class AccidentInsuranceTypesPage extends BasePage {
     private WebElement widgetAccidentText;
     @FindBy(xpath = "//*[@src = '/assets/road-cone-5b8290fd.png']/../../descendant::button")
     private WebElement widgetAccidentButton;
+
+    public void pressBackButton() {
+        waitElement(backButton).click();
+    }
+
+    public String getWidgetAccidentText() {
+        return getTextElement(waitElement(widgetAccidentText));
+    }
+
+    public void pressWidgetAccidentButton() {
+        waitElement(widgetAccidentButton).click();
+    }
 }

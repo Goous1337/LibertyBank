@@ -4,6 +4,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import web.pages.BasePage;
 
+import static web.helpers.Waiters.waitElement;
+
 public class InsuranceProductsPage extends BasePage {
     @FindBy(xpath = "//*[@data-testid = 'icon-med']")
     private WebElement dmsIcon;
@@ -49,5 +51,121 @@ public class InsuranceProductsPage extends BasePage {
     private WebElement travelContainerText;
     @FindBy(xpath = "//img[@src ='/assets/earth-4e3824bd.png']/../../descendant::button")
     private WebElement travelContainerButton;
+
+    public boolean dmsIconPresent() {
+        return waitElement(dmsIcon).isDisplayed();
+    }
+
+    public boolean carIconPresent() {
+        return waitElement(carIcon).isDisplayed();
+    }
+
+    public boolean travelIconPresent() {
+        return waitElement(travelIcon).isDisplayed();
+    }
+
+    public boolean accidentIconPresent() {
+        return waitElement(accidentIcon).isDisplayed();
+    }
+
+    public boolean propertyIconPresent() {
+        return waitElement(propertyIcon).isDisplayed();
+    }
+
+    public String getDmsCategoryText() {
+        return getTextElement(waitElement(dmsText));
+    }
+
+    public String getCarCategoryText() {
+        return getTextElement(waitElement(carText));
+    }
+
+    public String getAccidentCategoryText() {
+        return getTextElement(waitElement(accidentText));
+    }
+
+    public String getTravelCategoryText() {
+        return getTextElement(waitElement(travelText));
+    }
+
+    public String getPropertyCategoryText() {
+        return getTextElement(waitElement(propertyText));
+    }
+
+    public void selectDmsCategory() {
+        waitElement(dmsIcon).click();
+    }
+
+    public void selectCarsCategory() {
+        waitElement(carIcon).click();
+    }
+
+    public void selectTravelCategory() {
+        waitElement(travelIcon).click();
+    }
+
+    public void selectAccidentCategory() {
+        waitElement(accidentIcon).click();
+    }
+
+    public void selectPropertyCategory() {
+        waitElement(propertyIcon).click();
+    }
+
+    public boolean caruselNextButtonPresent() {
+        return waitElement(caruselNextButton).isDisplayed();
+    }
+
+    public boolean caruselPrevButtonPresent() {
+        return waitElement(caruselPrevButton).isDisplayed();
+    }
+
+    public void pressCaruselNextButton() {
+        waitElement(caruselNextButton).click();
+    }
+
+    public void pressCaruselPrevButton() {
+        waitElement(caruselPrevButton);
+    }
+
+    public String getOsagoContainerText() {
+        return getTextElement(waitElement(osagoContainerText));
+    }
+
+    public String getDmsContainerText() {
+        return getTextElement(waitElement(standartDMSContainerText));
+    }
+
+    public String getTravelContainerText() {
+        return getTextElement(waitElement(travelContainerText));
+    }
+
+    public String getApartmentContainerText() {
+        return getTextElement(waitElement(apartmentContainerText));
+    }
+
+    public String getAccidentContainerText() {
+        return getTextElement(waitElement(accidentContainerText));
+    }
+
+    public void pressOsagoContainerButton() {
+        waitElement(osagoContainerButton).click();
+    }
+
+    public void pressDmsContainerButton() {
+        waitElement(standartDMSContainerButton).click();
+    }
+
+    public void pressTravelContainerButton() {
+        waitElement(travelContainerButton).click();
+    }
+
+    public void pressApartmentContainerButton() {
+        waitElement(apartmentContainerButton).click();
+    }
+
+    public void pressAccidentContainerButton() {
+        waitElement(accidentContainerButton).click();
+    }
 
 }
