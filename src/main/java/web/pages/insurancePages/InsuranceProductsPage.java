@@ -28,13 +28,13 @@ public class InsuranceProductsPage extends BasePage {
     @FindBy(xpath = "//*[@data-testid = 'icon-home-circle']/following-sibling::p")
     private WebElement propertyText;
     @FindBy(xpath = "//button[contains(@class,'nextButton')]")
-    private WebElement caruselNextButton;
+    private WebElement carouselNextButton;
     @FindBy(xpath = "//button[contains(@class,'prevButton')]")
-    private WebElement caruselPrevButton;
+    private WebElement carouselPrevButton;
     @FindBy(xpath = "//img[@src = '/assets/mercedes-benz-3629f470.png']/../../descendant::p")
-    private WebElement osagoContainerText;
+    private WebElement kaskoContainerText;
     @FindBy(xpath = "//img[@src = '/assets/mercedes-benz-3629f470.png']/../../descendant::button")
-    private WebElement osagoContainerButton;
+    private WebElement kaskoContainerButton;
     @FindBy(xpath = "//img[@src ='/assets/road-cone-5b8290fd.png']/../../descendant::p")
     private WebElement accidentContainerText;
     @FindBy(xpath = "//img[@src ='/assets/road-cone-5b8290fd.png']/../../descendant::button")
@@ -44,9 +44,9 @@ public class InsuranceProductsPage extends BasePage {
     @FindBy(xpath = "//img[@src ='/assets/condo-29ee2909.png']/../../descendant::button")
     private WebElement apartmentContainerButton;
     @FindBy(xpath = "//img[@src ='/assets/heart-9a2306d8.png']/../../descendant::p")
-    private WebElement standartDMSContainerText;
+    private WebElement standardDMSContainerText;
     @FindBy(xpath = "//img[@src ='/assets/heart-9a2306d8.png']/../../descendant::button")
-    private WebElement standartDMSContainerButton;
+    private WebElement standardDMSContainerButton;
     @FindBy(xpath = "//img[@src ='/assets/earth-4e3824bd.png']/../../descendant::p")
     private WebElement travelContainerText;
     @FindBy(xpath = "//img[@src ='/assets/earth-4e3824bd.png']/../../descendant::button")
@@ -112,28 +112,28 @@ public class InsuranceProductsPage extends BasePage {
         waitElement(propertyIcon).click();
     }
 
-    public boolean caruselNextButtonPresent() {
-        return waitElement(caruselNextButton).isDisplayed();
+    public boolean carouselNextButtonPresent() {
+        return waitElement(carouselNextButton).isDisplayed();
     }
 
-    public boolean caruselPrevButtonPresent() {
-        return waitElement(caruselPrevButton).isDisplayed();
+    public boolean carouselPrevButtonPresent() {
+        return waitElement(carouselPrevButton).isDisplayed();
     }
 
-    public void pressCaruselNextButton() {
-        waitElement(caruselNextButton).click();
+    public void pressCarouselNextButton() {
+        waitElement(carouselNextButton).click();
     }
 
-    public void pressCaruselPrevButton() {
-        waitElement(caruselPrevButton);
+    public void pressCarouselPrevButton() {
+        waitElement(carouselPrevButton);
     }
 
-    public String getOsagoContainerText() {
-        return getTextElement(waitElement(osagoContainerText));
+    public String getKaskoContainerText() {
+        return getTextElement(waitElement(kaskoContainerText));
     }
 
     public String getDmsContainerText() {
-        return getTextElement(waitElement(standartDMSContainerText));
+        return getTextElement(waitElement(standardDMSContainerText));
     }
 
     public String getTravelContainerText() {
@@ -148,12 +148,12 @@ public class InsuranceProductsPage extends BasePage {
         return getTextElement(waitElement(accidentContainerText));
     }
 
-    public void pressOsagoContainerButton() {
-        waitElement(osagoContainerButton).click();
+    public void pressKaskoContainerButton() {
+        waitElement(kaskoContainerButton).click();
     }
 
     public void pressDmsContainerButton() {
-        waitElement(standartDMSContainerButton).click();
+        waitElement(standardDMSContainerButton).click();
     }
 
     public void pressTravelContainerButton() {

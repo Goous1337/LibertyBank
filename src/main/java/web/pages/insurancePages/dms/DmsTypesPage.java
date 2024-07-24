@@ -10,13 +10,13 @@ public class DmsTypesPage extends BasePage {
     @FindBy(xpath = "//button[@data-testid = 'back_button']")
     private WebElement backButton;
     @FindBy(xpath = "//*[contains(text(),'Standart')]")
-    private WebElement widgetDMSStandartText;
+    private WebElement widgetDMSStandardText;
     @FindBy(xpath = "//*[contains(text(),'Standart')]/following-sibling::button")
-    private WebElement widgetDMSStandartButton;
+    private WebElement widgetDMSStandardButton;
     @FindBy(xpath = "//*[contains(text(),'Standart+')]")
-    private WebElement widgetDMSStandartPlusText;
+    private WebElement widgetDMSStandardPlusText;
     @FindBy(xpath = "//*[contains(text(),'Standart+')]/following-sibling::button")
-    private WebElement widgetDMSStandartPlusButton;
+    private WebElement widgetDMSStandardPlusButton;
     @FindBy(xpath = "//*[contains(text(),'Premium')]")
     private WebElement widgetDMSPremiumText;
     @FindBy(xpath = "//*[contains(text(),'Premium')]/following-sibling::button")
@@ -31,19 +31,19 @@ public class DmsTypesPage extends BasePage {
     }
 
     public String getWidgetDmsStandartText() {
-        return getTextElement(waitElement(widgetDMSStandartText));
+        return getTextElement(waitElement(widgetDMSStandardText));
     }
 
     public void pressWidgetDmsStandartButton() {
-        waitElement(widgetDMSStandartButton).click();
+        waitElement(widgetDMSStandardButton).click();
     }
 
     public String getWidgetDmsStandartPlusText() {
-        return getTextElement(waitElement(widgetDMSStandartPlusText));
+        return getTextElement(waitElement(widgetDMSStandardPlusText));
     }
 
     public void pressWidgetDmsStandartPlusButton() {
-        waitElement(widgetDMSStandartPlusButton).click();
+        waitElement(widgetDMSStandardPlusButton).click();
     }
 
     public String getWidgetDmsPremiumText() {
