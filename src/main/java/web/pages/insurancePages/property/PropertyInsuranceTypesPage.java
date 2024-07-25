@@ -30,7 +30,7 @@ public class PropertyInsuranceTypesPage extends BasePage {
         return getTextElement(waitElement(widgetApartmentText));
     }
 
-    public void pressWidgetAccidentButton() {
+    public void pressWidgetApartmentButton() {
         waitElement(widgetApartmentButton).click();
     }
 

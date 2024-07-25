@@ -65,4 +65,18 @@ public class InsuranceEnum {
         ACCIDENT,
         TRAVEL
     }
+
+    public enum InsuranceProducts {
+        STANDARD,
+        STANDARDPLUS,
+        PREMIUM,
+        VIP,
+        OSAGO,
+        KASKO,
+        APARTMENT,
+        HOUSE,
+        CONTENTS,
+        ACCIDENT,
+        TRAVEL
+    }
 }

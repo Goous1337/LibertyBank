@@ -5,6 +5,7 @@ import io.qameta.allure.Feature;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
+import org.junit.jupiter.api.Test;
 import web.BaseTest;
 
 @Tags({@Tag("Web"), @Tag("MVP")})
@@ -12,5 +13,7 @@ import web.BaseTest;
 @Feature("US-10.1.1 Просмотр доступных видов страхования")
 @DisplayName("US-10.1.1 Просмотр доступных видов страхования")
 public class US_10_1_1_CheckInsuranceProductsTest extends BaseTest {
+    @Test
+    public void test (){}
 
 }
