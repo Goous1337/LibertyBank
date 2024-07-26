@@ -31,6 +31,7 @@ import web.steps.creditSteps.MyCreditSteps;
 import web.steps.creditSteps.СreditProductsSteps;
 import web.steps.depositsSteps.DepositsProductsFullInfoStep;
 import web.steps.depositsSteps.DepositsProductsSteps;
+import web.steps.insuranceSteps.CheckInsuranceProductsSteps;
 import web.steps.insuranceSteps.InsuranceApplicationApartmentSteps;
 import web.steps.creditSteps.*;
 import web.steps.insuranceSteps.InsuranceApplicationPropertyContentsSteps;
@@ -88,9 +89,8 @@ public class BaseTest {
 
     protected ChangePinSteps changePinSteps;
     protected InsuranceApplicationPropertyContentsSteps insuranceApplicationPropertyContentsSteps;
-
     protected InsuranceApplicationApartmentSteps insuranceApplicationApartmentSteps;
-
+    protected CheckInsuranceProductsSteps checkInsuranceProductsSteps;
     protected CreditApplicationInfoSteps applicationInfoSteps;
 
     protected void open(String pageUrl) {
@@ -169,5 +169,6 @@ public class BaseTest {
         depositsFilterStep = new DepositsFilterStep();
         investmentMainSteps = new InvestmentMainSteps();
         insuranceApplicationApartmentSteps = new InsuranceApplicationApartmentSteps();
+        checkInsuranceProductsSteps = new CheckInsuranceProductsSteps();
     }
 }

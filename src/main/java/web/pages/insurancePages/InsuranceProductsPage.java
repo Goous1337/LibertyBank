@@ -113,11 +113,11 @@ public class InsuranceProductsPage extends BasePage {
     }
 
     public boolean carouselNextButtonPresent() {
-        return waitElement(carouselNextButton).isDisplayed();
+        return carouselNextButton.isDisplayed();
     }
 
     public boolean carouselPrevButtonPresent() {
-        return waitElement(carouselPrevButton).isDisplayed();
+        return carouselPrevButton.isDisplayed();
     }
 
     public void pressCarouselNextButton() {

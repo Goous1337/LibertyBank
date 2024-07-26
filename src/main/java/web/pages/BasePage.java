@@ -49,4 +49,8 @@ public abstract class BasePage {
     public String getWindowHandle() {
         return DriverManager.getDriver().getWindowHandle();
     }
+
+    public String getWindowUrl() {
+        return DriverManager.getDriver().getCurrentUrl();
+    }
 }

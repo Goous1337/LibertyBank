@@ -75,4 +75,8 @@ public class Waiters {
     public static void setDriverImplicitlyWait(int seconds) {
         getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(seconds));
     }
+
+    public static void waitPageLoad () {
+        getDriver().manage().timeouts().pageLoadTimeout(Duration.ofSeconds(TIME_TO_WAIT));
+    }
 }

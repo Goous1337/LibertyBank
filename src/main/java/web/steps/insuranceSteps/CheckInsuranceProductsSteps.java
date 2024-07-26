@@ -1,6 +1,10 @@
 package web.steps.insuranceSteps;
 
 import io.qameta.allure.Step;
+import web.constans.insurance.InsuranceEnum.CarouselController;
+import web.constans.insurance.InsuranceEnum.CarouselProducts;
+import web.constans.insurance.InsuranceEnum.InsuranceProducts;
+import web.constans.insurance.InsuranceEnum.InsuranceType;
 import web.helpers.TestListener;
 import web.pages.insurancePages.InsuranceProductsPage;
 import web.pages.insurancePages.accident.AccidentInsuranceTypesPage;
@@ -8,15 +12,26 @@ import web.pages.insurancePages.auto.CarsInsuranceTypesPage;
 import web.pages.insurancePages.dms.DmsTypesPage;
 import web.pages.insurancePages.property.PropertyInsuranceTypesPage;
 import web.pages.insurancePages.travel.TravelInsuranceTypesPage;
-import web.constans.insurance.InsuranceEnum.InsuranceType;
-import web.constans.insurance.InsuranceEnum.CarouselController;
-import web.constans.insurance.InsuranceEnum.CarouselProducts;
-import web.constans.insurance.InsuranceEnum.InsuranceProducts;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static web.constans.insurance.InsuranceServiceConstants.PPRODUCT_PROPERTY_CONTENTS;
+import static web.constans.insurance.InsuranceServiceConstants.PRODUCT_ACCIDENT;
+import static web.constans.insurance.InsuranceServiceConstants.PRODUCT_CARS_KASKO;
+import static web.constans.insurance.InsuranceServiceConstants.PRODUCT_CARS_OSAGO;
+import static web.constans.insurance.InsuranceServiceConstants.PRODUCT_DMS_PREMIUM;
+import static web.constans.insurance.InsuranceServiceConstants.PRODUCT_DMS_STANDART;
+import static web.constans.insurance.InsuranceServiceConstants.PRODUCT_DMS_STANDART_PLUS;
+import static web.constans.insurance.InsuranceServiceConstants.PRODUCT_DMS_VIP;
+import static web.constans.insurance.InsuranceServiceConstants.PRODUCT_PROPERTY_APARTMENT;
+import static web.constans.insurance.InsuranceServiceConstants.PRODUCT_PROPERTY_HOUSE;
+import static web.constans.insurance.InsuranceServiceConstants.PRODUCT_TRAVEL;
+import static web.constans.insurance.InsuranceServiceConstants.PRODUCT_TYPE_ACCIDENT;
+import static web.constans.insurance.InsuranceServiceConstants.PRODUCT_TYPE_CARS;
+import static web.constans.insurance.InsuranceServiceConstants.PRODUCT_TYPE_DMS;
+import static web.constans.insurance.InsuranceServiceConstants.PRODUCT_TYPE_PROPERTY;
+import static web.constans.insurance.InsuranceServiceConstants.PRODUCT_TYPE_TRAVEL;
+import static web.helpers.Waiters.waitPageLoad;
 
 public class CheckInsuranceProductsSteps {
     protected InsuranceProductsPage insuranceProductsPage;
@@ -25,10 +40,10 @@ public class CheckInsuranceProductsSteps {
     protected DmsTypesPage dmsTypesPage;
     protected TravelInsuranceTypesPage travelInsuranceTypesPage;
     protected PropertyInsuranceTypesPage propertyInsuranceTypesPage;
-    private String productTypesWindowHandle;
-    private String productCategoryWindowHandle;
-    private String currentProductWindowHandle;
-    private String currWindowHandle;
+    private String productTypesWindowUrl;
+    private String productCategoryWindowUrl;
+    private String currentProductWindowUrl;
+    private String currWindowUrl;
 
     public CheckInsuranceProductsSteps() {
         insuranceProductsPage = new InsuranceProductsPage();
@@ -39,20 +54,24 @@ public class CheckInsuranceProductsSteps {
         propertyInsuranceTypesPage = new PropertyInsuranceTypesPage();
     }
 
-    public void setProductTypesWindowHandle() {
-        productTypesWindowHandle = insuranceProductsPage.getWindowHandle();
+    public void setProductTypesWindowUrl() {
+        productTypesWindowUrl = insuranceProductsPage.getWindowUrl();
     }
 
-    public String getProductTypesWindowHandle() {
-        return productTypesWindowHandle;
+    public String getProductTypesWindowUrl() {
+        return productTypesWindowUrl;
     }
 
-    public String getProductCategoryWindowHandle() {
-        return productCategoryWindowHandle;
+    public String getProductCategoryWindowUrl() {
+        return productCategoryWindowUrl;
     }
 
-    public String getCurrentProductWindowHandle() {
-        return currentProductWindowHandle;
+    public String getCurrentProductWindowUrl() {
+        return currentProductWindowUrl;
+    }
+
+    public String getCurrWindowUrl() {
+        return currWindowUrl;
     }
 
     @Step("Выбрать категорию страхования {insuranceType}")
@@ -60,27 +79,32 @@ public class CheckInsuranceProductsSteps {
         switch (insuranceType) {
             case DMS:
                 insuranceProductsPage.selectDmsCategory();
-                productCategoryWindowHandle = dmsTypesPage.getWindowHandle();
+                waitPageLoad();
+                productCategoryWindowUrl = dmsTypesPage.getWindowUrl();
                 TestListener.takeScreenshot();
                 break;
             case TRAVEL:
                 insuranceProductsPage.selectTravelCategory();
-                productCategoryWindowHandle = travelInsuranceTypesPage.getWindowHandle();
+                waitPageLoad();
+                productCategoryWindowUrl = travelInsuranceTypesPage.getWindowUrl();
                 TestListener.takeScreenshot();
                 break;
             case CARS:
                 insuranceProductsPage.selectCarsCategory();
-                productCategoryWindowHandle = carsInsuranceTypesPage.getWindowHandle();
+                waitPageLoad();
+                productCategoryWindowUrl = carsInsuranceTypesPage.getWindowUrl();
                 TestListener.takeScreenshot();
                 break;
             case ACCIDENT:
                 insuranceProductsPage.selectAccidentCategory();
-                productCategoryWindowHandle = accidentInsuranceTypesPage.getWindowHandle();
+                waitPageLoad();
+                productCategoryWindowUrl = accidentInsuranceTypesPage.getWindowUrl();
                 TestListener.takeScreenshot();
                 break;
             case PROPERTY:
                 insuranceProductsPage.selectPropertyCategory();
-                productCategoryWindowHandle = propertyInsuranceTypesPage.getWindowHandle();
+                waitPageLoad();
+                productCategoryWindowUrl = propertyInsuranceTypesPage.getWindowUrl();
                 TestListener.takeScreenshot();
                 break;
         }
@@ -113,25 +137,25 @@ public class CheckInsuranceProductsSteps {
     public void assertInsuranceCategoryText(InsuranceType insuranceType) {
         switch (insuranceType) {
             case DMS:
-                assertEquals(insuranceProductsPage.getDmsCategoryText(), "Медицинское страхование",
+                assertEquals(insuranceProductsPage.getDmsCategoryText(), PRODUCT_TYPE_DMS,
                         "Текст категории не совпадает с эталоном");
                 break;
             case CARS:
-                assertEquals(insuranceProductsPage.getCarCategoryText(), "Автострахование",
+                assertEquals(insuranceProductsPage.getCarCategoryText(), PRODUCT_TYPE_CARS,
                         "Текст категории не совпадает с эталоном");
                 break;
             case TRAVEL:
                 assertEquals(insuranceProductsPage.getTravelCategoryText(),
-                        "Страхование выезжающих за границу",
+                        PRODUCT_TYPE_TRAVEL,
                         "Текст категории не совпадает с эталоном");
                 break;
             case ACCIDENT:
                 assertEquals(insuranceProductsPage.getAccidentCategoryText(),
-                        "Страхование от несчастных случаев",
+                        PRODUCT_TYPE_ACCIDENT,
                         "Текст категории не совпадает с эталоном");
                 break;
             case PROPERTY:
-                assertEquals(insuranceProductsPage.getPropertyCategoryText(), "Страхование имущества",
+                assertEquals(insuranceProductsPage.getPropertyCategoryText(), PRODUCT_TYPE_PROPERTY,
                         "Текст категории не совпадает с эталоном");
                 break;
         }
@@ -167,27 +191,27 @@ public class CheckInsuranceProductsSteps {
         switch (carouselProduct) {
             case DMSSTANDARD:
                 assertEquals(insuranceProductsPage.getDmsContainerText(),
-                        "Добровольное медицинское срахование Standard",
+                        PRODUCT_DMS_STANDART,
                         "Текст не соответствует эталону");
                 break;
             case KASKO:
                 assertEquals(insuranceProductsPage.getKaskoContainerText(),
-                        "Автострахование КАСКО",
+                        PRODUCT_CARS_KASKO,
                         "Текст не соответствует эталону");
                 break;
             case TRAVEL:
                 assertEquals(insuranceProductsPage.getTravelContainerText(),
-                        "Страхование выезжающих за границу",
+                        PRODUCT_TRAVEL,
                         "Текст не соответствует эталону");
                 break;
             case APARTMENT:
                 assertEquals(insuranceProductsPage.getApartmentContainerText(),
-                        "Страхование квартиры",
+                        PRODUCT_PROPERTY_APARTMENT,
                         "Текст не соответствует эталону");
                 break;
             case ACCIDENT:
                 assertEquals(insuranceProductsPage.getAccidentContainerText(),
-                        "Страхование от несчастных случаев",
+                        PRODUCT_ACCIDENT,
                         "Текст не соответствует эталону");
                 break;
         }
@@ -198,41 +222,38 @@ public class CheckInsuranceProductsSteps {
         switch (carouselProduct) {
             case KASKO:
                 insuranceProductsPage.pressKaskoContainerButton();
-                currentProductWindowHandle = carsInsuranceTypesPage.getWindowHandle();
+                waitPageLoad();
+                currentProductWindowUrl = carsInsuranceTypesPage.getWindowUrl();
                 TestListener.takeScreenshot();
                 break;
             case ACCIDENT:
                 insuranceProductsPage.pressAccidentContainerButton();
-                currentProductWindowHandle = accidentInsuranceTypesPage.getWindowHandle();
+                waitPageLoad();
+                currentProductWindowUrl = accidentInsuranceTypesPage.getWindowUrl();
                 TestListener.takeScreenshot();
                 break;
             case APARTMENT:
                 insuranceProductsPage.pressApartmentContainerButton();
-                currentProductWindowHandle = propertyInsuranceTypesPage.getWindowHandle();
+                waitPageLoad();
+                currentProductWindowUrl = propertyInsuranceTypesPage.getWindowUrl();
                 TestListener.takeScreenshot();
                 break;
             case TRAVEL:
                 insuranceProductsPage.pressTravelContainerButton();
-                currentProductWindowHandle = travelInsuranceTypesPage.getWindowHandle();
+                waitPageLoad();
+                currentProductWindowUrl = travelInsuranceTypesPage.getWindowUrl();
                 TestListener.takeScreenshot();
+
                 break;
             case DMSSTANDARD:
                 insuranceProductsPage.pressDmsContainerButton();
-                currentProductWindowHandle = dmsTypesPage.getWindowHandle();
+                waitPageLoad();
+                currentProductWindowUrl = dmsTypesPage.getWindowUrl();
                 TestListener.takeScreenshot();
                 break;
         }
     }
 
-    @Step("Проверка того что окно сменилось")
-    public void assertWidndowsAreDifferent(String window1, String window2) {
-        assertNotEquals(window1, window2, "То же самое окно");
-    }
-
-    @Step("Проверка кнопки Назад")
-    public void assertBackButtonWorking() {
-        assertEquals(productTypesWindowHandle, currWindowHandle, "Страница не переключилась назад");
-    }
 
     @Step("Проверка текста продукта {product} в категории {category}")
     public void assertProductText(InsuranceProducts product, InsuranceType category) {
@@ -241,22 +262,22 @@ public class CheckInsuranceProductsSteps {
                 switch (product) {
                     case STANDARD:
                         assertEquals(dmsTypesPage.getWidgetDmsStandartText(),
-                                "Добровольное медицинское страхование Standard",
+                                PRODUCT_DMS_STANDART,
                                 "Текст не соответствует эталону");
                         break;
                     case STANDARDPLUS:
                         assertEquals(dmsTypesPage.getWidgetDmsStandartPlusText(),
-                                "Добровольное медицинское страхование Standard+",
+                                PRODUCT_DMS_STANDART_PLUS,
                                 "Текст не соответствует эталону");
                         break;
                     case PREMIUM:
                         assertEquals(dmsTypesPage.getWidgetDmsPremiumText(),
-                                "Добровольное медицинское страхование Premium",
+                                PRODUCT_DMS_PREMIUM,
                                 "Текст не соответствует эталону");
                         break;
                     case VIP:
                         assertEquals(dmsTypesPage.getWidgetDmsVipText(),
-                                "Добровольное медицинское страхование VIP",
+                                PRODUCT_DMS_VIP,
                                 "Текст не соответствует эталону");
                         break;
                 }
@@ -264,12 +285,12 @@ public class CheckInsuranceProductsSteps {
                 switch (product) {
                     case KASKO:
                         assertEquals(carsInsuranceTypesPage.getWidgetKaskoText(),
-                                "Автострахование КАСКО",
+                                PRODUCT_CARS_KASKO,
                                 "Текст не соответствует эталону");
                         break;
                     case OSAGO:
                         assertEquals(carsInsuranceTypesPage.getWidgetOsagoText(),
-                                "Автострахование ОСАГО",
+                                PRODUCT_CARS_OSAGO,
                                 "Текст не соответствует эталону");
                         break;
                 }
@@ -277,58 +298,62 @@ public class CheckInsuranceProductsSteps {
                 switch (product) {
                     case APARTMENT:
                         assertEquals(propertyInsuranceTypesPage.getWidgetAppartmentText(),
-                                "Страхование квартиры",
+                                PRODUCT_PROPERTY_APARTMENT,
                                 "Текст не соответствует эталону");
                         break;
                     case HOUSE:
                         assertEquals(propertyInsuranceTypesPage.getWidgetHouseText(),
-                                "Страхование дома",
+                                PRODUCT_PROPERTY_HOUSE,
                                 "Текст не соответствует эталону");
                         break;
                     case CONTENTS:
                         assertEquals(propertyInsuranceTypesPage.getWidgetContentsText(),
-                                "Страхование домашнего имущества",
+                                PPRODUCT_PROPERTY_CONTENTS,
                                 "Текст не соответствует эталону");
                         break;
                 }
             case TRAVEL:
                 if (product == InsuranceProducts.TRAVEL) {
                     assertEquals(travelInsuranceTypesPage.getWidgetTravelText(),
-                            "Страхование выезжающих за границу",
+                            PRODUCT_TRAVEL,
                             "Текст не соответствует эталону");
                 }
             case ACCIDENT:
                 if (product == InsuranceProducts.ACCIDENT) {
                     assertEquals(accidentInsuranceTypesPage.getWidgetAccidentText(),
-                            "Страхование от несчастных случаев",
+                            PRODUCT_ACCIDENT,
                             "Текст не соответствует эталону");
                 }
         }
     }
 
     @Step("Нажать на кнопку 'Подробнее' продукта {product} в категории {category}")
-    public void selectDmsProduct(InsuranceProducts product, InsuranceType category) {
+    public void selectInsuranceProduct(InsuranceProducts product, InsuranceType category) {
         switch (category) {
             case DMS:
                 switch (product) {
                     case STANDARD:
                         dmsTypesPage.pressWidgetDmsStandartButton();
-                        currentProductWindowHandle = dmsTypesPage.getWindowHandle();
+                        waitPageLoad();
+                        currentProductWindowUrl = dmsTypesPage.getWindowUrl();
                         TestListener.takeScreenshot();
                         break;
                     case STANDARDPLUS:
                         dmsTypesPage.pressWidgetDmsStandartPlusButton();
-                        currentProductWindowHandle = dmsTypesPage.getWindowHandle();
+                        waitPageLoad();
+                        currentProductWindowUrl = dmsTypesPage.getWindowUrl();
                         TestListener.takeScreenshot();
                         break;
                     case PREMIUM:
                         dmsTypesPage.pressWidgetDmsPremiumButton();
-                        currentProductWindowHandle = dmsTypesPage.getWindowHandle();
+                        waitPageLoad();
+                        currentProductWindowUrl = dmsTypesPage.getWindowUrl();
                         TestListener.takeScreenshot();
                         break;
                     case VIP:
                         dmsTypesPage.pressWidgetDmsVipButton();
-                        currentProductWindowHandle = dmsTypesPage.getWindowHandle();
+                        waitPageLoad();
+                        currentProductWindowUrl = dmsTypesPage.getWindowUrl();
                         TestListener.takeScreenshot();
                         break;
                 }
@@ -336,12 +361,14 @@ public class CheckInsuranceProductsSteps {
                 switch (product) {
                     case KASKO:
                         carsInsuranceTypesPage.pressWidgetKaskoButton();
-                        currentProductWindowHandle = carsInsuranceTypesPage.getWindowHandle();
+                        waitPageLoad();
+                        currentProductWindowUrl = carsInsuranceTypesPage.getWindowUrl();
                         TestListener.takeScreenshot();
                         break;
                     case OSAGO:
                         carsInsuranceTypesPage.pressWidgetOsagoButton();
-                        currentProductWindowHandle = carsInsuranceTypesPage.getWindowHandle();
+                        waitPageLoad();
+                        currentProductWindowUrl = carsInsuranceTypesPage.getWindowUrl();
                         TestListener.takeScreenshot();
                         break;
                 }
@@ -349,62 +376,77 @@ public class CheckInsuranceProductsSteps {
                 switch (product) {
                     case APARTMENT:
                         propertyInsuranceTypesPage.pressWidgetApartmentButton();
-                        currentProductWindowHandle = propertyInsuranceTypesPage.getWindowHandle();
+                        waitPageLoad();
+                        currentProductWindowUrl = propertyInsuranceTypesPage.getWindowUrl();
                         TestListener.takeScreenshot();
                         break;
                     case HOUSE:
                         propertyInsuranceTypesPage.pressWidgetHouseButton();
-                        currentProductWindowHandle = propertyInsuranceTypesPage.getWindowHandle();
+                        waitPageLoad();
+                        currentProductWindowUrl = propertyInsuranceTypesPage.getWindowUrl();
                         TestListener.takeScreenshot();
                         break;
                     case CONTENTS:
                         propertyInsuranceTypesPage.pressWidgetContentsButton();
-                        currentProductWindowHandle = propertyInsuranceTypesPage.getWindowHandle();
+                        waitPageLoad();
+                        currentProductWindowUrl = propertyInsuranceTypesPage.getWindowUrl();
                         TestListener.takeScreenshot();
                         break;
                 }
             case TRAVEL:
                 if (product == InsuranceProducts.TRAVEL) {
                     travelInsuranceTypesPage.pressWidgetTravelButton();
-                    currentProductWindowHandle = travelInsuranceTypesPage.getWindowHandle();
+                    waitPageLoad();
+                    currentProductWindowUrl = travelInsuranceTypesPage.getWindowUrl();
                     TestListener.takeScreenshot();
                 }
             case ACCIDENT:
                 if (product == InsuranceProducts.ACCIDENT) {
                     accidentInsuranceTypesPage.pressWidgetAccidentButton();
-                    currentProductWindowHandle = accidentInsuranceTypesPage.getWindowHandle();
+                    waitPageLoad();
+                    currentProductWindowUrl = accidentInsuranceTypesPage.getWindowUrl();
                     TestListener.takeScreenshot();
                 }
         }
     }
 
+    @Step("Проверить URL страницы")
+    public void assertWindowUrl(String firstUrl, String secondUrl, boolean status) {
+        assertEquals(firstUrl.equals(secondUrl), status, "URL match error");
+    }
+
     @Step("Нажать кнопку 'Назад' на странице категории ДМС")
     public void pressBackButtonDms() {
         dmsTypesPage.pressBackButton();
-        currWindowHandle = insuranceProductsPage.getWindowHandle();
+        waitPageLoad();
+        currWindowUrl = insuranceProductsPage.getWindowUrl();
     }
 
     @Step("Нажать кнопку 'Назад' на странице категории Автострахование")
     public void pressBackButtonCars() {
         carsInsuranceTypesPage.pressBackButton();
-        currWindowHandle = insuranceProductsPage.getWindowHandle();
+        waitPageLoad();
+        currWindowUrl = insuranceProductsPage.getWindowUrl();
     }
 
     @Step("Нажать кнопку 'Назад' на странице категории Имущество")
     public void pressBackButtonProperty() {
         propertyInsuranceTypesPage.pressBackButton();
-        currWindowHandle = insuranceProductsPage.getWindowHandle();
+        waitPageLoad();
+        currWindowUrl = insuranceProductsPage.getWindowUrl();
     }
 
     @Step("Нажать кнопку 'Назад' на странице категории Несчастные случаи")
     public void pressBackButtonAccident() {
         accidentInsuranceTypesPage.pressBackButton();
-        currWindowHandle = insuranceProductsPage.getWindowHandle();
+        waitPageLoad();
+        currWindowUrl = insuranceProductsPage.getWindowUrl();
     }
 
     @Step("Нажать кнопку 'Назад' на странице категории Выезжающих за границу")
     public void pressBackButtonTravel() {
         travelInsuranceTypesPage.pressBackButton();
-        currWindowHandle = insuranceProductsPage.getWindowHandle();
+        waitPageLoad();
+        currWindowUrl = insuranceProductsPage.getWindowUrl();
     }
 }
