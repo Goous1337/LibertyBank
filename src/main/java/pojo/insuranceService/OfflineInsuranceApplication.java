@@ -13,7 +13,11 @@ public class OfflineInsuranceApplication {
     private long mobilePhone;
     private String date;
     private String time;
-    private String address;
-    private String officeNumber;
+    private String city;
+    private String street;
+    private String building;
+    private String apartment;
+    private String floor;
+    private String entrance;
     private String type;
 }
