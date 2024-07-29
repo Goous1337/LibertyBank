@@ -72,8 +72,8 @@ public class CM_3_3_CheckApplyingLoanTest extends BaseTest {
                 () -> responseWithMaxParams.then().assertThat().body(JsonSchemaValidator
                         .matchesJsonSchemaInClasspath(jsonSchemaPath))
         );
-        CreditServiceDataBaseRequests.deleteCreditById(actualCreditOrderIdWithMinParams);
-        CreditServiceDataBaseRequests.deleteCreditById(actualCreditOrderIdWithMaxParams);
+        CreditServiceDataBaseRequests.deleteCreditOrder(actualCreditOrderIdWithMinParams);
+        CreditServiceDataBaseRequests.deleteCreditOrder(actualCreditOrderIdWithMaxParams);
     }
 
     @DisplayName("Оформление заявки на кредит с невалидным токеном")
