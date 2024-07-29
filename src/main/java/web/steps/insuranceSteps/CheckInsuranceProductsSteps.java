@@ -15,7 +15,6 @@ import web.pages.insurancePages.travel.TravelInsuranceTypesPage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static web.constans.insurance.InsuranceServiceConstants.PPRODUCT_PROPERTY_CONTENTS;
 import static web.constans.insurance.InsuranceServiceConstants.PRODUCT_ACCIDENT;
 import static web.constans.insurance.InsuranceServiceConstants.PRODUCT_CARS_KASKO;
 import static web.constans.insurance.InsuranceServiceConstants.PRODUCT_CARS_OSAGO;
@@ -24,6 +23,7 @@ import static web.constans.insurance.InsuranceServiceConstants.PRODUCT_DMS_STAND
 import static web.constans.insurance.InsuranceServiceConstants.PRODUCT_DMS_STANDART_PLUS;
 import static web.constans.insurance.InsuranceServiceConstants.PRODUCT_DMS_VIP;
 import static web.constans.insurance.InsuranceServiceConstants.PRODUCT_PROPERTY_APARTMENT;
+import static web.constans.insurance.InsuranceServiceConstants.PRODUCT_PROPERTY_CONTENTS;
 import static web.constans.insurance.InsuranceServiceConstants.PRODUCT_PROPERTY_HOUSE;
 import static web.constans.insurance.InsuranceServiceConstants.PRODUCT_TRAVEL;
 import static web.constans.insurance.InsuranceServiceConstants.PRODUCT_TYPE_ACCIDENT;
@@ -308,7 +308,7 @@ public class CheckInsuranceProductsSteps {
                         break;
                     case CONTENTS:
                         assertEquals(propertyInsuranceTypesPage.getWidgetContentsText(),
-                                PPRODUCT_PROPERTY_CONTENTS,
+                                PRODUCT_PROPERTY_CONTENTS,
                                 "Текст не соответствует эталону");
                         break;
                 }

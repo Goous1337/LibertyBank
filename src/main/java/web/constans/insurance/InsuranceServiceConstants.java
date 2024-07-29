@@ -60,14 +60,14 @@ public class InsuranceServiceConstants {
     public static final String PRODUCT_DMS_VIP = "Добровольное медицинское страхование VIP";
     public static final String PRODUCT_CARS_OSAGO = "Автострахование ОСАГО";
     public static final String PRODUCT_CARS_KASKO = "Автострахование КАСКО";
-    public static final String PPRODUCT_PROPERTY_CONTENTS = "Страхование домашнего имущества";
+    public static final String PRODUCT_PROPERTY_CONTENTS = "Страхование домашнего имущества";
     public static final String PRODUCT_PROPERTY_APARTMENT = "Страхование квартиры";
     public static final String PRODUCT_PROPERTY_HOUSE = "Страхование дома";
     public static final String PRODUCT_ACCIDENT = "Страхование от несчастных случаев";
     public static final String PRODUCT_TRAVEL = "Страхование выезжающих за границу";
     public static final String PRODUCT_TYPE_DMS = "Медицинское страхование";
     public static final String PRODUCT_TYPE_CARS = "Автострахование";
-    public static final String PRODUCT_TYPE_PROPERTY ="Страхование имущества";
+    public static final String PRODUCT_TYPE_PROPERTY = "Страхование имущества";
     public static final String PRODUCT_TYPE_ACCIDENT = "Страхование от несчастных случаев";
     public static final String PRODUCT_TYPE_TRAVEL = "Страхование выезжающих за границу";
 }

@@ -20,10 +20,16 @@ public class CreditServiceDataBaseRequests {
         return creditInfo;
     }
 
-    public static void deleteCreditById(int id) {
+    public static void deleteCreditOrder(int id) {
         String sql = "DELETE FROM credit_order WHERE id=?";
         getDBConnection(CREDIT_SERVICE).update(sql, id);
         LOG.info(String.format("Заказ по кредиту с id = %s был удален", id));
+    }
+
+    public static void deleteCreditOrder(String amount, String termCredit) {
+        String sql = "DELETE FROM credit_order WHERE id=? and period_months=?";
+        getDBConnection(CREDIT_SERVICE).update(sql, amount, termCredit);
+        LOG.info(String.format("Заказ по кредиту с amount = %s и period_months= %s был удален", amount, termCredit));
     }
 
     public static List<Integer> getCreditsOrders() {
