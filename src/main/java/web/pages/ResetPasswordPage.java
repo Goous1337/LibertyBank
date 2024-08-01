@@ -16,7 +16,7 @@ public class ResetPasswordPage extends BasePage {
     @FindBy(xpath = "//input[@name = 'confirmPassword']")
     private WebElement passwordConfirmInput;
 
-    @FindBy(xpath = "//input[@data-testid = 'inputBase']")
+    @FindBy(xpath = "//input[@data-testid = 'inputBase-1']")
     private WebElement verificationCodeInput;
 
     @FindBy(xpath = "//button[@type='submit']")

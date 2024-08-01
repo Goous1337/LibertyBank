@@ -63,14 +63,13 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
     @Tags({@Tag("Smoke"), @Tag("Negative")})
     @TmsLink("LIB-2435")
     @ParameterizedTest
-    @CsvSource({"71111111111, Login-1", "79228134511, Login-107543"})
+    @CsvSource({"71111111111, Login-1", "79228130511, Login-107543"})
     public void checkAuthUnregisteredUserTest(String phone, String password) {
         loginSteps.clickInputPhone();
         loginSteps.enterPhone(phone);
         loginSteps.clickInputPassword();
         loginSteps.enterPassword(password);
-        loginSteps.clickSubmitButton();
-        loginSteps.assertSubmitButtonAndInputInvalid(
+        loginSteps.clickSubmitButton();loginSteps.assertSubmitButtonAndInputInvalid(
                 "rgba(216, 223, 234, 1)",
                 "rgba(77, 95, 113, 1)",
                 "rgba(245, 60, 20, 1)");
