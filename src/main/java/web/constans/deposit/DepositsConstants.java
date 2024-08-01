@@ -12,6 +12,7 @@ public class DepositsConstants {
     public static final String PROCENT = "%";
     public static final String MONTHS = "месяцев";
     public static final String DATE_FORMAT = "dd.MM.yyyy";
+    public static final String DATE_FORMAT_APP = "yyyy.MM.dd";
     public static final String CAPS_RUB = "RUB";
     public static final String CAPS_USD = "USD";
 

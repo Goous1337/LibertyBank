@@ -67,7 +67,7 @@ public class US_3_1_CheckCreditSubsectionsTest extends BaseTest {
         creditInfoSteps.clickMyCreditButton();
         myCreditSteps.clickShowMoreAboutMyCreditButton();
         // Надо переделать логику для сравние URL-ов
-        //creditInfoSteps.assertUrlFirstMyCredit();
+        creditInfoSteps.assertUrlFirstMyCredit();
     }
 
 }

@@ -1,5 +1,6 @@
 package web.epic_3;
 
+import dataBase.requests.CreditServiceDataBaseRequests;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.TmsLink;
@@ -56,6 +57,7 @@ public class US_3_10_CheckValueCreditReportTest extends BaseTest {
         creditApplicationReportSteps.reportIsVisible();
         creditApplicationReportSteps.getDefaultValuesStep();
         creditApplicationReportSteps.assertCreditReports();
+        CreditServiceDataBaseRequests.deleteCreditOrder(sumCredit, termCredit);
     }
 
     @ParameterizedTest
@@ -81,5 +83,6 @@ public class US_3_10_CheckValueCreditReportTest extends BaseTest {
         creditApplicationReportSteps.reportIsVisible();
         creditApplicationReportSteps.getDefaultValuesStep();
         creditApplicationReportSteps.assertCreditReports();
+        CreditServiceDataBaseRequests.deleteCreditOrder(sumCredit, termCredit);
     }
 }
