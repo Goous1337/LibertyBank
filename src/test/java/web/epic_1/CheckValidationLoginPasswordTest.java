@@ -69,7 +69,8 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
         loginSteps.enterPhone(phone);
         loginSteps.clickInputPassword();
         loginSteps.enterPassword(password);
-        loginSteps.clickSubmitButton();loginSteps.assertSubmitButtonAndInputInvalid(
+        loginSteps.clickSubmitButton();
+        loginSteps.assertSubmitButtonAndInputInvalid(
                 "rgba(216, 223, 234, 1)",
                 "rgba(77, 95, 113, 1)",
                 "rgba(245, 60, 20, 1)");
