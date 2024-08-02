@@ -1,31 +1,61 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "array",
-  "items": {
-    "type": "object",
-    "properties": {
-      "id": {
-        "type": "number"
-      },
-      "name": {
-        "type": "string"
-      },
-      "interestRate": {
-        "type": "number"
-      },
-      "currencyCode": {
-        "type": "string"
-      },
-      "details": {
-        "type": "string"
+  "required": [
+    "id",
+    "name",
+    "interestRate",
+    "currencyCodeList",
+    "details",
+    "minPeriodMonths",
+    "maxPeriodMonths",
+    "minSum",
+    "maxSum",
+    "creditPurpose"
+  ],
+  "items": [
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "interestRate": {
+          "type": "number"
+        },
+        "currencyCodeList": {
+          "type": "array",
+          "items": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "details": {
+          "type": "string"
+        },
+        "minPeriodMonths": {
+          "type": "integer"
+        },
+        "maxPeriodMonths": {
+          "type": "integer"
+        },
+        "minSum": {
+          "type": "integer"
+        },
+        "maxSum": {
+          "type": "integer"
+        },
+        "creditPurpose": {
+          "type": "string"
+        }
       }
-    },
-    "required": [
-      "id",
-      "name",
-      "interestRate",
-      "currencyCode",
-      "details"
-    ]
-  }
+    }
+  ]
 }

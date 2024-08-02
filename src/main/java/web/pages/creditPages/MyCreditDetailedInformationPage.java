@@ -18,17 +18,17 @@ import static web.helpers.Converter.*;
 public class MyCreditDetailedInformationPage extends BasePage {
     public CreditProductService creditProductService;
     private String nameBackEnd;
-    private Integer creditLimitBackEnd;
+    private Double creditLimitBackEnd;
     private Integer periodMonthsBackEnd;
-    private Integer interestRateBackEnd;
-    private Integer generalDebtBackEnd;
+    private Double interestRateBackEnd;
+    private Double generalDebtBackEnd;
     private java.sql.Date paymentDateBackEnd;
     private String creditAccountNumberBackEnd;
     private String nameFromWeb;
-    private Integer creditLimitFromWeb;
+    private Double creditLimitFromWeb;
     private Integer periodMonthsFromWeb;
-    private Integer interestRateFromWeb;
-    private Integer generalDebtFromWeb;
+    private Double interestRateFromWeb;
+    private Double generalDebtFromWeb;
     private java.sql.Date paymentDateFromWeb;
     private String creditAccountNumberFromWeb;
     private List<MyCreditMoreInformation> listXpath;
@@ -75,10 +75,10 @@ public class MyCreditDetailedInformationPage extends BasePage {
         listXpath = new ArrayList<>();
         listXpath.add(new MyCreditMoreInformation(
                 nameTitleCreditText.getText(),
-                convertStringToInteger(creditLimitText.getText()),
+                convertValueToDouble(creditLimitText.getText()),
                 convertStringToInteger(periodMonthsCreditText.getText()),
-                convertStringToInteger(interestRateCreditText.getText()),
-                convertStringToInteger(repayCreditText.getText()),
+                convertValueToDouble(interestRateCreditText.getText()),
+                convertValueToDouble(repayCreditText.getText()),
                 parseDate(paymentDateCreditText.getText()),
                 convertStringToString(accountNumberCreditText.getText())
         ));
@@ -88,7 +88,7 @@ public class MyCreditDetailedInformationPage extends BasePage {
     public MyCreditMoreInformation getMoreMyCreditInformationObjectFromWeb() {
         for (MyCreditMoreInformation myCreditMoreInformation : addMoreMyCreditInformationXpathToList()) {
             nameFromWeb = myCreditMoreInformation.getName();
-            creditLimitFromWeb = myCreditMoreInformation.getCreditLimit();
+            creditLimitFromWeb = myCreditMoreInformation.getCreditAmount();
             periodMonthsFromWeb = myCreditMoreInformation.getPeriodMonths();
             interestRateFromWeb = myCreditMoreInformation.getInterestRate();
             generalDebtFromWeb = myCreditMoreInformation.getGeneralDebt();
@@ -115,8 +115,8 @@ public class MyCreditDetailedInformationPage extends BasePage {
                 if (myCreditMoreInformationBackEnd.getName().equals(myCreditMoreInformationWeb.getName())) {
                     nameBackEnd = myCreditMoreInformationBackEnd.getName();
                 }
-                if (myCreditMoreInformationBackEnd.getCreditLimit().equals(myCreditMoreInformationWeb.getCreditLimit())) {
-                    creditLimitBackEnd = myCreditMoreInformationBackEnd.getCreditLimit();
+                if (myCreditMoreInformationBackEnd.getCreditAmount().equals(myCreditMoreInformationWeb.getCreditAmount())) {
+                    creditLimitBackEnd = myCreditMoreInformationBackEnd.getCreditAmount();
                 }
                 if (myCreditMoreInformationBackEnd.getPeriodMonths().equals(myCreditMoreInformationWeb.getPeriodMonths())) {
                     periodMonthsBackEnd = myCreditMoreInformationBackEnd.getPeriodMonths();
@@ -132,7 +132,6 @@ public class MyCreditDetailedInformationPage extends BasePage {
                         myCreditMoreInformationWeb.getCreditAccountNumber())) {
                     creditAccountNumberFromWeb = myCreditMoreInformationBackEnd.getCreditAccountNumber();
                 }
-
             }
         }
         return new MyCreditMoreInformation(

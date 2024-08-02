@@ -4,12 +4,17 @@ import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import pojo.investmentService.AuthResponse;
-import pojo.investmentService.CustomerIdNotFoundResponse;
+import pojo.investmentService.ErrorResponse;
+
+import java.util.stream.Stream;
 
 import static api.utils.JsonParser.parseJson;
-import static constant.InvestmentConstants.ACCESS_TOKEN_INVALID_CUSTOMER_ID;
-import static constant.InvestmentConstants.INVALID_ACCESS_TOKEN;
+import static constant.InvestmentConstants.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static property.BaseProperties.ACCESS_TOKEN_INVESTMENT_SERVICE;
@@ -20,35 +25,32 @@ import static service.InvestmentService.postAuthRequest;
 @DisplayName("INV-1.1 Авторизация пользователя")
 public class INV_1_1_UserAuth {
 
-    private static final String JSON = "/jsons/investmentJsons/authData.json";
     private static final String JSON_NOT_FOUND = "/jsons/investmentJsons/authDataInvalidCustomerId.json";
     private static final String JSON_UNAUTHORIZED = "/jsons/investmentJsons/authDataUnauthorized.json";
+    private static final String JSON_INVALID_TOKEN = "/jsons/investmentJsons/invalidTokenData.json";
 
     {
         RestAssured.baseURI = INVESTMENT_SERVICE;
     }
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("authDataProvider")
     @TmsLink("LIB6-1027")
     @DisplayName("Авторизация пользователя")
-    @Description("Данный тест-кейс проверяет авторизацию пользователя")
-    public void postAuthData() {
-        AuthResponse actualData = postAuthRequest(ACCESS_TOKEN_INVESTMENT_SERVICE)
-                .as(AuthResponse.class);
-        AuthResponse expectedData = parseJson(AuthResponse.class, JSON);
-
-        assertEquals(actualData, expectedData, "Данные пользователя не соотвествуют ожидаемым");
-
+    @Description("Данный тест-кейс позволяет проверить переход клиента банка в сервис инвестиций")
+    public void postAuthData(String accessToken, boolean expectedStatus) {
+        AuthResponse actualData = postAuthRequest(accessToken).as(AuthResponse.class);
+        assertEquals(expectedStatus, actualData.isUserHaveActiveBrokerAccount());
     }
 
     @Test
     @TmsLink("LIB6-1121")
-    @DisplayName("Авторизация пользователя")
+    @DisplayName("Авторизация пользователя, невалидный customerId")
     @Description("Данный тест-кейс проверяет авторизацию пользователя с невалидным CustomerId")
     public void postAuthDataInvalidCustomerId() {
-        CustomerIdNotFoundResponse actualData = postAuthRequest(ACCESS_TOKEN_INVALID_CUSTOMER_ID)
-                .as(CustomerIdNotFoundResponse.class);
-        CustomerIdNotFoundResponse expectedData = parseJson(CustomerIdNotFoundResponse.class, JSON_NOT_FOUND);
+        ErrorResponse actualData = postAuthRequest(ACCESS_TOKEN_INVALID_CUSTOMER_ID)
+                .as(ErrorResponse.class);
+        ErrorResponse expectedData = parseJson(ErrorResponse.class, JSON_NOT_FOUND);
         assertAll(
                 () -> assertEquals(actualData.getUri(), expectedData.getUri(), "Эндпоинт не соответствует ожидаемому"),
                 () -> assertEquals(actualData.getType(), expectedData.getType(), "Тип ответа не соответствует ожидаемому"),
@@ -58,12 +60,12 @@ public class INV_1_1_UserAuth {
 
     @Test
     @TmsLink("LIB6-1038")
-    @DisplayName("Авторизация пользователя")
+    @DisplayName("Авторизация пользователя, ошибка авторизации")
     @Description("Данный тест-кейс проверяет авторизацию пользователя с невалидным Token")
-    public void postAuthDataInvalidToken() {
-        CustomerIdNotFoundResponse actualData = postAuthRequest(INVALID_ACCESS_TOKEN)
-                .as(CustomerIdNotFoundResponse.class);
-        CustomerIdNotFoundResponse expectedData = parseJson(CustomerIdNotFoundResponse.class, JSON_UNAUTHORIZED);
+    public void postAuthDataUnauthorized() {
+        ErrorResponse actualData = postAuthRequest(EMPTY_ACCESS_TOKEN)
+                .as(ErrorResponse.class);
+        ErrorResponse expectedData = parseJson(ErrorResponse.class, JSON_UNAUTHORIZED);
         assertAll(
                 () -> assertEquals(actualData.getUri(), expectedData.getUri(), "Эндпоинт не соответствует ожидаемому"),
                 () -> assertEquals(actualData.getType(), expectedData.getType(), "Тип ответа не соответствует ожидаемому"),
@@ -71,5 +73,26 @@ public class INV_1_1_UserAuth {
 
     }
 
-}
+    @ParameterizedTest
+    @ValueSource(strings = {INVALID_ACCESS_TOKEN, ACCESS_TOKEN_INVALID_UUID, ACCESS_TOKEN_INVALID_PAYLOAD, EXPIRED_ACCESS_TOKEN})
+    @TmsLink("LIB6-1277")
+    @DisplayName("Авторизация пользователя, невалидный JWT токен")
+    @Description("Данный тест-кейс проверяет авторизацию пользователя с невалидным Token")
+    public void postAuthDataInvalidToken(String token) {
+        ErrorResponse actualData = postAuthRequest(token)
+                .as(ErrorResponse.class);
+        ErrorResponse expectedData = parseJson(ErrorResponse.class, JSON_INVALID_TOKEN);
+        assertAll(
+                () -> assertEquals(actualData.getUri(), expectedData.getUri(), "Эндпоинт не соответствует ожидаемому"),
+                () -> assertEquals(actualData.getType(), expectedData.getType(), "Тип ответа не соответствует ожидаемому"),
+                () -> assertEquals(actualData.getMessage(), expectedData.getMessage(), "Сообщение об ошибке не соответствует ожидаемому"));
 
+    }
+
+    static Stream<Arguments> authDataProvider() {
+        return Stream.of(
+                Arguments.of(ACCESS_TOKEN_INVESTMENT_SERVICE, true),
+                Arguments.of(ACCESS_TOKEN_WITHOUT_ACCOUNT, false)
+        );
+    }
+}

@@ -1,31 +1,37 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "array",
-  "items": {
-    "type": "object",
-    "properties": {
-      "id": {
-        "type": "string"
+  "items": [
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "interestRate": {
+          "type": "integer"
+        },
+        "creditAmount": {
+          "type": "integer"
+        },
+        "currencyCode": {
+          "type": "string"
+        },
+        "terminationDate": {
+          "type": "string"
+        }
       },
-      "name": {
-        "type": "string"
-      },
-      "currencyCode": {
-        "type": "string"
-      },
-      "terminationDate": {
-        "type": "string"
-      },
-      "generalDebt": {
-        "type": "number"
-      }
-    },
-    "required": [
-      "id",
-      "name",
-      "currencyCode",
-      "terminationDate",
-      "generalDebt"
-    ]
-  }
+      "required": [
+        "id",
+        "name",
+        "interestRate",
+        "creditAmount",
+        "currencyCode",
+        "terminationDate"
+      ]
+    }
+  ]
 }

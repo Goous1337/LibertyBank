@@ -75,4 +75,9 @@ public class CreditApplicationSteps {
         assertTrue(creditApplicationPage.checkButtonCondition(bgButtonColor, textButtonColor, false), INVALID_COLOR);
     }
 
+    @Step("Продолжение оформления заявки после нажатия на кнопку 'Отправить заявку'")
+    public void sendApplicationForm() {
+        creditApplicationPage.clickSendCredit();
+    }
+
 }

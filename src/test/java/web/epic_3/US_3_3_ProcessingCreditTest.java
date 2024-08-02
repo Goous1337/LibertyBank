@@ -24,10 +24,8 @@ public class US_3_3_ProcessingCreditTest extends BaseTest {
     }
 
     private static Stream<Object> testDataLibertyExpress() {
-        return Stream.of(Arguments.of("50000", "12", "1234567890", "1000", "1000"),
-                Arguments.of("50001", "12", "1234567890", "1000", "1000"),
-                Arguments.of("2999999", "59", "1234567890", "1000", "1000"),
-                Arguments.of("3000000", "60", "123456789123", "5194", "51352"));
+        return Stream.of(Arguments.of("50000", "12", "1234567890", "1000", "1000", "123456"),
+                Arguments.of("50001", "12", "1234567890", "1000", "1000", "654321"));
     }
 
     private static Stream<Object> testDataLibertyCash() {
@@ -85,10 +83,15 @@ public class US_3_3_ProcessingCreditTest extends BaseTest {
         );
     }
 
-    @BeforeAll
+    @BeforeEach
     public void setUpTest() {
         authorization();
     }
+
+//    @AfterEach
+//    public void sendApplicationForm(){
+//        creditApplicationSteps.sendApplicationForm();
+//    }
 
     @Test
     @Tags({@Tag("Web"), @Tag("Smoke"), @Tag("Positive")})
@@ -125,7 +128,7 @@ public class US_3_3_ProcessingCreditTest extends BaseTest {
     @Tags({@Tag("Web"), @Tag("Positive")})
     @DisplayName("Проверка допустимых граничных значений полей при оформлении заявки на кредит Liberty Срочный")
     @MethodSource("testDataLibertyExpress")
-    public void checkPositiveBorderLibertyExpressInputTest(String sumCredit, String termCredit, String employerIdentificationNumber, String totalDebtLoad, String averageMonthlyIncome) {
+    public void checkPositiveBorderLibertyExpressInputTest(String sumCredit, String termCredit, String employerIdentificationNumber, String totalDebtLoad, String averageMonthlyIncome , String autogenerCode) throws InterruptedException {
         creditInfoSteps.clickCreditButton();
         creditInfoSteps.clickCreditProductButton();
         creditProductsSteps.clickShowMoreLibertyExpressButton();
@@ -143,6 +146,10 @@ public class US_3_3_ProcessingCreditTest extends BaseTest {
                 "rgba(0, 90, 254, 1)",
                 "rgba(245, 245, 245, 1)"
         );
+        creditApplicationSteps.sendApplicationForm();
+        creditMobileCodeVerificationSteps.enterGenerationCode(autogenerCode);
+        creditMobileCodeVerificationSteps.clickNextButton();
+        creditApplicationReportSteps.reportIsVisible();
     }
 
     @ParameterizedTest

@@ -43,9 +43,31 @@ public class CreditApplicationPage extends BasePage {
     @FindBy(xpath = "//button[text()='Отправить заявку']")
     private WebElement buttonSendCredit;
 
+    @FindBy(xpath = "//input[@value='USD']")
+    private WebElement usdRadioButton;
+    @FindBy(xpath = "//input[@value='EUR']")
+    private WebElement eurRadioButton;
+    @FindBy(xpath = "//input[@data-testid='input-text-amount']/../../following-sibling::span[contains(text(), 'USD') or contains(text(), 'RUB') or contains(text(), 'EUR')]")
+    private WebElement textCurrencyCredit;
+
     public void clickSendCredit() {
         waitElement(buttonSendCredit);
         buttonSendCredit.click();
+    }
+
+    public void clickEurRadioButton() {
+        waitElement(eurRadioButton);
+        eurRadioButton.click();
+    }
+
+    public void clickUsdRadioButton() {
+        waitElement(usdRadioButton);
+        usdRadioButton.click();
+    }
+
+    public String getCurrencyCreditText() {
+        waitElement(textCurrencyCredit);
+        return textCurrencyCredit.getText();
     }
 
     public boolean checkButtonCondition(String bgColor, String textColor, boolean isEnabled) {

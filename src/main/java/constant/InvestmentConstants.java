@@ -2,5 +2,23 @@ package constant;
 
 public class InvestmentConstants {
     public static final String ACCESS_TOKEN_INVALID_CUSTOMER_ID = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI5ZDU0MDAxZi1iNjc2LTQ3YTUtODk5Ny03OWJlN2RjYWZkZjIiLCJpYXQiOjE3MTEwNDYzMDMsImV4cCI6MTkzMTA5NjMwM30.ufDiUp89Z7S5LAnn_iG14_rLUpdmySahv47fVRWxkGc";
-    public static final String INVALID_ACCESS_TOKEN = "";
+    public static final String EMPTY_ACCESS_TOKEN = "";
+    public static final String ACCESS_TOKEN_WITHOUT_ACCOUNT = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlOGI1YmNiNS05NmEyLTQ2ZDktYjZkZi0zM2JlMzVhYjY5N2EiLCJpYXQiOjE3MTEwNDYzMDMsImV4cCI6MTc0NDM0NzYzOX0.QvR2x-pSQv2Bo-UKIy5K6PCmI8I7EJdk0sip8KbyjpE";
+    public static final String ACCESS_TOKEN_INVALID_UUID = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzE1MTcxNzAwLCJleHAiOjE5MTUxNzIzMDB9.0L9pqWvwo0GdRDt7X6ABhUWit0sf1b1vyEUDzPs21gc";
+    public static final String ACCESS_TOKEN_INVALID_PAYLOAD = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIxIjoiODAxMjllOTItZTI2ZS00Y2E4LWExNTgtMjc1MmM5ZGIxNTA4IiwiaWF0IjoxNzE1MTcxNzAwLCJleHAiOjE5MTUxNzIzMDB9.Lk4CpwSmmrI3sm01Ewr2z7X0y_tKIcMkRrrpdqVY51E";
+    public static final String EXPIRED_ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI4MDEyOWU5Mi1lMjZlLTRjYTgtYTE1OC0yNzUyYzlkYjE1MDgiLCJpYXQiOjE3MTUxNzE3MDAsImV4cCI6MTcxNTE3MTcwMH0.J2MIC6BKFRy-_T_ltQfecVjHmVw9NvmENo17GM17xs4";
+    public static final String INVALID_ACCESS_TOKEN = "123";
+    public static final String APPLICATION_FOR_BROKERAGE_SERVICE = "DOCX_FILE_APPLICATION_FOR_BROKERAGE_SERVICE";
+    public static final String APPLICATION_FOR_DEPOSIT_AGREEMENT = "DOCX_FILE_APPLICATION_FOR_DEPOSIT_AGREEMENT";
+    public static final String CONSENT_TO_THE_PROCESSING_OF_PERSONAL_DATA = "DOCX_FILE_CONSENT_TO_THE_PROCESSING_OF_PERSONAL_DATA";
+    public static final String BROKERAGE_REGULATIONS = "DOCX_FILE_BROKERAGE_REGULATIONS";
+    public static final String RISK_DECLARATIONS = "DOCX_FILE_RISK_DECLARATIONS";
+    public static final String PDF_CONTENT_TYPE = "application/pdf";
+    public static final String ARTICLE_TYPE = "articleType";
+    public static final String VALID_ARTICLE_ID = "65e82fb2a5706d3a4d258018";
+    public static final String NEWS = "NEWS";
+    public static final String ANALYTICS = "ANALYTICS";
+    public static final String TIMESTAMP = "timestamp";
+    public static final String LIMIT = "limit";
+    public static final String TAG = "tag";
 }

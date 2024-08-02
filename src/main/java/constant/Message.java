@@ -13,4 +13,9 @@ public class Message {
     public static final String BAD_REQUEST_MESSAGE = "Bad Request";
     public static final String NOT_FOUND_ISSUED_POLICIES = "Не найдено оформленных полисов";
     public static final String NOT_FOUND_CLIENT = "Клиент не найден";
+    public final static String FILTER_SHOULD_CONTAIN_JUST_NUMBERS = "Filter should contain just numbers";
+    public final static String BAD_REQUEST_ERROR = "BadRequestError";
+    public final static String NOT_FOUND_ERROR = "NotFoundError";
+    public final static String CANT_FIND_PRODUCT_GROUP = "Can't find product group with provided id";
+    public final static String FILTER_CANT_BE_EMPTY = "Filter can't be empty";
 }
