@@ -52,7 +52,7 @@ public class INS_28_CheckApplyingForInsuranceOffline extends BaseTest {
                 () -> assertEquals(insuranceService.getResponseIdNewApplicationInsuranceOffline(response),
                         InsuranceServiceDataBaseRequest.getApplicationId(applicationId), "Заявка не создана в базе данных"),
                 () -> assertEquals(insuranceService.getResponseIdNewApplicationInsuranceOffline(response),
-                        InsuranceServiceDataBaseRequest.getApplicationId(applicationId),"Ваша заявка успешно оформлена"),
+                        InsuranceServiceDataBaseRequest.getApplicationId(applicationId), "Ваша заявка успешно оформлена"),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(JSON_SCHEMA_PATH))
         );
     }
