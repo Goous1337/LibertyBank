@@ -43,7 +43,7 @@ public class INS_28_CheckApplyingForInsuranceOffline extends BaseTest {
     @ExtendWith(Retry.class)
     public void getApplicationInsuranceOfflineWithValidData() {
         OfflineInsuranceApplication offlineInsuranceApplication = new OfflineInsuranceApplication("1",
-                "Иваан", "Жук", "", 9009998877L, "2024-09-05", "12:00",
+                "Иваан", "Жук", "", 79009998876L, "2024-09-05", "12:00",
                 "Москва", "Ул и-ц'а", "12", "", "", "", "HOME");
         Response response = insuranceService.makeNewApplicationInsuranceOffline(CLIENT_ID, offlineInsuranceApplication);
         String applicationId = response.jsonPath().getString("applicationId");
