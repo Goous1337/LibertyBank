@@ -69,7 +69,7 @@ public class INS_28_CheckApplyingForInsuranceOffline extends BaseTest {
         Response response = insuranceService.makeNewApplicationInsuranceOfflineWithoutAuthorization(offlineInsuranceApplication);
         assertAll(
                 () -> assertEquals(SC_BAD_REQUEST, response.statusCode(), "Код ответа не соответсвует ожидаемому"),
-                () -> assertEquals(NO_CLIENT_ID, response.jsonPath().get("message"), "Поле clientI является обязательным")
+                () -> assertEquals(NO_CLIENT_ID, response.jsonPath().get("message"), "Поле clientId является обязательным")
         );
     }
 
