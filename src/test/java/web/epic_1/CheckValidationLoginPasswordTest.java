@@ -63,7 +63,7 @@ public class CheckValidationLoginPasswordTest extends BaseTest {
     @Tags({@Tag("Smoke"), @Tag("Negative")})
     @TmsLink("LIB-2435")
     @ParameterizedTest
-    @CsvSource({"71111111111, Login-1", "79228134511, Login-107543"})
+    @CsvSource({"71111111111, Login-1", "79228130511, Login-107543"})
     public void checkAuthUnregisteredUserTest(String phone, String password) {
         loginSteps.clickInputPhone();
         loginSteps.enterPhone(phone);
