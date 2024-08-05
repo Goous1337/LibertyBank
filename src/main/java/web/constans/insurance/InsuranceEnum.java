@@ -44,4 +44,39 @@ public class InsuranceEnum {
         RUB,
         USD
     }
+
+    public enum InsuranceType {
+        DMS,
+        CARS,
+        TRAVEL,
+        PROPERTY,
+        ACCIDENT,
+    }
+
+    public enum CarouselController {
+        NEXT,
+        PREV
+    }
+
+    public enum CarouselProducts {
+        KASKO,
+        DMSSTANDARD,
+        APARTMENT,
+        ACCIDENT,
+        TRAVEL
+    }
+
+    public enum InsuranceProducts {
+        STANDARD,
+        STANDARDPLUS,
+        PREMIUM,
+        VIP,
+        OSAGO,
+        KASKO,
+        APARTMENT,
+        HOUSE,
+        CONTENTS,
+        ACCIDENT,
+        TRAVEL
+    }
 }
