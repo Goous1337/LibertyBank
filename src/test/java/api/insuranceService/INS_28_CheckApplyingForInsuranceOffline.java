@@ -34,6 +34,7 @@ public class INS_28_CheckApplyingForInsuranceOffline extends BaseTest {
         RestAssured.baseURI = INSURANCE_POLICY_SERVICE;
     }
 
+
     @DisplayName("Подача заявки на страхование офлайн при валидных данных")
     @Description("Тест направлен на проверку подачи заявки на страхование офлайн при валидных данных")
     @Tag("API")
@@ -42,14 +43,16 @@ public class INS_28_CheckApplyingForInsuranceOffline extends BaseTest {
     @ExtendWith(Retry.class)
     public void getApplicationInsuranceOfflineWithValidData() {
         OfflineInsuranceApplication offlineInsuranceApplication = new OfflineInsuranceApplication("1",
-                "Иваан", "Жук", "Иванов", 9009998877L, "2024-09-05", "12:00",
-                "Москва", "Ул и-ц'а", "12ф3-1ф", "12", "123", "012", "HOME");
+                "Иваан", "Жук", "", 9009998877L, "2024-09-05", "12:00",
+                "Москва", "Ул и-ц'а", "12", "", "", "", "HOME");
         Response response = insuranceService.makeNewApplicationInsuranceOffline(CLIENT_ID, offlineInsuranceApplication);
         String applicationId = response.jsonPath().getString("applicationId");
         assertAll(
-                () -> assertEquals(SC_CREATED, response.statusCode(), "Код ответа не соответствует ожидаемому"),
+                () -> assertEquals(SC_CREATED, response.statusCode(), "Код ответа не соответсвует ожидаемому"),
                 () -> assertEquals(insuranceService.getResponseIdNewApplicationInsuranceOffline(response),
                         InsuranceServiceDataBaseRequest.getApplicationId(applicationId), "Заявка не создана в базе данных"),
+                () -> assertEquals(insuranceService.getResponseIdNewApplicationInsuranceOffline(response),
+                        InsuranceServiceDataBaseRequest.getApplicationId(applicationId),"Ваша заявка успешно оформлена"),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(JSON_SCHEMA_PATH))
         );
     }
@@ -65,8 +68,8 @@ public class INS_28_CheckApplyingForInsuranceOffline extends BaseTest {
                 "Москва", "Ул и-ц'а", "12ф3-1ф", "12", "123", "012", "HOME");
         Response response = insuranceService.makeNewApplicationInsuranceOfflineWithoutAuthorization(offlineInsuranceApplication);
         assertAll(
-                () -> assertEquals(SC_BAD_REQUEST, response.statusCode(), "Код ответа не соответствует ожидаемому"),
-                () -> assertEquals(NO_CLIENT_ID, response.jsonPath().get("message"), "Тело ответа не соответсвует ожидаемому")
+                () -> assertEquals(SC_BAD_REQUEST, response.statusCode(), "Код ответа не соответсвует ожидаемому"),
+                () -> assertEquals(NO_CLIENT_ID, response.jsonPath().get("message"), "Поле clientI является обязательным")
         );
     }
 
@@ -77,11 +80,11 @@ public class INS_28_CheckApplyingForInsuranceOffline extends BaseTest {
     @Test()
     public void getApplicationInsuranceOfflineWithIncorrectEndpoint() {
         OfflineInsuranceApplication offlineInsuranceApplication = new OfflineInsuranceApplication("1",
-                "Иваан", "Жук", "Иванов", 9009998877L, "2024-09-05", "12:00",
+                "Иваан", "Иванов", "Иванов", 9009998877L, "2024-09-05", "12:00",
                 "Москва", "Ул и-ц'а", "12ф3-1ф", "12", "123", "012", "HOME");
         Response response = insuranceService.makeNewApplicationInsuranceOfflineWithIncorrectEndpoint(CLIENT_ID, offlineInsuranceApplication);
         assertAll(
-                () -> assertEquals(SC_NOT_FOUND, response.statusCode(), "Код ответа не соответствует ожидаемому"),
+                () -> assertEquals(SC_NOT_FOUND, response.statusCode(), "Код ответа не соответсвует ожидаемому"),
                 () -> assertEquals(NOT_FOUND, response.jsonPath().get("error"), "Тело ответа не соответсвует ожидаемому")
         );
     }
