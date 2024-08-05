@@ -45,4 +45,12 @@ public abstract class BasePage {
         waitElement(elementBorder).click();
         waitElement(elementInput).sendKeys(data);
     }
+
+    public String getWindowHandle() {
+        return DriverManager.getDriver().getWindowHandle();
+    }
+
+    public String getWindowUrl() {
+        return DriverManager.getDriver().getCurrentUrl();
+    }
 }

@@ -2,7 +2,7 @@ package web.steps.insuranceSteps;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.TimeoutException;
-import web.pages.insurancePages.InsuranceApplicationPropertyContentsPage;
+import web.pages.insurancePages.property.InsuranceApplicationPropertyContentsPage;
 import web.constans.insurance.InsuranceEnum.ContentsApplicationField;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

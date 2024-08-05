@@ -2,7 +2,7 @@ package constant;
 
 public class InsuranceServiceConstants {
 
-    public static final String CLIENT_ID = "813f5509-7696-44be-a321-3a094c48a6e7";
+    public static final String CLIENT_ID = "f781452f-cb94-466d-8b48-7f39a6484f45";
 
     public static final String POLICY_THING_ID = "7223a5c7-ac5d-46c1-bcd7-063908674755";
 
@@ -17,6 +17,8 @@ public class InsuranceServiceConstants {
     public static final String POLICY_ACCIDENT_ID = "63ecf71b-e5b0-4cc8-bb6b-a23266e353ef";
 
     public static final String FAKE_INSURANCE_POLICY_ID = "231ec5ec-1ca9-4e0d-b812-5ad4ab63534b";
+
+    public static final String CLIENT_ID_WITHOUT_POLICIES = "e8b5bcb5-96a2-46d9-b6df-33be35ab697a";
 
     public static final String CONTENT_TYPE_VALUE = "application/json";
 

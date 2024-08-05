@@ -18,4 +18,5 @@ public class UrlConfig {
     public static final String ONLINE_PROPERTY_CONTENT_APPLICATION_URL = "/insurance/property/contents/application";
     public static final String INVESTMENT_URL = "/investment";
     public static final String ONLINE_APARTMENT_APPLICATION_URL = "/insurance/property/apartament/application/online";
+    public static final String INSURANCE_PRODUCTS_URL = "/insurance/products";
 }

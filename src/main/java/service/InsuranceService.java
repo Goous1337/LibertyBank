@@ -32,8 +32,7 @@ public class InsuranceService {
     public Response checkMakeNewVehicleApplicationRequest(String clientId, CreateVehicleApplicationInsuranceRequest
             createVehicleApplicationInsuranceRequest) {
         List<RequestParam> params = List.of(getRP(HEADER, "accept", ACCEPT_VALUE),
-                getRP(HEADER, "clientId", clientId),
-                getRP(HEADER, CONTENT_TYPE, CONTENT_TYPE_VALUE));
+                getRP(HEADER, "clientId", clientId), getRP(HEADER, CONTENT_TYPE, CONTENT_TYPE_VALUE));
         return sendSimpleRequest(POST, APPLICATION_INSURANCE, params, createVehicleApplicationInsuranceRequest);
     }
 
@@ -47,8 +46,7 @@ public class InsuranceService {
 
     public Response getAllUserPoliciesByClientId(String clientId) {
         List<RequestParam> params = List.of(getRP(HEADER, "accept", ACCEPT_VALUE),
-                getRP(HEADER, "clientId", clientId),
-                getRP(HEADER, CONTENT_TYPE, CONTENT_TYPE_VALUE));
+                getRP(HEADER, "clientId", clientId), getRP(HEADER, CONTENT_TYPE, CONTENT_TYPE_VALUE));
         return sendSimpleRequest(GET, POLICY_INSURANCE + "/", params);
     }
 
