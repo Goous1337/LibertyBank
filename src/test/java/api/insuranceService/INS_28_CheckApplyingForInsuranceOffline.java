@@ -48,7 +48,7 @@ public class INS_28_CheckApplyingForInsuranceOffline extends BaseTest {
         Response response = insuranceService.makeNewApplicationInsuranceOffline(CLIENT_ID, offlineInsuranceApplication);
         String applicationId = response.jsonPath().getString("applicationId");
         assertAll(
-                () -> assertEquals(SC_CREATED, response.statusCode(), "Код ответа не соответсвует ожидаемому"),
+                () -> assertEquals(SC_CREATED, response.statusCode(), "Код ответа не соответствует ожидаемому"),
                 () -> assertEquals(insuranceService.getResponseIdNewApplicationInsuranceOffline(response),
                         InsuranceServiceDataBaseRequest.getApplicationId(applicationId), "Заявка не создана в базе данных"),
                 () -> assertEquals(insuranceService.getResponseIdNewApplicationInsuranceOffline(response),
@@ -68,7 +68,7 @@ public class INS_28_CheckApplyingForInsuranceOffline extends BaseTest {
                 "Москва", "Ул и-ц'а", "12ф3-1ф", "12", "123", "012", "HOME");
         Response response = insuranceService.makeNewApplicationInsuranceOfflineWithoutAuthorization(offlineInsuranceApplication);
         assertAll(
-                () -> assertEquals(SC_BAD_REQUEST, response.statusCode(), "Код ответа не соответсвует ожидаемому"),
+                () -> assertEquals(SC_BAD_REQUEST, response.statusCode(), "Код ответа не соответствует ожидаемому"),
                 () -> assertEquals(NO_CLIENT_ID, response.jsonPath().get("message"), "Поле clientId является обязательным")
         );
     }
@@ -84,7 +84,7 @@ public class INS_28_CheckApplyingForInsuranceOffline extends BaseTest {
                 "Москва", "Ул и-ц'а", "12ф3-1ф", "12", "123", "012", "HOME");
         Response response = insuranceService.makeNewApplicationInsuranceOfflineWithIncorrectEndpoint(CLIENT_ID, offlineInsuranceApplication);
         assertAll(
-                () -> assertEquals(SC_NOT_FOUND, response.statusCode(), "Код ответа не соответсвует ожидаемому"),
+                () -> assertEquals(SC_NOT_FOUND, response.statusCode(), "Код ответа не соответствует ожидаемому"),
                 () -> assertEquals(NOT_FOUND, response.jsonPath().get("error"), "Тело ответа не соответсвует ожидаемому")
         );
     }
