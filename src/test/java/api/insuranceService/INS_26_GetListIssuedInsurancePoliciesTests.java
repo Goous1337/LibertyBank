@@ -86,5 +86,21 @@ public class INS_26_GetListIssuedInsurancePoliciesTests extends BaseTest {
                         "message"), "Сообщение об ошибке не соответствует ожидаемому"),
                 () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath)));
     }
+
+    @DisplayName("Получения списка оформленных полисов пользователя, не имеющего оформленных полисов")
+    @Description("Тест направлен на проверку получение списка оформленных страховых полисов при не имеющихся у пользоваетля ")
+    @Tag("API")
+    @TmsLink("https://jira.astondevs.ru/browse/LIB5-2925")
+    @Test()
+    public void getIsurensePublicAccountFound() {
+        String jsonSchemaPath = "schemas/insuranceService/checkGetListInsurancePoliciesUserDoesHave.json";
+        Response response = insuranceService.getAllUserPoliciesByClientId(CLIENT_ID_WITHOUT_POLICIES);
+        assertAll(() -> assertEquals(SC_NOT_FOUND, response.statusCode(), "Код ответа не соответствует ожидаемому"),
+                () -> assertEquals(NOT_FOUND_ISSUED_POLICIES, insuranceService.getResponsePolicyErrorMessage(response,
+                        "message"), "Сообщение об ошибке не соответствует ожидаемому"),
+                () -> response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath(jsonSchemaPath)));
+    }
+
+
 }
 
